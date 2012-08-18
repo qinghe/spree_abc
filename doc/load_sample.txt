@@ -1,0 +1,6 @@
+if user checked 'load sample' while create shop.
+   use delayed_job to create samples   
+else
+   create site,user, then show shop created.
+
+end

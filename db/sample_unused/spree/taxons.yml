@@ -1,0 +1,63 @@
+mc_root:
+  name: Categories
+  taxonomy: master_categories
+  permalink: categories
+
+mc_l1_n1:
+  name: Bags
+  taxonomy: master_categories
+  products: ror_tote, ror_bag, spree_tote, spree_bag
+  permalink: categories/bags
+
+mc_l1_n2:
+  name: Mugs
+  taxonomy: master_categories
+  products: ror_mug, ror_stein, spree_stein, spree_mug
+  permalink: categories/mugs
+
+clothing:
+  name: Clothing
+  taxonomy: master_categories
+  #products: ror_baseball_jersey, ror_jr_spaghetti, ror_ringer
+  permalink: categories/clothing
+
+shirts:
+  name: Shirts
+  taxonomy: master_categories
+  products: ror_jr_spaghetti, spree_jr_spaghetti
+  permalink: categories/clothing/shirts
+
+t_shirts:
+  name: T-Shirts
+  taxonomy: master_categories
+  products: ror_baseball_jersey, ror_ringer, apache_baseball_jersey, ruby_baseball_jersey, spree_baseball_jersey, spree_ringer
+  permalink: categories/clothing/shirts/t-shirts
+
+brand_root:
+  name: Brands
+  taxonomy: brand
+  permalink: brands
+
+ruby:
+  name: Ruby
+  taxonomy: brand
+  products: ruby_baseball_jersey
+  permalink: brands/ruby
+
+rails:
+  name: Ruby on Rails
+  taxonomy: brand
+  products: ror_baseball_jersey, ror_jr_spaghetti, ror_ringer, ror_stein, ror_bag, ror_tote, ror_mug
+  permalink: brands/ruby-on-rails
+
+apache:
+  name: Apache
+  taxonomy: brand
+  products: apache_baseball_jersey
+  permalink: brands/apache
+
+spree:
+  name: Spree
+  taxonomy: brand
+  products: spree_baseball_jersey, spree_stein, spree_jr_spaghetti, spree_mug, spree_ringer, spree_tote, spree_bag
+  permalink: brands/spree

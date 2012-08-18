@@ -1,0 +1,1 @@
+require 'spree_abc/custom_fixtures'
