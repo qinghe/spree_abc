@@ -34,6 +34,7 @@ group :test, :development do
   gem "capybara"
 end
 
+
 group :test do
   # Pretty printed test output
   gem 'turn', '0.8.2', :require => false
@@ -42,6 +43,10 @@ gem 'spree', '1.1.1'
 #gem 'spree_i18n',         :git => 'git://github.com/spree/spree_i18n.git'
 #gem 'spree_multi_domain' #, :git => 'git://github.com/spree/spree-multi-domain.git'
 gem 'spree_multi_site',   :path => '../spree_multi_site'
+
+group :test, :development do
+  gem 'mail_view'#, :git => 'https://github.com/37signals/mail_view.git'
+end
 
 gem 'execjs'
 gem 'therubyracer'

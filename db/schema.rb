@@ -11,7 +11,23 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120813141214) do
+ActiveRecord::Schema.define(:version => 20120819024114) do
+
+  create_table "delayed_jobs", :force => true do |t|
+    t.integer  "priority",   :default => 0
+    t.integer  "attempts",   :default => 0
+    t.text     "handler"
+    t.text     "last_error"
+    t.datetime "run_at"
+    t.datetime "locked_at"
+    t.datetime "failed_at"
+    t.string   "locked_by"
+    t.string   "queue"
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+  end
+
+  add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
 
   create_table "spree_activators", :force => true do |t|
     t.string   "description"
@@ -185,6 +201,7 @@ ActiveRecord::Schema.define(:version => 20120813141214) do
     t.string   "presentation", :limit => 100
     t.datetime "created_at",                                 :null => false
     t.datetime "updated_at",                                 :null => false
+    t.integer  "site_id"
     t.integer  "position",                    :default => 0, :null => false
   end
 
@@ -244,6 +261,7 @@ ActiveRecord::Schema.define(:version => 20120813141214) do
     t.datetime "updated_at",                             :null => false
     t.datetime "deleted_at"
     t.string   "display_on"
+    t.integer  "site_id"
   end
 
   create_table "spree_payments", :force => true do |t|
@@ -372,6 +390,7 @@ ActiveRecord::Schema.define(:version => 20120813141214) do
     t.string   "presentation", :null => false
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
+    t.integer  "site_id"
   end
 
   create_table "spree_properties_prototypes", :id => false, :force => true do |t|
@@ -383,6 +402,7 @@ ActiveRecord::Schema.define(:version => 20120813141214) do
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "site_id"
   end
 
   create_table "spree_return_authorizations", :force => true do |t|
@@ -426,6 +446,7 @@ ActiveRecord::Schema.define(:version => 20120813141214) do
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "site_id"
   end
 
   create_table "spree_shipping_methods", :force => true do |t|
@@ -443,14 +464,15 @@ ActiveRecord::Schema.define(:version => 20120813141214) do
   create_table "spree_sites", :force => true do |t|
     t.string   "name"
     t.string   "domain"
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
     t.string   "layout"
     t.integer  "parent_id"
     t.string   "short_name"
     t.integer  "rgt"
     t.integer  "lft"
-    t.boolean  "has_sample", :default => false
+    t.boolean  "has_sample",     :default => false
+    t.boolean  "loading_sample", :default => false
   end
 
   create_table "spree_state_changes", :force => true do |t|
@@ -475,6 +497,7 @@ ActiveRecord::Schema.define(:version => 20120813141214) do
     t.string   "description"
     t.datetime "created_at",                     :null => false
     t.datetime "updated_at",                     :null => false
+    t.integer  "site_id"
     t.boolean  "is_default",  :default => false
     t.datetime "deleted_at"
   end
@@ -503,6 +526,7 @@ ActiveRecord::Schema.define(:version => 20120813141214) do
     t.integer  "taxonomy_id"
     t.datetime "created_at",                       :null => false
     t.datetime "updated_at",                       :null => false
+    t.integer  "site_id"
     t.integer  "lft"
     t.integer  "rgt"
     t.string   "icon_file_name"
@@ -510,7 +534,6 @@ ActiveRecord::Schema.define(:version => 20120813141214) do
     t.integer  "icon_file_size"
     t.datetime "icon_updated_at"
     t.text     "description"
-    t.integer  "site_id"
   end
 
   add_index "spree_taxons", ["parent_id"], :name => "index_taxons_on_parent_id"
