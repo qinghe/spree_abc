@@ -1,11 +1,7 @@
-shipping_method = Spree::ShippingMethod.find_by_name("UPS Ground")
-shipping_method.calculator.preferred_amount = 5
-
-shipping_method = Spree::ShippingMethod.find_by_name("UPS One Day")
+#encoding: utf-8
+shipping_method = Spree::ShippingMethod.find_by_name("顺丰 Ground")
 shipping_method.calculator.preferred_amount = 15
 
-shipping_method = Spree::ShippingMethod.find_by_name("UPS Two Day")
-shipping_method.calculator.preferred_amount = 10
 
 # flat_rate_five_dollars:
 #   name: amount

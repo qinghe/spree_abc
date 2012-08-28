@@ -1,2 +1,5 @@
 log/development.log
 tmp
+log
+tmp
+vendor/cache
