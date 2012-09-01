@@ -1,4 +1,3 @@
-# This migration comes from spree_multi_site (originally 20120813135747)
 class AddSiteTaxons < ActiveRecord::Migration
   def up
     table_name = Spree::Taxon.connection.table_exists?(:taxons) ? :taxons : :spree_taxons
@@ -13,6 +12,8 @@ class AddSiteTaxons < ActiveRecord::Migration
     add_column table_name, :site_id, :integer
     table_name = Spree::OptionType.connection.table_exists?(:option_types) ? :option_types : :spree_option_types
     add_column table_name, :site_id, :integer
+    table_name = Spree::Asset.connection.table_exists?(:assets) ? :assets : :spree_assets
+    add_column table_name, :site_id, :integer
   end
 
   def down
@@ -22,6 +23,7 @@ class AddSiteTaxons < ActiveRecord::Migration
     remove_column Spree::Prototype.table_name, :site_id
     remove_column Spree::Property.table_name, :site_id
     remove_column Spree::OptionType.table_name, :site_id
+    remove_column Spree::Asset.table_name, :site_id
   end
 
 end

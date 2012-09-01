@@ -68,6 +68,7 @@ GEM
       xpath (~> 0.1.4)
     childprocess (0.3.4)
       ffi (~> 1.0, >= 1.0.6)
+    choice (0.1.6)
     cocaine (0.2.1)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
@@ -156,6 +157,11 @@ GEM
       activesupport (= 3.2.2)
       bundler (~> 1.0)
       railties (= 3.2.2)
+    rails-erd (1.0.0)
+      activerecord (>= 3.0)
+      activesupport (>= 3.0)
+      choice (~> 0.1.6)
+      ruby-graphviz (~> 1.0.4)
     railties (3.2.2)
       actionpack (= 3.2.2)
       activesupport (= 3.2.2)
@@ -183,6 +189,7 @@ GEM
       activesupport (>= 3.0)
       railties (>= 3.0)
       rspec (~> 2.8.0)
+    ruby-graphviz (1.0.8)
     rubyzip (0.9.9)
     sass (3.1.20)
     sass-rails (3.2.5)
@@ -272,6 +279,7 @@ DEPENDENCIES
   mail_view
   mysql2
   rails (= 3.2.2)
+  rails-erd
   rspec-rails (~> 2.0)
   sass-rails (~> 3.2.5)
   spree (= 1.1.1)
