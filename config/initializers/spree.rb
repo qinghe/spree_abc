@@ -11,3 +11,4 @@ Spree.config do |config|
   # config.site_name = "Spree Demo Site"
   # config.cache_static_content =false #for debug 
 end
+

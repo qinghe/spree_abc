@@ -14,6 +14,8 @@ class AddSiteTaxons < ActiveRecord::Migration
     add_column table_name, :site_id, :integer
     table_name = Spree::Asset.connection.table_exists?(:assets) ? :assets : :spree_assets
     add_column table_name, :site_id, :integer
+    table_name = Spree::Preference.connection.table_exists?(:preferences) ? :preferences : :spree_preferences
+    add_column table_name, :site_id, :integer
   end
 
   def down
@@ -24,6 +26,7 @@ class AddSiteTaxons < ActiveRecord::Migration
     remove_column Spree::Property.table_name, :site_id
     remove_column Spree::OptionType.table_name, :site_id
     remove_column Spree::Asset.table_name, :site_id
+    remove_column Spree::Preference.table_name, :site_id
   end
 
 end
