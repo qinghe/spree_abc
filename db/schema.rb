@@ -94,6 +94,7 @@ ActiveRecord::Schema.define(:version => 20120819024114) do
     t.string   "attachment_file_name"
     t.string   "type",                    :limit => 75
     t.datetime "attachment_updated_at"
+    t.integer  "site_id"
     t.text     "alt"
   end
 
@@ -113,6 +114,7 @@ ActiveRecord::Schema.define(:version => 20120819024114) do
     t.string   "type",       :limit => 50
     t.datetime "created_at",               :null => false
     t.datetime "updated_at",               :null => false
+    t.integer  "site_id"
   end
 
   add_index "spree_configurations", ["name", "type"], :name => "index_configurations_on_name_and_type"
@@ -187,6 +189,7 @@ ActiveRecord::Schema.define(:version => 20120819024114) do
     t.text     "details"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.integer  "site_id"
   end
 
   create_table "spree_mail_methods", :force => true do |t|
@@ -292,6 +295,7 @@ ActiveRecord::Schema.define(:version => 20120819024114) do
     t.text     "value"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "site_id"
     t.string   "key"
     t.string   "value_type"
   end
@@ -618,6 +622,7 @@ ActiveRecord::Schema.define(:version => 20120819024114) do
     t.string   "description"
     t.datetime "created_at",                     :null => false
     t.datetime "updated_at",                     :null => false
+    t.integer  "site_id"
     t.boolean  "default_tax", :default => false
   end
 

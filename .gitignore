@@ -6,3 +6,5 @@ vendor/cache
 tmp
 public/spree
 log
+db/schema.rb
+log/development.log
