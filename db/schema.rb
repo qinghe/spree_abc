@@ -488,6 +488,7 @@ ActiveRecord::Schema.define(:version => 20120819024114) do
     t.datetime "updated_at",     :null => false
     t.string   "stateful_type"
     t.string   "next_state"
+    t.integer  "site_id"
   end
 
   create_table "spree_states", :force => true do |t|
