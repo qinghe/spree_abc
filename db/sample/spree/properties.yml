@@ -1,0 +1,39 @@
+prop_manufacturer:
+  name: manufacturer
+  presentation: 制造商
+prop_brand:
+  name: brand
+  presentation: 品牌
+prop_model:
+  name: model
+  presentation: 货号
+prop_shirt_type:
+  name: shirt_type
+  presentation: 风格
+prop_shirt_sleeve_type:
+  name: shirt_sleeve_length
+  presentation: 袖长
+prop_shirt_fabric:
+  name: shirt_fabric
+  presentation: 面料
+prop_shirt_fit:
+  name: shirt_fit
+  presentation: 板型
+prop_gender:
+  name: gender
+  presentation: 性别
+prop_mug_type:
+  name: mug_type
+  presentation: 类型
+prop_mug_size:
+  name: mug_size
+  presentation: 尺寸
+prop_bag_type:
+  name: bag_type
+  presentation: 款式
+prop_bag_material:
+  name: bag_material
+  presentation: 质地
+prop_bag_size:
+  name: bag_size
+  presentation: 尺寸

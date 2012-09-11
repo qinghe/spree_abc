@@ -12,4 +12,4 @@ Spree.config do |config|
   # config.cache_static_content =false #for debug
 end
 #TODO uncomment it after complete the db/sample
-#SpreeMultiSite::Config.data_dir = File.join(Rails.application.root,'db')
+SpreeMultiSite::Config.seed_dir = File.join(Rails.application.root,'db')

@@ -1,0 +1,8 @@
+size:
+  name: T恤-尺寸
+  presentation: 尺寸
+  position: 1
+color:
+  name: T恤-颜色
+  presentation: 颜色
+  position: 2

@@ -390,7 +390,7 @@ zh-CN:
   email: "电子邮件"
   email_address: "电子邮件地址"
   email_server_settings_description: "设置邮件服务器。"
-  empty: "Empty"
+  empty: "0"
   empty_cart: "清空购物车"
   enable_login_via_login_password: "使用标准的电子邮件/密码"
   enable_login_via_openid: "使用OpenID代替"
@@ -592,6 +592,7 @@ zh-CN:
   option_values: "选项值"
   options: "选项"
   or: "或"
+  or_over_price: "%{price} 及以上"
   ord_qty: "订单数量"
   ord_total: "订单总计"
   order: "订单"
@@ -677,6 +678,8 @@ zh-CN:
   previous: "上一页"
   price: "价格"
   price_bucket: Price Bucket
+  price_sack: Price Sack
+  price_range: 价格区间
   price_with_vat_included: "%{price} (inc. VAT)"
   problem_authorizing_card: "验证信用卡时遇到问题"
   problem_capturing_card: "获取信用卡时遇到问题"
@@ -935,7 +938,7 @@ zh-CN:
   shipping_methods: "配送方式"
   shipping_methods_description: "管理配送方式"
   shipping_total: "配送费总计"
-  shop_by_taxonomy: "根据%{taxonomy}购物"
+  shop_by_taxonomy: "%{taxonomy}"#根据%{taxonomy}购物"
   shopping_cart: "购物车"
   show: "显示"
   show_active: "显示激活的"
@@ -1028,6 +1031,7 @@ zh-CN:
   unable_to_capture_credit_card: "无法使用信用卡付款"
   unable_to_connect_to_gateway: "无法连接支付网关."
   unable_to_save_order: "无法保存订单"
+  under_price: "%{price} 以下"
   under_paid: "Under Paid"
   units: "Units"
   unrecognized_card_type: "无法辨识的支付卡种类"
