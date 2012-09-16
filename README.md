@@ -11,7 +11,7 @@ Deployment
 ==========
 rake db:reset RAILS_ENV=production
 rake assets:precompile RAILS_ENV=production
-
+rake jobs:work RAILS_ENV=production
 Testing
 -------
 
