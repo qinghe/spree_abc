@@ -10,6 +10,7 @@ Spree.config do |config|
   # Uncomment to override the default site name.
   # config.site_name = "Spree Demo Site"
   # config.cache_static_content =false #for debug
+  # config.freeze
 end
 #TODO uncomment it after complete the db/sample
 SpreeMultiSite::Config.seed_dir = File.join(Rails.application.root,'db')
