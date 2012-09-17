@@ -10,12 +10,16 @@ Introduction goes here.
 Deployment
 ==========
 rake db:reset RAILS_ENV=production
+
 rake assets:precompile RAILS_ENV=production
+
 rake jobs:work RAILS_ENV=production
 
 
 iptables -A INPUT -p tcp -s 127.0.0.1 --dport 8080 -j ACCEPT
+
 sestatus -b | grep httpd
+
 togglesebool httpd_can_network_connection
 
 Testing
