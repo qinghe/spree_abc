@@ -42,6 +42,8 @@ end
 gem 'spree', '1.1.1'
 #gem 'spree_i18n',         :git => 'git://github.com/spree/spree_i18n.git'
 #gem 'spree_multi_domain' #, :git => 'git://github.com/spree/spree-multi-domain.git'
+gem 'daemons'
+gem 'delayed_job_active_record'
 gem 'spree_multi_site',   :path => '../spree_multi_site'
 
 group :test, :development do
@@ -50,7 +52,7 @@ end
 
 gem 'execjs'
 gem 'therubyracer'
-gem 'delayed_job_active_record'
+
 
 group :development do
   gem "rails-erd"
