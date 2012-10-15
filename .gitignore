@@ -1,14 +1,9 @@
-log/development.log
-tmp
-log
 tmp
 vendor/cache
-tmp
 public/spree
 log
 db/schema.rb
 log/development.log
-log/development.log
-log/development.log
-tmp
 public/assets
+db/sample/spree/payment_method.rb
+
