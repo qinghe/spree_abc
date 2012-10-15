@@ -45,6 +45,7 @@ gem 'spree', '1.1.1'
 gem 'daemons'
 gem 'delayed_job_active_record'
 gem 'spree_multi_site',   :path => '../spree_multi_site'
+gem 'spree_alipay',   :path => '../spree_alipay'
 
 group :test, :development do
   gem 'mail_view'#, :git => 'https://github.com/37signals/mail_view.git'
@@ -53,7 +54,7 @@ end
 gem 'execjs'
 gem 'therubyracer'
 
-
+gem 'capistrano', :group => :development #deployment
 group :development do
   gem "rails-erd"
 end
