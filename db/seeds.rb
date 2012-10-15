@@ -6,4 +6,8 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 # notice loading order,  site, default data, user
+
+# it is calling spree_multi_site/db/seed.rb to load db/default & db/firstshop 
+# data folder is spree_abc/db, it is specified by SpreeMultiSite::Config.seed_dir 
+
 SpreeMultiSite::Engine.load_seed if defined?(SpreeMultiSite)
