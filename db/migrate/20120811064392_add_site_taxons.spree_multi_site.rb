@@ -6,6 +6,13 @@ class AddSiteTaxons < ActiveRecord::Migration
     add_column table_name, :site_id, :integer
     table_name = Spree::ShippingCategory.connection.table_exists?(:shipping_categories) ? :shipping_categories : :spree_shipping_categories
     add_column table_name, :site_id, :integer
+
+    # ShippingMethod.all_available called :all, we have to add default_scope fix it.
+    # Zone has_many :shipping_methods, :dependent => :nullify, if zone is deleted, respect shipping_methods.zone_id is set to null
+    # for above two reasons, add site_id to shipping_method
+    table_name = Spree::ShippingMethod.connection.table_exists?(:shipping_methods) ? :shipping_methods : :spree_shipping_methods
+    add_column table_name, :site_id, :integer
+    
     table_name = Spree::Prototype.connection.table_exists?(:prototypes) ? :prototypes : :spree_prototypes
     add_column table_name, :site_id, :integer
     table_name = Spree::Property.connection.table_exists?(:properties) ? :properties : :spree_properties
@@ -22,6 +29,7 @@ class AddSiteTaxons < ActiveRecord::Migration
     remove_column Spree::Taxon.table_name, :site_id, :integer
     remove_column Spree::TaxCategory.table_name, :site_id
     remove_column Spree::ShippingCategory.table_name, :site_id
+    remove_column Spree::ShippingMethod.table_name, :site_id
     remove_column Spree::Prototype.table_name, :site_id
     remove_column Spree::Property.table_name, :site_id
     remove_column Spree::OptionType.table_name, :site_id

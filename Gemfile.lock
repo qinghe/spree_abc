@@ -2,6 +2,8 @@ PATH
   remote: ../spree_alipay
   specs:
     spree_alipay (1.0.0)
+      activemerchant
+      activemerchant_patch_for_china
       spree_core (~> 1.1.1)
 
 PATH
@@ -37,6 +39,8 @@ GEM
       i18n
       json (>= 1.5.1)
       money (<= 3.7.1)
+    activemerchant_patch_for_china (0.1.6)
+      activemerchant (>= 1.4.2)
     activemodel (3.2.2)
       activesupport (= 3.2.2)
       builder (~> 3.0.0)
