@@ -6,4 +6,4 @@ db/schema.rb
 log/development.log
 public/assets
 db/sample/spree/payment_method.rb
-
+.rvmrc

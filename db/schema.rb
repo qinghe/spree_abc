@@ -458,6 +458,7 @@ ActiveRecord::Schema.define(:version => 20120819024114) do
     t.integer  "zone_id"
     t.datetime "created_at",           :null => false
     t.datetime "updated_at",           :null => false
+    t.integer  "site_id"
     t.string   "display_on"
     t.integer  "shipping_category_id"
     t.boolean  "match_none"
