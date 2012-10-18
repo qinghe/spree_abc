@@ -45,6 +45,11 @@ gem 'spree', '1.1.1'
 gem 'daemons'
 gem 'delayed_job_active_record'
 gem 'spree_multi_site',   :path => '../spree_multi_site'
+
+
+#only specify it here, then could use ActiveMerchant::Billing::Integrations::Alipay::Helper directly
+gem 'activemerchant', :require => 'active_merchant'
+gem 'activemerchant_patch_for_china' #support alipay
 gem 'spree_alipay',   :path => '../spree_alipay'
 
 group :test, :development do
