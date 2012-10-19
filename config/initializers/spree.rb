@@ -12,5 +12,7 @@ Spree.config do |config|
   # config.cache_static_content =false #for debug
   # config.freeze
 end
+Spree.user_class = "Spree::User"
+
 #TODO uncomment it after complete the db/sample
 SpreeMultiSite::Config.seed_dir = File.join(Rails.application.root,'db')

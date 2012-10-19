@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120819024114) do
+ActiveRecord::Schema.define(:version => 20121019152850) do
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0
@@ -127,7 +127,7 @@ ActiveRecord::Schema.define(:version => 20120819024114) do
     t.integer "numcode"
   end
 
-  create_table "spree_creditcards", :force => true do |t|
+  create_table "spree_credit_cards", :force => true do |t|
     t.string   "month"
     t.string   "year"
     t.string   "cc_type"
@@ -236,7 +236,6 @@ ActiveRecord::Schema.define(:version => 20120819024114) do
     t.decimal  "total",                              :precision => 8, :scale => 2, :default => 0.0, :null => false
     t.string   "state"
     t.decimal  "adjustment_total",                   :precision => 8, :scale => 2, :default => 0.0, :null => false
-    t.decimal  "credit_total",                       :precision => 8, :scale => 2, :default => 0.0, :null => false
     t.integer  "user_id"
     t.datetime "created_at",                                                                        :null => false
     t.datetime "updated_at",                                                                        :null => false
@@ -464,6 +463,7 @@ ActiveRecord::Schema.define(:version => 20120819024114) do
     t.boolean  "match_none"
     t.boolean  "match_all"
     t.boolean  "match_one"
+    t.datetime "deleted_at"
   end
 
   create_table "spree_sites", :force => true do |t|
@@ -572,8 +572,8 @@ ActiveRecord::Schema.define(:version => 20120819024114) do
     t.string   "persistence_token"
     t.string   "reset_password_token"
     t.string   "perishable_token"
-    t.integer  "sign_in_count",          :default => 0, :null => false
-    t.integer  "failed_attempts",        :default => 0, :null => false
+    t.integer  "sign_in_count",                        :default => 0, :null => false
+    t.integer  "failed_attempts",                      :default => 0, :null => false
     t.datetime "last_request_at"
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
@@ -582,9 +582,10 @@ ActiveRecord::Schema.define(:version => 20120819024114) do
     t.string   "login"
     t.integer  "ship_address_id"
     t.integer  "bill_address_id"
-    t.datetime "created_at",                            :null => false
-    t.datetime "updated_at",                            :null => false
+    t.datetime "created_at",                                          :null => false
+    t.datetime "updated_at",                                          :null => false
     t.integer  "site_id"
+    t.string   "spree_api_key",          :limit => 48
     t.string   "authentication_token"
     t.string   "unlock_token"
     t.datetime "locked_at"
@@ -592,6 +593,7 @@ ActiveRecord::Schema.define(:version => 20120819024114) do
     t.datetime "reset_password_sent_at"
   end
 
+  add_index "spree_users", ["email"], :name => "email_idx_unique", :unique => true
   add_index "spree_users", ["persistence_token"], :name => "index_users_on_persistence_token"
 
   create_table "spree_variants", :force => true do |t|
@@ -622,10 +624,11 @@ ActiveRecord::Schema.define(:version => 20120819024114) do
   create_table "spree_zones", :force => true do |t|
     t.string   "name"
     t.string   "description"
-    t.datetime "created_at",                     :null => false
-    t.datetime "updated_at",                     :null => false
+    t.datetime "created_at",                            :null => false
+    t.datetime "updated_at",                            :null => false
     t.integer  "site_id"
-    t.boolean  "default_tax", :default => false
+    t.boolean  "default_tax",        :default => false
+    t.integer  "zone_members_count", :default => 0
   end
 
 end

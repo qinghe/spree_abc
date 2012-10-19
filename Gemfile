@@ -1,6 +1,7 @@
-source 'http://rubygems.org'
+#source 'http://rubygems.org'
+source 'http://ruby.taobao.org/'
 
-gem 'rails', '3.2.2'
+gem 'rails', '3.2.8'
 
 # Bundle edge Rails instead:
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
@@ -39,7 +40,9 @@ group :test do
   # Pretty printed test output
   gem 'turn', '0.8.2', :require => false
 end
-gem 'spree', '1.1.1'
+gem 'spree', '1.2.0'
+gem 'spree_auth_devise', :git => 'git://github.com/spree/spree_auth_devise'
+
 #gem 'spree_i18n',         :git => 'git://github.com/spree/spree_i18n.git'
 #gem 'spree_multi_domain' #, :git => 'git://github.com/spree/spree-multi-domain.git'
 gem 'daemons'
