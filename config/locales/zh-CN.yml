@@ -312,6 +312,10 @@ zh-CN:
   charges: "费用"
   checkout: "结账"
   cheque: "支票"
+  china_address:
+    firstname: 姓名
+    phone: 手机
+    state: 地区
   city: "城市"
   clone: "复制"
   code: "编码"
@@ -612,6 +616,7 @@ zh-CN:
   order_processed_successfully: "您的订单已经被成功处理了"
   order_state: # keys correspond to Checkout state names:
     # keys correspond to Checkout state names: 
+    china_address: 收货地址
     address: address
     adjustments: adjustments
     awaiting_return: awaiting return

@@ -1,0 +1,26 @@
+--- 
+cityies_001: 
+  name: "朝阳区"
+  state_id: "1"
+  id: "1"
+  abbr: BJCYQ
+cityies_011: 
+  name: "黄浦区"
+  state_id: "2"
+  id: "11"
+  abbr: SHHPQ
+cityies_021: 
+  name: "沈阳"
+  state_id: "3"
+  id: "21"
+  abbr: SY
+cityies_022: 
+  name: "大连"
+  state_id: "3"
+  id: "22"
+  abbr: DL
+cityies_023: 
+  name: "铁岭"
+  state_id: "3"
+  id: "23"
+  abbr: TL

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121019152850) do
+ActiveRecord::Schema.define(:version => 20121022131353) do
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0
@@ -57,9 +57,11 @@ ActiveRecord::Schema.define(:version => 20121019152850) do
     t.string   "alternative_phone"
     t.integer  "state_id"
     t.integer  "country_id"
-    t.datetime "created_at",        :null => false
-    t.datetime "updated_at",        :null => false
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
     t.string   "company"
+    t.integer  "city_id",           :default => 0
+    t.string   "city_name"
   end
 
   add_index "spree_addresses", ["firstname"], :name => "index_addresses_on_firstname"
@@ -107,6 +109,12 @@ ActiveRecord::Schema.define(:version => 20121019152850) do
     t.string   "calculable_type", :null => false
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
+  end
+
+  create_table "spree_cities", :force => true do |t|
+    t.string  "name"
+    t.string  "abbr"
+    t.integer "state_id"
   end
 
   create_table "spree_configurations", :force => true do |t|
