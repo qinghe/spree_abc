@@ -7,3 +7,6 @@ log/development.log
 public/assets
 db/sample/spree/payment_method.rb
 .rvmrc
+Gemfile.lock
+config/database.yml
+.idea/

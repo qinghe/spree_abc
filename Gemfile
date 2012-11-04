@@ -65,7 +65,7 @@ group :test, :development do
 end
 
 gem 'execjs'
-gem 'therubyracer'
+gem 'therubyracer'#,   :path => '../therubyracer'
 
 gem 'capistrano', :group => :development #deployment
 group :development do
