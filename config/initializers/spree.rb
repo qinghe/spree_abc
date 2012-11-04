@@ -11,6 +11,7 @@ Spree.config do |config|
   # config.site_name = "Spree Demo Site"
   # config.cache_static_content =false #for debug
   # config.freeze
+  config.default_country_id = 41 #china, fix /admin/configurations/states
 end
 Spree.user_class = "Spree::User"
 
