@@ -40,32 +40,29 @@ group :test do
   # Pretty printed test output
   gem 'turn', '0.8.2', :require => false
 end
-#gem 'spree', '1.2.0'
 gem 'spree', :github => "spree/spree", :branch => "1-2-stable"
 #gem 'spree_auth_devise', :git => 'git://github.com/spree/spree_auth_devise'
 # referer to https://github.com/spree/spree/issues/2013
 gem 'spree_auth_devise', :github => "spree/spree_auth_devise", :branch => "1-2-stable"
-#gem 'spree_i18n',         :git => 'git://github.com/spree/spree_i18n.git'
-#gem 'spree_multi_domain' #, :git => 'git://github.com/spree/spree-multi-domain.git'
 gem 'daemons'
 gem 'delayed_job_active_record'
-gem 'spree_multi_site',   :path => '../spree_multi_site'
+gem 'spree_multi_site',  :github => "RuanShan/spree_multi_site"
 
 
 #only specify it here, then could use ActiveMerchant::Billing::Integrations::Alipay::Helper directly
 gem 'activemerchant', :require => 'active_merchant'
 gem 'activemerchant_patch_for_china' #support alipay
-gem 'spree_alipay',   :path => '../spree_alipay'
+gem 'spree_alipay',   :github => "RuanShan/spree_alipay"
 
 gem 'spree_china_checkout',   :path => './spree_china_checkout'
 
 
 group :test, :development do
-  gem 'mail_view'#, :git => 'https://github.com/37signals/mail_view.git'
+  gem 'mail_view'  #, :git => 'https://github.com/37signals/mail_view.git'
 end
 
 gem 'execjs'
-gem 'therubyracer'#,   :path => '../therubyracer'
+gem 'therubyracer' #,   :path => '../therubyracer'
 
 gem 'capistrano', :group => :development #deployment
 group :development do
