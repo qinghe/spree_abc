@@ -3,8 +3,8 @@
     ($ this).find(':submit, :image').attr('disabled', true).removeClass('primary').addClass 'disabled'
 
 $ ->
-  if ($ '#checkout_form_china_address').is('*')
-    ($ '#checkout_form_china_address').validate()
+  if ($ '#checkout_form_address').is('*')
+    ($ '#checkout_form_address').validate()
     get_states = (region) ->
       country = ($ 'p#' + region + 'country' + ' span#' + region + 'country :only-child').val()
       state_mapper[country]
