@@ -5,7 +5,10 @@ Introduction goes here.
   SpreeABC is e-commerce solution based on spree.
   Difference is that you could create many websites, it is more like shopify and for china user.
   
-  
+Development  
+-----------
+bundle update spree_multi_site # update gem spree_multi_site
+bundle update spree_alipay # update gem spree_alipay
   
 Deployment
 ==========
