@@ -509,7 +509,7 @@ zh-CN:
   logged_in_as: "已登陆为"
   logged_in_succesfully: "登陆成功"
   logged_out: "您已经登出系统"
-  login: Login
+  login: "登陆"
   login_as_existing: "作为一个已有客户登陆"
   login_failed: "登陆认证失败。"
   login_name: "用户名"
@@ -617,15 +617,15 @@ zh-CN:
   order_state: # keys correspond to Checkout state names:
     # keys correspond to Checkout state names: 
     china_address: 收货地址
-    address: address
+    address: 收货地址
     adjustments: adjustments
     awaiting_return: awaiting return
     canceled: canceled
     cart: cart
-    complete: complete
-    confirm: confirm
-    delivery: delivery
-    payment: payment
+    complete: 购买成功
+    confirm: 订单确认
+    delivery: 选择快递
+    payment: 支付方式
     resumed: resumed
     returned: returned
   order_summary: "订单概述"
