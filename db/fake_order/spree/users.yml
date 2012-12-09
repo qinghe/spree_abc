@@ -1,0 +1,11 @@
+<%
+addresses = Spree::Address.all()
+ship_addresses = addresses[0,100]
+bill_addresses = addresses[100,100]
+1.upto(100) do |i|
+%>
+user_<%= i %>:
+  email: <%= Faker::Internet.email %>
+  ship_address_id: <%= ship_addresses[i-1].id %>
+  bill_address_id: <%= bill_addresses[i-1].id %>
+<% end %>
