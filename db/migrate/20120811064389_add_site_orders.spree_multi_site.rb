@@ -10,7 +10,7 @@ class AddSiteOrders < ActiveRecord::Migration
     add_column table_name, :site_id, :integer
     table_name = Spree::Order.connection.table_exists?(:orders) ? :orders : :spree_orders
     add_column table_name, :site_id, :integer
-    table_name = Spree::User.connection.table_exists?(:users) ? :users : :spree_users
+    table_name =  Spree.user_class.connection.table_exists?(:users) ? :users : :spree_users
     add_column table_name, :site_id, :integer
     table_name = Spree::Product.connection.table_exists?(:products) ? :products : :spree_products
     add_column table_name, :site_id, :integer
@@ -20,7 +20,7 @@ class AddSiteOrders < ActiveRecord::Migration
     remove_column Spree::Zone.table_name, :site_id
     remove_column Spree::Taxonomy.table_name, :site_id
     remove_column Spree::Order.table_name, :site_id
-    remove_column Spree::User.table_name, :site_id
+    remove_column  Spree.user_class.table_name, :site_id
     remove_column Spree::Product.table_name, :site_id
   end
 end
