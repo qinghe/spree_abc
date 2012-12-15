@@ -10,3 +10,4 @@ db/sample/spree/payment_method.rb
 Gemfile.lock
 config/database.yml
 .idea/
+.bundle
