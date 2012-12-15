@@ -41,12 +41,18 @@ group :test do
   gem 'turn', '0.8.2', :require => false
 end
 gem 'spree', :github => "spree/spree", :branch => "1-2-stable"
+gem 'spree_simple_dash',   :path => '../spree_simple_dash' #replace Spree Analytics
+
 #gem 'spree_auth_devise', :git => 'git://github.com/spree/spree_auth_devise'
 # referer to https://github.com/spree/spree/issues/2013
 gem 'spree_auth_devise', :github => "spree/spree_auth_devise", :branch => "1-2-stable"
 gem 'daemons'
 gem 'delayed_job_active_record'
-gem 'spree_multi_site',  :github => "RuanShan/spree_multi_site"
+#'bundle update spree_multi_site' to update gem
+# bundle config require specified branch, or warning message as below
+# Cannot use local override for spree_multi_site at ../spree_multi_site because :branch is not specified in Gemfile. Specify a branch or use `bundle config --delete` to remove the local override
+  
+gem 'spree_multi_site',  :github => "RuanShan/spree_multi_site", :branch=>"master"
 
 
 #only specify it here, then could use ActiveMerchant::Billing::Integrations::Alipay::Helper directly
