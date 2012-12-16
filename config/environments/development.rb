@@ -28,5 +28,7 @@ SpreeAbc::Application.configure do
   # Expands the lines which load the assets
   config.assets.debug = true
   
+  config.after_initialize do
+    Spree::Site.loading_fake_order_with_sample = true  
+  end  
 end
-Spree::Site.loading_fake_order_with_sample = true
