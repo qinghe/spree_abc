@@ -8,15 +8,16 @@ Introduction goes here.
 Development  
 -----------
 bundle update spree_multi_site # update gem spree_multi_site
+
 bundle update spree_alipay # update gem spree_alipay
   
 Deployment
 ==========
-rake db:reset RAILS_ENV=production
+bundle exec rake db:reset RAILS_ENV=production
 
-rake assets:precompile RAILS_ENV=production
+bundle exec rake assets:precompile RAILS_ENV=production
 
-rake jobs:work RAILS_ENV=production
+#bundle exec rake jobs:work RAILS_ENV=production
 
 
 iptables -A INPUT -p tcp -s 127.0.0.1 --dport 8080 -j ACCEPT
