@@ -41,9 +41,13 @@ group :test do
   gem 'turn', '0.8.2', :require => false
 end
 gem 'spree', :github => "spree/spree", :branch => "1-2-stable"
-gem 'spree_simple_dash',   :path => '../spree_simple_dash' #replace Spree Analytics
 
-#gem 'spree_auth_devise', :git => 'git://github.com/spree/spree_auth_devise'
+# bundle config --local local.spree_simple_dash ../spree_simple_dash, using local for development 
+# :path => '../spree_simple_dash' 
+# replace Spree Analytics
+gem 'spree_simple_dash', :github=>"rubyjedi/spree_simple_dash", :branch=>"master"
+
+# gem 'spree_auth_devise', :git => 'git://github.com/spree/spree_auth_devise'
 # referer to https://github.com/spree/spree/issues/2013
 gem 'spree_auth_devise', :github => "spree/spree_auth_devise", :branch => "1-2-stable"
 gem 'daemons'
