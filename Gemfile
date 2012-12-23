@@ -45,7 +45,7 @@ gem 'spree', :github => "spree/spree", :branch => "1-2-stable"
 # bundle config --local local.spree_simple_dash ../spree_simple_dash, using local for development 
 # :path => '../spree_simple_dash' 
 # replace Spree Analytics
-gem 'spree_simple_dash', :github=>"rubyjedi/spree_simple_dash", :branch=>"master"
+gem 'spree_simple_dash', :github=>"RuanShan/spree_simple_dash", :branch=>"1-2-stable"
 
 # gem 'spree_auth_devise', :git => 'git://github.com/spree/spree_auth_devise'
 # referer to https://github.com/spree/spree/issues/2013
