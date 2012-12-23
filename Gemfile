@@ -66,6 +66,7 @@ gem 'spree_alipay',   :github => "RuanShan/spree_alipay"
 
 gem 'spree_china_checkout',   :path => './spree_china_checkout'
 
+gem 'spree_static_content', :github => 'RuanShan/spree_static_content', :branch => '1-2-stable'
 
 group :test, :development do
   gem 'mail_view'  #, :git => 'https://github.com/37signals/mail_view.git'

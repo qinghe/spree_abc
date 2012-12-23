@@ -253,11 +253,11 @@ zh-CN:
   adjustments: "其他调整"
   admin: 
     mail_methods: 
-      send_testmail: 'Send Testmail'
+      send_testmail: '发送测试邮件'
       testmail: 
-        delivery_error: 'Testmail delivery error'
-        delivery_success: 'Testmail sent successfully'
-        error: 'Testmail error: %{e}'
+        delivery_error: '测试邮件发送错误'
+        delivery_success: '测试邮件发送成功'
+        error: '测试邮件错误: %{e}'
   administration: "管理"
   all: "全部"
   all_departments: "所有部门"
@@ -599,7 +599,7 @@ zh-CN:
   maestro_or_solo_cards: Maestro/Solo cards
   mail_delivery_enabled: "邮件发送功能已启用"
   mail_delivery_not_enabled: "邮件发送功能尚未启用"
-  mail_methods: Mail Methods
+  mail_methods: 邮件服务
   mail_server_preferences: 邮件服务器首选项
   make_refund: "进行退款??"
   mark_shipped: "标记为已配送"
@@ -629,7 +629,7 @@ zh-CN:
   new_customer: "新建客户"
   new_group: New Group
   new_image: "新建图片"
-  new_mail_method: New Mail Method
+  new_mail_method: "新建邮件服务"
   new_option_type: "新建选项类型"
   new_option_value: "新建选项值"
   new_order: "新建订单"
@@ -1133,7 +1133,6 @@ zh-CN:
       key_generated: "API key generated"
       no_key: "No key defined"
       regenerate_key: "Regenerate API key"    
-  spree/order: 
     coupon_code: Coupon Code
     date: "日期"
     date_picker: 

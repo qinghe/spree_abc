@@ -14,4 +14,4 @@ SpreeMultiSite::Engine.load_seed if defined?(SpreeMultiSite)
 
 # fake_orders/spree/*  are data related to orders, like address, order..
 # for reasons time consume and useless to customer, system does not load those file while loading sample.
-# it is only for test now. 
+# it is only for test now.

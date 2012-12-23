@@ -5,16 +5,18 @@
 #
 # In order to initialize a setting do: 
 # config.setting_name = 'new value'
+
+# override configuration by overriding file app_configuration.rb 
 Spree.config do |config|
   # Example:
   # Uncomment to override the default site name.
   # config.site_name = "Spree Demo Site"
   # config.cache_static_content =false #for debug
-  # config.freeze
-  config.default_country_id = 41 #china
-  config.currency = 'CNY'
+  # config.freeze  
+  #config.default_country_id = 41 #china
+  #config.currency = 'CNY'
 end
 Spree.user_class = "Spree::User"
 
 #TODO uncomment it after complete the db/sample
-SpreeMultiSite::Config.seed_dir = File.join(Rails.application.root,'db')
+SpreeMultiSite::Config.seed_dir= File.join(Rails.application.root,'db')
