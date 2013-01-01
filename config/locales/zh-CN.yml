@@ -70,15 +70,15 @@ zh-CN:
         presentation: Presentation
       spree/order: 
         checkout_complete: "已结账"
-        completed_at: "Completed At"
+        completed_at: "完成时间"
         coupon_code: "Coupon Code"
-        created_at: Order Date
-        email: Customer E-Mail
+        created_at: "订单创建时间"
+        email: "客户 E-Mail"
         ip_address: "IP地址"
         item_total: "产品小记"
         number: "数量"
-        payment_state: Payment State
-        shipment_state: Shipment State
+        payment_state: "支付状态"
+        shipment_state: "配送状态"
         special_instructions: "特别指南"
         state: "状态"
         total: "总计"
@@ -496,10 +496,10 @@ zh-CN:
   first_item: "首件产品价格??"
   first_name: "名"
   first_name_begins_with: "名的开始"
-  flat_percent: "固定费率"
+  flat_percent: "固定费率 (每订单)"
   flat_rate_amount: "金额"
-  flat_rate_per_item: "固定费率 (每商品)"
-  flat_rate_per_order: "固定费率 (每订单)"
+  flat_rate_per_item: "固定费用 (每商品)"
+  flat_rate_per_order: "固定费用 (每订单)"
   flexible_rate: "灵活费率"
   forgot_password: "忘记密码"
   free_shipping: Free Shipping
@@ -572,14 +572,14 @@ zh-CN:
   last_name: "姓"
   last_name_begins_with: "姓的开始"
   last_year: "去年"
-  learn_more: Learn More
+  learn_more: "了解更多"
   leave_blank_to_not_change: "(leave blank if you don't want to change it)"
   list: "列表"
   listing_categories: "分类列表"
   listing_option_types: "选项类型列表"
   listing_orders: "订单列表"
   listing_product_groups: "产品组列表"
-  listing_products: "Listing Products"
+  listing_products: "产品列表"
   listing_reports: "报表列表"
   listing_tax_categories: "缴税分类列表"
   listing_users: "用户列表"
@@ -973,7 +973,7 @@ zh-CN:
     user_logged_in: 
       description: Available only to logged in users
       name: User Logged In
-  promotions: Promotions
+  promotions: "促销"
   promotions_description: Manage offers and coupons with promotions
   properties: "属性"
   property: "属性"
@@ -1032,7 +1032,7 @@ zh-CN:
   s3_used_for_product_images: "S3 is being used for product images"
   sales_tax: "消费税"
   sales_total: "销售总计"
-  sales_total_description: "Sales Total For All Orders"
+  sales_total_description: "所有订单汇总报表"
   save_and_continue: "保存并继续"
   save_preferences: "保存首选项"
   scope: "范围"
