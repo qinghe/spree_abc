@@ -1,3 +1,3 @@
-proto_shirts:
+proto_spirit:
   name: "白酒"
-  properties: prop_manufacturer, prop_brand, prop_model, prop_shirt_type, prop_shirt_sleeve_type, prop_shirt_fabric, prop_shirt_fit, prop_gender
+  properties: prop_manufacturer,prop_address,prop_brand,prop_model,prop_alcohol_content,prop_fragrance,prop_packaging,prop_production_certificate_no,prop_standard_label,prop_vintage,prop_model_number

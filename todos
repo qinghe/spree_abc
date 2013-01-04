@@ -1,0 +1,6 @@
+https://github.com/spree/spree/issues/1906
+https://github.com/spree/spree/commit/a398bc289bb6008c177452fd1d86b652ded96dbd
+
+1. override spree_multi_site, should not allow user add site.
+2. override spree_editor, should not allow user configure editor
+ 

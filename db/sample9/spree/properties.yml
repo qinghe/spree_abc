@@ -10,24 +10,24 @@ prop_brand:
 prop_model:
   name: 规格
   presentation: 规格
-prop_shirt_type:
+prop_alcohol_content:
   name: 酒的度数
   presentation: 酒的度数
-prop_shirt_sleeve_type:
+prop_fragrance:
   name: 酒的香型
   presentation: 酒的香型
-prop_shirt_fabric:
+prop_packaging:
   name: 包装类型
   presentation: 包装类型
-prop_shirt_fit:
+prop_production_certificate_no:
   name: 生产许可证编号
   presentation: 生产许可证编号
-prop_gender:
+prop_standard_label:
   name: 产品标准号
   presentation: 产品标准号
-prop_mug_size:
+prop_vintage:
   name: 年份
   presentation: 年份
-prop_bag_type:
+prop_model_number:
   name: 系列
   presentation: 系列

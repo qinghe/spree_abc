@@ -68,6 +68,12 @@ gem 'spree_china_checkout',   :path => './spree_china_checkout'
 
 gem 'spree_static_content', :github => 'RuanShan/spree_static_content', :branch => '1-2-stable'
 
+#support rich_editor 
+gem 'spree_editor',  :github => "RuanShan/spree_editor", :branch=>"clean_admin_ui"
+gem 'tinymce-rails', '>= 3.4.7.0.1'
+gem 'tinymce-rails-langs'
+
+
 group :test, :development do
   gem 'mail_view'  #, :git => 'https://github.com/37signals/mail_view.git'
 end
