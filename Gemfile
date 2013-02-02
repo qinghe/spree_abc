@@ -62,7 +62,7 @@ gem 'spree_multi_site',  :github => "RuanShan/spree_multi_site", :branch=>"maste
 #only specify it here, then could use ActiveMerchant::Billing::Integrations::Alipay::Helper directly
 gem 'activemerchant', :require => 'active_merchant'
 gem 'activemerchant_patch_for_china' #support alipay
-gem 'spree_alipay',   :github => "RuanShan/spree_alipay"
+gem 'spree_alipay',   :github => "RuanShan/spree_alipay", :ref => '53ae94b'
 
 gem 'spree_china_checkout',   :path => './spree_china_checkout'
 
