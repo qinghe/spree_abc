@@ -27,6 +27,8 @@ bundle update spree_alipay # update gem spree_alipay
   
 Deployment
 ==========
+bundle install --deloyment
+
 bundle exec rake db:reset RAILS_ENV=production
 
 bundle exec rake assets:precompile RAILS_ENV=production
