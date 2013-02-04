@@ -1273,3 +1273,21 @@ zh-CN:
   zone_based: "根据区域"
   zone_setting_description: "在各种计算中使用到的国家、省份、区域."
   zones: "区域"
+# from spree_auth_devise  
+  devise:
+    user_passwords:
+      user:
+        cannot_be_blank: '密码不能为空.'
+        send_instructions: '几分钟后，您将收到重置密码的电子邮件.'
+        updated: '您的密码已修改成功，您现在已登录.'
+    user_registrations:
+      signed_up: '欢迎您！您已注册成功.'
+      inactive_signed_up: '您已注册成功. 因为您的账号%{reason}，无法登陆.'
+      updated: '帐号资料更新成功.'
+      destroyed: '再见！您的帐户已成功注销。我们希望很快可以再见到您.'
+    user_sessions:
+      signed_in: '登录成功.'
+      signed_out: '退出成功.'
+    oauth_callbacks:
+      success: '成功地从%{kind}获得授权.'
+      failure: '因为%{reason}，所以您无法从%{kind}获得授权.'
