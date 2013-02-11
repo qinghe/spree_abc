@@ -38,7 +38,8 @@ module Spree
     preference :always_put_site_name_in_title, :boolean, :default => true
     preference :auto_capture, :boolean, :default => false # automatically capture the credit card (as opposed to just authorize and capture later)
     preference :cache_static_content, :boolean, :default => true
-    preference :check_for_spree_alerts, :boolean, :default => true
+#    preference :check_for_spree_alerts, :boolean, :default => true
+    preference :check_for_spree_alerts, :boolean, :default => false
     preference :checkout_zone, :string, :default => nil # replace with the name of a zone if you would like to limit the countries
     preference :company, :boolean, :default => false # Request company field for billing and shipping addr
     preference :create_inventory_units, :boolean, :default => true # should only be false when track_inventory_levels is false, also disables RMA's
