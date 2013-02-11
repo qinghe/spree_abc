@@ -76,7 +76,7 @@ zh-CN:
         email: "客户 E-Mail"
         ip_address: "IP地址"
         item_total: "产品小记"
-        number: "数量"
+        number: "序号"
         payment_state: "支付状态"
         shipment_state: "配送状态"
         special_instructions: "特别指南"
@@ -767,17 +767,17 @@ zh-CN:
   payment_processing_failed: "Payment could not be processed, please check the details you entered"
   payment_processor_choose_banner_text: "If you need help choosing a payment processor, please visit"
   payment_processor_choose_link: "our payments page"
-  payment_state: Payment State
+  payment_state: "支付状态"
   payment_states: 
-    balance_due: balance due
-    checkout: checkout
-    completed: completed
-    credit_owed: credit owed
-    failed: failed
-    paid: paid
-    pending: pending
-    processing: processing
-    void: void
+    balance_due:  "尚欠款"
+    checkout: "准备支付"
+    completed: "支付完成"
+    credit_owed: "应予退款"
+    failed: "支付失败"
+    paid: "已支付"
+    pending: "等待支付"
+    processing: "处理中"
+    void: "作废"
   payment_updated: "支付已更新"
   payments: "支付"
   pending_payments: "等待支付"
@@ -793,9 +793,8 @@ zh-CN:
   preview: "预览"
   previous: "上一页"
   price: "价格"
-  price_range: Price Range
-  price_sack: Price Sack
   price_range: 价格区间
+  price_sack: Price Sack
   price_with_vat_included: "%{price} (inc. VAT)"
   problem_authorizing_card: "验证信用卡时遇到问题"
   problem_capturing_card: "获取信用卡时遇到问题"
@@ -1068,13 +1067,13 @@ zh-CN:
       thanks: "Thank you for your business."
       track_information: "Tracking Information: %{tracking}"
   shipment_number: "运单号 #"
-  shipment_state: Shipment State
+  shipment_state: "发货状态"
   shipment_states: 
-    backorder: backorder
-    partial: partial
-    pending: pending
-    ready: ready
-    shipped: shipped
+    backorder: "预订成功"
+    partial: "部分发货"
+    pending: "等待确认"
+    ready: "准备发货"
+    shipped: "已发货"
   shipment_updated: "配送状态更新"
   shipments: "配送"
   shipped: "已发货"
