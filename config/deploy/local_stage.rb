@@ -18,7 +18,7 @@ set :application, "SpreeABC"
 default_run_options[:pty] = true
 set :scm, :git
 set :scm_user, "qinghe"
-set :scm_passphrase, ""
+set :scm_passphrase, "a12345z"
 set :repository,  "git@github.com:RuanShan/spree_abc.git"
 set :repository_cache, "cached_copy" #create this folder 
 
@@ -37,6 +37,7 @@ set :deploy_to, "/var/www/deployed_apps/spree_abc"
 #set :deploy_via, :copy
 set :deploy_via, :remote_cache
 set :copy_exclude, [ '.git' ]
+set :rails_env, 'local_stage'
 # if you want to clean up old releases on each deploy uncomment this:
 # after "deploy:restart", "deploy:cleanup"
 
