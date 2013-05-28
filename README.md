@@ -27,6 +27,8 @@ bundle update spree_alipay # update gem spree_alipay
   
 Deployment
 ==========
+# A Capistrano Rails Guide
+# https://gist.github.com/jrochkind/2161449
 bundle install --deloyment
 
 bundle exec rake db:reset RAILS_ENV=production

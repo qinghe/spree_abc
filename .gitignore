@@ -3,11 +3,12 @@ vendor/cache
 public/spree
 log
 db/schema.rb
-log/development.log
+log/*.log
 public/assets
 db/sample/spree/payment_method.rb
+db/sample9
 .rvmrc
-Gemfile.lock
 config/database.yml
 .idea/
 .bundle
+config/deploy
