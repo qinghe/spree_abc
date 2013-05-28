@@ -12,4 +12,4 @@ config/database.yml
 .idea/
 .bundle
 config/deploy
-config/deploy/testing.rb
+config/deploy/*
