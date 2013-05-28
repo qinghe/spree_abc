@@ -3,7 +3,7 @@ require 'bundler/capistrano'
 #rvm info
 set :default_environment, { 
     'PATH'=>         "/home/david/.rvm/gems/ruby-1.9.2-p318@spree_abc/bin:/home/david/.rvm/gems/ruby-1.9.2-p318@global/bin:/home/david/.rvm/rubies/ruby-1.9.2-p318/bin:/home/david/.rvm/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/home/david/bin",
-    'MY_RUBY_HOME' => "/home/david/.rvm/rubies/ruby-1.9.2-p318",
+    'RUBY_VERSION' => 'ruby 1.9.2',
     'GEM_HOME' =>     "/home/david/.rvm/gems/ruby-1.9.2-p318@spree_abc",
     'GEM_PATH' =>     "/home/david/.rvm/gems/ruby-1.9.2-p318@spree_abc:/home/david/.rvm/gems/ruby-1.9.2-p318@global",
     'BUNDLE_PATH'  => "/home/david/.rvm/gems/ruby-1.9.2-p318@spree_abc"  

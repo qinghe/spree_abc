@@ -8,7 +8,6 @@ public/assets
 db/sample/spree/payment_method.rb
 db/sample9
 .rvmrc
-config/database.yml
 .idea/
 .bundle
 config/deploy
