@@ -20,7 +20,7 @@ GIT
 
 GIT
   remote: git://github.com/RuanShan/spree_multi_site.git
-  revision: 92bdcef8604daeb689a6cb18b699a6c58654d964
+  revision: 44c2a508b2ccfea980c9da0ca270b7bb09a631cc
   branch: master
   specs:
     spree_multi_site (1.0.1)
