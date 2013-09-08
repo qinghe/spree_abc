@@ -12,3 +12,4 @@ db/sample9
 .bundle
 config/deploy
 config/deploy/*
+Gemfile.lock
