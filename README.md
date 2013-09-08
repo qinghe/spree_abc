@@ -13,7 +13,7 @@ rm db/migrate -Rf
 
 bundle exec rake spree:install:migrations
 
-bundle exec rake spree_promo:install:migrations
+bundle exec rake spree_api:install:migrations
 
 bundle exec rake spree_devise_auth:install:migrations
 
