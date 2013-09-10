@@ -1,8 +1,7 @@
-zh-CN: 
-  a_copy_of_all_mail_will_be_sent_to_the_following_addresses: 一份所有邮件的副本会被寄送到如下地址
-  activerecord: 
-    attributes: 
-      spree/address: 
+zh-CN:
+  activerecord:
+    attributes:
+      spree/address:
         address1: 地址
         address2: 地址（继续）
         city: 城市
@@ -16,14 +15,14 @@ zh-CN:
         iso: ISO
         iso3: ISO3
         iso_name: ISO名称
-        name: 国家名
-        numcode: ISO代码
-      spree/creditcard: 
+        name: 名称
+        numcode: ISO编号
+      spree/credit_card:
         base: 
         cc_type: 信用卡类型
         month: 月份
         number: 卡号
-        verification_value: 校验码
+        verification_value: 验证码
         year: 年份
       spree/inventory_unit:
         state: 状态
@@ -56,14 +55,18 @@ zh-CN:
         state: 省份
         zipcode: 邮政编码
       spree/order/ship_address:
-        address1: 收货地址
-        city: 收货所在城市
-        firstname: 收货名
-        lastname: 收货人姓
-        phone: 收货人联系电话
-        state: 收货所在省份
-        zipcode: 收货地址邮政编码
-      spree/product: 
+        address1: di zhi
+        city: 城市
+        firstname: 名字
+        lastname: 姓氏
+        phone: 电话
+        state: 省份
+        zipcode: 邮政编码
+      spree/payment:
+        amount: 金额
+      spree/payment_method:
+        name: 名称
+      spree/product:
         available_on: 上架日期
         cost_currency: 成本币种
         cost_price: 成本
@@ -73,16 +76,7 @@ zh-CN:
         on_hand: 库存
         shipping_category: 物流分类
         tax_category: 缴税分类
-      product_group: 
-        name: 名称
-        product_count: 产品数量
-        product_scopes: 产品范围
-        products: 产品
-        url: URL
-      product_scope: 
-        arguments: 参数
-        description: 描述
-      spree/promotion: 
+      spree/promotion:
         advertise: 推广
         code: 编号
         description: 描述
@@ -97,11 +91,11 @@ zh-CN:
         presentation: 描述
       spree/prototype:
         name: 名称
-      spree/return_authorization: 
-        amount: 金额
-      spree/role: 
-        name: 名称
-      spree/state: 
+      spree/return_authorization:
+        amount: Amount
+      spree/role:
+        name: ming cheng
+      spree/state:
         abbr: 缩写
         name: 名称
       spree/tax_category:
@@ -133,88 +127,125 @@ zh-CN:
       spree/zone:
         description: 描述
         name: 名称
-    models: 
-      spree/address: 
+    errors:
+      models:
+        spree/credit_card:
+          attributes:
+            base:
+              card_expired: 
+    models:
+      spree/address:
         one: 地址
-        other: 其他地址
-      spree/cheque_payment: 
-        one: 支票支付
-        other: 其他支票支付
-      spree/country: 
+        other: 地址
+      spree/country:
         one: 国家
-        other: 其他国家
-      spree/credit_card: 
+        other: 国家
+      spree/credit_card:
         one: 信用卡
-        other: 其他信用卡
-      spree/creditcard_payment: 
-        one: 信用卡支付
-        other: 其他信用卡支付
-      spree/creditcard_txn: 
-        one: 信用卡交易
-        other: 其他信用卡交易
-      spree/inventory_unit: 
-        one: 库存单元
-        other: 其他库存单元
-      spree/line_item: 
-        one: 所列项目
-        other: 其他所列项目
-      spree/order: 
+        other: 信用卡
+      spree/inventory_unit:
+        one: 库存单位
+        other: 库存单位
+      spree/line_item:
+        one: Line Item
+        other: Line Items
+      spree/order:
         one: 订单
-        other: 其他订单
-      spree/payment: 
+        other: 订单
+      spree/payment:
         one: 支付
-        other: 其他支付
-      spree/product: 
+        other: 支付
+      spree/product:
         one: 产品
-        other: 其他产品
-      spree/product_group: 
-        one: 产品组
-        other: 其他产品组
-      spree/property: 
+        other: 产品
+      spree/property:
         one: 属性
-        other: 其他属性
-      spree/prototype: 
+        other: 属性
+      spree/prototype:
         one: 原型
-        other: 其他原型
-      spree/return_authorization: 
-        one: 退款
-        other: 其他退款
-      spree/role: 
+        other: 原型
+      spree/return_authorization:
+        one: Return Authorization
+        other: Return Authorizations
+      spree/role:
         one: 角色
-        other: 其他角色
-      spree/shipment: 
-        one: 配送
-        other: 其他配送
-      spree/shipping_category: 
-        one: 配送类型
-        other: 其他配送类型
-      spree/state: 
+        other: 角色
+      spree/shipment:
+        one: 物流
+        other: 物流
+      spree/shipping_category:
+        one: 物流分类
+        other: 物流分类
+      spree/state:
         one: 省份
-        other: 其他省份
-      spree/tax_category: 
-        one: 缴税类型
-        other: 其他缴税类型
-      spree/tax_rate: 
+        other: 省份
+      spree/tax_category:
+        one: 缴税分类
+        other: 缴税分类
+      spree/tax_rate:
         one: 税率
-        other: 其他税率
-      spree/taxon: 
+        other: 税率
+      spree/taxon:
         one: 分类
-        other: 其他分类
-      spree/taxonomy: 
-        one: 分类层级
-        other: 其他分类层级
-      spree/user: 
+        other: 分类
+      spree/taxonomy:
+        one: 分类
+        other: 分类
+      spree/user:
         one: 用户
-        other: 其他用户
-      spree/variant: 
+        other: 用户
+      spree/variant:
         one: 具体型号
-        other: 其他具体型号
-      spree/zone: 
+        other: 具体型号
+      spree/zone:
         one: 区域
-        other: 其他区域
+        other: 区域
+  devise:
+    confirmations:
+      confirmed: 您已成功确认您的帐户信息。您现在已登录。
+      send_instructions: 您将在几分钟后收到一封说明如何确认帐号的邮件。
+    failure:
+      inactive: 您的帐号尚未激活。
+      invalid: 找不到该电子邮件地址或者密码,请更正并再次尝试。
+      invalid_token: 无效的授权口令。
+      locked: 您的帐号已被冻结。
+      timeout: 您的登录时间过长，请重新登录后继续其他操作。
+      unauthenticated: 您需要在继续操作之前进行登录或者注册。
+      unconfirmed: 您需要在继续操作之前确认您的帐号。
+    mailer:
+      confirmation_instructions:
+        subject: 确认帐号说明
+      reset_password_instructions:
+        subject: 重置密码说明
+      unlock_instructions:
+        subject: 帐号解锁说明
+    oauth_callbacks:
+      failure: 由于%{reason}，您暂时无法从%{kind}获得授权。
+      success: 成功地从%{kind}帐号获得授权。
+    unlocks:
+      send_instructions: 您将在几分钟之后收到一封说明如何解锁帐号的邮件。
+      unlocked: 您的帐号已被成功解锁。您现在已登录。
+    user_passwords:
+      user:
+        cannot_be_blank: 密码不能为空。
+        send_instructions: 您将在几分钟之后收到一封说明如何重置密码的邮件。
+        updated: 您已成功修改您的密码，您现在已登录。
+    user_registrations:
+      destroyed: 再见！您已成功取消帐号注册。希望您再次光临。
+      inactive_signed_up: 您已成功注册。但是，由于您的帐号%{reason}，您暂时无法登录。
+      signed_up: 欢迎！您已成功注册。
+      updated: 您已成功更新您的帐号信息。
+    user_sessions:
+      signed_in: 成功登录。
+      signed_out: 成功注销。
+  errors:
+    messages:
+      already_confirmed: 已被确认
+      not_found: 无法找到
+      not_locked: 未冻结
+      not_saved: 由于以下%{count}个错误，导致%{resource}无法保存：
   spree:
     abbreviation: 缩写
-    access_denied: 拒绝访问
     account: 帐户
     account_updated: 帐户更新完成!
     action: 操作
@@ -233,24 +264,19 @@ zh-CN:
     active: 激活
     add: 添加
     add_action_of_type: Add action of type
-    add_category: 添加分类
     add_country: 添加国家
     add_new_header: Add New Header
     add_new_style: 添加新的样式
     add_one: 新建
-    add_option_type: 添加选项类型
-    add_option_types: 添加(更多)选项类型
     add_option_value: 添加选项值
     add_product: 添加产品
     add_product_properties: 添加产品属性
     add_rule_of_type: Add rule of type
-    add_scope: 添加一个范围
     add_state: 添加一个省份
     add_stock: 添加库存
     add_stock_management: 添加库存管理
     add_to_cart: 加入购物车
     add_variant: 添加具体型号
-    add_zone: 添加区域
     additional_item: 额外项目花费
     address1: 地址
     address2: 地址（继续）
@@ -282,12 +308,10 @@ zh-CN:
     all_adjustments_closed: 所有价格调整已被成功禁用！
     all_adjustments_opened: 所有价格调整已被成功启用！
     all_departments: 所有部门
-    allow_backorders: 允许预定
     allow_ssl_in_development_and_test: 允许在开发以及测试模式下使用SSL
     allow_ssl_in_production: 允许在生产模式下使用SSL
     allow_ssl_in_staging: 允许在演示模式下使用SSL
-    allowed_ssl_in_production_mode: 生产环境下将%{not}会使用SSL
-    already_registered: 已经注册过了？
+    already_signed_up_for_analytics: 您已注册Spree Analytics帐号
     alt_text: 其他文本
     alternative_phone: 其他电话
     amount: 金额
@@ -299,15 +323,8 @@ zh-CN:
     analytics_desc_list_4: 完全免费
     analytics_trackers: 追踪分析
     and: 以及
-    apply: Apply
     are_you_sure: 你确定么？
-    are_you_sure_category: 你确定你要删除这个分类么?
     are_you_sure_delete: 你确定你要删除这条记录么?
-    are_you_sure_delete_image: 你确定你要删除这张图片么?
-    are_you_sure_option_type: 你你确定你要删除这个选项类型么?
-    are_you_sure_you_want_to_capture: 你确定你要付款么?
-    assign_taxon: 指派分类
-    assign_taxons: 指派分类
     associated_adjustment_closed: 相关联的价格调整已被关闭，并且不会被重复计算。您需要启用它吗？
     attachment_default_style: 附件样式
     attachment_default_url: 附件链接
@@ -315,11 +332,7 @@ zh-CN:
     attachment_styles: Paperclip样式
     attachment_url: 附加链接
     authorization_failure: 认证失败
-    authorized: 已认证
-    availability: Availability
     available_on: 上架日期
-    available_taxons: 可选分类
-    awaiting_return: 等待退回
     back: 后退
     back_end: 后端
     back_to_adjustments_list: 回到价格调整列表
@@ -348,47 +361,29 @@ zh-CN:
     backorderable: 可预订
     backorders_allowed: 
     balance_due: 尚欠款
-    best_selling_products: 销售最佳产品
-    best_selling_taxons: 销售最佳分类
     bill_address: 账单地址
     billing: 账单
     billing_address: 账单地址
     both: 全部
-    by_day: (按日)
     calculator: 计算器
     calculator_settings_warning: 如果你正在修改计算方式，你必须在编辑计算器设置之前先保存
     cancel: 取消
-    cancel_my_account: Cancel my account
-    cancel_my_account_description: Unhappy?
-    canceled: 已取消
     cannot_create_payment_without_payment_methods: 您无法在没有定义任何支付方式的情况下进行支付。
     cannot_create_returns: 没有配送的订单不能申请退货
     cannot_perform_operation: 无法执行请求的操作
     cannot_set_shipping_method_without_address: 缺乏客户的详细信息，无法设置配送方式。
     capture: 付款
     card_code: 卡验证码
-    card_details: 卡详细信息
     card_number: 卡号
     card_type_is: 卡的类型是
     cart: 购物车
     categories: 分类
     category: 分类
-    change: 修改
-    change_language: 修改语言
-    change_my_password: 修改我的密码
-    charge_total: 费用总计
-    charged: 已找零??
-    charges: 费用
     check_for_spree_alerts: 查收Spree的通知
     checkout: 结账
     choose_a_customer: 选择用户
     choose_currency: 选择货币
     choose_dashboard_locale: 选择控制面板语言
-    cheque: 支票
-    china_address:
-      firstname: 姓名
-      phone: 手机
-      state: 地区
     city: 城市
     clone: 复制
     close: 关闭
@@ -396,19 +391,15 @@ zh-CN:
     code: 编码
     company: 公司
     complete: 完成
-    complete_list: 全部列出
     configuration: 配置
-    configuration_options: 配置选项
     configurations: 配置
     configure_s3: 配置S3
-    configured: 已配置
     confirm: 确认
     confirm_delete: 确认删除
     confirm_password: 确认密码
     continue: 继续
     continue_shopping: 继续购物
     cost_currency: 成本币种
-    copy_all_mails_to: 将所有的邮件复制到
     cost_price: 进货价
     could_not_connect_to_jirafe: 无法连接Jirafe。稍后将会自动重新连接。
     could_not_create_stock_movement: 
@@ -434,13 +425,8 @@ zh-CN:
     create: 创建
     create_a_new_account: 创建一个新帐号
     created_at: 创建日期
-    create_product_group_from_products: Create a new product group from these products
-    create_user_account: 创建用户帐号
-    created_successfully: 创建成功
     credit: 欠款??
     credit_card: 信用卡
-    credit_card_capture_complete: 信用卡付款完成
-    credit_card_payment: 信用卡支付
     credit_cards: 信用卡
     credit_owed: 应予退款
     currency: 币种
@@ -472,7 +458,6 @@ zh-CN:
       format: ! '%Y/%m/%d'
       js_format: yy/mm/dd
     date_range: 时间范围
-    debit: 借方??
     default: 默认
     default_meta_description: 默认元描述
     default_meta_keywords: 默认元关键字
@@ -485,23 +470,14 @@ zh-CN:
     description: 描述
     destination: 
     destroy: 删除
-    didnt_receive_confirmation_instructions: Didn't receive confirmation instructions?
-    didnt_receive_unlock_instructions: Didn't receive unlock instructions?
     discount_amount: 折扣金额
     dismiss_banner: 不，谢谢！我对此不感兴趣，请不要再显示此信息。
     display: 显示
     display_currency: 显示货币符号
-    dollar_amounts_displayed_as: Dollar amounts displayed as %{example}
     edit: 编辑
-    edit_general_settings: Edit General Settings
-    editing_billing_integration: 编辑付款集成
-    editing_category: 编辑分类
-    editing_mail_method: Editing Mail Method
     editing_option_type: 编辑类型选项
-    editing_option_types: 编辑类型选项
     editing_payment_method: 编辑支付方式
     editing_product: 编辑产品
-    editing_product_group: 编辑产品组
     editing_promotion: 促销编辑
     editing_property: 编辑属性
     editing_prototype: 编辑原型
@@ -516,19 +492,11 @@ zh-CN:
     editing_user: 编辑用户
     editing_zone: 编辑区域
     email: 电子邮件
-    email_address: 电子邮件地址
-    email_server_settings_description: 设置邮件服务器。
-    empty: 0
+    empty: Empty
     empty_cart: 清空购物车
-    enable_login_via_login_password: 使用标准的电子邮件/密码
-    enable_login_via_openid: 使用OpenID代替
     enable_mail_delivery: 开启邮件发送
     end: 结束
     ending_in: Ending in
-    enter_at_least_five_letters: Enter at least five letters of customer name
-    enter_exactly_as_shown_on_card: 请严格按照卡面信息输入
-    enter_password_to_confirm: (we need your current password to confirm your changes)
-    enter_token: Enter Token
     environment: 环境
     error: 错误
     errors:
@@ -556,51 +524,33 @@ zh-CN:
     exceptions:
       count_on_hand_setter: 
     expiration: 过期
-    expiration_month: 过期月份
-    expiration_year: 过期年份
-    expiry: Expiry
     extension: 扩展
-    extensions: 扩展
     filename: 文件名
     fill_in_customer_info: 请填写顾客信息
     filter_results: 过滤结果
-    final_confirmation: 最终确认
     finalize: 完成
-    finalized_payments: 已付款项目
     first_item: 首件产品价格??
     first_name: 名
     first_name_begins_with: 名的开始
     flat_percent: 固定费率
-    flat_rate_amount: 金额
     flat_rate_per_item: 固定费率 (每商品)
     flat_rate_per_order: 固定费率 (每订单)
     flexible_rate: 灵活费率
     forgot_password: 忘记密码
     free_shipping: 免运送费
     front_end: 前端
-    full_name: 全名
     gateway: 网关
     gateway_config_unavailable: 当前运行环境下无可用的网关
-    gateway_configuration: 网关配置
     gateway_error: 网关出错
-    gateway_setting_description: 选择一个支付网关并对其进行配置。
-    gateway_settings_warning: 如果您正在变更网关类型，您需要在编辑网关设置之前先保存
     general: 一般
     general_settings: 一般设置
-    general_settings_description: 配置Spree的一般设置。
     google_analytics: Google Analytics
-    google_analytics_active: 激活
-    google_analytics_create: 创建新的Google Analytics Account
     google_analytics_id: Analytics ID
-    google_analytics_new: 新的Google Analytics帐号
-    google_analytics_setting_description: 管理Google Analytics ID
     guest_checkout: 匿名用户结账
     guest_user_account: 作为一个匿名用户结账
     has_no_shipped_units: 没有已配送的单元
     height: 高度
-    hello_user: 用户你好
     hide_cents: 隐藏分钱
-    history: 历史
     home: 首页
     i18n:
       available_locales: 可用的语言
@@ -617,17 +567,11 @@ zh-CN:
     icon: 图标
     image: 图片
     image_settings: 图片设置
-    image_settings_description: Image Settings Description
     image_settings_updated: 已成功更新图片设置
     image_settings_warning: 如果您更新了paperclip的样式，您需要重新生成缩略图。您可以通过运行“rake paperclip:refresh:thumbnails CLASS=Spree::Image”以达到目标。
     images: 图片
-    images_for: Images for
-    in_progress: 处理中
-    include_in_shipment: 包含在配送中
-    included_in_other_shipment: 包含在其他配送中
     included_in_price: 包含在售价中
-    included_in_this_shipment: 包含在本次配送中
-    included_price_validation: cannot be selected unless you have set a Default Tax Zone
+    included_price_validation: 除非您设置了默认的缴税区域，否则无法选择
     instructions_to_reset_password: 请填写如下表格来重置你的密码，重置后的密码会通过电子邮件发送给您
     insufficient_stock: 库存不足，当前还剩下%{on_hand}件库存
     intercept_email_address: 用于接收邮件的邮箱地址
@@ -639,11 +583,8 @@ zh-CN:
     inventory: 库存
     inventory_adjustment: 库存调整
     inventory_error_flash_for_insufficient_quantity: 您的购物车中的一个商品已经不可购买。
-    inventory_setting_description: 库存配置，预定，以及没有库存时的页面显示
-    inventory_settings: 库存设置
     is_not_available_to_shipment_address: 无法送达要求的配送地址
     iso_name: ISO名称
-    issue_number: 问题编号
     item: 商品项
     item_description: 商品项描述
     item_total: 项目总计
@@ -655,26 +596,16 @@ zh-CN:
     jirafe: Jirafe
     landing_page_rule:
       path: Path
-    last_14_days: 过去14天
-    last_5_orders: 最近的5个订单
-    last_7_days: 过去7天
-    last_month: 上个月
     last_name: 姓
     last_name_begins_with: 姓的开始
-    last_year: 去年
     learn_more: 更多
-    leave_blank_to_not_change: (leave blank if you don't want to change it)
     list: 列表
-    listing_categories: 分类列表
     listing_countries: 正在列出国家
-    listing_option_types: 选项类型列表
     listing_orders: 订单列表
-    listing_product_groups: 产品组列表
     listing_products: 产品列表
     listing_reports: 报表列表
     listing_tax_categories: 缴税分类列表
     listing_users: 用户列表
-    live: Live
     loading: 加载
     locale_changed: Locale已变更
     location: 位置
@@ -689,25 +620,18 @@ zh-CN:
     logout: 登出/注销
     look_for_similar_items: 寻找类似的产品
     maestro_or_solo_cards: Maestro/Solo cards
-    mail_delivery_enabled: 邮件发送功能已启用
-    mail_delivery_not_enabled: 邮件发送功能尚未启用
     mail_method_settings: 邮件方式设置
-    mail_methods: 邮件服务
-    mail_server_preferences: 邮件服务器首选项
+    mail_methods: 邮件方式
     make_refund: 进行退款??
-    mark_shipped: 标记为已配送
     master_price: 默认价格
     match_choices:
       all: 全部
       none: None
-      one: One
     max_items: 最大商品项??
-    may_be_combined_with_other_promotions: May be combined with other promotions
     meta_description: 元描述
     meta_keywords: 关键字
     metadata: 元数据
     minimal_amount: Minimal Amount
-    missing_required_information: 缺少必须的信息
     month: 月
     more: 更多
     move_stock_between_locations: 
@@ -717,25 +641,18 @@ zh-CN:
     name_or_sku: 名称或条形码（输入产品名称中的至少4个字母）
     new: 新建
     new_adjustment: 新建调整
-    new_billing_integration: 新建支付集成
-    new_category: 新建目录
     new_customer: 新建客户
-    new_group: New Group
     new_image: 新建图片
-    new_mail_method: 新建邮件服务
     new_option_type: 新建选项类型
-    new_option_value: 新建选项值
     new_order: 新建订单
     new_order_completed: 新建订单完成
     new_payment: 新建支付
     new_payment_method: 新建支付方式
     new_product: 新建产品
-    new_product_group: 新建产品组
     new_promotion: 新建促销活动
     new_property: 新建属性
     new_prototype: 新建原型
     new_return_authorization: 新建退货
-    new_shipment: 新建配送
     new_shipping_category: 新建配送分类
     new_shipping_method: 新建配送方式
     new_state: 新建省份
@@ -764,15 +681,12 @@ zh-CN:
     no_trackers_found: 找不到任何追踪器
     no_tracking_present: 未提供跟踪细节。
     none: 没有
-    none_available: 没有可用的
     normal_amount: Normal Amount
     not: false
     not_available: N/A
     not_enough_stock: 
     not_found: 未找到%{resource}
-    note: 备注
     notice_messages:
-      option_type_removed: 成功移出了选项类型
       product_cloned: 产品已经被复制
       product_deleted: 产品已经被删除
       product_not_cloned: 产品无法被复制
@@ -781,10 +695,9 @@ zh-CN:
       variant_not_deleted: 具体型号不能被删除
     on_hand: 库存
     open: 打开
-    one_default_category_with_default_tax_rate: You should configure exactly one default category with your countries default tax rate
     open_all_adjustments: 启用所有价格调整
-    operation: 操作
     option_type: 选项类型
+    option_type_placeholder: 
     option_types: 选项类型
     option_value: 选项值
     option_values: 选项值
@@ -792,12 +705,8 @@ zh-CN:
     options: 选项
     or: 或
     or_over_price: ! '%{price}或以上'
-    ord_qty: 订单数量
-    ord_total: 订单总计
     order: 订单
     order_adjustments: 订单调整
-    order_confirmation_note: 订单确认备注
-    order_date: 订单日期
     order_details: 订单详情
     order_email_resent: 重新发出了订单邮件
     order_information: 订单信息
@@ -837,35 +746,20 @@ zh-CN:
     order_summary: 订单概述
     order_sure_want_to: 您确定您想要%{event}这个订单么?
     order_total: 订单总计
-    order_total_message: 您的卡上一共会支付
     order_updated: 订单已更新
     orders: 订单
-    other_payment_options: 其他支付选项
     out_of_stock: 没有库存
-    out_of_stock_products: 没有库存的产品
-    over_paid: Over Paid
     overview: 首页
-    overview_welcome: 欢迎来到商店首页，现在我们还没有足够的数据来显示仪表盘。<br/><br/> 当系统中有有限订单后，系统会自动生成统计数据，并显示在仪表盘中。
     package_from: 包裹来自
-    page_only_viewable_when_logged_in: 您试图访问一个只有登陆后才能访问的页面
-    page_only_viewable_when_logged_out: 您试图访问一个只有登出/注销后才能访问的页面
     pagination:
       next_page: 下一页 &raquo;
       previous_page: ! '&laquo; 上一页'
       truncate: ! '&hellip;'
-    paid: 已支付
-    parent_category: 上级分类
     password: 密码
-    password_reset_instructions: 密码重置指南
-    password_reset_instructions_are_mailed: 如何重置密码的步骤已经通过电子邮件发送给您，请检查您的电子邮件。
-    password_reset_token_not_found: 对不起，我们无法找到您的帐号。如果您遇到问题，请尝试从您的电子邮件中重新复制粘铁URL到浏览器中，或者重新进行重置密码的步骤
-    password_updated: 密码更新成功
-    paste: 粘帖
+    paste: 粘贴
     path: 路径
     pay: 支付
     payment: 支付
-    payment_actions: Actions
-    payment_gateway: 支付网关
     payment_information: 支付信息
     payment_method: 支付方式
     payment_methods: 支付方式
@@ -877,7 +771,7 @@ zh-CN:
       balance_due: 欠款
       checkout: 支付
       completed: 完成
-      credit_owed: 退款
+      credit_owed: credit owed
       failed: 失败
       paid: 已支付
       pending: 等待中
@@ -890,26 +784,17 @@ zh-CN:
     permalink: 永久链接
     phone: 电话
     place_order: 下单
-    please_create_user: 请创建一个用户帐号
     please_define_payment_methods: 请先设定支付方式。
     populate_get_error: Something went wrong. Please try adding the item again.
     powered_by: Powered by
     presentation: 描述
-    preview: 预览
     previous: 上一页
     price: 价格
     price_range: 价格范围
     price_sack: Price Sack
-    problem_authorizing_card: 验证信用卡时遇到问题
-    problem_capturing_card: 获取信用卡时遇到问题
-    problems_processing_order: 我们在处理您的订单时遇到问题
-    proceed_as_guest: 谢谢，不用了，以访客身份处理
     process: 处理
     product: 产品
     product_details: 产品详情
-    product_group: 产品组
-    product_group_invalid: 产品组有不合法的范围
-    product_groups: 产品组
     product_has_no_description: 该产品没有描述
     product_not_available_in_this_currency: 此产品在当前选中的货币下不可购买。
     product_properties: 产品属性
@@ -921,122 +806,6 @@ zh-CN:
       product_source:
         group: 从产品分组
         manual: 手工选择
-    product_scopes: 
-      groups: 
-        price: 
-          description: 根据价格选择产品的查询范围
-          name: 价格
-        search: 
-          description: 根据产品名称、关键字以及描述选择产品的查询范围
-          name: 文本搜索
-        taxon: 
-          description: 根据产品分类选择产品的查询范围
-          name: 分类
-        values: 
-          description: 根据产品的选项与属性值选择产品的查询范围
-          name: 值
-      scopes: 
-        ascend_by_master_price: 
-          name: 按产品默认价格升序
-        ascend_by_name: 
-          name: 按产品名称升序
-        ascend_by_updated_at: 
-          name: 按最后更新事件升序
-        descend_by_master_price: 
-          name: 按产品默认价格降序
-        descend_by_name: 
-          name: 按产品名称降序
-        descend_by_popularity: 
-          name: 按流行程序排序(最流行的排在最前)
-        descend_by_updated_at: 
-          name: 按最后更新事件降序
-        in_name: 
-          args: 
-            words: 单词
-          description: (以空格或逗号分割)
-          name: 产品名称中有以下
-          sentence: 产品名称中包含 <em>%s</em>
-        in_name_or_description: 
-          args: 
-            words: 单词
-          description: (以空格或逗号分割)
-          name: 产品名称或描述中有以下
-          sentence: 产品名称或描述中包含 <em>%s</em>
-        in_name_or_keywords: 
-          args: 
-            words: 单词
-          description: (以空格或逗号分割)
-          name: 产品名称或关键字中有以下
-          sentence: 产品名称或关键字中包含 <em>%s</em>
-        in_taxons: 
-          args: 
-            taxon_names: Taxon names
-          description: 分类名称必须以空格或逗号分割(例如： adidas,鞋子)
-          name: 在分类以及所有下级分类中
-          sentence: 在 <em>%s</em> 以及他们所有的下级分类中
-        master_price_gte: 
-          args: 
-            amount: 金额
-          description: 
-          name: 默认价格大于等于
-          sentence: 价格大于等于 <em>%.2f</em>
-        master_price_lte: 
-          args: 
-            amount: 金额
-          description: 
-          name: 默认价格小于等于
-          sentence: 价格小于等于 <em>%.2f</em>
-        price_between: 
-          args: 
-            high: 上限
-            low: 下限
-          description: 
-          name: 价格在
-          sentence: 价格在 <em>%.2f</em> 到 <em>%.2f</em> 之内
-        taxons_name_eq: 
-          args: 
-            taxon_name: 分类名称
-          description: 在指定的分类中 - 不包括下级分类
-          name: 在分类中(不包括下级分类)
-          sentence: 在 <em>%s</em> 中
-        with: 
-          args: 
-            value: 值
-          description: Select specific products
-          name: Products with IDs
-          sentence: with IDs <em>%s</em>
-        with_ids: 
-          args: 
-            ids: IDs
-          description: Select specific products
-          name: Products with IDs
-          sentence: with IDs <em>%s</em>
-        with_option: 
-          args: 
-            option: 选项
-          description: 选择所有拥有特定可选项的产品(例如. 颜色)
-          name: 拥有选项
-          sentence: 拥有选项 <em>%s</em>
-        with_option_value: 
-          args: 
-            option: 选项
-            value: 选项值
-          description: 选择所有至少有一个型号拥有指定选项及选项值的产品(例如. 颜色:红色)
-          name: 拥有选项及选项值
-          sentence: 拥有选项 <em>%s</em> 及选项值 <em>%s</em>
-        with_property: 
-          args: 
-            property: 属性
-          description: 选择所有拥有特定属性的产品(例如. 重量)
-          name: 拥有属性
-          sentence: 拥有属性 <em>%s</em>
-        with_property_value: 
-          args: 
-            property: 属性
-            value: 属性值
-          description: 选择所有至少有一个型号拥有指定属性或属性值的产品(例如. 重量:10kg)
-          name: 拥有属性值
-          sentence: 拥有属性 <em>%s</em> 及属性值 <em>%s</em>
     products: 产品
     promotion: 促销
     promotion_action: 优惠方式
@@ -1076,7 +845,6 @@ zh-CN:
         description: 只对已经登录的用户有效
         name: 用户登录
     promotions: 促销
-    promotions_description: Manage offers and coupons with promotions
     properties: 属性
     property: 属性
     prototype: 原型
@@ -1087,32 +855,21 @@ zh-CN:
     quantity: 数量
     quantity_returned: 返回的数量
     quantity_shipped: 已发货数量
-    range: 范围
     rate: 费率
     reason: 原因
-    recalculate_order_total: 重新计算订单总价
     receive: 收到
     receive_stock: 
     received: 已收到
     reference: 
     refund: 退款
     register: 注册成为新用户
-    register_or_guest: 作为访客或者注册用户结账
     registration: 注册
     remember_me: 记住我
     remove: 移出
     rename: 重命名
     reports: 报表
-    required_for_solo_and_maestro: Required for Solo and Maestro cards.
     resend: 重新发送
-    resend_confirmation_instructions: Resend confirmation instructions
-    resend_unlock_instructions: Resend unlock instructions
     reset_password: 重置密码
-    resource_controller: 
-      member_object_not_found: 无法找到成员对象.
-      successfully_created: 创建成功!
-      successfully_removed: 移除成功!
-      successfully_updated: 更新成功!
     response_code: 返回代码
     resume: 恢复
     resumed: 已恢复
@@ -1131,11 +888,8 @@ zh-CN:
     s3_access_key: Access Key
     s3_bucket: Bucket
     s3_headers: S3 Headers
-    s3_not_used_for_product_images: S3 is not being used for product images
     s3_protocol: S3 Protocol
     s3_secret: Secret Key
-    s3_used_for_product_images: S3 is being used for product images
-    sales_tax: 消费税
     sales_total: 销售总计
     sales_total_description: 所有订单总销量
     sales_totals: 总销量
@@ -1143,7 +897,6 @@ zh-CN:
     say_no: 不
     say_yes: 是的
     scope: 范围
-    scopes: 范围
     search: 搜索
     search_results: 搜索 '%{keywords}' 的结果
     searching: 搜索
@@ -1153,10 +906,7 @@ zh-CN:
     select_from_prototype: 从原型中选择
     select_stock: 
     send_copy_of_all_mails_to: 将所有邮件的副本发送至
-    send_copy_of_orders_mails_to: 将订单邮件的副本发送至
     send_mails_as: 发送邮件作为
-    send_me_reset_password_instructions: Send me reset password instructions
-    send_order_mails_as: 发送订单邮件作为
     server: 服务器
     server_error: 服务器返回了一个错误
     settings: 设置
@@ -1186,7 +936,6 @@ zh-CN:
     shipping: 配送中
     shipping_address: 配送地址
     shipping_categories: 配送类型
-    shipping_categories_description: 管理配送分类以决定哪些产品可以通过哪些方式进行配送
     shipping_category: 配送分类
     shipping_flat_rate_per_item: 
     shipping_flat_rate_per_order: 固定费率
@@ -1194,23 +943,14 @@ zh-CN:
     shipping_instructions: 配送指南
     shipping_method: 配送方式
     shipping_methods: 配送方式
-    shipping_methods_description: 管理配送方式
     shipping_price_sack: 
-    shipping_total: 配送费总计
     shop_by_taxonomy: 根据%{taxonomy}购物
     shopping_cart: 购物车
-    short_description: Short description
     show: 显示
     show_active: 显示激活的
     show_deleted: 显示删除的
-    show_incomplete_orders: 显示不完整的订单
     show_only_complete_orders: 只显示完整的订单
-    show_only_unfulfilled_orders: Show only unfulfilled orders
-    show_out_of_stock_products: 显示没有库存的产品
-    show_price_inc_vat: 显示价格包含VAT
     show_rate_in_label: 
-    showing_first_n: 展示第一个%{n}
-    sign_up: 注册
     site_name: 站点名称
     site_url: 站点URL
     sku: 条形码
@@ -1233,7 +973,6 @@ zh-CN:
     start_date: 有效期开始
     state: 省份
     state_based: 根据省份
-    state_setting_description: 管理每个国家的省份列表。
     states: 省份
     states_required: 
     status: 状态
@@ -1259,15 +998,11 @@ zh-CN:
     successfully_updated: ! '%{resource} 已被成功更新!'
     tax: 税
     tax_categories: 缴税分类
-    tax_categories_setting_description: 设定缴税分类以确定哪些产品是需要缴税的.
     tax_category: 缴税分类
     tax_rate_amount_explanation: 
     tax_rates: 税率
-    tax_rates_description: 设定与配置税率
     tax_settings: 缴税设置
-    tax_settings_description: 基本税款设置
     tax_total: 税款总额
-    tax_type: 税款类型
     taxon: 分类
     taxon_edit: 编辑分类
     taxon_placeholder: 添加分类
@@ -1290,8 +1025,6 @@ zh-CN:
     thumbnail: 缩略图
     time: 时间
     to_add_variants_you_must_first_define: 要添加具体型号，您需要先定义
-    to_state: To State
-    top_grossing_products: 毛利最高产品
     total: 总计
     tracking: 追踪
     tracking_number: 
@@ -1301,40 +1034,24 @@ zh-CN:
     transfer_stock: 
     transfer_to_location: 
     tree: 树
-    try_again: 再试一次
     type: 类型
     type_to_search: 搜索类型
-    unable_ship_method: 由于服务器错误，无法生成一种配送方式。
-    unable_to_authorize_credit_card: 无法验证信用卡
-    unable_to_capture_credit_card: 无法使用信用卡付款
     unable_to_connect_to_gateway: 无法连接支付网关.
-    unable_to_save_order: 无法保存订单
-    under_paid: Under Paid
     under_price: 低于 %{price}
     unlock: 解锁
-    units: Units
     unrecognized_card_type: 无法辨识的支付卡种类
     unshippable_items: 无法邮寄的商品
     update: 更新
-    update_password: 更新我的密码并登陆
-    updated_successfully: 更新成功
     updating: 更新中
     usage_limit: 使用限制
-    use_as_shipping_address: 用于配送地址
     use_billing_address: 使用账单地址
-    use_different_shipping_address: 使用不同的配送地址
     use_new_cc: 使用一张新卡
     use_s3: 使用Amazon S3存储图片
     user: 用户
-    user_account: 用户帐号
-    user_created_successfully: 用户创建成功
-    user_details: 用户详情
     user_rule:
       choose_users: 选择用户
     users: 用户详情
-    validate_on_profile_create: Validate on profile create
-    validation: 
-      cannot_be_greater_than_available_stock: cannot be greater than available stock.
+    validation:
       cannot_be_less_than_shipped_units: 不能少于已配送的单位数。
       cannot_destory_line_item_as_inventory_units_have_shipped: Cannot destory line item as some inventory units have shipped.
       exceeds_available_stock: 超出可用的库存。请确认订单项拥有有效的数量。
@@ -1345,44 +1062,17 @@ zh-CN:
     variant: 具体型号
     variant_placeholder: 
     variants: 具体型号
-    vat: VAT
     version: 版本
-    view_shipping_options: 显示配送选项
     void: 作废
-    website: 网站
     weight: 重量
-    welcome_to_sample_store: 欢迎来到示例商城
     what_is_a_cvv: 信用卡验证码(CVV)是什么
     what_is_this: 这是什么?
-    whats_this: 这是什么
     width: 宽度
     year: 年
-    yes: 是
-    you_have_been_logged_out: 您已退出
     you_have_no_orders_yet: 您还没有下过订单
     your_cart_is_empty: 您的购物车是空的
     your_order_is_empty_add_product: 您的订单是空的，请搜索并且添加以上的产品
     zip: 邮编
     zipcode: 邮编
     zone: 区域
-    zone_based: 根据区域
-    zone_setting_description: 在各种计算中使用到的国家、省份、区域.
     zones: 区域
-# from spree_auth_devise  
-  devise:
-    user_passwords:
-      user:
-        cannot_be_blank: '密码不能为空.'
-        send_instructions: '几分钟后，您将收到重置密码的电子邮件.'
-        updated: '您的密码已修改成功，您现在已登录.'
-    user_registrations:
-      signed_up: '欢迎您！您已注册成功.'
-      inactive_signed_up: '您已注册成功. 因为您的账号%{reason}，无法登陆.'
-      updated: '帐号资料更新成功.'
-      destroyed: '再见！您的帐户已成功注销。我们希望很快可以再见到您.'
-    user_sessions:
-      signed_in: '登录成功.'
-      signed_out: '退出成功.'
-    oauth_callbacks:
-      success: '成功地从%{kind}获得授权.'
-      failure: '因为%{reason}，所以您无法从%{kind}获得授权.'
