@@ -13,3 +13,4 @@ db/sample9
 config/deploy
 config/deploy/*
 Gemfile.lock
+Gemfile.lock
