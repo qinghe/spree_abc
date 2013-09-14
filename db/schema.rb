@@ -348,7 +348,7 @@ ActiveRecord::Schema.define(:version => 20130908074850) do
   add_index "spree_products", ["deleted_at"], :name => "index_spree_products_on_deleted_at"
   add_index "spree_products", ["name"], :name => "index_spree_products_on_name"
   add_index "spree_products", ["permalink"], :name => "index_spree_products_on_permalink"
-  add_index "spree_products", ["permalink"], :name => "permalink_idx_unique", :unique => true
+  add_index "spree_products", ["site_id", "permalink"], :name => "permalink_idx_unique", :unique => true
 
   create_table "spree_products_promotion_rules", :id => false, :force => true do |t|
     t.integer "product_id"

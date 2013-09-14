@@ -18,14 +18,15 @@ spree_bag = Spree::Product.find_by_name!("Spree Bag")
 ruby_baseball_jersey = Spree::Product.find_by_name!("Ruby Baseball Jersey")
 apache_baseball_jersey = Spree::Product.find_by_name!("Apache Baseball Jersey")
 
-small = Spree::OptionValue.find_by_name!("Small")
-medium = Spree::OptionValue.find_by_name!("Medium")
-large = Spree::OptionValue.find_by_name!("Large")
-extra_large = Spree::OptionValue.find_by_name!("Extra Large")
+#OptionValue have not site_id, we should never use OptionValue.find..
+small = Spree::OptionType.find_by_presentation!("Size").option_values.find_by_name!("Small")
+medium = Spree::OptionType.find_by_presentation!("Size").option_values.find_by_name!("Medium")
+large = Spree::OptionType.find_by_presentation!("Size").option_values.find_by_name!("Large")
+extra_large = Spree::OptionType.find_by_presentation!("Size").option_values.find_by_name!("Extra Large")
 
-red = Spree::OptionValue.find_by_name!("Red")
-blue = Spree::OptionValue.find_by_name!("Blue")
-green = Spree::OptionValue.find_by_name!("Green")
+red = Spree::OptionType.find_by_presentation!("Color").option_values.find_by_name!("Red")
+blue = Spree::OptionType.find_by_presentation!("Color").option_values.find_by_name!("Blue")
+green = Spree::OptionType.find_by_presentation!("Color").option_values.find_by_name!("Green")
 
 variants = [
   {
