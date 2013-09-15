@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/RuanShan/spree_alipay.git
-  revision: 024eb4aad9eec063d6ca812ca42844f795051202
+  revision: 917783ef2b423e605419b7db13fea9751b57a8b0
   branch: 2-0-stable
   specs:
     spree_alipay (2.0.4)
@@ -8,11 +8,18 @@ GIT
 
 GIT
   remote: git://github.com/RuanShan/spree_multi_site.git
-  revision: 1f8ae89ee413b6a3ed643d3ab839261368fddbb9
+  revision: af91e6b132e5338dfe36090c5895da125cd178c2
   branch: 2-0-stable
   specs:
     spree_multi_site (2.0.4)
       spree_core (~> 2.0.4)
+
+GIT
+  remote: git://github.com/RuanShan/spree_theme.git
+  revision: 19b39fa31558cf8782e60d4645c15a40e01ec68d
+  branch: master
+  specs:
+    spree_theme (1.0.0)
 
 GIT
   remote: git://github.com/spree/spree.git
@@ -319,4 +326,5 @@ DEPENDENCIES
   spree_auth_devise!
   spree_china_checkout!
   spree_multi_site!
+  spree_theme!
   uglifier (>= 1.0.3)
