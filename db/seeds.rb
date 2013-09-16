@@ -10,8 +10,9 @@
 # it is calling spree_multi_site/db/seed.rb to load db/default & db/firstshop 
 # data folder is spree_abc/db, it is specified by SpreeMultiSite::Config.seed_dir 
 
-SpreeMultiSite::Engine.load_seed if defined?(SpreeMultiSite)
-
+SpreeMultiSite::Engine.load_seed #if defined?(SpreeMultiSite)
+SpreeTheme::Engine.load_seed
+load File.dirname(__FILE__)+ "/templates/seed.rb"
 # fake_orders/spree/*  are data related to orders, like address, order..
 # for reasons time consume and useless to customer, system does not load those file while loading sample.
 # it is only for test now.

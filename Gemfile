@@ -51,6 +51,8 @@ gem 'delayed_job_active_record'
 # Cannot use local override for spree_multi_site at ../spree_multi_site because :branch is not specified in Gemfile. Specify a branch or use `bundle config --delete` to remove the local override
   
 gem 'spree_multi_site',  :github => "RuanShan/spree_multi_site", :branch=>"2-0-stable"
+
+gem "friendly_id" # spree_theme require it.
 gem 'spree_theme',  :github => "RuanShan/spree_theme", :branch=>"master"
 
 #only specify it here, then could use ActiveMerchant::Billing::Integrations::Alipay::Helper directly

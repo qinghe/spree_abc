@@ -16,7 +16,7 @@ GIT
 
 GIT
   remote: git://github.com/RuanShan/spree_theme.git
-  revision: 19b39fa31558cf8782e60d4645c15a40e01ec68d
+  revision: 3f1477d2c6e9dfe23ce4c7b5039d6da738c194fb
   branch: master
   specs:
     spree_theme (1.0.0)
@@ -188,6 +188,8 @@ GEM
     erubis (2.7.0)
     execjs (2.0.1)
     ffaker (1.18.0)
+    friendly_id (4.0.10.1)
+      activerecord (>= 3.0, < 4.0)
     highline (1.6.18)
     hike (1.2.3)
     httparty (0.11.0)
@@ -316,6 +318,7 @@ DEPENDENCIES
   capistrano (= 2.14.1)
   coffee-rails (~> 3.2)
   delayed_job_active_record
+  friendly_id
   mail_view
   mysql2
   rails-erd

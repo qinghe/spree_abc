@@ -1,0 +1,327 @@
+<% g_page_layout_id=1;@template.select(g_page_layout_id); %>
+           <% g_section_id=1;
+              @template.select(g_page_layout_id, g_section_id);
+              g_piece_selector = @template.current_piece.piece_selector;
+              %> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr">
+<head>
+  <title><%= @current_page.title%></title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8" />
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
+  <script type="text/javascript" src="<%=@website.public_path('js')%>"></script>
+  <link rel="stylesheet" href="<%=@website.public_path('css')%>" type="text/css" />
+<!--[if lt IE 7]>
+  <script src="/javascripts/IE7.js" type="text/javascript"></script>
+<![endif]-->
+<% if @current_page.is_preview %>
+  <script type="text/javascript" src="/assets/store/spree_theme.js"></script>
+  <link rel="stylesheet" href="/assets/store/spree_theme.css" type="text/css" />    
+  <link rel="stylesheet" href="/assets/jquery-ui/minified/jquery-ui.min.css" type="text/css" />    
+<% else%>
+  <script type="text/javascript" src="/assets/jquery.js"></script>
+  <script type="text/javascript" src="/assets/jquery-ui.js"></script>    
+<% end %>    
+<%= csrf_meta_tags %>
+<%= render "spree/shared/routes" %>
+</head>
+<body class="<%=g_piece_selector%> clear-block">
+
+  <div id="page" class='page <%='ui-layout-center' if @current_page.is_preview %>'><div id="page-inner" class="clear-block">
+    <a name="top" id="navigation-top"></a>
+    <div id="skip-to-nav"><a href="#navigation">Skip to Navigation</a></div>
+    <% g_page_layout_id=2;@template.select(g_page_layout_id); %>
+           <% g_section_id=2;
+              @template.select(g_page_layout_id, g_section_id);
+              g_piece_selector = @template.current_piece.piece_selector;
+              %> 
+<!-- container  -->
+<div class="<%=g_piece_selector%> c_pageparams.parent_section_instance content_layout" >
+      <div class="<%=g_piece_selector%>_inner clear-block">
+      <% g_page_layout_id=3;@template.select(g_page_layout_id); %>
+           <% g_section_id=9;
+              @template.select(g_page_layout_id, g_section_id);
+              g_piece_selector = @template.current_piece.piece_selector;
+              %> 
+<!-- container  -->
+<div class="<%=g_piece_selector%> c_pageparams.parent_section_instance content_layout" >
+      <div class="<%=g_piece_selector%>_inner clear-block">
+                 <% g_section_id=10;
+              @template.select(g_page_layout_id, g_section_id);
+              g_piece_selector = @template.current_piece.piece_selector;
+              %> 
+<% if @template.image.present? %>    
+     <img src="<%= @template.image.url %>"  border="0" />
+<% else %>
+     <img alt='no image'  border="0" />         
+<% end %>
+
+      </div>          
+</div> <% g_page_layout_id=4;@template.select(g_page_layout_id); %>
+           <% g_section_id=3;
+              @template.select(g_page_layout_id, g_section_id);
+              g_piece_selector = @template.current_piece.piece_selector;
+              %> 
+<!-- container  -->
+<div class="<%=g_piece_selector%> c_pageparams.parent_section_instance content_layout" >
+      <div class="<%=g_piece_selector%>_inner clear-block">
+                 <% g_section_id=4;
+              @template.select(g_page_layout_id, g_section_id);
+              g_piece_selector = @template.current_piece.piece_selector;
+              %> 
+<ul class="<%=g_piece_selector%>" >
+<% if @template.menu.present? %>
+<% for page in @template.menu.children %>
+              <% g_section_id=5;
+              @template.select(g_page_layout_id, g_section_id);
+              g_piece_selector = @template.current_piece.piece_selector;
+              %> 
+<li class="<%=g_piece_selector%>">
+  <% if page.clickable? %>
+    <% if page.current? %>
+     <a id="pi<%= g_piece_selector%>_page.id" href="<%= page.path %>" class="selected" ><%= page.name %> </a>
+    <% else %>
+     <a id="pi<%= g_piece_selector%>_page.id" href="<%= page.path %>" ><%= page.name %> </a>
+    <% end %>
+  <% else %>
+    <a id="pi<%= g_piece_selector%>_page.id" class="noclick"> <%= page.name %> </a>    
+  <% end %>
+</li>
+
+<% end %>
+<% end %>
+</ul>
+      </div>          
+</div> 
+      </div>          
+</div> <% g_page_layout_id=5;@template.select(g_page_layout_id); %>
+           <% g_section_id=2;
+              @template.select(g_page_layout_id, g_section_id);
+              g_piece_selector = @template.current_piece.piece_selector;
+              %> 
+<!-- container  -->
+<div class="<%=g_piece_selector%> c_pageparams.parent_section_instance content_layout" >
+      <div class="<%=g_piece_selector%>_inner clear-block">
+      <% g_page_layout_id=7;@template.select(g_page_layout_id); %>
+           <% g_section_id=2;
+              @template.select(g_page_layout_id, g_section_id);
+              g_piece_selector = @template.current_piece.piece_selector;
+              %> 
+<!-- container  -->
+<div class="<%=g_piece_selector%> c_pageparams.parent_section_instance content_layout" >
+      <div class="<%=g_piece_selector%>_inner clear-block">
+      <% g_page_layout_id=9;@template.select(g_page_layout_id); %>
+           <% g_section_id=6;
+              @template.select(g_page_layout_id, g_section_id);
+              g_piece_selector = @template.current_piece.piece_selector;
+              %> 
+<!-- container  -->
+<div class="<%=g_piece_selector%> c_pageparams.parent_section_instance content_layout" >
+      <div class="<%=g_piece_selector%>_inner clear-block">
+                 <% g_section_id=7;
+              @template.select(g_page_layout_id, g_section_id);
+              g_piece_selector = @template.current_piece.piece_selector;
+              %> 
+<ul class="<%=g_piece_selector%>">
+<% if @template.menu.present? %>
+<% for page in @template.menu.children %>
+              <% g_section_id=8;
+              @template.select(g_page_layout_id, g_section_id);
+              g_piece_selector = @template.current_piece.piece_selector;
+              %> 
+<li class="<%=g_piece_selector%>">
+  <% if page.clickable? %>
+    <% if page.current? %>
+     <a id="pi<%= g_piece_selector%>_page.id" href="<%= page.path %>" class="selected" ><%= page.name %> </a>
+    <% else %>
+     <a id="pi<%= g_piece_selector%>_page.id" href="<%= page.path %>" ><%= page.name %> </a>
+    <% end %>
+  <% else %>
+    <a id="pi<%= g_piece_selector%>_page.id" class="noclick"> <%= page.name %> </a>    
+  <% end %>
+</li>
+
+<% end %>
+<% end %>
+</ul>
+      </div>          
+</div> 
+      </div>          
+</div> <% g_page_layout_id=8;@template.select(g_page_layout_id); %>
+           <% g_section_id=2;
+              @template.select(g_page_layout_id, g_section_id);
+              g_piece_selector = @template.current_piece.piece_selector;
+              %> 
+<!-- container  -->
+<div class="<%=g_piece_selector%> c_pageparams.parent_section_instance content_layout" >
+      <div class="<%=g_piece_selector%>_inner clear-block">
+      <% g_page_layout_id=10;@template.select(g_page_layout_id); %>
+           <% if @current_page.valid_context? %>
+                      <% g_section_id=2;
+              @template.select(g_page_layout_id, g_section_id);
+              g_piece_selector = @template.current_piece.piece_selector;
+              %> 
+<!-- container  -->
+<div class="<%=g_piece_selector%> c_pageparams.parent_section_instance content_layout" >
+      <div class="<%=g_piece_selector%>_inner clear-block">
+                 <% if @current_page.resources.present? %>
+           <% @current_page.resources.each{|product| %>
+           <% g_page_layout_id=12;@template.select(g_page_layout_id); %>
+           <% g_section_id=13;
+              @template.select(g_page_layout_id, g_section_id);
+              g_piece_selector = @template.current_piece.piece_selector;
+              %> 
+<!-- container  -->
+<div class="<%=g_piece_selector%> c_pageparams.parent_section_instance content_layout" >
+      <div class="<%=g_piece_selector%>_inner clear-block">
+                 <% g_section_id=14;
+              @template.select(g_page_layout_id, g_section_id);
+              g_piece_selector = @template.current_piece.piece_selector;
+              %> 
+<a href="<%= product.path %>"> <%=product.name %> </a>
+
+      </div>          
+</div> <% g_page_layout_id=13;@template.select(g_page_layout_id); %>
+           <% g_section_id=17;
+              @template.select(g_page_layout_id, g_section_id);
+              g_piece_selector = @template.current_piece.piece_selector;
+              %> 
+<!-- container  -->
+<div class="<%=g_piece_selector%> c_pageparams.parent_section_instance content_layout" >
+      <div class="<%=g_piece_selector%>_inner clear-block">
+                 <% g_section_id=18;
+              @template.select(g_page_layout_id, g_section_id);
+              g_piece_selector = @template.current_piece.piece_selector;
+              %> 
+<%= link_to small_image(product, :itemprop => "image"), product.path %>
+
+      </div>          
+</div> 
+           <% } %>
+           <% end %>
+
+      </div>          
+</div> 
+           <% end %>
+<% g_page_layout_id=11;@template.select(g_page_layout_id); %>
+           <% if @current_page.valid_context? %>
+                      <% g_section_id=2;
+              @template.select(g_page_layout_id, g_section_id);
+              g_piece_selector = @template.current_piece.piece_selector;
+              %> 
+<!-- container  -->
+<div class="<%=g_piece_selector%> c_pageparams.parent_section_instance content_layout" >
+      <div class="<%=g_piece_selector%>_inner clear-block">
+                 <% if @current_page.resources.present? %>
+           <% @current_page.resources.each{|product| %>
+           <% g_page_layout_id=14;@template.select(g_page_layout_id); %>
+           <% g_section_id=13;
+              @template.select(g_page_layout_id, g_section_id);
+              g_piece_selector = @template.current_piece.piece_selector;
+              %> 
+<!-- container  -->
+<div class="<%=g_piece_selector%> c_pageparams.parent_section_instance content_layout" >
+      <div class="<%=g_piece_selector%>_inner clear-block">
+                 <% g_section_id=14;
+              @template.select(g_page_layout_id, g_section_id);
+              g_piece_selector = @template.current_piece.piece_selector;
+              %> 
+<a href="<%= product.path %>"> <%=product.name %> </a>
+
+      </div>          
+</div> <% g_page_layout_id=15;@template.select(g_page_layout_id); %>
+           <% g_section_id=15;
+              @template.select(g_page_layout_id, g_section_id);
+              g_piece_selector = @template.current_piece.piece_selector;
+              %> 
+<!-- container  -->
+<div class="<%=g_piece_selector%> c_pageparams.parent_section_instance content_layout" >
+      <div class="<%=g_piece_selector%>_inner clear-block">
+                 <% g_section_id=16;
+              @template.select(g_page_layout_id, g_section_id);
+              g_piece_selector = @template.current_piece.piece_selector;
+              %> 
+<%=product.description %>
+
+      </div>          
+</div> 
+           <% } %>
+           <% end %>
+
+      </div>          
+</div> 
+           <% end %>
+
+      </div>          
+</div> 
+      </div>          
+</div> <% g_page_layout_id=6;@template.select(g_page_layout_id); %>
+           <% g_section_id=2;
+              @template.select(g_page_layout_id, g_section_id);
+              g_piece_selector = @template.current_piece.piece_selector;
+              %> 
+<!-- container  -->
+<div class="<%=g_piece_selector%> c_pageparams.parent_section_instance content_layout" >
+      <div class="<%=g_piece_selector%>_inner clear-block">
+      <% g_page_layout_id=16;@template.select(g_page_layout_id); %>
+           <% g_section_id=3;
+              @template.select(g_page_layout_id, g_section_id);
+              g_piece_selector = @template.current_piece.piece_selector;
+              %> 
+<!-- container  -->
+<div class="<%=g_piece_selector%> c_pageparams.parent_section_instance content_layout" >
+      <div class="<%=g_piece_selector%>_inner clear-block">
+                 <% g_section_id=4;
+              @template.select(g_page_layout_id, g_section_id);
+              g_piece_selector = @template.current_piece.piece_selector;
+              %> 
+<ul class="<%=g_piece_selector%>" >
+<% if @template.menu.present? %>
+<% for page in @template.menu.children %>
+              <% g_section_id=5;
+              @template.select(g_page_layout_id, g_section_id);
+              g_piece_selector = @template.current_piece.piece_selector;
+              %> 
+<li class="<%=g_piece_selector%>">
+  <% if page.clickable? %>
+    <% if page.current? %>
+     <a id="pi<%= g_piece_selector%>_page.id" href="<%= page.path %>" class="selected" ><%= page.name %> </a>
+    <% else %>
+     <a id="pi<%= g_piece_selector%>_page.id" href="<%= page.path %>" ><%= page.name %> </a>
+    <% end %>
+  <% else %>
+    <a id="pi<%= g_piece_selector%>_page.id" class="noclick"> <%= page.name %> </a>    
+  <% end %>
+</li>
+
+<% end %>
+<% end %>
+</ul>
+      </div>          
+</div> <% g_page_layout_id=17;@template.select(g_page_layout_id); %>
+           <% g_section_id=11;
+              @template.select(g_page_layout_id, g_section_id);
+              g_piece_selector = @template.current_piece.piece_selector;
+              %> 
+<!-- container  -->
+<div class="<%=g_piece_selector%> c_pageparams.parent_section_instance content_layout" >
+      <div class="<%=g_piece_selector%>_inner clear-block">
+                 <% g_section_id=12;
+              @template.select(g_page_layout_id, g_section_id);
+              g_piece_selector = @template.current_piece.piece_selector;
+              %> 
+<%= @template.css :text %> 
+
+      </div>          
+</div> 
+      </div>          
+</div> 
+  </div><!-- /#page-inner -->
+  </div><!-- /#page -->
+<% if @current_page.is_preview %>      
+  // And go!
+  <script type="text/javascript" src="/assets/interface.js"></script>    
+<% end %>
+</body>
+</html>
