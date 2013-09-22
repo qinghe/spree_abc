@@ -2,7 +2,7 @@
 :template: !ruby/object:Spree::TemplateTheme
   attributes:
     id: 1
-    website_id: 1
+    site_id: 2
     page_layout_root_id: 1
     title: Template One
     slug: ''
@@ -2065,7 +2065,7 @@
 - !ruby/object:Spree::PageLayout
   attributes:
     id: 1
-    website_id: 1
+    site_id: 1
     root_id: 1
     parent_id: !!null 
     lft: 1
@@ -2085,7 +2085,7 @@
 - !ruby/object:Spree::PageLayout
   attributes:
     id: 2
-    website_id: 1
+    site_id: 1
     root_id: 1
     parent_id: 1
     lft: 2
@@ -2105,7 +2105,7 @@
 - !ruby/object:Spree::PageLayout
   attributes:
     id: 3
-    website_id: 1
+    site_id: 1
     root_id: 1
     parent_id: 2
     lft: 3
@@ -2125,7 +2125,7 @@
 - !ruby/object:Spree::PageLayout
   attributes:
     id: 4
-    website_id: 1
+    site_id: 1
     root_id: 1
     parent_id: 2
     lft: 5
@@ -2145,7 +2145,7 @@
 - !ruby/object:Spree::PageLayout
   attributes:
     id: 5
-    website_id: 1
+    site_id: 1
     root_id: 1
     parent_id: 1
     lft: 8
@@ -2165,7 +2165,7 @@
 - !ruby/object:Spree::PageLayout
   attributes:
     id: 6
-    website_id: 1
+    site_id: 1
     root_id: 1
     parent_id: 1
     lft: 52
@@ -2185,7 +2185,7 @@
 - !ruby/object:Spree::PageLayout
   attributes:
     id: 7
-    website_id: 1
+    site_id: 1
     root_id: 1
     parent_id: 5
     lft: 9
@@ -2205,7 +2205,7 @@
 - !ruby/object:Spree::PageLayout
   attributes:
     id: 8
-    website_id: 1
+    site_id: 1
     root_id: 1
     parent_id: 5
     lft: 13
@@ -2225,7 +2225,7 @@
 - !ruby/object:Spree::PageLayout
   attributes:
     id: 9
-    website_id: 1
+    site_id: 1
     root_id: 1
     parent_id: 7
     lft: 10
@@ -2245,7 +2245,7 @@
 - !ruby/object:Spree::PageLayout
   attributes:
     id: 10
-    website_id: 1
+    site_id: 1
     root_id: 1
     parent_id: 8
     lft: 14
@@ -2265,7 +2265,7 @@
 - !ruby/object:Spree::PageLayout
   attributes:
     id: 11
-    website_id: 1
+    site_id: 1
     root_id: 1
     parent_id: 8
     lft: 24
@@ -2285,7 +2285,7 @@
 - !ruby/object:Spree::PageLayout
   attributes:
     id: 12
-    website_id: 1
+    site_id: 1
     root_id: 1
     parent_id: 18
     lft: 18
@@ -2305,7 +2305,7 @@
 - !ruby/object:Spree::PageLayout
   attributes:
     id: 13
-    website_id: 1
+    site_id: 1
     root_id: 1
     parent_id: 18
     lft: 16
@@ -2325,7 +2325,7 @@
 - !ruby/object:Spree::PageLayout
   attributes:
     id: 14
-    website_id: 1
+    site_id: 1
     root_id: 1
     parent_id: 20
     lft: 32
@@ -2345,7 +2345,7 @@
 - !ruby/object:Spree::PageLayout
   attributes:
     id: 15
-    website_id: 1
+    site_id: 1
     root_id: 1
     parent_id: 20
     lft: 34
@@ -2365,7 +2365,7 @@
 - !ruby/object:Spree::PageLayout
   attributes:
     id: 16
-    website_id: 1
+    site_id: 1
     root_id: 1
     parent_id: 6
     lft: 53
@@ -2385,7 +2385,7 @@
 - !ruby/object:Spree::PageLayout
   attributes:
     id: 17
-    website_id: 1
+    site_id: 1
     root_id: 1
     parent_id: 6
     lft: 55
@@ -2405,7 +2405,7 @@
 - !ruby/object:Spree::PageLayout
   attributes:
     id: 18
-    website_id: 1
+    site_id: 1
     root_id: 1
     parent_id: 10
     lft: 15
@@ -2425,7 +2425,7 @@
 - !ruby/object:Spree::PageLayout
   attributes:
     id: 19
-    website_id: 1
+    site_id: 1
     root_id: 1
     parent_id: 22
     lft: 26
@@ -2445,7 +2445,7 @@
 - !ruby/object:Spree::PageLayout
   attributes:
     id: 20
-    website_id: 1
+    site_id: 1
     root_id: 1
     parent_id: 11
     lft: 31
@@ -2465,7 +2465,7 @@
 - !ruby/object:Spree::PageLayout
   attributes:
     id: 21
-    website_id: 1
+    site_id: 1
     root_id: 1
     parent_id: 22
     lft: 28
@@ -2485,7 +2485,7 @@
 - !ruby/object:Spree::PageLayout
   attributes:
     id: 22
-    website_id: 1
+    site_id: 1
     root_id: 1
     parent_id: 11
     lft: 25
@@ -2505,7 +2505,7 @@
 - !ruby/object:Spree::PageLayout
   attributes:
     id: 23
-    website_id: 1
+    site_id: 1
     root_id: 1
     parent_id: 20
     lft: 36
@@ -2525,7 +2525,7 @@
 - !ruby/object:Spree::PageLayout
   attributes:
     id: 24
-    website_id: 1
+    site_id: 1
     root_id: 1
     parent_id: 20
     lft: 38
@@ -2545,7 +2545,7 @@
 - !ruby/object:Spree::PageLayout
   attributes:
     id: 25
-    website_id: 1
+    site_id: 1
     root_id: 1
     parent_id: 24
     lft: 39
@@ -2565,7 +2565,7 @@
 - !ruby/object:Spree::PageLayout
   attributes:
     id: 26
-    website_id: 1
+    site_id: 1
     root_id: 1
     parent_id: 24
     lft: 41
@@ -2585,7 +2585,7 @@
 - !ruby/object:Spree::PageLayout
   attributes:
     id: 27
-    website_id: 1
+    site_id: 1
     root_id: 1
     parent_id: 8
     lft: 46
@@ -2605,7 +2605,7 @@
 - !ruby/object:Spree::PageLayout
   attributes:
     id: 28
-    website_id: 1
+    site_id: 1
     root_id: 1
     parent_id: 8
     lft: 48
@@ -2625,7 +2625,7 @@
 - !ruby/object:Spree::PageLayout
   attributes:
     id: 29
-    website_id: 1
+    site_id: 1
     root_id: 1
     parent_id: 18
     lft: 20

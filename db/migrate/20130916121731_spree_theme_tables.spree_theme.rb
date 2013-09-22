@@ -58,7 +58,7 @@ class SpreeThemeTables < ActiveRecord::Migration
 
     # section_piece composite of section
     create_table :spree_sections, :force=>true do |t|
-      t.column "website_id",             :integer, :limit => 3,     :null => false, :default => 0
+      t.column "site_id",             :integer, :limit => 3,     :null => false, :default => 0
       t.column "root_id",                :integer, :limit => 3
       t.column "parent_id",              :integer, :limit => 3
       t.column "lft",                    :integer, :limit => 2,     :null => false, :default => 0
@@ -74,7 +74,7 @@ class SpreeThemeTables < ActiveRecord::Migration
     end   
     #section instance composite of layout
     create_table :spree_page_layouts, :force=>true do |t|
-      t.column "website_id",                :integer, :limit => 3,     :null => true,  :default => 0    
+      t.column "site_id",                :integer, :limit => 3,     :null => true,  :default => 0    
       t.column "root_id",                :integer, :limit => 3#,     :null => true,  :default => :null     
       t.column "parent_id",              :integer, :limit => 3#,     :null => true,  :default => :null
       #default value is null, acts_as_nested_set required      
@@ -137,7 +137,7 @@ class SpreeThemeTables < ActiveRecord::Migration
     end
 
     create_table :spree_template_themes, :force=>true do |t|
-      t.column :website_id,              :integer, :null => true, :default => 0 # this is an id in the page_layouts table
+      t.column :site_id,              :integer, :null => true, :default => 0 # this is an id in the page_layouts table
       t.column :page_layout_root_id,               :integer, :null => false, :default => 0 # this is an id in the page_layouts table
       t.column :release_id,              :integer, :null => true, :default => 0 # this is an id in the page_layouts table
       t.column :title,                   :string,  :limit => 64,      :null => false, :default => ""  # the name of the property      

@@ -283,7 +283,7 @@ ActiveRecord::Schema.define(:version => 20130916121732) do
   add_index "spree_orders", ["number"], :name => "index_spree_orders_on_number"
 
   create_table "spree_page_layouts", :force => true do |t|
-    t.integer  "website_id",        :limit => 3,   :default => 0
+    t.integer  "site_id",           :limit => 3,   :default => 0
     t.integer  "root_id",           :limit => 3
     t.integer  "parent_id",         :limit => 3
     t.integer  "lft",               :limit => 2,   :default => 0,     :null => false
@@ -549,7 +549,7 @@ ActiveRecord::Schema.define(:version => 20130916121732) do
   end
 
   create_table "spree_sections", :force => true do |t|
-    t.integer "website_id",               :limit => 3,   :default => 0,    :null => false
+    t.integer "site_id",                  :limit => 3,   :default => 0,    :null => false
     t.integer "root_id",                  :limit => 3
     t.integer "parent_id",                :limit => 3
     t.integer "lft",                      :limit => 2,   :default => 0,    :null => false
@@ -789,12 +789,14 @@ ActiveRecord::Schema.define(:version => 20130916121732) do
   end
 
   create_table "spree_template_themes", :force => true do |t|
-    t.integer "website_id",                          :default => 0
-    t.integer "page_layout_root_id",                 :default => 0,  :null => false
-    t.integer "release_id",                          :default => 0
-    t.string  "title",                 :limit => 64, :default => "", :null => false
-    t.string  "slug",                  :limit => 64, :default => "", :null => false
-    t.string  "assigned_resource_ids",               :default => "", :null => false
+    t.integer  "site_id",                             :default => 0
+    t.integer  "page_layout_root_id",                 :default => 0,  :null => false
+    t.integer  "release_id",                          :default => 0
+    t.string   "title",                 :limit => 64, :default => "", :null => false
+    t.string   "slug",                  :limit => 64, :default => "", :null => false
+    t.string   "assigned_resource_ids",               :default => "", :null => false
+    t.datetime "created_at",                                          :null => false
+    t.datetime "updated_at",                                          :null => false
   end
 
   create_table "spree_tokenized_permissions", :force => true do |t|

@@ -4,3 +4,5 @@ for file in files
 Rails.logger.debug "start load #{file}"     
   load path
 end
+
+load File.dirname(__FILE__)+ "/../templates/seed.rb"
