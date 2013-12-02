@@ -2,11 +2,11 @@ require 'bundler/capistrano'
 #service sshd start
 #rvm info
 set :default_environment, { 
-    'PATH'=>         "/home/david/.rvm/gems/ruby-1.9.2-p318@spree_abc/bin:/home/david/.rvm/gems/ruby-1.9.2-p318@global/bin:/home/david/.rvm/rubies/ruby-1.9.2-p318/bin:/home/david/.rvm/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/home/david/bin",
-    'RUBY_VERSION' => 'ruby 1.9.2',
-    'GEM_HOME' =>     "/home/david/.rvm/gems/ruby-1.9.2-p318@spree_abc",
-    'GEM_PATH' =>     "/home/david/.rvm/gems/ruby-1.9.2-p318@spree_abc:/home/david/.rvm/gems/ruby-1.9.2-p318@global",
-    'BUNDLE_PATH'  => "/home/david/.rvm/gems/ruby-1.9.2-p318@spree_abc"  
+    'PATH'=>         "/home/david/.rvm/gems/ruby-1.9.3-p448@spree_abc/bin:/home/david/.rvm/gems/ruby-1.9.3-p448@global/bin:/home/david/.rvm/rubies/ruby-1.9.3-p448/bin:/home/david/.rvm/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/home/david/bin",
+    'RUBY_VERSION' => 'ruby 1.9.3',
+    'GEM_HOME' =>     "/home/david/.rvm/gems/ruby-1.9.3-p448@spree_abc",
+    'GEM_PATH' =>     "/home/david/.rvm/gems/ruby-1.9.3-p448@spree_abc:/home/david/.rvm/gems/ruby-1.9.3-p448@global",
+    'BUNDLE_PATH'  => "/home/david/.rvm/gems/ruby-1.9.3-p448@spree_abc"  
 }
 
 set :user, 'david'
@@ -21,16 +21,13 @@ set :scm_user, "qinghe"
 set :scm_passphrase, "a12345z"
 set :repository,  "git@github.com:RuanShan/spree_abc.git"
 set :repository_cache, "cached_copy" #create this folder 
-
+set :branch, "2-0-stable"
 #set :git_shallow_clone, 1
 set :scm_verbose, true 
 
 # Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
 
-#role :web, ""                          # Your HTTP server, Apache/etc
-#role :app, ""                          # This may be the same as your `Web` server
-#role :db,  "127.0.0.1", :primary => true # This is where Rails migrations will run
-#role :db,  "your slave db-server here"
+# should allow sshd, add 'sshd:127.0.0.1' >> /etc/hosts.allow 
 server "127.0.0.1", :app, :web, :db, :primary => true
 
 set :deploy_to, "/var/www/deployed_apps/spree_abc"
