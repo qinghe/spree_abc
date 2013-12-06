@@ -1,5 +1,5 @@
-source 'http://rubygems.org'
-#source 'http://ruby.taobao.org/'
+#source 'http://rubygems.org'
+source 'http://ruby.taobao.org/'
 # Bundle edge Rails instead:
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
 
@@ -53,7 +53,7 @@ gem 'delayed_job_active_record'
 gem 'spree_multi_site',  :github => "RuanShan/spree_multi_site", :branch=>"2-0-stable"
 
 gem "friendly_id" # spree_theme require it.
-gem 'spree_theme',  :github => "RuanShan/spree_theme", :branch=>"master"
+gem 'spree_theme',  :github => "RuanShan/spree_theme", :ref=>"1ddf49d079c213256bc984f59ab4a21c501b9006"
 
 #only specify it here, then could use ActiveMerchant::Billing::Integrations::Alipay::Helper directly
 gem 'activemerchant', :require => 'active_merchant'
@@ -77,7 +77,7 @@ end
 #gem 'execjs'
 #gem 'therubyracer' #,   :path => '../therubyracer'
 
-gem 'capistrano', '= 2.14.1', :group => :development #deployment
+gem 'capistrano', :group => :development #deployment
 group :development do
   gem "rails-erd"
 end

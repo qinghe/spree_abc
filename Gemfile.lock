@@ -16,7 +16,7 @@ GIT
 
 GIT
   remote: git://github.com/RuanShan/spree_theme.git
-  revision: 934e9a7ca8c46ffefd47a8cb8367127753a2c387
+  revision: 1ddf49d079c213256bc984f59ab4a21c501b9006
   branch: master
   specs:
     spree_theme (1.0.0)
@@ -97,7 +97,7 @@ PATH
       spree_core (~> 2.0.4)
 
 GEM
-  remote: http://rubygems.org/
+  remote: http://ruby.taobao.org/
   specs:
     actionmailer (3.2.14)
       actionpack (= 3.2.14)
@@ -315,7 +315,7 @@ PLATFORMS
 DEPENDENCIES
   activemerchant
   activemerchant_patch_for_china
-  capistrano (= 2.14.1)
+  capistrano
   coffee-rails (~> 3.2)
   delayed_job_active_record
   friendly_id
