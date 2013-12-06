@@ -17,9 +17,12 @@ GIT
 GIT
   remote: git://github.com/RuanShan/spree_theme.git
   revision: 1ddf49d079c213256bc984f59ab4a21c501b9006
+  ref: 1ddf49d079c213256bc984f59ab4a21c501b9006
   branch: master
   specs:
     spree_theme (1.0.0)
+      friendly_id
+      spree_core (~> 2.0)
 
 GIT
   remote: git://github.com/spree/spree.git
