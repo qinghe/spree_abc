@@ -77,7 +77,7 @@ end
 #gem 'execjs'
 #gem 'therubyracer' #,   :path => '../therubyracer'
 
-gem 'capistrano', :group => :development #deployment
+gem 'capistrano'
 group :development do
   gem "rails-erd"
 end
