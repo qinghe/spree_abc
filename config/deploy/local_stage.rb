@@ -35,6 +35,7 @@ set :deploy_to, "/var/www/deployed_apps/spree_abc"
 set :deploy_via, :remote_cache
 set :copy_exclude, [ '.git' ]
 set :rails_env, 'local_stage'
+set :linked_dirs, %w{public/system, public/shops}
 # if you want to clean up old releases on each deploy uncomment this:
 # after "deploy:restart", "deploy:cleanup"
 
