@@ -78,6 +78,7 @@ end
 #gem 'therubyracer' #,   :path => '../therubyracer'
 
 gem 'capistrano'
+gem 'capistrano-rails', '~> 1.1.0'
 group :development do
   gem "rails-erd"
 end
