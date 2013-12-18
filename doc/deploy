@@ -1,0 +1,7 @@
+cap local_staging deploy
+rake db:seed RAILS_ENV=local_staging
+
+1. configure mysql to support utf-8
+  [mysqld]
+  character_set_server= utf8    
+http://www.dotkam.com/2008/09/14/configure-rails-and-mysql-to-support-utf-8/

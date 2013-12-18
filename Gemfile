@@ -53,7 +53,7 @@ gem 'delayed_job_active_record'
 gem 'spree_multi_site',  :github => "RuanShan/spree_multi_site", :branch=>"2-0-stable"
 
 gem "friendly_id" # spree_theme require it.
-gem 'spree_theme',  :github => "RuanShan/spree_theme",:branch=>"master", :ref=>"1ddf49d079c213256bc984f59ab4a21c501b9006"
+gem 'spree_theme',  :github => "RuanShan/spree_theme",:branch=>"master", :ref=>"81bb6e63e7fe32f8f45a1fc0965fe784d9347276"
 
 #only specify it here, then could use ActiveMerchant::Billing::Integrations::Alipay::Helper directly
 gem 'activemerchant', :require => 'active_merchant'

@@ -5,4 +5,4 @@ Rails.logger.debug "start load #{file}"
   load path
 end
 
-load File.dirname(__FILE__)+ "/../templates/seed.rb"
+load File.join(SpreeTheme::Engine.root,'db/themes/seed.rb')

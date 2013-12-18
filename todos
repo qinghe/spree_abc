@@ -4,3 +4,6 @@ https://github.com/spree/spree/commit/a398bc289bb6008c177452fd1d86b652ded96dbd
 1. override spree_multi_site, should not allow user add site.
 2. override spree_editor, should not allow user configure editor
  
+ 
+Mysql2::Error: Illegal mix of collations (latin1_swedish_ci,IMPLICIT) and (utf8_general_ci,COERCIBLE) for operation '=': SELECT  `spree_shipping_methods`.* FROM `spree_shipping_methods`  WHERE `spree_shipping_methods`.`deleted_at` IS NULL AND `spree_shipping_methods`.`site_id` = 2 AND `spree_shipping_methods`.`name` = '顺丰 Ground' LIMIT 1
+ 
