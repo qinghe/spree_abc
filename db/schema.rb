@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130916121732) do
+ActiveRecord::Schema.define(:version => 20131219133336) do
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0
@@ -764,6 +764,7 @@ ActiveRecord::Schema.define(:version => 20130916121732) do
     t.string   "meta_description"
     t.string   "meta_keywords"
     t.integer  "depth"
+    t.integer  "mtype",             :default => 0
   end
 
   add_index "spree_taxons", ["parent_id"], :name => "index_taxons_on_parent_id"

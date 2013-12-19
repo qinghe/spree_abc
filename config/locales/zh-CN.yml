@@ -1,5 +1,4 @@
 zh-CN: 
-  a_copy_of_all_mail_will_be_sent_to_the_following_addresses: 一份所有邮件的副本会被寄送到如下地址
   activerecord: 
     attributes: 
       spree/address: 
@@ -16,14 +15,14 @@ zh-CN:
         iso: ISO
         iso3: ISO3
         iso_name: ISO名称
-        name: 国家名
-        numcode: ISO代码
-      spree/creditcard: 
+        name: 名称
+        numcode: ISO编号
+      spree/credit_card:
         base: 
         cc_type: 信用卡类型
         month: 月份
         number: 卡号
-        verification_value: 校验码
+        verification_value: 验证码
         year: 年份
       spree/inventory_unit:
         state: 状态
@@ -63,7 +62,11 @@ zh-CN:
         phone: 收货人联系电话
         state: 收货所在省份
         zipcode: 收货地址邮政编码
-      spree/product: 
+      spree/payment:
+        amount: 金额
+      spree/payment_method:
+        name: 名称
+      spree/product:
         available_on: 上架日期
         cost_currency: 成本币种
         cost_price: 成本
@@ -153,8 +156,8 @@ zh-CN:
         one: 信用卡交易
         other: 其他信用卡交易
       spree/inventory_unit: 
-        one: 库存单元
-        other: 其他库存单元
+        one: 库存单位
+        other: 其他库存单位
       spree/line_item: 
         one: 所列项目
         other: 其他所列项目
@@ -183,17 +186,19 @@ zh-CN:
         one: 角色
         other: 其他角色
       spree/shipment: 
-        one: 配送
-        other: 其他配送
+        one: 物流
+        other: 物流
       spree/shipping_category: 
-        one: 配送类型
-        other: 其他配送类型
+        one: 物流分类
+        other: 其他物流分类
       spree/state: 
         one: 省份
         other: 其他省份
+      spree/stock_location: 
+      spree/stock_transfer: 
       spree/tax_category: 
-        one: 缴税类型
-        other: 其他缴税类型
+        one: 缴税分类
+        other: 其他缴税分类
       spree/tax_rate: 
         one: 税率
         other: 其他税率
@@ -201,8 +206,9 @@ zh-CN:
         one: 分类
         other: 其他分类
       spree/taxonomy: 
-        one: 分类层级
-        other: 其他分类层级
+        one: 分类
+        other: 其他分类
+      spree/tracker: 
       spree/user: 
         one: 用户
         other: 其他用户
@@ -212,6 +218,51 @@ zh-CN:
       spree/zone: 
         one: 区域
         other: 其他区域
+# from spree_auth_devise  
+  devise:
+    confirmations:
+      confirmed: 您已成功确认您的帐户信息。您现在已登录。
+      send_instructions: 您将在几分钟后收到一封说明如何确认帐号的邮件。
+    failure:
+      inactive: 您的帐号尚未激活。
+      invalid: 找不到该电子邮件地址或者密码,请更正并再次尝试。
+      invalid_token: 无效的授权口令。
+      locked: 您的帐号已被冻结。
+      timeout: 您的登录时间过长，请重新登录后继续其他操作。
+      unauthenticated: 您需要在继续操作之前进行登录或者注册。
+      unconfirmed: 您需要在继续操作之前确认您的帐号。
+    mailer:
+      confirmation_instructions:
+        subject: 确认帐号说明
+      reset_password_instructions:
+        subject: 重置密码说明
+      unlock_instructions:
+        subject: 帐号解锁说明
+    oauth_callbacks:
+      failure: 由于%{reason}，您暂时无法从%{kind}获得授权。
+      success: 成功地从%{kind}帐号获得授权。
+    unlocks:
+      send_instructions: 您将在几分钟之后收到一封说明如何解锁帐号的邮件。
+      unlocked: 您的帐号已被成功解锁。您现在已登录。
+    user_passwords:
+      user:
+        cannot_be_blank: 密码不能为空。
+        send_instructions: 您将在几分钟之后收到一封说明如何重置密码的邮件。
+        updated: 您已成功修改您的密码，您现在已登录。
+    user_registrations:
+      destroyed: 再见！您已成功取消帐号注册。希望您再次光临。
+      inactive_signed_up: 您已成功注册。但是，由于您的帐号%{reason}，您暂时无法登录。
+      signed_up: 欢迎！您已成功注册。
+      updated: 您已成功更新您的帐号信息。
+    user_sessions:
+      signed_in: 成功登录。
+      signed_out: 成功注销。
+  errors:
+    messages:
+      already_confirmed: 已被确认
+      not_found: 无法找到
+      not_locked: 未冻结
+      not_saved: 由于以下%{count}个错误，导致%{resource}无法保存：
   spree:
     abbreviation: 缩写
     access_denied: 拒绝访问
@@ -288,6 +339,7 @@ zh-CN:
     allow_ssl_in_staging: 允许在演示模式下使用SSL
     allowed_ssl_in_production_mode: 生产环境下将%{not}会使用SSL
     already_registered: 已经注册过了？
+    already_signed_up_for_analytics: 您已注册Spree Analytics帐号
     alt_text: 其他文本
     alternative_phone: 其他电话
     amount: 金额
@@ -627,7 +679,7 @@ zh-CN:
     included_in_other_shipment: 包含在其他配送中
     included_in_price: 包含在售价中
     included_in_this_shipment: 包含在本次配送中
-    included_price_validation: cannot be selected unless you have set a Default Tax Zone
+    included_price_validation: 除非您设置了默认的缴税区域，否则无法选择
     instructions_to_reset_password: 请填写如下表格来重置你的密码，重置后的密码会通过电子邮件发送给您
     insufficient_stock: 库存不足，当前还剩下%{on_hand}件库存
     intercept_email_address: 用于接收邮件的邮箱地址
@@ -757,6 +809,7 @@ zh-CN:
     no_pending_payments: 
     no_products_found: 找不到产品
     no_promotions_found: 找不到任何促销活动
+    no_resource_found: 
     no_results: 无任何结果
     no_rules_added: 未添加规则
     no_shipping_methods_found: 找不到任何配送方式
@@ -785,6 +838,7 @@ zh-CN:
     open_all_adjustments: 启用所有价格调整
     operation: 操作
     option_type: 选项类型
+    option_type_placeholder: 
     option_types: 选项类型
     option_value: 选项值
     option_values: 选项值
@@ -868,6 +922,7 @@ zh-CN:
     payment_gateway: 支付网关
     payment_information: 支付信息
     payment_method: 支付方式
+    payment_method_not_supported: 
     payment_methods: 支付方式
     payment_processing_failed: 无法处理支付信息，请检查您所输入的详细信息
     payment_processor_choose_banner_text: 如果您需要关于支付处理的帮助，请访问
@@ -1334,7 +1389,7 @@ zh-CN:
     users: 用户详情
     validate_on_profile_create: Validate on profile create
     validation: 
-      cannot_be_greater_than_available_stock: cannot be greater than available stock.
+      cannot_be_greater_than_available_stock: 不能大于库存单位数。
       cannot_be_less_than_shipped_units: 不能少于已配送的单位数。
       cannot_destory_line_item_as_inventory_units_have_shipped: Cannot destory line item as some inventory units have shipped.
       exceeds_available_stock: 超出可用的库存。请确认订单项拥有有效的数量。
@@ -1368,21 +1423,3 @@ zh-CN:
     zone_based: 根据区域
     zone_setting_description: 在各种计算中使用到的国家、省份、区域.
     zones: 区域
-# from spree_auth_devise  
-  devise:
-    user_passwords:
-      user:
-        cannot_be_blank: '密码不能为空.'
-        send_instructions: '几分钟后，您将收到重置密码的电子邮件.'
-        updated: '您的密码已修改成功，您现在已登录.'
-    user_registrations:
-      signed_up: '欢迎您！您已注册成功.'
-      inactive_signed_up: '您已注册成功. 因为您的账号%{reason}，无法登陆.'
-      updated: '帐号资料更新成功.'
-      destroyed: '再见！您的帐户已成功注销。我们希望很快可以再见到您.'
-    user_sessions:
-      signed_in: '登录成功.'
-      signed_out: '退出成功.'
-    oauth_callbacks:
-      success: '成功地从%{kind}获得授权.'
-      failure: '因为%{reason}，所以您无法从%{kind}获得授权.'
