@@ -1,0 +1,19 @@
+<%-
+  #params: @template_themes, @theme, 
+  #@page_layout, current selected page_layout, it could be root or not. 
+  #@editors, 
+  #@param_values_for_editors
+%>
+
+<div >
+  <div>
+    <%=render :partial=>"theme_selection", :locals=>{:template_themes=>@template_themes, :selected=>@theme} %>
+    <%= link_to_function "Preview", "window.open('#{preview_template_themes_path}','rle-preview')"%>
+    <%= link_to "Preview setting", publish_template_themes_url%>
+    <%= link_to "Edit layout", edit_layout_template_theme_url(@theme)%>
+  </div>
+  <div class="clear-block">
+    <%=render :partial=>"layout_editor"%>
+  </div>
+</div>
+

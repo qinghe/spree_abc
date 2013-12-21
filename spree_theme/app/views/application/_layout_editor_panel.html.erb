@@ -1,0 +1,13 @@
+<%# ui-layout-south required by jquery.layout 
+  # sg_ignore, SelectorGodget ignore it.
+%>
+<div id='editor_panel' class="clear-block ui-layout-south sg_ignore">
+  <%=render :partial=>'layout_editor'%>
+</div>
+<SCRIPT type="text/javascript">
+$(document).ready(function () {
+  $('body').layout({ applyDefaultStyles: true,
+  stateManagement__enabled: true // enable stateManagement - automatic cookie load & save enabled by default  
+  });
+});
+</SCRIPT>

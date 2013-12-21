@@ -1,0 +1,36 @@
+<%
+# list layout tree in editor page.
+# local params: theme, selected_id,
+layout_root = theme.page_layout
+%>
+<%=form_tag(update_layout_tree_template_theme_path(theme), :id=>"layout_tree_form",:name=>"layout_tree_form", :remote=>true) do %>
+
+  <div id='page_layout_tree_inner' class="block">
+  <% for layout in layout_root.self_and_descendants%>
+  <div class="clear-block">
+    <div class="fl">
+    <%=raw("&nbsp;&nbsp;"*layout.cached_level)%>
+    <%# do not call form.submit. 
+    %>
+    <%= link_to_function(layout.slug, 
+      "$('#selected_page_layout_id').val(#{layout.id});$('#layout_editor_form').trigger('submit')",
+      {"class"=>(layout.id==selected_id ? "selected":""),"data-lid"=>layout.id, :onmouseout=>"$('#{layout.css_selector}').trigger('dehighlight')",:onmouseover=>"$('#{layout.css_selector}').trigger('highlight')"})
+      %>
+    <span><%= layout.current_contexts if layout.section_context.present? %></span>
+    </div>
+    <div class="fr">
+    <%= link_to_function "+","$('#layout_id').val(#{layout.id});$('#section_select_dialog').dialog('open')"%>
+    <%= link_to_function "-","if (confirm('Really?')) submit_layout_tree_form('del_self',#{layout.id} )"%>
+    <%= link_to_function "u","submit_layout_tree_form('move_left',#{layout.id} )"%>
+    <%= link_to_function "d","submit_layout_tree_form('move_right',#{layout.id} )"%>
+    <%= link_to_function "<","submit_layout_tree_form('promote',#{layout.id} )"%>
+    <%= link_to_function ">","submit_layout_tree_form('demote',#{layout.id} )"%>
+    </div>
+  </div>
+  <% end %>
+  </div>
+<%=hidden_field_tag "selected_section_id" %>
+<%=hidden_field_tag "op" %>
+<%=hidden_field_tag "layout_id" %>
+
+<%end%>

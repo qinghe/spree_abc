@@ -1,0 +1,51 @@
+#todos
+0. go through whole process, create new template -> edit it-> release it-> other shop apply it
+
+*1. export template
+*2. editor dock.
+*2.1 promote section, demote section   
+*2.2 highlight counter part of preview page when hovering on section
+2.3 _update_param_value.js.erb, update <a> hover,selected param_value, client should be updated by ajax. 
+3.  ajax update section, no need refresh when add section into template.
+
+4.  add section cart and try add to cart.
+ 
+
+#how todo
+how to add a section piece param?
+  #sectionA   -container
+  #              -container
+  #                -text                  
+  #page_layoutA  -root
+  #                 -sectionA                   
+  #add a section piece param into continer 
+  #
+  
+  add record of section_piece_param 
+  # after create
+  add section_param where section.section_piece_id = ? for each section tree.
+  # after create
+  add param_value where page_layout.section_id = ? for each layout tree.
+
+how to remove a section piece param?
+  del record of section_piece_param
+  del section_param where section.section_piece_id = ? for each section tree.
+  del param_value where page_layout.section_id = ? for each layout tree.
+  
+
+# features
+  1. a site has one logo, 
+     user could upload own logo 
+     logo section always get log from app configuration.
+  2. designer could copy template for new design
+     copy layout and theme
+     
+  3. designer could copy template theme for new design
+
+
+
+#bugs
+get_css 12,13,'block', it is not right in generated css. 
+set font-size:0, unset it does not work.
+set input font-color:red, unset it does not work.
+category 'brand' do not work.

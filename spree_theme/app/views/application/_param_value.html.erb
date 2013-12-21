@@ -1,0 +1,21 @@
+<%
+  #params:  html_attribute_hash  {id=>html_attribute}
+  #         
+  #local_params: param_value, param_category
+  param_category = param_value.section_param.section_piece_param.param_category
+  section_piece_param = param_value.section_param.section_piece_param
+  ha_array = param_value.section_param.html_attributes # excluded disabled by section
+%>
+
+<%
+unless @param_category_ids.include? param_category.id
+    @param_category_ids << param_category.id
+%>
+<div class="editor-header">H:<%=param_category.slug%></div>
+<% end %>
+
+<%#render :partial=>"html_attribute_value", :collection=>ha_array,:as=>:html_attribute, :locals=>{:param_value=>param_value}
+%>
+<%ha_array.each{|html_attribute| %>
+<%= raw partial_html_attribute_value( param_value, html_attribute )%>
+<% }%>

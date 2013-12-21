@@ -1,0 +1,26 @@
+<%= render :partial => 'sub_menu' %>
+<h1>Listing themes</h1>
+
+<table>
+  <tr>
+    <th>TemplateTheme</th>
+    <th>IsApplied</th>
+    <th>IsReleased</th>
+  </tr>
+
+<% @themes.each do |theme| %>
+  <tr>
+    <td><%= theme.title %></td>
+    <td><%= theme==SpreeTheme.site_class.current.template_theme %></td>
+    <td><%= theme.template_releases.exists? %></td>
+
+    <td><%= link_to 'Destroy', admin_template_theme_path(theme), :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to 'Copy', copy_admin_template_theme_path(theme), {:method=>:post} %></td>
+    <td><%= link_to 'Preview', preview_template_theme_path(theme) %></td>
+    <td><%= link_to 'Release', release_admin_template_theme_path(theme), {:method=>:post} %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
