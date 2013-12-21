@@ -15,16 +15,6 @@ GIT
       spree_core (~> 2.0.4)
 
 GIT
-  remote: git://github.com/RuanShan/spree_theme.git
-  revision: 81bb6e63e7fe32f8f45a1fc0965fe784d9347276
-  ref: 81bb6e63e7fe32f8f45a1fc0965fe784d9347276
-  branch: master
-  specs:
-    spree_theme (1.0.0)
-      friendly_id
-      spree_core (~> 2.0)
-
-GIT
   remote: git://github.com/spree/spree.git
   revision: 406836beb874da97b500abdaaed52786ea1a543a
   branch: 2-0-stable
@@ -98,6 +88,13 @@ PATH
   specs:
     spree_china_checkout (2.0.4)
       spree_core (~> 2.0.4)
+
+PATH
+  remote: ./spree_theme
+  specs:
+    spree_theme (1.0.0)
+      friendly_id
+      spree_core (~> 2.0)
 
 GEM
   remote: http://ruby.taobao.org/
