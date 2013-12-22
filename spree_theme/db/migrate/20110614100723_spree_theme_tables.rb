@@ -86,7 +86,7 @@ class SpreeThemeTables < ActiveRecord::Migration
       t.column "section_id",             :integer, :limit => 3,     :null => true,  :default => 0
       # id of sections, only root could be here.
       t.column "section_instance",       :integer, :limit => 2,     :null => false, :default => 0
-      t.column "section_context",        :string,  :limit => 32,    :null => false, :default => ""
+      t.column "section_context",        :string,  :limit => 64,    :null => false, :default => ""
       t.column "data_source",            :string,  :limit => 32,    :null => false, :default => ""
       t.column "data_filter",            :string,  :limit => 32,    :null => false, :default => ""
       t.column "is_enabled",             :boolean,                  :null => false, :default => true
@@ -165,7 +165,7 @@ class SpreeThemeTables < ActiveRecord::Migration
       #t.column :section_instance,        :integer, :limit => 2,     :null => false, :default => 0 # the instance of the section in the layout
       t.column :section_param_id,  :integer, :limit => 2,     :null => false, :default => 0
       t.column :theme_id,                 :integer, :limit => 2,     :null => false, :default => 0
-      t.column :pvalue,                  :string #,                   :null => false, :default => "" # the user chosen value of the corresponding default_page_param (can be utf8)
+      t.column :pvalue,                  :string, :limit => 4096 #,                   :null => false, :default => "" # the user chosen value of the corresponding default_page_param (can be utf8)
       t.column :unset,                   :string #,                   :null => false, :default => false if true ignore the pvalue and do not generate an output for this param
       t.column :computed_pvalue,         :string #,                   :null => false, :default => "" #hash in yml
       #t.column :preview_pvalue,          :string,                   :null => false, :default => "" 

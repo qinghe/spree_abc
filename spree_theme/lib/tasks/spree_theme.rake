@@ -10,8 +10,8 @@ namespace :spree_theme do
     load File.join(SpreeTheme::Engine.root,'db/seeds/00_section_pieces.rb')
   end
   
-  desc "export template one"
-  task :export_template => :environment do
+  desc "export theme one"
+  task :export_theme => :environment do
     template = Spree::TemplateTheme.first
     serializable_data = template.serializable_data
     file_path =  File.join(SpreeTheme.site_class.designsite.document_path, "#{template.id}_#{Time.now.to_i}.yml")
@@ -21,17 +21,19 @@ namespace :spree_theme do
     puts "exported file #{file_path}"
   end
   
-  desc "import template one, accept param FILE, ex. FILE='spree_theme/db/themes/design/1_138.rb'"
+  desc "import theme one, accept param THEME_FILE or THEME_PATH," 
+       "ex. FILE='spree_theme/db/themes/design/1_138.rb', THEME_PATH='1'"
        "default path=shops/rails_env/shop_id/1_nnn.rb"
-  task :import_template => :environment do
+  task :import_theme => :environment do
     #template = Spree::TemplateTheme.first
-    if ENV['FILE']
-      file_path = ENV['FILE'] 
-    else 
-      SpreeTheme.site_class.current = SpreeTheme.site_class.designsite 
-      file_path =  File.join(SpreeTheme.site_class.designsite.document_path, "1_*.yml")
+      SpreeTheme.site_class.current = SpreeTheme.site_class.designsite
+      
+      if ENV['THEME_PATH']
+        file_path = File.join(SpreeTheme::Engine.root,'db','themes','designs', "1_*.yml")
+      else
+        file_path = File.join(SpreeTheme.site_class.designsite.document_path, "1_*.yml")
+      end
       file_path = Dir[file_path].sort.last      
-    end
     open(file_path) do |file|
       Spree::TemplateTheme.import_into_db(file)
     end    
@@ -76,7 +78,7 @@ namespace :spree_theme do
       end
     end 
     
-    if ENV['AUTO_FIX'].present?
+    if ENV['FIX'].present?
       incomplete_page_layouts.uniq.each{| pl |
         pl.replace_with( Spree::Section.find( pl.section_id ))
       }

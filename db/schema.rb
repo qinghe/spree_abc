@@ -292,7 +292,7 @@ ActiveRecord::Schema.define(:version => 20131219133336) do
     t.string   "slug",              :limit => 200, :default => "",    :null => false
     t.integer  "section_id",        :limit => 3,   :default => 0
     t.integer  "section_instance",  :limit => 2,   :default => 0,     :null => false
-    t.string   "section_context",   :limit => 32,  :default => "",    :null => false
+    t.string   "section_context",   :limit => 64,  :default => "",    :null => false
     t.string   "data_source",       :limit => 32,  :default => "",    :null => false
     t.string   "data_filter",       :limit => 32,  :default => "",    :null => false
     t.boolean  "is_enabled",                       :default => true,  :null => false
@@ -312,15 +312,15 @@ ActiveRecord::Schema.define(:version => 20131219133336) do
   end
 
   create_table "spree_param_values", :force => true do |t|
-    t.integer  "page_layout_root_id", :limit => 2, :default => 0, :null => false
-    t.integer  "page_layout_id",      :limit => 2, :default => 0, :null => false
-    t.integer  "section_param_id",    :limit => 2, :default => 0, :null => false
-    t.integer  "theme_id",            :limit => 2, :default => 0, :null => false
-    t.string   "pvalue"
+    t.integer  "page_layout_root_id", :limit => 2,    :default => 0, :null => false
+    t.integer  "page_layout_id",      :limit => 2,    :default => 0, :null => false
+    t.integer  "section_param_id",    :limit => 2,    :default => 0, :null => false
+    t.integer  "theme_id",            :limit => 2,    :default => 0, :null => false
+    t.string   "pvalue",              :limit => 4096
     t.string   "unset"
     t.string   "computed_pvalue"
-    t.datetime "created_at",                                      :null => false
-    t.datetime "updated_at",                                      :null => false
+    t.datetime "created_at",                                         :null => false
+    t.datetime "updated_at",                                         :null => false
   end
 
   create_table "spree_payment_methods", :force => true do |t|
@@ -535,6 +535,7 @@ ActiveRecord::Schema.define(:version => 20131219133336) do
     t.boolean  "is_container",                   :default => false, :null => false
     t.boolean  "is_selectable",                  :default => false, :null => false
     t.string   "resources",     :limit => 10,    :default => "",    :null => false
+    t.string   "usage",         :limit => 10,    :default => "",    :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
