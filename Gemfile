@@ -45,7 +45,7 @@ gem 'spree', :github => "spree/spree", :branch => "2-0-stable"
 # referer to https://github.com/spree/spree/issues/2013
 gem 'spree_auth_devise', :github => "spree/spree_auth_devise", :branch => "2-0-stable"
 #gem 'daemons'
-gem 'delayed_job_active_record'
+#gem 'delayed_job_active_record'
 #'bundle update spree_multi_site' to update gem
 # bundle config require specified branch, or warning message as below
 # Cannot use local override for spree_multi_site at ../spree_multi_site because :branch is not specified in Gemfile. Specify a branch or use `bundle config --delete` to remove the local override

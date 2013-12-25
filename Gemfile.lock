@@ -8,7 +8,7 @@ GIT
 
 GIT
   remote: git://github.com/RuanShan/spree_multi_site.git
-  revision: 1049a90a54380eba9769f2f563f84e0789175937
+  revision: a7e3674df68e970dd45ac31a98cb0c4a8ca19f32
   branch: 2-0-stable
   specs:
     spree_multi_site (2.0.4)
@@ -180,11 +180,6 @@ GEM
     deface (0.9.1)
       nokogiri (~> 1.5.0)
       rails (~> 3.1)
-    delayed_job (4.0.0)
-      activesupport (>= 3.0, < 4.1)
-    delayed_job_active_record (4.0.0)
-      activerecord (>= 3.0, < 4.1)
-      delayed_job (>= 3.0, < 4.1)
     devise (2.2.7)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.1)
@@ -329,7 +324,6 @@ DEPENDENCIES
   capistrano-rails (~> 1.1.0)
   capistrano-rvm (~> 0.1.0)
   coffee-rails (~> 3.2)
-  delayed_job_active_record
   friendly_id
   mail_view
   mysql2
