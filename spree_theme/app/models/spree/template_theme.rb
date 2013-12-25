@@ -200,28 +200,30 @@ module Spree
         Spree::ParamValue; Spree::PageLayout; Spree::TemplateFile;Spree::TemplateRelease;
         serialized_hash = YAML::load(file)
         template = serialized_hash[:template]
-        if self.exists?(template[:id])
-          existing_template = self.find(template[:id])          
-          existing_template.destroy
-        end
-        connection.insert_fixture(template.attributes, self.table_name)
-        # we need new template id
-        # template = self.find_by_title template.title
-        serialized_hash[:param_values].each do |record|
-          table_name = ParamValue.table_name
-          connection.insert_fixture(record.attributes.except('id'), table_name)          
-        end
-        serialized_hash[:page_layouts].each do |record|
-          table_name = PageLayout.table_name
-          connection.insert_fixture(record.attributes, table_name)          
-        end
-        serialized_hash[:template_files].each do |record|
-          table_name = TemplateFile.table_name
-          connection.insert_fixture(record.attributes, table_name)          
-        end        
-        serialized_hash[:template_releases].each do |record|
-          table_name = TemplateRelease.table_name
-          connection.insert_fixture(record.attributes, table_name)          
+        transaction do 
+          if self.exists?(template[:id])
+            existing_template = self.find(template[:id])          
+            existing_template.destroy
+          end
+          connection.insert_fixture(template.attributes, self.table_name)
+          # we need new template id
+          # template = self.find_by_title template.title
+          serialized_hash[:param_values].each do |record|
+            table_name = ParamValue.table_name
+            connection.insert_fixture(record.attributes.except('id'), table_name)          
+          end
+          serialized_hash[:page_layouts].each do |record|
+            table_name = PageLayout.table_name
+            connection.insert_fixture(record.attributes, table_name)          
+          end
+          serialized_hash[:template_files].each do |record|
+            table_name = TemplateFile.table_name
+            connection.insert_fixture(record.attributes, table_name)          
+          end        
+          serialized_hash[:template_releases].each do |record|
+            table_name = TemplateRelease.table_name
+            connection.insert_fixture(record.attributes, table_name)          
+          end
         end        
       end
     end

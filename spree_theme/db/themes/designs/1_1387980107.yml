@@ -1,5 +1,5 @@
 ---
-:template: !ruby/ActiveRecord:Spree::TemplateTheme
+:template: !ruby/object:Spree::TemplateTheme
   attributes:
     id: 1
     site_id: 1
@@ -20,9 +20,9 @@
     created_at: 2013-04-08 13:27:02.000000000 Z
     updated_at: 2013-10-05 00:45:57.000000000 Z
 :param_values:
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 370
+    id: 909
     page_layout_root_id: 1
     page_layout_id: 2
     section_param_id: 6
@@ -34,9 +34,9 @@
     computed_pvalue: 
     created_at: 2013-04-08 13:27:02.000000000 Z
     updated_at: 2013-04-08 13:27:02.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 371
+    id: 910
     page_layout_root_id: 1
     page_layout_id: 2
     section_param_id: 7
@@ -50,9 +50,9 @@
     computed_pvalue: 
     created_at: 2013-04-08 13:27:02.000000000 Z
     updated_at: 2013-04-08 13:27:12.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 372
+    id: 911
     page_layout_root_id: 1
     page_layout_id: 2
     section_param_id: 8
@@ -63,9 +63,9 @@
     computed_pvalue: 
     created_at: 2013-04-08 13:27:03.000000000 Z
     updated_at: 2013-04-08 13:27:03.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 373
+    id: 912
     page_layout_root_id: 1
     page_layout_id: 2
     section_param_id: 9
@@ -79,9 +79,9 @@
     computed_pvalue: 
     created_at: 2013-04-08 13:27:03.000000000 Z
     updated_at: 2013-04-08 13:27:03.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 374
+    id: 913
     page_layout_root_id: 1
     page_layout_id: 2
     section_param_id: 10
@@ -95,9 +95,9 @@
     computed_pvalue: 
     created_at: 2013-04-08 13:27:03.000000000 Z
     updated_at: 2013-04-08 13:27:03.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
-  attributes: &97247080
-    id: 375
+- !ruby/object:Spree::ParamValue
+  attributes:
+    id: 914
     page_layout_root_id: 1
     page_layout_id: 5
     section_param_id: 6
@@ -111,9 +111,9 @@
     computed_pvalue: 
     created_at: 2013-04-08 13:27:04.000000000 Z
     updated_at: 2013-04-08 14:08:13.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 376
+    id: 915
     page_layout_root_id: 1
     page_layout_id: 5
     section_param_id: 7
@@ -127,9 +127,9 @@
     computed_pvalue: 
     created_at: 2013-04-08 13:27:04.000000000 Z
     updated_at: 2013-04-08 13:27:12.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 377
+    id: 916
     page_layout_root_id: 1
     page_layout_id: 5
     section_param_id: 8
@@ -140,9 +140,9 @@
     computed_pvalue: 
     created_at: 2013-04-08 13:27:04.000000000 Z
     updated_at: 2013-04-08 13:27:04.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 378
+    id: 917
     page_layout_root_id: 1
     page_layout_id: 5
     section_param_id: 9
@@ -158,9 +158,9 @@
     computed_pvalue: 
     created_at: 2013-04-08 13:27:04.000000000 Z
     updated_at: 2013-10-05 10:50:30.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 379
+    id: 918
     page_layout_root_id: 1
     page_layout_id: 5
     section_param_id: 10
@@ -174,9 +174,9 @@
     computed_pvalue: 
     created_at: 2013-04-08 13:27:04.000000000 Z
     updated_at: 2013-04-08 13:27:04.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 380
+    id: 919
     page_layout_root_id: 1
     page_layout_id: 6
     section_param_id: 6
@@ -188,9 +188,9 @@
     computed_pvalue: 
     created_at: 2013-04-08 13:27:05.000000000 Z
     updated_at: 2013-04-08 13:27:05.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 381
+    id: 920
     page_layout_root_id: 1
     page_layout_id: 6
     section_param_id: 7
@@ -204,9 +204,9 @@
     computed_pvalue: 
     created_at: 2013-04-08 13:27:05.000000000 Z
     updated_at: 2013-04-08 13:27:05.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 382
+    id: 921
     page_layout_root_id: 1
     page_layout_id: 6
     section_param_id: 8
@@ -217,9 +217,9 @@
     computed_pvalue: 
     created_at: 2013-04-08 13:27:05.000000000 Z
     updated_at: 2013-04-08 13:27:05.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 383
+    id: 922
     page_layout_root_id: 1
     page_layout_id: 6
     section_param_id: 9
@@ -235,9 +235,9 @@
     computed_pvalue: 
     created_at: 2013-04-08 13:27:05.000000000 Z
     updated_at: 2013-04-08 13:27:13.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 384
+    id: 923
     page_layout_root_id: 1
     page_layout_id: 6
     section_param_id: 10
@@ -251,9 +251,9 @@
     computed_pvalue: 
     created_at: 2013-04-08 13:27:05.000000000 Z
     updated_at: 2013-04-08 13:27:05.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 385
+    id: 924
     page_layout_root_id: 1
     page_layout_id: 7
     section_param_id: 6
@@ -265,9 +265,9 @@
     computed_pvalue: 
     created_at: 2013-04-08 13:27:05.000000000 Z
     updated_at: 2013-04-08 13:27:05.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 386
+    id: 925
     page_layout_root_id: 1
     page_layout_id: 7
     section_param_id: 7
@@ -283,9 +283,9 @@
     computed_pvalue: 
     created_at: 2013-04-08 13:27:05.000000000 Z
     updated_at: 2013-04-08 13:27:12.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 387
+    id: 926
     page_layout_root_id: 1
     page_layout_id: 7
     section_param_id: 8
@@ -296,9 +296,9 @@
     computed_pvalue: 
     created_at: 2013-04-08 13:27:05.000000000 Z
     updated_at: 2013-04-08 13:27:05.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 388
+    id: 927
     page_layout_root_id: 1
     page_layout_id: 7
     section_param_id: 9
@@ -314,9 +314,9 @@
     computed_pvalue: 
     created_at: 2013-04-08 13:27:05.000000000 Z
     updated_at: 2013-10-05 01:17:40.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 389
+    id: 928
     page_layout_root_id: 1
     page_layout_id: 7
     section_param_id: 10
@@ -332,9 +332,9 @@
     computed_pvalue: 
     created_at: 2013-04-08 13:27:06.000000000 Z
     updated_at: 2013-10-02 10:05:06.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 395
+    id: 934
     page_layout_root_id: 1
     page_layout_id: 10
     section_param_id: 6
@@ -348,9 +348,9 @@
     computed_pvalue: 
     created_at: 2013-04-08 13:27:07.000000000 Z
     updated_at: 2013-04-09 11:57:56.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 396
+    id: 935
     page_layout_root_id: 1
     page_layout_id: 10
     section_param_id: 7
@@ -366,9 +366,9 @@
     computed_pvalue: 
     created_at: 2013-04-08 13:27:07.000000000 Z
     updated_at: 2013-04-09 11:57:55.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 397
+    id: 936
     page_layout_root_id: 1
     page_layout_id: 10
     section_param_id: 8
@@ -379,9 +379,9 @@
     computed_pvalue: 
     created_at: 2013-04-08 13:27:07.000000000 Z
     updated_at: 2013-04-08 13:27:07.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 398
+    id: 937
     page_layout_root_id: 1
     page_layout_id: 10
     section_param_id: 9
@@ -395,9 +395,9 @@
     computed_pvalue: 
     created_at: 2013-04-08 13:27:07.000000000 Z
     updated_at: 2013-04-08 13:27:07.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 399
+    id: 938
     page_layout_root_id: 1
     page_layout_id: 10
     section_param_id: 10
@@ -411,9 +411,9 @@
     computed_pvalue: 
     created_at: 2013-04-08 13:27:07.000000000 Z
     updated_at: 2013-04-08 13:27:07.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 400
+    id: 939
     page_layout_root_id: 1
     page_layout_id: 11
     section_param_id: 6
@@ -427,9 +427,9 @@
     computed_pvalue: 
     created_at: 2013-04-08 13:27:07.000000000 Z
     updated_at: 2013-04-12 13:03:56.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 401
+    id: 940
     page_layout_root_id: 1
     page_layout_id: 11
     section_param_id: 7
@@ -445,9 +445,9 @@
     computed_pvalue: 
     created_at: 2013-04-08 13:27:08.000000000 Z
     updated_at: 2013-04-09 13:14:08.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 402
+    id: 941
     page_layout_root_id: 1
     page_layout_id: 11
     section_param_id: 8
@@ -458,9 +458,9 @@
     computed_pvalue: 
     created_at: 2013-04-08 13:27:08.000000000 Z
     updated_at: 2013-04-08 13:27:08.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 403
+    id: 942
     page_layout_root_id: 1
     page_layout_id: 11
     section_param_id: 9
@@ -474,9 +474,9 @@
     computed_pvalue: 
     created_at: 2013-04-08 13:27:08.000000000 Z
     updated_at: 2013-04-08 13:27:08.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 404
+    id: 943
     page_layout_root_id: 1
     page_layout_id: 11
     section_param_id: 10
@@ -490,9 +490,9 @@
     computed_pvalue: 
     created_at: 2013-04-08 13:27:08.000000000 Z
     updated_at: 2013-04-08 13:27:08.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 410
+    id: 949
     page_layout_root_id: 1
     page_layout_id: 13
     section_param_id: 65
@@ -502,9 +502,9 @@
     computed_pvalue: 
     created_at: 2013-04-08 13:27:08.000000000 Z
     updated_at: 2013-04-08 13:27:08.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 411
+    id: 950
     page_layout_root_id: 1
     page_layout_id: 13
     section_param_id: 66
@@ -519,9 +519,9 @@
     computed_pvalue: 
     created_at: 2013-04-08 13:27:09.000000000 Z
     updated_at: 2013-10-05 01:20:44.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 412
+    id: 951
     page_layout_root_id: 1
     page_layout_id: 13
     section_param_id: 67
@@ -542,9 +542,9 @@
     computed_pvalue: 
     created_at: 2013-04-08 13:27:09.000000000 Z
     updated_at: 2013-10-05 01:21:15.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 413
+    id: 952
     page_layout_root_id: 1
     page_layout_id: 13
     section_param_id: 68
@@ -555,9 +555,9 @@
     computed_pvalue: 
     created_at: 2013-04-08 13:27:09.000000000 Z
     updated_at: 2013-04-08 13:27:09.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 414
+    id: 953
     page_layout_root_id: 1
     page_layout_id: 13
     section_param_id: 69
@@ -570,9 +570,9 @@
     computed_pvalue: 
     created_at: 2013-04-08 13:27:09.000000000 Z
     updated_at: 2013-04-19 13:14:07.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 420
+    id: 959
     page_layout_root_id: 1
     page_layout_id: 15
     section_param_id: 60
@@ -582,9 +582,9 @@
     computed_pvalue: 
     created_at: 2013-04-08 13:27:10.000000000 Z
     updated_at: 2013-04-08 13:27:10.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 421
+    id: 960
     page_layout_root_id: 1
     page_layout_id: 15
     section_param_id: 61
@@ -595,9 +595,9 @@
     computed_pvalue: 
     created_at: 2013-04-08 13:27:10.000000000 Z
     updated_at: 2013-04-08 13:27:10.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 422
+    id: 961
     page_layout_root_id: 1
     page_layout_id: 15
     section_param_id: 62
@@ -610,9 +610,9 @@
     computed_pvalue: 
     created_at: 2013-04-08 13:27:10.000000000 Z
     updated_at: 2013-10-04 07:23:31.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 423
+    id: 962
     page_layout_root_id: 1
     page_layout_id: 15
     section_param_id: 63
@@ -623,9 +623,9 @@
     computed_pvalue: 
     created_at: 2013-04-08 13:27:10.000000000 Z
     updated_at: 2013-04-08 13:27:10.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 424
+    id: 963
     page_layout_root_id: 1
     page_layout_id: 15
     section_param_id: 64
@@ -638,9 +638,9 @@
     computed_pvalue: 
     created_at: 2013-04-08 13:27:10.000000000 Z
     updated_at: 2013-10-04 07:23:47.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 425
+    id: 964
     page_layout_root_id: 1
     page_layout_id: 17
     section_param_id: 50
@@ -650,9 +650,9 @@
     computed_pvalue: 
     created_at: 2013-04-08 13:27:11.000000000 Z
     updated_at: 2013-04-08 13:27:11.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 426
+    id: 965
     page_layout_root_id: 1
     page_layout_id: 17
     section_param_id: 51
@@ -663,9 +663,9 @@
     computed_pvalue: 
     created_at: 2013-04-08 13:27:11.000000000 Z
     updated_at: 2013-04-08 13:27:11.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 427
+    id: 966
     page_layout_root_id: 1
     page_layout_id: 17
     section_param_id: 52
@@ -676,9 +676,9 @@
     computed_pvalue: 
     created_at: 2013-04-08 13:27:11.000000000 Z
     updated_at: 2013-04-08 13:27:11.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 428
+    id: 967
     page_layout_root_id: 1
     page_layout_id: 17
     section_param_id: 53
@@ -689,9 +689,9 @@
     computed_pvalue: 
     created_at: 2013-04-08 13:27:11.000000000 Z
     updated_at: 2013-04-08 13:27:11.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 429
+    id: 968
     page_layout_root_id: 1
     page_layout_id: 17
     section_param_id: 54
@@ -702,9 +702,9 @@
     computed_pvalue: 
     created_at: 2013-04-08 13:27:11.000000000 Z
     updated_at: 2013-04-08 13:27:11.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 430
+    id: 969
     page_layout_root_id: 1
     page_layout_id: 18
     section_param_id: 6
@@ -718,9 +718,9 @@
     computed_pvalue: 
     created_at: 2013-04-08 14:05:42.000000000 Z
     updated_at: 2013-04-09 13:23:57.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 431
+    id: 970
     page_layout_root_id: 1
     page_layout_id: 18
     section_param_id: 7
@@ -736,9 +736,9 @@
     computed_pvalue: 
     created_at: 2013-04-08 14:05:42.000000000 Z
     updated_at: 2013-10-05 01:20:18.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 432
+    id: 971
     page_layout_root_id: 1
     page_layout_id: 18
     section_param_id: 8
@@ -757,9 +757,9 @@
     computed_pvalue: 
     created_at: 2013-04-08 14:05:42.000000000 Z
     updated_at: 2013-10-05 01:20:09.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 433
+    id: 972
     page_layout_root_id: 1
     page_layout_id: 18
     section_param_id: 9
@@ -773,9 +773,9 @@
     computed_pvalue: 
     created_at: 2013-04-08 14:05:42.000000000 Z
     updated_at: 2013-04-08 14:05:42.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 434
+    id: 973
     page_layout_root_id: 1
     page_layout_id: 18
     section_param_id: 10
@@ -789,9 +789,9 @@
     computed_pvalue: 
     created_at: 2013-04-08 14:05:42.000000000 Z
     updated_at: 2013-04-08 14:05:42.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 435
+    id: 974
     page_layout_root_id: 1
     page_layout_id: 20
     section_param_id: 6
@@ -803,9 +803,9 @@
     computed_pvalue: 
     created_at: 2013-04-09 13:12:32.000000000 Z
     updated_at: 2013-04-09 13:12:32.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 436
+    id: 975
     page_layout_root_id: 1
     page_layout_id: 20
     section_param_id: 7
@@ -821,9 +821,9 @@
     computed_pvalue: 
     created_at: 2013-04-09 13:12:32.000000000 Z
     updated_at: 2013-04-12 13:08:17.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 437
+    id: 976
     page_layout_root_id: 1
     page_layout_id: 20
     section_param_id: 8
@@ -834,9 +834,9 @@
     computed_pvalue: 
     created_at: 2013-04-09 13:12:32.000000000 Z
     updated_at: 2013-04-09 13:12:32.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 438
+    id: 977
     page_layout_root_id: 1
     page_layout_id: 20
     section_param_id: 9
@@ -850,9 +850,9 @@
     computed_pvalue: 
     created_at: 2013-04-09 13:12:32.000000000 Z
     updated_at: 2013-04-09 13:12:32.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 439
+    id: 978
     page_layout_root_id: 1
     page_layout_id: 20
     section_param_id: 10
@@ -866,9 +866,9 @@
     computed_pvalue: 
     created_at: 2013-04-09 13:12:32.000000000 Z
     updated_at: 2013-04-09 13:12:32.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 445
+    id: 984
     page_layout_root_id: 1
     page_layout_id: 22
     section_param_id: 6
@@ -880,9 +880,9 @@
     computed_pvalue: 
     created_at: 2013-04-12 13:44:05.000000000 Z
     updated_at: 2013-04-12 13:44:05.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 446
+    id: 985
     page_layout_root_id: 1
     page_layout_id: 22
     section_param_id: 7
@@ -896,9 +896,9 @@
     computed_pvalue: 
     created_at: 2013-04-12 13:44:05.000000000 Z
     updated_at: 2013-04-12 13:44:58.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 447
+    id: 986
     page_layout_root_id: 1
     page_layout_id: 22
     section_param_id: 8
@@ -911,9 +911,9 @@
     computed_pvalue: 
     created_at: 2013-04-12 13:44:05.000000000 Z
     updated_at: 2013-10-04 07:21:38.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 448
+    id: 987
     page_layout_root_id: 1
     page_layout_id: 22
     section_param_id: 9
@@ -927,9 +927,9 @@
     computed_pvalue: 
     created_at: 2013-04-12 13:44:05.000000000 Z
     updated_at: 2013-04-12 13:44:05.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 449
+    id: 988
     page_layout_root_id: 1
     page_layout_id: 22
     section_param_id: 10
@@ -943,9 +943,9 @@
     computed_pvalue: 
     created_at: 2013-04-12 13:44:05.000000000 Z
     updated_at: 2013-04-12 13:44:05.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 450
+    id: 989
     page_layout_root_id: 1
     page_layout_id: 23
     section_param_id: 110
@@ -975,9 +975,9 @@
     computed_pvalue: 
     created_at: 2013-04-13 01:32:40.000000000 Z
     updated_at: 2013-04-13 01:32:40.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 451
+    id: 990
     page_layout_root_id: 1
     page_layout_id: 23
     section_param_id: 111
@@ -988,9 +988,9 @@
     computed_pvalue: 
     created_at: 2013-04-13 01:32:40.000000000 Z
     updated_at: 2013-04-13 01:32:40.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 452
+    id: 991
     page_layout_root_id: 1
     page_layout_id: 23
     section_param_id: 112
@@ -1001,9 +1001,9 @@
     computed_pvalue: 
     created_at: 2013-04-13 01:32:40.000000000 Z
     updated_at: 2013-04-13 01:32:40.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 453
+    id: 992
     page_layout_root_id: 1
     page_layout_id: 23
     section_param_id: 113
@@ -1014,9 +1014,9 @@
     computed_pvalue: 
     created_at: 2013-04-13 01:32:40.000000000 Z
     updated_at: 2013-04-13 01:32:40.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 454
+    id: 993
     page_layout_root_id: 1
     page_layout_id: 23
     section_param_id: 114
@@ -1033,9 +1033,9 @@
     computed_pvalue: 
     created_at: 2013-04-13 01:32:40.000000000 Z
     updated_at: 2013-10-04 07:25:24.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 455
+    id: 994
     page_layout_root_id: 1
     page_layout_id: 24
     section_param_id: 6
@@ -1049,9 +1049,9 @@
     computed_pvalue: 
     created_at: 2013-04-13 02:35:25.000000000 Z
     updated_at: 2013-04-13 02:37:27.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 456
+    id: 995
     page_layout_root_id: 1
     page_layout_id: 24
     section_param_id: 7
@@ -1065,9 +1065,9 @@
     computed_pvalue: 
     created_at: 2013-04-13 02:35:25.000000000 Z
     updated_at: 2013-10-04 07:24:31.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 457
+    id: 996
     page_layout_root_id: 1
     page_layout_id: 24
     section_param_id: 8
@@ -1080,9 +1080,9 @@
     computed_pvalue: 
     created_at: 2013-04-13 02:35:25.000000000 Z
     updated_at: 2013-10-04 07:24:39.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 458
+    id: 997
     page_layout_root_id: 1
     page_layout_id: 24
     section_param_id: 9
@@ -1096,9 +1096,9 @@
     computed_pvalue: 
     created_at: 2013-04-13 02:35:25.000000000 Z
     updated_at: 2013-04-13 02:35:25.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 459
+    id: 998
     page_layout_root_id: 1
     page_layout_id: 24
     section_param_id: 10
@@ -1112,9 +1112,9 @@
     computed_pvalue: 
     created_at: 2013-04-13 02:35:26.000000000 Z
     updated_at: 2013-04-13 02:35:26.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 470
+    id: 1009
     page_layout_root_id: 1
     page_layout_id: 27
     section_param_id: 125
@@ -1124,9 +1124,9 @@
     computed_pvalue: 
     created_at: 2013-04-16 14:20:10.000000000 Z
     updated_at: 2013-04-16 14:20:10.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 471
+    id: 1010
     page_layout_root_id: 1
     page_layout_id: 27
     section_param_id: 126
@@ -1139,9 +1139,9 @@
     computed_pvalue: 
     created_at: 2013-04-16 14:20:10.000000000 Z
     updated_at: 2013-10-07 13:04:14.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 472
+    id: 1011
     page_layout_root_id: 1
     page_layout_id: 27
     section_param_id: 127
@@ -1152,9 +1152,9 @@
     computed_pvalue: 
     created_at: 2013-04-16 14:20:10.000000000 Z
     updated_at: 2013-04-16 14:20:10.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 473
+    id: 1012
     page_layout_root_id: 1
     page_layout_id: 27
     section_param_id: 128
@@ -1165,9 +1165,9 @@
     computed_pvalue: 
     created_at: 2013-04-16 14:20:10.000000000 Z
     updated_at: 2013-04-16 14:20:10.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 474
+    id: 1013
     page_layout_root_id: 1
     page_layout_id: 27
     section_param_id: 129
@@ -1178,9 +1178,9 @@
     computed_pvalue: 
     created_at: 2013-04-16 14:20:10.000000000 Z
     updated_at: 2013-04-16 14:20:10.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 475
+    id: 1014
     page_layout_root_id: 1
     page_layout_id: 29
     section_param_id: 110
@@ -1190,9 +1190,9 @@
     computed_pvalue: 
     created_at: 2013-04-19 13:03:09.000000000 Z
     updated_at: 2013-04-19 13:03:09.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 476
+    id: 1015
     page_layout_root_id: 1
     page_layout_id: 29
     section_param_id: 111
@@ -1205,9 +1205,9 @@
     computed_pvalue: 
     created_at: 2013-04-19 13:03:10.000000000 Z
     updated_at: 2013-10-02 09:59:32.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 477
+    id: 1016
     page_layout_root_id: 1
     page_layout_id: 29
     section_param_id: 112
@@ -1222,9 +1222,9 @@
     computed_pvalue: 
     created_at: 2013-04-19 13:03:10.000000000 Z
     updated_at: 2013-10-05 07:13:31.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 478
+    id: 1017
     page_layout_root_id: 1
     page_layout_id: 29
     section_param_id: 113
@@ -1235,9 +1235,9 @@
     computed_pvalue: 
     created_at: 2013-04-19 13:03:10.000000000 Z
     updated_at: 2013-04-19 13:03:10.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 479
+    id: 1018
     page_layout_root_id: 1
     page_layout_id: 29
     section_param_id: 114
@@ -1254,9 +1254,9 @@
     computed_pvalue: 
     created_at: 2013-04-19 13:03:10.000000000 Z
     updated_at: 2013-10-02 10:00:34.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 488
+    id: 1027
     page_layout_root_id: 1
     page_layout_id: 9
     section_param_id: 27
@@ -1266,9 +1266,9 @@
     computed_pvalue: 
     created_at: 2013-10-02 10:20:54.000000000 Z
     updated_at: 2013-10-02 10:20:54.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 489
+    id: 1028
     page_layout_root_id: 1
     page_layout_id: 9
     section_param_id: 28
@@ -1279,9 +1279,9 @@
     computed_pvalue: 
     created_at: 2013-10-02 10:20:54.000000000 Z
     updated_at: 2013-10-02 10:20:54.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 490
+    id: 1029
     page_layout_root_id: 1
     page_layout_id: 9
     section_param_id: 29
@@ -1294,9 +1294,9 @@
     computed_pvalue: 
     created_at: 2013-10-02 10:20:54.000000000 Z
     updated_at: 2013-10-05 00:49:11.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 491
+    id: 1030
     page_layout_root_id: 1
     page_layout_id: 9
     section_param_id: 30
@@ -1307,9 +1307,9 @@
     computed_pvalue: 
     created_at: 2013-10-02 10:20:54.000000000 Z
     updated_at: 2013-10-02 10:20:54.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 492
+    id: 1031
     page_layout_root_id: 1
     page_layout_id: 9
     section_param_id: 31
@@ -1320,9 +1320,9 @@
     computed_pvalue: 
     created_at: 2013-10-02 10:20:54.000000000 Z
     updated_at: 2013-10-02 10:20:54.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 493
+    id: 1032
     page_layout_root_id: 1
     page_layout_id: 9
     section_param_id: 32
@@ -1334,9 +1334,9 @@
     computed_pvalue: 
     created_at: 2013-10-02 10:20:54.000000000 Z
     updated_at: 2013-10-05 01:11:02.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 494
+    id: 1033
     page_layout_root_id: 1
     page_layout_id: 9
     section_param_id: 33
@@ -1352,9 +1352,9 @@
     computed_pvalue: 
     created_at: 2013-10-02 10:20:54.000000000 Z
     updated_at: 2013-10-05 01:12:13.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 495
+    id: 1034
     page_layout_root_id: 1
     page_layout_id: 9
     section_param_id: 34
@@ -1364,9 +1364,9 @@
     computed_pvalue: 
     created_at: 2013-10-02 10:20:54.000000000 Z
     updated_at: 2013-10-02 10:20:54.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 496
+    id: 1035
     page_layout_root_id: 1
     page_layout_id: 9
     section_param_id: 35
@@ -1376,9 +1376,9 @@
     computed_pvalue: 
     created_at: 2013-10-02 10:20:54.000000000 Z
     updated_at: 2013-10-02 10:20:54.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 497
+    id: 1036
     page_layout_root_id: 1
     page_layout_id: 9
     section_param_id: 36
@@ -1388,9 +1388,9 @@
     computed_pvalue: 
     created_at: 2013-10-02 10:20:54.000000000 Z
     updated_at: 2013-10-02 10:20:54.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 498
+    id: 1037
     page_layout_root_id: 1
     page_layout_id: 9
     section_param_id: 37
@@ -1400,9 +1400,9 @@
     computed_pvalue: 
     created_at: 2013-10-02 10:20:55.000000000 Z
     updated_at: 2013-10-02 10:20:55.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 499
+    id: 1038
     page_layout_root_id: 1
     page_layout_id: 9
     section_param_id: 38
@@ -1412,9 +1412,9 @@
     computed_pvalue: 
     created_at: 2013-10-02 10:20:55.000000000 Z
     updated_at: 2013-10-02 10:20:55.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 500
+    id: 1039
     page_layout_root_id: 1
     page_layout_id: 9
     section_param_id: 39
@@ -1424,9 +1424,9 @@
     computed_pvalue: 
     created_at: 2013-10-02 10:20:55.000000000 Z
     updated_at: 2013-10-02 10:20:55.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 501
+    id: 1040
     page_layout_root_id: 1
     page_layout_id: 9
     section_param_id: 40
@@ -1436,9 +1436,9 @@
     computed_pvalue: 
     created_at: 2013-10-02 10:20:55.000000000 Z
     updated_at: 2013-10-02 10:20:55.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 502
+    id: 1041
     page_layout_root_id: 1
     page_layout_id: 9
     section_param_id: 41
@@ -1448,9 +1448,9 @@
     computed_pvalue: 
     created_at: 2013-10-02 10:20:55.000000000 Z
     updated_at: 2013-10-02 10:20:55.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 503
+    id: 1042
     page_layout_root_id: 1
     page_layout_id: 9
     section_param_id: 42
@@ -1460,9 +1460,9 @@
     computed_pvalue: 
     created_at: 2013-10-02 10:20:55.000000000 Z
     updated_at: 2013-10-02 10:20:55.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 515
+    id: 1054
     page_layout_root_id: 1
     page_layout_id: 30
     section_param_id: 6
@@ -1474,9 +1474,9 @@
     computed_pvalue: 
     created_at: 2013-10-05 00:36:48.000000000 Z
     updated_at: 2013-10-05 00:36:48.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 516
+    id: 1055
     page_layout_root_id: 1
     page_layout_id: 30
     section_param_id: 7
@@ -1490,9 +1490,9 @@
     computed_pvalue: 
     created_at: 2013-10-05 00:36:48.000000000 Z
     updated_at: 2013-10-05 00:46:41.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 517
+    id: 1056
     page_layout_root_id: 1
     page_layout_id: 30
     section_param_id: 8
@@ -1504,10 +1504,10 @@
     unset: 
     computed_pvalue: 
     created_at: 2013-10-05 00:36:48.000000000 Z
-    updated_at: *97247080
-- !ruby/ActiveRecord:Spree::ParamValue
+    updated_at: 2013-10-05 01:14:46.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 518
+    id: 1057
     page_layout_root_id: 1
     page_layout_id: 30
     section_param_id: 9
@@ -1521,9 +1521,9 @@
     computed_pvalue: 
     created_at: 2013-10-05 00:36:48.000000000 Z
     updated_at: 2013-10-05 00:36:48.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 519
+    id: 1058
     page_layout_root_id: 1
     page_layout_id: 30
     section_param_id: 10
@@ -1537,9 +1537,9 @@
     computed_pvalue: 
     created_at: 2013-10-05 00:36:48.000000000 Z
     updated_at: 2013-10-05 00:36:48.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 525
+    id: 1064
     page_layout_root_id: 1
     page_layout_id: 32
     section_param_id: 6
@@ -1551,9 +1551,9 @@
     computed_pvalue: 
     created_at: 2013-10-05 00:37:55.000000000 Z
     updated_at: 2013-10-05 00:37:55.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 526
+    id: 1065
     page_layout_root_id: 1
     page_layout_id: 32
     section_param_id: 7
@@ -1567,9 +1567,9 @@
     computed_pvalue: 
     created_at: 2013-10-05 00:37:55.000000000 Z
     updated_at: 2013-10-05 01:14:00.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 527
+    id: 1066
     page_layout_root_id: 1
     page_layout_id: 32
     section_param_id: 8
@@ -1580,9 +1580,9 @@
     computed_pvalue: 
     created_at: 2013-10-05 00:37:55.000000000 Z
     updated_at: 2013-10-05 00:37:55.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 528
+    id: 1067
     page_layout_root_id: 1
     page_layout_id: 32
     section_param_id: 9
@@ -1596,9 +1596,9 @@
     computed_pvalue: 
     created_at: 2013-10-05 00:37:56.000000000 Z
     updated_at: 2013-10-05 00:37:56.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 529
+    id: 1068
     page_layout_root_id: 1
     page_layout_id: 32
     section_param_id: 10
@@ -1612,9 +1612,9 @@
     computed_pvalue: 
     created_at: 2013-10-05 00:37:56.000000000 Z
     updated_at: 2013-10-05 00:37:56.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 535
+    id: 1074
     page_layout_root_id: 1
     page_layout_id: 34
     section_param_id: 27
@@ -1624,9 +1624,9 @@
     computed_pvalue: 
     created_at: 2013-10-05 00:38:16.000000000 Z
     updated_at: 2013-10-05 00:38:16.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 536
+    id: 1075
     page_layout_root_id: 1
     page_layout_id: 34
     section_param_id: 28
@@ -1637,9 +1637,9 @@
     computed_pvalue: 
     created_at: 2013-10-05 00:38:16.000000000 Z
     updated_at: 2013-10-05 00:38:16.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 537
+    id: 1076
     page_layout_root_id: 1
     page_layout_id: 34
     section_param_id: 29
@@ -1654,9 +1654,9 @@
     computed_pvalue: 
     created_at: 2013-10-05 00:38:16.000000000 Z
     updated_at: 2013-10-05 01:13:10.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 538
+    id: 1077
     page_layout_root_id: 1
     page_layout_id: 34
     section_param_id: 30
@@ -1667,9 +1667,9 @@
     computed_pvalue: 
     created_at: 2013-10-05 00:38:16.000000000 Z
     updated_at: 2013-10-05 00:38:16.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 539
+    id: 1078
     page_layout_root_id: 1
     page_layout_id: 34
     section_param_id: 31
@@ -1680,9 +1680,9 @@
     computed_pvalue: 
     created_at: 2013-10-05 00:38:16.000000000 Z
     updated_at: 2013-10-05 00:38:16.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 540
+    id: 1079
     page_layout_root_id: 1
     page_layout_id: 34
     section_param_id: 32
@@ -1694,9 +1694,9 @@
     computed_pvalue: 
     created_at: 2013-10-05 00:38:17.000000000 Z
     updated_at: 2013-10-05 01:13:53.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 541
+    id: 1080
     page_layout_root_id: 1
     page_layout_id: 34
     section_param_id: 33
@@ -1712,9 +1712,9 @@
     computed_pvalue: 
     created_at: 2013-10-05 00:38:17.000000000 Z
     updated_at: 2013-10-05 01:13:33.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 542
+    id: 1081
     page_layout_root_id: 1
     page_layout_id: 34
     section_param_id: 34
@@ -1724,9 +1724,9 @@
     computed_pvalue: 
     created_at: 2013-10-05 00:38:17.000000000 Z
     updated_at: 2013-10-05 00:38:17.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 543
+    id: 1082
     page_layout_root_id: 1
     page_layout_id: 34
     section_param_id: 35
@@ -1736,9 +1736,9 @@
     computed_pvalue: 
     created_at: 2013-10-05 00:38:17.000000000 Z
     updated_at: 2013-10-05 00:38:17.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 544
+    id: 1083
     page_layout_root_id: 1
     page_layout_id: 34
     section_param_id: 36
@@ -1748,9 +1748,9 @@
     computed_pvalue: 
     created_at: 2013-10-05 00:38:17.000000000 Z
     updated_at: 2013-10-05 00:38:17.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 545
+    id: 1084
     page_layout_root_id: 1
     page_layout_id: 34
     section_param_id: 37
@@ -1760,9 +1760,9 @@
     computed_pvalue: 
     created_at: 2013-10-05 00:38:17.000000000 Z
     updated_at: 2013-10-05 00:38:17.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 546
+    id: 1085
     page_layout_root_id: 1
     page_layout_id: 34
     section_param_id: 38
@@ -1772,9 +1772,9 @@
     computed_pvalue: 
     created_at: 2013-10-05 00:38:17.000000000 Z
     updated_at: 2013-10-05 00:38:17.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 547
+    id: 1086
     page_layout_root_id: 1
     page_layout_id: 34
     section_param_id: 39
@@ -1784,9 +1784,9 @@
     computed_pvalue: 
     created_at: 2013-10-05 00:38:17.000000000 Z
     updated_at: 2013-10-05 00:38:17.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 548
+    id: 1087
     page_layout_root_id: 1
     page_layout_id: 34
     section_param_id: 40
@@ -1796,9 +1796,9 @@
     computed_pvalue: 
     created_at: 2013-10-05 00:38:17.000000000 Z
     updated_at: 2013-10-05 00:38:17.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 549
+    id: 1088
     page_layout_root_id: 1
     page_layout_id: 34
     section_param_id: 41
@@ -1808,9 +1808,9 @@
     computed_pvalue: 
     created_at: 2013-10-05 00:38:17.000000000 Z
     updated_at: 2013-10-05 00:38:17.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 550
+    id: 1089
     page_layout_root_id: 1
     page_layout_id: 34
     section_param_id: 42
@@ -1820,9 +1820,9 @@
     computed_pvalue: 
     created_at: 2013-10-05 00:38:17.000000000 Z
     updated_at: 2013-10-05 00:38:17.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 575
+    id: 1114
     page_layout_root_id: 1
     page_layout_id: 40
     section_param_id: 210
@@ -1832,9 +1832,9 @@
     computed_pvalue: 
     created_at: 2013-11-02 09:20:58.000000000 Z
     updated_at: 2013-11-02 09:20:58.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 576
+    id: 1115
     page_layout_root_id: 1
     page_layout_id: 40
     section_param_id: 211
@@ -1844,9 +1844,9 @@
     computed_pvalue: 
     created_at: 2013-11-02 09:20:58.000000000 Z
     updated_at: 2013-11-02 09:20:58.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 577
+    id: 1116
     page_layout_root_id: 1
     page_layout_id: 40
     section_param_id: 212
@@ -1857,9 +1857,9 @@
     computed_pvalue: 
     created_at: 2013-11-02 09:20:58.000000000 Z
     updated_at: 2013-11-02 09:20:58.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 578
+    id: 1117
     page_layout_root_id: 1
     page_layout_id: 40
     section_param_id: 213
@@ -1869,9 +1869,9 @@
     computed_pvalue: 
     created_at: 2013-11-02 09:20:58.000000000 Z
     updated_at: 2013-11-02 09:20:58.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 579
+    id: 1118
     page_layout_root_id: 1
     page_layout_id: 40
     section_param_id: 214
@@ -1881,9 +1881,9 @@
     computed_pvalue: 
     created_at: 2013-11-02 09:20:59.000000000 Z
     updated_at: 2013-11-02 09:20:59.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 580
+    id: 1119
     page_layout_root_id: 1
     page_layout_id: 40
     section_param_id: 215
@@ -1893,9 +1893,9 @@
     computed_pvalue: 
     created_at: 2013-11-02 09:20:59.000000000 Z
     updated_at: 2013-11-02 09:20:59.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 581
+    id: 1120
     page_layout_root_id: 1
     page_layout_id: 40
     section_param_id: 216
@@ -1905,9 +1905,9 @@
     computed_pvalue: 
     created_at: 2013-11-02 09:20:59.000000000 Z
     updated_at: 2013-11-02 09:20:59.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 582
+    id: 1121
     page_layout_root_id: 1
     page_layout_id: 40
     section_param_id: 217
@@ -1917,9 +1917,9 @@
     computed_pvalue: 
     created_at: 2013-11-02 09:20:59.000000000 Z
     updated_at: 2013-11-02 09:20:59.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 583
+    id: 1122
     page_layout_root_id: 1
     page_layout_id: 41
     section_param_id: 218
@@ -1929,9 +1929,9 @@
     computed_pvalue: 
     created_at: 2013-11-02 09:21:08.000000000 Z
     updated_at: 2013-11-02 09:21:08.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 584
+    id: 1123
     page_layout_root_id: 1
     page_layout_id: 41
     section_param_id: 219
@@ -1941,9 +1941,9 @@
     computed_pvalue: 
     created_at: 2013-11-02 09:21:08.000000000 Z
     updated_at: 2013-11-02 09:21:08.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 585
+    id: 1124
     page_layout_root_id: 1
     page_layout_id: 41
     section_param_id: 220
@@ -1954,9 +1954,9 @@
     computed_pvalue: 
     created_at: 2013-11-02 09:21:08.000000000 Z
     updated_at: 2013-11-02 09:21:08.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 586
+    id: 1125
     page_layout_root_id: 1
     page_layout_id: 41
     section_param_id: 221
@@ -1966,9 +1966,9 @@
     computed_pvalue: 
     created_at: 2013-11-02 09:21:09.000000000 Z
     updated_at: 2013-11-02 09:21:09.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 587
+    id: 1126
     page_layout_root_id: 1
     page_layout_id: 41
     section_param_id: 222
@@ -1978,9 +1978,9 @@
     computed_pvalue: 
     created_at: 2013-11-02 09:21:09.000000000 Z
     updated_at: 2013-11-02 09:21:09.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 588
+    id: 1127
     page_layout_root_id: 1
     page_layout_id: 41
     section_param_id: 223
@@ -1990,9 +1990,9 @@
     computed_pvalue: 
     created_at: 2013-11-02 09:21:09.000000000 Z
     updated_at: 2013-11-02 09:21:09.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 589
+    id: 1128
     page_layout_root_id: 1
     page_layout_id: 41
     section_param_id: 224
@@ -2002,9 +2002,9 @@
     computed_pvalue: 
     created_at: 2013-11-02 09:21:09.000000000 Z
     updated_at: 2013-11-02 09:21:09.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 590
+    id: 1129
     page_layout_root_id: 1
     page_layout_id: 41
     section_param_id: 225
@@ -2014,9 +2014,9 @@
     computed_pvalue: 
     created_at: 2013-11-02 09:21:09.000000000 Z
     updated_at: 2013-11-02 09:21:09.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 591
+    id: 1130
     page_layout_root_id: 1
     page_layout_id: 42
     section_param_id: 6
@@ -2026,9 +2026,9 @@
     computed_pvalue: 
     created_at: 2013-11-02 09:35:02.000000000 Z
     updated_at: 2013-11-02 09:35:02.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 592
+    id: 1131
     page_layout_root_id: 1
     page_layout_id: 42
     section_param_id: 7
@@ -2042,9 +2042,9 @@
     computed_pvalue: 
     created_at: 2013-11-02 09:35:02.000000000 Z
     updated_at: 2013-11-02 09:53:32.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 593
+    id: 1132
     page_layout_root_id: 1
     page_layout_id: 42
     section_param_id: 8
@@ -2055,9 +2055,9 @@
     computed_pvalue: 
     created_at: 2013-11-02 09:35:02.000000000 Z
     updated_at: 2013-11-02 09:35:02.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 594
+    id: 1133
     page_layout_root_id: 1
     page_layout_id: 42
     section_param_id: 9
@@ -2067,9 +2067,9 @@
     computed_pvalue: 
     created_at: 2013-11-02 09:35:02.000000000 Z
     updated_at: 2013-11-02 09:35:02.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 595
+    id: 1134
     page_layout_root_id: 1
     page_layout_id: 42
     section_param_id: 10
@@ -2079,9 +2079,9 @@
     computed_pvalue: 
     created_at: 2013-11-02 09:35:02.000000000 Z
     updated_at: 2013-11-02 09:35:02.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 596
+    id: 1135
     page_layout_root_id: 1
     page_layout_id: 43
     section_param_id: 160
@@ -2091,9 +2091,9 @@
     computed_pvalue: 
     created_at: 2013-11-02 09:36:17.000000000 Z
     updated_at: 2013-11-02 09:36:17.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 597
+    id: 1136
     page_layout_root_id: 1
     page_layout_id: 43
     section_param_id: 161
@@ -2103,9 +2103,9 @@
     computed_pvalue: 
     created_at: 2013-11-02 09:36:17.000000000 Z
     updated_at: 2013-11-02 09:36:17.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 598
+    id: 1137
     page_layout_root_id: 1
     page_layout_id: 43
     section_param_id: 162
@@ -2116,9 +2116,9 @@
     computed_pvalue: 
     created_at: 2013-11-02 09:36:17.000000000 Z
     updated_at: 2013-11-02 09:36:17.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 599
+    id: 1138
     page_layout_root_id: 1
     page_layout_id: 43
     section_param_id: 163
@@ -2128,9 +2128,9 @@
     computed_pvalue: 
     created_at: 2013-11-02 09:36:17.000000000 Z
     updated_at: 2013-11-02 09:36:17.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 600
+    id: 1139
     page_layout_root_id: 1
     page_layout_id: 43
     section_param_id: 164
@@ -2140,9 +2140,9 @@
     computed_pvalue: 
     created_at: 2013-11-02 09:36:18.000000000 Z
     updated_at: 2013-11-02 09:36:18.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 601
+    id: 1140
     page_layout_root_id: 1
     page_layout_id: 44
     section_param_id: 165
@@ -2152,9 +2152,9 @@
     computed_pvalue: 
     created_at: 2013-11-02 09:37:21.000000000 Z
     updated_at: 2013-11-02 09:37:21.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 602
+    id: 1141
     page_layout_root_id: 1
     page_layout_id: 44
     section_param_id: 166
@@ -2162,11 +2162,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 
+    created_at: 2013-11-02 09:37:21.000000000 Z
     updated_at: 2013-11-02 09:37:21.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 603
+    id: 1142
     page_layout_root_id: 1
     page_layout_id: 44
     section_param_id: 167
@@ -2177,9 +2177,9 @@
     computed_pvalue: 
     created_at: 2013-11-02 09:37:21.000000000 Z
     updated_at: 2013-11-02 09:37:21.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 604
+    id: 1143
     page_layout_root_id: 1
     page_layout_id: 44
     section_param_id: 168
@@ -2189,9 +2189,9 @@
     computed_pvalue: 
     created_at: 2013-11-02 09:37:21.000000000 Z
     updated_at: 2013-11-02 09:37:21.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 605
+    id: 1144
     page_layout_root_id: 1
     page_layout_id: 44
     section_param_id: 169
@@ -2201,9 +2201,9 @@
     computed_pvalue: 
     created_at: 2013-11-02 09:37:21.000000000 Z
     updated_at: 2013-11-02 09:37:21.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 606
+    id: 1145
     page_layout_root_id: 1
     page_layout_id: 44
     section_param_id: 170
@@ -2213,9 +2213,9 @@
     computed_pvalue: 
     created_at: 2013-11-02 09:37:21.000000000 Z
     updated_at: 2013-11-02 09:37:21.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 607
+    id: 1146
     page_layout_root_id: 1
     page_layout_id: 44
     section_param_id: 171
@@ -2225,9 +2225,9 @@
     computed_pvalue: 
     created_at: 2013-11-02 09:37:22.000000000 Z
     updated_at: 2013-11-02 09:37:22.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 608
+    id: 1147
     page_layout_root_id: 1
     page_layout_id: 44
     section_param_id: 172
@@ -2238,9 +2238,9 @@
     computed_pvalue: 
     created_at: 2013-11-02 09:37:22.000000000 Z
     updated_at: 2013-11-02 09:37:22.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 609
+    id: 1148
     page_layout_root_id: 1
     page_layout_id: 45
     section_param_id: 173
@@ -2250,9 +2250,9 @@
     computed_pvalue: 
     created_at: 2013-11-02 09:37:30.000000000 Z
     updated_at: 2013-11-02 09:37:30.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 610
+    id: 1149
     page_layout_root_id: 1
     page_layout_id: 45
     section_param_id: 174
@@ -2262,9 +2262,9 @@
     computed_pvalue: 
     created_at: 2013-11-02 09:37:31.000000000 Z
     updated_at: 2013-11-02 09:37:31.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 611
+    id: 1150
     page_layout_root_id: 1
     page_layout_id: 45
     section_param_id: 175
@@ -2275,9 +2275,9 @@
     computed_pvalue: 
     created_at: 2013-11-02 09:37:31.000000000 Z
     updated_at: 2013-11-02 09:37:31.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 612
+    id: 1151
     page_layout_root_id: 1
     page_layout_id: 45
     section_param_id: 176
@@ -2287,9 +2287,9 @@
     computed_pvalue: 
     created_at: 2013-11-02 09:37:31.000000000 Z
     updated_at: 2013-11-02 09:37:31.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 613
+    id: 1152
     page_layout_root_id: 1
     page_layout_id: 45
     section_param_id: 177
@@ -2299,9 +2299,9 @@
     computed_pvalue: 
     created_at: 2013-11-02 09:37:31.000000000 Z
     updated_at: 2013-11-02 09:37:31.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 614
+    id: 1153
     page_layout_root_id: 1
     page_layout_id: 45
     section_param_id: 178
@@ -2311,9 +2311,9 @@
     computed_pvalue: 
     created_at: 2013-11-02 09:37:31.000000000 Z
     updated_at: 2013-11-02 09:37:31.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 615
+    id: 1154
     page_layout_root_id: 1
     page_layout_id: 45
     section_param_id: 179
@@ -2323,9 +2323,9 @@
     computed_pvalue: 
     created_at: 2013-11-02 09:37:31.000000000 Z
     updated_at: 2013-11-02 09:37:31.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 616
+    id: 1155
     page_layout_root_id: 1
     page_layout_id: 45
     section_param_id: 180
@@ -2336,9 +2336,9 @@
     computed_pvalue: 
     created_at: 2013-11-02 09:37:31.000000000 Z
     updated_at: 2013-11-02 09:37:31.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 625
+    id: 1164
     page_layout_root_id: 1
     page_layout_id: 47
     section_param_id: 268
@@ -2348,9 +2348,9 @@
     computed_pvalue: 
     created_at: 2013-11-02 09:37:51.000000000 Z
     updated_at: 2013-11-02 09:37:51.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 626
+    id: 1165
     page_layout_root_id: 1
     page_layout_id: 47
     section_param_id: 269
@@ -2360,9 +2360,9 @@
     computed_pvalue: 
     created_at: 2013-11-02 09:37:51.000000000 Z
     updated_at: 2013-11-02 09:37:51.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 627
+    id: 1166
     page_layout_root_id: 1
     page_layout_id: 47
     section_param_id: 270
@@ -2373,9 +2373,9 @@
     computed_pvalue: 
     created_at: 2013-11-02 09:37:52.000000000 Z
     updated_at: 2013-11-02 09:37:52.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 628
+    id: 1167
     page_layout_root_id: 1
     page_layout_id: 47
     section_param_id: 271
@@ -2385,9 +2385,9 @@
     computed_pvalue: 
     created_at: 2013-11-02 09:37:52.000000000 Z
     updated_at: 2013-11-02 09:37:52.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 629
+    id: 1168
     page_layout_root_id: 1
     page_layout_id: 47
     section_param_id: 272
@@ -2397,9 +2397,9 @@
     computed_pvalue: 
     created_at: 2013-11-02 09:37:52.000000000 Z
     updated_at: 2013-11-02 09:37:52.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 630
+    id: 1169
     page_layout_root_id: 1
     page_layout_id: 47
     section_param_id: 273
@@ -2409,9 +2409,9 @@
     computed_pvalue: 
     created_at: 2013-11-02 09:37:52.000000000 Z
     updated_at: 2013-11-02 09:37:52.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 631
+    id: 1170
     page_layout_root_id: 1
     page_layout_id: 47
     section_param_id: 274
@@ -2421,9 +2421,9 @@
     computed_pvalue: 
     created_at: 2013-11-02 09:37:52.000000000 Z
     updated_at: 2013-11-02 09:37:52.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 632
+    id: 1171
     page_layout_root_id: 1
     page_layout_id: 47
     section_param_id: 275
@@ -2433,9 +2433,9 @@
     computed_pvalue: 
     created_at: 2013-11-02 09:37:52.000000000 Z
     updated_at: 2013-11-02 09:37:52.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 633
+    id: 1172
     page_layout_root_id: 1
     page_layout_id: 48
     section_param_id: 260
@@ -2445,9 +2445,9 @@
     computed_pvalue: 
     created_at: 2013-11-02 09:38:01.000000000 Z
     updated_at: 2013-11-02 09:38:01.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 634
+    id: 1173
     page_layout_root_id: 1
     page_layout_id: 48
     section_param_id: 261
@@ -2457,9 +2457,9 @@
     computed_pvalue: 
     created_at: 2013-11-02 09:38:01.000000000 Z
     updated_at: 2013-11-02 09:38:01.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 635
+    id: 1174
     page_layout_root_id: 1
     page_layout_id: 48
     section_param_id: 262
@@ -2470,9 +2470,9 @@
     computed_pvalue: 
     created_at: 2013-11-02 09:38:01.000000000 Z
     updated_at: 2013-11-02 09:38:01.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 636
+    id: 1175
     page_layout_root_id: 1
     page_layout_id: 48
     section_param_id: 263
@@ -2482,9 +2482,9 @@
     computed_pvalue: 
     created_at: 2013-11-02 09:38:01.000000000 Z
     updated_at: 2013-11-02 09:38:01.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 637
+    id: 1176
     page_layout_root_id: 1
     page_layout_id: 48
     section_param_id: 264
@@ -2494,9 +2494,9 @@
     computed_pvalue: 
     created_at: 2013-11-02 09:38:01.000000000 Z
     updated_at: 2013-11-02 09:38:01.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 638
+    id: 1177
     page_layout_root_id: 1
     page_layout_id: 48
     section_param_id: 265
@@ -2506,9 +2506,9 @@
     computed_pvalue: 
     created_at: 2013-11-02 09:38:01.000000000 Z
     updated_at: 2013-11-02 09:38:01.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 639
+    id: 1178
     page_layout_root_id: 1
     page_layout_id: 48
     section_param_id: 266
@@ -2518,9 +2518,9 @@
     computed_pvalue: 
     created_at: 2013-11-02 09:38:01.000000000 Z
     updated_at: 2013-11-02 09:38:01.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 640
+    id: 1179
     page_layout_root_id: 1
     page_layout_id: 48
     section_param_id: 267
@@ -2530,9 +2530,9 @@
     computed_pvalue: 
     created_at: 2013-11-02 09:38:02.000000000 Z
     updated_at: 2013-11-02 09:38:02.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 641
+    id: 1180
     page_layout_root_id: 1
     page_layout_id: 49
     section_param_id: 6
@@ -2542,9 +2542,9 @@
     computed_pvalue: 
     created_at: 2013-11-02 09:39:01.000000000 Z
     updated_at: 2013-11-02 09:39:01.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 642
+    id: 1181
     page_layout_root_id: 1
     page_layout_id: 49
     section_param_id: 7
@@ -2558,9 +2558,9 @@
     computed_pvalue: 
     created_at: 2013-11-02 09:39:01.000000000 Z
     updated_at: 2013-11-02 10:07:21.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 643
+    id: 1182
     page_layout_root_id: 1
     page_layout_id: 49
     section_param_id: 8
@@ -2571,9 +2571,9 @@
     computed_pvalue: 
     created_at: 2013-11-02 09:39:01.000000000 Z
     updated_at: 2013-11-02 09:39:01.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 644
+    id: 1183
     page_layout_root_id: 1
     page_layout_id: 49
     section_param_id: 9
@@ -2583,9 +2583,9 @@
     computed_pvalue: 
     created_at: 2013-11-02 09:39:01.000000000 Z
     updated_at: 2013-11-02 09:39:01.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 645
+    id: 1184
     page_layout_root_id: 1
     page_layout_id: 49
     section_param_id: 10
@@ -2595,9 +2595,9 @@
     computed_pvalue: 
     created_at: 2013-11-02 09:39:01.000000000 Z
     updated_at: 2013-11-02 09:39:01.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 646
+    id: 1185
     page_layout_root_id: 1
     page_layout_id: 50
     section_param_id: 6
@@ -2607,9 +2607,9 @@
     computed_pvalue: 
     created_at: 2013-11-02 09:39:32.000000000 Z
     updated_at: 2013-11-02 09:39:32.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 647
+    id: 1186
     page_layout_root_id: 1
     page_layout_id: 50
     section_param_id: 7
@@ -2623,9 +2623,9 @@
     computed_pvalue: 
     created_at: 2013-11-02 09:39:33.000000000 Z
     updated_at: 2013-11-02 10:07:33.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 648
+    id: 1187
     page_layout_root_id: 1
     page_layout_id: 50
     section_param_id: 8
@@ -2636,9 +2636,9 @@
     computed_pvalue: 
     created_at: 2013-11-02 09:39:33.000000000 Z
     updated_at: 2013-11-02 09:39:33.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 649
+    id: 1188
     page_layout_root_id: 1
     page_layout_id: 50
     section_param_id: 9
@@ -2648,9 +2648,9 @@
     computed_pvalue: 
     created_at: 2013-11-02 09:39:33.000000000 Z
     updated_at: 2013-11-02 09:39:33.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 650
+    id: 1189
     page_layout_root_id: 1
     page_layout_id: 50
     section_param_id: 10
@@ -2660,9 +2660,9 @@
     computed_pvalue: 
     created_at: 2013-11-02 09:39:33.000000000 Z
     updated_at: 2013-11-02 09:39:33.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 651
+    id: 1190
     page_layout_root_id: 1
     page_layout_id: 51
     section_param_id: 189
@@ -2672,9 +2672,9 @@
     computed_pvalue: 
     created_at: 2013-11-02 09:39:53.000000000 Z
     updated_at: 2013-11-02 09:39:53.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 652
+    id: 1191
     page_layout_root_id: 1
     page_layout_id: 51
     section_param_id: 190
@@ -2684,9 +2684,9 @@
     computed_pvalue: 
     created_at: 2013-11-02 09:39:53.000000000 Z
     updated_at: 2013-11-02 09:39:53.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 653
+    id: 1192
     page_layout_root_id: 1
     page_layout_id: 51
     section_param_id: 191
@@ -2697,9 +2697,9 @@
     computed_pvalue: 
     created_at: 2013-11-02 09:39:53.000000000 Z
     updated_at: 2013-11-02 09:39:53.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 654
+    id: 1193
     page_layout_root_id: 1
     page_layout_id: 51
     section_param_id: 192
@@ -2709,9 +2709,9 @@
     computed_pvalue: 
     created_at: 2013-11-02 09:39:53.000000000 Z
     updated_at: 2013-11-02 09:39:53.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 655
+    id: 1194
     page_layout_root_id: 1
     page_layout_id: 51
     section_param_id: 193
@@ -2721,9 +2721,9 @@
     computed_pvalue: 
     created_at: 2013-11-02 09:39:53.000000000 Z
     updated_at: 2013-11-02 09:39:53.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 656
+    id: 1195
     page_layout_root_id: 1
     page_layout_id: 51
     section_param_id: 194
@@ -2733,9 +2733,9 @@
     computed_pvalue: 
     created_at: 2013-11-02 09:39:53.000000000 Z
     updated_at: 2013-11-02 09:39:53.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 657
+    id: 1196
     page_layout_root_id: 1
     page_layout_id: 51
     section_param_id: 195
@@ -2745,9 +2745,9 @@
     computed_pvalue: 
     created_at: 2013-11-02 09:39:53.000000000 Z
     updated_at: 2013-11-02 09:39:53.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 658
+    id: 1197
     page_layout_root_id: 1
     page_layout_id: 51
     section_param_id: 196
@@ -2757,9 +2757,9 @@
     computed_pvalue: 
     created_at: 2013-11-02 09:39:53.000000000 Z
     updated_at: 2013-11-02 09:39:53.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 659
+    id: 1198
     page_layout_root_id: 1
     page_layout_id: 52
     section_param_id: 197
@@ -2769,9 +2769,9 @@
     computed_pvalue: 
     created_at: 2013-11-02 09:40:04.000000000 Z
     updated_at: 2013-11-02 09:40:04.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 660
+    id: 1199
     page_layout_root_id: 1
     page_layout_id: 52
     section_param_id: 198
@@ -2781,9 +2781,9 @@
     computed_pvalue: 
     created_at: 2013-11-02 09:40:04.000000000 Z
     updated_at: 2013-11-02 09:40:04.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 661
+    id: 1200
     page_layout_root_id: 1
     page_layout_id: 52
     section_param_id: 199
@@ -2794,9 +2794,9 @@
     computed_pvalue: 
     created_at: 2013-11-02 09:40:04.000000000 Z
     updated_at: 2013-11-02 09:40:04.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 662
+    id: 1201
     page_layout_root_id: 1
     page_layout_id: 52
     section_param_id: 200
@@ -2806,9 +2806,9 @@
     computed_pvalue: 
     created_at: 2013-11-02 09:40:04.000000000 Z
     updated_at: 2013-11-02 09:40:04.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 663
+    id: 1202
     page_layout_root_id: 1
     page_layout_id: 52
     section_param_id: 201
@@ -2818,9 +2818,9 @@
     computed_pvalue: 
     created_at: 2013-11-02 09:40:04.000000000 Z
     updated_at: 2013-11-02 09:40:04.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 664
+    id: 1203
     page_layout_root_id: 1
     page_layout_id: 52
     section_param_id: 202
@@ -2830,9 +2830,9 @@
     computed_pvalue: 
     created_at: 2013-11-02 09:40:04.000000000 Z
     updated_at: 2013-11-02 09:40:04.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 665
+    id: 1204
     page_layout_root_id: 1
     page_layout_id: 52
     section_param_id: 203
@@ -2842,9 +2842,9 @@
     computed_pvalue: 
     created_at: 2013-11-02 09:40:04.000000000 Z
     updated_at: 2013-11-02 09:40:04.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 666
+    id: 1205
     page_layout_root_id: 1
     page_layout_id: 52
     section_param_id: 204
@@ -2854,9 +2854,9 @@
     computed_pvalue: 
     created_at: 2013-11-02 09:40:04.000000000 Z
     updated_at: 2013-11-02 09:40:04.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 667
+    id: 1206
     page_layout_root_id: 1
     page_layout_id: 28
     section_param_id: 6
@@ -2866,9 +2866,9 @@
     computed_pvalue: 
     created_at: 2013-11-02 09:50:08.000000000 Z
     updated_at: 2013-11-02 09:50:08.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 668
+    id: 1207
     page_layout_root_id: 1
     page_layout_id: 28
     section_param_id: 7
@@ -2882,9 +2882,9 @@
     computed_pvalue: 
     created_at: 2013-11-02 09:50:08.000000000 Z
     updated_at: 2013-11-02 10:07:29.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 669
+    id: 1208
     page_layout_root_id: 1
     page_layout_id: 28
     section_param_id: 8
@@ -2895,9 +2895,9 @@
     computed_pvalue: 
     created_at: 2013-11-02 09:50:08.000000000 Z
     updated_at: 2013-11-02 09:50:08.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 670
+    id: 1209
     page_layout_root_id: 1
     page_layout_id: 28
     section_param_id: 9
@@ -2907,9 +2907,9 @@
     computed_pvalue: 
     created_at: 2013-11-02 09:50:08.000000000 Z
     updated_at: 2013-11-02 09:50:08.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 671
+    id: 1210
     page_layout_root_id: 1
     page_layout_id: 28
     section_param_id: 10
@@ -2919,9 +2919,9 @@
     computed_pvalue: 
     created_at: 2013-11-02 09:50:09.000000000 Z
     updated_at: 2013-11-02 09:50:09.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 672
+    id: 1211
     page_layout_root_id: 1
     page_layout_id: 38
     section_param_id: 6
@@ -2931,9 +2931,9 @@
     computed_pvalue: 
     created_at: 2013-11-02 09:50:37.000000000 Z
     updated_at: 2013-11-02 09:50:37.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 673
+    id: 1212
     page_layout_root_id: 1
     page_layout_id: 38
     section_param_id: 7
@@ -2947,9 +2947,9 @@
     computed_pvalue: 
     created_at: 2013-11-02 09:50:37.000000000 Z
     updated_at: 2013-11-02 10:07:38.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 674
+    id: 1213
     page_layout_root_id: 1
     page_layout_id: 38
     section_param_id: 8
@@ -2960,9 +2960,9 @@
     computed_pvalue: 
     created_at: 2013-11-02 09:50:37.000000000 Z
     updated_at: 2013-11-02 09:50:37.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 675
+    id: 1214
     page_layout_root_id: 1
     page_layout_id: 38
     section_param_id: 9
@@ -2972,9 +2972,9 @@
     computed_pvalue: 
     created_at: 2013-11-02 09:50:37.000000000 Z
     updated_at: 2013-11-02 09:50:37.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 676
+    id: 1215
     page_layout_root_id: 1
     page_layout_id: 38
     section_param_id: 10
@@ -2984,9 +2984,9 @@
     computed_pvalue: 
     created_at: 2013-11-02 09:50:37.000000000 Z
     updated_at: 2013-11-02 09:50:37.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 708
+    id: 1247
     page_layout_root_id: 1
     page_layout_id: 3
     section_param_id: 43
@@ -2996,9 +2996,9 @@
     computed_pvalue: 
     created_at: 2013-11-05 03:16:07.000000000 Z
     updated_at: 2013-11-05 03:16:07.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 709
+    id: 1248
     page_layout_root_id: 1
     page_layout_id: 3
     section_param_id: 44
@@ -3008,9 +3008,9 @@
     computed_pvalue: 
     created_at: 2013-11-05 03:16:07.000000000 Z
     updated_at: 2013-11-05 03:16:07.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 710
+    id: 1249
     page_layout_root_id: 1
     page_layout_id: 3
     section_param_id: 45
@@ -3021,9 +3021,9 @@
     computed_pvalue: 
     created_at: 2013-11-05 03:16:07.000000000 Z
     updated_at: 2013-11-05 03:16:07.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 711
+    id: 1250
     page_layout_root_id: 1
     page_layout_id: 3
     section_param_id: 46
@@ -3033,9 +3033,9 @@
     computed_pvalue: 
     created_at: 2013-11-05 03:16:07.000000000 Z
     updated_at: 2013-11-05 03:16:07.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 712
+    id: 1251
     page_layout_root_id: 1
     page_layout_id: 3
     section_param_id: 47
@@ -3045,9 +3045,9 @@
     computed_pvalue: 
     created_at: 2013-11-05 03:16:07.000000000 Z
     updated_at: 2013-11-05 03:16:07.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 713
+    id: 1252
     page_layout_root_id: 1
     page_layout_id: 3
     section_param_id: 48
@@ -3057,9 +3057,9 @@
     computed_pvalue: 
     created_at: 2013-11-05 03:16:07.000000000 Z
     updated_at: 2013-11-05 03:16:07.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 714
+    id: 1253
     page_layout_root_id: 1
     page_layout_id: 3
     section_param_id: 49
@@ -3069,9 +3069,9 @@
     computed_pvalue: 
     created_at: 2013-11-05 03:16:07.000000000 Z
     updated_at: 2013-11-05 03:16:07.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 715
+    id: 1254
     page_layout_root_id: 1
     page_layout_id: 4
     section_param_id: 11
@@ -3081,9 +3081,9 @@
     computed_pvalue: 
     created_at: 2013-11-05 03:16:07.000000000 Z
     updated_at: 2013-11-05 03:16:07.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 716
+    id: 1255
     page_layout_root_id: 1
     page_layout_id: 4
     section_param_id: 12
@@ -3093,9 +3093,9 @@
     computed_pvalue: 
     created_at: 2013-11-05 03:16:07.000000000 Z
     updated_at: 2013-11-05 03:16:07.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 717
+    id: 1256
     page_layout_root_id: 1
     page_layout_id: 4
     section_param_id: 13
@@ -3106,9 +3106,9 @@
     computed_pvalue: 
     created_at: 2013-11-05 03:16:08.000000000 Z
     updated_at: 2013-11-05 03:16:08.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 718
+    id: 1257
     page_layout_root_id: 1
     page_layout_id: 4
     section_param_id: 14
@@ -3118,9 +3118,9 @@
     computed_pvalue: 
     created_at: 2013-11-05 03:16:08.000000000 Z
     updated_at: 2013-11-05 03:16:08.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 719
+    id: 1258
     page_layout_root_id: 1
     page_layout_id: 4
     section_param_id: 15
@@ -3130,9 +3130,9 @@
     computed_pvalue: 
     created_at: 2013-11-05 03:16:08.000000000 Z
     updated_at: 2013-11-05 03:16:08.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 720
+    id: 1259
     page_layout_root_id: 1
     page_layout_id: 4
     section_param_id: 16
@@ -3142,9 +3142,9 @@
     computed_pvalue: 
     created_at: 2013-11-05 03:16:08.000000000 Z
     updated_at: 2013-11-05 03:16:08.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 721
+    id: 1260
     page_layout_root_id: 1
     page_layout_id: 4
     section_param_id: 17
@@ -3154,9 +3154,9 @@
     computed_pvalue: 
     created_at: 2013-11-05 03:16:08.000000000 Z
     updated_at: 2013-11-05 03:16:08.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 722
+    id: 1261
     page_layout_root_id: 1
     page_layout_id: 4
     section_param_id: 18
@@ -3166,9 +3166,9 @@
     computed_pvalue: 
     created_at: 2013-11-05 03:16:08.000000000 Z
     updated_at: 2013-11-05 03:16:08.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 723
+    id: 1262
     page_layout_root_id: 1
     page_layout_id: 4
     section_param_id: 19
@@ -3178,9 +3178,9 @@
     computed_pvalue: 
     created_at: 2013-11-05 03:16:08.000000000 Z
     updated_at: 2013-11-05 03:16:08.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 724
+    id: 1263
     page_layout_root_id: 1
     page_layout_id: 4
     section_param_id: 20
@@ -3190,9 +3190,9 @@
     computed_pvalue: 
     created_at: 2013-11-05 03:16:08.000000000 Z
     updated_at: 2013-11-05 03:16:08.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 725
+    id: 1264
     page_layout_root_id: 1
     page_layout_id: 4
     section_param_id: 21
@@ -3202,9 +3202,9 @@
     computed_pvalue: 
     created_at: 2013-11-05 03:16:08.000000000 Z
     updated_at: 2013-11-05 03:16:08.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 726
+    id: 1265
     page_layout_root_id: 1
     page_layout_id: 4
     section_param_id: 22
@@ -3214,9 +3214,9 @@
     computed_pvalue: 
     created_at: 2013-11-05 03:16:08.000000000 Z
     updated_at: 2013-11-05 03:16:08.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 727
+    id: 1266
     page_layout_root_id: 1
     page_layout_id: 4
     section_param_id: 23
@@ -3226,9 +3226,9 @@
     computed_pvalue: 
     created_at: 2013-11-05 03:16:08.000000000 Z
     updated_at: 2013-11-05 03:16:08.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 728
+    id: 1267
     page_layout_root_id: 1
     page_layout_id: 4
     section_param_id: 24
@@ -3238,9 +3238,9 @@
     computed_pvalue: 
     created_at: 2013-11-05 03:16:09.000000000 Z
     updated_at: 2013-11-05 03:16:09.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 729
+    id: 1268
     page_layout_root_id: 1
     page_layout_id: 4
     section_param_id: 25
@@ -3250,9 +3250,9 @@
     computed_pvalue: 
     created_at: 2013-11-05 03:16:09.000000000 Z
     updated_at: 2013-11-05 03:16:09.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 730
+    id: 1269
     page_layout_root_id: 1
     page_layout_id: 4
     section_param_id: 26
@@ -3262,9 +3262,9 @@
     computed_pvalue: 
     created_at: 2013-11-05 03:16:09.000000000 Z
     updated_at: 2013-11-05 03:16:09.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 748
+    id: 1287
     page_layout_root_id: 1
     page_layout_id: 16
     section_param_id: 11
@@ -3274,9 +3274,9 @@
     computed_pvalue: 
     created_at: 2013-11-05 03:16:11.000000000 Z
     updated_at: 2013-11-05 03:16:11.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 749
+    id: 1288
     page_layout_root_id: 1
     page_layout_id: 16
     section_param_id: 12
@@ -3286,9 +3286,9 @@
     computed_pvalue: 
     created_at: 2013-11-05 03:16:11.000000000 Z
     updated_at: 2013-11-05 03:16:11.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 750
+    id: 1289
     page_layout_root_id: 1
     page_layout_id: 16
     section_param_id: 13
@@ -3299,9 +3299,9 @@
     computed_pvalue: 
     created_at: 2013-11-05 03:16:11.000000000 Z
     updated_at: 2013-11-05 03:16:11.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 751
+    id: 1290
     page_layout_root_id: 1
     page_layout_id: 16
     section_param_id: 14
@@ -3311,9 +3311,9 @@
     computed_pvalue: 
     created_at: 2013-11-05 03:16:11.000000000 Z
     updated_at: 2013-11-05 03:16:11.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 752
+    id: 1291
     page_layout_root_id: 1
     page_layout_id: 16
     section_param_id: 15
@@ -3323,9 +3323,9 @@
     computed_pvalue: 
     created_at: 2013-11-05 03:16:11.000000000 Z
     updated_at: 2013-11-05 03:16:11.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 753
+    id: 1292
     page_layout_root_id: 1
     page_layout_id: 16
     section_param_id: 16
@@ -3335,9 +3335,9 @@
     computed_pvalue: 
     created_at: 2013-11-05 03:16:11.000000000 Z
     updated_at: 2013-11-05 03:16:11.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 754
+    id: 1293
     page_layout_root_id: 1
     page_layout_id: 16
     section_param_id: 17
@@ -3347,9 +3347,9 @@
     computed_pvalue: 
     created_at: 2013-11-05 03:16:11.000000000 Z
     updated_at: 2013-11-05 03:16:11.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 755
+    id: 1294
     page_layout_root_id: 1
     page_layout_id: 16
     section_param_id: 18
@@ -3359,9 +3359,9 @@
     computed_pvalue: 
     created_at: 2013-11-05 03:16:11.000000000 Z
     updated_at: 2013-11-05 03:16:11.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 756
+    id: 1295
     page_layout_root_id: 1
     page_layout_id: 16
     section_param_id: 19
@@ -3371,9 +3371,9 @@
     computed_pvalue: 
     created_at: 2013-11-05 03:16:11.000000000 Z
     updated_at: 2013-11-05 03:16:11.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 757
+    id: 1296
     page_layout_root_id: 1
     page_layout_id: 16
     section_param_id: 20
@@ -3383,9 +3383,9 @@
     computed_pvalue: 
     created_at: 2013-11-05 03:16:12.000000000 Z
     updated_at: 2013-11-05 03:16:12.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 758
+    id: 1297
     page_layout_root_id: 1
     page_layout_id: 16
     section_param_id: 21
@@ -3395,9 +3395,9 @@
     computed_pvalue: 
     created_at: 2013-11-05 03:16:12.000000000 Z
     updated_at: 2013-11-05 03:16:12.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 759
+    id: 1298
     page_layout_root_id: 1
     page_layout_id: 16
     section_param_id: 22
@@ -3407,9 +3407,9 @@
     computed_pvalue: 
     created_at: 2013-11-05 03:16:12.000000000 Z
     updated_at: 2013-11-05 03:16:12.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 760
+    id: 1299
     page_layout_root_id: 1
     page_layout_id: 16
     section_param_id: 23
@@ -3417,11 +3417,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 
+    created_at: 2013-11-05 03:16:12.000000000 Z
     updated_at: 2013-11-05 03:16:12.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 761
+    id: 1300
     page_layout_root_id: 1
     page_layout_id: 16
     section_param_id: 24
@@ -3431,9 +3431,9 @@
     computed_pvalue: 
     created_at: 2013-11-05 03:16:12.000000000 Z
     updated_at: 2013-11-05 03:16:12.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 762
+    id: 1301
     page_layout_root_id: 1
     page_layout_id: 16
     section_param_id: 25
@@ -3443,9 +3443,9 @@
     computed_pvalue: 
     created_at: 2013-11-05 03:16:12.000000000 Z
     updated_at: 2013-11-05 03:16:12.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 763
+    id: 1302
     page_layout_root_id: 1
     page_layout_id: 16
     section_param_id: 26
@@ -3455,9 +3455,9 @@
     computed_pvalue: 
     created_at: 2013-11-05 03:16:12.000000000 Z
     updated_at: 2013-11-05 03:16:12.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 764
+    id: 1303
     page_layout_root_id: 1
     page_layout_id: 1
     section_param_id: 226
@@ -3469,11 +3469,11 @@
       20hidden: '1'
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:49.000000000 Z
-    updated_at: 2013-12-22 14:11:49.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:58:57.000000000 Z
+    updated_at: 2013-12-25 13:58:57.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 765
+    id: 1304
     page_layout_root_id: 1
     page_layout_id: 1
     section_param_id: 227
@@ -3481,11 +3481,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:49.000000000 Z
-    updated_at: 2013-12-22 14:11:49.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:58:57.000000000 Z
+    updated_at: 2013-12-25 13:58:57.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 766
+    id: 1305
     page_layout_root_id: 1
     page_layout_id: 1
     section_param_id: 228
@@ -3494,11 +3494,11 @@
       85: clear:both
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:49.000000000 Z
-    updated_at: 2013-12-22 14:11:49.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:58:57.000000000 Z
+    updated_at: 2013-12-25 13:58:57.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 767
+    id: 1306
     page_layout_root_id: 1
     page_layout_id: 1
     section_param_id: 229
@@ -3506,11 +3506,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:49.000000000 Z
-    updated_at: 2013-12-22 14:11:49.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:58:57.000000000 Z
+    updated_at: 2013-12-25 13:58:57.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 768
+    id: 1307
     page_layout_root_id: 1
     page_layout_id: 1
     section_param_id: 230
@@ -3518,11 +3518,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:49.000000000 Z
-    updated_at: 2013-12-22 14:11:49.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:58:57.000000000 Z
+    updated_at: 2013-12-25 13:58:57.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 769
+    id: 1308
     page_layout_root_id: 1
     page_layout_id: 1
     section_param_id: 231
@@ -3530,11 +3530,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:49.000000000 Z
-    updated_at: 2013-12-22 14:11:49.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:58:57.000000000 Z
+    updated_at: 2013-12-25 13:58:57.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 770
+    id: 1309
     page_layout_root_id: 1
     page_layout_id: 1
     section_param_id: 232
@@ -3542,11 +3542,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:49.000000000 Z
-    updated_at: 2013-12-22 14:11:49.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:58:57.000000000 Z
+    updated_at: 2013-12-25 13:58:57.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 771
+    id: 1310
     page_layout_root_id: 1
     page_layout_id: 1
     section_param_id: 233
@@ -3554,11 +3554,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:49.000000000 Z
-    updated_at: 2013-12-22 14:11:49.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:58:57.000000000 Z
+    updated_at: 2013-12-25 13:58:57.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 772
+    id: 1311
     page_layout_root_id: 1
     page_layout_id: 1
     section_param_id: 234
@@ -3566,11 +3566,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:49.000000000 Z
-    updated_at: 2013-12-22 14:11:49.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:58:57.000000000 Z
+    updated_at: 2013-12-25 13:58:57.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 773
+    id: 1312
     page_layout_root_id: 1
     page_layout_id: 1
     section_param_id: 235
@@ -3578,11 +3578,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:49.000000000 Z
-    updated_at: 2013-12-22 14:11:49.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:58:57.000000000 Z
+    updated_at: 2013-12-25 13:58:57.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 774
+    id: 1313
     page_layout_root_id: 1
     page_layout_id: 1
     section_param_id: 236
@@ -3590,11 +3590,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:49.000000000 Z
-    updated_at: 2013-12-22 14:11:49.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:58:57.000000000 Z
+    updated_at: 2013-12-25 13:58:57.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 775
+    id: 1314
     page_layout_root_id: 1
     page_layout_id: 1
     section_param_id: 237
@@ -3602,11 +3602,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:49.000000000 Z
-    updated_at: 2013-12-22 14:11:49.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:58:57.000000000 Z
+    updated_at: 2013-12-25 13:58:57.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 776
+    id: 1315
     page_layout_root_id: 1
     page_layout_id: 1
     section_param_id: 238
@@ -3614,11 +3614,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:49.000000000 Z
-    updated_at: 2013-12-22 14:11:49.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:58:57.000000000 Z
+    updated_at: 2013-12-25 13:58:57.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 777
+    id: 1316
     page_layout_root_id: 1
     page_layout_id: 1
     section_param_id: 239
@@ -3626,11 +3626,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:49.000000000 Z
-    updated_at: 2013-12-22 14:11:49.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:58:57.000000000 Z
+    updated_at: 2013-12-25 13:58:57.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 778
+    id: 1317
     page_layout_root_id: 1
     page_layout_id: 1
     section_param_id: 240
@@ -3638,11 +3638,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:49.000000000 Z
-    updated_at: 2013-12-22 14:11:49.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:58:58.000000000 Z
+    updated_at: 2013-12-25 13:58:58.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 779
+    id: 1318
     page_layout_root_id: 1
     page_layout_id: 1
     section_param_id: 241
@@ -3650,11 +3650,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:49.000000000 Z
-    updated_at: 2013-12-22 14:11:49.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:58:58.000000000 Z
+    updated_at: 2013-12-25 13:58:58.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 780
+    id: 1319
     page_layout_root_id: 1
     page_layout_id: 1
     section_param_id: 242
@@ -3662,11 +3662,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:49.000000000 Z
-    updated_at: 2013-12-22 14:11:49.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:58:58.000000000 Z
+    updated_at: 2013-12-25 13:58:58.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 781
+    id: 1320
     page_layout_root_id: 1
     page_layout_id: 1
     section_param_id: 243
@@ -3674,11 +3674,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:49.000000000 Z
-    updated_at: 2013-12-22 14:11:49.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:58:58.000000000 Z
+    updated_at: 2013-12-25 13:58:58.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 782
+    id: 1321
     page_layout_root_id: 1
     page_layout_id: 1
     section_param_id: 317
@@ -3686,11 +3686,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:49.000000000 Z
-    updated_at: 2013-12-22 14:11:49.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:58:58.000000000 Z
+    updated_at: 2013-12-25 13:58:58.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 783
+    id: 1322
     page_layout_root_id: 1
     page_layout_id: 1
     section_param_id: 318
@@ -3698,11 +3698,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:49.000000000 Z
-    updated_at: 2013-12-22 14:11:49.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:58:58.000000000 Z
+    updated_at: 2013-12-25 13:58:58.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 784
+    id: 1323
     page_layout_root_id: 1
     page_layout_id: 1
     section_param_id: 319
@@ -3710,11 +3710,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:49.000000000 Z
-    updated_at: 2013-12-22 14:11:49.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:58:58.000000000 Z
+    updated_at: 2013-12-25 13:58:58.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 785
+    id: 1324
     page_layout_root_id: 1
     page_layout_id: 1
     section_param_id: 320
@@ -3722,11 +3722,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:49.000000000 Z
-    updated_at: 2013-12-22 14:11:49.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:58:58.000000000 Z
+    updated_at: 2013-12-25 13:58:58.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 786
+    id: 1325
     page_layout_root_id: 1
     page_layout_id: 1
     section_param_id: 321
@@ -3734,11 +3734,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:50.000000000 Z
-    updated_at: 2013-12-22 14:11:50.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:58:58.000000000 Z
+    updated_at: 2013-12-25 13:58:58.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 787
+    id: 1326
     page_layout_root_id: 1
     page_layout_id: 1
     section_param_id: 322
@@ -3746,11 +3746,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:50.000000000 Z
-    updated_at: 2013-12-22 14:11:50.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:58:58.000000000 Z
+    updated_at: 2013-12-25 13:58:58.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 788
+    id: 1327
     page_layout_root_id: 1
     page_layout_id: 1
     section_param_id: 244
@@ -3758,11 +3758,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:50.000000000 Z
-    updated_at: 2013-12-22 14:11:50.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:58:58.000000000 Z
+    updated_at: 2013-12-25 13:58:58.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 789
+    id: 1328
     page_layout_root_id: 1
     page_layout_id: 1
     section_param_id: 245
@@ -3770,11 +3770,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:50.000000000 Z
-    updated_at: 2013-12-22 14:11:50.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:58:58.000000000 Z
+    updated_at: 2013-12-25 13:58:58.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 790
+    id: 1329
     page_layout_root_id: 1
     page_layout_id: 1
     section_param_id: 246
@@ -3782,11 +3782,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:50.000000000 Z
-    updated_at: 2013-12-22 14:11:50.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:58:58.000000000 Z
+    updated_at: 2013-12-25 13:58:58.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 791
+    id: 1330
     page_layout_root_id: 1
     page_layout_id: 1
     section_param_id: 247
@@ -3794,11 +3794,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:50.000000000 Z
-    updated_at: 2013-12-22 14:11:50.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:58:58.000000000 Z
+    updated_at: 2013-12-25 13:58:58.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 792
+    id: 1331
     page_layout_root_id: 1
     page_layout_id: 1
     section_param_id: 248
@@ -3806,11 +3806,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:50.000000000 Z
-    updated_at: 2013-12-22 14:11:50.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:58:58.000000000 Z
+    updated_at: 2013-12-25 13:58:58.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 793
+    id: 1332
     page_layout_root_id: 1
     page_layout_id: 1
     section_param_id: 249
@@ -3818,11 +3818,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:50.000000000 Z
-    updated_at: 2013-12-22 14:11:50.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:58:58.000000000 Z
+    updated_at: 2013-12-25 13:58:58.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 794
+    id: 1333
     page_layout_root_id: 1
     page_layout_id: 1
     section_param_id: 250
@@ -3830,11 +3830,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:50.000000000 Z
-    updated_at: 2013-12-22 14:11:50.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:58:58.000000000 Z
+    updated_at: 2013-12-25 13:58:58.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 795
+    id: 1334
     page_layout_root_id: 1
     page_layout_id: 1
     section_param_id: 251
@@ -3842,11 +3842,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:50.000000000 Z
-    updated_at: 2013-12-22 14:11:50.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:58:58.000000000 Z
+    updated_at: 2013-12-25 13:58:58.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 796
+    id: 1335
     page_layout_root_id: 1
     page_layout_id: 1
     section_param_id: 252
@@ -3854,11 +3854,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:50.000000000 Z
-    updated_at: 2013-12-22 14:11:50.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:58:58.000000000 Z
+    updated_at: 2013-12-25 13:58:58.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 797
+    id: 1336
     page_layout_root_id: 1
     page_layout_id: 1
     section_param_id: 253
@@ -3866,11 +3866,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:50.000000000 Z
-    updated_at: 2013-12-22 14:11:50.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:58:58.000000000 Z
+    updated_at: 2013-12-25 13:58:58.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 798
+    id: 1337
     page_layout_root_id: 1
     page_layout_id: 1
     section_param_id: 254
@@ -3878,11 +3878,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:50.000000000 Z
-    updated_at: 2013-12-22 14:11:50.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:58:58.000000000 Z
+    updated_at: 2013-12-25 13:58:58.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 799
+    id: 1338
     page_layout_root_id: 1
     page_layout_id: 1
     section_param_id: 255
@@ -3890,11 +3890,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:50.000000000 Z
-    updated_at: 2013-12-22 14:11:50.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:58:58.000000000 Z
+    updated_at: 2013-12-25 13:58:58.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 800
+    id: 1339
     page_layout_root_id: 1
     page_layout_id: 1
     section_param_id: 256
@@ -3902,11 +3902,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:50.000000000 Z
-    updated_at: 2013-12-22 14:11:50.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:58:58.000000000 Z
+    updated_at: 2013-12-25 13:58:58.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 801
+    id: 1340
     page_layout_root_id: 1
     page_layout_id: 31
     section_param_id: 135
@@ -3914,11 +3914,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:50.000000000 Z
-    updated_at: 2013-12-22 14:11:50.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:58:58.000000000 Z
+    updated_at: 2013-12-25 13:58:58.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 802
+    id: 1341
     page_layout_root_id: 1
     page_layout_id: 31
     section_param_id: 136
@@ -3926,11 +3926,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:50.000000000 Z
-    updated_at: 2013-12-22 14:11:50.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:58:58.000000000 Z
+    updated_at: 2013-12-25 13:58:58.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 803
+    id: 1342
     page_layout_root_id: 1
     page_layout_id: 31
     section_param_id: 137
@@ -3939,11 +3939,11 @@
       15hidden: '1'
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:50.000000000 Z
-    updated_at: 2013-12-22 14:11:50.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:58:58.000000000 Z
+    updated_at: 2013-12-25 13:58:58.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 804
+    id: 1343
     page_layout_root_id: 1
     page_layout_id: 31
     section_param_id: 138
@@ -3951,11 +3951,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:50.000000000 Z
-    updated_at: 2013-12-22 14:11:50.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:58:58.000000000 Z
+    updated_at: 2013-12-25 13:58:58.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 805
+    id: 1344
     page_layout_root_id: 1
     page_layout_id: 31
     section_param_id: 139
@@ -3963,11 +3963,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:50.000000000 Z
-    updated_at: 2013-12-22 14:11:50.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:58:58.000000000 Z
+    updated_at: 2013-12-25 13:58:58.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 806
+    id: 1345
     page_layout_root_id: 1
     page_layout_id: 33
     section_param_id: 135
@@ -3975,11 +3975,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:50.000000000 Z
-    updated_at: 2013-12-22 14:11:50.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:58:58.000000000 Z
+    updated_at: 2013-12-25 13:58:58.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 807
+    id: 1346
     page_layout_root_id: 1
     page_layout_id: 33
     section_param_id: 136
@@ -3987,11 +3987,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:50.000000000 Z
-    updated_at: 2013-12-22 14:11:50.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:58:58.000000000 Z
+    updated_at: 2013-12-25 13:58:58.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 808
+    id: 1347
     page_layout_root_id: 1
     page_layout_id: 33
     section_param_id: 137
@@ -4000,11 +4000,11 @@
       15hidden: '1'
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:50.000000000 Z
-    updated_at: 2013-12-22 14:11:50.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:58:58.000000000 Z
+    updated_at: 2013-12-25 13:58:58.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 809
+    id: 1348
     page_layout_root_id: 1
     page_layout_id: 33
     section_param_id: 138
@@ -4012,11 +4012,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:50.000000000 Z
-    updated_at: 2013-12-22 14:11:50.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:58:59.000000000 Z
+    updated_at: 2013-12-25 13:58:59.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 810
+    id: 1349
     page_layout_root_id: 1
     page_layout_id: 33
     section_param_id: 139
@@ -4024,11 +4024,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:50.000000000 Z
-    updated_at: 2013-12-22 14:11:50.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:58:59.000000000 Z
+    updated_at: 2013-12-25 13:58:59.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 811
+    id: 1350
     page_layout_root_id: 1
     page_layout_id: 8
     section_param_id: 6
@@ -4036,11 +4036,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:50.000000000 Z
-    updated_at: 2013-12-22 14:11:50.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:58:59.000000000 Z
+    updated_at: 2013-12-25 13:58:59.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 812
+    id: 1351
     page_layout_root_id: 1
     page_layout_id: 8
     section_param_id: 7
@@ -4054,11 +4054,11 @@
       21: width:760px
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:50.000000000 Z
-    updated_at: 2013-12-25 13:08:29.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:58:59.000000000 Z
+    updated_at: 2013-12-25 14:01:25.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 813
+    id: 1352
     page_layout_root_id: 1
     page_layout_id: 8
     section_param_id: 8
@@ -4067,11 +4067,11 @@
       15hidden: '1'
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:50.000000000 Z
-    updated_at: 2013-12-22 14:11:50.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:58:59.000000000 Z
+    updated_at: 2013-12-25 13:58:59.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 814
+    id: 1353
     page_layout_root_id: 1
     page_layout_id: 8
     section_param_id: 9
@@ -4079,11 +4079,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:50.000000000 Z
-    updated_at: 2013-12-22 14:11:50.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:58:59.000000000 Z
+    updated_at: 2013-12-25 13:58:59.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 815
+    id: 1354
     page_layout_root_id: 1
     page_layout_id: 8
     section_param_id: 10
@@ -4091,11 +4091,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:50.000000000 Z
-    updated_at: 2013-12-22 14:11:50.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:58:59.000000000 Z
+    updated_at: 2013-12-25 13:58:59.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 816
+    id: 1355
     page_layout_root_id: 1
     page_layout_id: 12
     section_param_id: 55
@@ -4103,11 +4103,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:51.000000000 Z
-    updated_at: 2013-12-22 14:11:51.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:58:59.000000000 Z
+    updated_at: 2013-12-25 13:58:59.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 817
+    id: 1356
     page_layout_root_id: 1
     page_layout_id: 12
     section_param_id: 56
@@ -4115,11 +4115,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:51.000000000 Z
-    updated_at: 2013-12-22 14:11:51.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:58:59.000000000 Z
+    updated_at: 2013-12-25 13:58:59.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 818
+    id: 1357
     page_layout_root_id: 1
     page_layout_id: 12
     section_param_id: 57
@@ -4128,11 +4128,11 @@
       15hidden: '1'
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:51.000000000 Z
-    updated_at: 2013-12-22 14:11:51.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:58:59.000000000 Z
+    updated_at: 2013-12-25 13:58:59.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 819
+    id: 1358
     page_layout_root_id: 1
     page_layout_id: 12
     section_param_id: 58
@@ -4140,11 +4140,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:51.000000000 Z
-    updated_at: 2013-12-22 14:11:51.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:58:59.000000000 Z
+    updated_at: 2013-12-25 13:58:59.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 820
+    id: 1359
     page_layout_root_id: 1
     page_layout_id: 12
     section_param_id: 59
@@ -4152,11 +4152,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:51.000000000 Z
-    updated_at: 2013-12-22 14:11:51.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:58:59.000000000 Z
+    updated_at: 2013-12-25 13:58:59.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 821
+    id: 1360
     page_layout_root_id: 1
     page_layout_id: 12
     section_param_id: 294
@@ -4164,11 +4164,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:51.000000000 Z
-    updated_at: 2013-12-22 14:11:51.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:58:59.000000000 Z
+    updated_at: 2013-12-25 13:58:59.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 822
+    id: 1361
     page_layout_root_id: 1
     page_layout_id: 12
     section_param_id: 295
@@ -4176,11 +4176,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:51.000000000 Z
-    updated_at: 2013-12-22 14:11:51.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:58:59.000000000 Z
+    updated_at: 2013-12-25 13:58:59.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 823
+    id: 1362
     page_layout_root_id: 1
     page_layout_id: 12
     section_param_id: 296
@@ -4188,11 +4188,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:51.000000000 Z
-    updated_at: 2013-12-22 14:11:51.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:58:59.000000000 Z
+    updated_at: 2013-12-25 13:58:59.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 824
+    id: 1363
     page_layout_root_id: 1
     page_layout_id: 12
     section_param_id: 297
@@ -4200,11 +4200,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:51.000000000 Z
-    updated_at: 2013-12-22 14:11:51.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:58:59.000000000 Z
+    updated_at: 2013-12-25 13:58:59.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 825
+    id: 1364
     page_layout_root_id: 1
     page_layout_id: 19
     section_param_id: 90
@@ -4212,11 +4212,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:51.000000000 Z
-    updated_at: 2013-12-22 14:11:51.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:58:59.000000000 Z
+    updated_at: 2013-12-25 13:58:59.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 826
+    id: 1365
     page_layout_root_id: 1
     page_layout_id: 19
     section_param_id: 91
@@ -4224,11 +4224,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:51.000000000 Z
-    updated_at: 2013-12-22 14:11:51.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:58:59.000000000 Z
+    updated_at: 2013-12-25 13:58:59.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 827
+    id: 1366
     page_layout_root_id: 1
     page_layout_id: 19
     section_param_id: 92
@@ -4237,11 +4237,11 @@
       15hidden: '1'
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:51.000000000 Z
-    updated_at: 2013-12-22 14:11:51.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:58:59.000000000 Z
+    updated_at: 2013-12-25 13:58:59.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 828
+    id: 1367
     page_layout_root_id: 1
     page_layout_id: 19
     section_param_id: 93
@@ -4249,11 +4249,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:51.000000000 Z
-    updated_at: 2013-12-22 14:11:51.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:58:59.000000000 Z
+    updated_at: 2013-12-25 13:58:59.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 829
+    id: 1368
     page_layout_root_id: 1
     page_layout_id: 19
     section_param_id: 94
@@ -4261,11 +4261,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:51.000000000 Z
-    updated_at: 2013-12-22 14:11:51.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:58:59.000000000 Z
+    updated_at: 2013-12-25 13:58:59.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 830
+    id: 1369
     page_layout_root_id: 1
     page_layout_id: 19
     section_param_id: 95
@@ -4273,11 +4273,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:51.000000000 Z
-    updated_at: 2013-12-22 14:11:51.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:58:59.000000000 Z
+    updated_at: 2013-12-25 13:58:59.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 831
+    id: 1370
     page_layout_root_id: 1
     page_layout_id: 19
     section_param_id: 96
@@ -4285,11 +4285,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:51.000000000 Z
-    updated_at: 2013-12-22 14:11:51.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:58:59.000000000 Z
+    updated_at: 2013-12-25 13:58:59.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 832
+    id: 1371
     page_layout_root_id: 1
     page_layout_id: 19
     section_param_id: 97
@@ -4298,11 +4298,11 @@
       15hidden: '1'
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:51.000000000 Z
-    updated_at: 2013-12-22 14:11:51.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:58:59.000000000 Z
+    updated_at: 2013-12-25 13:58:59.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 833
+    id: 1372
     page_layout_root_id: 1
     page_layout_id: 19
     section_param_id: 98
@@ -4310,11 +4310,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:51.000000000 Z
-    updated_at: 2013-12-22 14:11:51.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:58:59.000000000 Z
+    updated_at: 2013-12-25 13:58:59.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 834
+    id: 1373
     page_layout_root_id: 1
     page_layout_id: 19
     section_param_id: 99
@@ -4322,11 +4322,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:51.000000000 Z
-    updated_at: 2013-12-22 14:11:51.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:58:59.000000000 Z
+    updated_at: 2013-12-25 13:58:59.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 835
+    id: 1374
     page_layout_root_id: 1
     page_layout_id: 19
     section_param_id: 298
@@ -4334,11 +4334,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:51.000000000 Z
-    updated_at: 2013-12-22 14:11:51.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:58:59.000000000 Z
+    updated_at: 2013-12-25 13:58:59.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 836
+    id: 1375
     page_layout_root_id: 1
     page_layout_id: 19
     section_param_id: 100
@@ -4346,11 +4346,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:51.000000000 Z
-    updated_at: 2013-12-22 14:11:51.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:58:59.000000000 Z
+    updated_at: 2013-12-25 13:58:59.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 837
+    id: 1376
     page_layout_root_id: 1
     page_layout_id: 19
     section_param_id: 101
@@ -4358,11 +4358,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:51.000000000 Z
-    updated_at: 2013-12-22 14:11:51.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:59:00.000000000 Z
+    updated_at: 2013-12-25 13:59:00.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 838
+    id: 1377
     page_layout_root_id: 1
     page_layout_id: 19
     section_param_id: 102
@@ -4371,11 +4371,11 @@
       15hidden: '1'
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:51.000000000 Z
-    updated_at: 2013-12-22 14:11:51.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:59:00.000000000 Z
+    updated_at: 2013-12-25 13:59:00.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 839
+    id: 1378
     page_layout_root_id: 1
     page_layout_id: 19
     section_param_id: 103
@@ -4383,11 +4383,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:51.000000000 Z
-    updated_at: 2013-12-22 14:11:51.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:59:00.000000000 Z
+    updated_at: 2013-12-25 13:59:00.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 840
+    id: 1379
     page_layout_root_id: 1
     page_layout_id: 19
     section_param_id: 104
@@ -4395,11 +4395,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:51.000000000 Z
-    updated_at: 2013-12-22 14:11:51.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:59:00.000000000 Z
+    updated_at: 2013-12-25 13:59:00.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 841
+    id: 1380
     page_layout_root_id: 1
     page_layout_id: 19
     section_param_id: 300
@@ -4407,11 +4407,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:51.000000000 Z
-    updated_at: 2013-12-22 14:11:51.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:59:00.000000000 Z
+    updated_at: 2013-12-25 13:59:00.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 842
+    id: 1381
     page_layout_root_id: 1
     page_layout_id: 21
     section_param_id: 105
@@ -4419,11 +4419,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:51.000000000 Z
-    updated_at: 2013-12-22 14:11:51.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:59:00.000000000 Z
+    updated_at: 2013-12-25 13:59:00.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 843
+    id: 1382
     page_layout_root_id: 1
     page_layout_id: 21
     section_param_id: 106
@@ -4431,11 +4431,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:51.000000000 Z
-    updated_at: 2013-12-22 14:11:51.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:59:00.000000000 Z
+    updated_at: 2013-12-25 13:59:00.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 844
+    id: 1383
     page_layout_root_id: 1
     page_layout_id: 21
     section_param_id: 107
@@ -4444,11 +4444,11 @@
       15hidden: '1'
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:51.000000000 Z
-    updated_at: 2013-12-22 14:11:51.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:59:00.000000000 Z
+    updated_at: 2013-12-25 13:59:00.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 845
+    id: 1384
     page_layout_root_id: 1
     page_layout_id: 21
     section_param_id: 108
@@ -4456,11 +4456,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:51.000000000 Z
-    updated_at: 2013-12-22 14:11:51.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:59:00.000000000 Z
+    updated_at: 2013-12-25 13:59:00.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 846
+    id: 1385
     page_layout_root_id: 1
     page_layout_id: 21
     section_param_id: 109
@@ -4468,11 +4468,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:51.000000000 Z
-    updated_at: 2013-12-22 14:11:51.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:59:00.000000000 Z
+    updated_at: 2013-12-25 13:59:00.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 847
+    id: 1386
     page_layout_root_id: 1
     page_layout_id: 21
     section_param_id: 302
@@ -4480,11 +4480,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:51.000000000 Z
-    updated_at: 2013-12-22 14:11:51.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:59:00.000000000 Z
+    updated_at: 2013-12-25 13:59:00.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 848
+    id: 1387
     page_layout_root_id: 1
     page_layout_id: 21
     section_param_id: 303
@@ -4492,11 +4492,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:52.000000000 Z
-    updated_at: 2013-12-22 14:11:52.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:59:00.000000000 Z
+    updated_at: 2013-12-25 13:59:00.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 849
+    id: 1388
     page_layout_root_id: 1
     page_layout_id: 21
     section_param_id: 304
@@ -4504,11 +4504,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:52.000000000 Z
-    updated_at: 2013-12-22 14:11:52.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:59:00.000000000 Z
+    updated_at: 2013-12-25 13:59:00.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 850
+    id: 1389
     page_layout_root_id: 1
     page_layout_id: 21
     section_param_id: 305
@@ -4516,11 +4516,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:52.000000000 Z
-    updated_at: 2013-12-22 14:11:52.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:59:00.000000000 Z
+    updated_at: 2013-12-25 13:59:00.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 851
+    id: 1390
     page_layout_root_id: 1
     page_layout_id: 21
     section_param_id: 306
@@ -4528,11 +4528,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:52.000000000 Z
-    updated_at: 2013-12-22 14:11:52.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:59:00.000000000 Z
+    updated_at: 2013-12-25 13:59:00.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 852
+    id: 1391
     page_layout_root_id: 1
     page_layout_id: 14
     section_param_id: 55
@@ -4540,11 +4540,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:52.000000000 Z
-    updated_at: 2013-12-22 14:11:52.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:59:00.000000000 Z
+    updated_at: 2013-12-25 13:59:00.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 853
+    id: 1392
     page_layout_root_id: 1
     page_layout_id: 14
     section_param_id: 56
@@ -4552,11 +4552,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:52.000000000 Z
-    updated_at: 2013-12-22 14:11:52.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:59:00.000000000 Z
+    updated_at: 2013-12-25 13:59:00.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 854
+    id: 1393
     page_layout_root_id: 1
     page_layout_id: 14
     section_param_id: 57
@@ -4565,11 +4565,11 @@
       15hidden: '1'
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:52.000000000 Z
-    updated_at: 2013-12-22 14:11:52.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:59:00.000000000 Z
+    updated_at: 2013-12-25 13:59:00.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 855
+    id: 1394
     page_layout_root_id: 1
     page_layout_id: 14
     section_param_id: 58
@@ -4577,11 +4577,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:52.000000000 Z
-    updated_at: 2013-12-22 14:11:52.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:59:00.000000000 Z
+    updated_at: 2013-12-25 13:59:00.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 856
+    id: 1395
     page_layout_root_id: 1
     page_layout_id: 14
     section_param_id: 59
@@ -4589,11 +4589,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:52.000000000 Z
-    updated_at: 2013-12-22 14:11:52.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:59:00.000000000 Z
+    updated_at: 2013-12-25 13:59:00.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 857
+    id: 1396
     page_layout_root_id: 1
     page_layout_id: 14
     section_param_id: 294
@@ -4601,11 +4601,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:52.000000000 Z
-    updated_at: 2013-12-22 14:11:52.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:59:00.000000000 Z
+    updated_at: 2013-12-25 13:59:00.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 858
+    id: 1397
     page_layout_root_id: 1
     page_layout_id: 14
     section_param_id: 295
@@ -4613,11 +4613,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:52.000000000 Z
-    updated_at: 2013-12-22 14:11:52.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:59:00.000000000 Z
+    updated_at: 2013-12-25 13:59:00.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 859
+    id: 1398
     page_layout_root_id: 1
     page_layout_id: 14
     section_param_id: 296
@@ -4625,11 +4625,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:52.000000000 Z
-    updated_at: 2013-12-22 14:11:52.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:59:00.000000000 Z
+    updated_at: 2013-12-25 13:59:00.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 860
+    id: 1399
     page_layout_root_id: 1
     page_layout_id: 14
     section_param_id: 297
@@ -4637,11 +4637,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:52.000000000 Z
-    updated_at: 2013-12-22 14:11:52.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:59:00.000000000 Z
+    updated_at: 2013-12-25 13:59:00.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 861
+    id: 1400
     page_layout_root_id: 1
     page_layout_id: 25
     section_param_id: 115
@@ -4649,11 +4649,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:52.000000000 Z
-    updated_at: 2013-12-22 14:11:52.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:59:00.000000000 Z
+    updated_at: 2013-12-25 13:59:00.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 862
+    id: 1401
     page_layout_root_id: 1
     page_layout_id: 25
     section_param_id: 116
@@ -4661,11 +4661,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:52.000000000 Z
-    updated_at: 2013-12-22 14:11:52.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:59:00.000000000 Z
+    updated_at: 2013-12-25 13:59:00.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 863
+    id: 1402
     page_layout_root_id: 1
     page_layout_id: 25
     section_param_id: 117
@@ -4674,11 +4674,11 @@
       15hidden: '1'
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:52.000000000 Z
-    updated_at: 2013-12-22 14:11:52.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:59:00.000000000 Z
+    updated_at: 2013-12-25 13:59:00.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 864
+    id: 1403
     page_layout_root_id: 1
     page_layout_id: 25
     section_param_id: 118
@@ -4686,11 +4686,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:52.000000000 Z
-    updated_at: 2013-12-22 14:11:52.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:59:00.000000000 Z
+    updated_at: 2013-12-25 13:59:00.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 865
+    id: 1404
     page_layout_root_id: 1
     page_layout_id: 25
     section_param_id: 119
@@ -4698,11 +4698,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:52.000000000 Z
-    updated_at: 2013-12-22 14:11:52.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:59:00.000000000 Z
+    updated_at: 2013-12-25 13:59:00.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 866
+    id: 1405
     page_layout_root_id: 1
     page_layout_id: 25
     section_param_id: 307
@@ -4710,11 +4710,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:52.000000000 Z
-    updated_at: 2013-12-22 14:11:52.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:59:01.000000000 Z
+    updated_at: 2013-12-25 13:59:01.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 867
+    id: 1406
     page_layout_root_id: 1
     page_layout_id: 25
     section_param_id: 308
@@ -4722,11 +4722,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:52.000000000 Z
-    updated_at: 2013-12-22 14:11:52.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:59:01.000000000 Z
+    updated_at: 2013-12-25 13:59:01.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 868
+    id: 1407
     page_layout_root_id: 1
     page_layout_id: 25
     section_param_id: 309
@@ -4734,11 +4734,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:52.000000000 Z
-    updated_at: 2013-12-22 14:11:52.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:59:01.000000000 Z
+    updated_at: 2013-12-25 13:59:01.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 869
+    id: 1408
     page_layout_root_id: 1
     page_layout_id: 26
     section_param_id: 120
@@ -4746,11 +4746,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:52.000000000 Z
-    updated_at: 2013-12-22 14:11:52.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:59:01.000000000 Z
+    updated_at: 2013-12-25 13:59:01.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 870
+    id: 1409
     page_layout_root_id: 1
     page_layout_id: 26
     section_param_id: 121
@@ -4758,11 +4758,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:52.000000000 Z
-    updated_at: 2013-12-22 14:11:52.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:59:01.000000000 Z
+    updated_at: 2013-12-25 13:59:01.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 871
+    id: 1410
     page_layout_root_id: 1
     page_layout_id: 26
     section_param_id: 122
@@ -4771,11 +4771,11 @@
       15hidden: '1'
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:52.000000000 Z
-    updated_at: 2013-12-22 14:11:52.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:59:01.000000000 Z
+    updated_at: 2013-12-25 13:59:01.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 872
+    id: 1411
     page_layout_root_id: 1
     page_layout_id: 26
     section_param_id: 123
@@ -4783,11 +4783,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:52.000000000 Z
-    updated_at: 2013-12-22 14:11:52.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:59:01.000000000 Z
+    updated_at: 2013-12-25 13:59:01.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 873
+    id: 1412
     page_layout_root_id: 1
     page_layout_id: 26
     section_param_id: 124
@@ -4795,11 +4795,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:52.000000000 Z
-    updated_at: 2013-12-22 14:11:52.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:59:01.000000000 Z
+    updated_at: 2013-12-25 13:59:01.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 874
+    id: 1413
     page_layout_root_id: 1
     page_layout_id: 26
     section_param_id: 310
@@ -4807,11 +4807,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:52.000000000 Z
-    updated_at: 2013-12-22 14:11:52.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:59:01.000000000 Z
+    updated_at: 2013-12-25 13:59:01.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 875
+    id: 1414
     page_layout_root_id: 1
     page_layout_id: 26
     section_param_id: 311
@@ -4819,11 +4819,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:52.000000000 Z
-    updated_at: 2013-12-22 14:11:52.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:59:01.000000000 Z
+    updated_at: 2013-12-25 13:59:01.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 876
+    id: 1415
     page_layout_root_id: 1
     page_layout_id: 26
     section_param_id: 312
@@ -4831,11 +4831,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:53.000000000 Z
-    updated_at: 2013-12-22 14:11:53.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:59:01.000000000 Z
+    updated_at: 2013-12-25 13:59:01.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 877
+    id: 1416
     page_layout_root_id: 1
     page_layout_id: 35
     section_param_id: 140
@@ -4843,11 +4843,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:53.000000000 Z
-    updated_at: 2013-12-22 14:11:53.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:59:01.000000000 Z
+    updated_at: 2013-12-25 13:59:01.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 878
+    id: 1417
     page_layout_root_id: 1
     page_layout_id: 35
     section_param_id: 141
@@ -4855,11 +4855,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:53.000000000 Z
-    updated_at: 2013-12-22 14:11:53.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:59:01.000000000 Z
+    updated_at: 2013-12-25 13:59:01.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 879
+    id: 1418
     page_layout_root_id: 1
     page_layout_id: 35
     section_param_id: 142
@@ -4868,11 +4868,11 @@
       15hidden: '1'
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:53.000000000 Z
-    updated_at: 2013-12-22 14:11:53.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:59:01.000000000 Z
+    updated_at: 2013-12-25 13:59:01.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 880
+    id: 1419
     page_layout_root_id: 1
     page_layout_id: 35
     section_param_id: 143
@@ -4880,11 +4880,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:53.000000000 Z
-    updated_at: 2013-12-22 14:11:53.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:59:01.000000000 Z
+    updated_at: 2013-12-25 13:59:01.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 881
+    id: 1420
     page_layout_root_id: 1
     page_layout_id: 35
     section_param_id: 144
@@ -4892,11 +4892,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:53.000000000 Z
-    updated_at: 2013-12-22 14:11:53.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:59:01.000000000 Z
+    updated_at: 2013-12-25 13:59:01.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 882
+    id: 1421
     page_layout_root_id: 1
     page_layout_id: 36
     section_param_id: 145
@@ -4904,11 +4904,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:53.000000000 Z
-    updated_at: 2013-12-22 14:11:53.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:59:01.000000000 Z
+    updated_at: 2013-12-25 13:59:01.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 883
+    id: 1422
     page_layout_root_id: 1
     page_layout_id: 36
     section_param_id: 146
@@ -4916,11 +4916,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:53.000000000 Z
-    updated_at: 2013-12-22 14:11:53.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:59:01.000000000 Z
+    updated_at: 2013-12-25 13:59:01.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 884
+    id: 1423
     page_layout_root_id: 1
     page_layout_id: 36
     section_param_id: 147
@@ -4929,11 +4929,11 @@
       15hidden: '1'
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:53.000000000 Z
-    updated_at: 2013-12-22 14:11:53.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:59:01.000000000 Z
+    updated_at: 2013-12-25 13:59:01.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 885
+    id: 1424
     page_layout_root_id: 1
     page_layout_id: 36
     section_param_id: 148
@@ -4941,11 +4941,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:53.000000000 Z
-    updated_at: 2013-12-22 14:11:53.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:59:01.000000000 Z
+    updated_at: 2013-12-25 13:59:01.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 886
+    id: 1425
     page_layout_root_id: 1
     page_layout_id: 36
     section_param_id: 149
@@ -4953,11 +4953,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:53.000000000 Z
-    updated_at: 2013-12-22 14:11:53.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:59:01.000000000 Z
+    updated_at: 2013-12-25 13:59:01.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 887
+    id: 1426
     page_layout_root_id: 1
     page_layout_id: 37
     section_param_id: 150
@@ -4965,11 +4965,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:53.000000000 Z
-    updated_at: 2013-12-22 14:11:53.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:59:01.000000000 Z
+    updated_at: 2013-12-25 13:59:01.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 888
+    id: 1427
     page_layout_root_id: 1
     page_layout_id: 37
     section_param_id: 151
@@ -4977,11 +4977,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:53.000000000 Z
-    updated_at: 2013-12-22 14:11:53.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:59:01.000000000 Z
+    updated_at: 2013-12-25 13:59:01.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 889
+    id: 1428
     page_layout_root_id: 1
     page_layout_id: 37
     section_param_id: 152
@@ -4990,11 +4990,11 @@
       15hidden: '1'
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:53.000000000 Z
-    updated_at: 2013-12-22 14:11:53.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:59:01.000000000 Z
+    updated_at: 2013-12-25 13:59:01.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 890
+    id: 1429
     page_layout_root_id: 1
     page_layout_id: 37
     section_param_id: 153
@@ -5002,11 +5002,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:53.000000000 Z
-    updated_at: 2013-12-22 14:11:53.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:59:01.000000000 Z
+    updated_at: 2013-12-25 13:59:01.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 891
+    id: 1430
     page_layout_root_id: 1
     page_layout_id: 37
     section_param_id: 154
@@ -5014,11 +5014,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:53.000000000 Z
-    updated_at: 2013-12-22 14:11:53.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:59:01.000000000 Z
+    updated_at: 2013-12-25 13:59:01.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 892
+    id: 1431
     page_layout_root_id: 1
     page_layout_id: 46
     section_param_id: 181
@@ -5026,11 +5026,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:53.000000000 Z
-    updated_at: 2013-12-22 14:11:53.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:59:02.000000000 Z
+    updated_at: 2013-12-25 13:59:02.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 893
+    id: 1432
     page_layout_root_id: 1
     page_layout_id: 46
     section_param_id: 182
@@ -5038,11 +5038,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:53.000000000 Z
-    updated_at: 2013-12-22 14:11:53.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:59:02.000000000 Z
+    updated_at: 2013-12-25 13:59:02.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 894
+    id: 1433
     page_layout_root_id: 1
     page_layout_id: 46
     section_param_id: 183
@@ -5051,11 +5051,11 @@
       15hidden: '1'
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:53.000000000 Z
-    updated_at: 2013-12-22 14:11:53.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:59:02.000000000 Z
+    updated_at: 2013-12-25 13:59:02.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 895
+    id: 1434
     page_layout_root_id: 1
     page_layout_id: 46
     section_param_id: 184
@@ -5063,11 +5063,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:53.000000000 Z
-    updated_at: 2013-12-22 14:11:53.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:59:02.000000000 Z
+    updated_at: 2013-12-25 13:59:02.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 896
+    id: 1435
     page_layout_root_id: 1
     page_layout_id: 46
     section_param_id: 185
@@ -5075,11 +5075,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:53.000000000 Z
-    updated_at: 2013-12-22 14:11:53.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:59:02.000000000 Z
+    updated_at: 2013-12-25 13:59:02.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 897
+    id: 1436
     page_layout_root_id: 1
     page_layout_id: 46
     section_param_id: 186
@@ -5087,11 +5087,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:53.000000000 Z
-    updated_at: 2013-12-22 14:11:53.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:59:02.000000000 Z
+    updated_at: 2013-12-25 13:59:02.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 898
+    id: 1437
     page_layout_root_id: 1
     page_layout_id: 46
     section_param_id: 187
@@ -5099,11 +5099,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:53.000000000 Z
-    updated_at: 2013-12-22 14:11:53.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:59:02.000000000 Z
+    updated_at: 2013-12-25 13:59:02.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 899
+    id: 1438
     page_layout_root_id: 1
     page_layout_id: 46
     section_param_id: 188
@@ -5112,11 +5112,11 @@
       27: font-weight:bold
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:53.000000000 Z
-    updated_at: 2013-12-22 14:11:53.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:59:02.000000000 Z
+    updated_at: 2013-12-25 13:59:02.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 900
+    id: 1439
     page_layout_root_id: 1
     page_layout_id: 39
     section_param_id: 284
@@ -5124,11 +5124,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:54.000000000 Z
-    updated_at: 2013-12-22 14:11:54.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:59:02.000000000 Z
+    updated_at: 2013-12-25 13:59:02.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 901
+    id: 1440
     page_layout_root_id: 1
     page_layout_id: 39
     section_param_id: 285
@@ -5138,11 +5138,11 @@
       21unset: '0'
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:54.000000000 Z
-    updated_at: 2013-12-22 14:11:54.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:59:02.000000000 Z
+    updated_at: 2013-12-25 13:59:02.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 902
+    id: 1441
     page_layout_root_id: 1
     page_layout_id: 39
     section_param_id: 286
@@ -5158,11 +5158,11 @@
       15hidden: '1'
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:54.000000000 Z
-    updated_at: 2013-12-22 14:11:54.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:59:02.000000000 Z
+    updated_at: 2013-12-25 13:59:02.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 903
+    id: 1442
     page_layout_root_id: 1
     page_layout_id: 39
     section_param_id: 287
@@ -5172,11 +5172,11 @@
       2unset: '0'
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:54.000000000 Z
-    updated_at: 2013-12-22 14:11:54.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:59:02.000000000 Z
+    updated_at: 2013-12-25 13:59:02.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 904
+    id: 1443
     page_layout_root_id: 1
     page_layout_id: 39
     section_param_id: 288
@@ -5184,11 +5184,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:54.000000000 Z
-    updated_at: 2013-12-22 14:11:54.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:59:02.000000000 Z
+    updated_at: 2013-12-25 13:59:02.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 905
+    id: 1444
     page_layout_root_id: 1
     page_layout_id: 39
     section_param_id: 313
@@ -5198,11 +5198,11 @@
       32unset: '0'
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:54.000000000 Z
-    updated_at: 2013-12-22 14:11:54.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:59:02.000000000 Z
+    updated_at: 2013-12-25 13:59:02.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 906
+    id: 1445
     page_layout_root_id: 1
     page_layout_id: 39
     section_param_id: 314
@@ -5212,11 +5212,11 @@
       2unset: '0'
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:54.000000000 Z
-    updated_at: 2013-12-22 14:11:54.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:59:02.000000000 Z
+    updated_at: 2013-12-25 13:59:02.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 907
+    id: 1446
     page_layout_root_id: 1
     page_layout_id: 39
     section_param_id: 315
@@ -5224,11 +5224,11 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:54.000000000 Z
-    updated_at: 2013-12-22 14:11:54.000000000 Z
-- !ruby/ActiveRecord:Spree::ParamValue
+    created_at: 2013-12-25 13:59:02.000000000 Z
+    updated_at: 2013-12-25 13:59:02.000000000 Z
+- !ruby/object:Spree::ParamValue
   attributes:
-    id: 908
+    id: 1447
     page_layout_root_id: 1
     page_layout_id: 39
     section_param_id: 316
@@ -5238,10 +5238,10 @@
       32unset: '0'
     unset: 
     computed_pvalue: 
-    created_at: 2013-12-22 14:11:54.000000000 Z
-    updated_at: 2013-12-22 14:11:54.000000000 Z
+    created_at: 2013-12-25 13:59:02.000000000 Z
+    updated_at: 2013-12-25 13:59:02.000000000 Z
 :page_layouts:
-- !ruby/ActiveRecord:Spree::PageLayout
+- !ruby/object:Spree::PageLayout
   attributes:
     id: 1
     site_id: 1
@@ -5260,8 +5260,8 @@
     copy_from_root_id: 0
     is_full_html: true
     created_at: 2013-04-08 13:27:02.000000000 Z
-    updated_at: 2013-12-22 14:11:49.000000000 Z
-- !ruby/ActiveRecord:Spree::PageLayout
+    updated_at: 2013-12-25 13:58:57.000000000 Z
+- !ruby/object:Spree::PageLayout
   attributes:
     id: 2
     site_id: 1
@@ -5281,7 +5281,7 @@
     is_full_html: false
     created_at: 2013-04-08 13:27:02.000000000 Z
     updated_at: 2013-04-08 13:27:02.000000000 Z
-- !ruby/ActiveRecord:Spree::PageLayout
+- !ruby/object:Spree::PageLayout
   attributes:
     id: 3
     site_id: 1
@@ -5301,7 +5301,7 @@
     is_full_html: false
     created_at: 2013-04-08 13:27:03.000000000 Z
     updated_at: 2013-11-05 03:16:06.000000000 Z
-- !ruby/ActiveRecord:Spree::PageLayout
+- !ruby/object:Spree::PageLayout
   attributes:
     id: 4
     site_id: 1
@@ -5321,7 +5321,7 @@
     is_full_html: false
     created_at: 2013-04-08 13:27:03.000000000 Z
     updated_at: 2013-11-05 03:16:07.000000000 Z
-- !ruby/ActiveRecord:Spree::PageLayout
+- !ruby/object:Spree::PageLayout
   attributes:
     id: 5
     site_id: 1
@@ -5341,7 +5341,7 @@
     is_full_html: false
     created_at: 2013-04-08 13:27:04.000000000 Z
     updated_at: 2013-04-08 13:27:04.000000000 Z
-- !ruby/ActiveRecord:Spree::PageLayout
+- !ruby/object:Spree::PageLayout
   attributes:
     id: 6
     site_id: 1
@@ -5361,7 +5361,7 @@
     is_full_html: false
     created_at: 2013-04-08 13:27:05.000000000 Z
     updated_at: 2013-04-08 13:27:05.000000000 Z
-- !ruby/ActiveRecord:Spree::PageLayout
+- !ruby/object:Spree::PageLayout
   attributes:
     id: 7
     site_id: 1
@@ -5381,7 +5381,7 @@
     is_full_html: false
     created_at: 2013-04-08 13:27:05.000000000 Z
     updated_at: 2013-04-08 13:27:05.000000000 Z
-- !ruby/ActiveRecord:Spree::PageLayout
+- !ruby/object:Spree::PageLayout
   attributes:
     id: 8
     site_id: 1
@@ -5400,8 +5400,8 @@
     copy_from_root_id: 0
     is_full_html: false
     created_at: 2013-04-08 13:27:06.000000000 Z
-    updated_at: 2013-12-22 14:11:50.000000000 Z
-- !ruby/ActiveRecord:Spree::PageLayout
+    updated_at: 2013-12-25 13:58:59.000000000 Z
+- !ruby/object:Spree::PageLayout
   attributes:
     id: 9
     site_id: 1
@@ -5421,7 +5421,7 @@
     is_full_html: false
     created_at: 2013-10-02 10:20:54.000000000 Z
     updated_at: 2013-10-02 10:20:54.000000000 Z
-- !ruby/ActiveRecord:Spree::PageLayout
+- !ruby/object:Spree::PageLayout
   attributes:
     id: 10
     site_id: 1
@@ -5441,7 +5441,7 @@
     is_full_html: false
     created_at: 2013-04-08 13:27:07.000000000 Z
     updated_at: 2013-04-08 13:27:10.000000000 Z
-- !ruby/ActiveRecord:Spree::PageLayout
+- !ruby/object:Spree::PageLayout
   attributes:
     id: 11
     site_id: 1
@@ -5461,7 +5461,7 @@
     is_full_html: false
     created_at: 2013-04-08 13:27:07.000000000 Z
     updated_at: 2013-04-08 13:27:10.000000000 Z
-- !ruby/ActiveRecord:Spree::PageLayout
+- !ruby/object:Spree::PageLayout
   attributes:
     id: 12
     site_id: 1
@@ -5480,8 +5480,8 @@
     copy_from_root_id: 0
     is_full_html: false
     created_at: 2013-04-08 13:27:08.000000000 Z
-    updated_at: 2013-12-22 14:11:51.000000000 Z
-- !ruby/ActiveRecord:Spree::PageLayout
+    updated_at: 2013-12-25 13:58:59.000000000 Z
+- !ruby/object:Spree::PageLayout
   attributes:
     id: 13
     site_id: 1
@@ -5501,7 +5501,7 @@
     is_full_html: false
     created_at: 2013-04-08 13:27:08.000000000 Z
     updated_at: 2013-04-08 13:27:08.000000000 Z
-- !ruby/ActiveRecord:Spree::PageLayout
+- !ruby/object:Spree::PageLayout
   attributes:
     id: 14
     site_id: 1
@@ -5520,8 +5520,8 @@
     copy_from_root_id: 0
     is_full_html: false
     created_at: 2013-04-08 13:27:09.000000000 Z
-    updated_at: 2013-12-22 14:11:52.000000000 Z
-- !ruby/ActiveRecord:Spree::PageLayout
+    updated_at: 2013-12-25 13:59:00.000000000 Z
+- !ruby/object:Spree::PageLayout
   attributes:
     id: 15
     site_id: 1
@@ -5541,7 +5541,7 @@
     is_full_html: false
     created_at: 2013-04-08 13:27:09.000000000 Z
     updated_at: 2013-04-08 13:27:09.000000000 Z
-- !ruby/ActiveRecord:Spree::PageLayout
+- !ruby/object:Spree::PageLayout
   attributes:
     id: 16
     site_id: 1
@@ -5561,7 +5561,7 @@
     is_full_html: false
     created_at: 2013-04-08 13:27:10.000000000 Z
     updated_at: 2013-11-05 03:16:11.000000000 Z
-- !ruby/ActiveRecord:Spree::PageLayout
+- !ruby/object:Spree::PageLayout
   attributes:
     id: 17
     site_id: 1
@@ -5581,7 +5581,7 @@
     is_full_html: false
     created_at: 2013-04-08 13:27:11.000000000 Z
     updated_at: 2013-04-08 13:27:11.000000000 Z
-- !ruby/ActiveRecord:Spree::PageLayout
+- !ruby/object:Spree::PageLayout
   attributes:
     id: 18
     site_id: 1
@@ -5601,7 +5601,7 @@
     is_full_html: false
     created_at: 2013-04-08 14:05:42.000000000 Z
     updated_at: 2013-04-08 14:05:42.000000000 Z
-- !ruby/ActiveRecord:Spree::PageLayout
+- !ruby/object:Spree::PageLayout
   attributes:
     id: 19
     site_id: 1
@@ -5621,7 +5621,7 @@
     is_full_html: false
     created_at: 2013-04-09 13:08:24.000000000 Z
     updated_at: 2013-11-05 03:16:09.000000000 Z
-- !ruby/ActiveRecord:Spree::PageLayout
+- !ruby/object:Spree::PageLayout
   attributes:
     id: 20
     site_id: 1
@@ -5641,7 +5641,7 @@
     is_full_html: false
     created_at: 2013-04-09 13:12:31.000000000 Z
     updated_at: 2013-04-09 13:12:31.000000000 Z
-- !ruby/ActiveRecord:Spree::PageLayout
+- !ruby/object:Spree::PageLayout
   attributes:
     id: 21
     site_id: 1
@@ -5660,8 +5660,8 @@
     copy_from_root_id: 0
     is_full_html: false
     created_at: 2013-04-12 13:43:15.000000000 Z
-    updated_at: 2013-12-22 14:11:51.000000000 Z
-- !ruby/ActiveRecord:Spree::PageLayout
+    updated_at: 2013-12-25 13:59:00.000000000 Z
+- !ruby/object:Spree::PageLayout
   attributes:
     id: 22
     site_id: 1
@@ -5681,7 +5681,7 @@
     is_full_html: false
     created_at: 2013-04-12 13:44:05.000000000 Z
     updated_at: 2013-04-12 13:44:05.000000000 Z
-- !ruby/ActiveRecord:Spree::PageLayout
+- !ruby/object:Spree::PageLayout
   attributes:
     id: 23
     site_id: 1
@@ -5700,8 +5700,8 @@
     copy_from_root_id: 0
     is_full_html: false
     created_at: 2013-04-13 01:32:40.000000000 Z
-    updated_at: 
-- !ruby/ActiveRecord:Spree::PageLayout
+    updated_at: 2013-04-13 01:32:40.000000000 Z
+- !ruby/object:Spree::PageLayout
   attributes:
     id: 24
     site_id: 1
@@ -5721,7 +5721,7 @@
     is_full_html: false
     created_at: 2013-04-13 02:35:25.000000000 Z
     updated_at: 2013-04-13 02:35:25.000000000 Z
-- !ruby/ActiveRecord:Spree::PageLayout
+- !ruby/object:Spree::PageLayout
   attributes:
     id: 25
     site_id: 1
@@ -5740,8 +5740,8 @@
     copy_from_root_id: 0
     is_full_html: false
     created_at: 2013-04-13 02:35:40.000000000 Z
-    updated_at: 2013-12-22 14:11:52.000000000 Z
-- !ruby/ActiveRecord:Spree::PageLayout
+    updated_at: 2013-12-25 13:59:00.000000000 Z
+- !ruby/object:Spree::PageLayout
   attributes:
     id: 26
     site_id: 1
@@ -5760,8 +5760,8 @@
     copy_from_root_id: 0
     is_full_html: false
     created_at: 2013-04-13 02:35:47.000000000 Z
-    updated_at: 2013-12-22 14:11:52.000000000 Z
-- !ruby/ActiveRecord:Spree::PageLayout
+    updated_at: 2013-12-25 13:59:01.000000000 Z
+- !ruby/object:Spree::PageLayout
   attributes:
     id: 27
     site_id: 1
@@ -5781,7 +5781,7 @@
     is_full_html: false
     created_at: 2013-04-16 14:20:10.000000000 Z
     updated_at: 2013-04-16 14:22:47.000000000 Z
-- !ruby/ActiveRecord:Spree::PageLayout
+- !ruby/object:Spree::PageLayout
   attributes:
     id: 28
     site_id: 1
@@ -5801,7 +5801,7 @@
     is_full_html: false
     created_at: 2013-04-16 14:20:15.000000000 Z
     updated_at: 2013-11-02 09:50:08.000000000 Z
-- !ruby/ActiveRecord:Spree::PageLayout
+- !ruby/object:Spree::PageLayout
   attributes:
     id: 29
     site_id: 1
@@ -5821,7 +5821,7 @@
     is_full_html: false
     created_at: 2013-04-19 13:03:09.000000000 Z
     updated_at: 2013-04-19 13:03:09.000000000 Z
-- !ruby/ActiveRecord:Spree::PageLayout
+- !ruby/object:Spree::PageLayout
   attributes:
     id: 30
     site_id: 1
@@ -5841,7 +5841,7 @@
     is_full_html: false
     created_at: 2013-10-05 00:36:47.000000000 Z
     updated_at: 2013-10-05 00:36:47.000000000 Z
-- !ruby/ActiveRecord:Spree::PageLayout
+- !ruby/object:Spree::PageLayout
   attributes:
     id: 31
     site_id: 1
@@ -5860,8 +5860,8 @@
     copy_from_root_id: 0
     is_full_html: false
     created_at: 2013-10-05 00:37:29.000000000 Z
-    updated_at: 2013-12-22 14:11:50.000000000 Z
-- !ruby/ActiveRecord:Spree::PageLayout
+    updated_at: 2013-12-25 13:58:58.000000000 Z
+- !ruby/object:Spree::PageLayout
   attributes:
     id: 32
     site_id: 1
@@ -5881,7 +5881,7 @@
     is_full_html: false
     created_at: 2013-10-05 00:37:55.000000000 Z
     updated_at: 2013-10-05 00:37:55.000000000 Z
-- !ruby/ActiveRecord:Spree::PageLayout
+- !ruby/object:Spree::PageLayout
   attributes:
     id: 33
     site_id: 1
@@ -5900,8 +5900,8 @@
     copy_from_root_id: 0
     is_full_html: false
     created_at: 2013-10-05 00:38:04.000000000 Z
-    updated_at: 2013-12-22 14:11:50.000000000 Z
-- !ruby/ActiveRecord:Spree::PageLayout
+    updated_at: 2013-12-25 13:58:58.000000000 Z
+- !ruby/object:Spree::PageLayout
   attributes:
     id: 34
     site_id: 1
@@ -5921,7 +5921,7 @@
     is_full_html: false
     created_at: 2013-10-05 00:38:16.000000000 Z
     updated_at: 2013-10-05 00:38:16.000000000 Z
-- !ruby/ActiveRecord:Spree::PageLayout
+- !ruby/object:Spree::PageLayout
   attributes:
     id: 35
     site_id: 1
@@ -5940,8 +5940,8 @@
     copy_from_root_id: 0
     is_full_html: false
     created_at: 2013-10-09 15:29:25.000000000 Z
-    updated_at: 2013-12-22 14:11:53.000000000 Z
-- !ruby/ActiveRecord:Spree::PageLayout
+    updated_at: 2013-12-25 13:59:01.000000000 Z
+- !ruby/object:Spree::PageLayout
   attributes:
     id: 36
     site_id: 1
@@ -5960,8 +5960,8 @@
     copy_from_root_id: 0
     is_full_html: false
     created_at: 2013-10-09 15:29:34.000000000 Z
-    updated_at: 2013-12-22 14:11:53.000000000 Z
-- !ruby/ActiveRecord:Spree::PageLayout
+    updated_at: 2013-12-25 13:59:01.000000000 Z
+- !ruby/object:Spree::PageLayout
   attributes:
     id: 37
     site_id: 1
@@ -5980,8 +5980,8 @@
     copy_from_root_id: 0
     is_full_html: false
     created_at: 2013-10-12 08:30:42.000000000 Z
-    updated_at: 2013-12-22 14:11:53.000000000 Z
-- !ruby/ActiveRecord:Spree::PageLayout
+    updated_at: 2013-12-25 13:59:01.000000000 Z
+- !ruby/object:Spree::PageLayout
   attributes:
     id: 38
     site_id: 1
@@ -6001,7 +6001,7 @@
     is_full_html: false
     created_at: 2013-10-12 08:30:51.000000000 Z
     updated_at: 2013-11-02 09:50:37.000000000 Z
-- !ruby/ActiveRecord:Spree::PageLayout
+- !ruby/object:Spree::PageLayout
   attributes:
     id: 39
     site_id: 1
@@ -6020,8 +6020,8 @@
     copy_from_root_id: 0
     is_full_html: false
     created_at: 2013-11-02 09:20:24.000000000 Z
-    updated_at: 2013-12-22 14:11:54.000000000 Z
-- !ruby/ActiveRecord:Spree::PageLayout
+    updated_at: 2013-12-25 13:59:02.000000000 Z
+- !ruby/object:Spree::PageLayout
   attributes:
     id: 40
     site_id: 1
@@ -6041,7 +6041,7 @@
     is_full_html: false
     created_at: 2013-11-02 09:20:58.000000000 Z
     updated_at: 2013-11-02 09:20:58.000000000 Z
-- !ruby/ActiveRecord:Spree::PageLayout
+- !ruby/object:Spree::PageLayout
   attributes:
     id: 41
     site_id: 1
@@ -6061,7 +6061,7 @@
     is_full_html: false
     created_at: 2013-11-02 09:21:08.000000000 Z
     updated_at: 2013-11-02 09:21:08.000000000 Z
-- !ruby/ActiveRecord:Spree::PageLayout
+- !ruby/object:Spree::PageLayout
   attributes:
     id: 42
     site_id: 1
@@ -6081,7 +6081,7 @@
     is_full_html: false
     created_at: 2013-11-02 09:35:01.000000000 Z
     updated_at: 2013-11-02 09:35:01.000000000 Z
-- !ruby/ActiveRecord:Spree::PageLayout
+- !ruby/object:Spree::PageLayout
   attributes:
     id: 43
     site_id: 1
@@ -6101,7 +6101,7 @@
     is_full_html: false
     created_at: 2013-11-02 09:36:17.000000000 Z
     updated_at: 2013-11-02 09:36:17.000000000 Z
-- !ruby/ActiveRecord:Spree::PageLayout
+- !ruby/object:Spree::PageLayout
   attributes:
     id: 44
     site_id: 1
@@ -6121,7 +6121,7 @@
     is_full_html: false
     created_at: 2013-11-02 09:37:21.000000000 Z
     updated_at: 2013-11-02 09:37:21.000000000 Z
-- !ruby/ActiveRecord:Spree::PageLayout
+- !ruby/object:Spree::PageLayout
   attributes:
     id: 45
     site_id: 1
@@ -6141,7 +6141,7 @@
     is_full_html: false
     created_at: 2013-11-02 09:37:30.000000000 Z
     updated_at: 2013-11-02 09:37:30.000000000 Z
-- !ruby/ActiveRecord:Spree::PageLayout
+- !ruby/object:Spree::PageLayout
   attributes:
     id: 46
     site_id: 1
@@ -6160,8 +6160,8 @@
     copy_from_root_id: 0
     is_full_html: false
     created_at: 2013-11-02 09:37:40.000000000 Z
-    updated_at: 2013-12-22 14:11:53.000000000 Z
-- !ruby/ActiveRecord:Spree::PageLayout
+    updated_at: 2013-12-25 13:59:01.000000000 Z
+- !ruby/object:Spree::PageLayout
   attributes:
     id: 47
     site_id: 1
@@ -6181,7 +6181,7 @@
     is_full_html: false
     created_at: 2013-11-02 09:37:51.000000000 Z
     updated_at: 2013-11-02 09:37:51.000000000 Z
-- !ruby/ActiveRecord:Spree::PageLayout
+- !ruby/object:Spree::PageLayout
   attributes:
     id: 48
     site_id: 1
@@ -6199,9 +6199,9 @@
     is_enabled: true
     copy_from_root_id: 0
     is_full_html: false
-    created_at: 
+    created_at: 2013-11-02 09:38:01.000000000 Z
     updated_at: 2013-11-02 09:38:01.000000000 Z
-- !ruby/ActiveRecord:Spree::PageLayout
+- !ruby/object:Spree::PageLayout
   attributes:
     id: 49
     site_id: 1
@@ -6221,7 +6221,7 @@
     is_full_html: false
     created_at: 2013-11-02 09:39:00.000000000 Z
     updated_at: 2013-11-02 09:39:00.000000000 Z
-- !ruby/ActiveRecord:Spree::PageLayout
+- !ruby/object:Spree::PageLayout
   attributes:
     id: 50
     site_id: 1
@@ -6241,7 +6241,7 @@
     is_full_html: false
     created_at: 2013-11-02 09:39:32.000000000 Z
     updated_at: 2013-11-02 09:39:32.000000000 Z
-- !ruby/ActiveRecord:Spree::PageLayout
+- !ruby/object:Spree::PageLayout
   attributes:
     id: 51
     site_id: 1
@@ -6261,7 +6261,7 @@
     is_full_html: false
     created_at: 2013-11-02 09:39:52.000000000 Z
     updated_at: 2013-11-02 09:39:52.000000000 Z
-- !ruby/ActiveRecord:Spree::PageLayout
+- !ruby/object:Spree::PageLayout
   attributes:
     id: 52
     site_id: 1
@@ -6282,7 +6282,7 @@
     created_at: 2013-11-02 09:40:04.000000000 Z
     updated_at: 2013-11-02 09:40:04.000000000 Z
 :template_files:
-- !ruby/ActiveRecord:Spree::TemplateFile
+- !ruby/object:Spree::TemplateFile
   attributes:
     id: 1
     theme_id: 1
@@ -6294,7 +6294,7 @@
     attachment_updated_at: 2013-05-12 13:29:47.000000000 Z
     created_at: 2013-05-12 13:29:53.000000000 Z
 :template_releases:
-- !ruby/ActiveRecord:Spree::TemplateRelease
+- !ruby/object:Spree::TemplateRelease
   attributes:
     id: 1
     name: First theme released
