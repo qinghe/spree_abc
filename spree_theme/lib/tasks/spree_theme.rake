@@ -14,7 +14,11 @@ namespace :spree_theme do
   task :export_theme => :environment do
     template = Spree::TemplateTheme.first
     serializable_data = template.serializable_data
-    file_path =  File.join(SpreeTheme.site_class.designsite.document_path, "#{template.id}_#{Time.now.to_i}.yml")
+    if ENV['THEME_PATH']
+      file_path = File.join(SpreeTheme::Engine.root,'db','themes','designs', "#{template.id}_#{Time.now.to_i}.yml")
+    else
+      file_path =  File.join(SpreeTheme.site_class.designsite.document_path, "#{template.id}_#{Time.now.to_i}.yml")
+    end
     open(file_path,'w') do |file|
       file.write(serializable_data.to_yaml)
     end
