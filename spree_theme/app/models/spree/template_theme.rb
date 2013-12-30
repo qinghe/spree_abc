@@ -205,7 +205,9 @@ module Spree
             existing_template = self.find(template[:id])          
             existing_template.destroy
           end
-          connection.insert_fixture(template.attributes, self.table_name)
+          #site id is 1 in exported yml, in spree_abc, design.dalianshops.com is 2
+          site = SpreeTheme.site_class.find_by_domain( 'design.dalianshops.com' )  
+          connection.insert_fixture(template.attributes.merge('site_id'=>site.id), self.table_name)
           # we need new template id
           # template = self.find_by_title template.title
           serialized_hash[:param_values].each do |record|
@@ -214,7 +216,7 @@ module Spree
           end
           serialized_hash[:page_layouts].each do |record|
             table_name = PageLayout.table_name
-            connection.insert_fixture(record.attributes, table_name)          
+            connection.insert_fixture(record.attributes.merge('site_id'=>site.id), table_name)          
           end
           serialized_hash[:template_files].each do |record|
             table_name = TemplateFile.table_name

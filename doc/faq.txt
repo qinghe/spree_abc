@@ -1,2 +1,6 @@
 1. how to test multi-site for local deployment?
-  
+  there are two sites in seeds:
+    www.dalianshops.com  design.dalianshops.com 
+    
+  add cookie key abc_development_domain, set value to one for play.
+    
