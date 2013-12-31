@@ -14,7 +14,7 @@ namespace :spree_theme do
   task :export_theme => :environment do
     template = Spree::TemplateTheme.first
     serializable_data = template.serializable_data
-    if ENV['THEME_PATH']
+    if ENV['SEED_PATH']
       file_path = File.join(SpreeTheme::Engine.root,'db','themes','designs', "#{template.id}_#{Time.now.to_i}.yml")
     else
       file_path =  File.join(SpreeTheme.site_class.designsite.document_path, "#{template.id}_#{Time.now.to_i}.yml")
@@ -25,14 +25,14 @@ namespace :spree_theme do
     puts "exported file #{file_path}"
   end
   
-  desc "import theme one, accept param THEME_FILE or THEME_PATH," 
-       "ex. FILE='spree_theme/db/themes/design/1_138.rb', THEME_PATH='1'"
+  desc "import theme one, accept param THEME_FILE or SEED_PATH," 
+       "ex. FILE='spree_theme/db/themes/design/1_138.rb', SEED_PATH='1'"
        "default path=shops/rails_env/shop_id/1_nnn.rb"
   task :import_theme => :environment do
     #template = Spree::TemplateTheme.first
       SpreeTheme.site_class.current = SpreeTheme.site_class.designsite
       
-      if ENV['THEME_PATH']
+      if ENV['SEED_PATH']
         file_path = File.join(SpreeTheme::Engine.root,'db','themes','designs', "1_*.yml")
       else
         file_path = File.join(SpreeTheme.site_class.designsite.document_path, "1_*.yml")

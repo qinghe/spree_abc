@@ -3,4 +3,7 @@
     www.dalianshops.com  design.dalianshops.com 
     
   add cookie key abc_development_domain, set value to one for play.
+
+2. reload default template for spree_theme/db/themes/design
+rake spree_theme:import_theme RAILS_ENV=local_staging SEED_PATH=1
     
