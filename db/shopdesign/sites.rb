@@ -1,5 +1,5 @@
 attributes = {  
-    :name =>  "Dalianshops designs",
+    :name =>  "Dalianshops design",
     :domain => "design.dalianshops.com",
     :short_name => "design"
   }
