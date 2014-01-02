@@ -15,3 +15,4 @@ config/deploy/*
 Gemfile.lock
 Gemfile.lock
 public/shops/development
+public/shops
