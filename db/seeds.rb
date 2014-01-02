@@ -16,5 +16,6 @@ SpreeTheme::Engine.load_seed
 # fake_orders/spree/*  are data related to orders, like address, order..
 # for reasons time consume and useless to customer, system does not load those file while loading sample.
 # it is only for test now.
-load File.dirname(__FILE__)+ "/firstshop/seed.rb"
-load File.dirname(__FILE__)+ "/designshop/seed.rb"
+load File.dirname(__FILE__)+ "/shopfirst/seed.rb"
+load File.dirname(__FILE__)+ "/shopdesign/seed.rb"
+load File.dirname(__FILE__)+ "/shopdemo/seed.rb"

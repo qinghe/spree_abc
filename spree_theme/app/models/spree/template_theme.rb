@@ -67,6 +67,8 @@ module Spree
         #only released template is importable
         #create theme record
         new_theme = self.dup
+        #set resource to site native
+        new_theme.assigned_resource_ids = resource_config
         new_theme.title = "Imported "+ new_theme.title
         new_theme.site_id = SpreeTheme.site_class.current.id
         new_theme.release_id = self.template_releases.last.id
