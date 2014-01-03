@@ -1,5 +1,4 @@
----
-en:
+zh-CN:
   activerecord:
     attributes:
       template_theme: &template_theme_labels
@@ -34,3 +33,7 @@ en:
     link: Link
     meta_title: Meta Title
     page_navigation_title: "Pages"
+  spree:
+    admin:
+      tab:
+        template_themes: 模板

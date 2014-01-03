@@ -319,13 +319,13 @@ zh-CN:
           delivery_success: 测试邮件发送成功
           error: ! '测试邮件错误: %{e}'
       tab:
-        configuration: 
-        orders: 
+        configuration: 配置
+        orders: 订单
         overview: 
-        products: 
-        promotions: 
-        reports: 
-        users: 
+        products: 产品
+        promotions: 促销
+        reports: 报表
+        users: 用户
     administration: 管理
     agree_to_privacy_policy: 同意隐私政策
     agree_to_terms_of_service: 同意服务条款
