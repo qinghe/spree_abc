@@ -36,7 +36,7 @@ end
 def create_admin_user
   if ENV['AUTO_ACCEPT']
     password = 'spree123'
-    email = 'spree@example.com'
+    email = 'first@dalianshops.com'
   else
     puts 'Create the admin user (press enter for defaults).'
     #name = prompt_for_admin_name unless name

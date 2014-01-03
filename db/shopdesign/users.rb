@@ -1,7 +1,7 @@
 require 'highline/import'
 # see last line where we create an admin if there is none, asking for email and password
 password = 'spree123'
-email = 'design@example.com'
+email = 'design@dalianshops.com'
 attributes = {
   :password => password,
   :password_confirmation => password,
