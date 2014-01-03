@@ -1,5 +1,6 @@
 cap local_staging deploy
 rake db:seed RAILS_ENV=local_staging
+rake spree_theme:import_theme SEED_PATH=1 RAILS_ENV=local_staging
 
 1. configure mysql to support utf-8
   [mysqld]

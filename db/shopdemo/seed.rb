@@ -4,5 +4,3 @@ for file in files
 Rails.logger.debug "start load #{file}"     
   load path
 end
-
-load File.join(SpreeTheme::Engine.root,'db/themes/seed.rb')
