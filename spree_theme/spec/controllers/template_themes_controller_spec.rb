@@ -2,12 +2,6 @@ require "spec_helper"
 
 describe Spree::TemplateThemesController, :type => :controller do
   describe "GET #index" do
-    it "responds successfully with an HTTP 200 status code" do
-      spree_get :index
-      expect(response).to be_success
-      expect(response).to render_template("index")
-    end
-
     #FIXME test it
     it "get upload image dialog" do
       param_value = Spree::ParamValue.first

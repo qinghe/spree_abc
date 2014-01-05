@@ -1,5 +1,8 @@
 class AddFakeWebsite < ActiveRecord::Migration
   def up
+    
+    #site use theme without native layout, theme_id>0, release_id is in template_theme table
+    #site use theme with native layout, release_id>0, template_theme.release_id=0
     if ActiveRecord::Base.connection.table_exists? 'spree_sites'
       add_column :spree_sites, :index_page, :integer, :default => 0
       add_column :spree_sites, :theme_id, :integer, :default => 0

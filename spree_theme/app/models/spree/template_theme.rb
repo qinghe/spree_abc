@@ -10,7 +10,7 @@ module Spree
     has_many :param_values, :foreign_key=>"theme_id", :dependent => :delete_all
     has_many :template_files, :foreign_key=>"theme_id", :dependent => :delete_all
     has_many :template_releases, :foreign_key=>"theme_id", :dependent => :delete_all
-    belongs_to :imported_template_release, :class_name=>"TemplateRelease", :foreign_key=>"release_id"
+    belongs_to :foreign_template_release, :class_name=>"TemplateRelease", :foreign_key=>"release_id"
     
     scope :by_layout,  lambda { |layout_id| where(:page_layout_root_id => layout_id) }
     serialize :assigned_resource_ids, Hash
@@ -76,12 +76,12 @@ module Spree
         new_theme
       end
       
-      #
+      # theme from design shop has been imported into current site
       def has_imported?
         # theme should has page_layout, param_values      
         raise ArgumentError if self.release_id>0
-        themes = TemplateTheme.native.imported.includes(:imported_template_release)
-        themes.select{|theme| theme.imported_template_release.theme_id == self.id}.present?
+        themes = TemplateTheme.native.imported.includes(:foreign_template_release)
+        themes.select{|theme| theme.foreign_template_release.theme_id == self.id}.present?
       end
       
       def has_native_layout?
@@ -90,6 +90,11 @@ module Spree
       # apply to website
       def apply
         SpreeTheme.site_class.current.update_attribute(:theme_id,self.id)
+      end
+      
+      #apply to webiste
+      def applied?
+        
       end
       
       # Usage: user want to copy this layout&theme to new for editing or backup.

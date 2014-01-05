@@ -35,6 +35,7 @@ Spree::Core::Engine.routes.prepend do
         post :copy
         post :release
         post :import
+        post :apply
       end
     end
   end

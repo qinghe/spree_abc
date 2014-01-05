@@ -52,6 +52,19 @@ module SpreeTheme
       
     def design?
       self == self.class.designsite
-    end      
+    end 
+    
+    # apply theme to site
+    # params - theme_or_release, TemplateTheme or TemplateRelease
+    def apply_theme( theme_or_release)
+      if theme_or_release.kind_of? Spree::TemplateTheme
+        template_release_id= 0
+        template_id= theme_or_release.id           
+      else
+        template_release_id= theme_or_release.id
+        template_id= 0        
+      end
+      save!
+    end
   end
 end

@@ -43,6 +43,15 @@ how to remove a section piece param?
   3. designer could copy template theme for new design
 
 
+#themes-+      
+        +- foreign :  themes from design shop
+        +- native -+ has native layout, can edit, release 
+                   + no native layout, can not edit,  
+                      theme.release_id: release id of original theme, means imported that release
+                     
+  
+           
+
 
 #bugs
 get_css 12,13,'block', it is not right in generated css. 
