@@ -4,8 +4,7 @@ module Spree
     delegate :taxon_class,:site_class, :to=>:"SpreeTheme"
     # index of frontend 
     def page
-      #template_release =  SpreeTheme.site_class.current.template_release
-      #@lg = PageGenerator.generator( @menu, template_release, {:resource=>(@resource.nil? ? nil:@resource),:controller=>self})
+      #@lg = PageGenerator.generator( @menu, @theme, {:resource=>(@resource.nil? ? nil:@resource),:controller=>self})
       #@lg.context.each_pair{|key,val|
       #  instance_variable_set( "@#{key}", val)
       #}  
@@ -320,7 +319,7 @@ module Spree
       @dialog_title = dialog_title
       @content_string = render_to_string :partial => dialog_content
       respond_to do |format|
-          format.js{ render "base/model_dialog"}
+        format.js{ render "base/model_dialog"}
       end
     end
     

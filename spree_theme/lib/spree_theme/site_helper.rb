@@ -33,9 +33,6 @@ module SpreeTheme
         File.join(Rails.root,'public') 
       end
       
-      def document_layout_path
-        File.join( document_root, 'shops', Rails.env )
-      end
     end  
 
     def document_path
@@ -47,7 +44,7 @@ module SpreeTheme
     end
     
     def layout
-      self.template_release.present? ? self.template_release.layout_path : nil
+      self.template_theme.present? ? self.template_theme.layout_path : nil
     end
       
     def design?
@@ -56,14 +53,8 @@ module SpreeTheme
     
     # apply theme to site
     # params - theme_or_release, TemplateTheme or TemplateRelease
-    def apply_theme( theme_or_release)
-      if theme_or_release.kind_of? Spree::TemplateTheme
-        template_release_id= 0
-        template_id= theme_or_release.id           
-      else
-        template_release_id= theme_or_release.id
-        template_id= 0        
-      end
+    def apply_theme( theme)
+      self.theme_id= theme.id           
       save!
     end
   end

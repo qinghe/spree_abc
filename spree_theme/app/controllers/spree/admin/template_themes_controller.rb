@@ -26,13 +26,7 @@ module Spree
       
       #apply this theme to site
       def apply
-        #create template_release before call lg.release
-        if @theme.template_releases.present?
-          SpreeTheme.site_class.current.apply_theme @theme.template_releases.last
-        elsif @theme.foreign_template_release.present?
-          SpreeTheme.site_class.current.apply_theme @theme          
-        end  
-          
+        SpreeTheme.site_class.current.apply_theme @theme                    
         @themes = TemplateTheme.native          
         render :action=>'native' 
       end
@@ -52,13 +46,7 @@ module Spree
         def release
           #create template_release before call lg.release    
           if @theme.has_native_layout?     
-            template_release = @theme.template_releases.build
-            template_release.name = "just a test"
-            template_release.save
-            SpreeTheme.site_class.current.apply_theme template_release
-             
-            @lg = PageGenerator.releaser( template_release)
-            @lg.release
+            @theme.release
           end
           @themes = TemplateTheme.native          
           render :action=>'native' 

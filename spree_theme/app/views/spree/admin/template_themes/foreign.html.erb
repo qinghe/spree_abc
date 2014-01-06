@@ -5,15 +5,15 @@
   <tr>
     <th>TemplateTheme</th>
     <th>IsImported</th>
+    <th>Options</th>
   </tr>
 
 <% @themes.each do |theme| %>
   <tr>
     <td><%= theme.title %></td>
-    <td><%= theme.has_imported? %></td>
-
-    <td><%= link_to 'Preview', preview_template_theme_path(theme) %></td>
-    <td><%= link_to 'Import', import_admin_template_theme_path(theme), {:method=>:post} %></td>
+    <td><%= theme.imported? %></td>
+    <td><%= link_to 'Preview', preview_template_theme_path(theme) %>
+    <%= link_to_unless theme.imported?, 'Import', import_admin_template_theme_path(theme), {:method=>:post} %></td>
   </tr>
 <% end %>
 </table>

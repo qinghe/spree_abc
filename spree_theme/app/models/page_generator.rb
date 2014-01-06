@@ -22,8 +22,8 @@ class PageGenerator
     #end
     
     #designer release a template
-    def releaser( template_release)
-      pg = self.new( template_release, menu=nil)
+    def releaser( theme)
+      pg = self.new( theme, menu=nil)
       pg.build
       pg
     end
@@ -31,26 +31,20 @@ class PageGenerator
     #generator generate content: html,js,css
     # params:
     #   theme_or_release: template theme or template release, a template may not released.
-    def previewer(menu, theme_or_release=nil,  options={})
+    def previewer(menu, theme=nil,  options={})
       options[:preview] = true
-      pg = self.new( theme_or_release, menu, options)
+      pg = self.new( theme, menu, options)
       pg.build
       pg
     end    
     #generator generate content: html,js,css
-    def generator(menu, theme_or_release=nil,  options={})
-      self.new( theme_or_release, menu, options)
+    def generator(menu, theme=nil,  options={})
+      self.new( theme, menu, options)
     end
   end
   
-  def initialize( theme_or_release, menu, options={})
-    if theme_or_release.kind_of? Spree::TemplateRelease
-      self.template_release=  theme_or_release
-      self.theme = theme_or_release.template_theme      
-    else
-      self.theme = theme_or_release 
-      self.template_release = theme.template_releases.last
-    end
+  def initialize( theme, menu, options={})
+    self.theme = theme
     self.menu = menu
     self.resource = nil
     self.is_preview = options[:preview].present?
@@ -141,10 +135,10 @@ class PageGenerator
     raise ArgumentError unless specific_attribute_collection.include?(specific_attribute)
     page_content = send(specific_attribute)
     if page_content.present?
-      path = self.template_release.document_path
+      path = self.theme.document_path
       FileUtils.mkdir_p(path) unless File.exists?(path)
 
-      path = self.template_release.document_file_path(specific_attribute)      
+      path = self.theme.document_file_path(specific_attribute)      
       open(path, 'w') do |f|  f.puts page_content; end
     end
     

@@ -49,10 +49,7 @@ Rails.logger.debug "temp_file=#{temp_file.size}"
   
   it "destroy imported one" do
 Rails.logger.debug "............strart test import................."    
-    #template.template_releases.stub(:exists?) { true }
-    template_release = template.template_releases.build
-    template_release.name = "just a test"
-    template_release.save    
+    #template.template_releases.stub(:exists?) { true }  
     # release first
     imported_template = template.import
     imported_template.has_native_layout?.should be_false
@@ -75,5 +72,23 @@ Rails.logger.debug "............strart test import................."
     template.assigned_resource_id( Spree::TemplateFile, template.page_layout ).should eq template_file.id
     template.assigned_resource_id( Spree::TemplateFile, template.page_layout, 1 ).should eq template_file.id    
   end
+
+  it "should update release id" do
+    template_release = template.template_releases.build
+    template_release.name = "just a test"
+    template_release.save!
+    
+    template.reload
+    
+    template.release_id.should == template_release.id
+  end
+
+  it "should be applied" do
+    
+    template.applied?.should be_true
+  end
   
+  it "should be imported?" do
+    template.imported?.should be_true
+  end  
 end

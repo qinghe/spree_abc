@@ -13,7 +13,7 @@ describe Spree::Admin::TemplateThemesController, :type => :controller do
 
   describe "post #apply" do
     it "responds successfully with an HTTP 200 status code" do
-      spree_post :apply, :id=>Spree::Theme.first
+      spree_post :apply, :id=>Spree::TemplateTheme.first
       expect(response).to be_success
       expect(response).to render_template("native")
     end   

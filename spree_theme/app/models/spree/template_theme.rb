@@ -10,12 +10,12 @@ module Spree
     has_many :param_values, :foreign_key=>"theme_id", :dependent => :delete_all
     has_many :template_files, :foreign_key=>"theme_id", :dependent => :delete_all
     has_many :template_releases, :foreign_key=>"theme_id", :dependent => :delete_all
-    belongs_to :foreign_template_release, :class_name=>"TemplateRelease", :foreign_key=>"release_id"
+    # template_release may be in current or design site
+    belongs_to :current_template_release, :class_name=>"TemplateRelease", :foreign_key=>"release_id"
     
     scope :by_layout,  lambda { |layout_id| where(:page_layout_root_id => layout_id) }
     serialize :assigned_resource_ids, Hash
     scope :within_site, lambda { |site|where(:site_id=> site.id) }
-    scope :imported, where("release_id>0")
     
     before_destroy :remove_relative_data
     attr_accessible :site_id,:page_layout_root_id,:title
@@ -44,17 +44,53 @@ module Spree
       end      
     end
     
+    def release( release_attributes= {})
+      template_release = self.template_releases.build
+      template_release.name = "just a test"
+      template_release.save!
+      self.reload # release_id shoulb be template_release.id
+      @lg = PageGenerator.releaser( self )
+      @lg.release  
+      template_release    
+    end
     
     begin 'for page generator'  
       # * params
       #   * usage - may be [ehtml, css, js]
       def file_name(usage)
         if usage.to_s == 'ehtml'
-          "l#{page_layout_root_id}_t#{id}.html.erb"
+          "l#{page_layout_root_id}.html.erb"
         else
-          "l#{page_layout_root_id}_t#{id}.#{usage}"
+          "l#{page_layout_root_id}.#{usage}"
         end        
       end
+      
+      # folder name 'layouts' is required, rails look for layout in folder named 'layouts'
+      def path
+        # self.id is not accurate, it may use imported theme of design site.
+        File.join( File::SEPARATOR+'layouts', "t#{self.current_template_release.theme_id}_r#{self.release_id}")
+      end
+      
+      def document_path
+        File.join( page_layout.site.document_path, self.path)
+      end
+      
+      # * params
+      #   * targe - could be css, js
+      # * return js or css document file path, ex /shops/development/1/layouts/t1_r1/l1_t1.css
+      def file_path( target )
+        # theme.site do not work.
+        File.join(page_layout.site.path, self.path, file_name(target))         
+      end
+      
+      def layout_path
+        document_file_path( :ehtml )
+      end      
+      
+      def document_file_path( target )
+        File.join( document_path, file_name(target) )
+      end
+       
     end
     
     begin 'edit template'
@@ -71,30 +107,27 @@ module Spree
         new_theme.assigned_resource_ids = resource_config
         new_theme.title = "Imported "+ new_theme.title
         new_theme.site_id = SpreeTheme.site_class.current.id
-        new_theme.release_id = self.template_releases.last.id
         new_theme.save!
         new_theme
       end
       
-      # theme from design shop has been imported into current site
-      def has_imported?
-        # theme should has page_layout, param_values      
-        raise ArgumentError if self.release_id>0
-        themes = TemplateTheme.native.imported.includes(:foreign_template_release)
-        themes.select{|theme| theme.foreign_template_release.theme_id == self.id}.present?
+      # theme from design shop has been imported into current site or not
+      def imported?
+        # theme should has page_layout, param_values
+        themes = TemplateTheme.native.includes(:current_template_release)
+        themes.select{|theme| theme.current_template_release.theme_id == self.id}.present?
+        
       end
       
       def has_native_layout?
         !self.class.exists?(["page_layout_root_id=? and id<?", self.page_layout_root_id, self.id])        
       end
-      # apply to website
-      def apply
-        SpreeTheme.site_class.current.update_attribute(:theme_id,self.id)
-      end
-      
-      #apply to webiste
+
+      # is theme applied to webiste
       def applied?
-        
+        ( has_native_layout? ? 
+        ( SpreeTheme.site_class.current.template_release.template_theme ==self ) : 
+        ( SpreeTheme.site_class.current.template_theme ==self ))
       end
       
       # Usage: user want to copy this layout&theme to new for editing or backup.
@@ -289,15 +322,12 @@ module Spree
         ParamValue.find(:all, :include=>[:section_param=>[:section_piece_param=>:param_category]], 
          :conditions=>["theme_id=? and section_piece_params.editor_id=?", self.id, editor_id],
          :order=>"section_piece_params.editor_id, param_categories.position")
-          
         else
         ParamValue.find(:all, :include=>[:section_param=>[:section_piece_param=>:param_category]], 
          :conditions=>["theme_id=?", self.id],
          :order=>"section_piece_params.editor_id, param_categories.position")
-            
         end
       end
-    
     
       def get_resource_class_key( resource_class)
         resource_class.to_s.underscore.to_sym

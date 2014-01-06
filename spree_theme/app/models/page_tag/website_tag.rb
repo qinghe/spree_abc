@@ -14,7 +14,7 @@ module PageTag
     
     # template_release is nil if designing
     def public_path(target)      
-      page_generator.template_release.file_path(target)       
+      page_generator.theme.file_path(target)       
     end
     
   end

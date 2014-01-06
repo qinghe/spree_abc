@@ -71,14 +71,13 @@ Rails.logger.debug "menu.context=#{@menu.current_context}"
         session[:theme_id] = params[:id]
       end
     end
-    template_release =  SpreeTheme.site_class.current.template_release
     #browse template by public
-    if @theme.blank? and template_release.present?       
-      @theme = template_release.template_theme
+    if @theme.blank? and SpreeTheme.site_class.current.template_theme.present?       
+      @theme = SpreeTheme.site_class.current.template_theme
     end
 
     # site has a released theme    
-    if template_release.present?  
+    if @theme.present?  
       unless request.xhr?
         if @is_designer      
            prepare_params_for_editors(@theme)
@@ -91,7 +90,7 @@ Rails.logger.debug "menu.context=#{@menu.current_context}"
       if @is_designer
         @lg = PageGenerator.generator( @menu, @theme, {:resource=>@resource,:controller=>self})                  
       else
-        @lg = PageGenerator.generator( @menu, template_release, {:resource=>@resource,:controller=>self})          
+        @lg = PageGenerator.generator( @menu, @theme, {:resource=>@resource,:controller=>self})          
       end      
       @lg.context.each_pair{|key,val|
         instance_variable_set( "@#{key}", val)
@@ -132,5 +131,7 @@ Rails.logger.debug "menu.context=#{@menu.current_context}"
   def add_view_path
     #!!is it a place cause memory overflow?
     append_view_path SpreeTheme.site_class.current.document_path
+    # layout of imported theme is in design site home folder 
+    append_view_path SpreeTheme.site_class.designsite.document_path
   end
 end

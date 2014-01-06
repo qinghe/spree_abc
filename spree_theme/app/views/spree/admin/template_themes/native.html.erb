@@ -5,21 +5,20 @@
   <tr>
     <th>TemplateTheme</th>
     <th>IsApplied</th>
-    <th>IsReleased</th>
     <th >Options</th>
   </tr>
 
 <% @themes.each do |theme| %>
   <tr>
     <td><%= theme.title %></td>
-    <td><%= theme==SpreeTheme.site_class.current.template_theme %></td>
-    <td><%= theme.template_releases.exists? %></td>
-
+    <td><%= theme.applied? %></td>
     <td><%= link_to 'Destroy', admin_template_theme_path(theme), :confirm => 'Are you sure?', :method => :delete %>    
-    <%= link_to 'Copy', copy_admin_template_theme_path(theme), {:method=>:post} %>    
-    <%= link_to 'Preview', preview_template_theme_path(theme) %>
+    <%= link_to 'Copy', copy_admin_template_theme_path(theme), {:method=>:post} %>
     <%= link_to 'Apply', apply_admin_template_theme_path(theme), {:method=>:post} %>
-    <%= link_to_if theme.has_native_layout?, 'Release', release_admin_template_theme_path(theme), {:method=>:post} %></td>
+    <% if SpreeTheme.site_class.current.design? %>    
+      <%= link_to 'Preview', preview_template_theme_path(theme) %>
+      <%= link_to_if theme.has_native_layout?, 'Release', release_admin_template_theme_path(theme), {:method=>:post} %></td>
+    <% end %>
   </tr>
 <% end %>
 </table>
