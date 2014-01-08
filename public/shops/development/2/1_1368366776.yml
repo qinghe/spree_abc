@@ -15,7 +15,7 @@
         - 1
 #    created_at: 2013-04-08 13:27:02.293646000Z
 #    updated_at: 2013-04-19 13:11:08.121438000Z
-    release_id: 0
+    release_id: 1
 :param_values:
 - !ruby/object:Spree::ParamValue
   attributes:

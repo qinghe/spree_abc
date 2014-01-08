@@ -39,7 +39,8 @@ namespace :spree_theme do
       end
       file_path = Dir[file_path].sort.last      
     open(file_path) do |file|
-      Spree::TemplateTheme.import_into_db(file)
+      theme = Spree::TemplateTheme.import_into_db(file)
+      theme.release({},{:page_only=>true})
     end    
     puts "imported file #{file_path}"
   end

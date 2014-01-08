@@ -44,14 +44,18 @@ module Spree
       end      
     end
     
-    def release( release_attributes= {})
-      template_release = self.template_releases.build
-      template_release.name = "just a test"
-      template_release.save!
+    # params
+    #   options:  page_only- do not create template_release record, rake task import_theme required it
+    def release( release_attributes= {},option={})
+      unless option[:page_only]
+        template_release = self.template_releases.build
+        template_release.name = "just a test"
+        template_release.save!
+      end
       self.reload # release_id shoulb be template_release.id
       @lg = PageGenerator.releaser( self )
       @lg.release  
-      template_release    
+      self.current_template_release    
     end
     
     begin 'for page generator'  
@@ -234,7 +238,8 @@ module Spree
       
       # it would delete existing one first, then import
       # params
-      #   file - opened file 
+      #   file - opened file
+      # return imported theme 
       def self.import_into_db( file )
         # rake task require class 
         Spree::ParamValue; Spree::PageLayout; Spree::TemplateFile;Spree::TemplateRelease;
@@ -266,7 +271,8 @@ module Spree
             table_name = TemplateRelease.table_name
             connection.insert_fixture(record.attributes, table_name)          
           end
-        end        
+        end
+        self.find(template[:id])
       end
     end
     def remove_relative_data
