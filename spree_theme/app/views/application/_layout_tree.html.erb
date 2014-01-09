@@ -1,7 +1,9 @@
 <%
 # list layout tree in editor page.
-# local params: theme, selected_id,
+# local params: theme, selected_id
 layout_root = theme.page_layout
+options ||={} 
+selected_id= (options[:selected_id]||layout_root.id )
 %>
 <%=form_tag(update_layout_tree_template_theme_path(theme), :id=>"layout_tree_form",:name=>"layout_tree_form", :remote=>true) do %>
 
@@ -18,6 +20,7 @@ layout_root = theme.page_layout
       %>
     <span><%= layout.current_contexts if layout.section_context.present? %></span>
     </div>
+    <% if options[:editable] %>
     <div class="fr">
     <%= link_to_function "+","$('#layout_id').val(#{layout.id});$('#section_select_dialog').dialog('open')"%>
     <%= link_to_function "-","if (confirm('Really?')) submit_layout_tree_form('del_self',#{layout.id} )"%>
@@ -26,6 +29,7 @@ layout_root = theme.page_layout
     <%= link_to_function "<","submit_layout_tree_form('promote',#{layout.id} )"%>
     <%= link_to_function ">","submit_layout_tree_form('demote',#{layout.id} )"%>
     </div>
+    <% end %>
   </div>
   <% end %>
   </div>

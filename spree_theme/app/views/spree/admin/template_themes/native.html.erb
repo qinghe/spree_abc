@@ -5,20 +5,24 @@
   <tr>
     <th>TemplateTheme</th>
     <th>IsApplied</th>
-    <th >Options</th>
+    
   </tr>
 
 <% @themes.each do |theme| %>
   <tr>
     <td><%= theme.title %></td>
     <td><%= theme.applied? %></td>
-    <td><%= link_to 'Destroy', admin_template_theme_path(theme), :confirm => 'Are you sure?', :method => :delete %>    
-    <%= link_to 'Copy', copy_admin_template_theme_path(theme), {:method=>:post} %>
+    <td class="actions">
+    <%= link_to 'Config', config_admin_template_theme_path(theme), {:method=>:get} %>
     <%= link_to 'Apply', apply_admin_template_theme_path(theme), {:method=>:post} %>
+              &nbsp;
+    <%= link_to 'Copy', copy_admin_template_theme_path(theme), {:method=>:post} %>
     <% if SpreeTheme.site_class.current.design? %>    
       <%= link_to 'Preview', preview_template_theme_path(theme) %>
-      <%= link_to_if theme.has_native_layout?, 'Release', release_admin_template_theme_path(theme), {:method=>:post} %></td>
+      <%= link_to_if theme.has_native_layout?, 'Release', release_admin_template_theme_path(theme), {:method=>:post} %>
     <% end %>
+    <%= link_to_delete theme, :no_text => true if can?(:delete, theme)  %>
+    </td>
   </tr>
 <% end %>
 </table>

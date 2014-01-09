@@ -1,7 +1,7 @@
 module Spree
   module Admin
-    class TemplateThemesController < Spree::Admin::BaseController
-      before_filter :load_theme, :only => [:apply, :import, :edit, :update, :release, :copy_theme]
+    class TemplateThemesController < ResourceController #Spree::Admin::BaseController
+      #before_filter :load_theme, :only => [:apply, :import, :edit, :update, :release, :copy_theme]
 
       def index
         native
@@ -18,7 +18,7 @@ module Spree
       end
 
       def import
-        imported_theme = @theme.import
+        imported_theme = @template_theme.import
         respond_to do |format|
           format.html { redirect_to(foreign_admin_template_themes_url) }
         end    
@@ -26,7 +26,7 @@ module Spree
       
       #apply this theme to site
       def apply
-        SpreeTheme.site_class.current.apply_theme @theme                    
+        SpreeTheme.site_class.current.apply_theme @template_theme                    
         @themes = TemplateTheme.native          
         render :action=>'native' 
       end
@@ -45,8 +45,8 @@ module Spree
 
         def release
           #create template_release before call lg.release    
-          if @theme.has_native_layout?     
-            @theme.release
+          if @template_theme.has_native_layout?     
+            @template_theme.release
           end
           @themes = TemplateTheme.native          
           render :action=>'native' 
@@ -55,22 +55,16 @@ module Spree
         # DELETE /themes/1
         # DELETE /themes/1.xml
         def destroy
-          @theme = TemplateTheme.find(params[:id])
-          @theme.destroy
+          @template_theme = TemplateTheme.find(params[:id])
+          @template_theme.destroy
       
           respond_to do |format|
             format.html { redirect_to(admin_template_themes_url) }
             format.xml  { head :ok }
           end
-        end
-    
+        end    
       end
 
-      private
-      def load_theme
-        @theme = TemplateTheme.find(params[:id])
-        authorize! action, @theme
-      end
     end
   end
 end

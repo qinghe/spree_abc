@@ -37,3 +37,10 @@ zh-CN:
     admin:
       tab:
         template_themes: 模板
+    back_to_themes_list: 回到模板列表
+    apply_theme: 
+    config_theme:
+    configing_theme: 配置模板 
+    copy_theme:
+    delete_theme: 删除 
+    release_theme:                    

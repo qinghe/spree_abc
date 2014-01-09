@@ -129,9 +129,7 @@ module Spree
 
       # is theme applied to webiste
       def applied?
-        ( has_native_layout? ? 
-        ( SpreeTheme.site_class.current.template_release.template_theme ==self ) : 
-        ( SpreeTheme.site_class.current.template_theme ==self ))
+        SpreeTheme.site_class.current.template_theme ==self 
       end
       
       # Usage: user want to copy this layout&theme to new for editing or backup.
