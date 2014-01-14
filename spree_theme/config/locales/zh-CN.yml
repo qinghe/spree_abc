@@ -43,4 +43,11 @@ zh-CN:
     configing_theme: 配置模板 
     copy_theme:
     delete_theme: 删除 
-    release_theme:                    
+    release_theme: 
+    template_theme:
+      assign_resource:
+    page_layout:
+      context: 
+      date_source: 
+      
+                         

@@ -5,7 +5,7 @@
  *
 
  *= require admin/spree_backend
-
+ *= require admin/spree_theme
  *= require_self
  *= require_tree .
 */

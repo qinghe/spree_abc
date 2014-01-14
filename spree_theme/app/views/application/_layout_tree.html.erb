@@ -9,6 +9,8 @@ selected_id= (options[:selected_id]||layout_root.id )
 
   <div id='page_layout_tree_inner' class="block">
   <% for layout in layout_root.self_and_descendants%>
+    <% assigned_taxons = theme.assigned_resources(SpreeTheme.taxon_class, layout)
+    %>
   <div class="clear-block">
     <div class="fl">
     <%=raw("&nbsp;&nbsp;"*layout.cached_level)%>
@@ -18,17 +20,33 @@ selected_id= (options[:selected_id]||layout_root.id )
       "$('#selected_page_layout_id').val(#{layout.id});$('#layout_editor_form').trigger('submit')",
       {"class"=>(layout.id==selected_id ? "selected":""),"data-lid"=>layout.id, :onmouseout=>"$('#{layout.css_selector}').trigger('dehighlight')",:onmouseover=>"$('#{layout.css_selector}').trigger('highlight')"})
       %>
+    <%if options[:show_assigned_resource] %>
+      <% if assigned_taxons.present? %>
+      <span>[t:<%= assigned_taxons.collect(&:name) %>]</span>
+      <%end%>
+    <%end%>  
+    <%if options[:show_context] %>      
     <span><%= layout.current_contexts if layout.section_context.present? %></span>
+    <%end%>  
     </div>
+    <% if options[:configurable] %>
+      <% # only show it for selected page_layout
+      %>
+      <div class="fr">
+        <% if assigned_taxons.present? %>
+        <% end %>
+        <%= link_to 'add_taxon' %>, <%= link_to 'add_image' %>
+      </div>
+    <% end %>
     <% if options[:editable] %>
-    <div class="fr">
-    <%= link_to_function "+","$('#layout_id').val(#{layout.id});$('#section_select_dialog').dialog('open')"%>
-    <%= link_to_function "-","if (confirm('Really?')) submit_layout_tree_form('del_self',#{layout.id} )"%>
-    <%= link_to_function "u","submit_layout_tree_form('move_left',#{layout.id} )"%>
-    <%= link_to_function "d","submit_layout_tree_form('move_right',#{layout.id} )"%>
-    <%= link_to_function "<","submit_layout_tree_form('promote',#{layout.id} )"%>
-    <%= link_to_function ">","submit_layout_tree_form('demote',#{layout.id} )"%>
-    </div>
+      <div class="fr">
+      <%= link_to_function "+","$('#layout_id').val(#{layout.id});$('#section_select_dialog').dialog('open')"%>
+      <%= link_to_function "-","if (confirm('Really?')) submit_layout_tree_form('del_self',#{layout.id} )"%>
+      <%= link_to_function "u","submit_layout_tree_form('move_left',#{layout.id} )"%>
+      <%= link_to_function "d","submit_layout_tree_form('move_right',#{layout.id} )"%>
+      <%= link_to_function "<","submit_layout_tree_form('promote',#{layout.id} )"%>
+      <%= link_to_function ">","submit_layout_tree_form('demote',#{layout.id} )"%>
+      </div>
     <% end %>
   </div>
   <% end %>

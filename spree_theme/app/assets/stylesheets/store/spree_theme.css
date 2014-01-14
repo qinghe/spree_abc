@@ -1,4 +1,5 @@
 /*
+ *= require spree_theme_base
  *= require jquery.ui.all
  *= require jquery.layout
  *= require normalize
@@ -23,18 +24,6 @@
   background-color: #B6B6B6;
 }
 
-.fl{ float:left;}
-.fr{ float:right;}
-.clear-block:after {
-  content: ".";
-  display: block;
-  height: 0;
-  clear: both;
-  visibility: hidden;
-}
-.clear-block {
-  display: block;
-}
 
 .block
 {
@@ -42,8 +31,6 @@
     padding: 2px;
     margin: 2px;
 }
-
-ul{ list-style:none; margin: 0; padding: 0;}
 
 .menu li{
   padding:5px;

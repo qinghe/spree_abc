@@ -6,7 +6,7 @@
     </li>
   <% end %>
 <% end %>
-<%= render :partial=>'theme_tabs'%>
-<div class="container">
-<%= render :partial=>'layout_tree', :locals=>{:theme=>@template_theme, :options=>{:configurable=>true} }%>
+<%= render :partial=>'theme_tabs',:locals=>{:current=>"AssignResource"}%>
+<div class="">
+<%= render :partial=>'layout_tree', :locals=>{:theme=>@template_theme, :options=>{:configurable=>true,:show_assigned_resource=>true} }%>
 </div>

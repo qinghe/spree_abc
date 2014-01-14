@@ -280,11 +280,15 @@ module Spree
     end
     
     begin 'assigned resource'
-      # all menus used by this theme, from param values which pclass='db'
-      # param_value.pvalue should be menu root id
-      # return menu roots
-      def assigned_menus
-
+      # all resources used by this theme
+      # return menu roots/ images
+      def assigned_resources( resource_class, page_layout )
+        resource_key = get_resource_class_key(resource_class)
+        if assigned_resource_ids.try(:[],page_layout.id).try(:[],resource_key).present?
+          resource_ids = assigned_resource_ids[page_layout.id][resource_key]
+          resources = resource_class.find resource_ids
+        end
+        resources||[]
       end
       
       # get assigned menu by specified page_layout_id
