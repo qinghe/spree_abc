@@ -13,7 +13,7 @@
     <td><%= theme.title %></td>
     <td><%= theme.imported? %></td>
     <td><%= link_to 'Preview', preview_template_theme_path(theme) %>
-    <%= link_to_unless theme.imported?, 'Import', import_admin_template_theme_path(theme), {:method=>:post} %></td>
+    <%= link_to_unless theme.imported?, 'Import', prepare_import_admin_template_theme_path(theme) %></td>
   </tr>
 <% end %>
 </table>

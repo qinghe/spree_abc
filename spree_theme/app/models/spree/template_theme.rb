@@ -286,7 +286,9 @@ module Spree
         resource_key = get_resource_class_key(resource_class)
         if assigned_resource_ids.try(:[],page_layout.id).try(:[],resource_key).present?
           resource_ids = assigned_resource_ids[page_layout.id][resource_key]
-          resources = resource_class.find resource_ids
+          #in prepare_import, we want to know assigned resources
+          #current shop is not designshop, we need use unscope here.
+          resources = resource_class.unscoped.find resource_ids
         end
         resources||[]
       end

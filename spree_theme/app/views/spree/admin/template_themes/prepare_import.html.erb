@@ -1,0 +1,47 @@
+<%= render :partial => 'sub_menu' %>
+<% content_for :page_title do %>
+  <%= Spree.t(:configing_theme) %> &ldquo;<%= @template_theme.title %>&rdquo;
+<% end %>
+<%= form_for :template_theme, :url=>import_admin_template_theme_path do |f| %>
+  <fieldset class="no-border-top">
+    <div class="row">
+        <div class="alpha eight columns">
+          <fieldset class="security no-border-bottom">
+            <legend align="center">Assign taxon</legend>
+            <% @template_theme.page_layout.self_and_descendants.each do |page_layout|
+              assigned_taxonomies = @template_theme.assigned_resources( SpreeTheme.taxon_class, page_layout) 
+              next if assigned_taxonomies.blank?
+            %>
+            <div class="field">
+              <%= label :page_layout, :title, page_layout.title  %> <br />
+              <% assigned_taxonomies.each{|taxon| %>
+                <%= select_tag "assigned_resource_ids[#{page_layout.id}][#{@template_theme.get_resource_class_key(taxon.class)}][]",options_from_collection_for_select(taxon.class.roots, :id, :name), prompt: (Spree.t :select_taxon) %>
+              <%}%>
+            </div>
+            <% end %>
+          </fieldset>
+        </div>
+        <div class="omega eight columns">
+          <fieldset class="currency no-border-bottom">
+            <legend align="center">Assign image</legend>
+            <% @template_theme.page_layout.self_and_descendants.each do |page_layout|
+              assigned_images = @template_theme.assigned_resources( Spree::TemplateFile, page_layout) 
+              next if assigned_images.blank?
+           %>
+            <div class="field">
+            <%= label :page_layout, :title, page_layout.title  %> <br />
+            <% assigned_images.each{|image| %>
+              <%= select_tag "assigned_resource_ids[#{page_layout.id}][#{@template_theme.get_resource_class_key(image.class)}][]",options_from_collection_for_select(image.class.all, :id, :attachment_file_name), prompt: (Spree.t :select_template_image) %>
+            <%}%> 
+            </div>
+            <% end %>
+          </fieldset>
+        </div>
+      </div>
+  <div class="form-buttons filter-actions actions" data-hook="buttons">
+    <%= button Spree.t('actions.import'), 'icon-ok' %>
+    <span class="or"><%= Spree.t(:or) %></span>
+    <%= link_to_with_icon 'icon-remove', Spree.t('actions.cancel'), collection_url, :class => 'button' %>
+  </div>
+</fieldset>
+<% end %>

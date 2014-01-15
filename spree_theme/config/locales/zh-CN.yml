@@ -21,7 +21,9 @@ zh-CN:
     label:
       template_theme:
         <<: *template_theme_labels
-
+  notice_messages:
+    template_theme_imported: 模板已经导入
+    template_theme_not_imported: 模板无法导入
   template_theme: Theme
   template_themes: Themes
   static_content:
@@ -34,6 +36,8 @@ zh-CN:
     meta_title: Meta Title
     page_navigation_title: "Pages"
   spree:
+    actions:
+      import: 导入
     admin:
       tab:
         template_themes: 模板
@@ -44,6 +48,8 @@ zh-CN:
     copy_theme:
     delete_theme: 删除 
     release_theme: 
+    select_taxon: 选择菜单
+    select_template_image: 选择图片    
     template_theme:
       assign_resource:
     page_layout:

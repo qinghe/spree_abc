@@ -17,8 +17,19 @@ module Spree
         @themes = @themes.select{|theme| theme.template_releases.present?}
       end
 
+      # params
+      #   assigned_resource_ids: a hash, key is page_layout_id
+      #     ex. {"30"=>{"spree/taxon"=>[""]}, "3"=>{"spree/template_file"=>[""]}} 
+      #                           
       def import
         imported_theme = @template_theme.import
+        if imported_theme.present?
+          flash[:success] = Spree.t('notice_messages.product_cloned')
+        else
+          flash[:success] = Spree.t('notice_messages.product_not_cloned')
+        end
+
+        
         respond_to do |format|
           format.html { redirect_to(foreign_admin_template_themes_url) }
         end    
@@ -31,7 +42,12 @@ module Spree
         render :action=>'native' 
       end
 
-      begin 'designer'
+      begin 'design shop'
+        
+        def prepare_import
+          logger.debug "action=#{action.inspect}"
+        end
+        
         #copy selected theme to new theme
         def copy
           @original_theme = TemplateTheme.find(params[:id])
@@ -64,7 +80,21 @@ module Spree
           end
         end    
       end
-
+      protected
+      def collection_actions
+        [:index,:native, :foreign]
+      end
+      
+      #def find_resource
+      #  logger.debug "action=#{action.inspect}"
+      #  if parent_data.present?
+      #    parent.send(controller_name).find(params[:id])
+      #  elsif ['import', 'prepare_import'].include? action
+      #    
+      #  else
+      #    model_class.find(params[:id])
+      #  end
+      #end
     end
   end
 end

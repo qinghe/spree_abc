@@ -33,6 +33,7 @@ Spree::Core::Engine.routes.prepend do
       end
       member do
         get :config # assign resource(menu, image)
+        get :prepare_import # assign resource(menu, image)
         post :copy
         post :release
         post :import
