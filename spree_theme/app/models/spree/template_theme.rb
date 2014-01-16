@@ -19,6 +19,7 @@ module Spree
     
     before_destroy :remove_relative_data
     attr_accessible :site_id,:page_layout_root_id,:title
+    attr_accessible :assigned_resource_ids, :template_files #import require it.
     
     class << self
       # template has page_layout & param_values
@@ -102,16 +103,23 @@ module Spree
       #only create template record, do not copy param_value,page_layout,template_file...
       # * params
       #   * resource_config - new configuration for resource
-      def import(resource_config={})
+      def import(new_attributes={})
         raise ArgumentError unless self.template_releases.exists?
         #only released template is importable
         #create theme record
         new_theme = self.dup
         #set resource to site native
-        new_theme.assigned_resource_ids = resource_config
         new_theme.title = "Imported "+ new_theme.title
+        new_theme.attributes = new_attributes
         new_theme.site_id = SpreeTheme.site_class.current.id
         new_theme.save!
+        if new_theme.template_files.present?
+          new_theme.template_files.each{|file|
+            original_file = new_attributes[:template_files].first
+Rails.logger.debug "#{file.page_layout_id},#{original_file.page_layout_id},#{file.object_id},#{original_file.object_id},#{file.inspect}, #{original_file.inspect}"            
+            new_theme.assign_resource( file, PageLayout.find(file.page_layout_id))
+          }          
+        end
         new_theme
       end
       

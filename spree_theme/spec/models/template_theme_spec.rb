@@ -89,6 +89,22 @@ Rails.logger.debug "............strart test import................."
   end
   
   it "should be imported?" do
-    template.imported?.should be_true
-  end  
+    template.should be_imported
+  end 
+  
+  it "assign attributes" do
+    original_title = "it is test"
+    theme = Spree::TemplateTheme.new(:title=>original_title)
+    theme.attributes = {:assigned_resource_ids=>{}, :template_files=>[]}
+    theme.title.should == original_title
+  end 
+  
+  it "should be imported" do
+    open(File.join( SpreeTheme::Engine.root,'db', 'themes', 'template_images', 'logo.gif')) do|f|
+      template_file = Spree::TemplateFile.new(:attachment=>f, :page_layout_id=>template.page_layout_root_id)      
+      new_template = template.import(:template_files => [template_file] )
+      new_template.should be_a_kind_of Spree::TemplateTheme
+      new_template.assigned_resources( Spree::TemplateFile,template.page_layout ).should be_present
+    end
+  end
 end

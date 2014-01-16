@@ -2,7 +2,7 @@
 <% content_for :page_title do %>
   <%= Spree.t(:configing_theme) %> &ldquo;<%= @template_theme.title %>&rdquo;
 <% end %>
-<%= form_for :template_theme, :url=>import_admin_template_theme_path do |f| %>
+<%= form_for :template_theme, :url=>import_admin_template_theme_path, :html=>{ :multipart => true} do |f| %>
   <fieldset class="no-border-top">
     <div class="row">
         <div class="alpha eight columns">
@@ -15,7 +15,7 @@
             <div class="field">
               <%= label :page_layout, :title, page_layout.title  %> <br />
               <% assigned_taxonomies.each{|taxon| %>
-                <%= select_tag "assigned_resource_ids[#{page_layout.id}][#{@template_theme.get_resource_class_key(taxon.class)}][]",options_from_collection_for_select(taxon.class.roots, :id, :name), prompt: (Spree.t :select_taxon) %>
+                <%= select_tag "assigned_resource_ids[#{page_layout.id}][]",options_from_collection_for_select(taxon.class.roots, :id, :name), prompt: (Spree.t :select_taxon) %>
               <%}%>
             </div>
             <% end %>
@@ -30,9 +30,13 @@
            %>
             <div class="field">
             <%= label :page_layout, :title, page_layout.title  %> <br />
-            <% assigned_images.each{|image| %>
-              <%= select_tag "assigned_resource_ids[#{page_layout.id}][#{@template_theme.get_resource_class_key(image.class)}][]",options_from_collection_for_select(image.class.all, :id, :attachment_file_name), prompt: (Spree.t :select_template_image) %>
+            <% assigned_images.each{|image| %>              
+              <%= fields_for 'template_files[]', @template_theme.template_files.build do |file_form| %>
+                <%= file_form.file_field  :attachment %>
+                <%= file_form.hidden_field  :page_layout_id, :value=>page_layout.id %>
+              <% end %>
             <%}%> 
+            
             </div>
             <% end %>
           </fieldset>

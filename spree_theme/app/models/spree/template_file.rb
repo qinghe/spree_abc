@@ -11,6 +11,8 @@ module Spree
     self.attachment_definitions[:attachment][:default_url] = "/images/:style/missing.png"
   
     delegate :url, :to => :attachment
-    attr_accessible :theme_id, :attachment
+    #it is required while import theme with new template_file. we would set theme.assigned_resources while import.
+    attr_accessor :page_layout_id
+    attr_accessible :theme_id, :attachment, :page_layout_id
   end
 end
