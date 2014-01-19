@@ -1,0 +1,35 @@
+<% #local params: 
+   #  theme: theme 
+   #  page_layout: current page_layout  
+   #  page_layouts: whole page_layout tree
+   #  options: page_layouts_with_resource
+  page_layouts||= page_layout.self_and_descendants
+  children = page_layouts.select{|pl| pl.parent_id == page_layout.id} 
+  options ||={} 
+  page_layouts_with_resource = options[:page_layouts_with_resource]
+%>
+<% if children.present? %>
+  <ul>
+    <% for child in children %>
+    <li id="<%= child.id %>" rel="taxon">
+      <%= link_to_function(child.title, "$('#selected_page_layout_id').val(#{child.id});",
+        {"class"=>(child.id==selected_id ? "selected":""),"data-lid"=>child.id})
+      %>
+      <% if page_layouts_with_resource.include? child %>
+      <%   
+           assigned_taxon1_id = theme.assigned_resource_id(SpreeTheme.taxon_class, child)   
+           assigned_taxon2_id = theme.assigned_resource_id(SpreeTheme.taxon_class, child, 1)   
+           child = page_layouts_with_resource.select{|pl| pl.id==child.id}.first
+      %>   
+        <% if child.sections.first.section_piece.resources=~/m/%>   
+              <%= select_tag "assigned_resource_ids[#{child.id}][]",options_from_collection_for_select(SpreeTheme.taxon_class.roots, :id, :name, assigned_taxon1_id ), prompt: (Spree.t :select_taxon), onchange:"alert('yes');" %>
+          <% if child.sections.first.section_piece.resources=='m2'%>   
+              <%= select_tag "assigned_resource_ids[#{child.id}][]",options_from_collection_for_select(SpreeTheme.taxon_class.roots, :id, :name, assigned_taxon2_id), prompt: (Spree.t :select_taxon) %>
+          <% end %>
+        <% end %>
+      <% end %>
+      <%= render :partial => 'page_layout', :locals => { :theme => theme, :page_layout=>child, :page_layouts=>page_layouts, :selected_id=>selected_id, :options=>options } %>
+    </li>
+    <%end%>
+  </ul>
+<% end %>

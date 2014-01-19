@@ -68,4 +68,12 @@ describe Spree::PageLayout do
      
   end
   
+  it "has many sections" do
+    sections = page_layout.sections
+    sections.should be_present
+    
+    for section in sections
+      section.root_id.should == page_layout.section_id
+    end
+  end
 end

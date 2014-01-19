@@ -24,8 +24,9 @@ gem "awesome_nested_set"
 #use paperclip instead of dragonfly,  dragonfly have no way to configure image path
 #gem "paperclip", "2.8.0" # spree require it.
 gem "responds_to_parent"
-gem 'jquery-rails'
-gem 'jquery-ui-rails'
+# spree already contain
+#gem 'jquery-rails'
+#gem 'jquery-ui-rails'
 gem "friendly_id"
 
 group :assets do

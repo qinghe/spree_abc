@@ -38,6 +38,7 @@ Spree::Core::Engine.routes.prepend do
         post :release
         post :import
         post :apply
+        put :update_config
       end
     end
   end

@@ -77,17 +77,19 @@ module Spree
           render :action=>'native' 
         end
         
-        # DELETE /themes/1
-        # DELETE /themes/1.xml
-        def destroy
-          @template_theme = TemplateTheme.find(params[:id])
-          @template_theme.destroy
+        def update_config
+          params[:positions].each do |id, index|
+            model_class.where(:id => id).update_all(:position => index)
+          end
       
           respond_to do |format|
-            format.html { redirect_to(admin_template_themes_url) }
-            format.xml  { head :ok }
+            format.js  { render :text => 'Ok' }
           end
-        end    
+          
+        end
+        
+        
+         
       end
       protected
       def collection_actions

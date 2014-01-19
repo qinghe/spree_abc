@@ -692,6 +692,7 @@ taxonomy_name:
   slug: taxonomy-name
   is_selectable: "1"
   is_container: "0"
+  resources: m2
   html: |    
     <% if @template.menu.present? %>   
     <span ><%= @template.menu.taxonomy.name %> </span>
@@ -1154,7 +1155,7 @@ logged_and_unlogged_menu:
   id: 49
   is_selectable: "0"
   is_container: "1"
-  resources: m
+  resources: m2
   html: |
     <% menu = (spree_current_user ? @template.menu : @template.menu2) %>
     <% if menu.present? %>
