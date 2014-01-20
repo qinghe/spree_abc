@@ -41,6 +41,8 @@ zh-CN:
     admin:
       tab:
         template_themes: 模板
+        native_themes: 模板
+        foreign_themes: 模板商店
     back_to_themes_list: 回到模板列表
     apply_theme: 
     config_theme:

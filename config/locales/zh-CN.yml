@@ -326,6 +326,9 @@ zh-CN:
         promotions: 促销
         reports: 报表
         users: 用户
+        option_types: 选项类型
+        properties: 属性
+        prototypes: 原型
     administration: 管理
     agree_to_privacy_policy: 同意隐私政策
     agree_to_terms_of_service: 同意服务条款
