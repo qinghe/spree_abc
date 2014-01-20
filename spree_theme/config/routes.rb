@@ -38,7 +38,12 @@ Spree::Core::Engine.routes.prepend do
         post :release
         post :import
         post :apply
-        put :update_config
+        
+      end
+      resources :page_layout do
+        member do
+          post :update_config
+        end
       end
     end
   end

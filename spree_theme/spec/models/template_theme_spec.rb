@@ -73,6 +73,13 @@ Rails.logger.debug "............strart test import................."
     template.assigned_resource_id( Spree::TemplateFile, template.page_layout, 1 ).should eq template_file.id    
   end
 
+  it "should unassign resource" do
+    template_file = Spree::TemplateFile.first
+    template.assign_resource( template_file, template.page_layout )
+    template.unassigned_resource( Spree::TemplateFile, template.page_layout )
+    template.assigned_resource_id( Spree::TemplateFile, template.page_layout ).should eq 0    
+  end
+
   it "should update release id" do
     template_release = template.template_releases.build
     template_release.name = "just a test"
