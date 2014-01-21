@@ -1,18 +1,18 @@
 <%= render :partial => 'sub_menu' %>
-<h1>Foreign themes</h1>
-
+<% content_for :page_title do %>
+  <%= Spree.t(:foreign_themes) %> 
+<% end %>
 <table>
   <tr>
     <th>TemplateTheme</th>
     <th>IsImported</th>
-    <th>Options</th>
   </tr>
 
 <% @themes.each do |theme| %>
   <tr>
     <td><%= theme.title %></td>
     <td><%= theme.imported? %></td>
-    <td><%= link_to 'Preview', preview_template_theme_path(theme) %>
+    <td class="actions"><%= link_to 'Preview', preview_template_theme_url(theme, :host=>SpreeTheme.site_class.designsite.domain) %>
     <%= link_to_unless theme.imported?, 'Import', prepare_import_admin_template_theme_path(theme) %></td>
   </tr>
 <% end %>

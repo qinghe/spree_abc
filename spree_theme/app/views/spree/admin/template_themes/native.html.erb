@@ -1,10 +1,12 @@
 <%= render :partial => 'sub_menu' %>
-<h1>Listing themes</h1>
+<% content_for :page_title do %>
+  <%= Spree.t(:native_themes) %> 
+<% end %>
 
 <table>
   <tr>
     <th>TemplateTheme</th>
-    <th>IsApplied</th>
+    <th>Applied</th>
     
   </tr>
 
