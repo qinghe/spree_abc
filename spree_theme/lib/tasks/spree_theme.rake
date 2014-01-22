@@ -25,7 +25,7 @@ namespace :spree_theme do
     puts "exported file #{file_path}"
   end
   
-  desc "import theme one, accept param THEME_FILE or SEED_PATH," 
+  desc "import theme one, accept param SEED_PATH," 
        "ex. FILE='spree_theme/db/themes/design/1_138.rb', SEED_PATH='1'"
        "default path=shops/rails_env/shop_id/1_nnn.rb"
   task :import_theme => :environment do

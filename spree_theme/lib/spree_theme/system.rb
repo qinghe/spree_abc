@@ -53,8 +53,12 @@ Rails.logger.debug "request.fullpath=#{request.fullpath}"
     end
     #menu should be same instance pass to PageGenerator, it require  request_fullpath
     @menu.request_fullpath = request.fullpath
-Rails.logger.debug "menu.context=#{@menu.current_context}"    
-    @is_designer = website.design?
+Rails.logger.debug "menu.context=#{@menu.current_context}"
+    @is_designer = false
+    if website.design?
+      #add website condition 
+      @is_designer = ( Spree::TemplateTheme.accessible_by( current_ability, :read).where(:site_id=>website.id).count >0 )
+    end
     if Rails.env !~ /prduction/
       # for development or test, enable get site from cookies
       if cookies[:abc_development_design].present?
@@ -64,7 +68,7 @@ Rails.logger.debug "menu.context=#{@menu.current_context}"
     #get template from query string 
     if @is_designer
       if session[:theme_id].present?
-        @theme = Spree::TemplateTheme.find( params[:id] )
+        @theme = Spree::TemplateTheme.find( session[:theme_id] )
       end
       if params[:action]=='preview' && params[:id].present?
         @theme = Spree::TemplateTheme.find( params[:id] )

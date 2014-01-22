@@ -73,7 +73,12 @@ module Spree
       # folder name 'layouts' is required, rails look for layout in folder named 'layouts'
       def path
         # self.id is not accurate, it may use imported theme of design site.
-        File.join( File::SEPARATOR+'layouts', "t#{self.current_template_release.theme_id}_r#{self.release_id}")
+        # on other side, design site may release template first time. current_template_release = nil
+        if self.current_template_release.present?
+          File.join( File::SEPARATOR+'layouts', "t#{self.current_template_release.theme_id}_r#{self.release_id}")
+        else
+          File.join( File::SEPARATOR+'layouts', "t#{self.id}_r#{self.release_id}")
+        end
       end
       
       def document_path
