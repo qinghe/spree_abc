@@ -7,3 +7,7 @@
 2. reload default template for spree_theme/db/themes/design
 rake spree_theme:import_theme RAILS_ENV=local_staging SEED_PATH=1
     
+3.How to inspect controller filter chains?
+  http://makandracards.com/makandra/10923-how-to-inspect-controller-filter-chains-in-specs
+  
+  ex. Spree::UsersController._process_action_callbacks.select { |c| c.kind == :before }.map(&:filter)

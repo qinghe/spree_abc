@@ -132,8 +132,8 @@ Rails.logger.debug "#{file.page_layout_id},#{original_file.page_layout_id},#{fil
       def imported?
         # theme should has page_layout, param_values
         themes = TemplateTheme.native.includes(:current_template_release)
-        themes.select{|theme| theme.current_template_release.theme_id == self.id}.present?
-        
+        #theme.current_template_release may be nil
+        themes.select{|theme| theme.current_template_release.try(:theme_id) == self.id}.present?        
       end
       
       def has_native_layout?
