@@ -27,7 +27,7 @@ module SpreeTheme::System
   end
 
   def initialize_template
-Rails.logger.debug "request.fullpath=#{request.fullpath}"
+#Rails.logger.debug "request.fullpath=#{request.fullpath}"
     # fullpath may contain ?n=www.domain.com    
     return if request.fullpath =~ /^\/under_construction/
     return if request.fullpath =~ /^\/create_admin_session/
@@ -53,7 +53,6 @@ Rails.logger.debug "request.fullpath=#{request.fullpath}"
     end
     #menu should be same instance pass to PageGenerator, it require  request_fullpath
     @menu.request_fullpath = request.fullpath
-Rails.logger.debug "menu.context=#{@menu.current_context}"
     @is_designer = false
     if website.design?
       #add website condition 
@@ -79,7 +78,7 @@ Rails.logger.debug "menu.context=#{@menu.current_context}"
     if @theme.blank? and SpreeTheme.site_class.current.template_theme.present?       
       @theme = SpreeTheme.site_class.current.template_theme
     end
-
+#Rails.logger.debug "menu.context=#{@menu.current_context}, @is_designer=#{@is_designer}, request.xhr?=#{request.xhr?}"
     # site has a released theme    
     if @theme.present?  
       unless request.xhr?
