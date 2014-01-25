@@ -76,7 +76,7 @@ Rails.logger.debug "............strart test import................."
   it "should unassign resource" do
     template_file = Spree::TemplateFile.first
     template.assign_resource( template_file, template.page_layout )
-    template.unassigned_resource( Spree::TemplateFile, template.page_layout )
+    template.unassign_resource( Spree::TemplateFile, template.page_layout )
     template.assigned_resource_id( Spree::TemplateFile, template.page_layout ).should eq 0    
   end
 
@@ -110,6 +110,7 @@ Rails.logger.debug "............strart test import................."
     open(File.join( SpreeTheme::Engine.root,'db', 'themes', 'template_images', 'logo.gif')) do|f|
       template_file = Spree::TemplateFile.new(:attachment=>f, :page_layout_id=>template.page_layout_root_id)      
       new_template = template.import(:template_files => [template_file] )
+      new_template.current_template_release.should be_present
       new_template.should be_a_kind_of Spree::TemplateTheme
       new_template.assigned_resources( Spree::TemplateFile,template.page_layout ).should be_present
     end
