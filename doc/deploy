@@ -7,3 +7,5 @@ rake spree_theme:import_theme SEED_PATH=1 RAILS_ENV=local_staging
   [mysqld]
   character_set_server= utf8    
 http://www.dotkam.com/2008/09/14/configure-rails-and-mysql-to-support-utf-8/
+
+2. yum install libxml2
