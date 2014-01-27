@@ -16,3 +16,4 @@ Gemfile.lock
 Gemfile.lock
 public/shops/development
 public/shops
+config/deploy/production.rb

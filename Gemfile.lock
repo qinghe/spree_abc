@@ -8,7 +8,7 @@ GIT
 
 GIT
   remote: git://github.com/RuanShan/spree_multi_site.git
-  revision: 5f8cd7c6b489bb7191dc258aa0d196218b563595
+  revision: 4035d83c28340ad142ce317c0e22ae273b9f3ad0
   branch: 2-0-stable
   specs:
     spree_multi_site (2.0.4)
