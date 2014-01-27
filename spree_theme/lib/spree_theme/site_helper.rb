@@ -1,20 +1,22 @@
 module SpreeTheme
   module SiteHelper
     extend ActiveSupport::Concern
-    included do     
+    included do
+      cattr_accessor :designshop_url
       belongs_to :template_theme, :foreign_key=>"theme_id"
       belongs_to :template_release, :foreign_key=>"template_release_id"
       attr_accessible :index_page,:theme_id
+      self.designshop_url = 'design.dalianshops.com'
     end
     
     module ClassMethods
       def designsite
-        find_by_domain 'design.dalianshops.com'
+        find_by_domain designshop_url
       end     
          
       def current
         if Thread.current[:spree_site].nil?
-          website = self.find_or_initialize_by_domain_and_name('design.dalianshops.com','DalianShops Design Site' )
+          website = self.find_or_initialize_by_domain_and_name(designshop_url,'DalianShops Design Site' )
           if website.new_record?
             website.theme_id = 1
             website.save!

@@ -2,16 +2,15 @@ module Spree
   class TemplateThemesController < Spree::StoreController
     before_filter :add_view_path
     delegate :taxon_class,:site_class, :to=>:"SpreeTheme"
-    # index of frontend 
+
     def page
-      #@lg = PageGenerator.generator( @menu, @theme, {:resource=>(@resource.nil? ? nil:@resource),:controller=>self})
-      #@lg.context.each_pair{|key,val|
-      #  instance_variable_set( "@#{key}", val)
-      #}  
+      if SpreeTheme.site_class.current.dalianshops?
+        redirect_to new_site_path      
+      end
     end  
     
     def under_construction  
-      logger.debug "request.env[/devise/]= #{request.env['devise.mapping']},#{warden.inspect}"   
+      #logger.debug "request.env[/devise/]= #{request.env['devise.mapping']},#{warden.inspect}"   
       #require spree_auth_devise
       render "under_construction", layout:"under_construction"            
     end

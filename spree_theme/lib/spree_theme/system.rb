@@ -27,7 +27,8 @@ module SpreeTheme::System
   end
 
   def initialize_template
-#Rails.logger.debug "request.fullpath=#{request.fullpath}"
+    return if SpreeTheme.site_class.current.dalianshops?
+    #Rails.logger.debug "request.fullpath=#{request.fullpath}"
     # fullpath may contain ?n=www.domain.com    
     return if request.fullpath =~ /^\/under_construction/
     return if request.fullpath =~ /^\/create_admin_session/
