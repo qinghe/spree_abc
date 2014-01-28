@@ -3,9 +3,14 @@ rake db:seed RAILS_ENV=local_staging
 rake spree_theme:reload_section_piece  RAILS_ENV=local_staging
 rake spree_theme:import_theme SEED_PATH=1 RAILS_ENV=local_staging
 
+
+https://help.github.com/articles/deploying-with-capistrano
+
 1. configure mysql to support utf-8
   [mysqld]
   character_set_server= utf8    
 http://www.dotkam.com/2008/09/14/configure-rails-and-mysql-to-support-utf-8/
 
-2. yum install libxml2
+2. yum install libxml2-devel libxslt-devel
+  nokogiri required 
+  https://github.com/sparklemotion/nokogiri

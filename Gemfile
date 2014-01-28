@@ -74,8 +74,8 @@ group :test, :development do
   gem 'mail_view'  #, :git => 'https://github.com/37signals/mail_view.git'
 end
 
-#gem 'execjs'
-#gem 'therubyracer' 
+#execjs need js runtime
+gem 'therubyracer' 
 
 group :development do
   gem 'capistrano'

@@ -209,6 +209,7 @@ GEM
     kaminari (0.14.1)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
+    libv8 (3.16.14.3)
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
@@ -272,6 +273,7 @@ GEM
       polyamorous (~> 0.6.0)
     rdoc (3.12.2)
       json (~> 1.4)
+    ref (1.0.5)
     ruby-graphviz (1.0.9)
     ruby-hmac (0.4.0)
     sass (3.2.10)
@@ -295,6 +297,9 @@ GEM
     stringex (1.5.1)
     term-ansicolor (1.2.2)
       tins (~> 0.8)
+    therubyracer (0.12.0)
+      libv8 (~> 3.16.14.0)
+      ref
     thor (0.18.1)
     tilt (1.4.1)
     tins (0.13.1)
@@ -336,4 +341,5 @@ DEPENDENCIES
   spree_china_checkout!
   spree_multi_site!
   spree_theme!
+  therubyracer
   uglifier (>= 1.0.3)
