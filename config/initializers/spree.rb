@@ -20,4 +20,4 @@ Spree.user_class = "Spree::User"
 SpreeTheme.site_class = "Spree::Site"
 SpreeTheme.taxon_class = "Spree::Taxon"
 #TODO uncomment it after complete the db/sample
-SpreeMultiSite::Config.seed_dir= File.join(Rails.application.root,'db')
+SpreeMultiSite::Config.seed_dir= File.join(SpreeAbc::Application.root,'db')
