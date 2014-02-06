@@ -30,7 +30,8 @@ module Spree
     preference :allow_ssl_in_development_and_test, :boolean, default: false
 #    preference :allow_ssl_in_production, :boolean, default: true
     preference :allow_ssl_in_production, :boolean, default: false
-    preference :allow_ssl_in_staging, :boolean, default: true
+#    preference :allow_ssl_in_staging, :boolean, default: true
+    preference :allow_ssl_in_staging, :boolean, default: false
     preference :alternative_billing_phone, :boolean, default: false # Request extra phone for bill addr
     preference :alternative_shipping_phone, :boolean, default: false # Request extra phone for ship addr
     preference :always_put_site_name_in_title, :boolean, default: true
