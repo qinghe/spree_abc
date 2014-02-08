@@ -71,6 +71,7 @@ gem 'spree_china_checkout',   :path => './spree_china_checkout'
 
 
 group :test, :development do
+  gem 'rspec-rails'
   gem 'mail_view'  #, :git => 'https://github.com/37signals/mail_view.git'
 end
 

@@ -19,3 +19,6 @@ rake spree_theme:import_theme RAILS_ENV=local_staging SEED_PATH=1
 5. 导出整个数据库
   mysqldump -u 用户名 -p 数据库名 > 导出的文件名    
   mysqldump -u root -p spree_abc_production > abc.sql
+  
+6. setup test env
+   rake db:test:clone
