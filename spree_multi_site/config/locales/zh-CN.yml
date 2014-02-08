@@ -1,0 +1,18 @@
+--- 
+zh-CN:
+  site_account: Site Account
+  site_layout: Site Layout
+  site: 网络商店
+  site_has_sample: 填充示例数据
+  new_site: 创建您的商店
+  load_sample: 
+    test_mailer:
+      test_email:
+        load_sample: 载入示例数据
+    loading_sample: 系统正在为您加载示例产品信息, 请您登录注册使用的邮箱查询我们的邮件通知!
+  activerecord: 
+    attributes: 
+      site: 
+        name: 给您的商店取个名字
+        short_name: 二级域名
+        domain: 网店域名 

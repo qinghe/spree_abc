@@ -1,0 +1,12 @@
+<%
+orders = Spree::Order.all(:include=>[:ship_address])
+sf_ground = Spree::ShippingMethod.first
+%>
+<% 1.upto(100) do |i| %>
+shipment_<%= i %>:
+  number: H<%= Array.new(11){rand(11)}.join %>
+  order_id: <%= orders[i-1].id %>
+  shipping_method_id: <%= sf_ground.id%>
+  address_id: <%= orders[i-1].ship_address.id %>
+  state: pending
+<% end %>

@@ -1,0 +1,16 @@
+Folder and files description
+
+
+default
+  contain default data, those data shared be each site.
+firstshop
+  user access a site, actually a page to apply shop information,
+  for now, we just load the first shop for that purpose.
+sample
+  while user apply for new online shop, he could decide wether load sample data as well.
+  this folder contain all sample data. copied from spree/sample/db/sample 
+seeds.rb
+
+  task 'rake db:seed' would load this file to load seeds.
+
+  

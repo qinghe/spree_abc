@@ -11,3 +11,11 @@ rake spree_theme:import_theme RAILS_ENV=local_staging SEED_PATH=1
   http://makandracards.com/makandra/10923-how-to-inspect-controller-filter-chains-in-specs
   
   ex. Spree::UsersController._process_action_callbacks.select { |c| c.kind == :before }.map(&:filter)
+
+4. how analyze rails log?
+  https://github.com/wvanbergen/request-log-analyzer
+  request-log-analyzer production.log --format rails3
+
+5. 导出整个数据库
+  mysqldump -u 用户名 -p 数据库名 > 导出的文件名    
+  mysqldump -u root -p spree_abc_production > abc.sql

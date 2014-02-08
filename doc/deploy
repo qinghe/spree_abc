@@ -1,5 +1,7 @@
+
 CREATE SCHEMA `spree_abc_xxx` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ;
 
+https://github.com/capistrano/capistrano/wiki/Capistrano-Tasks
 cap local_staging deploy
 rake db:seed RAILS_ENV=local_staging
 rake spree_theme:reload_section_piece  RAILS_ENV=local_staging
