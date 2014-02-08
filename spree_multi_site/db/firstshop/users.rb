@@ -1,3 +1,4 @@
+#copy from spree_auth_devise/db/defaults/users
 require 'highline/import'
 
 # see last line where we create an admin if there is none, asking for email and password
@@ -57,9 +58,8 @@ def create_admin_user
   else
     admin = Spree.user_class.create(attributes,:without_protection => true)
     # create an admin role and and assign the admin user to that role
-    # legacy_user have no role
-    #role = Spree::Role.find_or_create_by_name 'admin'
-    #admin.roles << role
+    role = Spree::Role.find_or_create_by_name 'admin'
+    admin.spree_roles << role
     admin.save
   end
 end

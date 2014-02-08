@@ -15,8 +15,9 @@ describe Spree::Site do
     
   it "should create site and user" do
     user_attributes = {"email"=>"test@abc.com", "password"=>"a12345z", "password_confirmation"=>"a12345z"}
-    @site.users_attribute = user_attributes
-    @site.should be_save
+    @site.users<< Spree::User.new(user_attributes)
+    @site.save
+    @site.should_not be_new_record
     @site.users.first.email.should eq(user_attributes['email'])
   end
   
@@ -24,6 +25,13 @@ describe Spree::Site do
     @site.save!
     @site.load_sample
   end
+  
+  it "should has associations" do
+    @site.users.build.should 
+    @site.products.build.should
+    @site.zones.build.should
+    
+  end  
   
   it "shold remove samples" do
     
@@ -42,7 +50,10 @@ describe Spree::Site do
   end
   
   it "shold create two site and load samples for them" do
-    
+    @site1 = Spree::Site.create(:name=>'Site1',:domain=>'www.site1.net',:short_name=>'site1')
+    @site2 = Spree::Site.create(:name=>'Site1',:domain=>'www.site1.net',:short_name=>'site2')
+    @site1.load_sample
+    @site2.load_sample
     #product image copied and in right folder.
   end
   

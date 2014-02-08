@@ -1,7 +1,7 @@
 require 'spree_core'
 require 'spree_multi_site/engine'
 require 'spree_multi_site/multi_site_system'
-require 'spree_multi_site/multi_site_hooks'
 require 'spree_multi_site/paper_clip_interpolate_site'
 require 'spree_multi_site/permalinks'
 require 'spree_multi_site/attribute_validator_cleaner'
+require 'spree_multi_site/middleware'

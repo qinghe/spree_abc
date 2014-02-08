@@ -3,6 +3,6 @@
   <h6><%= t(:new_site) %></h6>
 <%= form_for :site, :url => new_site_path do |f| %>
   <%= render :partial => "form", :locals => { :f => f } %>
-  <p><%= f.submit t(:create), :class => 'button primary' %></p>
+  <p><%= f.submit Spree.t(:create), :class => 'button primary' %></p>
 <% end %>
 </div>

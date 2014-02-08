@@ -5,6 +5,6 @@ Rake::Task['db:load_dir'].reenable
 Rake::Task['db:load_dir'].invoke(default_path)
 
 # For easy to test, load first shop while load seeds. 
-default_path = File.join(SpreeMultiSite::Config.seed_dir, 'firstshop')
-Rake::Task['db:load_dir'].reenable
-Rake::Task['db:load_dir'].invoke(default_path)
+#default_path = File.join(SpreeMultiSite::Config.seed_dir, 'firstshop')
+#Rake::Task['db:load_dir'].reenable
+#Rake::Task['db:load_dir'].invoke(default_path)

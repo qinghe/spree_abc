@@ -1,11 +1,11 @@
 module Spree
-    class SitesController< BaseController
+    class SitesController< StoreController
       def new
         if request.get?
-          @site = Spree::Site.new
+          @site = Site.new
           @user = @site.users.build
         else
-          @site = Spree::Site.new(params[:site])
+          @site = Site.new(params[:site])
           @user = Spree.user_class.new(params[:user])
           @site.users << @user
           if @site.save
@@ -23,7 +23,7 @@ module Spree
       end
       
       def show
-        @site = Spree::Site.find(params[:id])
+        @site = Site.find(params[:id])
         render :after_new
       end
            
