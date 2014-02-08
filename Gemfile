@@ -50,7 +50,7 @@ gem 'spree_auth_devise', :github => "spree/spree_auth_devise", :branch => "2-0-s
 # bundle config require specified branch, or warning message as below
 # Cannot use local override for spree_multi_site at ../spree_multi_site because :branch is not specified in Gemfile. Specify a branch or use `bundle config --delete` to remove the local override
   
-gem 'spree_multi_site',  :github => "RuanShan/spree_multi_site", :branch=>"2-0-stable"
+gem 'spree_multi_site',   :path => './spree_multi_site'
 
 gem "friendly_id" # spree_theme require it.
 gem 'spree_theme',   :path => './spree_theme'

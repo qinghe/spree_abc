@@ -7,14 +7,6 @@ GIT
       spree_core (~> 2.0.4)
 
 GIT
-  remote: git://github.com/RuanShan/spree_multi_site.git
-  revision: 4035d83c28340ad142ce317c0e22ae273b9f3ad0
-  branch: 2-0-stable
-  specs:
-    spree_multi_site (2.0.4)
-      spree_core (~> 2.0.4)
-
-GIT
   remote: git://github.com/spree/spree.git
   revision: 406836beb874da97b500abdaaed52786ea1a543a
   branch: 2-0-stable
@@ -87,6 +79,12 @@ PATH
   remote: ./spree_china_checkout
   specs:
     spree_china_checkout (2.0.4)
+      spree_core (~> 2.0.4)
+
+PATH
+  remote: ./spree_multi_site
+  specs:
+    spree_multi_site (2.0.4)
       spree_core (~> 2.0.4)
 
 PATH
