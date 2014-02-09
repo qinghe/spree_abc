@@ -71,10 +71,17 @@ gem 'spree_china_checkout',   :path => './spree_china_checkout'
 
 
 group :test, :development do
-  gem 'rspec-rails'
   gem 'mail_view'  #, :git => 'https://github.com/37signals/mail_view.git'
 end
 
+group :test do
+  gem 'rspec-rails'
+  gem 'database_cleaner'
+  gem 'factory_girl'
+  gem 'capybara'
+  gem 'capybara-accessible'  
+  gem 'webmock'
+end
 #execjs need js runtime
 gem 'therubyracer' 
 

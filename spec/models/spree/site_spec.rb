@@ -1,6 +1,10 @@
 require 'spec_helper'
 
 describe Spree::Site do
+  before do
+    SpreeMultiSite::Config.seed_dir= File.join(SpreeAbc::Application.root,'db') 
+  end
+  
   before(:each) do
     @site = Spree::Site.new(:name=>'ABC',:domain=>'www.abc.net',:short_name=>'shop')
   end
@@ -27,9 +31,9 @@ describe Spree::Site do
   end
   
   it "should has associations" do
-    @site.users.build.should 
-    @site.products.build.should
-    @site.zones.build.should
+    @site.users.build.should be_present
+    @site.products.build.should be_present
+    @site.zones.build.should be_present
     
   end  
   
@@ -40,13 +44,12 @@ describe Spree::Site do
     Spree::Site.current = @site
     Spree::Product.count.should eq(0)
     #Spree::Variant.count.should eq(0)
-    Spree::Zone.count.should eq(0)
-    Spree::ZoneMember.count.should eq(0)
-    Spree::StateChange.count.should eq(0)
-    #product variants
-    #taxonomy, taxon
-    #zone,zone_member
-    #state_changes
+    Spree::Zone.count.should eq(0)    
+    #Spree::StateChange.count.should eq(0)
+    #product -> variants
+    #taxonomy -> taxon
+    #zone -> zone_member
+    #order -> state_changes
   end
   
   it "shold create two site and load samples for them" do
