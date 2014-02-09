@@ -15,7 +15,7 @@ bundle exec rake spree:install:migrations
 
 bundle exec rake spree_api:install:migrations
 
-bundle exec rake spree_devise_auth:install:migrations
+bundle exec rake spree_auth:install:migrations
 
 bundle exec rake spree_multi_site:install:migrations
 

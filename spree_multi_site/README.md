@@ -42,9 +42,14 @@ Be sure to bundle your dependencies and then create a dummy test app for the spe
     # SpreeMultiSite::Engine.load_seed if defined?(SpreeMultiSite)
  
     # if you delete all migrations in db/migrate, try all belows to recovery
-    
+    bundle exec rake spree:install:migrations
+    bundle exec rake spree_api:install:migrations
+    bundle exec rake spree_auth:install:migrations
+    bundle exec rake spree_multi_site:install:migrations
+
     # load default data, no sample
-    $ bundle rake db:reset
+    $ rake db:test:clone
+    $ rake db:seed RAILS_ENV=test
     
     After load default&first seeds, you could test manually by providing those parameters or cookies,
     params[:n]: n is 'short_name.dalianshops.com'

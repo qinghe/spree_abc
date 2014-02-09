@@ -7,7 +7,21 @@ describe Spree::Site do
 
   it "should be valid" do
     @site.should be_valid
+    @site.domain = ''
+    @site.should be_valid
+  
+    @site.domain = nil
+    @site.should be_valid
+    
+    @site.domain = 'www.abc.net'
+    @site.save!
+    
+    site2 = @site.dup
+    site2.should be_invalid
   end
+  
+  
+  
   it "should not be valid" do
     @site.short_name = nil
     @site.valid?.should be_false
@@ -27,9 +41,9 @@ describe Spree::Site do
   end
   
   it "should has associations" do
-    @site.users.build.should 
-    @site.products.build.should
-    @site.zones.build.should
+    @site.users.build.should be_present
+    @site.products.build.should be_present
+    @site.zones.build.should be_present
     
   end  
   
@@ -50,8 +64,8 @@ describe Spree::Site do
   end
   
   it "shold create two site and load samples for them" do
-    @site1 = Spree::Site.create(:name=>'Site1',:domain=>'www.site1.net',:short_name=>'site1')
-    @site2 = Spree::Site.create(:name=>'Site1',:domain=>'www.site1.net',:short_name=>'site2')
+    @site1 = Spree::Site.create!(:name=>'Site1',:domain=>'www.site1.net',:short_name=>'site1')
+    @site2 = Spree::Site.create!(:name=>'Site1',:domain=>'www.site2.net',:short_name=>'site2')
     @site1.load_sample
     @site2.load_sample
     #product image copied and in right folder.
