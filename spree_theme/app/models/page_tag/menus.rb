@@ -32,11 +32,11 @@ module PageTag
       self.menus_cache = {}
     end
 
-    # get menu root assigned to section instance or ancestors
-    #  containerA(menu) - taxonomy_name
-    #                  - hmenu
-    #  containerB- hmenu(menu)
-    #  in case above all works
+    # get menu root assigned to section instance 
+    # 1. containerA(menu) - taxonomy_name
+    #                     - hmenu
+    # 2. containerB- hmenu(menu)
+    # for menu assignment easy, method 1 is not support any more   
     def get( wrapped_page_layout, resource_position=0  )
       key = wrapped_page_layout.to_key 
       unless menus_cache.key? key
@@ -48,9 +48,15 @@ module PageTag
         end
         menus_cache[key] = menu_tree     
       end
+      
+      if menus_cache[key].blank?
+      #get default menu
+        
+      end
+      
       if menus_cache[key].present?
         WrappedMenu.new( self, menus_cache[key].first)
-      else
+      else        
         nil  
       end
     end
