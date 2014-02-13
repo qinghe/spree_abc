@@ -1,7 +1,26 @@
 module Spree
   module Context
     module Taxon
+      extend ActiveSupport::Concern
       include Spree::Context::Base
+      
+      included do
+        cattr_accessor :context_routes
+         #(:either, :list,:detail,:cart,:account,:checkout, :thanks,:signup,:login)
+        self.context_routes = { 
+          ContextEnum.home =>"/",
+          ContextEnum.account =>"/account",
+          ContextEnum.checkout =>"/checkout",
+          ContextEnum.cart =>"/cart",
+          ContextEnum.signup =>"/signup",
+          ContextEnum.login =>"/login"
+          }
+                  
+        def path
+          context_routes[current_context] || "/#{self.id}"     
+        end
+      end
+      
             # context of default taxon vary in request_fullpath
       # ex. /cart  context is cart
       #     /user  context is account
@@ -31,7 +50,7 @@ module Spree
             ContextEnum.list
         end
       end
-      
+  
     end
   end
   

@@ -1,12 +1,4 @@
 class DefaultTaxon < SpreeTheme.taxon_class
-  cattr_accessor :context_routes
-   #(:either, :list,:detail,:cart,:account,:checkout, :thanks,:signup,:login)
-  self.context_routes = { ContextEnum.account =>"/account",
-    ContextEnum.checkout =>"/checkout",
-    ContextEnum.cart =>"/cart",
-    ContextEnum.signup =>"/signup",
-    ContextEnum.login =>"/login"
-    }
 
   class DefaultTaxonRoot < DefaultTaxon
     attr_accessor :default_taxon
@@ -45,7 +37,7 @@ class DefaultTaxon < SpreeTheme.taxon_class
       []
     end
   end
-    
+     
   def name
     translated_name = ""
     some_context = current_context

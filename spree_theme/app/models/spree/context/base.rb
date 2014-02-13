@@ -2,7 +2,7 @@ module Spree
   module Context
     module Base
       # use string instead of symbol, parameter from client is string 
-      ContextEnum=Struct.new(:either, :list,:detail,:cart,:account,:checkout, :thanks,:signup,:login)[:"", :list,:detail,:cart,:account,:checkout, :thanks,:signup,:login]
+      ContextEnum=Struct.new(:either,:home, :list,:detail,:cart,:account,:checkout, :thanks,:signup,:login)[:"", :home, :list,:detail,:cart,:account,:checkout, :thanks,:signup,:login]
       
       #context may be array, datasource is nil for array.
       ContextDataSourceMap = { ContextEnum.list=>[:gpvs],ContextEnum.detail=>[:this_product]}

@@ -24,6 +24,10 @@ describe DefaultTaxon do
     cart.current_context.should eq DefaultTaxon::ContextEnum.cart
   end
   
+  it "should has path" do
+    taxon.path.should be_present
+  end
+  
   #TODO
   # test add_section_piece, section_param should be added
 end
