@@ -765,7 +765,7 @@ ActiveRecord::Schema.define(:version => 20131219133336) do
     t.string   "meta_description"
     t.string   "meta_keywords"
     t.integer  "depth"
-    t.integer  "mtype",             :default => 0
+    t.integer  "page_context",             :default => 0
   end
 
   add_index "spree_taxons", ["parent_id"], :name => "index_taxons_on_parent_id"

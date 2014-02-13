@@ -102,7 +102,7 @@ class PageGenerator
     url = nil
     if model.kind_of?( SpreeTheme.taxon_class )
       
-      url= case model.mtype
+      url= case model.page_context
         when 1 #home
           [self.url_prefix]  
         when 2 #cart

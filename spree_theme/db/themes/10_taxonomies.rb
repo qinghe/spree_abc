@@ -17,21 +17,21 @@ taxons = [
     :name => "Home",
     :taxonomy => main_menu,
     :parent => "MainMenu",
-    :mtype => 1,
+    :page_context => 1,
     :position => 1
   },
   {
     :name => "Login",
     :taxonomy => unlogged,
     :parent => "Unlogged",
-    :mtype => 6,
+    :page_context => 6,
     :position => 1
   },
   {
     :name => "My account",
     :taxonomy => logged,
     :parent => "Logged",
-    :mtype => 7,
+    :page_context => 7,
     :position => 1
   },
 ]
