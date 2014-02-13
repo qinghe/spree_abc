@@ -7,40 +7,19 @@ https://github.com/spree/spree/commit/a398bc289bb6008c177452fd1d86b652ded96dbd
  
 20140122
 *1. for design site, disable editor if logged in user is not admin
+1. new shop no need to add taxon for each context during import theme. 
+    a. taxon, section, page_layout has context
+    b. system has default taxon tree for each context, theme could use it if no taxon assigned. 
+    
+    remove page_layout.current_context, fix related method
+    rename taxon.mtype to page_context.
+    move taxon routes into one place
+    
 1.1 improve spree_theme for first shop   
 2. prepare for import, how to handle logo image?  remove upload image for now.
 3. assign taxon to taxonomy name.
 4. complete theme 1
 5. deploy spree_abc on vps.
  
-DEBUG [54179d57]  /usr/local/rvm/rubies/ruby-1.9.3-p448/bin/ruby /webroot/spree_abc2/shared/bundle/ruby/1.9.1/bin/rake assets:precompile:all RAILS_ENV=staging RAILS_GROUPS=assets
-DEBUG [54179d57]  rake aborted!
-DEBUG [54179d57]  Could not find a JavaScript runtime. See https://github.com/sstephenson/execjs for a list of available runtimes.
-DEBUG [54179d57]  /webroot/spree_abc2/shared/bundle/ruby/1.9.1/gems/execjs-2.0.1/lib/execjs/runtimes.rb:51:in `autodetect'
-DEBUG [54179d57]  /webroot/spree_abc2/shared/bundle/ruby/1.9.1/gems/execjs-2.0.1/lib/execjs.rb:5:in `<module:ExecJS>'
-DEBUG [54179d57]  /webroot/spree_abc2/shared/bundle/ruby/1.9.1/gems/execjs-2.0.1/lib/execjs.rb:4:in `<top (required)>'
-DEBUG [54179d57]  /webroot/spree_abc2/shared/bundle/ruby/1.9.1/gems/coffee-script-2.2.0/lib/coffee_script.rb:1:in `require'
-DEBUG [54179d57]  /webroot/spree_abc2/shared/bundle/ruby/1.9.1/gems/coffee-script-2.2.0/lib/coffee_script.rb:1:in `<top (required)>'
-DEBUG [54179d57]  /webroot/spree_abc2/shared/bundle/ruby/1.9.1/gems/coffee-script-2.2.0/lib/coffee-script.rb:1:in `require'
-DEBUG [54179d57]  /webroot/spree_abc2/shared/bundle/ruby/1.9.1/gems/coffee-script-2.2.0/lib/coffee-script.rb:1:in `<top (required)>'
-DEBUG [54179d57]  /webroot/spree_abc2/shared/bundle/ruby/1.9.1/gems/coffee-rails-3.2.2/lib/coffee-rails.rb:1:in `require'
-DEBUG [54179d57]  /webroot/spree_abc2/shared/bundle/ruby/1.9.1/gems/coffee-rails-3.2.2/lib/coffee-rails.rb:1:in `<top (required)>'
-DEBUG [54179d57]  /usr/local/rvm/gems/ruby-1.9.3-p448@global/gems/bundler-1.3.5/lib/bundler/runtime.rb:72:in `require'
-DEBUG [54179d57]  /usr/local/rvm/gems/ruby-1.9.3-p448@global/gems/bundler-1.3.5/lib/bundler/runtime.rb:72:in `block (2 levels) in require'
-DEBUG [54179d57]  /usr/local/rvm/gems/ruby-1.9.3-p448@global/gems/bundler-1.3.5/lib/bundler/runtime.rb:70:in `each'
-DEBUG [54179d57]  /usr/local/rvm/gems/ruby-1.9.3-p448@global/gems/bundler-1.3.5/lib/bundler/runtime.rb:70:in `block in require'
-DEBUG [54179d57]  /usr/local/rvm/gems/ruby-1.9.3-p448@global/gems/bundler-1.3.5/lib/bundler/runtime.rb:59:in `each'
-DEBUG [54179d57]  /usr/local/rvm/gems/ruby-1.9.3-p448@global/gems/bundler-1.3.5/lib/bundler/runtime.rb:59:in `require'
-DEBUG [54179d57]  /usr/local/rvm/gems/ruby-1.9.3-p448@global/gems/bundler-1.3.5/lib/bundler.rb:132:in `require'
-DEBUG [54179d57]  /webroot/spree_abc2/releases/20140127160317/config/application.rb:7:in `<top (required)>'
-DEBUG [54179d57]  /webroot/spree_abc2/releases/20140127160317/Rakefile:5:in `require'
-DEBUG [54179d57]  /webroot/spree_abc2/releases/20140127160317/Rakefile:5:in `<top (required)>'
-DEBUG [54179d57]  (See full trace by running task with --trace)
-DEBUG [54179d57]  rake aborted!
-DEBUG [54179d57]  Command failed with status (1): [/usr/local/rvm/rubies/ruby-1.9.3-p448/bin/...]
-DEBUG [54179d57]  /webroot/spree_abc2/shared/bundle/ruby/1.9.1/gems/actionpack-3.2.14/lib/sprockets/assets.rake:12:in `ruby_rake_task'
-DEBUG [54179d57]  /webroot/spree_abc2/shared/bundle/ruby/1.9.1/gems/actionpack-3.2.14/lib/sprockets/assets.rake:21:in `invoke_or_reboot_rake_task'
-DEBUG [54179d57]  /webroot/spree_abc2/shared/bundle/ruby/1.9.1/gems/actionpack-3.2.14/lib/sprockets/assets.rake:29:in `block (2 levels) in <top (required)>'
-DEBUG [54179d57]  Tasks: TOP => assets:precompile
-DEBUG [54179d57]  (See full trace by running task with --trace)
+
  

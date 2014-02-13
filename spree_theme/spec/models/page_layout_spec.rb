@@ -46,7 +46,6 @@ describe Spree::PageLayout do
       else
         node.current_contexts.should eq(contexts)  
       end
-      
     end
   end
 
@@ -75,5 +74,18 @@ describe Spree::PageLayout do
     for section in sections
       section.root_id.should == page_layout.section_id
     end
+  end
+  
+  it "should update datasource" do
+    data_source_gpvs = Spree::PageLayout::ContextDataSourceMap[Spree::PageLayout::ContextEnum.list].first
+    product_list = Spree::PageLayout.find_by_section_context( Spree::PageLayout::ContextEnum.list)
+    product_list.update_data_source( Spree::PageLayout::DataSourceEmpty)
+    product_list.data_source.should be_blank
+    product_list.update_data_source( data_source_gpvs )
+    product_list.current_data_source.should eq data_source_gpvs
+  end
+  
+  it "should get available data sources" do
+    
   end
 end

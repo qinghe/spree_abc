@@ -317,13 +317,7 @@ module Spree
         end
         @current_contexts
       end
-
-      # * current context of section
-      # * section_context is inheritable value, current_context means self.section_context or inherited value 
-      def current_context
-       self.section_context.present? ? self.section_context.to_sym : inherited_section_context.to_sym
-      end
-            
+           
       # * params
       #   * new_context - one value of Contexts or an array of contexts 
       def update_section_context( new_context)
@@ -382,9 +376,8 @@ module Spree
       def update_data_source( new_data_source )
         # update self data_source
         original_data_source = self.data_source 
-  #      self.data_source = new_data_source
+        self.data_source = new_data_source
         if new_data_source.blank? or self.is_valid_data_source?
-  Rails.logger.debug "update_data_source, section_context=#{self.section_context}."        
           self.update_attribute(:data_source,new_data_source )
           #verify descendants, fix them.
           verify_required_descendants = self.descendants.where('data_source!=?', DataSourceEmpty)
@@ -393,7 +386,6 @@ module Spree
               node.update_data_source(DataSourceEmpty)
             end
           end
-          
         else
           self.data_source = original_data_source
         end
@@ -405,7 +397,7 @@ module Spree
         is_valid = false
         if self.current_data_source != DataSourceEmpty
           if self.inherited_data_source == DataSourceEmpty # top level data source 
-            available_data_sources =  ContextDataSourceMap[self.current_context]
+            available_data_sources =  ContextDataSourceMap[self.current_contexts.first]
             if available_data_sources.present?
               is_valid = ( available_data_sources.include? self.current_data_source )
             end          
@@ -421,13 +413,15 @@ module Spree
       # get available data sources for self
       def available_data_sources
         data_sources = []
-        the_context = self.current_context 
-        if  the_context != ContextEnum.either
-          the_data_source = self.inherited_data_source
-          if the_data_source == DataSourceEmpty # top level data source 
-            data_sources =  ContextDataSourceMap[the_context]
-          else
-            data_sources = DataSourceChainMap[the_data_source]
+        if self.current_contexts.size == 1
+          the_context = self.current_contexts.first 
+          if  the_context != ContextEnum.either
+            the_data_source = self.inherited_data_source
+            if the_data_source == DataSourceEmpty # top level data source 
+              data_sources =  ContextDataSourceMap[the_context]
+            else
+              data_sources = DataSourceChainMap[the_data_source]
+            end
           end
         end
         data_sources
