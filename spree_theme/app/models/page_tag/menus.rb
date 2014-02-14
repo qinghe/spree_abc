@@ -4,12 +4,12 @@ module PageTag
       self.accessable_attributes=[:id,:name]
       delegate *self.accessable_attributes, :to => :model
       delegate :taxonomy, :to => :model
+      
       def children
         self.model.children.collect{|item| WrappedMenu.new(self.collection_tag, item)}
       end
           
       # url link to the menu itme's page(each menu itme link to a page).
-      
       def current?
         self.collection_tag.template_tag.page_generator.menu.id == self.model.id
       end
@@ -22,7 +22,6 @@ module PageTag
       def path
         self.collection_tag.template_tag.page_generator.build_path( self.model)
       end
-      
     end
     attr_accessor :menus_cache #store all menus of template, key is page_layout_id, value is menu tree
     attr_accessor :template_tag
