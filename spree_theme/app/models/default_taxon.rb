@@ -32,6 +32,9 @@ class DefaultTaxon < SpreeTheme.taxon_class
       DefaultTaxonRoot.new( self )
     end
     
+    def self_and_descendants
+      [root, self]
+    end
     # menu section would call default_taxon.children
     def children
       []
