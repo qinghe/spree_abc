@@ -12,10 +12,13 @@ module PageTag
       delegate *self.accessable_attributes, :to => :page_layout
       
       def initialize(collection_tag, page_layout, section_id)
-        
         self.collection_tag = collection_tag
         self.page_layout = page_layout      
         self.section_id = section_id
+      end
+      
+      def section_piece
+        page_layout.sections.find(section_id, :include=>[:section_piece])
       end
             
       #Usage: css selector for current section piece instance
