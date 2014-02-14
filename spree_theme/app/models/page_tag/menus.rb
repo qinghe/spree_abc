@@ -50,8 +50,13 @@ module PageTag
       end
       
       if menus_cache[key].blank?
-      #get default menu
-        
+        # get default menu
+        if wrapped_page_layout.section_piece.present?
+          wrapped_resource = wrapped_page_layout.section_piece.wrapped_resources[resource_position]
+            if wrapped_resource.present?
+              menus_cache[key] = DefaultTaxon.instance_by_context( wrapped_resource.context ).self_and_descendants
+            end
+        end
       end
       
       if menus_cache[key].present?
