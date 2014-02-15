@@ -1,4 +1,3 @@
-#page_layout.templates
 require 'spec_helper'
 describe Spree::PageLayout do
   let (:page_layout) { Spree::PageLayout.first }

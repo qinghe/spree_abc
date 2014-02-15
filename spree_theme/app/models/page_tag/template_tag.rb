@@ -17,7 +17,7 @@ module PageTag
         self.section_id = section_id
       end
       
-      def section_piece
+      def section
         page_layout.sections.find(section_id, :include=>[:section_piece])
       end
             

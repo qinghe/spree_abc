@@ -1,6 +1,11 @@
 require 'spec_helper'
 describe Spree::TemplateTheme do
   let (:template) { Spree::TemplateTheme.first }
+  
+  it "has document_path" do
+    template.document_path.should be_present
+  end
+  
   it "has right param_values" do
     section_params = template.page_layout.self_and_descendants.map{|page_layout| 
       page_layout.section.self_and_descendants.map{|section| section.section_params }.flatten 
@@ -77,7 +82,9 @@ Rails.logger.debug "............strart test import................."
     template_file = Spree::TemplateFile.first
     template.assign_resource( template_file, template.page_layout )
     template.unassign_resource( Spree::TemplateFile, template.page_layout )
-    template.assigned_resource_id( Spree::TemplateFile, template.page_layout ).should eq 0    
+    template.assigned_resource_id( Spree::TemplateFile, template.page_layout ).should eq 0
+    
+    template.assigned_resources( Spree::TemplateFile, template.page_layout ).compact.should be_blank    
   end
 
   it "should update release id" do

@@ -16,8 +16,10 @@ class DefaultTaxon < SpreeTheme.taxon_class
   # * params
   #   * context - one of ContextEnum member
   def self.instance_by_context( context )
-    raise "unimplement" unless context_routes.key?( context )
-    request_fullpath = context_routes[context] 
+    unless context_routes.key?( context )
+      raise "unimplement for context:#{context}" 
+    end
+    request_fullpath = context_routes[context]  
     instance( request_fullpath )
   end
     

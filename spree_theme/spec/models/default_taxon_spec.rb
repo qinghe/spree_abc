@@ -19,13 +19,25 @@ describe DefaultTaxon do
   end
   
   it "instantiate by context" do
-    cart = DefaultTaxon.instance_by_context( DefaultTaxon::ContextEnum.cart )
-    cart.should be_a_kind_of DefaultTaxon
-    cart.current_context.should eq DefaultTaxon::ContextEnum.cart
+    DefaultTaxon::ContextEnum.each{|context| 
+      next if [ DefaultTaxon::ContextEnum.list, DefaultTaxon::ContextEnum.detail, DefaultTaxon::ContextEnum.thanks].include? context
+      taxon = DefaultTaxon.instance_by_context( context )
+      taxon.should be_a_kind_of DefaultTaxon
+      if context == DefaultTaxon::ContextEnum.either
+        taxon.current_context.should eq DefaultTaxon::ContextEnum.home
+      else
+        taxon.current_context.should eq context
+      end
+    }
   end
   
   it "should has path" do
     taxon.path.should be_present
+  end
+
+  it "should has self_and_descendant" do
+    taxon.self_and_descendants.should be_present
+    taxon.self_and_descendants.size.should eq 2
   end
   
   #TODO

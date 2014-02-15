@@ -87,9 +87,8 @@ in config/spree.rb
 
 Load sample
 -----------
-rake spree_theme:load_sample
-rake spree_theme:import_template
-
+rake spree_theme:load_samples
+rake spree_theme:import_theme
 
 Testing
 -------

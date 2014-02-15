@@ -47,6 +47,5 @@ describe Spree::Section do
       (sp.html_attributes(:disabled) - sp.section_piece_param.html_attributes).should be_blank
     end
     
-    
   end
 end

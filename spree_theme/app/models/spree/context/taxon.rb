@@ -13,7 +13,8 @@ module Spree
           ContextEnum.checkout =>"/checkout",
           ContextEnum.cart =>"/cart",
           ContextEnum.signup =>"/signup",
-          ContextEnum.login =>"/login"
+          ContextEnum.login =>"/login",
+          ContextEnum.either =>"/" #default_taxon for context :either is home
           }
                   
         def path
@@ -46,6 +47,8 @@ module Spree
             ContextEnum.thanks
           when /^\/signup/
             ContextEnum.signup
+          when '/'
+            ContextEnum.home
           else
             ContextEnum.list
         end

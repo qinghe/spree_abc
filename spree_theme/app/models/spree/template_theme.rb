@@ -294,14 +294,24 @@ Rails.logger.debug "#{file.page_layout_id},#{original_file.page_layout_id},#{fil
     
     begin 'assigned resource'
       # all resources used by this theme
-      # return menu roots/ images
+      # return menu roots/ images,  if none assgined, return [nil] or []
       def assigned_resources( resource_class, page_layout )
         resource_key = get_resource_class_key(resource_class)
         if assigned_resource_ids.try(:[],page_layout.id).try(:[],resource_key).present?
           resource_ids = assigned_resource_ids[page_layout.id][resource_key]
           #in prepare_import, we want to know assigned resources
           #current shop is not designshop, we need use unscope here.
-          resources = resource_class.unscoped.find resource_ids
+          if resource_ids.include? 0
+            resources = resource_ids.collect{|resource_id|
+              if resource_id > 0
+                resource_class.unscoped.find resource_id
+              else
+                nil  
+              end
+            }
+          else
+            resources = resource_class.unscoped.find resource_ids  
+          end
         end
         resources||[]
       end
@@ -339,7 +349,7 @@ Rails.logger.debug "#{file.page_layout_id},#{original_file.page_layout_id},#{fil
         resource_key = get_resource_class_key(resource_class)
         self.assigned_resource_ids[page_layout.id]||={}
         self.assigned_resource_ids[page_layout.id][resource_key]||=[]
-        self.assigned_resource_ids[page_layout.id][resource_key][resource_position] = nil
+        self.assigned_resource_ids[page_layout.id][resource_key][resource_position] = 0
         #Rails.logger.debug "assigned_resource_ids=#{assigned_resource_ids.inspect}"
         self.save! 
       end

@@ -8,7 +8,7 @@ module Spree
     # resources m:either/m:signup
     # return array of struct{:resource, :context}    
     def wrapped_resources
-        collection = section_piece.resources.split('/').collect{|res_ctx|
+        collection = resources.split('/').collect{|res_ctx|
           resource, context = res_ctx.split(':')
           Struct.new(:resource, :context)[resource, context.to_sym]          
         }      

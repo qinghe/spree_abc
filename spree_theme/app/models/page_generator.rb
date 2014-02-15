@@ -30,7 +30,7 @@ class PageGenerator
     
     #generator generate content: html,js,css
     # params:
-    #   theme_or_release: template theme or template release, a template may not released.
+    #   theme: template theme,  a template may not released.
     def previewer(menu, theme=nil,  options={})
       options[:preview] = true
       pg = self.new( theme, menu, options)
@@ -123,9 +123,7 @@ class PageGenerator
       path = self.theme.document_file_path(specific_attribute)      
       open(path, 'w') do |f|  f.puts page_content; end
     end
-    
   end
-
 
   private
   # erb context variables 

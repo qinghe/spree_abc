@@ -7,8 +7,7 @@ module Spree
     belongs_to :section  
     has_many :themes, :class_name => "TemplateTheme",:primary_key=>:root_id,:foreign_key=>:page_layout_root_id
     has_many :param_values
-    belongs_to :site
-    friendly_id :title, :use => :scoped, :scope => :site
+    friendly_id :title, :use => :scoped, :scope => :site_id
     has_many :full_set_nodes, :class_name =>'PageLayout', :foreign_key=>:root_id, :primary_key=>:root_id
     has_many :sections, :class_name =>'Section', :foreign_key=>:root_id, :primary_key=>:section_id
   
@@ -43,6 +42,11 @@ module Spree
     def self.verify_contexts( some_contexts, target_contexts )
       some_contexts = [some_contexts] unless some_contexts.kind_of?( Array )
       (target_contexts==[ContextEnum.either] || (target_contexts&some_contexts)==some_contexts)
+    end
+
+    #theme.document_path use it
+    def site
+      SpreeTheme.site_class.find( self.site_id )      
     end
     
     # a page_layout tree could be whole html or partial html, it depend's on self.section.section_piece.is_root?,  
