@@ -338,7 +338,7 @@ hmenu:
   id: 3
   is_selectable: "0"
   is_container: "1"
-  resources: m:either
+  resources: m
   html: |-
     <ul class="<%=g_piece_selector%>" >
     <% if @template.menu.present? %>
@@ -361,7 +361,7 @@ vmenu:
   id: 4
   is_selectable: "0"
   is_container: "1"
-  resources: m:either
+  resources: m
   title: vmenu
   slug: vmenu
   html: |-
@@ -692,7 +692,7 @@ taxonomy_name:
   slug: taxonomy-name
   is_selectable: "1"
   is_container: "0"
-  resources: m:either
+  resources: m
   html: |    
     <% if @template.menu.present? %>   
     <span ><%= @template.menu.taxonomy.name %> </span>
