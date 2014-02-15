@@ -43,7 +43,7 @@ class PageGenerator
     end
   end
   
-  def initialize( theme, menu, options={})
+  def initialize( theme, menu, options={})        
     self.theme = theme
     self.menu = menu
     self.resource = nil

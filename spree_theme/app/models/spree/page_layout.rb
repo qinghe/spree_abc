@@ -358,7 +358,9 @@ module Spree
       def context_detail?
         current_contexts.include? ContextEnum.detail
       end
-      
+      def context_either?
+        current_contexts.blank?
+      end
     end
   
     begin 'handle data source'

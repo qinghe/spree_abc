@@ -31,8 +31,9 @@ describe DefaultTaxon do
     }
   end
   
-  it "should has path" do
+  it "should has path/context" do
     taxon.path.should be_present
+    taxon.current_context.should be_present
   end
 
   it "should has self_and_descendant" do

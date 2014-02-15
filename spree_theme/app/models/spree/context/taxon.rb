@@ -53,7 +53,10 @@ module Spree
             ContextEnum.list
         end
       end
-  
+      
+      def context_either?
+        current_context ==ContextEnum.either
+      end
     end
   end
   

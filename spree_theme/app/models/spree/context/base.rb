@@ -22,7 +22,7 @@ module Spree
       end
 
       def context_either?
-        current_context ==ContextEnum.either
+        raise "unimplement"
       end
     end
   end
