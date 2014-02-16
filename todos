@@ -15,11 +15,15 @@ https://github.com/spree/spree/commit/a398bc289bb6008c177452fd1d86b652ded96dbd
     rename taxon.mtype to page_context.
     move taxon routes into one place
     
+    http://demo.david.com:3000/  account menu default taxon is not right.
+    http://demo.david.com:3000/  context home should be special one of list, or home have no product  
+    section_pieces.resource length =20
+    
 1.1 improve spree_theme for first shop   
 2. prepare for import, how to handle logo image?  remove upload image for now.
 3. assign taxon to taxonomy name.
 4. complete theme 1
 5. deploy spree_abc on vps.
  
-
- 
+bugs
+for unlogged customer, http://demo.david.com:3000/account would use layout 'abc_application'

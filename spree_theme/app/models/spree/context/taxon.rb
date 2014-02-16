@@ -5,6 +5,8 @@ module Spree
       include Spree::Context::Base
       
       included do
+        class_attribute :request_fullpath
+
         cattr_accessor :context_routes
          #(:either, :list,:detail,:cart,:account,:checkout, :thanks,:signup,:login)
         self.context_routes = { 
@@ -27,30 +29,50 @@ module Spree
       #     /user  context is account
       # return :either(detail or list), cart, checkout, register, login
       def current_context
-        #TODO verify thanks page.
-        case self.request_fullpath
-          when /^\/[\d]+\/[\d]+/
-            ContextEnum.detail
-          when /^\/cart/
-            ContextEnum.cart
-          when /^\/user/,/^\/password/ 
-            ContextEnum.account
-          when /^\/account/
-            ContextEnum.account 
-          when /^\/login/, /^\/checkout\/registration/,/^\/password/
-            ContextEnum.login   
-          when /^\/signup/
-            ContextEnum.signup
-          when /^\/checkout/
-            ContextEnum.checkout
-          when /^\/orders/
-            ContextEnum.thanks
-          when /^\/signup/
-            ContextEnum.signup
-          when '/'
-            ContextEnum.home
-          else
-            ContextEnum.list
+        if request_fullpath.present? #for current page, request_fullpath is present
+          case self.request_fullpath
+            when /^\/[\d]+\/[\d]+/
+              ContextEnum.detail
+            when /^\/cart/
+              ContextEnum.cart
+            when /^\/user/,/^\/password/ 
+              ContextEnum.account
+            when /^\/account/
+              ContextEnum.account 
+            when /^\/login/, /^\/checkout\/registration/,/^\/password/
+              ContextEnum.login   
+            when /^\/signup/
+              ContextEnum.signup
+            when /^\/checkout/
+              ContextEnum.checkout
+            when /^\/orders/
+              ContextEnum.thanks
+            when /^\/signup/
+              ContextEnum.signup
+            when '/'
+              ContextEnum.home
+            else
+              ContextEnum.list
+          end
+        else
+          case self.page_context
+            when 1 #home
+              ContextEnum.home
+            when 2 #cart
+              ContextEnum.cart
+            when 3 #checkout
+              ContextEnum.checkout
+            when 4 #thanks
+              ContextEnum.thanks
+            when 5 #signup
+              ContextEnum.signup
+            when 6 #login
+              ContextEnum.login
+            when 7 #accout
+              ContextEnum.account
+            else
+              ContextEnum.list  
+          end
         end
       end
       

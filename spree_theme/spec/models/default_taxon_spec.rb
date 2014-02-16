@@ -10,6 +10,10 @@ describe DefaultTaxon do
     taxon.current_context.should == :detail
     taxon.request_fullpath = '/cart'
     taxon.current_context.should == :cart    
+    
+    taxon = Spree::Taxon.first
+    taxon.request_fullpath.should be_blank
+    taxon.current_context.should == :list
   end
   
   it "has default root" do

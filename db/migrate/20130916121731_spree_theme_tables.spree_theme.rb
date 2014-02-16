@@ -32,7 +32,7 @@ class SpreeThemeTables < ActiveRecord::Migration
       t.column :is_container,        :boolean,                   :null => false, :default => false
       t.column :is_selectable,       :boolean,                   :null => false, :default => false
       # could assign kinds of resources to this piece
-      t.column :resources,           :string, :limit => 10,      :null => false, :default => ""
+      t.column :resources,           :string, :limit => 20,      :null => false, :default => ""
       # usage of section piece, dialog| a template need a way to find dialog section
       t.column :usage,           :string, :limit => 10,      :null => false, :default => ""
       # load by fixture, created_at,updated_at maybe nil

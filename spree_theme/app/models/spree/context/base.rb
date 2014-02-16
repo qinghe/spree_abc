@@ -15,7 +15,6 @@ module Spree
         #keys should inclde all data_sources, test required.
         }
       DataSourceEmpty = :""
-      mattr_accessor :request_fullpath
       
       def current_context
         raise "unimplement"
