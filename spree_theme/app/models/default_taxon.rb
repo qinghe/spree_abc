@@ -50,24 +50,24 @@ class DefaultTaxon < SpreeTheme.taxon_class
     if some_context==ContextEnum.account
       translated_name = case request_fullpath
         when /^\/account/
-          "My account"
+          Spree.t("default_page.account")
         when /^\/login/
-          "Login as Existing Customer"
+          Spree.t("default_page.login")
         when /^\/checkout\/registration/,/^\/signup/
-          "Registration"
+          Spree.t("default_page.signup")
         when /^\/password\/recover/
-          "Forgot Password?"
+          Spree.t("default_page.password")
         when /^\/password/
-          "Forgot Password?"
+          Spree.t("default_page.password")
         else
-          "unknown"
+          "Unknown"
       end
     elsif some_context==ContextEnum.checkout
       translated_name = Spree.t(:checkout)
     elsif  some_context==ContextEnum.cart
       translated_name =  Spree.t(:shopping_cart)
     else
-      translated_name = "Default #{some_context}"
+      translated_name = Spree.t("default_page.#{some_context}")
     end
     translated_name
   end

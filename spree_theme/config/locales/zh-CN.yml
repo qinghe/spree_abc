@@ -52,6 +52,13 @@ zh-CN:
     release_theme: 
     select_taxon: 选择菜单
     select_template_image: 选择图片    
+    default_page:
+      home: 首页
+      login: 登录
+      account: 我的账户
+      signup: 注册
+      password: 忘记密码
+      unknown: 未知
     template_theme:
       assign_resource:
     page_layout:

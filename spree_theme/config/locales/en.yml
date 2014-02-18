@@ -1,4 +1,3 @@
----
 en:
   activerecord:
     attributes:
@@ -22,7 +21,9 @@ en:
     label:
       template_theme:
         <<: *template_theme_labels
-
+  notice_messages:
+    template_theme_imported: 模板已经导入
+    template_theme_not_imported: 模板无法导入
   template_theme: Theme
   template_themes: Themes
   static_content:
@@ -34,3 +35,33 @@ en:
     link: Link
     meta_title: Meta Title
     page_navigation_title: "Pages"
+  spree:
+    actions:
+      import: 导入
+    admin:
+      tab:
+        template_themes: 模板
+        native_themes: 模板
+        foreign_themes: 模板商店
+    back_to_themes_list: 回到模板列表
+    apply_theme: 
+    config_theme:
+    configing_theme: 配置模板 
+    copy_theme:
+    delete_theme: 删除 
+    release_theme: 
+    select_taxon: 选择菜单
+    select_template_image: 选择图片    
+    taxon:
+      default_home: Home
+      default_login: Login as Existing Customer
+      default_account: My account
+      default_signup: Registration
+      default_password: Forgot Password 
+    template_theme:
+      assign_resource:
+    page_layout:
+      context: 
+      date_source: 
+      
+                         
