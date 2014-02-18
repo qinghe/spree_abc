@@ -52,7 +52,7 @@ module PageTag
     
     #is given section context valid to current page 
     def valid_context?
-      self.template_tag.current_piece.context_either? or (self.template_tag.current_piece.current_contexts.include? menu.current_context)      
+      (self.template_tag.current_piece.context? menu.current_context)      
     end
     
     # when render for cart/account, should output '<%=yield %>'
