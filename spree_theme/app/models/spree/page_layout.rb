@@ -36,12 +36,15 @@ module Spree
     
     
     # verify :come_contexts valid to :target_contexts
+    #   home is special list
     # ex.  [:cart]  is valid to [:either]
     #      [:cart]  is valid to [:account, :checkout, :thankyou, :cart]
     #      [:cart]  is invalid to [:account]
+    #      [:list]  is invalid to [:home]
+    #      [:home]  is valid to [:list]
     def self.verify_contexts( some_contexts, target_contexts )
       some_contexts = [some_contexts] unless some_contexts.kind_of?( Array )
-      (target_contexts==[ContextEnum.either] || (target_contexts&some_contexts)==some_contexts)
+      ( target_contexts==[ContextEnum.either] || (target_contexts&some_contexts)==some_contexts || (some_contexts==[ContextEnum.home]&&target_contexts.include?(ContextEnum.list)) )
     end
 
     #theme.document_path use it
@@ -343,8 +346,9 @@ module Spree
         end
       end
       
+      # called in current_page_tag
       def context?(some_context)
-        current_contexts.include? some_context.to_sym
+        self.class.verify_contexts some_context.to_sym, current_contexts
       end
       def context_cart?
         current_contexts.include? ContextEnum.cart
@@ -358,9 +362,11 @@ module Spree
       def context_detail?
         current_contexts.include? ContextEnum.detail
       end
-      def context_either?
-        current_contexts.blank?
-      end
+      
+      #def context_either?
+      #  self.class.verify_contexts ContextEnum.either, current_contexts
+      #end
+
     end
   
     begin 'handle data source'
