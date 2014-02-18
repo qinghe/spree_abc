@@ -16,10 +16,6 @@ module Spree
         }
       DataSourceEmpty = :""
       
-      def current_context
-        raise "unimplement"
-      end
-
       def context_either?
         raise "unimplement"
       end
