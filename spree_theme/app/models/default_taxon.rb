@@ -49,7 +49,7 @@ class DefaultTaxon < SpreeTheme.taxon_class
     
     if some_context==ContextEnum.account
       translated_name = case request_fullpath
-        when /^\/account/
+        when /^\/account/,/users\/[\d]+\/edit/ #users/2/edit  
           Spree.t("default_page.account")
         when /^\/login/
           Spree.t("default_page.login")
@@ -58,9 +58,9 @@ class DefaultTaxon < SpreeTheme.taxon_class
         when /^\/password\/recover/
           Spree.t("default_page.password")
         when /^\/password/
-          Spree.t("default_page.password")
+          Spree.t("default_page.password")          
         else
-          "Unknown"
+          Spree.t("default_page.unknown")
       end
     elsif some_context==ContextEnum.checkout
       translated_name = Spree.t(:checkout)
