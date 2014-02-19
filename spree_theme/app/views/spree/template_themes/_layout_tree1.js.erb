@@ -1,4 +1,4 @@
 <%#require @theme, @selected_page_layout %>
 
-$('#layout_tree_form').replaceWith(<%=raw (render :partial=>"layout_tree.html.erb", :locals=>{:theme :@theme, options:{:selected_id=>@selected_page_layout.id, :editable=>true}}).to_json%>);
+$('#layout_tree_form').replaceWith(<%=raw (render :partial=>"layout_tree.html.erb", :locals=>{:theme =>@theme, :options=>{:selected_id=>@selected_page_layout.id, :editable=>true}}).to_json%>);
 

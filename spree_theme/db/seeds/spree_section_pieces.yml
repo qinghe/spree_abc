@@ -1175,3 +1175,13 @@ logged_and_unlogged_menu:
      margin:0; /* non-editable */}
   title: logged and unlogged menu
   slug: logged-and-unlogged-menu
+password_recover_form:
+  id: 50
+  title: password recover form
+  slug: password-recover-form
+  is_selectable: "1"
+  is_container: "0"
+  html: |    
+    <%= render :partial => 'spree/user_passwords/new' %>
+  css: ""
+  js: ""

@@ -35,11 +35,13 @@ module Spree
               ContextEnum.detail
             when /^\/cart/
               ContextEnum.cart
-            when /^\/user/,/^\/password/ 
+            when /^\/user/
               ContextEnum.account
-            when /^\/account/
+            when /^\/password/ 
+              ContextEnum.password
+            when /^\/account/,/users\/[\d]+\/edit/ #users/2/edit  
               ContextEnum.account 
-            when /^\/login/, /^\/checkout\/registration/,/^\/password/
+            when /^\/login/, /^\/checkout\/registration/
               ContextEnum.login   
             when /^\/signup/
               ContextEnum.signup
