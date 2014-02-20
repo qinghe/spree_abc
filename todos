@@ -26,4 +26,5 @@ https://github.com/spree/spree/commit/a398bc289bb6008c177452fd1d86b652ded96dbd
 5. deploy spree_abc on vps.
  
 bugs
-for unlogged customer, http://demo.david.com:3000/account would use layout 'abc_application'
+1. for unlogged customer, http://demo.david.com:3000/account would use layout 'abc_application'
+2. logged user could not design page   http://design.david.com:3000/password/recover.
