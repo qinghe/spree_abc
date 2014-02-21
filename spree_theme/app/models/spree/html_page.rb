@@ -90,7 +90,6 @@ module Spree
               @html_attribute_value_hash[unique_key]=hav
             }        
           end
-          Rails.logger.debug "html_attribute_value_hash=#{@html_attribute_value_hash.keys.inspect}"
         end
         hav = @html_attribute_value_hash[key]
       end

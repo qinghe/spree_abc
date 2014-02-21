@@ -75,6 +75,12 @@ module Spree
       }.select{|resource| resource.present?}
     end
     
+    
+    def partial_html
+      pvs = self.param_values.includes(:section_param=>:section_piece_param)
+      Spree::HtmlPage::PartialHtml.new(nil, self, nil, pvs)
+    end
+    
     begin 'modify page layout tree'
   
       # Do not support add_layout_tree now. Page layout should be full html, Keep it simple. 

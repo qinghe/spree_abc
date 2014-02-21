@@ -282,7 +282,6 @@ module Spree
         if uploaded_image.valid?
           uploaded_image['theme_id']=@param_value.theme_id              
           if uploaded_image.save
-  logger.debug "uploaded_image = #{uploaded_image.inspect}"          
                 # update param value to selected uploaded image
                 param_value_params={@html_attribute_id.to_s=>{"unset"=>"0", "pvalue0"=>uploaded_image.attachment_file_name, "psvalue0"=>"0i"}}
                 param_value_event = ParamValue::EventEnum[:pv_changed]
