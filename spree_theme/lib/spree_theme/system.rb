@@ -59,12 +59,11 @@ module SpreeTheme::System
       #add website condition 
       @is_designer = ( Spree::TemplateTheme.accessible_by( current_ability, :read).where(:site_id=>website.id).count >0 )
     end
-    if Rails.env !~ /prduction/
-      # for development or test, enable get site from cookies
-      if cookies[:abc_development_design].present?
-        @is_designer = true
-      end     
-    end    
+    
+    #login, forget_password page only available fore unlogged user. we need this flag to show editor even user have not log in.
+    if cookies[:_dalianshops_designer]=='1'
+      @is_designer = true
+    end     
     #get template from query string 
     if @is_designer
       if session[:theme_id].present?
