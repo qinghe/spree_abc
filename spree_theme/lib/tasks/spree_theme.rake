@@ -67,7 +67,7 @@ namespace :spree_theme do
       if page_layout.section.present?
         section_nodes = page_layout.section.self_and_descendants.includes(:section_params)
         section_params = section_nodes.collect(&:section_params).flatten
-        if page_layout.param_values.count!=section_params.count
+        if page_layout.param_values.where(:theme_id=>theme.id).count!=section_params.count
           incomplete_page_layouts << page_layout
           puts "error:page_layout=#{page_layout.title},#{page_layout.id} param_values and section_params are not match"          
           puts "      page_layout.param_values=#{page_layout.param_values.count}, section_params=#{section_params.count}"
