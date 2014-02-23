@@ -24,7 +24,7 @@ describe DefaultTaxon do
   
   it "instantiate by context" do
     DefaultTaxon::ContextEnum.each{|context| 
-      next if [ DefaultTaxon::ContextEnum.list, DefaultTaxon::ContextEnum.detail, DefaultTaxon::ContextEnum.thanks].include? context
+      next if [ DefaultTaxon::ContextEnum.list, DefaultTaxon::ContextEnum.detail, DefaultTaxon::ContextEnum.thanks, DefaultTaxon::ContextEnum.pasword].include? context
       taxon = DefaultTaxon.instance_by_context( context )
       taxon.should be_a_kind_of DefaultTaxon
       if context == DefaultTaxon::ContextEnum.either

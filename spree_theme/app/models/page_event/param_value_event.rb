@@ -27,7 +27,7 @@ module PageEvent
     def handler_name
       "#{self.html_attribute.slug[/\w+/]}_#{self.event_name}_handler"
     end
-  
+     
     def height_pv_changed_handler(partial_html)
       height = partial_html.height 
       if height>0
@@ -52,6 +52,7 @@ module PageEvent
       end
     end
     # TODO width_pv_changed_handler, should not bigger than its parent's width.
+    alias_method :height_unset_changed_handler, :height_pv_changed_handler
     
     def border_pv_changed_handler(partial_html)
       height_pv_changed_handler( partial_html )

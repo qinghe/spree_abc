@@ -32,6 +32,17 @@ module Spree
       self.html_attribute_ids.split(',').collect{|i| [i.to_i, "#{i}unset", "#{i}hidden"]}.flatten
     end
     
+    # only for seed or data patch
+    def add_param_value_event( html_attribute, event)
+      if param_conditions[html_attribute.id]
+        unless param_conditions[html_attribute.id].include?( event )
+          param_conditions[html_attribute.id]<< event
+          save!
+        end
+      end  
+    end
+
+    
     private
     #add section_param where section.section_piece_id = ? for each section tree.
     def add_section_params
