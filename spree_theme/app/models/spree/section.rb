@@ -5,6 +5,7 @@ module Spree
     has_many :full_set_nodes, :class_name =>'Section', :foreign_key=>:root_id, :primary_key=>:root_id
     belongs_to :section_piece  
     has_many :section_params
+    has_many :page_layouts
     
     friendly_id :title, :use => :slugged
     attr_accessible :section_piece_id, :title, :global_events, :subscribed_global_events,:is_enabled

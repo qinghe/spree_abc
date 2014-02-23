@@ -19,7 +19,11 @@ describe Spree::Section do
   
   it "destroy a section" do
     section.section_params.size.should be > 0 
-    section.destroy    
+    section.destroy
+  end
+
+  it "a section has page_layouts" do
+    section.page_layouts.build.should be_present
   end
   
   it "build cart section html" do

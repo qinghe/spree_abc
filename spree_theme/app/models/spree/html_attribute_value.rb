@@ -203,10 +203,12 @@ module Spree
     # return pvalue with right type, db:int, bool:bool, text:string
     def pvalue( irepeat = 0)
       casted_value = properties["pvalue#{irepeat}"] 
-      if html_attribute.is_special? :bool
-        casted_value = casted_value.to_i > 0    
-      elsif html_attribute.is_special? :db
-        casted_value = casted_value.to_i      
+      if html_attribute.computable?
+        if unset?
+          casted_value = 0
+        else
+          casted_value = casted_value.to_i
+        end    
       end
       casted_value
     end

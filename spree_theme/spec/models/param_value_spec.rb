@@ -19,30 +19,41 @@ describe Spree::ParamValue do
   
   
   it "should trigger pv_change" do
-    
-    
-    
-    #section_piece_param_height = Spree::SectionPieceParam.find(:first, :conditions=>["section_piece_id=? and editor_id=? and class_name=?",2, 2, 'block'])
-    #section_piece_param_margin = Spree::SectionPieceParam.find(:first, :conditions=>["section_piece_id=? and editor_id=? and class_name=?",2, 2, 'block'])
-    
-    container = Spree::Section.find('container').page_layouts.first
-    
-    #section_param_height = container.section_params.find(:first, :conditions=>["section_piece_param_id=?", section_piece_param_height.id])
-    
-    #param_value = section_param_height.param_values.first
-    param_value = container.partial_html.height.param_value
-Rails.logger.debug  "param_value_height=#{param_value.inspect}"
-    param_value.should be_present
-    
-    html_attribute_value_params = {"psvalue0"=>"l1", "pvalue0"=>"800", "unit0"=>"px"}
     html_attribute_height = Spree::HtmlAttribute.find('height')
+    container = Spree::Section.find('container').page_layouts.first
+    param_value = container.partial_html.html_attribute_values('block_width').param_value
+    param_value.should be_present    
+    html_attribute_value_params = {"psvalue0"=>"l1", "pvalue0"=>"800", "unit0"=>"px"}
     is_updated, new_html_attribute_value, original_html_attribute_value = param_value.update_html_attribute_value(html_attribute_height, html_attribute_value_params, Spree::ParamValue::EventEnum[:pv_changed] )
     is_updated.should be_true
-Rails.logger.debug  "original_html_attribute_value=#{original_html_attribute_value.inspect}"
-Rails.logger.debug  "new_html_attribute_value=#{new_html_attribute_value.inspect}"
-    param_value.updated_html_attribute_values.should be_present
-    
+    param_value.updated_html_attribute_values.should be_present    
   end
   
+  it "height should trigger pv_change" do
+    html_attribute_height = Spree::HtmlAttribute.find('height')
+    html_attribute_margin = Spree::HtmlAttribute.find('margin')
+    container = Spree::Section.find('container').page_layouts.first
+    # set margin
+    param_value_margin = container.partial_html.html_attribute_values('inner_margin').param_value
+    html_attribute_value_params = {"psvalue0"=>"l1", "pvalue0"=>"10", "unit0"=>"px", "psvalue1"=>"l1", "pvalue1"=>"0", "unit1"=>"px", "psvalue2"=>"l1", "pvalue2"=>"0", "unit2"=>"px", "psvalue3"=>"l1", "pvalue3"=>"0", "unit3"=>"px"}
+    is_updated, new_html_attribute_value, original_html_attribute_value = param_value_margin.update_html_attribute_value(html_attribute_margin, html_attribute_value_params, Spree::ParamValue::EventEnum[:pv_changed] )
+    is_updated.should be_true
+    new_html_attribute_value.pvalue.should eq 10
+    #set height, inner height should be set.
+    html_attribute_value_params = {"psvalue0"=>"l1", "pvalue0"=>"800", "unit0"=>"px"}
+    param_value = container.partial_html.html_attribute_values('block_height').param_value
+    is_updated, new_html_attribute_value, original_html_attribute_value = param_value.update_html_attribute_value(html_attribute_height, html_attribute_value_params, Spree::ParamValue::EventEnum[:pv_changed] )
+    is_updated.should be_true
+    param_value.updated_html_attribute_values.should be_present        
+    inner_height = param_value_margin.reload.html_attribute_value( html_attribute_height)
+    inner_height.pvalue.should eq 790
+    #unset height, inner height should be 0 
+    html_attribute_value_params = {"psvalue0"=>"l1", "pvalue0"=>"800", "unit0"=>"px", "unset"=>"1"}
+    is_updated, new_html_attribute_value, original_html_attribute_value = param_value.update_html_attribute_value(html_attribute_height, html_attribute_value_params, Spree::ParamValue::EventEnum[:pv_changed] )
+    is_updated.should be_true
+    inner_height = param_value_margin.reload.html_attribute_value( html_attribute_height)
+    inner_height.pvalue.should eq 0
+       
+  end
   
 end

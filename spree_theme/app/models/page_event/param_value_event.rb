@@ -39,12 +39,15 @@ module PageEvent
           inner_height_value-= border[i]  
           inner_height_value-= padding[i]  
             } 
-    Rails.logger.debug "height=#{height}, inner_height_value=#{inner_height_value}"  
         hav = partial_html.html_attribute_values("block_height")         
         computed_inner_height['psvalue'] = hav['psvalue']
         computed_inner_height['pvalue'] = inner_height_value
         computed_inner_height['unit'] = hav['unit']
         computed_inner_height['unset'] = Spree::HtmlAttribute::BOOL_FALSE
+        self.updated_html_attribute_values.push(computed_inner_height)
+      else
+        computed_inner_height = partial_html.html_attribute_values('inner_height')
+        computed_inner_height['unset'] = Spree::HtmlAttribute::BOOL_TRUE
         self.updated_html_attribute_values.push(computed_inner_height)
       end
     end

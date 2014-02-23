@@ -125,29 +125,25 @@ module Spree
         return 0 if self.root? 
         hav = self.html_attribute_values("block_height")
         # self width unset, parent content layout is vertical.
-        return 0 if hav.unset?
-        return hav['pvalue'].to_i    
+        return hav.pvalue    
       end
       
       def margin
         hav = self.html_attribute_values("inner_margin")
         # self width unset, parent content layout is vertical.
-        return [0,0,0,0] if hav.unset?
         # in case 'auto'.to_i => 0
-        return [hav.pvalue(0).to_i, hav.pvalue(1).to_i, hav.pvalue(2).to_i, hav.pvalue(3).to_i]        
+        return [hav.pvalue(0), hav.pvalue(1), hav.pvalue(2), hav.pvalue(3)]        
       end
         
       def padding        
         hav = self.html_attribute_values("inner_padding")
         # self width unset, parent content layout is vertical.
-        return [0,0,0,0] if hav.unset?
         return [hav.pvalue(0), hav.pvalue(1), hav.pvalue(2), hav.pvalue(3)]        
       end
       
       def border
         hav = self.html_attribute_values("inner_border-width")
         # self width unset, parent content layout is vertical.
-        return [0,0,0,0] if hav.unset?
         return [hav.pvalue(0), hav.pvalue(1), hav.pvalue(2), hav.pvalue(3)]
       end
     end            

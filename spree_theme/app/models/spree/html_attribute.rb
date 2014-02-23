@@ -106,6 +106,11 @@ module Spree
       self.punits.present?
     end
     
+    #
+    def computable?
+      is_special?(:bool) or ['width','height','border-width','margin','padding'].include? self.slug 
+    end
+    
     def units
       if @units.blank?
         if has_unit?

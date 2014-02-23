@@ -72,27 +72,6 @@ module PageTag
     def menu2
       get( template_tag.current_piece,  1 )
     end
-      
-    def menus
-      if self.collection_tags.nil?
-        self.menu_models = []
-        param_values =  ParamValue.find(:all,:conditions=>["layout_root_id=? and theme_id=? and param_values.section_id=? and param_values.section_instance=? and section_piece_params.pclass=?", 
-          page_generator.layout_id, page_generator.theme_id, self.section['section_id'], self.section['section_instance'], 'db'],
-            :include=>[:section_param=>:section_piece_param]
-          )
-        for pv in param_values
-          menu_root_ids = pv.html_attribute_values_hash.values.collect{|hav| hav.pvalue}
-          menu_roots = SpreeTheme.taxon_class.find(:all, :conditions=>["id in (?)",menu_root_ids])
           
-          self.menu_models = menu_roots.collect{|menu| WrappedMenu.new(self, menu)} 
-          self.menu_keys = pv.html_attribute_values_hash.values.collect{|hav| hav.html_attribute['slug']}
-        end
-      end
-      self.menu_models
-    end
-    
-    def menus_hash
-      menus.each_index.inject({}){|h,i|h[self.menu_keys[i]] = self.menu_models[i]}
-    end
   end
 end

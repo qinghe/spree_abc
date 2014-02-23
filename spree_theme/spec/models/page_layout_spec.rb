@@ -9,7 +9,7 @@ describe Spree::PageLayout do
   end
   
   it "has partial html" do
-    page_layout.partial_html.should be_kind_of HtmlPage::PartialHtml
+    page_layout.partial_html.should be_kind_of Spree::HtmlPage::PartialHtml
   end
   
   it "create new page_layout tree" do
