@@ -58,6 +58,7 @@ zh-CN:
       account: 我的账户
       signup: 注册
       password: 忘记密码
+      detail: 产品
       unknown: 未知
     template_theme:
       assign_resource:

@@ -52,8 +52,6 @@ module PageEvent
       end
     end
     # TODO width_pv_changed_handler, should not bigger than its parent's width.
-    alias_method :height_unset_changed_handler, :height_pv_changed_handler
-    
     def border_pv_changed_handler(partial_html)
       height_pv_changed_handler( partial_html )
     end 
@@ -64,6 +62,11 @@ module PageEvent
       height_pv_changed_handler( partial_html )      
     end 
 
+    alias_method :height_unset_changed_handler, :height_pv_changed_handler
+    alias_method :border_unset_changed_handler, :height_pv_changed_handler
+    alias_method :margin_unset_changed_handler, :height_pv_changed_handler
+    alias_method :padding_unset_changed_handler, :height_pv_changed_handler
+    
     # here are two tipical layouts,    
     #   Layout Example                                 fluid --> fixed                         fixed --> fluid
     #   layout_root1 
@@ -123,10 +126,7 @@ module PageEvent
         self.updated_html_attribute_values.push(block_width,block_min_width,block_margin )
       elsif self.section.slug=='container'
     
-      elsif self.section.slug=='center_area'
-        # parent_width is unset
-    
-          
+         
       end    
     end
     
@@ -148,8 +148,6 @@ module PageEvent
         self.updated_html_attribute_values.push(block_width,block_min_width,block_margin )
       elsif self.section.slug=='container'
     
-      elsif self.section.slug=='center_area'
-        # parent_width is unset
       end
     end
   
