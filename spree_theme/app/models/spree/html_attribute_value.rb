@@ -281,7 +281,7 @@ module Spree
             "_#{target}"
           when 'as_h' #selected:hover
             " .selected"
-          when /(a|a_h)/
+          when 'a','a_h'
             " a"
           when /\_h$/  #button_h
             " #{target.delete('_h')}"

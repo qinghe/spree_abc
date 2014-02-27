@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131219133336) do
+ActiveRecord::Schema.define(:version => 20140227130911) do
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0
@@ -84,6 +84,7 @@ ActiveRecord::Schema.define(:version => 20131219133336) do
   end
 
   add_index "spree_adjustments", ["adjustable_id"], :name => "index_adjustments_on_order_id"
+  add_index "spree_adjustments", ["source_type", "source_id"], :name => "index_spree_adjustments_on_source_type_and_source_id"
 
   create_table "spree_assets", :force => true do |t|
     t.integer  "viewable_id"
@@ -133,7 +134,7 @@ ActiveRecord::Schema.define(:version => 20131219133336) do
     t.string  "iso3"
     t.string  "name"
     t.integer "numcode"
-    t.boolean "states_required", :default => true
+    t.boolean "states_required", :default => false
   end
 
   create_table "spree_credit_cards", :force => true do |t|
@@ -143,9 +144,6 @@ ActiveRecord::Schema.define(:version => 20131219133336) do
     t.string   "last_digits"
     t.string   "first_name"
     t.string   "last_name"
-    t.string   "start_month"
-    t.string   "start_year"
-    t.string   "issue_number"
     t.integer  "address_id"
     t.string   "gateway_customer_profile_id"
     t.string   "gateway_payment_profile_id"
@@ -257,10 +255,10 @@ ActiveRecord::Schema.define(:version => 20131219133336) do
 
   create_table "spree_orders", :force => true do |t|
     t.string   "number",               :limit => 32
-    t.decimal  "item_total",                         :precision => 10, :scale => 2, :default => 0.0, :null => false
-    t.decimal  "total",                              :precision => 10, :scale => 2, :default => 0.0, :null => false
+    t.decimal  "item_total",                         :precision => 10, :scale => 2, :default => 0.0,     :null => false
+    t.decimal  "total",                              :precision => 10, :scale => 2, :default => 0.0,     :null => false
     t.string   "state"
-    t.decimal  "adjustment_total",                   :precision => 10, :scale => 2, :default => 0.0, :null => false
+    t.decimal  "adjustment_total",                   :precision => 10, :scale => 2, :default => 0.0,     :null => false
     t.integer  "user_id"
     t.datetime "completed_at"
     t.integer  "bill_address_id"
@@ -271,12 +269,13 @@ ActiveRecord::Schema.define(:version => 20131219133336) do
     t.string   "payment_state"
     t.string   "email"
     t.text     "special_instructions"
-    t.datetime "created_at",                                                                         :null => false
-    t.datetime "updated_at",                                                                         :null => false
+    t.datetime "created_at",                                                                             :null => false
+    t.datetime "updated_at",                                                                             :null => false
     t.integer  "site_id"
     t.string   "currency"
     t.string   "last_ip_address"
     t.integer  "created_by_id"
+    t.string   "channel",                                                           :default => "spree"
   end
 
   add_index "spree_orders", ["completed_at"], :name => "index_spree_orders_on_completed_at"
@@ -370,6 +369,8 @@ ActiveRecord::Schema.define(:version => 20131219133336) do
     t.decimal "amount",     :precision => 8, :scale => 2
     t.string  "currency"
   end
+
+  add_index "spree_prices", ["variant_id", "currency"], :name => "index_spree_prices_on_variant_id_and_currency"
 
   create_table "spree_product_option_types", :force => true do |t|
     t.integer  "position"
@@ -534,7 +535,7 @@ ActiveRecord::Schema.define(:version => 20131219133336) do
     t.boolean  "is_root",                        :default => false, :null => false
     t.boolean  "is_container",                   :default => false, :null => false
     t.boolean  "is_selectable",                  :default => false, :null => false
-    t.string   "resources",     :limit => 10,    :default => "",    :null => false
+    t.string   "resources",     :limit => 20,    :default => "",    :null => false
     t.string   "usage",         :limit => 10,    :default => "",    :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -666,6 +667,7 @@ ActiveRecord::Schema.define(:version => 20131219133336) do
     t.datetime "created_at",                           :null => false
     t.datetime "updated_at",                           :null => false
     t.boolean  "backorderable",     :default => false
+    t.datetime "deleted_at"
   end
 
   add_index "spree_stock_items", ["stock_location_id", "variant_id"], :name => "stock_item_by_loc_and_var_id"
@@ -765,7 +767,7 @@ ActiveRecord::Schema.define(:version => 20131219133336) do
     t.string   "meta_description"
     t.string   "meta_keywords"
     t.integer  "depth"
-    t.integer  "page_context",             :default => 0
+    t.integer  "page_context",      :default => 0
   end
 
   add_index "spree_taxons", ["parent_id"], :name => "index_taxons_on_parent_id"
@@ -849,19 +851,21 @@ ActiveRecord::Schema.define(:version => 20131219133336) do
   end
 
   add_index "spree_users", ["site_id", "email"], :name => "email_idx_unique", :unique => true
+  add_index "spree_users", ["spree_api_key"], :name => "index_spree_users_on_spree_api_key"
 
   create_table "spree_variants", :force => true do |t|
-    t.string   "sku",                                         :default => "",    :null => false
-    t.decimal  "weight",        :precision => 8, :scale => 2
-    t.decimal  "height",        :precision => 8, :scale => 2
-    t.decimal  "width",         :precision => 8, :scale => 2
-    t.decimal  "depth",         :precision => 8, :scale => 2
+    t.string   "sku",                                           :default => "",    :null => false
+    t.decimal  "weight",          :precision => 8, :scale => 2, :default => 0.0
+    t.decimal  "height",          :precision => 8, :scale => 2
+    t.decimal  "width",           :precision => 8, :scale => 2
+    t.decimal  "depth",           :precision => 8, :scale => 2
     t.datetime "deleted_at"
-    t.boolean  "is_master",                                   :default => false
+    t.boolean  "is_master",                                     :default => false
     t.integer  "product_id"
-    t.decimal  "cost_price",    :precision => 8, :scale => 2
+    t.decimal  "cost_price",      :precision => 8, :scale => 2
     t.string   "cost_currency"
     t.integer  "position"
+    t.boolean  "track_inventory",                               :default => true
   end
 
   add_index "spree_variants", ["product_id"], :name => "index_spree_variants_on_product_id"

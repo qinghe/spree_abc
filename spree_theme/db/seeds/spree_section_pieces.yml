@@ -113,7 +113,8 @@ root:
       th, thead th, tbody th
       { text-align: left;
         font-style:normal;
-        font-weight:normal;   
+        font-weight:normal;  
+        vertical-align: middle;
       }
       img
       { border: 0;
@@ -581,19 +582,25 @@ product_price:
   slug: product_price
   is_selectable: "0"
   is_container: "0"
-  html: |   
+  html: |
     <% if product.price_in(current_currency) and !product.price.nil? %>
-      <div class="columns five <% if !product.has_variants? %> alpha <% else %> omega <% end %>">        
+      <div data-hook="product_price" class="columns five <% if !product.has_variants? %> alpha <% else %> omega <% end %>">
         <div id="product-price">
-          <div><span class="price selling" itemprop="price"><%= product.price_in(current_currency).display_price %></span></div>
+          <div>
+            <span class="price selling" itemprop="price">
+              <%= display_price(product.master) %>
+            </span>
+            <span itemprop="priceCurrency" content="<%= product.currency %>"></span>
+          </div>
         </div>
       </div>
     <% else %>
         <div id="product-price">
           <br>
-          <div><span class="price selling" itemprop="price"><%= t('product_not_available_in_this_currency') %></span></div>
+          <div><span class="price selling" itemprop="price"><%= Spree.t('product_not_available_in_this_currency') %></span></div>
         </div>
-    <% end %>   
+    <% end %>    
+     
   created_at: 2011-09-20 19:40:07
   updated_at: 2011-09-20 19:40:07
   css: ""
