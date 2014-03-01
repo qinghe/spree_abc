@@ -1,3 +1,6 @@
+<% #section_param_piece checkout_form,  render :partial=> "one_page"
+%>
+
   <div id="checkout_form_address" data-hook="billing_fieldset_wrapper">
     <%= form.fields_for :bill_address do |bill_form| %>
       <h3><%= Spree.t(:billing_address) %></h3>

@@ -1,2 +1,1 @@
-//= require store/spree_core
-//= require store/checkout
+//= require store/checkout_city

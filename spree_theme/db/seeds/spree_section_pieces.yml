@@ -13,7 +13,8 @@ root:
       <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
       <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8" />
       <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"/>
-      <%= javascript_include_tag 'store/spree_theme' %>      
+      <%# it is in main app/assets/ include spree_theme, spree_china_checkout %>      
+      <%= javascript_include_tag 'store/all' %>      
     <% if @current_page.is_preview %>
       <%= stylesheet_link_tag 'store/spree_theme', :media => 'screen' %>
     <% else%>

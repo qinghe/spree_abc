@@ -1,14 +1,27 @@
 module Spree
-  class CitiesController < BaseController
-    ssl_allowed :index
+    class CitiesController < Spree::Api::BaseController
+      skip_before_filter :check_for_user_or_api_key
+      skip_before_filter :authenticate_user
 
-    respond_to :js
+      def index
+        @cities = scope.ransack(params[:q]).result.
+                    includes(:state).order('name ASC')
 
-    def index
-      # we return ALL known information, since billing country isn't restricted
-      # by shipping country
-      logger.debug "cities=#{cities_path}"
-      respond_with @city_info = Spree::City.cities_group_by_state_id.to_json, :layout => nil
+        if params[:page] || params[:per_page]
+          @cities = @cities.page(params[:page]).per(params[:per_page])
+        end
+
+        respond_with(@cities)
+      end
+
+      private
+        def scope
+          if params[:state_id]
+            @state = State.find(params[:state_id])
+            return @state.cities
+          else
+            return State.scoped
+          end
+        end
     end
-  end
 end

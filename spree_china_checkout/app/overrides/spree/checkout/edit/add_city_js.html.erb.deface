@@ -1,4 +1,0 @@
-<!-- insert_before '#checkout' -->
-<% content_for :head do %>
-  <%= javascript_include_tag cities_path(:format => :js) %>
-<% end %>

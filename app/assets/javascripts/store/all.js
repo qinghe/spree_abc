@@ -4,9 +4,7 @@
 // It's not advisable to add code directly here, but if you do, it'll appear at the bottom of the
 // the compiled file.
 //
-//= require jquery
-//= require jquery_ujs
 
-//= require store/spree_frontend
+//= require store/spree_theme
+//= require store/spree_china_checkout
 
-//= require_tree .
