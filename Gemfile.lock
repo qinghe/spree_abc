@@ -1,7 +1,7 @@
 GIT
   remote: git://github.com/RuanShan/spree_alipay.git
-  revision: dd57755347c7640f553be8fdc95a7e6be2917307
-  branch: 2-0-stable
+  revision: f068642bca258d0171b307de23d26c577e57e0a1
+  branch: master
   specs:
     spree_alipay (2.0.9)
       spree_core (~> 2.0.9.beta)
@@ -210,7 +210,7 @@ GEM
     ffi (1.9.3)
     friendly_id (4.0.10.1)
       activerecord (>= 3.0, < 4.0)
-    highline (1.6.20)
+    highline (1.6.21)
     hike (1.2.3)
     httparty (0.13.0)
       json (~> 1.8)

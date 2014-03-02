@@ -1,4 +1,5 @@
 module Spree
+  module Api
     class CitiesController < Spree::Api::BaseController
       skip_before_filter :check_for_user_or_api_key
       skip_before_filter :authenticate_user
@@ -24,4 +25,5 @@ module Spree
           end
         end
     end
+  end
 end

@@ -1,4 +1,6 @@
 Spree::Core::Engine.routes.draw do
   # Add your extension routes here
-  resources :cities, :only => :index
+  namespace :api, :defaults => { :format => 'json' } do
+    resources :cities, :only => :index
+  end
 end

@@ -1,6 +1,6 @@
 Spree.ready ($) ->
 
-  Spree.routes.cities_search = "/cities"
+  Spree.routes.cities_search = "/api/cities"
   if ($ '#checkout_form').is('form')
      ($ '#checkout_form').validate()
 
@@ -58,4 +58,6 @@ Spree.ready ($) ->
         stateInput.prop('disabled', !statesRequired)
         stateInput.removeClass('hidden')
         stateSelect.removeClass('required')
+    ($ '#bstate select').change ->
+      Spree.updateCity 'b'
     Spree.updateCity 'b'
