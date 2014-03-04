@@ -45,6 +45,12 @@ zh-CN:
         foreign_themes: 模板商店
     back_to_themes_list: 回到模板列表
     apply_theme: 
+    china_address:
+      firstname: 收货人姓名
+      phone: 电话
+      state: 邮编
+      city: 所在地区
+      street: 街道地址
     config_theme:
     configing_theme: 配置模板 
     copy_theme:
@@ -60,6 +66,7 @@ zh-CN:
       password: 忘记密码
       detail: 产品
       unknown: 未知
+      checkout: 付款
     template_theme:
       assign_resource:
     page_layout:

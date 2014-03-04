@@ -1,5 +1,6 @@
-Spree::Country.create!({"name"=>"China", "iso3"=>"CHN", "iso"=>"CN", "iso_name"=>"CHINA", "numcode"=>"156"}, :without_protection => true)
-country =  Spree::Country.find_by_name("China")
+#encoding: utf-8
+Spree::Country.create!({"name"=>"中国", "iso3"=>"CHN", "iso"=>"CN", "iso_name"=>"CHINA", "numcode"=>"156"}, :without_protection => true)
+country =  Spree::Country.find_by_iso("CN")
 Spree::Config[:default_country_id] = country.id
 # load states.yml, cities.yml
 

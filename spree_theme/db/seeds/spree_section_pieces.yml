@@ -905,7 +905,7 @@ ship_form:
   html: |    
     <div id="checkout_form_address" data-hook="billing_fieldset_wrapper">
       <%= form.fields_for :bill_address do |bill_form| %>
-        <h6><%= Spree.t(:billing_address) %></h6>
+        <h6><%= Spree.t(:shipping_address) %></h6>
         <%= render :partial => 'spree/address/form', :locals => { :form => bill_form, :address_type => 'billing', :address => @order.bill_address } %>
       <% end %>
       <%= form.fields_for :ship_address do |ship_form| %>
