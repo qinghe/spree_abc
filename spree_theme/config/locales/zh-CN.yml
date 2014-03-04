@@ -67,6 +67,7 @@ zh-CN:
       detail: 产品
       unknown: 未知
       checkout: 付款
+      thanks: 恭喜！支付成功
     template_theme:
       assign_resource:
     page_layout:
