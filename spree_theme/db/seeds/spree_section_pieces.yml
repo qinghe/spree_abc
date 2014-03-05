@@ -19,7 +19,6 @@ root:
       <%= stylesheet_link_tag 'store/spree_theme', :media => 'screen' %>
     <% else%>
       <link rel="stylesheet" href="<%=@website.public_path('css')%>" type="text/css" />
-      <script type="text/javascript" src="<%=@website.public_path('js')%>"></script>
     <% end %>    
     <%= csrf_meta_tags %>
     <%= render "spree/shared/routes" %>

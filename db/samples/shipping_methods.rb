@@ -1,7 +1,7 @@
 #encoding: utf-8
 
-china = Spree::Zone.find_by_name!("China")
-shipping_category = Spree::ShippingCategory.find_or_create_by_name!('Default')
+china = Spree::Zone.find_by_name!('中国')
+shipping_category = Spree::ShippingCategory.find_or_create_by_name!('缺省')
 
 shipping_methods = [
   {
