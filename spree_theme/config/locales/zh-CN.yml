@@ -64,7 +64,8 @@ zh-CN:
       account: 我的账户
       signup: 注册
       password: 忘记密码
-      detail: 产品
+      list: 产品列表
+      detail: 产品详细信息
       unknown: 未知
       checkout: 付款
       thanks: 恭喜！支付成功
