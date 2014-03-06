@@ -495,15 +495,18 @@ product_thumbnails:
     <div id="product-images" data-hook="product_images" class="<%=g_piece_selector%>">
     <% if (product.images + product.variant_images).uniq.size > 1 %>
       <ul id="product-thumbnails" class="thumbnails inline" data-hook>
-        <% product.images.each do |i| %><li class='tmb-all' id='tmb-<%= i.id %>'>
-            <%= link_to(image_tag(i.attachment.url(:mini)), i.attachment.url(:product), :class => 'tmb-all', :id => "tmb-#{i.id}") %>
-        </li><% end %>
-        <% if product.has_variants? %>
-          <% product.variant_images.each do |i| %>
-            <% next if product.images.include?(i) %><li class='vtmb' id='tmb-<%= i.id %>'>
-              <%= link_to(image_tag(i.attachment.url(:mini)), i.attachment.url(:product)) %>
-          </li><% end %>
+      <% product.images.each do |i| %><li class='tmb-all tmb-<%= i.viewable.id %>'>
+          <%= link_to(image_tag(i.attachment.url(:mini)), i.attachment.url(:product)) %>
+        </li>
         <% end %>
+        <% if product.has_variants? %>
+        <% product.variant_images.each do |i| %>
+          <% next if product.images.include?(i) %>
+          <li class='vtmb tmb-<%= i.viewable.id %>'>
+            <%= link_to(image_tag(i.attachment.url(:mini)), i.attachment.url(:product)) %>
+          </li>
+        <% end %>
+      <% end %>
       </ul>
     <% end %>
     </div>
@@ -515,7 +518,8 @@ product_thumbnails:
      * it is inline-block, we should remove space between li.
      * http://stackoverflow.com/questions/16234440/space-between-li
      */
-          display: inline-block;
+      display: inline;
+      float:left;
     }
     .<%=g_piece_selector%> img {
       <%= @template.css :img %> 
@@ -589,8 +593,7 @@ product_price:
           <div>
             <span class="price selling" itemprop="price">
               <%= display_price(product.master) %>
-            </span>
-            <span itemprop="priceCurrency" content="<%= product.currency %>"></span>
+            </span>            
           </div>
         </div>
       </div>
@@ -1192,3 +1195,32 @@ password_recover_form:
     <%= render :partial => 'spree/user_passwords/new' %>
   css: ""
   js: ""
+product_option_values:
+  id: 51
+  title: product option values
+  slug: product-option-values
+  is_selectable: "1"
+  is_container: "0"
+  html: |    
+    <% if product.variants_and_option_values(current_currency).any? %>
+      <div id="product-variants" class="columns five alpha">
+        <ul>
+          <% product.variants_and_option_values(current_currency).each_with_index do |variant, index| %>
+            <li>
+              <%= radio_button_tag "products[#{product.id}]", variant.id, index == 0, 'data-price' => Spree::Money.new(variant.price, with_currency: true).to_s %>
+              <label for="<%= ['products', product.id, variant.id].join('_') %>">
+                <span class="variant-description">
+                  <%= variant_options variant %>
+                </span>
+                <% if variant_price variant %>
+                  <span class="price diff"><%= variant_price variant %></span>
+                <% end %>
+              </label>
+            </li>
+          <% end%>
+        </ul>
+      </div>
+    <% end%>
+  css: ""
+  js: ""
+  
