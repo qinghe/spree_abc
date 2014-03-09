@@ -19,3 +19,4 @@ SpreeTheme::Engine.load_seed
 load File.dirname(__FILE__)+ "/shopfirst/seed.rb"
 load File.dirname(__FILE__)+ "/shopdesign/seed.rb"
 load File.dirname(__FILE__)+ "/shopdemo/seed.rb"
+load File.dirname(__FILE__)+ "/patch/seed.rb"

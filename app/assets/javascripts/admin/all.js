@@ -11,3 +11,4 @@
 //= require admin/spree_theme
 //= require_tree .
 
+//= require admin/spree_editor

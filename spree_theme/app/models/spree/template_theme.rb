@@ -342,7 +342,7 @@ Rails.logger.debug "#{file.page_layout_id},#{original_file.page_layout_id},#{fil
         #Rails.logger.debug "assigned_resource_ids=#{assigned_resource_ids.inspect}"
         self.save! 
       end
-      # unassign resource to page_layout node
+      # unassign resource from page_layout node
       def unassign_resource( resource_class, page_layout, resource_position=0 )
         #assigned_resource_ids={page_layout_id={:menu_ids=>[]}}
         self.assigned_resource_ids = {} unless assigned_resource_ids.present?        
@@ -352,6 +352,21 @@ Rails.logger.debug "#{file.page_layout_id},#{original_file.page_layout_id},#{fil
         self.assigned_resource_ids[page_layout.id][resource_key][resource_position] = 0
         #Rails.logger.debug "assigned_resource_ids=#{assigned_resource_ids.inspect}"
         self.save! 
+      end
+      
+      #clear assigned_resource from theme
+      def unassign_resource_from_theme!( resource )
+        resource_key = get_resource_class_key(resource.class)
+        self.assigned_resource_ids.each_pair{|page_layout_id, resourcs|
+            if resourcs.key? resource_key
+              resourcs[resource_key].each_with_index{|resource_id,idx|
+                if resource_id == resource.id
+                  assigned_resource_ids[page_layout_id][resource_key][idx] = 0
+                end
+              }
+            end
+        }
+        self.save!         
       end
     end
     

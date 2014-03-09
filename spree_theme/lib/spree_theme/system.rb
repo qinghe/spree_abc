@@ -27,7 +27,8 @@ module SpreeTheme::System
   end
 
   def initialize_template
-    return if SpreeTheme.site_class.current.dalianshops?
+    #dalianshops use template now.
+    #return if SpreeTheme.site_class.current.dalianshops?
     #Rails.logger.debug "request.fullpath=#{request.fullpath}"
     # fullpath may contain ?n=www.domain.com    
     return if request.fullpath =~ /^\/under_construction/
@@ -48,6 +49,8 @@ module SpreeTheme::System
         @menu = SpreeTheme.taxon_class.find_by_id(params[:c])
       elsif website.index_page > 0
         @menu = SpreeTheme.taxon_class.find_by_id(website.index_page)
+      elsif SpreeTheme.taxon_class.home.present? #just set home page in taxon is ok as well 
+        @menu = SpreeTheme.taxon_class.home
       else
         @menu = DefaultTaxon.instance
       end
@@ -128,7 +131,7 @@ module SpreeTheme::System
       @page_layout||= theme.page_layout
       @sections = Spree::Section.roots
       #template selection
-      @template_themes = Spree::TemplateTheme.all
+      @template_themes = Spree::TemplateTheme.where(:site_id=>SpreeTheme.site_class.current.id)
   end
   
   def add_view_path

@@ -22,6 +22,21 @@ module Spree
         end
       end
       
+      def quick_lunch
+          @site = Site.new(params[:site])          
+          if params[:user]
+            params[:user][:password_confirmation] = params[:user][:password] 
+          end
+          @user = Spree.user_class.new(params[:user])
+          @site.users << @user
+          if @site.save
+            @site.users.first.spree_roles << Spree::Role.find_by_name('admin')
+            redirect_to @site.admin_url
+          else
+            redirect_to root_path()            
+          end        
+      end
+      
       def show
         @site = Site.find(params[:id])
         render :after_new

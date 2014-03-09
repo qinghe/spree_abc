@@ -1,8 +1,8 @@
+#encoding: utf-8
 require 'spec_helper'
-
 describe Spree::Site do
   before(:each) do
-    @site = Spree::Site.new(:name=>'ABC',:domain=>'www.abc.net',:short_name=>'shop')
+    @site = Spree::Site.new(:name=>'ABCD',:domain=>'www.abc.net',:short_name=>'shop')
   end
 
   it "should be valid" do
@@ -18,13 +18,26 @@ describe Spree::Site do
     
     site2 = @site.dup
     site2.should be_invalid
+    site2.short_name = nil
+    site2.domain = nil
+    site2.should be_valid
+    site2.save.should be_true
+    site2.short_name.should start_with( @site.short_name)
+    site2.short_name.should != @site.short_name
   end
   
   
   
   it "should not be valid" do
+    @site.name = 'ABC'
     @site.short_name = nil
     @site.valid?.should be_false
+    
+    @site.name = '大连&白酒!'
+    @site.short_name = nil
+    @site.valid?.should be_true
+    @site.short_name.should eq "da-lian-and-bai-jiu"
+    @site.save.should be_true
   end
     
   it "should create site and user" do

@@ -635,7 +635,7 @@ product_atc:
     <%= form_for :order, :url => populate_orders_path, :html=>{:class=>[g_piece_selector]} do |f| %>
       <%= hidden_field_tag  "variants[#{product.master.id}]", 1 %>
       <%= button_tag  :id => 'add-to-cart-button', :type => :submit  do %>
-            <%= t(:add_to_cart) %>
+            <%= Spree.t(:add_to_cart) %>
       <% end %>
     <% end %>
   created_at: 2011-09-20 19:40:07
@@ -786,7 +786,7 @@ thanks:
   updated_at: 2011-09-20 19:40:07
   css: ""
   js: ""
-taxon_name:
+description_name:
   id: 27
   title: taxon name
   slug: taxon-name
@@ -1223,4 +1223,27 @@ product_option_values:
     <% end%>
   css: ""
   js: ""
-  
+taxon_description:
+  id: 52
+  title: taxon description
+  slug: taxon-description
+  is_selectable: "1"
+  is_container: "0"
+  html: |    
+    <%=raw @current_page.menu.description %>
+  css: ""
+  js: ""  
+site_form:
+  id: 53
+  title: site form
+  slug: site-form
+  is_selectable: "1"
+  is_container: "0"
+  html: |    
+    <%= render :partial => 'spree/sites/form_for_spree_theme' %>
+  css: |
+    .<%=@template.current_piece.section_selector%> p{ 
+      float:left;
+    }
+  js: ""
+

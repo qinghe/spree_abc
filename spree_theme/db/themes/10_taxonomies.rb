@@ -1,6 +1,6 @@
 #encoding: utf-8
 taxonomies = [
-  { :name => "MainMenu" },
+#  { :name => "MainMenu" },
 #  { :name => "Unlogged" },
 #  { :name => "Logged" }
 ]
@@ -9,18 +9,18 @@ taxonomies.each do |taxonomy_attrs|
   Spree::Taxonomy.create!(taxonomy_attrs)
 end
 
-main_menu = Spree::Taxonomy.find_by_name!("MainMenu")
+#main_menu = Spree::Taxonomy.find_by_name!("MainMenu")
 #unlogged = Spree::Taxonomy.find_by_name!("Unlogged")
 #logged = Spree::Taxonomy.find_by_name!("Logged")
 
 taxons = [
-  {
-    :name => "首页",
-    :taxonomy => main_menu,
-    :parent => "MainMenu",
-    :page_context => 1,
-    :position => 1
-  },
+#  {
+#    :name => "首页",
+#    :taxonomy => main_menu,
+#    :parent => "MainMenu",
+#    :page_context => 1,
+#    :position => 1
+#  },
 #  {
 #    :name => "Login",
 #    :taxonomy => unlogged,

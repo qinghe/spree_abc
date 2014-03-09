@@ -18,13 +18,17 @@ module Spree
           ContextEnum.login =>"/login",
           ContextEnum.either =>"/" #default_taxon for context :either is home
           }
-                  
+        #FIXME what if home is not assigned to theme? 
+        def self.home
+          where(:page_context=> 1 ).first
+        end
+          
         def path
           context_routes[current_context] || "/#{self.id}"     
         end
       end
       
-            # context of default taxon vary in request_fullpath
+      # context of default taxon vary in request_fullpath
       # ex. /cart  context is cart
       #     /user  context is account
       # return :either(detail or list), cart, checkout, register, login
@@ -81,6 +85,7 @@ module Spree
       def context_either?
         current_context ==ContextEnum.either
       end
+            
     end
   end
   

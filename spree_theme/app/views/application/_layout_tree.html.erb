@@ -16,7 +16,7 @@ selected_id= (options[:selected_id]||layout_root.id )
     <%=raw("&nbsp;&nbsp;"*layout.cached_level)%>
     <%# do not call form.submit. 
     %>
-    <%= link_to_function(layout.slug, 
+    <%= link_to_function(layout.title, 
       "$('#selected_page_layout_id').val(#{layout.id});$('#layout_editor_form').trigger('submit')",
       {"class"=>(layout.id==selected_id ? "selected":""),"data-lid"=>layout.id, :onmouseout=>"$('#{layout.css_selector}').trigger('dehighlight')",:onmouseover=>"$('#{layout.css_selector}').trigger('highlight')"})
       %>

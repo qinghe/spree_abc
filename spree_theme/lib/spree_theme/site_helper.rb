@@ -4,7 +4,8 @@ module SpreeTheme
     included do
       cattr_accessor :designshop_url
       belongs_to :template_theme, :foreign_key=>"theme_id"
-      belongs_to :template_release, :foreign_key=>"template_release_id"
+      has_many :template_themes
+      #belongs_to :template_release, :foreign_key=>"template_release_id"
       attr_accessible :index_page,:theme_id
       self.designshop_url = 'design.dalianshops.com'
     end

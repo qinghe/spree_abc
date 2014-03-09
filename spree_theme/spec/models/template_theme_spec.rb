@@ -122,4 +122,14 @@ Rails.logger.debug "............strart test import................."
       new_template.assigned_resources( Spree::TemplateFile,template.page_layout ).should be_present
     end
   end
+  
+  it "should unassign resource from theme after taxon destroy" do
+    
+    taxon = SpreeTheme.taxon_class.first
+    template.assign_resource( taxon, template.page_layout )
+    taxon.taxonomy.destroy
+    template.reload
+    template.assigned_resource_id( taxon.class, template.page_layout ).should eq 0
+    
+  end  
 end

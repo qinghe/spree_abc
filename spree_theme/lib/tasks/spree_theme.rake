@@ -10,14 +10,19 @@ namespace :spree_theme do
     load File.join(SpreeTheme::Engine.root,'db/seeds/00_section_pieces.rb')
   end
   
-  desc "export theme one"
+  desc "export theme. params: SITE_ID, SEED_PATH."
   task :export_theme => :environment do
-    template = Spree::TemplateTheme.first
-    serializable_data = template.serializable_data
-    if ENV['SEED_PATH']
-      file_path = File.join(SpreeTheme::Engine.root,'db','themes','designs', "#{template.id}_#{Time.now.to_i}.yml")
+    if ENV['SITE_ID']
+      theme = SpreeTheme.site_class.find( ENV['SITE_ID'] ).template_themes.first 
     else
-      file_path =  File.join(SpreeTheme.site_class.designsite.document_path, "#{template.id}_#{Time.now.to_i}.yml")
+      theme = Spree::TemplateTheme.first        
+    end
+    serializable_data = theme.serializable_data
+    #add site_id into name is required, later we want to import, just specify site_id is OK.
+    if ENV['SEED_PATH']
+      file_path = File.join(SpreeTheme::Engine.root,'db','themes','designs', "#{theme.site_id}_#{theme.id}_#{Time.now.to_i}.yml")
+    else
+      file_path =  File.join(theme.site.document_path, "#{theme.site_id}_#{theme.id}_#{Time.now.to_i}.yml")
     end
     open(file_path,'w') do |file|
       file.write(serializable_data.to_yaml)
@@ -25,19 +30,21 @@ namespace :spree_theme do
     puts "exported file #{file_path}"
   end
   
-  desc "import theme one, accept param SEED_PATH," 
-       "ex. FILE='spree_theme/db/themes/design/1_138.rb', SEED_PATH='1'"
-       "default path=shops/rails_env/shop_id/1_nnn.rb"
+  desc "import theme. params SEED_PATH, SITE_ID." 
+       "SEED_PATH='1' path = spree_theme/db/themes/designs/{site_id}_{theme_id}_{time}.yml"
+       "default path=shops/rails_env/shop_id/{site_id}_{theme_id}_{time}.yml"
   task :import_theme => :environment do
-    #template = Spree::TemplateTheme.first
-      SpreeTheme.site_class.current = SpreeTheme.site_class.designsite
-      
-      if ENV['SEED_PATH']
-        file_path = File.join(SpreeTheme::Engine.root,'db','themes','designs', "1_*.yml")
-      else
-        file_path = File.join(SpreeTheme.site_class.designsite.document_path, "1_*.yml")
-      end
-      file_path = Dir[file_path].sort.last      
+    if ENV['SITE_ID']
+      SpreeTheme.site_class.current = SpreeTheme.site_class.find ENV['SITE_ID']
+    else
+      SpreeTheme.site_class.current = SpreeTheme.site_class.designsite      
+    end    
+    if ENV['SEED_PATH']
+      file_path = File.join(SpreeTheme::Engine.root,'db','themes','designs', "#{SpreeTheme.site_class.current.id}_*.yml")
+    else
+      file_path = File.join(SpreeTheme.site_class.current.document_path, "#{SpreeTheme.site_class.current.id}_*.yml")
+    end
+    file_path = Dir[file_path].sort.last      
     open(file_path) do |file|
       theme = Spree::TemplateTheme.import_into_db(file)
       theme.release({},{:page_only=>true})
@@ -45,9 +52,9 @@ namespace :spree_theme do
     puts "imported file #{file_path}"
   end
 
-  desc "get css of template one, rake spree_theme:get_css[1,2,'block']"
+  desc "get css of theme one, rake spree_theme:get_css[1,2,'block']"
   task :get_css, [:page_layout_id,:section_id, :class_name] =>[ :environment ] do |t, args|
-    #template = Spree::TemplateTheme.first
+    #theme = Spree::TemplateTheme.first
     class_name = args.class_name
     lg = PageGenerator.generator( DefaultTaxon.instance, SpreeTheme.site_class.designsite.template_theme)
     template = lg.context[:template]
@@ -60,7 +67,11 @@ namespace :spree_theme do
     #section_pieces = Spree::SectionPiece.all(:include=>:section_piece_params)    
     #sections =  Spree::Section.all(:include=>{:section_params=>:section_piece_params})
     #page_layouts = Spree::PageLayout.all(:include=>{:section_params=>:section_piece_params})    
-    theme = Spree::TemplateTheme.first
+    if ENV['SITE_ID']
+      theme = SpreeTheme.site_class.find( ENV['SITE_ID'] ).template_themes.first 
+    else
+      theme = Spree::TemplateTheme.first        
+    end    
     incomplete_page_layouts = []
     # section_param and param_value match each other.
     for page_layout in theme.page_layout.self_and_descendants.includes(:section)     
@@ -104,5 +115,10 @@ namespace :spree_theme do
       end      
     end
   end
+  
+  
+  def exported_theme_file_name( theme )
+    "#{theme.site_id}_#{template.id}_#{Time.now.to_i}.yml"
+  end 
 end
 

@@ -28,6 +28,18 @@ https://github.com/spree/spree/commit/a398bc289bb6008c177452fd1d86b652ded96dbd
 bugs
 1. for unlogged customer, http://demo.david.com:3000/account would use layout 'abc_application'
 *2. logged user could not design page   http://design.david.com:3000/password/recover.
-3. unset container height, should remove inner height.
+*3. unset container height, should remove inner height.
 
 4. .s_1_75 .error, should be label.error,  input has class="error".
+
+5. css selector:#page .page, background-color:yellow
+
+
+new todo
+==============================================================================================
+1. add feature spree_editor.
+
+2. https://app.shopify.com/services/signup/setup 
+   https://shopabc-5.myshopify.com/admin/account_setup
+   
+3. export/import theme 2.

@@ -11,7 +11,7 @@ main_menu = taxon_class.find_by_name("MainMenu")
 
 #template.assign_resource(main_menu, main_menu_section)
 main_menu_section = template.page_layout.self_and_descendants.where(:title=>'Main menu').first
-template.assign_resource(main_menu, main_menu_section)
+#template.assign_resource(main_menu, main_menu_section)
 
 category_section = template.page_layout.self_and_descendants.where(:title=>'Categories').first
 template.assign_resource(categories, category_section)

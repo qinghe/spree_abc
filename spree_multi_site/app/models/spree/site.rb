@@ -1,3 +1,4 @@
+#encoding: utf-8
 class Spree::Site < ActiveRecord::Base
   cattr_accessor :unknown,:subdomain_regexp, :loading_fake_order_with_sample, :dalianshops_url
   has_many :taxonomies,:inverse_of =>:site,:dependent=>:destroy
@@ -17,7 +18,7 @@ class Spree::Site < ActiveRecord::Base
   has_many :zones,:dependent=>:destroy
   has_many :state_changes,:dependent=>:destroy
   
-  acts_as_nested_set
+  #acts_as_nested_set
   accepts_nested_attributes_for :users
   
   #app_configuration require site_id
@@ -28,10 +29,12 @@ class Spree::Site < ActiveRecord::Base
   self.subdomain_regexp = /^([a-z0-9\-])*$/
   self.loading_fake_order_with_sample = false
   self.dalianshops_url = "www.dalianshops.com"
-  validates_presence_of   :name
-  validates :short_name, presence: true, length: 4..32, format: {with: subdomain_regexp} #, unless: "domain.blank?"
+  validates :name, length: 4..32 #"中国".length=> 2
+  validates :short_name, uniqueness: true, presence: true, length: 4..32, format: {with: subdomain_regexp} #, unless: "domain.blank?"
   validates_uniqueness_of :domain, :allow_blank=>true 
   attr_accessible :name, :domain, :short_name, :has_sample
+  #generate short name fro name
+  before_validation :set_short_name
   
   class << self
     def dalianshops
@@ -135,75 +138,28 @@ class Spree::Site < ActiveRecord::Base
     ([self.short_name] + self.class.dalianshops.domain.split('.')[1..-1]).join('.')
   end
   
+  def admin_url
+    "http://"+subdomain+"/admin"
+  end
+  
   private
   def load_sample_products
     file = Pathname.new(File.join(SpreeMultiSite::Config.seed_dir, 'samples', "seed.rb"))
-Rails.logger.debug "start load #{file}"     
     load file
   end
   
   def load_sample_orders
     file = Pathname.new(File.join(SpreeMultiSite::Config.seed_dir, 'fake_order', "seed.rb"))
-Rails.logger.debug "start load #{file}"     
     load file
   end
-  
-  def original_load_sample
-    require 'ffaker'
-    require 'erb'
-    require 'spree_multi_site/custom_fixtures'
-    # only load sample from one folder. by default is 'Rails.application.root/db/sample'
-    # could override it by setting Spree::Config.data_path
-    sample_dirs = ['sample']
-    sample_dirs << 'fake_order' if self.class.loading_fake_order_with_sample                                               
-    for sample_dir in sample_dirs    
-      dir = File.join(SpreeMultiSite::Config.seed_dir,sample_dir)
-  #Rails.logger.debug "load sample from dir=#{dir}"
-      fixtures = ActiveSupport::OrderedHash.new
-      ruby_files = ActiveSupport::OrderedHash.new
-      Dir.glob(File.join(dir , '**/*.{yml,csv,rb}')).each do |fixture_file|
-        ext = File.extname fixture_file
-        if ext == ".rb"
-          ruby_files[File.basename(fixture_file, '.*')] = fixture_file
-        else
-          fixtures[fixture_file.sub(dir, "")[1..-1]] = fixture_file
-        end
+   
+  def set_short_name
+    if short_name.blank?
+      self.short_name = name.to_url 
+      if self.class.exists?(:short_name=> self.short_name)
+        self.short_name << "-#{(self.class.last.id+1).to_s}"
       end
-      # put eager loading model ahead, 
-      fixture_indexes = ['sites',
-        'shipping_categories','payment_methods',
-        'properties','option_types','option_values', 
-        'tax_categories','tax_rates','shipping_methods','promotions','calculators',
-        'products','product_properties','product_option_types','variants','assets', 
-        'taxonomies','taxons',
-        'addresses','users','orders','line_items','shipments','adjustments']
-      #{:a=>1, :b=>2, :c=>3}.sort => [[:a, 1], [:b, 2], [:c, 3]] 
-      sorted_fixtures = fixtures.sort{|a,b|
-        key1,key2  = a.first.sub(".yml", "").sub("spree/", ""), b.first.sub(".yml", "").sub("spree/", "")  #a.first is relative_path
-  #puts "a=#{a.inspect},b=#{b.inspect} \n key1=#{key1}, key2=#{key2}, #{(fixture_indexes.index(key1)<=> fixture_indexes.index(key2)).to_i}"      
-        i = (fixture_indexes.index(key1)<=> fixture_indexes.index(key2)).to_i
-        i==0 ? -1 : i # key not in fixture_indexes should be placed ahead.
-      }
-      SpreeMultiSite::Fixtures.reset_cache
-      sorted_fixtures.each do |relative_path , fixture_file|
-        # load fixtures  
-        # load_yml(dir,fixture_file)
-  Rails.logger.debug "loading fixture_file=#{fixture_file}"
-        if fixture_file =~/users.yml/ #user class may be legacy_user or user
-          SpreeMultiSite::Fixtures.create_fixtures(dir, relative_path.sub(".yml", ""),{:spree_users=>Spree.user_class})
-        else
-          SpreeMultiSite::Fixtures.create_fixtures(dir, relative_path.sub(".yml", ""))            
-        end
-      end
-  #puts "create habtm records"      
-      SpreeMultiSite::Fixtures.create_habtm_records    
-      ruby_files.sort.each do |fixture , ruby_file|
-        # an invoke will only execute the task once
-  Rails.logger.debug  "loading ruby #{ruby_file}"
-        load ruby_file
-      end
-    end  #for sample_dir  
- 
+    end
   end
     
 end

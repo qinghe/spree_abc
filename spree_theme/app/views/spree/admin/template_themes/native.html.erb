@@ -18,10 +18,12 @@
     <%= link_to 'Config', config_admin_template_theme_path(theme), {:method=>:get} %>
     <%= link_to 'Apply', apply_admin_template_theme_path(theme), {:method=>:post} %>
               &nbsp;
-    <% if SpreeTheme.site_class.current.design? %>    
+    <% if theme.has_native_layout? %>    
+      <%= link_to 'Preview', preview_template_theme_path(theme), {:target=>'_blank'} %>
+      <% if SpreeTheme.site_class.current.design? %>    
       <%= link_to 'Copy', copy_admin_template_theme_path(theme), {:method=>:post} %>
-      <%= link_to 'Preview', preview_template_theme_path(theme) %>
-      <%= link_to_if theme.has_native_layout?, 'Release', release_admin_template_theme_path(theme), {:method=>:post} %>
+      <%= link_to 'Release', release_admin_template_theme_path(theme), {:method=>:post} %>
+      <% end %>
     <% end %>
     <%= link_to_delete theme, :no_text => true if can?(:delete, theme)  %>
     </td>
