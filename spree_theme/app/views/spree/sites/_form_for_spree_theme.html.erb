@@ -5,16 +5,13 @@
 <%= form_for :site, :url => quick_lunch_path do |f| %>
     <div >
         <p>
-          <%= f.label :name, t(:name,:scope=>['activerecord','attributes','site']) %> <span class="required">*</span><br />
-          <%= f.text_field :name, :class => 'fullwidth title' %>
+          <%= f.text_field :name, :class => 'fullwidth title', :placeholder => Spree.t(:name_store)  %>
         </p>
         <p>
-          <%= label :user, :email, Spree.t(:email,:scope=>['activerecord','attributes','user']) %><span class="required">*</span><br />
-          <%= email_field :user, :email %>
+          <%= email_field :user, :email, :placeholder => Spree.t(:email)%>
         </p>
         <p>
-          <%= label :user,:password, Spree.t(:password) %><span class="required">*</span><br />
-          <%= password_field :user,:password %>
+          <%= password_field :user,:password, :placeholder=>Spree.t(:password) %>
         </p>
         <p><%= f.button Spree.t(:create), :class => 'button primary' %></p>
     </div>

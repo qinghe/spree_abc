@@ -12,7 +12,9 @@ zh-CN:
     loading_sample: 系统正在为您加载示例产品信息, 请您登录注册使用的邮箱查询我们的邮件通知!
   activerecord: 
     attributes: 
-      site: 
+      spree/site: 
         name: 给您的商店取个名字
         short_name: 二级域名
-        domain: 网店域名 
+        domain: 网店域名
+  spree:
+    name_store: 给您的商店取个名字

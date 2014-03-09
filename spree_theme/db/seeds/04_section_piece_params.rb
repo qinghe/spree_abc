@@ -16,7 +16,7 @@ objs=[
   {"id"=>16, "editor_id"=>2, "section_piece_id"=>2, "class_name"=>"inner", "pclass"=>"css", "param_category_id"=>2,  "html_attribute_ids"=>"31,32,7,8,6,15", "param_conditions"=>{8=>['pv_changed'],31=>['pv_changed'],32=>['pv_changed']}},
 
   #general background
-  {"id"=>31, "editor_id"=>3, "section_piece_id"=>2, "class_name"=>"block", "pclass"=>"css", "param_category_id"=>2,  "html_attribute_ids"=>"2,3,4,5"},
+  {"id"=>31, "editor_id"=>3, "section_piece_id"=>2, "class_name"=>"inner", "pclass"=>"css", "param_category_id"=>2,  "html_attribute_ids"=>"2,3,4,5"},
  
   #general text
   {"id"=>35, "editor_id"=>4, "section_piece_id"=>2, "class_name"=>"block", "pclass"=>"css", "param_category_id"=>2,  "html_attribute_ids"=>"23,24,25,27,49,53,54,56"},
