@@ -25,16 +25,13 @@ module Spree
     #   return a hash, values are instance of HtmlAttributeValue, keys are html_attribute_id and html_attribute.slug. 
     #   key is section_param.section_piece_param.class_name+html_attribute.slug. ex."block_width"
     #   unique_key = hav.computed? ?  "computed_#{class_name}_#{hav.html_attribute.slug}" : "#{class_name}_#{hav.html_attribute.slug}"
-  
     def html_attribute_values_hash
       ha_array = HtmlAttribute.find_by_ids(self.html_attribute_ids)
-      
       hav_hash = ha_array.inject({}){|h, ha| hav = HtmlAttributeValue.parse_from(self,ha); 
         h[ha.id]=hav;
         unique_key = "#{hav.param_value.section_param.section_piece_param.class_name}_#{hav.html_attribute.css_name}"
         h[unique_key]=hav; h 
       }
-  
       hav_hash
     end
     
@@ -68,7 +65,6 @@ module Spree
       self.pvalue["#{html_attribute_id}unset"] = unset_for_ha
     end
     
-    
     def unset?(html_attribute_id)
       ( self.html_attribute_extra(html_attribute_id, 'unset')== HtmlAttribute::BOOL_FALSE) ? false : true    
     end
@@ -89,9 +85,7 @@ module Spree
       else
         self.pvalue["#{html_attribute_id}#{attr_name}"] = attr_val
       end
-      
     end
-    
   
     #def disabled_html_attribute_ids
     #  if @disabled_html_attribute_ids.nil?
@@ -105,7 +99,6 @@ module Spree
     def first_pvalue
       pvalue_for_haid( html_attribute_ids.first )
     end
-    
     
     def partial_html
       pvs = self.class.within_section(self).includes(:section_param=>:section_piece_param)
@@ -136,7 +129,6 @@ module Spree
                 self.html_attribute_extra(html_attribute.id, 'unset', new_html_attribute_value.unset)     
               else # user modify unset, we should give a default value. 
                 self.html_attribute_extra(html_attribute.id, 'unset', new_html_attribute_value.unset)   
-    Rails.logger.debug "pvalue=#{new_html_attribute_value.build_pvalue(default=true)}"              
                 self.set_pvalue_for_haid(html_attribute.id, new_html_attribute_value.build_pvalue(default=true))            
               end
             else
@@ -179,7 +171,6 @@ module Spree
           pve = PageEvent::ParamValueEvent.new(self.page_events.first, self, self.original_html_attribute_values.first, self.updated_html_attribute_values.first )
           @param_value_events<<pve
           # tell current section, this is new html attribute value. 
-          #Rails.logger.debug "self.section=#{section.inspect}"        
           se = PageEvent::GlobalParamValueEvent.new(self.page_events.first, self, self.original_html_attribute_values.first, self.updated_html_attribute_values.first )
           if self.page_layout.subscribe_event?(se)
             @global_param_value_events << se
@@ -191,7 +182,6 @@ module Spree
       # we also collect all updated_html_attribute_values which caused by GlobalParamValueEvent or ParamValueEvent events.
       def trigger_events
         extra_html_attribute_values = []
-    Rails.logger.debug "@param_value_events:#{@param_value_events.inspect}, @global_param_value_events=#{@global_param_value_events.inspect}"
         #@param_value_events may be nil, ex. load seed.   
         if @param_value_events.present?
           param_value_events = @param_value_events
@@ -212,7 +202,6 @@ module Spree
         self.updated_html_attribute_values||=[]
         self.updated_html_attribute_values.concat(extra_html_attribute_values )
       end
-      
     end
     
   end

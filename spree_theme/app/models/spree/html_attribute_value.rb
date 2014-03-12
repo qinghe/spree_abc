@@ -275,7 +275,7 @@ module Spree
         
         #it has to apply to inner, for root, outer is body, it include editor panel, some css would affect it. 
         selector = case target
-          when /content_layout/,/block/,/cell/
+          when /content_layout/,/block/,/cell/,'page'
             ""          
           when /inner/
             "_#{target}"
