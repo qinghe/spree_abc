@@ -1,0 +1,111 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr">
+
+<head>
+  <title>verify layout margin collapse for image border</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="jquery.hoverIntent.js"></script>
+
+
+<!--[if lte IE 6]>
+<link type="text/css" rel="stylesheet" media="all" href="ie6.css?y" />
+<![endif]-->
+<!--[if IE 7]>
+<link type="text/css" rel="stylesheet" media="all" href="ie7.css?y" />
+<![endif]-->
+<!--[if IE 8]>
+<link type="text/css" rel="stylesheet" media="all" href="ie8.css?y" />
+<![endif]-->
+
+
+     <style type="text/css">
+/* From http://www.positioniseverything.net/easyclearing.html */
+.clear-block:after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+
+.clear-block {
+  display: block;
+}
+.clear_both{
+  clear:both;
+}
+.clear_none{
+  clear:none;
+}
+.outer{
+    /*position:relative;*/
+    float:left;  
+    background-color:#F99660;
+}
+.inner
+{
+    background-color:#FAEBD7;
+}
+.block1{
+    background-color:#C0C0C0;
+}
+.block2{
+    background-color: #A52A2A;
+}
+.block3{
+    background-color: #AACCCC;
+}
+.border{
+ border:solid 1px black;
+}
+  </style>
+
+</head>
+<body class="not-front logged-in two-sidebars">
+
+  <div id="page"><div id="page-inner">
+    <div class="outer section border"><div class="inner clear-block">
+         <h3> container1: margin-bottom=10px,  container2:margin-top=5px. </h3>
+      <div style="float:left;"> 10px height <div style="width:100px;background:#C0C0C0;height:10px;"></div></div>
+      <div style="float:left;"> <div style="width:10px;height:5px;"></div></div>
+      <div style="float:left;"> 5px height <div style="width:100px;background:#A52A2A;height:5px;"></div></div>
+      
+    </div></div> 
+
+    <div  class="outer clear_both block1"><div class="inner clear-block" style='margin-bottom:10px;'>
+      <div style="text-align:center; font-size:3em; ">container 1</div>
+    </div></div> 
+
+    <div  class="outer clear_both block2"><div class="inner clear-block" style='margin-top:5px;'>
+      <div style="text-align:center; font-size:3em; ">container 2</div>
+    </div></div> 
+
+    <div class="outer clear_both border"><div class="inner clear-block">
+         <h3>container1: margin-bottom=10px,  child1:margin-top=10px,   child3:margin-top=5px </h3>
+    </div></div>
+
+    <div  class="outer clear_both block1"><div class="inner clear-block" style='margin-bottom:10px;'>
+      <div style="text-align:center; font-size:3em; ">container 1</div>
+    </div></div> 
+    <div  class="outer clear_both"><div class="inner clear-block">
+      <div class="outer clear_none block2"> <div  class="inner clear-block" style='margin-top:10px;' >
+       1st child
+      </div></div>
+      <div class="outer clear_none block3" > <div  class="inner clear-block">
+       2nd child
+      </div></div>
+      <div class="outer clear_none block2" > <div  class="inner clear-block" style='margin-top:5px;'>
+       3rd child
+      </div></div>
+    </div></div> 
+
+
+  <div class="clear_both" style="width:100%;background:#aacca8;"> closure</div>
+
+  </div></div> <!-- /#page-inner, /#page -->
+
+</body>
+</html>
+

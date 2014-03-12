@@ -257,7 +257,7 @@ container:
   css: |-
     /* background, margin, border, skinnables */
     .<%=g_piece_selector%>
-    { float:left; overflow:hidden;  padding:0;  margin:0; 
+    { float:left; overflow:hidden;  padding:0;  margin:0 auto; 
       position:relative;
       <%=@template.css(:block)%>
     }

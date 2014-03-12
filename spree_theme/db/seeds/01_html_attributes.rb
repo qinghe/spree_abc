@@ -99,7 +99,7 @@ objs=[
   {"id"=>98, "title"=>"margin-left", "pvalues"=>"auto,l1", "pvalues_desc"=>"Auto,L1", "punits"=>"l,%", "neg_ok"=>true, "default_value"=>-1, "pvspecial"=>"", "css_name"=>"margin-left"},
   {"id"=>99, "title"=>"content sections", "pvalues"=>"1", "pvalues_desc"=>"1", "punits"=>"", "neg_ok"=>true, "default_value"=>-1, "pvspecial"=>"", "css_name"=>"content sections"},
   {"id"=>100, "title"=>"width", "pvalues"=>"auto,100%,l1", "pvalues_desc"=>"Auto,100%,L1", "punits"=>"px", "neg_ok"=>false, "default_value"=>-1, "pvspecial"=>"", "css_name"=>"width"},
-  {"id"=>101, "title"=>"float", "pvalues"=>"left,right", "pvalues_desc"=>"Left,Right", "punits"=>"", "neg_ok"=>false, "default_value"=>-1, "pvspecial"=>"", "css_name"=>"float"},
+  {"id"=>101, "title"=>"float", "pvalues"=>"left,right,none", "pvalues_desc"=>"Left,Right,Center", "punits"=>"", "neg_ok"=>false, "default_value"=>-1, "pvspecial"=>"", "css_name"=>"float"},
   {"id"=>102, "title"=>"list_style", "pvalues"=>"basic,stardard_list,snapshot", "pvalues_desc"=>"Basic,Stardard list,Snapshot", "punits"=>"", "neg_ok"=>false, "default_value"=>-1, "pvspecial"=>"", "css_name"=>"list_style"},
   {"id"=>103, "title"=>"list_style", "pvalues"=>"list,ggrid,grid", "pvalues_desc"=>"List,Ggrid,Grid", "punits"=>"", "neg_ok"=>false, "default_value"=>-1, "pvspecial"=>"", "css_name"=>"list_style"},
   {"id"=>104, "title"=>"layout_style", "pvalues"=>"0,1", "pvalues_desc"=>"0,1", "punits"=>"", "neg_ok"=>false, "default_value"=>-1, "pvspecial"=>"", "css_name"=>"layout_style"},

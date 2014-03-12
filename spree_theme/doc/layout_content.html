@@ -1,0 +1,227 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+		<title>Container layout content demo</title>
+     <style type="text/css">
+/* From http://www.positioniseverything.net/easyclearing.html */
+.clear-block:after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+
+.clear-block {
+  display: block;
+}
+
+.section{
+  clear:both;
+}
+  div.fluid_container {
+    background-color: #ffc0cb;
+   /* border: 1px solid black;*/  
+    }
+  div.child{
+    /*position:relative;*/
+    float:left;
+    background-color: #90ee90;
+    border: 1px solid #7f7f7f;      
+  }  
+  div.child1{
+    /*position:relative;*/
+    float:left;
+    background-color:#ffa500;
+        
+  }
+   div.child2{
+    /*position:relative;*/
+    float:left;
+    background-color: #90ee90;
+  }  
+   div.child3{
+    /*position:relative;*/
+    float:left;
+    background-color:#1e90ff;;
+  }  
+    div.title{    
+    padding:10px 0 0 0;
+  }
+  </style>
+
+	</head>
+	<body>
+	  <h4>V container: layout content vertically;
+        H container: layout content horizontally;
+    </h4>
+    <div class="title"> V container with width:500px; child width:N/A; </div>
+    <div class="fluid_container clear-block" style="width:500px;">
+      <div class="child section" >child1 </div>
+      <div class="child section">child2</div>
+      <div class="child section">new added child3,width:N/A;</div>
+    </div>
+    
+    <div class="title"> V container with width:500px; child1 width:N/A; child2 width:300px; </div>
+
+    <div class="fluid_container clear-block" style="width:500px;">
+      <div class="child section" >child1 </div>
+      <div class="child section" style="width:300px;">child2</div>
+      <div class="child section">new added child3, width:N/A, but it has very long content..........................................................................................</div>
+    </div>
+    
+    <div class="title"> V container with width:60%; child1 width:N/A; child2 width:50%; </div>
+    <div class="fluid_container clear-block" style="width:60%;">
+      <div class="child section">child1</div>
+      <div class="child section">child2</div>
+      <div class="child section" style="width:50%;">new added child3, width:50%</div>
+    </div>
+    <div class="title"> V container with width:60%; child1 width:N/A; child2 width:50%;<br/>
+    how to compute the width of self?
+    </div>
+    <div class="fluid_container clear-block" style="width:60%;">
+      <div class="child section">child1</div>
+      <div class="child section">child2</div>
+      <div class="child section" style="width:1000px;">new added child3, width:1000px</div>
+    </div>
+    
+    <div class="title"> V container with width:N/A; child1 width:N/A; child2 width:50%; <br/>
+    how to compute the width of self?
+    </div>
+    <div class="fluid_container clear-block">
+      <div class="child section">child1</div>
+      <div class="child section" style="width:50%;">child2</div>
+      <div class="child section" style="width:50%;">new added child3, width:50%; but it has very long content...............................................................................................................................................................................................................................</div>
+    </div>
+    <div class="title"> V container with width:N/A; child1 width:N/A; child2 width:50%; <br/>
+    how to compute the width of self?
+    </div>
+    <div class="fluid_container clear-block">
+      <div class="child section">child1</div>
+      <div class="child section" style="width:50%;">child 2</div>
+      <div class="child section" style="width:1200px;">new added child3 width:1200px;</div>
+    </div>
+
+    <h4> horizontal containers <br/>
+      if there are more then one child, child'width could not be N/A; 
+    </h4>    
+    <div class="title"> H container with width:N/A; </div>
+    <div class="fluid_container clear-block" >
+      <div class="child1" style="width:100%;">child1:100%;</div>
+    </div>
+    
+    <div class="title"> H container with width:500px; user added two modules</div>
+    <div class="fluid_container clear-block" style="width:500px;">
+      <div class="child1" style="width:250px;">child1:250px;</div>
+      <div class="child2" style="width:250px;">child2:250px;</div>
+    </div>
+    <div class="fluid_container clear-block" style="width:500px;">
+      <div class="child1" style="width:166px;">child1:166px;</div>
+      <div class="child2" style="width:166px;">child2:166px;</div>
+      <div class="child3" style="width:168px;">new child3:168px;</div>
+    </div>
+    <div class="fluid_container clear-block" style="width:500px;">
+      <div class="child1" style="width:33%;">child1:33%;</div>
+      <div class="child2" style="width:33%;">child2:33%;</div>
+      <div class="child3" style="width:34%;">new child3:34%;</div>
+    </div>
+    <div class="title"> H container with width:500px; it has two width:N/A children </div>
+    <div class="fluid_container clear-block" style="width:500px;">
+      <div class="child1" style="">child1:N/A</div>
+      <div class="child2" style="">child2:N/A</div>
+    </div>
+    <div class="title"> H container with width:500px; it has child1 width:N/A, child2:width:200px </div>
+    <div class="fluid_container clear-block" style="width:500px;">
+      <div class="child1" style="">child1:N/A;</div>
+      <div class="child2" style="width:200px;">child2:200px;</div>
+    </div>
+    <div class="title"> H container with width:500px; it has child1 width:N/A, child2:width:50% </div>
+    <div class="fluid_container clear-block" style="width:500px;">
+      <div class="child1" style="">child1:N/A;</div>
+      <div class="child2" style="width:50%;">child2:50%;</div>
+    </div>
+    <div class="title"> H container with width:500px; it has child1 width:150px, child2:width:50% </div>
+    <div class="fluid_container clear-block" style="width:500px;">
+      <div class="child1" style="width:150px;">child1:150px;</div>
+      <div class="child2" style="width:50%;">child2:50%;</div>
+    </div>
+        
+<h4> if container has % width, children could only have % width</h4>
+    
+    <div class="title"> H container with width:50%;  user added two modules</div>
+    <div class="fluid_container clear-block" style="width:50%;">
+      <div class="child1" style="width:50%;">child1:50%;</div>
+      <div class="child2" style="width:50%;">child2:50%;</div>
+    </div>
+    <div class="fluid_container clear-block" style="width:50%;">
+      <div class="child1" style="width:33%;">child1:33%;</div>
+      <div class="child2" style="width:33%;">child2:33%;</div>
+      <div class="child3" style="width:34%;">new child3:34%;</div>
+    </div>
+    <div class="title"> H container with width:50%; it has two width:N/A children </div>
+    <div class="fluid_container clear-block" style="width:50%;">
+      <div class="child1" style="">child1:N/A;</div>
+      <div class="child2" style="">child2:N/A;</div>
+    </div>
+    <div class="title"> H container with width:50%; it has two width:200px children </div>
+    <div class="fluid_container clear-block" style="width:50%;">
+      <div class="child1" style="width:200px;">child1:200px;</div>
+      <div class="child2" style="width:200px;">child2:200px;</div>
+    </div>  
+    
+    <div class="title"> H container with width:50%; it has child1 width:N/A, child2:width:200px </div>
+    <div class="fluid_container clear-block" style="width:50%;">
+      <div class="child1" style="">child1:N/A;</div>
+      <div class="child2" style="width:200px;">child2:200px;</div>
+    </div>
+    <div class="title"> H container with width:50%; it has child1 width:N/A, child2:width:50% </div>
+    <div class="fluid_container clear-block" style="width:50%;">
+      <div class="child1" style="">child1:N/A;</div>
+      <div class="child2" style="width:50%;">child2:50%;</div>
+    </div>
+    <div class="title"> H container with width:50%; it has child1 width:150px, child2:width:50% </div>
+    <div class="fluid_container clear-block" style="width:50%;">
+      <div class="child1" style="width:150px;">child1:150px;</div>
+      <div class="child2" style="width:50%;">child2:50%;</div>
+    </div>
+    
+<h4> if container has N/A width, children could only have % width</h4>
+    <div class="title"> H container with width:N/A; user added two modules </div>
+    <div class="fluid_container clear-block" >
+      <div class="child1" style="width:50%;">child1:50%;</div>
+      <div class="child2" style="width:50%;">child2:50%;</div>
+    </div>
+    <div class="fluid_container clear-block" >
+      <div class="child1" style="width:33%;">child1:33%;</div>
+      <div class="child2" style="width:33%;">child2:33%;</div>
+      <div class="child3" style="width:34%;">new child3:34%;</div>
+    </div>
+    <div class="title"> H container with width:N/A; it has two width:N/A children </div>
+    <div class="fluid_container clear-block" >
+      <div class="child1" style="">child1:N/A;</div>
+      <div class="child2" style="">child2:N/A;</div>
+    </div>
+    <div class="title"> H container with width:N/A; it has two width:200px children </div>
+    <div class="fluid_container clear-block" >
+      <div class="child1" style="width:200px;">child1:200px;</div>
+      <div class="child2" style="width:200px;">child2:200px;</div>
+    </div>
+    <div class="title"> H container with width:N/A; it has child1 width:N/A, child2:width:200px </div>
+    <div class="fluid_container clear-block" >
+      <div class="child1" style="">child1:N/A;</div>
+      <div class="child2" style="width:200px;">child2:200px;</div>
+    </div>
+    <div class="title"> H container with width:N/A; it has child1 width:N/A, child2:width:50% </div>
+    <div class="fluid_container clear-block" style="width:50%;">
+      <div class="child1" style="">child1:N/A;</div>
+      <div class="child2" style="width:50%;">child2:50%;</div>
+    </div>
+   <div class="title"> H container with width:N/A; it has child1 width:150px, child2:width:50% </div>
+    <div class="fluid_container clear-block" style="">
+      <div class="child1" style="width:150px;">child1:150px;</div>
+      <div class="child2" style="width:50%;">child2:50%;</div>
+    </div>
+
+	</body>
+</html>
