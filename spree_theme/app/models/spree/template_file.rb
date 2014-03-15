@@ -14,5 +14,8 @@ module Spree
     #it is required while import theme with new template_file. we would set theme.assigned_resources while import.
     attr_accessor :page_layout_id
     attr_accessible :theme_id, :attachment, :page_layout_id
+    #for resource_class.resourceful
+    scope :resourceful, ->(theme){ where(:theme_id=>theme.id)}
+
   end
 end

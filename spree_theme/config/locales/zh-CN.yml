@@ -1,22 +1,21 @@
 zh-CN:
   activerecord:
     attributes:
-      template_theme: &template_theme_labels
+      spree/template_text:
+        name: 用途
+        slug: Slug
+        body: 内容
+      spree/template_theme: &template_theme_labels
         title: Title
         slug: Slug
         body: Body
-        foreign_link: Foreign link (URL)
-        position: Position
-        visible: Visible
-        meta_keywords: Meta Keywords
-        meta_description: Meta Description
-        meta_title: Meta Title
-        layout: Layout
     models:
-      template_theme:
-        one: Page
-        many: Pages
-
+      spree/template_file:
+        one: 模板图片
+      spree/template_text:
+        one: 模板素材
+      spree/template_theme:
+        one: 模板
   helpers:
     label:
       template_theme:
@@ -26,21 +25,13 @@ zh-CN:
     template_theme_not_imported: 模板无法导入
   template_theme: Theme
   template_themes: Themes
-  static_content:
-    static_pages: Static pages
-    static_pages_desc: Manage static page with WYSIWYG editor.
-    new_page: New page
-    editing_page: Editing page
-    confirm_delete: Are you sure ?
-    link: Link
-    meta_title: Meta Title
-    page_navigation_title: "Pages"
   spree:
     actions:
       import: 导入
     admin:
       tab:
         template_themes: 模板
+        theme_texts: 模板素材
         native_themes: 模板
         foreign_themes: 模板商店
     back_to_themes_list: 回到模板列表
@@ -58,6 +49,7 @@ zh-CN:
     release_theme: 
     select_taxon: 选择菜单
     select_template_image: 选择图片    
+    select_template_text: 选择文本    
     default_page:
       home: 首页
       login: 登录
@@ -69,6 +61,15 @@ zh-CN:
       unknown: 未知
       checkout: 付款
       thanks: 恭喜！支付成功
+    template_text:
+      static_pages: Static pages
+      static_pages_desc: Manage static page with WYSIWYG editor.
+      new_page: New page
+      editing_page: Editing page
+      confirm_delete: Are you sure ?
+      link: Link
+      meta_title: Meta Title
+      page_navigation_title: "Pages"          
     template_theme:
       assign_resource:
     page_layout:

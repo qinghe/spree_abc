@@ -26,6 +26,7 @@ Spree::Core::Engine.routes.prepend do
   #match 'preview(/:c(/:r))' => 'template_themes#preview' #preview home
  
   namespace :admin do
+    resources :template_texts
     resources :template_themes do
       collection do
         get :native

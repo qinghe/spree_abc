@@ -10,7 +10,7 @@ module Spree
     friendly_id :title, :use => :scoped, :scope => :site_id
     has_many :full_set_nodes, :class_name =>'PageLayout', :foreign_key=>:root_id, :primary_key=>:root_id
     has_many :sections, :class_name =>'Section', :foreign_key=>:root_id, :primary_key=>:section_id
-  
+    has_many :section_pieces, :through=>:sections
     # remove section relatives after page_layout destroyed.
     before_destroy :remove_section
     

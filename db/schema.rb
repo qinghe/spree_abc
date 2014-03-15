@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140227130911) do
+ActiveRecord::Schema.define(:version => 20140315025930) do
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0
@@ -791,6 +791,17 @@ ActiveRecord::Schema.define(:version => 20140227130911) do
     t.datetime "created_at",                              :null => false
     t.datetime "updated_at",                              :null => false
   end
+
+  create_table "spree_template_texts", :force => true do |t|
+    t.integer  "site_id",    :default => 0, :null => false
+    t.string   "name"
+    t.text     "body"
+    t.string   "slug"
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+  end
+
+  add_index "spree_template_texts", ["slug"], :name => "index_spree_template_texts_on_slug"
 
   create_table "spree_template_themes", :force => true do |t|
     t.integer  "site_id",                             :default => 0

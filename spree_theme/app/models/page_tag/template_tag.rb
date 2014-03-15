@@ -63,13 +63,17 @@ module PageTag
       def assigned_image_id
         self.collection_tag.theme.assigned_resource_id(Spree::TemplateFile, page_layout)
       end
+      def assigned_text_id
+        self.collection_tag.theme.assigned_resource_id(Spree::TemplateText, page_layout)
+      end
     end
     
     attr_accessor :page_layout_tree
-    attr_accessor :param_values_tag, :menus_tag, :image_tag
+    attr_accessor :param_values_tag, :menus_tag, :image_tag, :text_tag
     delegate :css, :to => :param_values_tag 
     delegate :menu,:menu2, :to => :menus_tag
     delegate :image, :to => :image_tag
+    delegate :text, :to => :text_tag
     delegate :theme, :to => :page_generator
     attr_accessor :current_piece
 
@@ -78,6 +82,7 @@ module PageTag
       self.param_values_tag = ::PageTag::ParamValues.new(self)
       self.menus_tag = ::PageTag::Menus.new(self)
       self.image_tag = ::PageTag::TemplateImage.new(self)
+      self.text_tag = ::PageTag::TemplateText.new(self)
       self.page_layout_tree = theme.page_layout.self_and_descendants()
     end
     

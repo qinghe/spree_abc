@@ -25,5 +25,5 @@ SpreeMultiSite::Config.tap do |config|
 end
 
 SpreeEditor::Config.tap do |config|
-  config.ids = "product_description page_body taxon_description"
+  config.ids = "product_description taxon_description template_text_body"
 end

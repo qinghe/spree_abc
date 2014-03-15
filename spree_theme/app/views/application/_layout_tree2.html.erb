@@ -4,7 +4,7 @@
 layout = theme.page_layout
 options ||={} 
 selected_id= (options[:selected_id]||layout.id )
-page_layouts_with_resource = Spree::PageLayout.includes({:sections=>:section_piece}).where(["spree_section_pieces.resources!=?",''])
+page_layouts_with_resource = Spree::PageLayout.includes(:section_pieces).where(["spree_page_layouts.root_id=? and spree_section_pieces.resources!=?",layout.id,''])
 %>
 <%=form_tag(update_layout_tree_template_theme_path(theme), :id=>"layout_tree_form",:name=>"layout_tree_form", :remote=>true) do %>
 
