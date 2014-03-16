@@ -35,102 +35,70 @@ root:
     <% end %>
     </body>
     </html>
-  css: |-
+  css: |
     body
-      { font-size: 100%;
-        margin: 0;
-        padding: 0;
-        <%= @template.css :body %>
-      }    
-      body, caption, th, td, input, textarea, select, option, legend, fieldset
-      {
-        <% if @template.css(:font_family)== 'serif' %>
-        font-family: Times, "Times New Roman", Georgia, "Bitstream Vera Serif", serif;
-        <% else %>
-        font-family: Tahoma, Verdana, Arial, Helvetica, "Bitstream Vera Sans", Sans, sans-serif;
-        <% end %>
-      }    
-      ol,ul {
-        list-style: none;
-      }
-      /* **** Defaults **** */  /** headings **/     
-      h1
-      { font-size: 2em;
-        line-height: 1.3em;
-        margin-top: 0;
-        margin-bottom: 0.5em; /* 0.5em is equavalent to 1em in the page's base font. A margin specified in ems is relative to
-                                 the element's font-size, not to the pages' base font size. */
-      }    
-      h2
-      { font-size: 1.5em;
-        line-height: 1.3em;
-        margin-top: 0.667em; /* Equivalent to 1em in the page's base font: 1 / 1.5 = 0.667em */
-        margin-bottom: 0.667em;
-      }    
-      h3
-      { font-size: 1.3em;
-        line-height: 1.3em;
-        margin-top: 0.769em; /* Equivalent to 1em in the page's base font: 1 / 1.3 = 0.769 */
-        margin-bottom: 0.769em;
-      }    
-      /* http://meyerweb.com/eric/tools/css/reset/ */
-      /* Normalizes margin,padding */
-      html, body, div, span, applet, object, iframe,
-      h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-      a, abbr, acronym, address, big, cite, code,
-      del, dfn, em, font, img, ins, kbd, q, s, samp,
-      small, strike, strong, sub, sup, tt, var,
-      b, u, i, center,
-      dl, dt, dd, ol, ul, li,
-      fieldset, form, label, legend,
-      table, caption, tbody, tfoot, thead, tr, th, td {
-        margin: 0;
-        padding: 0;
-        border: 0;
-        outline: 0;
-        font-size: 100%;
-        vertical-align: baseline;
-        background: transparent;
-      }
-      body {
-        line-height: 1;
-      }
-      ol, ul {
-        list-style: none;
-      }
-      blockquote, q {
-        quotes: none;
-      }
-      blockquote:before, blockquote:after,
-      q:before, q:after {
-        content: '';
-        content: none;
-      }
-      /* Normalizes font-size and font-weight to normal */
-      address,caption,cite,code,dfn,em,strong,th,var { font-size:normal; font-weight:normal }    
-      /* Removes list-style from lists */
-      table { border-collapse:collapse; border-spacing:0 }
-      th, thead th, tbody th
-      { text-align: left;
-        font-style:normal;
-        font-weight:normal;  
-        vertical-align: middle;
-      }
-      img
-      { border: 0;
-        /* remove extra height, 
-         * http://stackoverflow.com/questions/6483994/css-font-size-img-tag
-         */
-        vertical-align:middle; 
-      }
-      table {
-        width:100%; 
-      }
-      /* set padding margin to label */
-      #page form label {
-        display: inline-block;
-      }
-      
+    { font-size: 100%;
+      line-height: 1; /* it is in css reset */
+      margin: 0;
+      padding: 0;
+      <%= @template.css :body %>
+    }    
+    body, caption, th, td, input, textarea, select, option, legend, fieldset
+    {
+      <% if @template.css(:font_family)== 'serif' %>
+      font-family: Times, "Times New Roman", Georgia, "Bitstream Vera Serif", serif;
+      <% else %>
+      font-family: Tahoma, Verdana, Arial, Helvetica, "Bitstream Vera Sans", Sans, sans-serif;
+      <% end %>
+    }    
+    ol,ul {
+      list-style: none;
+    }
+    /* **** Defaults **** */  /** headings **/     
+    h1
+    { font-size: 2em;
+      line-height: 1.3em;
+      margin-top: 0;
+      margin-bottom: 0.5em; /* 0.5em is equavalent to 1em in the page's base font. A margin specified in ems is relative to
+                               the element's font-size, not to the pages' base font size. */
+    }    
+    h2
+    { font-size: 1.5em;
+      line-height: 1.3em;
+      margin-top: 0.667em; /* Equivalent to 1em in the page's base font: 1 / 1.5 = 0.667em */
+      margin-bottom: 0.667em;
+    }    
+    h3
+    { font-size: 1.3em;
+      line-height: 1.3em;
+      margin-top: 0.769em; /* Equivalent to 1em in the page's base font: 1 / 1.3 = 0.769 */
+      margin-bottom: 0.769em;
+    }    
+    table { border-collapse:collapse; border-spacing:0 }
+    th, thead th, tbody th
+    { text-align: left;
+      font-style:normal;
+      font-weight:normal;  
+      vertical-align: middle;
+    }
+    img
+    { border: 0;
+      /* remove extra height, 
+       * http://stackoverflow.com/questions/6483994/css-font-size-img-tag
+       */
+      vertical-align:middle; 
+    }
+    table {
+      width:100%; 
+    }
+    /* set padding margin to label */
+    #page form label {
+      display: inline-block;
+    }
+    #page form p {
+      margin: 0; padding: 0;
+    }
+          
     <% if @template.css :use_bbtl %>
     div#bbtl
     { position:absolute;
@@ -436,8 +404,7 @@ text:
   is_selectable: "0"
   is_container: "0"
   resources: t
-  html: |          
-          <%=raw @template.text %> 
+  html: <%= raw @template.text %>
   created_at: 2011-09-20 19:40:07
   updated_at: 2011-09-20 19:40:07
   css: ""
@@ -787,17 +754,20 @@ thanks:
   updated_at: 2011-09-20 19:40:07
   css: ""
   js: ""
-description_name:
+taxon_name:
   id: 27
   title: taxon name
   slug: taxon-name
   is_selectable: "1"
   is_container: "0"
   html: |    
-    <h1> <%= @current_page.menu.name %> </h1>
+    <h1 class="taxon_name"> <%= @current_page.menu.name %> </h1>
   created_at: 2011-09-20 19:40:07
   updated_at: 2011-09-20 19:40:07
-  css: ""
+  css: |
+    .<%=@template.current_piece.section_selector%> h1.taxon_name{
+      margin: 0; padding: 0; font-size: 100%;line-height:1em;
+    }
   js: ""
 container_title:
   id: 28
@@ -807,7 +777,8 @@ container_title:
   is_container: "1"
   html: ~~content~~    
   css: |
-    .<%=@template.current_piece.section_selector%> h6{
+    .<%=@template.current_piece.section_selector%> h6.theme_title{
+      margin: 0; padding: 0; font-size: 100%;line-height:1em;
       <%= @template.css :s_h6 %> 
     }
   js: ""
@@ -830,7 +801,7 @@ order_address:
   html: |
     <% if @order.has_step?("address") %>
       <% if @order.has_step?("delivery") %>
-        <h6><%= Spree.t(:shipping_address) %> <%= link_to "(#{Spree.t(:edit)})", checkout_state_path(:address) unless @order.completed? %></h6>
+        <h6 class="theme_title"><%= Spree.t(:shipping_address) %> <%= link_to "(#{Spree.t(:edit)})", checkout_state_path(:address) unless @order.completed? %></h6>
         <div class="columns alpha four" data-hook="order-ship-address">
           <%= render :partial => 'spree/shared/address', :locals => { :address => @order.ship_address } %>
         </div>
@@ -845,7 +816,7 @@ order_payment:
   is_selectable: "1"
   is_container: "0"
   html: |    
-    <h6><%= Spree.t(:payment_information) %> <%= link_to "(#{Spree.t(:edit)})", checkout_state_path(:payment) unless @order.completed? %></h6>
+    <<h6 class="theme_title">><%= Spree.t(:payment_information) %> <%= link_to "(#{Spree.t(:edit)})", checkout_state_path(:payment) unless @order.completed? %></h6>
     <div class="payment-info">
       <% @order.payments.valid.each do |payment| %>
         <%= render payment%><br/>
@@ -871,7 +842,7 @@ payment_form:
   is_container: "0"
   html: |    
     <div id="checkout_form_payment" >
-      <h6><%= Spree.t(:payment_information) %></h6>
+      <h6 class="theme_title"><%= Spree.t(:payment_information) %></h6>
       <% @order.available_payment_methods.each do |method| %>
       <p>
         <label>
@@ -908,7 +879,7 @@ ship_form:
   html: |    
     <div id="checkout_form_address" data-hook="billing_fieldset_wrapper">
       <%= form.fields_for :bill_address do |bill_form| %>
-        <h6><%= Spree.t(:shipping_address) %></h6>
+        <h6 class="theme_title"><%= Spree.t(:shipping_address) %></h6>
         <%= render :partial => 'spree/address/form', :locals => { :form => bill_form, :address_type => 'billing', :address => @order.bill_address } %>
       <% end %>
       <%= form.fields_for :ship_address do |ship_form| %>
@@ -945,20 +916,7 @@ checkout_as_guest_form:
   slug: checkout-as-guest-form
   is_selectable: "1"
   is_container: "0"
-  html: |    
-    <% if Spree::Config[:allow_guest_checkout] %>
-      <div id="guest_checkout" data-hook class="columns omega eight">
-        <%= render :partial => 'spree/shared/error_messages', :locals => { :target => @order } %>
-        <h6><%= Spree.t(:guest_user_account) %></h6>
-        <%= form_for @order, :url => update_checkout_registration_path, :method => :put, :html => { :id => 'checkout_form_registration' } do |f| %>
-          <p>
-            <%= f.label :email, Spree.t(:email) %><br />
-            <%= f.email_field :email, :class => 'title' %>
-          </p>
-          <p><%= f.submit Spree.t(:continue), :class => 'button primary' %></p>
-        <% end %>
-      </div>
-    <% end %>
+  html: "" 
   css: ""
   js: ""
 sign_up_form:
@@ -1164,6 +1122,8 @@ minicart:
   js: ""
 logged_and_unlogged_menu:
   id: 49
+  title: logged and unlogged menu
+  slug: logged-and-unlogged-menu
   is_selectable: "0"
   is_container: "1"
   resources: m:account/m:login
@@ -1184,8 +1144,6 @@ logged_and_unlogged_menu:
      display:inline-block;
      float:left;
      margin:0; /* non-editable */}
-  title: logged and unlogged menu
-  slug: logged-and-unlogged-menu
 password_recover_form:
   id: 50
   title: password recover form
