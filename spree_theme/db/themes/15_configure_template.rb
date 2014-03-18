@@ -35,8 +35,8 @@ for partial_html in html_page.partial_htmls
     partial_html['block_height']['unset'] = true
     partial_html['block_height'].update
   when 'Main menu'
-    partial_html['block_background-color']['pvalue'] = '#D74700'
-    partial_html['block_background-color'].update
+    partial_html['inner_background-color']['pvalue'] = '#D74700'
+    partial_html['inner_background-color'].update
   when 'content'
     partial_html['block_height']['unset'] = true
     partial_html['block_height'].update
@@ -54,10 +54,10 @@ for partial_html in html_page.partial_htmls
     partial_html['block_height'].update
     partial_html['block_width']['pvalue'] = 200
     partial_html['block_width'].update
-    partial_html['block_background-color']['pvalue'] = '#FFF8ED'
-    partial_html['block_background-color'].update
+    partial_html['inner_background-color']['pvalue'] = '#FFF8ED'
+    partial_html['inner_background-color'].update
   when 'footer'
-    partial_html['block_background-color']['pvalue'] = '#F5F5F5'
-    partial_html['block_background-color'].update
+    partial_html['inner_background-color']['pvalue'] = '#F5F5F5'
+    partial_html['inner_background-color'].update
   end
 end
