@@ -66,7 +66,6 @@ module SpreeTheme::System
     end
     #menu should be same instance pass to PageGenerator, it require  request_fullpath
     @menu.request_fullpath = request.fullpath
-Rails.logger.info "Abc:request_fullpath = #{request.fullpath}"    
     @is_designer = false
     if website.design?
       #add website condition 
