@@ -33,6 +33,7 @@ module Spree
       #     /user  context is account
       # return :either(detail or list), cart, checkout, register, login
       def current_context
+        # consider query_string d=www.dalianshops.com and preview path /template_themes/2/preview
         if request_fullpath.present? #for current page, request_fullpath is present
           case self.request_fullpath
             when /^\/[\d]+\/[\d]+/
@@ -55,7 +56,7 @@ module Spree
               ContextEnum.thanks
             when /^\/signup/
               ContextEnum.signup
-            when '/'
+            when '/',/^\/\?/, /^\/template_themes/ 
               ContextEnum.home
             else
               ContextEnum.list

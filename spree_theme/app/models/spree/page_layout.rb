@@ -483,7 +483,6 @@ module Spree
        
        #piece may contain several ~~content~~, the deepest one is first.           
        if(pos = (piece=~/~~content~~/))
-  Rails.logger.debug "build page_layout_id=#{node.id}, data_source=#{node.data_source}"       
          if node.data_source.present? #node.data_source.singularize
            subpieces = <<-EOS1 
            <% if @current_page.resources.present? %>

@@ -5,7 +5,6 @@ module Spree
     delegate :taxon_class,:site_class, :to=>:"SpreeTheme"
 
     def page
-Rails.logger.debug "menu=#{@menu.inspect}"      
       #if SpreeTheme.site_class.current.dalianshops?
       #  redirect_to new_site_path      
       #end
