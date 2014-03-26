@@ -7,7 +7,7 @@ Spree::Core::Engine.routes.draw do
   resources :sites, :only => [:show]
 
   if Rails.env.development?
-    mount Spree::MailPreview => 'mail_view'
+    mount Spree::UserMailer::Preview => 'mail_view'
   end
 end
 
