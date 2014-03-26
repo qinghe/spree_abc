@@ -2,7 +2,7 @@
 - !ruby/object:Spree::TemplateText
   attributes:
     id: 1
-    site_id: 0
+    site_id: 1
     name: 广告词
     body: ! "<h1>真金不怕火炼</h1>\r\n<p>把&ldquo;电子&rdquo;的事情交给我们，让您轻松做&ldquo;商务&rdquo;</p>\r\n<h3
       style=\"padding-left: 30px;\"><em>行不行，试过就知道</em></h3>"
@@ -12,7 +12,7 @@
 - !ruby/object:Spree::TemplateText
   attributes:
     id: 2
-    site_id: 0
+    site_id: 1
     name: 功能介绍
     body: ! "<table style=\"width: 814px; height: 160px;\">\r\n<tbody>\r\n<tr>\r\n<td>\r\n<h3>1
       开通和装修</h3>\r\n<ul>\r\n<li>注册即服务，开通像注册邮箱一样简单。</li>\r\n<li>一键导入淘宝数据，想你所想。</li>\r\n<li>有免费，有定制，装修到您满意。</li>\r\n</ul>\r\n</td>\r\n<td>\r\n<h3>2
@@ -27,7 +27,7 @@
 - !ruby/object:Spree::TemplateText
   attributes:
     id: 3
-    site_id: 0
+    site_id: 1
     name: 您需要dalianshops 吗
     body: <p>您需要dalianshops 吗？<br><br>一. 我是新手。<br>1. 想开个独立的网店， 展示产品及销售<br>2. 不需要复杂的功能，能卖东西就行。<br>3.
       界面一定要漂亮，要定制的, 文艺范，小清新。<br>请选择我们， 放眼互联网， 它不是最好，一定是最适合你的。<br><br>二. 我有淘宝/天猫店，想开个独立的网店<br>1.
@@ -42,7 +42,7 @@
 - !ruby/object:Spree::TemplateText
   attributes:
     id: 4
-    site_id: 0
+    site_id: 1
     name: powered by dalianshops
     body: <p><em>powered by dalianshops</em></p>
     slug: 

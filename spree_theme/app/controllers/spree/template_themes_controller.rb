@@ -17,6 +17,10 @@ Rails.logger.debug "menu=#{@menu.inspect}"
       render "under_construction", layout:"under_construction"            
     end
     
+    def new_admin_session
+      
+    end
+    
     def create_admin_session
       user_params = params[:spree_user]
       user = Spree.user_class.find_for_authentication(:email => user_params[:email])

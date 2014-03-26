@@ -23,18 +23,27 @@ module SpreeTheme::System
     #if @is_preview 
     #  return 'layout_for_preview'
     #end  
+    if @is_layout_for_login_required
+      return 'layout_for_login'
+    end
     SpreeTheme.site_class.current.layout || Spree::Config[:layout]
   end
 
   def initialize_template
+    # in case  tld/create_admin_session, should show system layout, theme may have no login section. ex www.dalianshops.com
+    @is_layout_for_login_required = false
     #dalianshops use template now.
     #return if SpreeTheme.site_class.current.dalianshops?
     #Rails.logger.debug "request.fullpath=#{request.fullpath}"
     # fullpath may contain ?n=www.domain.com    
-    return if request.fullpath =~ /^\/under_construction/
-    return if request.fullpath =~ /^\/create_admin_session/
-    return if( request.fullpath =~ /^\/user\/spree_user\/logout/ or request.fullpath =~ /^\/logout/) 
-    return if request.fullpath =~ /^\/admin/    
+    case request.fullpath
+      when /^\/under_construction/, /^\/user\/spree_user\/logout/ ,/^\/logout/, /^\/admin/
+        return
+      when /^\/create_admin_session/,/^\/new_admin_session/
+        @is_layout_for_login_required = true
+        return
+    end  
+      
     website = SpreeTheme.site_class.current
     #DefaultTaxon.instance.id => 0
     if params[:controller]=~/cart|checkout|order/
