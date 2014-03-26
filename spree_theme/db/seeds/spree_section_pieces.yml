@@ -31,7 +31,7 @@ root:
       </div><!-- /#page -->
       </div><!-- /#jquery.layout require it -->
     <% if @current_page.is_preview %>      
-      <script type="text/javascript" src="/assets/interface.js"></script>    
+      <%= javascript_include_tag 'interface' %>      
     <% end %>
     </body>
     </html>
