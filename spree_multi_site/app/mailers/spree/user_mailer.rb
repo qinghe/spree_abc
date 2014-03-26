@@ -3,8 +3,7 @@ class Spree::UserMailer < ActionMailer::Base
 
   def load_sample(user)
     @user = user
-    mail(:to => user.email,
-         :subject => user.site[:name] )
+    mail(:to => user.email, :subject => user.site[:name] )
   end
 
 end
