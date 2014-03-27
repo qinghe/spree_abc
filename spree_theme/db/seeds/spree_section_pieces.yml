@@ -30,9 +30,9 @@ root:
       </div><!-- /#page-inner -->
       </div><!-- /#page -->
       </div><!-- /#jquery.layout require it -->
-    <% if @current_page.is_preview %>      
-      <%= javascript_include_tag 'interface' %>      
-    <% end %>
+      <%= javascript_tag  do -%>
+        g_is_preview = <%= @current_page.is_preview.to_json %>  
+      <% end -%>
     </body>
     </html>
   css: |

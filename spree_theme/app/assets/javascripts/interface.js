@@ -429,13 +429,3 @@ SelectorGadget.prototype.analytics = function() {
   document.body.appendChild(jQuery('<img />').attr('src', urchinUrl).get(0));
 };
 
-// And go!
-// g_selector_gadget = null;
-if (typeof(g_selector_gadget) == 'undefined' || g_selector_gadget == null) {
-    g_selector_gadget = new SelectorGadget();
-    //g_selector_gadget.makeInterface();
-    //g_selector_gadget.clearEverything();
-    g_selector_gadget.setMode('interactive');
-//    g_selector_gadget.setMode('browse');
-//    g_selector_gadget.analytics();
-}
