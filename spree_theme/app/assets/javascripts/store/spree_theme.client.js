@@ -1,3 +1,4 @@
+//= require jquery.validate/localization/messages_zh-CN.js
 function center_template_section( selector )
 {
   var ele = $(selector);

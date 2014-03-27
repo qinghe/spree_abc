@@ -9,7 +9,7 @@
 //= require interface.js
 
 $(document).ready(function() {
-  if (g_is_preview)
+  if (typeof(g_is_preview) != 'undefined' && g_is_preview==true)
   {
     if (typeof(g_selector_gadget) == 'undefined' || g_selector_gadget == null) {
       g_selector_gadget = new SelectorGadget();

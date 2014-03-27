@@ -2,17 +2,20 @@
  @site ||= SpreeTheme.site_class.new
  @user ||= @site.users.build
 %>
-<%= form_for :site, :url => quick_lunch_path do |f| %>
+<%= form_for :site, :url => quick_lunch_path, :html=>{:id=>"site_form"} do |f| %>
     <div >
         <p>
-          <%= f.text_field :name, :class => 'fullwidth title', :placeholder => Spree.t(:name_store)  %>
+          <%= f.text_field :name, :class => 'fullwidth title', :placeholder => Spree.t(:name_store), :minlength=>4, :maxlength=>24, :required=>""  %>
         </p>
         <p>
           <%= email_field :user, :email, :placeholder => Spree.t(:email)%>
         </p>
         <p>
-          <%= password_field :user,:password, :placeholder=>Spree.t(:password) %>
+          <%= password_field :user,:password, :placeholder=>Spree.t(:password), :minlength=>6, :maxlength=>24, :required=>"" %>
         </p>
         <p><%= f.button Spree.t(:create), :class => 'button primary' %></p>
     </div>
 <% end %>
+<%= javascript_tag do %>
+$(function() {  $("#site_form").validate();  });
+<% end -%>

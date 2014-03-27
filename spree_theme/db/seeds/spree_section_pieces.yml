@@ -1040,7 +1040,7 @@ container_form:
   is_container: "1"
   html: ~~content~~    
   css: |
-    .<%=@template.current_piece.section_selector%> .error{ <%=@template.css(:s_error) %> }
+    .<%=@template.current_piece.section_selector%> label.error{ <%=@template.css(:s_error) %> }
     .<%=@template.current_piece.section_selector%> label{ <%=@template.css(:s_label) %> }
     .<%=@template.current_piece.section_selector%> input{ <%=@template.css(:s_input) %> }
     .<%=@template.current_piece.section_selector%> button{ <%=@template.css(:s_button) %> } 
