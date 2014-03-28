@@ -14,7 +14,7 @@ root:
       <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8" />
       <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"/>
       <%# it is in main app/assets/ include spree_theme, spree_china_checkout %>      
-      <%= javascript_include_tag 'store/all' %>      
+      <%= javascript_include_tag 'store/spree_theme.client' %>      
     <% if @current_page.is_preview %>
       <%= stylesheet_link_tag 'store/spree_theme', :media => 'screen' %>
     <% else%>
