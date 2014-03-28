@@ -5,6 +5,6 @@
 // the compiled file.
 //
 
-//= require store/spree_theme.client
+//= require store/spree_theme
 //= require store/spree_china_checkout
 
