@@ -10,5 +10,4 @@
 //= require admin/spree_backend
 //= require admin/spree_theme
 //= require admin/spree_editor
-//= require tinymce-jquery
 //= require_tree .
