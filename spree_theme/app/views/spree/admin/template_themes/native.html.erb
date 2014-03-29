@@ -15,13 +15,12 @@
     <td><%= theme.title %></td>
     <td><%= theme.applied? %></td>
     <td class="actions">
-    <%= link_to 'Config', config_admin_template_theme_path(theme), {:method=>:get} %>
-    <%= link_to 'Apply', apply_admin_template_theme_path(theme), {:method=>:post} %>
-              &nbsp;
+    <%= link_to_with_icon 'icon-cogs', 'Config', config_admin_template_theme_path(theme), {:method=>:get,:no_text => true} %>
+    <%= link_to_with_icon 'icon-check-circle', 'Apply', apply_admin_template_theme_path(theme), {:method=>:post,:no_text => true} %>
     <% if theme.has_native_layout? %>    
-      <%= link_to 'Preview', preview_template_theme_path(theme), {:target=>'_blank'} %>
+      <%= link_to_with_icon 'icon-eye', 'Preview', preview_template_theme_path(theme), {:target=>'_blank',:no_text => true} %>
       <% if SpreeTheme.site_class.current.design? %>    
-      <%= link_to 'Copy', copy_admin_template_theme_path(theme), {:method=>:post} %>
+      <%= link_to_with_icon 'icon-copy', 'Copy', copy_admin_template_theme_path(theme), {:method=>:post,:no_text => true} %>
       <%= link_to 'Release', release_admin_template_theme_path(theme), {:method=>:post} %>
       <% end %>
     <% end %>
