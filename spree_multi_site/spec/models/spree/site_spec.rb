@@ -2,7 +2,7 @@
 require 'spec_helper'
 describe Spree::Site do
   before(:each) do
-    @site = Spree::Site.new(:name=>'ABCD',:domain=>'www.abc.net',:short_name=>'shop')
+    @site = Spree::Site.new(:name=>'ABCD',:domain=>'www.abc.net')
   end
 
   it "should be valid" do
@@ -23,7 +23,7 @@ describe Spree::Site do
     site2.should be_valid
     site2.save.should be_true
     site2.short_name.should start_with( @site.short_name)
-    site2.short_name.should != @site.short_name
+    site2.short_name.should_not == @site.short_name
   end
   
   
@@ -51,6 +51,7 @@ describe Spree::Site do
   it "shold load samples" do
     @site.save!
     @site.load_sample
+    @site.shipping_categories.should be_present
   end
   
   it "should has associations" do

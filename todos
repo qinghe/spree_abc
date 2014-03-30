@@ -43,3 +43,9 @@ new todo
    https://shopabc-5.myshopify.com/admin/account_setup
    
 3. export/import theme 2.
+
+4. show error message in checkout page. ex. can not ship.
+
+5. select shop currency.  use CNY
+
+6. add site_id into shipping_categories
