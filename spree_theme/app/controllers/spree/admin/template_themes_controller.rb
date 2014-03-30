@@ -33,9 +33,9 @@ module Spree
         
         imported_theme = @template_theme.import( new_theme_attributes )
         if imported_theme.present?
-          flash[:success] = Spree.t('notice_messages.product_cloned')
+          flash[:success] = Spree.t('notice_messages.theme_imported')
         else
-          flash[:success] = Spree.t('notice_messages.product_not_cloned')
+          flash[:success] = Spree.t('notice_messages.theme_not_imported')
         end
 
         

@@ -1,19 +1,20 @@
 <%= render :partial => 'sub_menu' %>
 <% content_for :page_title do %>
-  <%= Spree.t(:foreign_themes) %> 
+  <%= Spree.t(:theme_foreign) %> 
 <% end %>
 <table>
   <tr>
-    <th>TemplateTheme</th>
-    <th>IsImported</th>
+    <th><%= Spree::TemplateTheme.human_attribute_name(:title) %></th>
+    <th><%= Spree.t(:theme_imported) %></th>
   </tr>
 
 <% @themes.each do |theme| %>
   <tr>
     <td><%= theme.title %></td>
-    <td><%= theme.imported? %></td>
-    <td class="actions"><%= link_to 'Preview', preview_template_theme_url(theme, :host=>SpreeTheme.site_class.designsite.domain) %>
-    <%= link_to_unless theme.imported?, 'Import', prepare_import_admin_template_theme_path(theme) %></td>
+    <td align="center"><%= theme.imported? ? Spree.t(:theme_yes) : Spree.t(:theme_no) %></td>
+    <td class="actions"><%= link_to_with_icon 'icon-eye', Spree.t(:theme_preview), preview_template_theme_url(theme, :host=>SpreeTheme.site_class.designsite.domain),{:target=>'_blank',:no_text => true} %>
+    <%=link_to_with_icon 'icon-tag', Spree.t(:theme_import), prepare_import_admin_template_theme_path(theme),{:disabled=>theme.imported?,:no_text => true} %>
+    </td>
   </tr>
 <% end %>
 </table>

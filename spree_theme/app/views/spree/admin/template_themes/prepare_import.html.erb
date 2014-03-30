@@ -1,13 +1,13 @@
 <%= render :partial => 'sub_menu' %>
 <% content_for :page_title do %>
-  <%= Spree.t(:configing_theme) %> &ldquo;<%= @template_theme.title %>&rdquo;
+  <%= Spree.t(:theme_prepare_import) %> &ldquo;<%= @template_theme.title %>&rdquo;
 <% end %>
 <%= form_for :template_theme, :url=>import_admin_template_theme_path, :html=>{ :multipart => true} do |f| %>
   <fieldset class="no-border-top">
     <div class="row">
         <div class="alpha eight columns">
           <fieldset class="security no-border-bottom">
-            <legend align="center">Assign taxon</legend>
+            <legend align="center"><%= Spree.t(:theme_assign_taxon) %></legend>
             <% @template_theme.page_layout.self_and_descendants.each do |page_layout|
               assigned_taxons = @template_theme.assigned_resources( SpreeTheme.taxon_class, page_layout) 
               next if assigned_taxons.blank?
@@ -23,7 +23,7 @@
         </div>
         <div class="omega eight columns">
           <fieldset class="currency no-border-bottom">
-            <legend align="center">Assign image</legend>
+            <legend align="center"><%= Spree.t(:theme_assign_image) %></legend>
             <% @template_theme.page_layout.self_and_descendants.each do |page_layout|
               assigned_images = @template_theme.assigned_resources( Spree::TemplateFile, page_layout) 
               next if assigned_images.blank?

@@ -1,5 +1,5 @@
 <% content_for :page_title do %>
-  <%= Spree.t(:configing_theme) %> &ldquo;<%= @template_theme.title %>&rdquo;
+  <%= Spree.t(:theme_config) %> &ldquo;<%= @template_theme.title %>&rdquo;
 <% end %>
 
 <% content_for :sidebar_title do %>
@@ -10,7 +10,7 @@
   <nav class="menu">
     <ul data-hook="admin_theme_tabs">
       <%= content_tag :li, :class => ('active' if current == 'AssignResource') do %>
-        <%= link_to_with_icon 'icon-edit', Spree.t('template_theme.assign_resource'), config_admin_template_theme_url(@template_theme) %>
+        <%= link_to_with_icon 'icon-edit', Spree.t(:theme_assign_resource), config_admin_template_theme_url(@template_theme) %>
       <% end if can?(:admin, Spree::TemplateTheme) %>
       <%= content_tag :li, :class => ('active' if current == 'Context') do %>
         <%= link_to_with_icon 'icon-picture', Spree.t('page_layout.context'), config_admin_template_theme_url(@template_theme) %>

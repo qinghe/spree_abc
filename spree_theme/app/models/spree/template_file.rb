@@ -16,6 +16,7 @@ module Spree
     attr_accessible :theme_id, :attachment, :page_layout_id
     #for resource_class.resourceful
     scope :resourceful, ->(theme){ where(:theme_id=>theme.id)}
-
+    #get resource name.
+    alias_attribute(:name, :attachment_file_name)
   end
 end

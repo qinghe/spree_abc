@@ -6,9 +6,8 @@ zh-CN:
         slug: Slug
         body: 内容
       spree/template_theme: &template_theme_labels
-        title: Title
+        title: 名字
         slug: Slug
-        body: Body
     models:
       spree/template_file:
         one: 模板图片
@@ -21,13 +20,13 @@ zh-CN:
       template_theme:
         <<: *template_theme_labels
   notice_messages:
-    template_theme_imported: 模板已经导入
-    template_theme_not_imported: 模板无法导入
+    theme_imported: 模板已经购买成功
+    theme_not_imported: 模板无法导入
   template_theme: Theme
   template_themes: Themes
   spree:
     actions:
-      import: 导入
+      import: 购买
     admin:
       tab:
         template_themes: 模板
@@ -42,11 +41,6 @@ zh-CN:
       state: 邮编
       city: 所在地区
       street: 街道地址
-    config_theme:
-    configing_theme: 配置模板 
-    copy_theme:
-    delete_theme: 删除 
-    release_theme: 
     select_taxon: 选择菜单
     select_template_image: 选择图片    
     select_template_text: 选择文本    
@@ -70,8 +64,22 @@ zh-CN:
       link: Link
       meta_title: Meta Title
       page_navigation_title: "Pages"          
-    template_theme:
-      assign_resource:
+    theme_foreign: 模板商店
+    theme_native: 可用模板
+    theme_applied: 是否使用
+    theme_yes: 是
+    theme_no: 否 
+    theme_apply: 使用
+    theme_assign_resource: 分配素材
+    theme_assign_taxon: 分配菜单
+    theme_assign_image: 分配图片
+    theme_config: 设置
+    theme_import: 购买
+    theme_copy: 复制
+    theme_prepare_import: 设置
+    theme_imported: 是否已购买
+    theme_preview: 预览
+    theme_release: 发布
     page_layout:
       context: 
       date_source: 

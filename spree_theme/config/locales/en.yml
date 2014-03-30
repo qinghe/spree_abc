@@ -35,12 +35,6 @@ en:
         native_themes: 模板
         foreign_themes: 模板商店
     back_to_themes_list: 回到模板列表
-    apply_theme: 
-    config_theme:
-    configing_theme: 配置模板 
-    copy_theme:
-    delete_theme: 删除 
-    release_theme: 
     select_taxon: 选择菜单
     select_template_image: 选择图片    
     taxon:
@@ -59,6 +53,8 @@ en:
       meta_title: Meta Title
       page_navigation_title: "Pages"
     template_theme:
+      native_themes: native_themes
+      config: config 
       assign_resource:
     page_layout:
       context: 
