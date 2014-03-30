@@ -9,12 +9,12 @@
           <fieldset class="security no-border-bottom">
             <legend align="center">Assign taxon</legend>
             <% @template_theme.page_layout.self_and_descendants.each do |page_layout|
-              assigned_taxonomies = @template_theme.assigned_resources( SpreeTheme.taxon_class, page_layout) 
-              next if assigned_taxonomies.blank?
+              assigned_taxons = @template_theme.assigned_resources( SpreeTheme.taxon_class, page_layout) 
+              next if assigned_taxons.blank?
             %>
             <div class="field">
               <%= label :page_layout, :title, page_layout.title  %> <br />
-              <% assigned_taxonomies.each{|taxon| %>
+              <% assigned_taxons.each{|taxon| next if taxon.blank? %>                
                 <%= select_tag "assigned_resource_ids[#{page_layout.id}][]",options_from_collection_for_select(taxon.class.roots, :id, :name), prompt: (Spree.t :select_taxon) %>
               <%}%>
             </div>

@@ -1,7 +1,7 @@
 GIT
   remote: git://github.com/RuanShan/spree_alipay.git
-  revision: f068642bca258d0171b307de23d26c577e57e0a1
-  branch: master
+  revision: a038b987a64e9fe8706e92a7aa38eb0bf28cccb3
+  branch: 2-0-stable
   specs:
     spree_alipay (2.0.9)
       spree_core (~> 2.0.9.beta)
