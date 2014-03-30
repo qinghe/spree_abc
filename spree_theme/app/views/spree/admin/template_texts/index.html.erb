@@ -1,10 +1,10 @@
 <%= render :partial => 'sub_menu' %>
 <% content_for :page_actions do %>  
-  <li><%= button_link_to t("static_content.new_page"), new_object_url, :icon => 'icon-plus' %></li>
+  <li><%= button_link_to Spree.t("template_text.new"), new_object_url, :icon => 'icon-plus' %></li>
 <% end %>
 
 <% content_for :page_title do %>
-   <%= t("static_content.static_pages") %>
+   <%= Spree.t("template_text.index") %>
 <% end %>
 
 <table class="index">
@@ -14,7 +14,7 @@
   </colgroup>
   <thead>
     <tr>
-      <th><%= Spree::TemplateText.human_attribute_name(:title) %></th>
+      <th><%= Spree::TemplateText.human_attribute_name(:name) %></th>
       <th class="actions"></th>
     </tr>
   </thead>
