@@ -12,15 +12,15 @@
       <%= content_tag :li, :class => ('active' if current == 'AssignResource') do %>
         <%= link_to_with_icon 'icon-edit', Spree.t(:theme_assign_resource), config_admin_template_theme_url(@template_theme) %>
       <% end if can?(:admin, Spree::TemplateTheme) %>
-      <%= content_tag :li, :class => ('active' if current == 'Context') do %>
-        <%= link_to_with_icon 'icon-picture', Spree.t('page_layout.context'), config_admin_template_theme_url(@template_theme) %>
-      <% end if can?(:admin, Spree::PageLayout) %>
-      <%= content_tag :li, :class => ('active' if current == 'DataSource') do %>
-        <%= link_to_with_icon 'icon-th-large', Spree.t('page_layout.data_source'), config_admin_template_theme_url(@template_theme) %>
-      <% end if can?(:admin, Spree::PageLayout) %>
-      
+      <%if @template_theme.has_native_layout? %>
+        <%= content_tag :li, :class => ('active' if current == 'Context') do %>
+          <%= link_to_with_icon 'icon-picture', Spree.t('page_layout.context'), config_admin_template_theme_url(@template_theme) %>
+        <% end if can?(:admin, Spree::PageLayout) %>
+        <%= content_tag :li, :class => ('active' if current == 'DataSource') do %>
+          <%= link_to_with_icon 'icon-th-large', Spree.t('page_layout.data_source'), config_admin_template_theme_url(@template_theme) %>
+        <% end if can?(:admin, Spree::PageLayout) %>
+      <% end %>            
       </li>
     </ul>
   </nav>
-
 <% end %>
