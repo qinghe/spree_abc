@@ -34,6 +34,20 @@ bugs
 
 5. css selector:#page .page, background-color:yellow
 
+6. fix rails r "load 'db/patch/20140329_fix_shipping_categories_site_id.rb'"
+Connecting to database specified by database.yml
+  Spree::Preference Load (4.4ms)  SELECT `spree_preferences`.* FROM `spree_preferences` WHERE `spree_preferences`.`key` = 'spree/app_configuration/show_raw_product_description/0' LIMIT 1
+   (0.1ms)  BEGIN
+   (0.3ms)  UPDATE `spree_preferences` SET `value` = 1, `value_type` = 'boolean', `updated_at` = '2014-03-30 13:59:05' WHERE `spree_preferences`.`id` = 14
+   (42.6ms)  COMMIT
+  Spree::Preference Load (0.3ms)  SELECT `spree_preferences`.* FROM `spree_preferences` WHERE `spree_preferences`.`key` = 'spree/multi_site_configuration/seed_dir' LIMIT 1
+   (0.1ms)  BEGIN
+   (0.3ms)  UPDATE `spree_preferences` SET `value_type` = 'string', `updated_at` = '2014-03-30 13:59:05' WHERE `spree_preferences`.`id` = 15
+   (45.0ms)  COMMIT
+  Spree::Preference Load (0.3ms)  SELECT `spree_preferences`.* FROM `spree_preferences` WHERE `spree_preferences`.`key` = 'spree/editor_configuration/ids' LIMIT 1
+   (0.1ms)  BEGIN
+   (0.2ms)  UPDATE `spree_preferences` SET `value_type` = 'string', `updated_at` = '2014-03-30 13:59:05' WHERE `spree_preferences`.`id` = 16
+
 
 new todo
 ==============================================================================================
