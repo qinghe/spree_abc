@@ -45,7 +45,6 @@ module SpreeTheme::System
     end  
       
     website = SpreeTheme.site_class.current
-    #DefaultTaxon.instance.id => 0
     if params[:controller]=~/cart|checkout|order/
       @menu = DefaultTaxon.instance
     elsif params[:controller]=~/user/

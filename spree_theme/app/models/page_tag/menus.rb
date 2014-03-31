@@ -53,7 +53,7 @@ module PageTag
         if wrapped_page_layout.section.present?
           wrapped_resource = wrapped_page_layout.section.section_piece.wrapped_resources[resource_position]
           if wrapped_resource.present?
-            menus_cache[key] = DefaultTaxon.instance_by_context( wrapped_resource.context ).self_and_descendants
+            menus_cache[key] = DefaultTaxonRoot.instance_by_context( wrapped_resource.context ).self_and_descendants
           end
         end
       end
