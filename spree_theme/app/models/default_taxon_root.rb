@@ -33,7 +33,7 @@ Rails.logger.debug "@default_taxon=#{@default_taxon.request_fullpath}, #{self.re
     end
     
     def name
-      "Default taxonomy"
+      Spree.t "default_page.taxonomy"
     end
   end
     

@@ -56,6 +56,7 @@ zh-CN:
       unknown: 未知
       checkout: 付款
       thanks: 恭喜！支付成功
+      taxonomy: 缺省菜单 
     template_text:
       index: 文本素材
       static_pages_desc: Manage static page with WYSIWYG editor.

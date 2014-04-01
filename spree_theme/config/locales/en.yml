@@ -37,12 +37,18 @@ en:
     back_to_themes_list: 回到模板列表
     select_taxon: 选择菜单
     select_template_image: 选择图片    
-    taxon:
-      default_home: Home
-      default_login: Login as Existing Customer
-      default_account: My account
-      default_signup: Registration
-      default_password: Forgot Password 
+    default_page:
+      home: home
+      login: login
+      account: account
+      signup: signup
+      password: password
+      list: list
+      detail: detail
+      unknown: unknown
+      checkout: checkout
+      thanks: thanks
+      taxonomy: taxonomy 
     template_text:
       static_pages: Static pages
       static_pages_desc: Manage static page with WYSIWYG editor.
