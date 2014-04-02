@@ -3,19 +3,14 @@ module Spree
   CheckoutController.class_eval do
     # Updates the order and advances to the next state (when possible.)
     def update
-Rails.logger.debug "zz-->before update=#{@order.state}"
       if @order.update_attributes(object_params)
         fire_event('spree.checkout.update')
 
-Rails.logger.debug "zz-->before next=#{@order.state},#{@order.shipments}"
         while(@order.next) do
-Rails.logger.debug "zz-->order.state=#{@order.state}"
           if pay_by_billing_integration?
             break
           end
         end
-Rails.logger.debug "zz-->#{@order.errors.inspect}"        
-Rails.logger.debug "zz-->pay_by_billing_integration?=#{pay_by_billing_integration?}"        
         if pay_by_billing_integration?
           handle_billing_integration
           return
