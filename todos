@@ -32,8 +32,6 @@ bugs
 
 4. .s_1_75 .error, should be label.error,  input has class="error".
 
-5. css selector:#page .page, background-color:yellow
-
 6. fix rails r "load 'db/patch/20140329_fix_shipping_categories_site_id.rb'"
 Connecting to database specified by database.yml
   Spree::Preference Load (4.4ms)  SELECT `spree_preferences`.* FROM `spree_preferences` WHERE `spree_preferences`.`key` = 'spree/app_configuration/show_raw_product_description/0' LIMIT 1

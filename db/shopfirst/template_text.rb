@@ -7,6 +7,7 @@ def load_template_text
     Spree::TemplateText.connection.insert_fixture(row.attributes, Spree::TemplateText.table_name)
   }
 end
+Spree::Site.current = Spree::Site.first
 Spree::TemplateText.delete_all
 
 load_template_text
