@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/RuanShan/spree_alipay.git
-  revision: fde38e382a1cf299ad42e418125eec496ce142e6
+  revision: 0ddd637b2022a06fe9f4d76bdba90f7fd72120b6
   branch: 2-0-stable
   specs:
     spree_alipay (2.0.9)
@@ -8,29 +8,29 @@ GIT
 
 GIT
   remote: git://github.com/spree/spree.git
-  revision: 3724e56d522d231fe80d2b4fafdca9c19fa9586f
+  revision: 4d7ac0b2e06db823fa068a737319541cd838ffad
   branch: 2-0-stable
   specs:
-    spree (2.0.9.beta)
-      spree_api (= 2.0.9.beta)
-      spree_backend (= 2.0.9.beta)
-      spree_cmd (= 2.0.9.beta)
-      spree_core (= 2.0.9.beta)
-      spree_frontend (= 2.0.9.beta)
-      spree_sample (= 2.0.9.beta)
-    spree_api (2.0.9.beta)
+    spree (2.0.11.beta)
+      spree_api (= 2.0.11.beta)
+      spree_backend (= 2.0.11.beta)
+      spree_cmd (= 2.0.11.beta)
+      spree_core (= 2.0.11.beta)
+      spree_frontend (= 2.0.11.beta)
+      spree_sample (= 2.0.11.beta)
+    spree_api (2.0.11.beta)
       rabl (= 0.9.3)
-      spree_core (= 2.0.9.beta)
+      spree_core (= 2.0.11.beta)
       versioncake (~> 1.2.0)
-    spree_backend (2.0.9.beta)
+    spree_backend (2.0.11.beta)
       jquery-rails (~> 3.0.0)
       jquery-ui-rails (~> 4.0.0)
       select2-rails (~> 3.4.7)
-      spree_api (= 2.0.9.beta)
-      spree_core (= 2.0.9.beta)
-    spree_cmd (2.0.9.beta)
+      spree_api (= 2.0.11.beta)
+      spree_core (= 2.0.11.beta)
+    spree_cmd (2.0.11.beta)
       thor (~> 0.14)
-    spree_core (2.0.9.beta)
+    spree_core (2.0.11.beta)
       activemerchant (~> 1.42.3)
       acts_as_list (= 0.3.0)
       awesome_nested_set (= 2.1.6)
@@ -42,23 +42,24 @@ GIT
       httparty (~> 0.11)
       json (~> 1.7)
       kaminari (~> 0.15.0)
+      monetize
       paperclip (~> 3.4.1)
       paranoia (~> 1.3)
-      rails (~> 3.2.16)
+      rails (~> 3.2.17)
       ransack (~> 1.1.0)
       state_machine (= 1.2.0)
       stringex (~> 1.5.1)
       truncate_html (= 0.9.2)
-    spree_frontend (2.0.9.beta)
+    spree_frontend (2.0.11.beta)
       canonical-rails
       deface (>= 0.9.0)
       jquery-rails (~> 3.0.0)
       rails (~> 3.2.13)
-      spree_api (= 2.0.9.beta)
-      spree_core (= 2.0.9.beta)
+      spree_api (= 2.0.11.beta)
+      spree_core (= 2.0.11.beta)
       stringex (~> 1.5.1)
-    spree_sample (2.0.9.beta)
-      spree_core (= 2.0.9.beta)
+    spree_sample (2.0.11.beta)
+      spree_core (= 2.0.11.beta)
 
 GIT
   remote: git://github.com/spree/spree_auth_devise.git
@@ -120,7 +121,7 @@ GEM
     active_utils (2.0.2)
       activesupport (>= 2.3.11)
       i18n
-    activemerchant (1.42.6)
+    activemerchant (1.42.7)
       active_utils (~> 2.0, >= 2.0.1)
       activesupport (>= 2.3.14, < 5.0.0)
       builder (>= 2.1.2, < 4.0.0)
@@ -128,7 +129,7 @@ GEM
       json (~> 1.7)
       money (< 7.0.0)
       nokogiri (~> 1.4)
-    activemerchant_patch_for_china (0.2.0)
+    activemerchant_patch_for_china (0.2.1)
     activemodel (3.2.17)
       activesupport (= 3.2.17)
       builder (~> 3.0.0)
@@ -145,7 +146,7 @@ GEM
       multi_json (~> 1.0)
     acts_as_list (0.3.0)
       activerecord (>= 3.0)
-    addressable (2.3.5)
+    addressable (2.3.6)
     arel (3.0.3)
     awesome_nested_set (2.1.6)
       activerecord (>= 3.0.0)
@@ -158,7 +159,7 @@ GEM
       bcrypt (>= 3.1.3)
     builder (3.0.4)
     cancan (1.6.10)
-    canonical-rails (0.0.3)
+    canonical-rails (0.0.7)
       rails (>= 3.1, < 5.0)
     capistrano (3.1.0)
       i18n
@@ -182,7 +183,7 @@ GEM
     capybara-accessible (0.2.0)
       capybara (~> 2.0)
       selenium-webdriver
-    childprocess (0.5.1)
+    childprocess (0.5.2)
       ffi (~> 1.0, >= 1.0.11)
     choice (0.1.6)
     ckeditor (4.0.6)
@@ -190,7 +191,7 @@ GEM
       orm_adapter
     climate_control (0.0.3)
       activesupport (>= 3.0)
-    cocaine (0.5.3)
+    cocaine (0.5.4)
       climate_control (>= 0.0.3, < 1.0)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
@@ -199,7 +200,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.7.0)
-    colorize (0.6.0)
+    colorize (0.7.0)
     crack (0.4.2)
       safe_yaml (~> 1.0.0)
     database_cleaner (1.2.0)
@@ -246,12 +247,12 @@ GEM
     mail_view (2.0.4)
       tilt
     mime-types (1.25.1)
-    mini_portile (0.5.2)
-    monetize (0.1.4)
-    money (6.0.1)
+    mini_portile (0.5.3)
+    monetize (0.2.0)
+      money (~> 6.1.0.beta1)
+    money (6.1.1)
       i18n (~> 0.6.4)
-      monetize (~> 0.1.3)
-    multi_json (1.9.0)
+    multi_json (1.9.2)
     multi_xml (0.5.5)
     mysql2 (0.3.15)
     net-scp (1.1.2)
@@ -276,7 +277,7 @@ GEM
     rack (1.4.5)
     rack-cache (1.2)
       rack (>= 0.4)
-    rack-ssl (1.3.3)
+    rack-ssl (1.3.4)
       rack
     rack-test (0.6.2)
       rack (>= 1.0)
@@ -300,7 +301,7 @@ GEM
       rake (>= 0.8.7)
       rdoc (~> 3.4)
       thor (>= 0.14.6, < 2.0)
-    rake (10.1.1)
+    rake (10.2.2)
     ransack (1.1.0)
       actionpack (>= 3.0)
       activerecord (>= 3.0)
@@ -312,7 +313,7 @@ GEM
     rspec-expectations (2.14.5)
       diff-lcs (>= 1.1.3, < 2.0)
     rspec-mocks (2.14.6)
-    rspec-rails (2.14.1)
+    rspec-rails (2.14.2)
       actionpack (>= 3.0)
       activemodel (>= 3.0)
       activesupport (>= 3.0)
@@ -322,10 +323,9 @@ GEM
       rspec-mocks (~> 2.14.0)
     ruby-graphviz (1.0.9)
     ruby-hmac (0.4.0)
-    rubyzip (1.1.0)
+    rubyzip (1.1.2)
     safe_yaml (1.0.1)
-    sass (3.3.0)
-      rake
+    sass (3.3.4)
     sass-rails (3.2.6)
       railties (~> 3.2.0)
       sass (>= 3.1.10)
@@ -333,7 +333,7 @@ GEM
     select2-rails (3.4.9)
       sass-rails
       thor (~> 0.14)
-    selenium-webdriver (2.40.0)
+    selenium-webdriver (2.41.0)
       childprocess (>= 0.5.0)
       multi_json (~> 1.0)
       rubyzip (~> 1.0)
@@ -354,10 +354,10 @@ GEM
     therubyracer (0.12.1)
       libv8 (~> 3.16.14.0)
       ref
-    thor (0.18.1)
+    thor (0.19.1)
     tilt (1.4.1)
-    tins (1.0.0)
-    tinymce-rails (4.0.18)
+    tins (1.0.1)
+    tinymce-rails (4.0.19)
       railties (>= 3.1.1)
     tinymce-rails-langs (4.20140129)
       tinymce-rails (~> 4.0)
@@ -365,8 +365,8 @@ GEM
       polyglot
       polyglot (>= 0.3.1)
     truncate_html (0.9.2)
-    tzinfo (0.3.38)
-    uglifier (2.4.0)
+    tzinfo (0.3.39)
+    uglifier (2.5.0)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
     uuidtools (2.1.4)
