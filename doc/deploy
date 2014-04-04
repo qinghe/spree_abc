@@ -6,6 +6,7 @@ cap local_staging deploy
 rake db:seed RAILS_ENV=local_staging
 rake spree_theme:reload_section_piece  RAILS_ENV=local_staging
 rake spree_theme:import_theme SEED_PATH=1 RAILS_ENV=local_staging
+rake assets:precompile:all RAILS_ENV=staging RAILS_GROUPS=assets
 
 chown apache.apache  public -R
 
