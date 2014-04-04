@@ -3,6 +3,7 @@
   <%= Spree.t(:theme_native) %> 
 <% end %>
 
+<% if @themes.any? %>
 <table>
   <tr>
     <th><%= Spree::TemplateTheme.human_attribute_name(:title) %></th>
@@ -29,6 +30,12 @@
   </tr>
 <% end %>
 </table>
+<% else %>
+  <div class="alpha twelve columns no-objects-found">
+    <%= Spree.t(:no_resource_found, resource: I18n.t(:other, scope: 'activerecord.models.spree/template_theme')) %>,
+    <%= link_to Spree.t(:select_from_foreign_themes), spree.foreign_admin_template_themes_path %>!
+  </div>
+<% end %>
 
 <br />
 

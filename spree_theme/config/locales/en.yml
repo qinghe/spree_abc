@@ -37,6 +37,7 @@ en:
     back_to_themes_list: 回到模板列表
     select_taxon: 选择菜单
     select_template_image: 选择图片    
+    select_from_foreign_themes: 到模板商店选择模板   
     default_page:
       home: home
       login: login

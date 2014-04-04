@@ -15,6 +15,7 @@ zh-CN:
         one: 模板素材
       spree/template_theme:
         one: 模板
+        other: 模板
   helpers:
     label:
       template_theme:
@@ -44,7 +45,8 @@ zh-CN:
       street: 街道地址
     select_taxon: 选择菜单
     select_template_image: 选择图片    
-    select_template_text: 选择文本    
+    select_template_text: 选择文本 
+    select_from_foreign_themes: 到模板商店选择模板   
     default_page:
       home: 首页
       login: 登录
