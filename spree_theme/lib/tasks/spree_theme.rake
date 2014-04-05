@@ -47,10 +47,17 @@ namespace :spree_theme do
     file_path = Dir[file_path].sort.last      
     open(file_path) do |file|
       theme = Spree::TemplateTheme.import_into_db(file)
+      #Rake::Task['spree_theme:release_theme'].execute(theme.id)
       theme.release({},{:page_only=>true})
     end    
     puts "imported file #{file_path}"
   end
+  
+  desc "release theme without new template_release, rake spree_theme:release_theme[1]"
+  task :release_theme, [:theme_id] =>[ :environment ] do |t, args|
+    theme = Spree::TemplateTheme.find( args.theme_id)
+    theme.release({},{:page_only=>true})
+  end  
 
   desc "get css of theme one, rake spree_theme:get_css[1,2,'block']"
   task :get_css, [:page_layout_id,:section_id, :class_name] =>[ :environment ] do |t, args|
