@@ -10,21 +10,8 @@ Development
 reinstall all migration
 -----------------------
 rm db/migrate -Rf
+rake railties:install:migrations
 
-bundle exec rake spree:install:migrations
-
-bundle exec rake spree_api:install:migrations
-
-bundle exec rake spree_auth:install:migrations
-
-bundle exec rake spree_multi_site:install:migrations
-
-bundle exec rake spree_china_checkout:install:migrations
-
-bundle update spree_multi_site # update gem spree_multi_site
-
-bundle update spree_alipay # update gem spree_alipay
-  
 Deployment
 ==========
 # A Capistrano Rails Guide

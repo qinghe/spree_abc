@@ -172,6 +172,9 @@ zh-CN:
       spree/line_item: 
         one: 所列项目
         other: 所列项目
+      spree/option_type: 
+        one: 选项类型
+        other: 选项类型
       spree/order: 
         one: 订单
         other: 订单
@@ -184,6 +187,9 @@ zh-CN:
       spree/product_group: 
         one: 产品组
         other: 产品组
+      spree/promotion: 
+        one: 促销
+        other: 促销
       spree/property: 
         one: 属性
         other: 属性
@@ -206,7 +212,11 @@ zh-CN:
         one: 省份
         other: 省份
       spree/stock_location: 
+        one: 仓库地址
+        other: 仓库地址记录        
       spree/stock_transfer: 
+        one: 库存转储
+        other: 库存转储记录        
       spree/tax_category: 
         one: 缴税分类
         other: 缴税分类
@@ -357,9 +367,9 @@ zh-CN:
     back_to_shipping_categories: 回到物流分类列表
     back_to_shipping_methods_list: 回到邮寄方式列表
     back_to_states_list: 回到省份列表
-    back_to_stock_locations_list: 
-    back_to_stock_movements_list: 
-    back_to_stock_transfers_list: 
+    back_to_stock_locations_list: 回到仓库地址列表
+    back_to_stock_movements_list: 回到商品采购列表
+    back_to_stock_transfers_list: 回到库存转储列表
     back_to_store: 回到商店
     back_to_tax_categories_list: 回到缴税分类列表
     back_to_taxonomies_list: 回到分类列表
@@ -367,7 +377,8 @@ zh-CN:
     back_to_users_list: 回到用户列表
     back_to_zones_list: 回到区域列表
     backorderable: 可预订
-    backorders_allowed: 
+    backorderable_default: 缺省允许预订
+    backorders_allowed: 允许预订
     balance_due: 尚欠款
     best_selling_products: 销售最佳产品
     best_selling_taxons: 销售最佳分类
@@ -465,7 +476,7 @@ zh-CN:
     credit_cards: 信用卡
     credit_owed: 应予退款
     currency: 币种
-    currency_decimal_mark: 
+    currency_decimal_mark: 货币小数点标记
     currency_settings: 当前设置
     currency_symbol_position: 在金额之前或者之后放置币种符号？
     currency_thousands_separator: 千元分割符
@@ -653,7 +664,7 @@ zh-CN:
     insufficient_stock: 库存不足，当前还剩下%{on_hand}件库存
     intercept_email_address: 用于接收邮件的邮箱地址
     intercept_email_instructions: 使用以下邮箱地址覆盖所有收件人邮箱
-    internal_name: 
+    internal_name: 内部名称 
     invalid_payment_provider: 无效的支付服务提供商。
     invalid_promotion_action: 无效的优惠方式。
     invalid_promotion_rule: 无效的促销规则。
@@ -762,7 +773,7 @@ zh-CN:
     new_state: 新建省份
     new_stock_location: 添加仓库位置
     new_stock_movement: 
-    new_stock_transfer: 
+    new_stock_transfer: 转移库存
     new_tax_category: 新建缴税类型
     new_tax_rate: 新建税率
     new_taxon: 新建分类
@@ -1101,6 +1112,7 @@ zh-CN:
         name: 用户登录
     promotions: 促销
     promotions_description: Manage offers and coupons with promotions
+    propagate_all_variants: 适用所有产品
     properties: 属性
     property: 属性
     prototype: 原型
@@ -1118,7 +1130,7 @@ zh-CN:
     receive: 收到
     receive_stock: 
     received: 已收到
-    reference: 
+    reference: 编号/备注
     refund: 退款
     register: 注册成为新用户
     register_or_guest: 作为访客或者注册用户结账
@@ -1247,7 +1259,7 @@ zh-CN:
     smtp_send_all_emails_as_from_following_address: 所有邮件都从以下地址发出.
     smtp_send_copy_to_this_addresses: 向如下地址发送一份所有发出邮件的副本。多个邮件地址之间以逗号隔开。
     smtp_username: SMTP用户名
-    source: 
+    source: 源地址
     special_instructions: 特别说明
     split: 
     spree/order:
@@ -1261,16 +1273,16 @@ zh-CN:
     states: 省份
     states_required: 
     status: 状态
-    stock_location: 
+    stock_location: 仓库地址
     stock_location_info: 
-    stock_locations: 
-    stock_management: 
+    stock_locations: 仓库地址
+    stock_management: 库存管理
     stock_management_requires_a_stock_location: 
-    stock_movements: 
+    stock_movements: 库存变动 
     stock_movements_for_stock_location: 
     stock_successfully_transferred: 
-    stock_transfer: 
-    stock_transfers: 
+    stock_transfer: 库存转储
+    stock_transfers: 库存转储
     stop: 结束
     store: 商城
     street_address: 地址
@@ -1322,7 +1334,7 @@ zh-CN:
     tracking_url: 
     tracking_url_placeholder: 比如，http://quickship.com/package?num=:tracking
     transfer_from_location: 
-    transfer_stock: 
+    transfer_stock: 库存转储
     transfer_to_location: 
     tree: 树
     try_again: 再试一次
