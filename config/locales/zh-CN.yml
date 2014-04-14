@@ -181,6 +181,9 @@ zh-CN:
       spree/payment: 
         one: 支付
         other: 支付
+      spree/payment_method: 
+        one: 支付方式
+        other: 支付方式
       spree/product: 
         one: 产品
         other: 产品
@@ -208,6 +211,9 @@ zh-CN:
       spree/shipping_category: 
         one: 物流分类
         other: 物流分类
+      spree/shipping_method: 
+        one: 配送方式
+        other: 配送方式
       spree/state: 
         one: 省份
         other: 省份
@@ -230,6 +236,8 @@ zh-CN:
         one: 分类
         other: 分类
       spree/tracker: 
+        one: 网站统计工具
+        other: 网站统计工具
       spree/user: 
         one: 用户
         other: 用户

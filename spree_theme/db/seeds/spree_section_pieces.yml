@@ -1169,7 +1169,7 @@ product_option_values:
   is_container: "0"
   html: |    
     <% if product.variants_and_option_values(current_currency).any? %>
-      <div id="product-variants" class="columns five alpha">
+      <div id="product-variants" class="<%=g_piece_selector%>">
         <ul>
           <% product.variants_and_option_values(current_currency).each_with_index do |variant, index| %>
             <li>

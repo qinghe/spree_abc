@@ -8,6 +8,9 @@ namespace :spree_theme do
   desc "reload section_piece.yml"
   task :reload_section_piece => :environment do    
     load File.join(SpreeTheme::Engine.root,'db/seeds/00_section_pieces.rb')
+    Spree::TemplateTheme.all.each{|theme|
+      Rake::Task['spree_theme:release_theme'].invoke(theme.id)  
+    }    
   end
   
   desc "export theme. params: SITE_ID, SEED_PATH."
