@@ -1,8 +1,9 @@
+#encoding: utf-8
 #Spree::Sample.load_sample("tax_categories")
 #Spree::Sample.load_sample("shipping_categories")
 
 clothing = Spree::TaxCategory.find_by_name!("Clothing")
-shipping_category = Spree::ShippingCategory.find_by_name!("Default Shipping")
+shipping_category = Spree::ShippingCategory.find_by_name!("缺省")
 
 default_attrs = {
   :description => Faker::Lorem.paragraph,
@@ -123,15 +124,15 @@ products = [
 
 products.each do |product_attrs|
   eur_price = product_attrs.delete(:eur_price)
-  Spree::Config[:currency] = "USD"
+  #Spree::Config[:currency] = "USD"
 
-  default_shipping_category = Spree::ShippingCategory.find_by_name!("Default Shipping")
+  #default_shipping_category = Spree::ShippingCategory.find_by_name!("缺省")
   product = Spree::Product.create!(default_attrs.merge(product_attrs), :without_protection => true)
-  Spree::Config[:currency] = "EUR"
-  product.reload
-  product.price = eur_price
-  product.shipping_category = default_shipping_category
-  product.save!
+  #Spree::Config[:currency] = "EUR"
+  #product.reload
+  #product.price = eur_price
+  #product.shipping_category = default_shipping_category
+  #product.save!
 end
 
-Spree::Config[:currency] = "USD"
+#Spree::Config[:currency] = "USD"

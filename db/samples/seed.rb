@@ -1,6 +1,5 @@
 files = [ "payment_methods",
   "zones",
-  "shipping_categories",
   "shipping_methods",
   "tax_categories",
   "tax_rates",
