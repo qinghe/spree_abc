@@ -4,6 +4,7 @@
 //= require jquery.form
 //= require jquery.layout
 //= require jquery.ajax
+//= require jssor.slider.one
 //= require store/spree_frontend
 //= require store/spree_theme.client
 //= require interface.js

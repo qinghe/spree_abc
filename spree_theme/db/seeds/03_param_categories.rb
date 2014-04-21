@@ -14,6 +14,12 @@ objs=[
   {"id"=>14, "position"=>14, "is_enabled"=>true, "editor_id"=>4, "slug"=>"link_selected_hover" },
   {"id"=>15, "position"=>15, "is_enabled"=>true, "editor_id"=>4, "slug"=>"unclickable_link" },
   
+  {"id"=>20, "position"=>20, "is_enabled"=>true, "editor_id"=>0, "slug"=>"slides" },
+  {"id"=>21, "position"=>21, "is_enabled"=>true, "editor_id"=>0, "slug"=>"slide_caption" },
+  {"id"=>22, "position"=>22, "is_enabled"=>true, "editor_id"=>0, "slug"=>"bullet_navigator" },
+  {"id"=>23, "position"=>23, "is_enabled"=>true, "editor_id"=>0, "slug"=>"arraw_navigator" },
+  {"id"=>24, "position"=>24, "is_enabled"=>true, "editor_id"=>0, "slug"=>"thumbnail_navigator" },
+  
   #product img
   {"id"=>30, "position"=>30, "is_enabled"=>true, "editor_id"=>2, "slug"=>"main_image" },
   {"id"=>31, "position"=>31, "is_enabled"=>true, "editor_id"=>2, "slug"=>"thumb_image" },
