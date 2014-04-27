@@ -1277,4 +1277,18 @@ slider:
     .jssorb03 .dn, .jssorb03 .dn:hover { background-position: -95px -5px; }
 
   js: ""
-
+breadcrumbs:
+  id: 55
+  title: breadcrumbs
+  slug: breadcrumbs
+  is_selectable: "1"
+  is_container: "0"
+  html: |    
+    <%= breadcrumbs(@current_page) %>
+  css: |
+    .<%=@template.current_piece.section_selector%> ul{ margin: 0; padding: 0;}
+    .<%=@template.current_piece.section_selector%> li{
+      list-style-type:none; 
+      display: inline-block;
+    }
+  js: ""

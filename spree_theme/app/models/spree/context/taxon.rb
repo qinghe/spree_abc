@@ -86,7 +86,11 @@ module Spree
       def context_either?
         current_context ==ContextEnum.either
       end
-            
+      
+      #is it a home page?
+      def page_home?
+        page_context == 1
+      end      
     end
   end
   

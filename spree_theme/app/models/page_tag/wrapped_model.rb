@@ -13,13 +13,13 @@ module PageTag
       self.collection_tag.page_generator.build_path( self.model)
     end
     
-    def [](attribute_name)
-      if accessable_attributes.include? attribute_name.to_sym
-        #support method name
-        model.send attribute_name
-      else
-        nil
-      end
-    end
+#    def [](attribute_name)
+#      if accessable_attributes.include? attribute_name.to_sym
+#        #support method name
+#        model.send attribute_name
+#      else
+#        nil
+#      end
+#    end
   end
 end

@@ -6,7 +6,6 @@ class DefaultTaxonRoot < DefaultTaxon
       @default_taxon = DefaultTaxon.instance( self.request_fullpath )
       @default_taxon.root = self
     end
-Rails.logger.debug "@default_taxon=#{@default_taxon.request_fullpath}, #{self.request_fullpath}"    
     @default_taxon
   end
     

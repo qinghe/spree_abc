@@ -10,23 +10,32 @@
 # template.current_section.menu == template.menus.select
 # template.current_section.param_values == template.param_values.select
 module PageTag
-  class CurrentPage < Base
+  class CurrentPage < Menus::WrappedMenu
 
-    attr_accessor :website_tag, :template_tag
-    delegate :menu, :to => :page_generator
-    delegate :resource,:is_preview, :to => :page_generator
+    attr_accessor :page_generator,:website_tag, :template_tag, :product_tag
+    delegate :menu,:resource, :to => :page_generator
+    delegate :is_preview, :to => :page_generator    
+    alias_attribute :model, :menu #Menus::WrappedMenu use model
     
     def initialize(page_generator_instance)
-      super(page_generator_instance)
+      self.page_generator  = page_generator_instance
       self.website_tag = ::PageTag::WebsiteTag.new(page_generator_instance)
       self.template_tag = ::PageTag::TemplateTag.new(page_generator_instance)
+      # it is required to generate path
+      self.collection_tag = ::PageTag::Menus.new(self.template_tag)
+      # get current product
+      if self.page_generator.resource.present?
+        self.product_tag = Products::WrappedProduct.new( self.collection_tag, page_generator.resource)
+      else
+        self.product_tag = nil
+      end
     end
     
     #title is current page title,  resource.title-menu.title-website.title
     def title
       "#{menu.name} - #{website_tag.name}"
     end
-    
+
     #get current page's resource by template.current_piece 
     def resources()
       objs = []

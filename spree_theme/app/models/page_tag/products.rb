@@ -26,12 +26,12 @@ module PageTag
         
 
     # means the current select blog post in erubis context.
-    def current
-      if @current.nil? and !self.page_generator.resource.nil?
-        @current = WrappedProduct.new( self, page_generator.resource)
-      end
-      @current
-    end
+    #def current
+    #  if @current.nil? and !self.page_generator.resource.nil?
+    #    @current = WrappedProduct.new( self, page_generator.resource)
+    #  end
+    #  @current
+    #end
      
   end
 end

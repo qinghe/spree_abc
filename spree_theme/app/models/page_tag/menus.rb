@@ -1,12 +1,16 @@
 module PageTag
   class Menus < Base
     class WrappedMenu < WrappedModel
-      self.accessable_attributes=[:id,:name,:icon]
+      self.accessable_attributes=[:id,:name,:icon,:page_home?]
       delegate *self.accessable_attributes, :to => :model
       delegate :taxonomy, :to => :model
       
       def children
         self.model.children.collect{|item| WrappedMenu.new(self.collection_tag, item)}
+      end
+
+      def ancestors
+        self.model.ancestors.collect{|item| PageTag::Menus::WrappedMenu.new(self.collection_tag, item)}        
       end
           
       # url link to the menu itme's page(each menu itme link to a page).
@@ -18,13 +22,11 @@ module PageTag
         true
       end
       
-      #override super, menu belongs to template
-      def path
-        self.collection_tag.template_tag.page_generator.build_path( self.model)
-      end
     end
     attr_accessor :menus_cache #store all menus of template, key is page_layout_id, value is menu tree
-    attr_accessor :template_tag
+    attr_accessor :template_tag, :page_generator
+    #model.path require page_generator
+    delegate :page_generator, :to=>:template_tag
     
     def initialize(template_tag)
       self.template_tag = template_tag
