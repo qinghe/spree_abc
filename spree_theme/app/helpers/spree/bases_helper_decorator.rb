@@ -9,12 +9,7 @@ module Spree
       if current_page_tag
         #crumbs << content_tag(:li, link_to(Spree.t(:products), products_path) + separator)
         crumbs << current_page_tag.ancestors.collect { |ancestor| content_tag(:li, link_to(ancestor.name , (ancestor.path)) + separator) } unless current_page_tag.ancestors.empty?
-        if current_page_tag.product_tag.present?
-          crumbs << content_tag(:li, content_tag(:span, link_to(current_page_tag.name , current_page_tag.path))+ separator)          
-          crumbs << content_tag(:li, content_tag(:span, current_page_tag.product_tag.name ))        
-        else
-          crumbs << content_tag(:li, content_tag(:span, current_page_tag.name ))
-        end
+        crumbs << content_tag(:li, content_tag(:span, link_to(current_page_tag.name , current_page_tag.path)))          
       end
       crumb_list = content_tag(:ul, raw(crumbs.flatten.map{|li| li.mb_chars}.join), class: 'inline')
       content_tag(:nav, crumb_list, id: 'breadcrumbs', class: 'sixteen columns')
