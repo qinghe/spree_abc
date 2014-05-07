@@ -7,41 +7,21 @@ Introduction goes here.
   
 Development  
 ===========
-reinstall all migration
------------------------
-rm db/migrate -Rf
-
-bundle exec rake spree:install:migrations
-
-bundle exec rake spree_api:install:migrations
-
-bundle exec rake spree_auth:install:migrations
-
-bundle exec rake spree_multi_site:install:migrations
-
-bundle exec rake spree_china_checkout:install:migrations
-
-bundle update spree_multi_site # update gem spree_multi_site
-
-bundle update spree_alipay # update gem spree_alipay
+  install migrations
+    rm db/migrate -Rf
+    bundle exec rake railties:install:migrations
   
 Deployment
 ==========
-# A Capistrano Rails Guide
-# https://gist.github.com/jrochkind/2161449
-bundle install --deloyment
+    bundle install --deloyment
+    bundle exec rake db:reset RAILS_ENV=production
+    bundle exec rake assets:precompile RAILS_ENV=production
+  useful links:
+  [A Capistrano Rails Guide]( https://gist.github.com/jrochkind/2161449 )
 
-bundle exec rake db:reset RAILS_ENV=production
-
-bundle exec rake assets:precompile RAILS_ENV=production
-
-#bundle exec rake jobs:work RAILS_ENV=production
-
-iptables -A INPUT -p tcp -s 127.0.0.1 --dport 8080 -j ACCEPT
-
-sestatus -b | grep httpd
-
-togglesebool httpd_can_network_connection
+    iptables -A INPUT -p tcp -s 127.0.0.1 --dport 8080 -j ACCEPT
+    sestatus -b | grep httpd
+    togglesebool httpd_can_network_connection
 
 Testing
 -------
