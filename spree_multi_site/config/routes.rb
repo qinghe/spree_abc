@@ -1,8 +1,9 @@
-Spree::Core::Engine.routes.draw do
+Spree::Core::Engine.routes.prepend do
 
   namespace :admin do
     resources :sites
   end
+  post '/quick_lunch',:to => 'sites#quick_lunch', :as => :quick_lunch
   match 'new_site' => 'sites#new', :as => :new_site
   resources :sites, :only => [:show]
 

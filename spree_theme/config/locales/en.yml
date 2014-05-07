@@ -50,6 +50,7 @@ en:
       checkout: checkout
       thanks: thanks
       taxonomy: taxonomy 
+    default_shipping_category_name: Default
     template_text:
       static_pages: Static pages
       static_pages_desc: Manage static page with WYSIWYG editor.
