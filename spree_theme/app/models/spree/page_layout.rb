@@ -475,41 +475,49 @@ module Spree
           subpieces.concat(subpiece)
         end
       end  
-       piece = node.section.build_html
+      piece = node.section.build_html       
+      # if node.root?
+      #   piece.insert(0,init_vars)  
+      # end
        
-       if node.root?
-  #       piece.insert(0,init_vars)  
-       end
+      #piece may contain several ~~content~~, the deepest one is first.           
+      if(pos = (piece=~/~~content~~/))
+        if node.data_source.present? #node.data_source.singularize
+          case node.current_data_source
+            when DataSourceEnum.gpvs, DataSourceEnum.this_product
+              subpieces = <<-EOS1 
+              <% @template.products((defined?(page) ? page : @current_page)).each{|product| %>
+                  #{subpieces}
+              <% } %>
+              EOS1           
+            when DataSourceEnum.menu
+              subpieces = <<-EOS1 
+              <% if @template.menu.present? %>
+              <% @template.menu.children.each{|page| %>
+                  #{subpieces}
+              <% } %>
+              <% end %>              
+              EOS1           
+          end
+        end                    
+        piece.insert(pos,subpieces)        
+      end
        
-       #piece may contain several ~~content~~, the deepest one is first.           
-       if(pos = (piece=~/~~content~~/))
-         if node.data_source.present? #node.data_source.singularize
-           subpieces = <<-EOS1 
-           <% if @current_page.resources.present? %>
-           <% @current_page.resources.each{|product| %>
-           #{subpieces}
-           <% } %>
-           <% end %>
-           EOS1
-         end                    
-         piece.insert(pos,subpieces)        
-       end
-       
-       if node.section_context.present?
-         # should set current page_layout before do valid_context.
-         piece = <<-EOS2
-           <% if @current_page.valid_context? %>
-           #{piece}
-           <% end %>
-         EOS2
-       end  
+      if node.section_context.present?
+        # should set current page_layout before do valid_context.
+        piece = <<-EOS2
+          <% if @current_page.valid_context? %>
+          #{piece}
+          <% end %>
+        EOS2
+      end  
         
-       piece.insert(0,get_header_script(node))
-       # remove ~~content~~ however, node could be a container.
-       # in section.build_html, ~~content~~ have not removed. 
-       # there could be more than one ~~content~~, use gsub!
-       piece.gsub!(/~~content~~/,'')
-       piece       
+      piece.insert(0,get_header_script(node))
+      # remove ~~content~~ however, node could be a container.
+      # in section.build_html, ~~content~~ have not removed. 
+      # there could be more than one ~~content~~, use gsub!
+      piece.gsub!(/~~content~~/,'')
+      piece       
     end
   
     def get_header_script(node)

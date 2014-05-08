@@ -36,29 +36,6 @@ module PageTag
       "#{menu.name} - #{website_tag.name}"
     end
 
-    #get current page's resource by template.current_piece 
-    def resources()
-      objs = []
-      data_source = self.template_tag.current_piece.data_source
-      if data_source.present?
-        if data_source == 'gpvs'
-          #objs = menu.products
-          #copy from taxons_controller#show
-          @searcher = Spree::Config.searcher_class.new({:taxon => menu.id})
-          #@searcher.current_user = try_spree_current_user
-          #@searcher.current_currency = current_currency
-          objs = @searcher.retrieve_products
-        elsif data_source == 'this_product'
-          #default_taxon.id is 0 
-          objs = [self.resource] #menu.products.where(:id=>resource.id)        
-        end
-        if objs.present?
-          objs = Products.new( self.page_generator, objs)
-        end
-      end
-      objs
-    end
-    
     #is given section context valid to current page 
     def valid_context?
       #Rails.logger.debug "valid=#{menu.current_context}, self.template_tag.current_piece=#{self.template_tag.current_piece.title}"

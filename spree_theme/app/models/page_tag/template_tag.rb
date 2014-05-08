@@ -101,5 +101,32 @@ module PageTag
       self.current_piece = WrappedPageLayout.new(self, page_layout, section_id)
     end
     
+    def products( wrapped_taxon )
+      #get data source of current_piece
+      # if gpvs, 
+      #   if higher_level_data_source == menu
+      #     wrapped_taxon.data_source
+      #   else
+      #        
+      # if this_product
+        objs = []
+        data_source = self.collection_tag.template_tag.current_piece.data_source
+          if data_source == 'gpvs'
+            #objs = menu.products
+            #copy from taxons_controller#show
+            searcher = Spree::Config.searcher_class.new({:taxon => wrapped_taxon.id})
+            #@searcher.current_user = try_spree_current_user
+            #@searcher.current_currency = current_currency
+            objs = searcher.retrieve_products
+          elsif data_source == 'this_product'
+            #default_taxon.id is 0 
+            objs = [self.page_generator.resource]         
+          end
+          if objs.present?
+            objs = Products.new( self.page_generator, objs)
+          end
+        objs
+      
+    end
   end
 end

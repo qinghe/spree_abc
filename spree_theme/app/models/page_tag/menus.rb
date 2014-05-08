@@ -22,6 +22,29 @@ module PageTag
         true
       end
       
+      #get current page's resource by template.current_piece 
+      def resources()
+        objs = []
+        data_source = self.collection_tag.template_tag.current_piece.data_source
+        if data_source.present?
+          if data_source == 'gpvs'
+            #objs = menu.products
+            #copy from taxons_controller#show
+            searcher = Spree::Config.searcher_class.new({:taxon => self.id})
+            #@searcher.current_user = try_spree_current_user
+            #@searcher.current_currency = current_currency
+            objs = searcher.retrieve_products
+          elsif data_source == 'this_product'
+            #default_taxon.id is 0 
+            objs = [self.resource] #menu.products.where(:id=>resource.id)        
+          end
+          if objs.present?
+            objs = Products.new( self.collection_tag.page_generator, objs)
+          end
+        end
+        objs
+      end
+            
     end
     attr_accessor :menus_cache #store all menus of template, key is page_layout_id, value is menu tree
     attr_accessor :template_tag, :page_generator

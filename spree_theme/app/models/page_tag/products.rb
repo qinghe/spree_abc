@@ -8,7 +8,6 @@ module PageTag
       self.accessable_attributes=[:id,:name,:description,:images,:variant_images,:has_variants?,:price_in, :price, :master, :currency, :variants_and_option_values] 
       delegate *self.accessable_attributes, :to => :model
       
-      
       #:model_name use by small_image
       def self.model_name
         Spree::Product.model_name
@@ -18,12 +17,10 @@ module PageTag
         self.model.product_properties.includes(:property)
       end
     end  
-    
-    
+        
     def wrapped_models
       models.collect{|model|  WrappedProduct.new(self, model) }
     end
-        
 
     # means the current select blog post in erubis context.
     #def current

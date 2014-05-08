@@ -1,3 +1,29 @@
+#encoding utf8
+# * 这是一个示例页面
+# *    <html> 
+# *      <body> hello world!</body> 
+# *    </html>
+# * 从抽象角度看，一个网站是很多页面组成，每个页面是由html和css。
+# * html 表示了页面的布局(html标签如 <div>,<span><ul>)和内容(除标签外的数据，如:上面的 'hello world')，css 表示了页面的样式。
+# * 再实践中，常常会有多个页面使用相同的布局和CSS，只是内容不同。如：产品展示页面。 因此，当设计网站是使用模板会简便很多。
+# * 基于上述， 模板系统需要支持： 设计网站所有页面，每个页面可以有不同的布局、内容和样式。
+# *   1. 添加页面，
+# *   2. 设计页面布局，根据html语言的特点， 页面的布局可以看成树型结构，如图所示，每个节点可以是相对独立的一部分页面，或者是容器包含其他节点。
+# *      html root - head
+# *                - body - logo
+# *                       - main menu
+# *                       - content - product name
+# *                                 - product price
+# *                       - footer
+# *   3. 设计页面内容. 不同的页面有不同的内容，我们用taxon作为内容的集合， 一个页面可以由一个或几个taxon的内容构成。   
+# *   4. 设计页面样式. CSS设计， 用ParamValue表示。  
+# * 
+# * 
+# * template_theme, 
+# * template_theme, it is a template of site. In a general way, we could say all template are just html and css.   
+# * template_theme is composite of page_layout and param_values. page_layout is html, param_value is css
+# * 
+
 module Spree
   #it is a theme of page_layout
   class TemplateTheme < ActiveRecord::Base
@@ -293,7 +319,7 @@ Rails.logger.debug "#{file.page_layout_id},#{original_file.page_layout_id},#{fil
     
     begin 'assigned resource'
       # all resources used by this theme
-      # return menu roots/ images,  if none assgined, return [nil] or []
+      # return menu roots/ images /texts,  if none assgined, return [nil] or []
       def assigned_resources( resource_class, page_layout )
         resource_key = get_resource_class_key(resource_class)
         if assigned_resource_ids.try(:[],page_layout.id).try(:[],resource_key).present?
