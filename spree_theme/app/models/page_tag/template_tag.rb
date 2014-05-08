@@ -7,7 +7,7 @@ module PageTag
 # template is collection of page_layout. each page_layout is section instance 
   class TemplateTag < Base
     class WrappedPageLayout < WrappedModel
-      self.accessable_attributes=[:id,:title,:data_source,:data_filter,:current_contexts, :context?, :context_either?]
+      self.accessable_attributes=[:id,:title,:current_data_source,:data_filter,:current_contexts, :context?, :context_either?]
       attr_accessor :section_id, :page_layout
       delegate *self.accessable_attributes, :to => :page_layout
       
@@ -109,24 +109,23 @@ module PageTag
       #   else
       #        
       # if this_product
-        objs = []
-        data_source = self.collection_tag.template_tag.current_piece.data_source
-          if data_source == 'gpvs'
-            #objs = menu.products
-            #copy from taxons_controller#show
-            searcher = Spree::Config.searcher_class.new({:taxon => wrapped_taxon.id})
-            #@searcher.current_user = try_spree_current_user
-            #@searcher.current_currency = current_currency
-            objs = searcher.retrieve_products
-          elsif data_source == 'this_product'
-            #default_taxon.id is 0 
-            objs = [self.page_generator.resource]         
-          end
-          if objs.present?
-            objs = Products.new( self.page_generator, objs)
-          end
-        objs
-      
+      objs = []
+      case self.current_piece.current_data_source
+        when Spree::PageLayout::DataSourceEnum.gpvs
+          #objs = menu.products
+          #copy from taxons_controller#show
+          searcher = Spree::Config.searcher_class.new({:taxon => wrapped_taxon.id})
+          #@searcher.current_user = try_spree_current_user
+          #@searcher.current_currency = current_currency
+          objs = searcher.retrieve_products
+        when Spree::PageLayout::DataSourceEnum.this_product
+          #default_taxon.id is 0 
+          objs = [self.page_generator.resource]         
+      end
+      if objs.present?
+        objs = Products.new( self.page_generator, objs)
+      end
+      objs      
     end
   end
 end

@@ -489,15 +489,15 @@ module Spree
               <% @template.products((defined?(page) ? page : @current_page)).each{|product| %>
                   #{subpieces}
               <% } %>
-              EOS1           
+              EOS1
             when DataSourceEnum.menu
-              subpieces = <<-EOS1 
+              subpieces = <<-EOS3 
               <% if @template.menu.present? %>
               <% @template.menu.children.each{|page| %>
                   #{subpieces}
               <% } %>
               <% end %>              
-              EOS1           
+              EOS3
           end
         end                    
         piece.insert(pos,subpieces)        
