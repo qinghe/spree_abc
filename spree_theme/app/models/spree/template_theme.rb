@@ -79,6 +79,19 @@ module Spree
       
       def foreign
         self.within_site(SpreeTheme.site_class.designsite )
+      end        
+      
+      def fix_related_data_for_copied_theme(new_theme, new_nodes, original_nodes)
+        original_node_ids = original_nodes.collect(&:id)
+        new_node_ids = new_nodes.collect(&:id)
+          # # update param_values
+          original_node_ids.each_with_index{|node_id,index|
+            ParamValue.update_all(["page_layout_id=?", new_node_ids[index]],["theme_id=? and page_layout_id=?",new_theme.id, node_id])
+            if new_theme.assigned_resource_ids[node_id.id].present?             
+              new_theme.assigned_resource_ids[new_node_ids[index]] = new_theme.assigned_resource_ids.delete(node_id.id)            
+            end
+          }
+          new_theme.save!        
       end      
     end
     
@@ -306,6 +319,12 @@ Rails.logger.debug "#{file.page_layout_id},#{original_file.page_layout_id},#{fil
             table_name = ParamValue.table_name
             connection.insert_fixture(record.attributes.except('id'), table_name)          
           end
+          template.reload
+          original_nodes = serialized_hash[:page_layouts]
+          new_nodes = PageLayout.copy_to_new( original_nodes )
+          fix_related_data_for_copied_theme(template, new_nodes, original_nodes)
+          template.page_layout_id = new_nodes.first.id
+          template.save!
           serialized_hash[:page_layouts].each do |record|
             table_name = PageLayout.table_name
             connection.insert_fixture(record.attributes, table_name)          
@@ -411,7 +430,7 @@ Rails.logger.debug "#{file.page_layout_id},#{original_file.page_layout_id},#{fil
         HtmlPage.new(self)
       end
         
-        # param values of self.
+      # param values of self.
       def full_param_values(editor_id=0)
         if editor_id>0
         ParamValue.find(:all, :include=>[:section_param=>[:section_piece_param=>:param_category]], 
@@ -427,6 +446,7 @@ Rails.logger.debug "#{file.page_layout_id},#{original_file.page_layout_id},#{fil
       def get_resource_class_key( resource_class)
         resource_class.to_s.underscore.to_sym
       end
-    end    
+    end  
+    
   end
 end

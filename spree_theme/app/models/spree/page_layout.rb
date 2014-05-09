@@ -47,6 +47,41 @@ module Spree
       ( target_contexts==[ContextEnum.either] || (target_contexts&some_contexts)==some_contexts || (some_contexts==[ContextEnum.home]&&target_contexts.include?(ContextEnum.list)) )
     end
 
+      # user copy decendants of a layout to new root layout while user copy theme to new theme.
+      # since copy to new root, there is no section_instance confliction.
+      def self.copy_decendants_to_new_parent(new_parent, original_parent, ordered_nodes)
+        original_children =  ordered_nodes.select{|node| node.parent_id == original_parent.id }
+        for node in original_children
+          new_node = node.dup
+          new_node.parent_id = new_parent.id
+          new_node.root_id = new_parent.root_id
+          new_node.save!
+          if node.has_child?
+            copy_decendants_to_new_parent(new_node, node, ordered_nodes )
+          end
+        end
+        # copy_from_root_id means we have copied all decendants from that tree. 
+        if new_parent.root?
+          update_all(["copy_from_root_id=?",original_parent.id],['root_id=?',new_parent.id])
+        end
+      end
+       
+      # * description - copy :page_layout_tree whole tree
+      # * params 
+      # *   ordered_nodes -  whole tree node collection, it is ordered by left
+      # * return - new ordered nodes
+      def self.copy_to_new(ordered_nodes, new_attributes = nil)
+        #create new root first, get new root id.
+        original_root = ordered_nodes.first
+        new_layout = original_root.dup
+        new_layout.root_id = 0 # reset the lft,rgt.
+        new_layout.save!
+        new_layout.update_attribute("root_id", new_layout.id)  
+        copy_decendants_to_new_parent(new_layout, original_root,  ordered_nodes)
+        new_layout.self_and_descendants
+      end
+
+
     #theme.document_path use it
     def site
       SpreeTheme.site_class.find( self.site_id )      

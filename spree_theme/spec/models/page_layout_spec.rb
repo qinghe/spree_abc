@@ -91,4 +91,11 @@ describe Spree::PageLayout do
   it "should get available data sources" do
     
   end
+  
+  it "should copy page_layout to new" do
+    nodes = Spree::PageLayout.root.self_and_descendants
+    new_nodes = Spree::PageLayout.copy_to_new( nodes )
+    new_nodes.size.should eq nodes.size
+    
+  end
 end
