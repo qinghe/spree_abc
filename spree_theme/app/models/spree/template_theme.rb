@@ -223,7 +223,7 @@ Rails.logger.debug "#{file.page_layout_id},#{original_file.page_layout_id},#{fil
       # 
       def add_section(section, selected_page_layout=nil, attrs={})
         # check section.section_piece.is_container?
-        obj = nil
+        added_section = nil
         if section.root? 
           section_instance = 1
           if selected_page_layout.present?
@@ -232,7 +232,7 @@ Rails.logger.debug "#{file.page_layout_id},#{original_file.page_layout_id},#{fil
             section_instance = whole_tree.select{|xnode| xnode.section_id==section.id}.size.succ
           end
           attrs[:title]||="#{section.title}#{section_instance}"        
-          obj = PageLayout.create do|obj|
+          added_section = PageLayout.create do|obj|
             obj.section_id, obj.section_instance=section.id, section_instance
             obj.assign_attributes( attrs )
             obj.root_id = selected_page_layout.root_id if selected_page_layout.present?
@@ -240,14 +240,14 @@ Rails.logger.debug "#{file.page_layout_id},#{original_file.page_layout_id},#{fil
             obj.is_full_html = section.section_piece.is_root?
           end
           if selected_page_layout.present?
-            obj.move_to_child_of(selected_page_layout)
+            added_section.move_to_child_of(selected_page_layout)
           else
-            obj.update_attribute("root_id",obj.id)
+            added_section.update_attribute("root_id",added_section.id)
           end
           #copy the default section param value to the layout
-          obj.add_param_value(self)
+          added_section.add_param_value(self)
         end
-        obj
+        added_section
       end
       
       # ex. get dialog section
