@@ -87,8 +87,9 @@ module Spree
           # # update param_values
           original_node_ids.each_with_index{|node_id,index|
             ParamValue.update_all(["page_layout_id=?", new_node_ids[index]],["theme_id=? and page_layout_id=?",new_theme.id, node_id])
-            if new_theme.assigned_resource_ids[node_id.id].present?             
-              new_theme.assigned_resource_ids[new_node_ids[index]] = new_theme.assigned_resource_ids.delete(node_id.id)            
+Rails.logger.debug "new_theme=#{new_theme}"            
+            if new_theme.assigned_resource_ids[node_id].present?             
+              new_theme.assigned_resource_ids[new_node_ids[index]] = new_theme.assigned_resource_ids.delete(node_id)            
             end
           }
           new_theme.save!        
@@ -223,18 +224,7 @@ Rails.logger.debug "#{file.page_layout_id},#{original_file.page_layout_id},#{fil
         sql = %Q!INSERT INTO #{table_name}(#{table_column_names.join(',')}) SELECT #{table_column_values.join(',')} FROM #{table_name} WHERE  (theme_id =#{self.id})! 
         self.class.connection.execute(sql)
         #update layout_id to new_layout.id    
-        for node in new_layout.self_and_descendants
-          original_node = original_layout.self_and_descendants.select{|item| (item.section_id == node.section_id) and (item.section_instance==node.section_instance) }.first
-          #correct param_values
-          ParamValue.update_all(["page_layout_id=?", node.id],["theme_id=? and page_layout_id=?",new_theme.id, original_node.id])
-          #correct template.assigned_resource_ids
-          if new_theme.assigned_resource_ids[original_node.id].present?             
-            new_theme.assigned_resource_ids[node.id] = new_theme.assigned_resource_ids.delete(original_node.id)            
-          end
-        end
-        if new_theme.assigned_resource_ids.present?
-          new_theme.save
-        end
+        self.class.fix_related_data_for_copied_theme(new_theme, new_layout.self_and_descendants, original_layout.self_and_descendants)        
         return new_theme
       end
     
@@ -323,7 +313,7 @@ Rails.logger.debug "#{file.page_layout_id},#{original_file.page_layout_id},#{fil
           original_nodes = serialized_hash[:page_layouts]
           new_nodes = PageLayout.copy_to_new( original_nodes )
           fix_related_data_for_copied_theme(template, new_nodes, original_nodes)
-          template.page_layout_id = new_nodes.first.id
+          template.page_layout_root_id = new_nodes.first.id
           template.save!
           serialized_hash[:page_layouts].each do |record|
             table_name = PageLayout.table_name

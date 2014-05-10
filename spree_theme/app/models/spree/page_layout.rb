@@ -18,38 +18,38 @@ module Spree
     attr_accessible :section_id,:title
     attr_accessor :current_contexts, :inherited_contexts
   
-    # create component, it is partial layout, no html body, composite of some sections. 
-    #notice: attribute section_id, title required
-    # section.root.section_piece_id should be 'root'
-    def self.create_layout(section, title, attrs={})
-      #create record in table page_layouts
-      obj = create!(:section_id=>section.id) do |obj|
-        obj.title = title
-        obj.site_id = SpreeTheme.site_class.current.id
-        obj.attributes = attrs unless attrs.empty?
-        obj.section_instance = 1
-        obj.is_full_html = section.section_piece.is_root?
+    class << self
+      # create component, it is partial layout, no html body, composite of some sections. 
+      #notice: attribute section_id, title required
+      # section.root.section_piece_id should be 'root'
+      def create_layout(section, title, attrs={})
+        #create record in table page_layouts
+        obj = create!(:section_id=>section.id) do |obj|
+          obj.title = title
+          obj.site_id = SpreeTheme.site_class.current.id
+          obj.attributes = attrs unless attrs.empty?
+          obj.section_instance = 1
+          obj.is_full_html = section.section_piece.is_root?
+        end
+        obj.update_attribute("root_id",obj.id)
+        obj
       end
-      obj.update_attribute("root_id",obj.id)
-      obj
-    end
-    
-    
-    # verify :come_contexts valid to :target_contexts
-    #   home is special list
-    # ex.  [:cart]  is valid to [:either]
-    #      [:cart]  is valid to [:account, :checkout, :thankyou, :cart]
-    #      [:cart]  is invalid to [:account]
-    #      [:list]  is invalid to [:home]
-    #      [:home]  is valid to [:list]
-    def self.verify_contexts( some_contexts, target_contexts )
-      some_contexts = [some_contexts] unless some_contexts.kind_of?( Array )
-      ( target_contexts==[ContextEnum.either] || (target_contexts&some_contexts)==some_contexts || (some_contexts==[ContextEnum.home]&&target_contexts.include?(ContextEnum.list)) )
-    end
-
+      
+      # verify :come_contexts valid to :target_contexts
+      #   home is special list
+      # ex.  [:cart]  is valid to [:either]
+      #      [:cart]  is valid to [:account, :checkout, :thankyou, :cart]
+      #      [:cart]  is invalid to [:account]
+      #      [:list]  is invalid to [:home]
+      #      [:home]  is valid to [:list]
+      def verify_contexts( some_contexts, target_contexts )
+        some_contexts = [some_contexts] unless some_contexts.kind_of?( Array )
+        ( target_contexts==[ContextEnum.either] || (target_contexts&some_contexts)==some_contexts || (some_contexts==[ContextEnum.home]&&target_contexts.include?(ContextEnum.list)) )
+      end
+  
       # user copy decendants of a layout to new root layout while user copy theme to new theme.
       # since copy to new root, there is no section_instance confliction.
-      def self.copy_decendants_to_new_parent(new_parent, original_parent, ordered_nodes)
+      def copy_decendants_to_new_parent(new_parent, original_parent, ordered_nodes)
         original_children =  ordered_nodes.select{|node| node.parent_id == original_parent.id }
         for node in original_children
           new_node = node.dup
@@ -70,7 +70,7 @@ module Spree
       # * params 
       # *   ordered_nodes -  whole tree node collection, it is ordered by left
       # * return - new ordered nodes
-      def self.copy_to_new(ordered_nodes, new_attributes = nil)
+      def copy_to_new(ordered_nodes, new_attributes = nil)
         #create new root first, get new root id.
         original_root = ordered_nodes.first
         new_layout = original_root.dup
@@ -78,9 +78,9 @@ module Spree
         new_layout.save!
         new_layout.update_attribute("root_id", new_layout.id)  
         copy_decendants_to_new_parent(new_layout, original_root,  ordered_nodes)
-        new_layout.self_and_descendants
+        new_layout.reload.self_and_descendants
       end
-
+    end
 
     #theme.document_path use it
     def site
@@ -116,87 +116,13 @@ module Spree
       HtmlPage::PartialHtml.new(nil, self, nil, pvs)
     end
     
-    begin 'modify page layout tree'
-  
-      # Do not support add_layout_tree now. Page layout should be full html, Keep it simple. 
-      # since we add feature 'section_context' and 'data_source', should not allow user use this method, it may cause section_context conflict.
-      # user copy prebuild layout tree to another layout tree as child.
-      # copy it self and decendants to new parent. this only for root layout.
-      # include theme param values. add theme param values to all themes which available to the new parent.
-      def add_layout_tree(copy_layout_id)
-        copy_layout = self.class.find(copy_layout_id)
-        raise "only for root layout" unless copy_layout.root?
-        copy_layout.copy_to_new_parent(self)        
-      end
-    
-      
-      #
-      #  cached_whole_tree, it is whole tree of new parent, to compute new added section instance.
-      #  added_section_ids, new added section ids, but not in cache.
-      #  root_layout.copy_to()
-      def copy_to_new_parent(new_parent, cached_whole_tree = nil, added_section_ids=[])
-        
-        cached_whole_tree||= new_parent.root.self_and_descendants
-        
-        new_section_instance =  ( cached_whole_tree.select{|xnode| xnode.section_id==self.section_id}.size +
-          added_section_ids.select{|xid| xid==self.section_id}.size ).succ
-        
-        clone_node = self.dup # do not call clone, or modify itself
-        clone_node.parent_id = new_parent.id
-        clone_node.root_id = new_parent.root_id
-        clone_node.section_instance = new_section_instance
-        clone_node.copy_from_root_id =  self.root_id
-        clone_node.save!    
-        added_section_ids << clone_node.section_id
-    
-        # it should only have one theme.
-        copy_theme = self.root.themes.first
-        table_name = ParamValue.table_name    
-        table_column_names = ParamValue.column_names
-        table_column_names.delete('id')
-        # copy param values to all available themes
-        for theme in clone_node.root.themes
-          table_column_values  = table_column_names.dup
-          table_column_values[table_column_values.index('page_layout_root_id')] = clone_node.root_id
-          table_column_values[table_column_values.index('page_layout_id')] = clone_node.id
-          table_column_values[table_column_values.index('theme_id')] = theme.id
-          sql = %Q!INSERT INTO #{table_name}(#{table_column_names.join(',')}) SELECT #{table_column_values.join(',')} FROM #{table_name} WHERE ((page_layout_root_id=#{self.root_id} and page_layout_id =#{self.id}) and theme_id =#{copy_theme.id} )! 
-          self.class.connection.execute(sql) 
-        end 
-            
-        for node in self.children       
-          node.copy_to_new_parent(clone_node, cached_whole_tree, added_section_ids)
-        end
-                    
-      end
-      
-      # user copy decendants of a layout to new root layout while user copy theme to new theme.
-      # since copy to new root, there is no section_instance confliction.
-      def copy_decendants_to_new_parent(new_parent)
-        for node in self.children
-          clone_node = node.dup
-          clone_node.parent_id = new_parent.id
-          clone_node.root_id = new_parent.root_id
-          clone_node.save!
-          if node.has_child?
-            node.copy_decendants_to_new_parent(clone_node)
-          end
-        end
-        # copy_from_root_id means we have copied all decendants and do not copy them other than root 
-        if new_parent.root?
-          self.class.update_all(["copy_from_root_id=?,updated_at=?, created_at=?",self.id, Time.now,Time.now],['root_id=?',new_parent.id])
-        end
-      end
-       
-      # copy whole tree
+    begin 'modify page layout tree'      
+      # * usage - copy whole tree
+      # * return - root of new copied whole tree 
       def copy_to_new(new_attributes = nil)
+        raise "only work for root" unless root? 
         #create new root first, get new root id.
-        new_layout = self.dup
-        new_layout.root_id = 0 # reset the lft,rgt.
-        new_layout.save!
-        new_layout.update_attribute("root_id", new_layout.id)  
-        self.copy_decendants_to_new_parent(new_layout)
-        new_layout.reload
+        self.class.copy_to_new( self_and_descendants, new_attributes ).first
       end
        
       # it is not using
@@ -557,7 +483,57 @@ module Spree
   
     def get_header_script(node)
       header = "<% g_page_layout_id=#{node.id};@template.select(g_page_layout_id); %>#{$/}"
-    end   
+    end
+        
+    # Do not support add_layout_tree now. Page layout should be full html, Keep it simple. 
+    # since we add feature 'section_context' and 'data_source', should not allow user use this method, it may cause section_context conflict.
+    # user copy prebuild layout tree to another layout tree as child.
+    # copy it self and decendants to new parent. this only for root layout.
+    # include theme param values. add theme param values to all themes which available to the new parent.
+    def add_layout_tree(copy_layout_id)
+      copy_layout = self.class.find(copy_layout_id)
+      raise "only for root layout" unless copy_layout.root?
+      copy_layout.copy_to_new_parent(self)        
+    end
+      
+    #  cached_whole_tree, it is whole tree of new parent, to compute new added section instance.
+    #  added_section_ids, new added section ids, but not in cache.
+    #  root_layout.copy_to()
+    def copy_to_new_parent(new_parent, cached_whole_tree = nil, added_section_ids=[])
+      
+      cached_whole_tree||= new_parent.root.self_and_descendants
+      
+      new_section_instance =  ( cached_whole_tree.select{|xnode| xnode.section_id==self.section_id}.size +
+        added_section_ids.select{|xid| xid==self.section_id}.size ).succ
+      
+      clone_node = self.dup # do not call clone, or modify itself
+      clone_node.parent_id = new_parent.id
+      clone_node.root_id = new_parent.root_id
+      clone_node.section_instance = new_section_instance
+      clone_node.copy_from_root_id =  self.root_id
+      clone_node.save!    
+      added_section_ids << clone_node.section_id
+  
+      # it should only have one theme.
+      copy_theme = self.root.themes.first
+      table_name = ParamValue.table_name    
+      table_column_names = ParamValue.column_names
+      table_column_names.delete('id')
+      # copy param values to all available themes
+      for theme in clone_node.root.themes
+        table_column_values  = table_column_names.dup
+        table_column_values[table_column_values.index('page_layout_root_id')] = clone_node.root_id
+        table_column_values[table_column_values.index('page_layout_id')] = clone_node.id
+        table_column_values[table_column_values.index('theme_id')] = theme.id
+        sql = %Q!INSERT INTO #{table_name}(#{table_column_names.join(',')}) SELECT #{table_column_values.join(',')} FROM #{table_name} WHERE ((page_layout_root_id=#{self.root_id} and page_layout_id =#{self.id}) and theme_id =#{copy_theme.id} )! 
+        self.class.connection.execute(sql) 
+      end 
+          
+      for node in self.children       
+        node.copy_to_new_parent(clone_node, cached_whole_tree, added_section_ids)
+      end                  
+    end
+         
   end
 
 end
