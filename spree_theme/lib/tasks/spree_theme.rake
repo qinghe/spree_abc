@@ -27,7 +27,7 @@ namespace :spree_theme do
     else
       file_path =  File.join(theme.site.document_path, "#{theme.site_id}_#{theme.id}_#{Time.now.to_i}.yml")
     end
-    open(file_path,'w') do |file|
+    open(file_path,'w') do |file|      
       file.write(serializable_data.to_yaml)
     end
     puts "exported file #{file_path}"

@@ -310,9 +310,9 @@ hmenu:
   html: |-
     <ul class="<%=g_piece_selector%>" >
     <% if @template.menu.present? %>
-    <% for page in @template.menu.children %>
+    <% @template.menu.children.each{|page| %>
        ~~content~~
-    <% end %>
+    <% } %>
     <% end %>
     </ul>
   css: |-
@@ -336,9 +336,9 @@ vmenu:
   html: |-
     <ul class="<%=g_piece_selector%>">
     <% if @template.menu.present? %>
-    <% for page in @template.menu.children %>
+    <% @template.menu.children.each{|page| %>
        ~~content~~
-    <% end %>
+    <% } %>
     <% end %>
     </ul>
   css: |-
@@ -1137,9 +1137,9 @@ logged_and_unlogged_menu:
     <% menu = (spree_current_user ? @template.menu : @template.menu2) %>
     <% if menu.present? %>
     <ul class="<%=g_piece_selector%>" >
-      <% for page in menu.children %>
+      <% menu.children.each{|page| %>
          ~~content~~
-      <% end %>
+      <% } %>
     </ul>
     <% end %>
   css: |-
@@ -1231,9 +1231,9 @@ slider:
       </div>
       <% # jssor require with,height in element style. %>
       <div u="slides" style="position: absolute;overflow:hidden;<%=@template.css(:slides)%>">
-      <% for page in @template.menu.children %>
+      <% @template.menu.children.each{|page| %>
       <div><%= image_tag page.icon.url(:original), :u=>'image', :alt=>page.name %></div>
-      <% end %>
+      <% } %>
       </div>
       <!-- bullet navigator container -->
         <!-- Bullet Navigator Skin Begin -->

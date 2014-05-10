@@ -2,7 +2,7 @@ module Spree
   class Section < ActiveRecord::Base
     extend FriendlyId
     acts_as_nested_set #:scope=>"root_id"
-    has_many :full_set_nodes, :class_name =>'Section', :foreign_key=>:root_id, :primary_key=>:root_id
+    #has_many :full_set_nodes, :class_name =>'Section', :foreign_key=>:root_id, :primary_key=>:root_id
     belongs_to :section_piece  
     has_many :section_params
     has_many :page_layouts

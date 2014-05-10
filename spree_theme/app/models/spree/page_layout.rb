@@ -8,7 +8,7 @@ module Spree
     has_many :themes, :class_name => "TemplateTheme",:primary_key=>:root_id,:foreign_key=>:page_layout_root_id
     has_many :param_values
     friendly_id :title, :use => :scoped, :scope => :site_id
-    has_many :full_set_nodes, :class_name =>'PageLayout', :foreign_key=>:root_id, :primary_key=>:root_id
+    #has_many :full_set_nodes, :class_name =>'PageLayout', :foreign_key=>:root_id, :primary_key=>:root_id
     has_many :sections, :class_name =>'Section', :foreign_key=>:root_id, :primary_key=>:section_id
     has_many :section_pieces, :through=>:sections
     # remove section relatives after page_layout destroyed.
@@ -35,17 +35,6 @@ module Spree
         obj
       end
       
-      # verify :come_contexts valid to :target_contexts
-      #   home is special list
-      # ex.  [:cart]  is valid to [:either]
-      #      [:cart]  is valid to [:account, :checkout, :thankyou, :cart]
-      #      [:cart]  is invalid to [:account]
-      #      [:list]  is invalid to [:home]
-      #      [:home]  is valid to [:list]
-      def verify_contexts( some_contexts, target_contexts )
-        some_contexts = [some_contexts] unless some_contexts.kind_of?( Array )
-        ( target_contexts==[ContextEnum.either] || (target_contexts&some_contexts)==some_contexts || (some_contexts==[ContextEnum.home]&&target_contexts.include?(ContextEnum.list)) )
-      end
   
       # user copy decendants of a layout to new root layout while user copy theme to new theme.
       # since copy to new root, there is no section_instance confliction.
@@ -81,6 +70,17 @@ module Spree
         new_layout.reload.self_and_descendants
       end
     end
+      # verify :come_contexts valid to :target_contexts
+      #   home is special list
+      # ex.  [:cart]  is valid to [:either]
+      #      [:cart]  is valid to [:account, :checkout, :thankyou, :cart]
+      #      [:cart]  is invalid to [:account]
+      #      [:list]  is invalid to [:home]
+      #      [:home]  is valid to [:list]
+      def self.verify_contexts( some_contexts, target_contexts )
+        some_contexts = [some_contexts] unless some_contexts.kind_of?( Array )
+        ( target_contexts==[ContextEnum.either] || (target_contexts&some_contexts)==some_contexts || (some_contexts==[ContextEnum.home]&&target_contexts.include?(ContextEnum.list)) )
+      end
 
     #theme.document_path use it
     def site

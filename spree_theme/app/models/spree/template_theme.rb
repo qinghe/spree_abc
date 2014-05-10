@@ -86,8 +86,7 @@ module Spree
         new_node_ids = new_nodes.collect(&:id)
           # # update param_values
           original_node_ids.each_with_index{|node_id,index|
-            ParamValue.update_all(["page_layout_id=?", new_node_ids[index]],["theme_id=? and page_layout_id=?",new_theme.id, node_id])
-Rails.logger.debug "new_theme=#{new_theme}"            
+            ParamValue.update_all({ :page_layout_id=> new_node_ids[index], :page_layout_root_id=>new_theme.page_layout_root_id },["theme_id=? and page_layout_id=?",new_theme.id, node_id])
             if new_theme.assigned_resource_ids[node_id].present?             
               new_theme.assigned_resource_ids[new_node_ids[index]] = new_theme.assigned_resource_ids.delete(node_id)            
             end
@@ -172,7 +171,7 @@ Rails.logger.debug "new_theme=#{new_theme}"
         if new_theme.template_files.present?
           new_theme.template_files.each{|file|
             original_file = new_attributes[:template_files].first
-Rails.logger.debug "#{file.page_layout_id},#{original_file.page_layout_id},#{file.object_id},#{original_file.object_id},#{file.inspect}, #{original_file.inspect}"            
+#Rails.logger.debug "#{file.page_layout_id},#{original_file.page_layout_id},#{file.object_id},#{original_file.object_id},#{file.inspect}, #{original_file.inspect}"            
             new_theme.assign_resource( file, PageLayout.find(file.page_layout_id))
           }          
         end
@@ -280,8 +279,11 @@ Rails.logger.debug "#{file.page_layout_id},#{original_file.page_layout_id},#{fil
       # export to yaml, include page_layouts, param_values, template_files
       # it is a hash with keys :template, :param_values, :page_layouts
       def serializable_data
-        template = self.class.find(self.id,:include=>[:param_values,:page_layout=>:full_set_nodes])
-        hash ={:template=>template, :param_values=>template.param_values, :page_layouts=>template.page_layout.full_set_nodes,
+        template = self.class.find(self.id,:include=>[:param_values,:page_layout])
+        # template.page_layout.self_and_descendants would cause error
+        # https://github.com/rails/rails/issues/5303
+        # serializable_data.to_yaml, it only get error in rake task.
+        hash ={:template=>template, :param_values=>template.param_values, :page_layouts=>template.page_layout.self_and_descendants.all,
             :template_files=>template.template_files,:template_releases=>template.template_releases
             } 
         hash      
@@ -307,18 +309,20 @@ Rails.logger.debug "#{file.page_layout_id},#{original_file.page_layout_id},#{fil
           # template = self.find_by_title template.title
           serialized_hash[:param_values].each do |record|
             table_name = ParamValue.table_name
-            connection.insert_fixture(record.attributes.except('id'), table_name)          
+            #for unknown reason param_value.created_at may be nil
+            attributes = record.attributes.except('id') 
+            attributes['created_at']=Time.now if attributes['created_at'].blank?
+            connection.insert_fixture(attributes, table_name)          
           end
           template.reload
           original_nodes = serialized_hash[:page_layouts]
           new_nodes = PageLayout.copy_to_new( original_nodes )
+          template.update_attribute(:page_layout_root_id, new_nodes.first.id)
           fix_related_data_for_copied_theme(template, new_nodes, original_nodes)
-          template.page_layout_root_id = new_nodes.first.id
-          template.save!
-          serialized_hash[:page_layouts].each do |record|
-            table_name = PageLayout.table_name
-            connection.insert_fixture(record.attributes, table_name)          
-          end
+          #serialized_hash[:page_layouts].each do |record|
+          #  table_name = PageLayout.table_name
+          #  connection.insert_fixture(record.attributes, table_name)          
+          #end          
           serialized_hash[:template_files].each do |record|
             table_name = TemplateFile.table_name
             connection.insert_fixture(record.attributes, table_name)          

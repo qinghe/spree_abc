@@ -1,5 +1,6 @@
 //= require jquery
-//= require jquery.ui.all
+//= require jquery.ui.dialog
+//= require jquery.ui.dialog
 //= require jquery_ujs
 //= require jquery.form
 //= require jquery.layout
