@@ -26,4 +26,5 @@ end
 
 SpreeEditor::Config.tap do |config|
   config.ids = "product_description taxon_description template_text_body"
+  config.current_editor = "CKEditor"
 end
