@@ -1,4 +1,5 @@
 module Spree
+  # assume html_attribute could has only one manual selected value, position always is last
   class HtmlAttribute < ActiveRecord::Base
     extend FriendlyId
     BOOL_TRUE='1'
@@ -98,6 +99,7 @@ module Spree
       psv_for_manual_entry_enum.values.include?(selected_value)
     end
     
+    # assume html_attribute could has only one manual selected value, position always is last
     def manual_selected_value
       possible_selected_values.last if psv_for_manual_entry_enum.values.include?(possible_selected_values.last)
     end 
@@ -137,12 +139,17 @@ module Spree
       end
     end
     
-    def default_manual_value(repeat=0)
-      
-      if manual_selected_value.present?
-        if is_special?(:color)
-          "#000000"
-        end
+    #return default manual value and unit
+    def default_manual_value(repeat=0)      
+      case manual_selected_value
+        when psv_for_manual_entry_enum[:color]
+          ["#000000",'']
+        when psv_for_manual_entry_enum[:size]
+          [0,'px']
+        when psv_for_manual_entry_enum[:bool]
+          [0,'']
+        else
+          ['','']
       end
     end
     
@@ -153,15 +160,7 @@ module Spree
           self.repeats.times{|i|
             @default_properties["psvalue#{i}"] = self.default_possible_selected_value(i)
             if manual_entry?(@default_properties["psvalue#{i}"])
-              if @default_properties["psvalue#{i}"]== psv_for_manual_entry_enum[:size]
-                @default_properties["pvalue#{i}"] = 0
-                @default_properties["unit#{i}"] = 'px'                
-              elsif @default_properties["psvalue#{i}"]== psv_for_manual_entry_enum[:bool]
-                @default_properties["pvalue#{i}"] = 0
-              else
-                @default_properties["pvalue#{i}"] = ''
-                @default_properties["unit#{i}"] = ''                           
-              end
+              @default_properties["pvalue#{i}"],@default_properties["unit#{i}"] = default_manual_value(i)
             end
           }
         end
