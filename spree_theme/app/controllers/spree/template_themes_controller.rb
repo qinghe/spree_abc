@@ -322,13 +322,13 @@ module Spree
       @dialog_title = dialog_title
       @content_string = render_to_string :partial => dialog_content
       respond_to do |format|
-        format.js{ render "base/model_dialog"}
+        format.js{ render "application/model_dialog"}
       end
     end
     
     def render_message(message)
       respond_to do |format|
-          format.js{ render "base/message_box", :locals=>{:message=>message}}
+          format.js{ render "message_box", :locals=>{:message=>message}}
       end
     end
 

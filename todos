@@ -44,6 +44,27 @@ Connecting to database specified by database.yml
   Spree::Preference Load (0.3ms)  SELECT `spree_preferences`.* FROM `spree_preferences` WHERE `spree_preferences`.`key` = 'spree/editor_configuration/ids' LIMIT 1
    (0.1ms)  BEGIN
    (0.2ms)  UPDATE `spree_preferences` SET `value_type` = 'string', `updated_at` = '2014-03-30 13:59:05' WHERE `spree_preferences`.`id` = 16
+7. upload background image 
+ActionView::MissingTemplate (Missing template base/model_dialog with {:locale=>[:"zh-CN"], :formats=>[:js, :html], :handlers=>[:erb, :builder, :coffee, :rabl], :versions=>[:v1]}. Searched in:
+  * "/var/www/workspace/spree_abc/app/views"
+  * "/home/david/.rvm/gems/ruby-1.9.3-p448@spree_abc/bundler/gems/spree_editor-4312b29cc270/app/views"
+  * "/home/david/.rvm/gems/ruby-1.9.3-p448@spree_abc/gems/ckeditor-4.0.6/app/views"
+  * "/var/www/workspace/spree_abc/spree_china_checkout/app/views"
+  * "/var/www/workspace/spree_alipay/app/views"
+  * "/var/www/workspace/spree_abc/spree_theme/app/views"
+  * "/var/www/workspace/spree_abc/spree_multi_site/app/views"
+  * "/home/david/.rvm/gems/ruby-1.9.3-p448@spree_abc/bundler/gems/spree_auth_devise-3224869cfda1/app/views"
+  * "/home/david/.rvm/gems/ruby-1.9.3-p448@spree_abc/gems/devise-2.2.8/app/views"
+  * "/home/david/.rvm/gems/ruby-1.9.3-p448@spree_abc/bundler/gems/spree-4d7ac0b2e06d/frontend/app/views"
+  * "/home/david/.rvm/gems/ruby-1.9.3-p448@spree_abc/bundler/gems/spree-4d7ac0b2e06d/backend/app/views"
+  * "/home/david/.rvm/gems/ruby-1.9.3-p448@spree_abc/bundler/gems/spree-4d7ac0b2e06d/api/app/views"
+  * "/home/david/.rvm/gems/ruby-1.9.3-p448@spree_abc/bundler/gems/spree-4d7ac0b2e06d/core/app/views"
+  * "/home/david/.rvm/gems/ruby-1.9.3-p448@spree_abc/gems/kaminari-0.15.1/app/views"
+  * "/var/www/workspace/spree_abc/public/shops/development/2"
+  * "/var/www/workspace/spree_abc/public/shops/development/2"
+  * "/var/www/workspace/spree_abc"
+  * "/"
+):
 
 
 new todo
