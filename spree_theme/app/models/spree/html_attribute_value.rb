@@ -115,8 +115,25 @@ module Spree
         pvalue_string = pvalue_properties["pvalue0"]
       elsif html_attribute.is_special? :db
         pvalue_string = pvalue_properties["pvalue0"]
-      else      
-        vals = html_attribute.repeats.times.collect{|i|
+      else
+        pvalue_string = html_attribute.css_name+':'+ build_css_property_value( html_attribute, pvalue_properties )
+      end
+      pvalue_string
+    end
+    
+    def self.build_css_property_value( html_attribute, pvalue_properties )
+      val = nil
+      if html_attribute.is_special?(:image)
+        if html_attribute.manual_entry?(pvalue_properties["psvalue0"])
+          file = TemplateFile.find_by_attachment_file_name( pvalue_properties["pvalue0"] )
+          if file.present?
+            val = "url(#{file.attachment.url})"
+          end
+        else
+          val = pvalue_properties["psvalue0"]
+        end    
+      else
+        val = html_attribute.repeats.times.collect{|i|
           if html_attribute.is_special? :color #no need unit for color
             html_attribute.manual_entry?(pvalue_properties["psvalue#{i}"]) ? 
               "#{pvalue_properties["pvalue#{i}"]}" : pvalue_properties["psvalue#{i}"]                      
@@ -124,12 +141,10 @@ module Spree
             html_attribute.manual_entry?(pvalue_properties["psvalue#{i}"]) ? 
               "#{pvalue_properties["pvalue#{i}"]}#{pvalue_properties["unit#{i}"]}" : pvalue_properties["psvalue#{i}"]            
           end
-        }
-        pvalue_string = html_attribute.css_name+':'+ vals.join(' ')
+        }.join(' ')
       end
-      pvalue_string
+      val
     end
-    
   
     def self.ultra_initialize(param_value, html_attribute, properties)
       hav = HtmlAttributeValue.new
@@ -293,7 +308,7 @@ module Spree
           else  #noclick, selected
             " .#{target}"
           end
-Rails.logger.debug "css selector:#{prefix+selector}, #{attribute_name}:#{attribute_value}"          
+#Rails.logger.debug "css selector:#{prefix+selector}, #{attribute_name}:#{attribute_value}"          
         prefix+selector
       end 
       
@@ -301,30 +316,8 @@ Rails.logger.debug "css selector:#{prefix+selector}, #{attribute_name}:#{attribu
         self.html_attribute.css_name
       end
       def attribute_value
-        val = nil
-        target_properties = unset? ? default_properties : properties
-        
-          if html_attribute.css_name== 'background-image'
-            if html_attribute.manual_entry?(target_properties["psvalue0"])
-              file = TemplateFile.find_by_attachment_file_name( target_properties["pvalue0"] )
-              if file.present?
-                val="url(#{file.attachment.url})"
-              end
-            else
-              val=self["psvalue"]
-            end    
-          else
-            val = html_attribute.repeats.times.collect{|i|
-              if html_attribute.css_name== 'border-color'
-                html_attribute.manual_entry?(target_properties["psvalue#{i}"]) ? 
-                  "#{target_properties["pvalue#{i}"]}" : target_properties["psvalue#{i}"]
-              else
-                html_attribute.manual_entry?(target_properties["psvalue#{i}"]) ? 
-                  "#{target_properties["pvalue#{i}"]}#{target_properties["unit#{i}"]}" : target_properties["psvalue#{i}"]
-              end
-            }.join(' ')
-          end
-        
+        target_properties = unset? ? default_properties : properties        
+        self.class.build_css_property_value( self.html_attribute, target_properties )        
       end
     end
     

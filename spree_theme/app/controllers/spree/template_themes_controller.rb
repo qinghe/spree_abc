@@ -279,10 +279,10 @@ module Spree
       @dialog_content="upload_dialog_content"
       @param_value_id = params[:param_value_id]
       @html_attribute_id = params[:html_attribute_id].to_i
-  @param_value = ParamValue.find(@param_value_id, :include=>[:section_param=>:section_piece_param])
-  @editor = @param_value.section_param.section_piece_param.editor
-      if request.post?
-        
+      @param_value = ParamValue.find(@param_value_id, :include=>[:section_param=>:section_piece_param])
+  #@editor = @param_value.section_param.section_piece_param.editor
+      if request.post?        
+        #TODO replace same name of template file 
         uploaded_image = TemplateFile.new( params[:template_file] )
         if uploaded_image.valid?
           uploaded_image['theme_id']=@param_value.theme_id              
@@ -291,10 +291,9 @@ module Spree
                 param_value_params={@html_attribute_id.to_s=>{"unset"=>"0", "pvalue0"=>uploaded_image.attachment_file_name, "psvalue0"=>"0i"}}
                 param_value_event = ParamValue::EventEnum[:pv_changed]
                 editing_html_attribute_id = @html_attribte_id
-                do_update_param_value(@param_value, param_value_params, param_value_event, editing_html_attribute_id) 
+                @updated_html_attribute_values = do_update_param_value(@param_value, param_value_params, param_value_event, editing_html_attribute_id) 
                 # get all param values by selected editor
-                # since we redirect to editors, these are unused
-                @param_values = ParamValue.within_section(@param_value).within_editor(@editor)
+                #@param_values = ParamValue.within_section(@param_value).within_editor(@editor)
                 # update param value
                 render :partial=>'after_upload_dialog' 
           end

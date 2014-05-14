@@ -95,7 +95,7 @@ module Spree
         if html_attribute.is_special?(:bool)
           manual_value_tag << radio_button_tag("#{pv_ele_id}[pvalue#{i}]", bool_true,pvalue==bool_true, :onchange=>manual_value_onchange )+"Yes" 
           manual_value_tag << radio_button_tag("#{pv_ele_id}[pvalue#{i}]", bool_false,pvalue==bool_false, :onchange=>manual_value_onchange )+"No"
-        elsif html_attribute.is_special?(:image) or html_attribute.is_special?(:src)
+        elsif html_attribute.is_special?(:image)
           manual_value_tag << select("#{pv_ele_id}","pvalue#{i}", Spree::TemplateFile.all.collect{|item| [item.attachment_file_name, item.attachment_file_name]}, {:selected=>pvalue ,:include_blank=>"Please select "},{ :onchange=>manual_value_onchange}) 
           manual_value_tag << link_to( "upload file...",{:action=>"upload_file_dialog",:param_value_id=>param_value.id, :html_attribute_id=>html_attribute.id, :selected_editor_id=>@editor.id},:method =>:get,:remote=>true )  
         else
