@@ -122,7 +122,7 @@ module Spree
     end
     
     def self.build_css_property_value( html_attribute, pvalue_properties )
-      val = nil
+      val = ''
       if html_attribute.is_special?(:image)
         if html_attribute.manual_entry?(pvalue_properties["psvalue0"])
           file = TemplateFile.find_by_attachment_file_name( pvalue_properties["pvalue0"] )
