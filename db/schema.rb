@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140511083204) do
+ActiveRecord::Schema.define(:version => 20140606143001) do
 
   create_table "ckeditor_assets", :force => true do |t|
     t.integer  "site_id",                         :default => 0, :null => false
@@ -847,6 +847,7 @@ ActiveRecord::Schema.define(:version => 20140511083204) do
     t.boolean  "active",       :default => true
     t.datetime "created_at",                     :null => false
     t.datetime "updated_at",                     :null => false
+    t.integer  "site_id"
   end
 
   create_table "spree_users", :force => true do |t|

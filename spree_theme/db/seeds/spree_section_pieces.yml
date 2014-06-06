@@ -23,6 +23,7 @@ root:
     <% end %>    
     <%= csrf_meta_tags %>
     <%= render "spree/shared/routes" %>
+    <%= render "spree/shared/analytics" %>
     </head>
     <body class="clear-block">
       <div id="page-wrapper" class="<%='ui-layout-center' if @current_page.is_preview %>">
