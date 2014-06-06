@@ -100,6 +100,10 @@ Spree::TaxRate.class_eval do
   default_scope {where("spree_tax_categories.site_id=?", Spree::Site.current.id)}
 end
 
+Spree::Tracker.class_eval do
+  belongs_to :site
+  default_scope  { where(:site_id =>  Spree::Site.current.id) }
+end
 
 Spree.user_class.class_eval do
   belongs_to :site
