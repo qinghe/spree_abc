@@ -1,3 +1,7 @@
+app server 
+--------------------------------------------------------
+echo export TMOUT=1000000 >> /root/.bash_profile
+
 
 CREATE SCHEMA `spree_abc_xxx` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ;
 
@@ -12,6 +16,8 @@ chown apache.apache  public -R
 
 https://help.github.com/articles/deploying-with-capistrano
 
+db server
+-----------------------------------------------------------
 1. configure mysql to support utf-8
   [mysqld]
   character_set_server= utf8    

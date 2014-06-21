@@ -170,6 +170,7 @@ root:
       height: 0;
       clear: both;
       visibility: hidden;
+      font-size: 0;
     }
     .clear-block {
       display: block;
