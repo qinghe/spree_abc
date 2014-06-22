@@ -4,7 +4,6 @@ zh-CN:
   site_layout: Site Layout
   site: 网络商店
   site_has_sample: 填充示例数据
-  new_site: 创建您的商店
   load_sample: 
     test_mailer:
       test_email:
@@ -18,3 +17,4 @@ zh-CN:
         domain: 网店域名
   spree:
     name_store: 给您的商店取个名字
+    new_site: 创建您的商店
