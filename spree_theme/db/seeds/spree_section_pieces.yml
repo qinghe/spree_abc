@@ -26,6 +26,7 @@ root:
     <%= render "spree/shared/analytics" %>
     </head>
     <body class="clear-block">
+      <%= flash_messages %>
       <div id="page-wrapper" class="<%='ui-layout-center' if @current_page.is_preview %>">
       <div id="page" class='<%=g_piece_selector%>'><div id="page-inner" class="<%=g_piece_selector%>_inner clear-block">
         ~~content~~
@@ -636,7 +637,7 @@ cart:
         <%= form_for @order, :url => update_cart_path, :html => {:id => 'update-cart'} do |order_form| %>
           <div data-hook="inside_cart_form">
             <% #place holder for action /cart %>
-            <%= flash_messages %><%= yield %>
+            <%= yield %>
             ~~content~~
             <div class="cart_buttons" data-hook="cart_buttons">
               <%= button_tag :class => 'primary', :id => 'update-button' do %>
@@ -665,7 +666,7 @@ account:
   is_selectable: "0"
   is_container: "0"
   html: |   
-    <%= flash_messages %><%= yield %>
+    <%= yield %>
   created_at: 2011-09-20 19:40:07
   updated_at: 2011-09-20 19:40:07
   css: ""
@@ -755,7 +756,7 @@ thanks:
   is_selectable: "0"
   is_container: "0"
   html: |   
-    <%= flash_messages %><%= yield %>~~content~~
+    <%= yield %>~~content~~
   created_at: 2011-09-20 19:40:07
   updated_at: 2011-09-20 19:40:07
   css: ""
