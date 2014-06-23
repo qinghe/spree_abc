@@ -691,7 +691,7 @@ zh-CN:
       operators:
         gt: 大于
         gte: 大于或等于
-    items_cannot_be_shipped: 
+    items_cannot_be_shipped: 很抱歉，选择的商品暂时无法邮寄到您的地址，请换一个地址
     jirafe: Jirafe
     landing_page_rule:
       path: Path
