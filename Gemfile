@@ -57,7 +57,8 @@ gem 'spree_theme',   :path => './spree_theme'
 
 #only specify it here, then could use ActiveMerchant::Billing::Integrations::Alipay::Helper directly
 gem 'activemerchant', :require => 'active_merchant'
-gem 'activemerchant_patch_for_china' #support alipay
+#0.2.1 changed alipay service url
+gem 'activemerchant_patch_for_china', '0.2.0' #support alipay
 gem 'spree_alipay',   :github => "RuanShan/spree_alipay", :branch=>"2-0-stable"
 
 gem 'spree_china_checkout',   :path => './spree_china_checkout'

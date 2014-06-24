@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/RuanShan/spree_alipay.git
-  revision: 0ddd637b2022a06fe9f4d76bdba90f7fd72120b6
+  revision: 0ff794cec1c5ae39244f3520f47b3fa5b45a20f3
   branch: 2-0-stable
   specs:
     spree_alipay (2.0.9)
@@ -129,7 +129,7 @@ GEM
       json (~> 1.7)
       money (< 7.0.0)
       nokogiri (~> 1.4)
-    activemerchant_patch_for_china (0.2.1)
+    activemerchant_patch_for_china (0.2.0)
     activemodel (3.2.17)
       activesupport (= 3.2.17)
       builder (~> 3.0.0)
@@ -389,7 +389,7 @@ PLATFORMS
 
 DEPENDENCIES
   activemerchant
-  activemerchant_patch_for_china
+  activemerchant_patch_for_china (= 0.2.0)
   capistrano
   capistrano-rails (~> 1.1.0)
   capistrano-rvm (~> 0.1.0)
