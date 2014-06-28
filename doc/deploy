@@ -27,3 +27,7 @@ http://www.dotkam.com/2008/09/14/configure-rails-and-mysql-to-support-utf-8/
 2. yum install libxml2-devel libxslt-devel
   nokogiri required 
   https://github.com/sparklemotion/nokogiri
+
+  
+3. install pg
+https://community.jboss.org/wiki/InstallPostgreSQLonFedora?_sscc=t
