@@ -13,10 +13,12 @@ namespace :spree_theme do
     }    
   end
   
-  desc "export theme. params: SITE_ID, SEED_PATH."
+  desc "export theme. params: SITE_ID, THEME_ID, SEED_PATH."
   task :export_theme => :environment do
     if ENV['SITE_ID']
       theme = SpreeTheme.site_class.find( ENV['SITE_ID'] ).template_themes.first 
+    elsif ENV['THEME_ID']
+      theme = Spree::TemplateTheme.find ENV['THEME_ID'] 
     else
       theme = Spree::TemplateTheme.first        
     end
@@ -33,7 +35,7 @@ namespace :spree_theme do
     puts "exported file #{file_path}"
   end
   
-  desc "import theme. params SEED_PATH, SITE_ID." 
+  desc "import theme. params SEED_PATH, SITE_ID, THEME_ID." 
        "SEED_PATH='1' path = spree_theme/db/themes/designs/{site_id}_{theme_id}_{time}.yml"
        "default path=shops/rails_env/shop_id/{site_id}_{theme_id}_{time}.yml"
   task :import_theme => :environment do
@@ -41,11 +43,14 @@ namespace :spree_theme do
       SpreeTheme.site_class.current = SpreeTheme.site_class.find ENV['SITE_ID']
     else
       SpreeTheme.site_class.current = SpreeTheme.site_class.designsite      
-    end    
+    end 
+    
+    theme_id = (ENV['THEME_ID'] || SpreeTheme.site_class.current.template_themes.first.id)
+       
     if ENV['SEED_PATH']
-      file_path = File.join(SpreeTheme::Engine.root,'db','themes','designs', "#{SpreeTheme.site_class.current.id}_*.yml")
+      file_path = File.join(SpreeTheme::Engine.root,'db','themes','designs', "#{SpreeTheme.site_class.current.id}_#{theme_id}*.yml")
     else
-      file_path = File.join(SpreeTheme.site_class.current.document_path, "#{SpreeTheme.site_class.current.id}_*.yml")
+      file_path = File.join(SpreeTheme.site_class.current.document_path, "#{SpreeTheme.site_class.current.id}_#{theme_id}*.yml")
     end
     file_path = Dir[file_path].sort.last      
     open(file_path) do |file|
