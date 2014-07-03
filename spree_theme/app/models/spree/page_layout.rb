@@ -452,11 +452,14 @@ module Spree
               <% } %>
               EOS1
             when DataSourceEnum.menu
+              #assigned menu could be root or node
               subpieces = <<-EOS3 
               <% if @template.menu.present? %>
-              <% @template.menu.children.each{|page| %>
-                  #{subpieces}
-              <% } %>
+                <% if @template.menu.root? %>
+                  <% @template.menu.children.each{|page| #{subpieces} }%>
+                <% else %>  
+                  <% @template.menu.tap {|page| #{subpieces} } %>
+                <% end %>              
               <% end %>              
               EOS3
           end
