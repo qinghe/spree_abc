@@ -114,7 +114,12 @@ module Spree
       elsif html_attribute.is_special? :bool
         pvalue_string = pvalue_properties["pvalue0"]
       elsif html_attribute.is_special? :db
-        pvalue_string = pvalue_properties["pvalue0"]
+        pvalue_string = pvalue_properties["pvalue0"]      
+      elsif html_attribute.is_special? :image 
+        #background-image is special, 
+        # for param_value: format is  css_name:file_name; in this way, editor is easy to parse and render
+        # for css: format is css_name:url(file_url); 
+        pvalue_string = html_attribute.css_name+':'+ ( html_attribute.manual_entry?(pvalue_properties["psvalue0"]) ? "#{pvalue_properties["pvalue0"]}" : pvalue_properties["psvalue0"] ) 
       else
         pvalue_string = html_attribute.css_name+':'+ build_css_property_value( html_attribute, pvalue_properties )
       end

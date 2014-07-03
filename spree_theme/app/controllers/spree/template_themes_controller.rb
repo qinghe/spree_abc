@@ -280,7 +280,7 @@ module Spree
       @param_value_id = params[:param_value_id]
       @html_attribute_id = params[:html_attribute_id].to_i
       @param_value = ParamValue.find(@param_value_id, :include=>[:section_param=>:section_piece_param])
-  #@editor = @param_value.section_param.section_piece_param.editor
+      #@editor = @param_value.section_param.section_piece_param.editor
       if request.post?        
         #TODO replace same name of template file 
         uploaded_image = TemplateFile.new( params[:template_file] )

@@ -1,18 +1,18 @@
 <%
 #params: @theme
 #local params:   html_attribute, param_value
-bool_true = Spree::HtmlAttribute::BOOL_TRUE
-bool_false = Spree::HtmlAttribute::BOOL_FALSE
+  bool_true = Spree::HtmlAttribute::BOOL_TRUE
+  bool_false = Spree::HtmlAttribute::BOOL_FALSE
   section_piece_param = param_value.section_param.section_piece_param
-   ha = html_attribute
-   #val= param_value.pvalue_for_haid(ha.id)
-   pv_div_id = "pv_#{param_value.id}_#{ha.id}"
-   pv_ele_id = "pv#{param_value.id}[#{ha.id}]"
-   pv_link_id = pv_div_id+'_a'
-   hav = Spree::HtmlAttributeValue.parse_from(param_value, ha)
-   display = ( hav.hidden? ? "display:none" : ""  )
+  ha = html_attribute
+  #val= param_value.pvalue_for_haid(ha.id)
+  pv_div_id = "pv_#{param_value.id}_#{ha.id}"
+  pv_ele_id = "pv#{param_value.id}[#{ha.id}]"
+  pv_link_id = pv_div_id+'_a'
+  hav = Spree::HtmlAttributeValue.parse_from(param_value, ha)
+  display = ( hav.hidden? ? "display:none" : ""  )
 #   Rails.logger.debug "hidden=#{display}" 
-   query_path = update_param_value_template_theme_path( @theme )
+  query_path = update_param_value_template_theme_path( @theme )
 %>
   <div id=<%=pv_div_id%> class="pv clear-block" style="<%=display%>">
       <div class="fl"> <span class="pv-name"><%=ha.title%></span>
@@ -25,7 +25,7 @@ bool_false = Spree::HtmlAttribute::BOOL_FALSE
            possible_values = ha.possible_selected_values(i)
            possible_values_descriptions = ha.possible_selected_values_descriptions(i)
            units = ha.units
-onchange = my_remote_function( :submit=>"layout_editor_form",:query_path=>query_path, :query_params => hav.build_url_params(:psv_changed), :if=>'')
+           onchange = my_remote_function( :submit=>"layout_editor_form",:query_path=>query_path, :query_params => hav.build_url_params(:psv_changed), :if=>'')
 #logger.debug "ha=#{hav.html_attribute.id},hav.properties=#{hav.properties.inspect} psvalue=#{psvalue}, pvalue=#{pvalue}, unit=#{unit}"
         %>
         <%# possible selected value
