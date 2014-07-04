@@ -416,8 +416,8 @@ text:
   js: ""
 product_image:
   id: 11
-  title: product_image
-  slug: product_image
+  title: product image
+  slug: product-image
   is_selectable: "0"
   is_container: "0"
   html: |         
@@ -772,11 +772,11 @@ taxon_name:
   is_selectable: "1"
   is_container: "0"
   html: |    
-    <h1 class="taxon_name"> <%= @current_page.menu.name %> </h1>
+    <%= proc_page.call.name %>
   created_at: 2011-09-20 19:40:07
   updated_at: 2011-09-20 19:40:07
   css: |
-    .<%=@template.current_piece.section_selector%> h1.taxon_name{
+    .<%=@template.current_piece.section_selector%> .taxon_name{
       margin: 0; padding: 0; font-size: 100%;line-height:1em;
     }
   js: ""
@@ -1314,13 +1314,4 @@ breadcrumbs:
       display: inline-block;
     }
   js: ""
-taxon_name:
-  id: 56
-  title: taxon name
-  slug: taxon-name
-  is_selectable: "1"
-  is_container: "0"
-  html: |    
-    <%=raw proc_page.call.name %>
-  css: ""
-  js: ""  
+
