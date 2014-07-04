@@ -421,7 +421,11 @@ product_image:
   is_selectable: "0"
   is_container: "0"
   html: |         
-    <%= link_to small_image(product, :itemprop => "image"), product.path %>
+    <% if @template.css(:image_style).present? %>
+      <%= link_to send("#{@template.css(:image_style)}_image",product, :itemprop => "image"), product.path %>
+    <% else %>
+      <%= link_to small_image(product, :itemprop => "image"), product.path %>
+    <% end %>
   created_at: 2011-09-20 19:40:07
   updated_at: 2011-09-20 19:40:07
   css: ""
@@ -1310,3 +1314,13 @@ breadcrumbs:
       display: inline-block;
     }
   js: ""
+taxon_name:
+  id: 56
+  title: taxon name
+  slug: taxon-name
+  is_selectable: "1"
+  is_container: "0"
+  html: |    
+    <%=raw proc_page.call.name %>
+  css: ""
+  js: ""  

@@ -1,5 +1,8 @@
 module Spree
   module BaseHelper
+    #==================================================================================================
+    # template methods, using by template
+    #==================================================================================================
     #these methos has to be in BaseHelpler, controller may be TemplateThemes Cart Checkout User Order..
     #override original in BaseHelper
     def breadcrumbs(current_page_tag, separator="&nbsp;&raquo;&nbsp;")
@@ -14,6 +17,10 @@ module Spree
       crumb_list = content_tag(:ul, raw(crumbs.flatten.map{|li| li.mb_chars}.join), class: 'inline')
       content_tag(:nav, crumb_list, id: 'breadcrumbs', class: 'sixteen columns')
     end
+            
+    #==================================================================================================
+    # Editor methods
+    #==================================================================================================
     
     def my_remote_function(options)
       full_query_path = options[:query_path]+"?"+options[:query_params].to_param 

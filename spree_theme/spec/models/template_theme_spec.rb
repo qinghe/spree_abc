@@ -2,6 +2,12 @@ require 'spec_helper'
 describe Spree::TemplateTheme do
   let (:template) { Spree::TemplateTheme.first }
   
+  it "has page script" do
+    html, css, js = template.build_content
+    html.should match(/proc_page=/)
+  end
+  
+  
   it "has document_path" do
     template.document_path.should be_present
   end

@@ -16,7 +16,7 @@ module Spree
     #section_piece.section_piece_params.create!(:editor_id=>1) would cause ActiveRecord::RecordInvalid: Validation failed: Editor can't be blank
     #validates :editor, :presence=>true
     #validates :param_category, :presence=>true
-    validates :section_piece, :presence=>true
+    validates :editor, :param_category, :section_piece, :presence=>true
     after_create :add_section_params
     
     def html_attributes

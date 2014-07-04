@@ -99,7 +99,7 @@ module Spree
       def build_html_piece(tree, node, section_piece_hash)
         # .dup, do not alter the model, or affect other method. it may be in cache. 
          piece = node.section_piece.html.dup
-         piece.insert(0,get_header_script(node))
+         piece.insert(0,get_section_script(node))
          unless node.leaf?              
            children = tree.select{|n| n.parent_id==node.id}
            for child in children
@@ -125,7 +125,7 @@ module Spree
       def build_css_piece(tree, node, section_piece_hash)
         #duplicate the css, then modify it.
          piece = section_piece_hash[node.section_piece_id].css.dup
-         piece.insert(0,get_header_script(node))
+         piece.insert(0,get_section_script(node))
          unless node.leaf?              
            children = tree.select{|n| n.parent_id==node.id}
            for child in children
@@ -149,7 +149,7 @@ module Spree
         piece
       end
       
-      def get_header_script(node)
+      def get_section_script(node)
         
         #only set @param_values, @menus for root piece.
         header= <<-EOS

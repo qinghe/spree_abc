@@ -231,7 +231,7 @@ module Spree
       
       def build_css(tree, node, section_hash, theme_id=0)
         css = section_hash[node.section_id].build_css
-        css.insert(0, get_header_script(node))    
+        css.insert(0, get_section_script(node))    
         unless node.leaf?              
           children = tree.select{|n| n.parent_id==node.id}
           for child in children
@@ -447,7 +447,7 @@ module Spree
           case node.current_data_source
             when DataSourceEnum.gpvs, DataSourceEnum.this_product
               subpieces = <<-EOS1 
-              <% @template.products((defined?(page) ? page : @current_page)).each{|product| %>
+              <% @template.products( proc_page.call ).each{|product| %>
                   #{subpieces}
               <% } %>
               EOS1
@@ -475,8 +475,12 @@ module Spree
           <% end %>
         EOS2
       end  
+      
+      if node.root? # html root
+        piece.insert(0, get_page_script )        
+      end
         
-      piece.insert(0,get_header_script(node))
+      piece.insert(0, get_section_script(node))
       # remove ~~content~~ however, node could be a container.
       # in section.build_html, ~~content~~ have not removed. 
       # there could be more than one ~~content~~, use gsub!
@@ -484,8 +488,13 @@ module Spree
       piece       
     end
   
-    def get_header_script(node)
-      header = "<% g_page_layout_id=#{node.id};@template.select(g_page_layout_id); %>#{$/}"
+    def get_section_script(node)
+      "<% g_page_layout_id=#{node.id};@template.select(g_page_layout_id); %>#{$/}"
+    end
+    
+    # proc available in template
+    def get_page_script()
+      "<% proc_page=Proc.new{ defined?(page) ? page : @current_page } %> #{$/}"
     end
         
     # Do not support add_layout_tree now. Page layout should be full html, Keep it simple. 
