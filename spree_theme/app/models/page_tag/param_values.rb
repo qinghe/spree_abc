@@ -41,8 +41,11 @@ module PageTag
                 next if pv.unset?(ha.id)
                 if ha.is_special?(:image)
                   # background-image is special, pvalue is image name, we should make up the whole url
-                  Rails.logger.debug "pv.html_attribute_value( ha )=#{pv.html_attribute_value( ha ).inspect}"
+                  #Rails.logger.debug "pv.html_attribute_value( ha )=#{pv.html_attribute_value( ha ).inspect}"
                   val << (ha.css_name+':'+pv.html_attribute_value( ha ).attribute_value+';')
+                elsif ha.is_special?(:text)
+                  pv_for_ha = pv.pvalue_for_haid(ha.id)
+                  val <<  pv_for_ha
                 else
                   # should output hidden pv
                   # hidden= pv.hidden?(ha.id)
