@@ -1,6 +1,11 @@
 zh-CN:
   activerecord:
     attributes:
+      spree/template_file: 
+        attachment_file_name: 文件名字
+        attachment_content_type: 类型
+        attachment_file_size: 文件大小
+        created_at: 上传时间
       spree/template_text:
         name: 用途
         slug: Slug
@@ -59,6 +64,9 @@ zh-CN:
       checkout: 付款
       thanks: 恭喜！支付成功
       taxonomy: 缺省菜单 
+    template_file:
+      index: 图片素材
+    template_resource: 网站素材
     template_text:
       index: 文本素材
       static_pages_desc: Manage static page with WYSIWYG editor.

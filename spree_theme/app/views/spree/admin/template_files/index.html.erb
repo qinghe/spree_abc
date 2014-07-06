@@ -1,0 +1,48 @@
+<%= render :partial => 'sub_menu' %>
+<% content_for :page_actions do %>  
+  <li><%= button_link_to Spree.t("template_file.new"), new_object_url, :icon => 'icon-plus' %></li>
+<% end %>
+
+<%= render :partial=>'tabs',:locals=>{:current=>"TemplateFile"}%>
+
+
+<table class="index">
+  <colgroup>
+    <col style="width: 31%" />
+    <col style="width: 13%" />
+    <col style="width: 13%" />
+    <col style="width: 29%" />
+  </colgroup>
+  <thead>
+    <tr>
+      <th><%= Spree::TemplateFile.human_attribute_name(:attachment_file_name) %></th>
+      <th><%= Spree::TemplateFile.human_attribute_name(:attachment_content_type) %></th>
+      <th><%= Spree::TemplateFile.human_attribute_name(:attachment_file_size) %></th>
+      <th><%= Spree::TemplateFile.human_attribute_name(:created_at) %></th>
+      <th class="actions"></th>
+    </tr>
+  </thead>
+  
+  <tbody>
+    <% @template_files.each do |page| %>
+      <tr class="<%= cycle('odd', 'even') %>" id="<%= dom_id page %>">
+        <td>
+          <%= page.name %>
+        </td>
+        <td>
+          <%= page.attachment_content_type %>
+        </td>
+        <td>
+          <%= page.attachment_file_size %>
+        </td>
+        <td>
+          <%= pretty_time(page.created_at) %>
+        </td>
+        <td  class="actions">
+          <%= link_to_edit page, :no_text => true %>
+          <%= link_to_delete page, :no_text => true %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

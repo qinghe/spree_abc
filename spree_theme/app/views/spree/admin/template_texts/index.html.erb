@@ -3,9 +3,7 @@
   <li><%= button_link_to Spree.t("template_text.new"), new_object_url, :icon => 'icon-plus' %></li>
 <% end %>
 
-<% content_for :page_title do %>
-   <%= Spree.t("template_text.index") %>
-<% end %>
+<%= render :partial=>'tabs',:locals=>{:current=>"TemplateText"}%>
 
 <table class="index">
   <colgroup>

@@ -27,6 +27,7 @@ Spree::Core::Engine.routes.prepend do
  
   namespace :admin do
     resources :template_texts
+    resources :template_files
     resources :template_themes do
       collection do
         get :native
