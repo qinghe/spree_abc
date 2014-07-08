@@ -1,8 +1,7 @@
-class AddPageLayoutSpecificTaxonIds < ActiveRecord::Migration
+class AddSpecificTaxonIds < ActiveRecord::Migration
   def change
-    # section is specific for assigned taxons, only appear in those pages.
-    # comma separated taxon_id
-    add_column :spree_page_layouts, :specific_taxon_ids, :string, :default => ''
+    #add_column :spree_template_themes, :specific_taxon_ids, :string, :default => ''
+    change_column :spree_template_files, :theme_id , :integer, :limit => 2, :null => false, :default => 0
   end
 
 end
