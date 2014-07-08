@@ -2,12 +2,6 @@ require 'spec_helper'
 describe Spree::TemplateTheme do
   let (:template) { Spree::TemplateTheme.first }
   
-  it "has page script" do
-    html, css, js = template.build_content
-    html.should match(/proc_page=/)
-  end
-  
-  
   it "has document_path" do
     template.document_path.should be_present
   end
@@ -138,4 +132,29 @@ Rails.logger.debug "............strart test import................."
     template.assigned_resource_id( taxon.class, template.page_layout ).should eq 0
     
   end  
+  
+  it "should assign specific taxon to theme" do
+    SpreeTheme.site_class.current = template.website
+    taxon = Spree::SpecificTaxon.first
+    template.assign_resource( taxon, template.page_layout )
+    template.assigned_resource_ids[template.page_layout.id][:'spree/specific_taxon' ].should include(taxon.id)
+  end
+  
+  it "should has valid context" do
+    SpreeTheme.site_class.current = template.website
+    taxon = Spree::Taxon.first
+    template.valid_context?( template.page_layout, taxon ).should be true
+    
+  end
+  
+  it "should has invalid context" do
+    SpreeTheme.site_class.current = template.website
+    taxon = Spree::SpecificTaxon.first
+    template.assign_resource( taxon, template.page_layout )
+    another_taxon = Spree::Taxon.last
+    (taxon.id == another_taxon.id).should be false      
+    template.valid_context?( template.page_layout, another_taxon ).should be false    
+  end
+  
+    
 end

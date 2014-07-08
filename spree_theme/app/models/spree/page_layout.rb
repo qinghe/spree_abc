@@ -70,6 +70,7 @@ module Spree
         new_layout.reload.self_and_descendants
       end
     end
+      
       # verify :come_contexts valid to :target_contexts
       #   home is special list
       # ex.  [:cart]  is valid to [:either]
@@ -314,7 +315,7 @@ module Spree
       end
       
       # called in current_page_tag
-      def context?(some_context)
+      def valid_context?(some_context)
         self.class.verify_contexts some_context.to_sym, current_contexts
       end
       def context_cart?

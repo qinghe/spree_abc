@@ -7,6 +7,11 @@ describe Spree::PageLayout do
     html.present?.should be_true
     css.present?.should be_true
   end
+
+  it "has page script" do
+    html, css, js = page_layout.build_content
+    html.should match(/proc_page=/)
+  end
   
   it "has partial html" do
     page_layout.partial_html.should be_kind_of Spree::HtmlPage::PartialHtml
