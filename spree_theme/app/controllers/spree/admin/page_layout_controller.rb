@@ -11,12 +11,7 @@ module Spree
           if assigned_resource_ids.kind_of? Array
             section_piece.wrapped_resources.each_with_index{|wrapped_resource,index|
               resource_id = assigned_resource_ids[index].to_i
-              resource_class = case  wrapped_resource.resource
-                when 'm'
-                  SpreeTheme.taxon_class
-                when 't'
-                  Spree::TemplateText
-              end  
+              resource_class = wrapped_resource.resource_class               
               if resource_id>0
                 resource = resource_class.find resource_id
                 @theme.assign_resource(resource, @page_layout, index)
