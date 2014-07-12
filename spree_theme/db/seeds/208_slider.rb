@@ -16,4 +16,4 @@ logo = Spree::Section.create_section(section_piece_hash['container'].id, {:title
   {'block'=>{'disabled_ha_ids'=>'111','21unset'=>'0',21=>'width:600px','17unset'=>'0',17=>'height:200px'},
    'inner'=>{'15hidden'=>bool_true}})
    
-logo.add_section_piece(section_piece_hash['slider'].id, {'slides'=>{78=>'width:600px',79=>'height:200px'}})
+logo.add_section_piece(section_piece_hash['slider'].id, {'slides'=>{'78unset'=>'0',78=>'width:600px','79unset'=>'0',79=>'height:200px'}})

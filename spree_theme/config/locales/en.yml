@@ -44,6 +44,8 @@ en:
         foreign_themes: 模板商店
     back_to_template_file_list: back to template file list
     back_to_themes_list: 回到模板列表
+    back_to_template_text_list: 回到素材列表
+    back_to_template_file_list: 回到素材列表
     select_taxon: 选择菜单
     select_template_image: 选择图片    
     select_from_foreign_themes: 到模板商店选择模板   
@@ -60,6 +62,9 @@ en:
       thanks: thanks
       taxonomy: taxonomy 
     default_shipping_category_name: Default
+    template_file:
+      index: 图片素材
+      new: 新建图片素材
     template_resource: template_resource
     template_text:
       static_pages: Static pages
