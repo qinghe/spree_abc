@@ -86,9 +86,13 @@ module Spree
     preference :track_inventory_levels, :boolean, default: true # Determines whether to track on_hand values for variants / products.
 
     # Preferences related to image settings
-    preference :attachment_default_url, :string, default: '/spree/products/:id/:style/:basename.:extension'
-    preference :attachment_path, :string, default: ':rails_root/public/spree/products/:id/:style/:basename.:extension'
-    preference :attachment_url, :string, default: '/spree/products/:id/:style/:basename.:extension'
+    # because of :update_paperclip_settings, we need to override default for mulit_site
+#    preference :attachment_default_url, :string, default: '/spree/products/:id/:style/:basename.:extension'
+    preference :attachment_default_url, :string, default: '/shops/:rails_env/:site/products/:id/:basename_:style.:extension'
+#    preference :attachment_path, :string, default: ':rails_root/public/spree/products/:id/:style/:basename.:extension'
+    preference :attachment_path, :string, default: ':rails_root/public/shops/:rails_env/:site/products/:id/:basename_:style.:extension'
+#    preference :attachment_url, :string, default: '/spree/products/:id/:style/:basename.:extension'
+    preference :attachment_url, :string, default: '/shops/:rails_env/:site/products/:id/:basename_:style.:extension'
     preference :attachment_styles, :string, default: "{\"mini\":\"48x48>\",\"small\":\"100x100>\",\"product\":\"240x240>\",\"large\":\"600x600>\"}"
     preference :attachment_default_style, :string, default: 'product'
     preference :s3_access_key, :string
