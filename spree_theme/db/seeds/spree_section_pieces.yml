@@ -358,17 +358,33 @@ menuitem:
   title: menuitem
   slug: menuitem
   html: |
+    <% lambda_item = lambda{ |page| 
+        if page.clickable? 
+           if page.current?
+             link_to page.name, page.path,{:id=>"pi#{g_piece_selector}_page.id", :class=>"selected depth#{page.depth}"}
+           else
+             link_to page.name, page.path,{:id=>"pi#{g_piece_selector}_page.id", :class=>"depth#{page.depth}"}
+           end 
+        else
+          link_to page.name, page.path, {:id=>"pi#{g_piece_selector}_page.id", :class=>"noclick depth#{page.depth}", :href=>''}
+        end
+      }
+    %>
     <li class="<%=g_piece_selector%>">
-      <% if page.clickable? %>
-        <% if page.current? %>
-         <a id="pi<%= g_piece_selector%>_page.id" href="<%= page.path %>" class="selected" ><%= page.name %> </a>
-        <% else %>
-         <a id="pi<%= g_piece_selector%>_page.id" href="<%= page.path %>" ><%= page.name %> </a>
-        <% end %>
-      <% else %>
-        <a id="pi<%= g_piece_selector%>_page.id" class="noclick"> <%= page.name %> </a>    
-      <% end %>
+      <%= lambda_item.call(page) %>
+      <% unless page.leaf? %>
+      <ul><% page.children.each{|page| %>
+           <li>  <%= lambda_item.call(page) %> 
+           <% unless page.leaf? %>
+             <ul> <% page.children.each{|page| %>
+               <li>  <%= lambda_item.call(page) %> </li>
+             <% } %> </ul>
+           <% end %>    
+           </li>
+      <% } %> </ul>
+      <% end %>      
     </li>
+    
   css: |-
       .<%=g_piece_selector%> {
        <%= @template.css :shell %>
@@ -384,6 +400,10 @@ menuitem:
       }
       .<%=g_piece_selector%> a.selected:hover{  <%= @template.css :as_h %> }
       .<%=g_piece_selector%> .noclick{ <%= @template.css :noclick %> }
+      .<%=g_piece_selector%> a.depth1{ <%= @template.css :depth1 %>  }
+      .<%=g_piece_selector%> a.depth2{ <%= @template.css :depth2 %>  }
+      .<%=g_piece_selector%> a.depth3{ <%= @template.css :depth3 %>  }
+      .<%=g_piece_selector%> a.depth4{ <%= @template.css :depth4 %>  }
   js: ""
 image:
   id: 7

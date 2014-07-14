@@ -1,12 +1,16 @@
 module PageTag
   class Menus < Base
     class WrappedMenu < WrappedModel
-      self.accessable_attributes=[:id,:name,:icon,:page_home?]
+      self.accessable_attributes=[:id,:name,:icon,:page_home?,:depth, :leaf?]
       delegate *self.accessable_attributes, :to => :model
       delegate :taxonomy, :to => :model
       
       def children
         self.model.children.collect{|item| WrappedMenu.new(self.collection_tag, item)}
+      end
+
+      def descendants
+        self.model.descendants.collect{|item| WrappedMenu.new(self.collection_tag, item)}
       end
 
       def ancestors

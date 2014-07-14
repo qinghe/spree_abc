@@ -13,6 +13,9 @@ objs=[
   {"id"=>13, "position"=>13, "is_enabled"=>true, "editor_id"=>4, "slug"=>"link_selected" },
   {"id"=>14, "position"=>14, "is_enabled"=>true, "editor_id"=>4, "slug"=>"link_selected_hover" },
   {"id"=>15, "position"=>15, "is_enabled"=>true, "editor_id"=>4, "slug"=>"unclickable_link" },
+  {"id"=>16, "position"=>16, "is_enabled"=>true, "editor_id"=>4, "slug"=>"link_depth1" },
+  {"id"=>17, "position"=>17, "is_enabled"=>true, "editor_id"=>4, "slug"=>"link_depth2" },
+  {"id"=>18, "position"=>18, "is_enabled"=>true, "editor_id"=>4, "slug"=>"link_depth3" },
   
   {"id"=>20, "position"=>20, "is_enabled"=>true, "editor_id"=>0, "slug"=>"slides" },
   {"id"=>21, "position"=>21, "is_enabled"=>true, "editor_id"=>0, "slug"=>"slide_caption" },

@@ -13,6 +13,10 @@ class DefaultTaxonRoot < DefaultTaxon
     [self.default_taxon]
   end
   
+  #def descendants
+  #  [self.default_taxon]    
+  #end
+  
   def taxonomy
     @taxonomy ||= DefaultTaxonomy.new( self )
   end
