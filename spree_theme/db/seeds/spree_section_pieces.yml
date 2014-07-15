@@ -319,7 +319,7 @@ hmenu:
     <% end %>
     </ul>
   css: |-
-    .<%=g_piece_selector%> { margin: 0; padding: 0;}
+    .<%=g_piece_selector%>, .<%=g_piece_selector%> ul{ margin: 0; padding: 0;}
     .<%=g_piece_selector%> li{ 
       list-style-type:none;
       display:inline;}
@@ -345,7 +345,7 @@ vmenu:
     <% end %>
     </ul>
   css: |-
-    .<%=g_piece_selector%> { margin: 0; padding: 0;}
+    .<%=g_piece_selector%>,.<%=g_piece_selector%> ul{ margin: 0; padding: 0;}
     .<%=g_piece_selector%> li{ list-style-type:none; }
     .<%=g_piece_selector%> a{ float: left;  clear: left;  text-align: left;  margin: 0px;  border: 0px;  }
 

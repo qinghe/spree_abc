@@ -292,7 +292,7 @@ module Spree
             ".s_#{self.param_value.page_layout_id}_#{self.param_value.section_param.section_id}"
           end
         
-        #it has to apply to inner, for root, outer is body, it include editor panel, some css would affect it. 
+        # it has to apply to inner, for root, outer is body, it include editor panel, some css would affect it. 
         selector = case target
           when /content_layout/,/block/,/cell/,'page'
             ""          
@@ -306,9 +306,9 @@ module Spree
             " #{target.delete('_h')}"
           when 'error' #s_error
             " label.error"  
-          when /(table|label|input|li|img|button|td|th|h6)/
-          #product quantity,atc section_piece content just input,add a <span> wrap it.
-          #product images content thumb and main images so here should be section_id,
+          when 'table','label','input','li','img','button','td','th','h6'
+            # product quantity,atc section_piece content just input,add a <span> wrap it.
+            # product images content thumb and main images so here should be section_id,
             " #{target}"
           else  #noclick, selected
             " .#{target}"
