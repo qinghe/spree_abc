@@ -3,6 +3,11 @@ module Spree
     class SitesController< Spree::Admin::ResourceController
       #resource_controller
       self.create.after( :create_after )
+      
+      def index
+        @sites = Site.ransack(params[:q]).result.page(params[:page]).per(params[:per_page])
+      end
+      
       def new
         @user = @site.users.build
         super                    

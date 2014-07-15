@@ -12,9 +12,14 @@ zh-CN:
   activerecord: 
     attributes: 
       spree/site: 
-        name: 给您的商店取个名字
+        name: 网店名字
         short_name: 二级域名
         domain: 网店域名
+        created_at: 创建时间
   spree:
+    admin_store: 管理商店
     name_store: 给您的商店取个名字
     new_site: 创建您的商店
+    site:
+      index: 商店列表
+      new:
