@@ -3,4 +3,7 @@
 %>
 <div id='editor_panel' class="clear-block ui-layout-south sg_ignore">
   <%=render :partial=>'layout_editor'%>
+  <script>
+     Spree.routes.admin_template_theme_path = "<%= spree.admin_template_theme_path(@theme) %>";
+  </script>
 </div>
