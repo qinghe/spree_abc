@@ -65,6 +65,7 @@ namespace :spree_theme do
   task :release_theme, [:theme_id] =>[ :environment ] do |t, args|
     theme = Spree::TemplateTheme.find( args.theme_id)
     theme.release({},{:page_only=>true})
+    puts "released #{theme.site.layout}"
   end  
 
   desc "get css of theme one, rake spree_theme:get_css[1,2,'block']"
