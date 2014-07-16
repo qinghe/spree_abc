@@ -49,6 +49,13 @@ Spree::Core::Engine.routes.prepend do
       end
     end
   end
+  #namespace :api, :defaults => { :format => 'json' } do
+  #  resources :template_themes do
+  #    resources :page_layout do
+  #    end
+  #  end    
+  #end
+  
   get '/under_construction', :to => 'template_themes#under_construction', :as => :under_construction
   post '/create_admin_session', :to => 'template_themes#create_admin_session', :as => :create_admin_session
   get '/new_admin_session', :to => 'template_themes#new_admin_session', :as => :new_admin_session

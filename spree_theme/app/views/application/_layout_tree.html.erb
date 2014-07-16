@@ -15,13 +15,10 @@ selected_id= (options[:selected_id]||layout_root.id )
     <div class="fl">
     <%=raw("&nbsp;&nbsp;"*page_layout.cached_level)%>
     <% # do not call form.submit. 
-      page_layout_class = "dblclick_editable"
-      page_layout_class << ' selected' if page_layout.id==selected_id
+      page_layout_class = 'click_editable'
+      page_layout_class << ' selected' if page_layout.id==selected_id 
     %>
-    <%= link_to_function(page_layout.title, 
-      "$('#selected_page_layout_id').val(#{page_layout.id});$('#layout_editor_form').trigger('submit')",
-      {"class"=>page_layout_class,"data-lid"=>page_layout.id, :onmouseout=>"$('#{page_layout.css_selector}').trigger('dehighlight')",:onmouseover=>"$('#{page_layout.css_selector}').trigger('highlight')"})
-      %>
+    <%= link_to( page_layout.title, "", {"href"=>'javascript:void(0)', "class"=>page_layout_class,"data-lid"=>page_layout.id, :onmouseout=>"$('#{page_layout.css_selector}').trigger('dehighlight')",:onmouseover=>"$('#{page_layout.css_selector}').trigger('highlight')"}) %> 
     <%if options[:show_assigned_resource] %>
       <% if assigned_taxons.present? %>
       <span>[t:<%= assigned_taxons.collect(&:name) %>]</span>
