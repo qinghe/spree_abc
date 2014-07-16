@@ -43,6 +43,8 @@ module Spree
             # add job to load sample
             #Delayed::Job.enqueue SampleSeedJob.new( @site )
           end 
+        else
+          flash[:error] = Spree.t('errors.messages.could_not_create_site')
         end  
         site.persisted? ? site : nil       
       end

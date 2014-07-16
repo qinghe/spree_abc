@@ -1,7 +1,7 @@
 #encoding: utf-8
 module Spree
   UsersController.class_eval do
-    respond_to :html, :js
+    respond_to :html, :js, :json
      # since redirect_to work in ajax, do not need rewrite 'update'
      
     def update
@@ -20,6 +20,13 @@ module Spree
         render :edit
       end
     end
-
+    
+    def check_email
+      @user = Spree::User.new(params[:user] )
+      @user.valid?
+      result = ((!!@user.errors.include?(:email))== false)
+      Rails.logger.debug result.inspect
+      render :text=> result.to_json
+    end
   end
 end

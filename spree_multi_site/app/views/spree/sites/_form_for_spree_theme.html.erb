@@ -16,6 +16,23 @@
         <p><%= f.button Spree.t(:new_site), :class => 'button primary' %></p>
     </div>
 <% end %>
-<%= javascript_tag do %>
-$(function() {  $("#site_form").validate();  });
-<% end -%>
+<script>
+$("#site_form").validate({
+  debug: true,
+  rules: {
+    'user[email]': {
+      required: true,
+      email: true,
+      remote: {
+        url: <%=raw check_email_path.to_json %>,
+        type: "post"
+      }
+    }
+  },
+  messages:{
+    'user[email]': {
+      remote: <%=raw Spree.t('errors.messages.email_existing').to_json %>
+    }
+  }
+})
+</script>
