@@ -7,15 +7,13 @@
   children = page_layouts.select{|pl| pl.parent_id == page_layout.id}
   options ||={} 
   page_layouts_with_resource = options[:page_layouts_with_resource]
-  page_layout_class = ""
-  page_layout_class << ' selected' if child.id==selected_id
 %>
 <% if children.present? %>
   <ul>
     <% for child in children %>
     <li id="<%= child.id %>" rel="taxon">
       <%= link_to_function(child.title, "$('#selected_page_layout_id').val(#{child.id});",
-        {"class"=>page_layout_class,"data-lid"=>child.id})
+        {"class"=>(child.id==selected_id ? 'selected':'') ,"data-lid"=>child.id})
       %>
       <% if page_layouts_with_resource.include? child %>
       <%   

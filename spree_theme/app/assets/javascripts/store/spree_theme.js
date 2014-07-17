@@ -36,34 +36,6 @@ $(document).ready(function() {
       $(this).parent().next().children().eq($(this).index()).addClass('selected');
       $(this).parent().siblings('input').val($(this).attr('data-section-id'))
     });
-    $("#layout_tree_form .click_editable").each(function(index,element){
-    	var jquery_element = $(element);
-    	jquery_element.editable(function(value, settings) { 
-            var url = Spree.routes.admin_template_theme_path+'/page_layout/'+jquery_element.data('lid');
-            var submitdata = {};
-            submitdata[settings.name] = value;
-            submitdata[settings.id] = self.id;
-            $.ajax({ dataType: 'json', url: url, type: 'put',  data : submitdata,
-                success: function(data){
-                  jquery_element.html(data.page_layout.title);
-                }
-            });             
-            return(value);
-          },    		
-    			{ //since dblclick would trigger click, for a link, we should not click,dblclick together
-            event     : "click_editable",
-            name      : "page_layout[title]",
-            style  : "inherit" });
-      jquery_element.click(function(){
-        if($('#page_layout_editable').is(':checked')){
-          jquery_element.trigger('click_editable')
-        }else{
-          $('#selected_page_layout_id').val(jquery_element.data('lid'));
-          $('#layout_editor_form').trigger('submit')
-        }          
-      });        
-
-    })
   }  
 })
 function submit_layout_tree_form (op, layout_id, selected_section_id) {
