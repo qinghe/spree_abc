@@ -429,10 +429,12 @@ module Spree
     
     
     def build_section_html(tree, node, section_hash) 
+      return '' unless node.is_enabled?
       subpieces = ""
       unless node.leaf?              
         subnodes = tree.select{|n| n.parent_id==node.id}
         for child in subnodes
+          next unless child.is_enabled?
           subpiece = build_section_html(tree, child, section_hash)        
   # Rails.logger.debug "layout_id = #{child.id}, html=#{subpiece}" 
           subpieces.concat(subpiece)

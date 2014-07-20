@@ -1,0 +1,12 @@
+<%= render :partial => 'sub_menu' %>
+<% content_for :page_actions do %>
+  <li><%= button_link_to Spree.t(:back_to_themes_list), session[:return_to] || native_admin_template_themes_url, :icon => 'icon-arrow-left' %></li>
+  <% if can?(:config, Spree::TemplateTheme) %>
+    <li id="new_template_theme_link">
+    </li>
+  <% end %>
+<% end %>
+<%= render :partial=>'theme_tabs',:locals=>{:current=>"DataSource"}%>
+<div class="">
+<%= render :partial=>'layout_tree_for_config', :locals=>{:theme=>@template_theme, :options=>{:config_data_source=>true} }%>
+</div>

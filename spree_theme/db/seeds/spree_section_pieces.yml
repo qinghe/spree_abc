@@ -440,11 +440,14 @@ product_image:
   slug: product-image
   is_selectable: "0"
   is_container: "0"
-  html: |         
-    <% if @template.css(:image_style).present? %>
-      <%= link_to send("#{@template.css(:image_style)}_image",product, :itemprop => "image"), product.path %>
-    <% else %>
-      <%= link_to small_image(product, :itemprop => "image"), product.path %>
+  html: |  
+    <% if defined? product %>
+      <% var = @template.css(:image_style) %>        
+      <% if var.present? %>
+        <%= link_to send("#{var}_image",product, :itemprop => "image"), product.path %>
+      <% else %>
+        <%= link_to small_image(product, :itemprop => "image"), product.path %>
+      <% end %>
     <% end %>
   created_at: 2011-09-20 19:40:07
   updated_at: 2011-09-20 19:40:07
@@ -469,8 +472,10 @@ product_name:
   is_selectable: "0"
   is_container: "0"
   html: |    
+    <% if defined? product %>
      <%# span only for selector  .g_piece_selector a %>
      <span class="<%=g_piece_selector%>"><a href="<%= product.path %>"> <%=product.name %> </a> </span>
+    <% end %>
   created_at: 2011-09-20 19:40:07
   updated_at: 2011-09-20 19:40:07
   css: |

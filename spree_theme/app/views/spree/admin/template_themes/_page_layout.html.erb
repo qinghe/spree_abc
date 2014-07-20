@@ -1,0 +1,27 @@
+<% #local params: 
+   #  theme: theme 
+   #  page_layout: current page_layout  
+   #  page_layouts: whole page_layout tree
+   #  options: page_layouts_with_resource
+  page_layouts||= page_layout.self_and_descendants
+  children = page_layouts.select{|pl| pl.parent_id == page_layout.id}
+  page_layouts_with_resource = options[:page_layouts_with_resource]
+%>
+<% if children.present? %>
+  <ul>
+    <% for child in children %>
+    <li id="<%= child.id %>" rel="taxon">
+      <%= link_to_function(child.title, "",
+        {"class"=>(child.id==selected_id ? 'selected':'') ,"data-lid"=>child.id})
+      %>
+      <% assigned_resources =  theme.assigned_resources_by_page_layout child  %>
+      <% if assigned_resources.present? %>
+        ( <% assigned_resources.each{ |assigned_resource|%>
+          <span><%= assigned_resource.name %>    </span>
+          <% }%> )
+      <% end %>
+      <%= render :partial => 'page_layout', :locals => { :theme => theme, :page_layout=>child, :page_layouts=>page_layouts, :selected_id=>selected_id, :options=>options } %>
+    </li>
+    <%end%>
+  </ul>
+<% end %>

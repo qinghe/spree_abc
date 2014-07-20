@@ -1,6 +1,9 @@
 en:
   activerecord:
     attributes:
+      spree/page_layout:
+        section_context: section context
+        data_source: data source 
       spree/template_file: 
         attachment_file_name: File name
         attachment_content_type: type

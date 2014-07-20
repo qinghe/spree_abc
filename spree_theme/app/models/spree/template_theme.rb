@@ -342,6 +342,20 @@ module Spree
     end
     
     begin 'assigned resource'
+      
+      # get resources order by taxon/image/text,  
+      # return array of resources, no nil contained
+      def assigned_resources_by_page_layout( page_layout )
+        ordered_assinged_resources = []
+        [SpreeTheme.taxon_class, TemplateFile, TemplateText].each{|resource_class|
+          assgined_resources_contained_nil = assigned_resources( resource_class, page_layout )
+          if assgined_resources_contained_nil.present?
+            ordered_assinged_resources.concat( assgined_resources_contained_nil.compact)
+          end
+        }
+        ordered_assinged_resources
+      end
+      
       # all resources used by this theme
       # return menu roots/ images /texts,  if none assgined, return [nil] or []
       def assigned_resources( resource_class, page_layout )

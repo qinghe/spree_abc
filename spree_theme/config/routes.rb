@@ -34,8 +34,10 @@ Spree::Core::Engine.routes.prepend do
         get :foreign
       end
       member do
-        get :config # assign resource(menu, image)
-        get :prepare_import # assign resource(menu, image)
+        get :config_resource   # assign resource(menu, image)
+        get :config_context    # 
+        get :config_data_source#    
+        get :prepare_import    # assign resource(menu, image)
         post :copy
         post :release
         post :import
@@ -44,7 +46,9 @@ Spree::Core::Engine.routes.prepend do
       end
       resources :page_layout do
         member do
-          post :update_config
+          post :update_resource
+          post :update_context
+          post :update_data_source
         end
       end
     end

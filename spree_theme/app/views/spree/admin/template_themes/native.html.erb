@@ -16,7 +16,7 @@
     <td><%= theme.title %></td>
     <td align="center"><%= theme.applied? ? Spree.t(:theme_yes) : Spree.t(:theme_no) %></td>
     <td class="actions">
-    <%= link_to_with_icon 'icon-cogs', Spree.t(:theme_config), config_admin_template_theme_path(theme), {:method=>:get,:no_text => true} %>
+    <%= link_to_with_icon 'icon-cogs', Spree.t(:theme_config), config_resource_admin_template_theme_path(theme), {:method=>:get,:no_text => true} %>
     <%= link_to_with_icon 'icon-check-circle', Spree.t(:theme_apply), apply_admin_template_theme_path(theme), {:method=>:post,:no_text => true} %>
     <% if theme.has_native_layout? %>    
       <%= link_to_with_icon 'icon-eye', Spree.t(:theme_preview), preview_template_theme_path(theme), {:target=>'_blank',:no_text => true} %>

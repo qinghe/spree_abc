@@ -18,7 +18,7 @@ selected_id= (options[:selected_id]||layout_root.id )
       page_layout_class = 'click_editable'
       page_layout_class << ' selected' if page_layout.id==selected_id 
     %>
-    <%= link_to( page_layout.title, "", {"href"=>'javascript:void(0)', "class"=>page_layout_class,"data-lid"=>page_layout.id, :onmouseout=>"$('#{page_layout.css_selector}').trigger('dehighlight')",:onmouseover=>"$('#{page_layout.css_selector}').trigger('highlight')"}) %> 
+    <%= link_to( page_layout.title, "", {"href"=>'javascript:void(0)', "class"=>page_layout_class,"data-lid"=>page_layout.id,"data-tid"=>theme.id, :onmouseout=>"$('#{page_layout.css_selector}').trigger('dehighlight')",:onmouseover=>"$('#{page_layout.css_selector}').trigger('highlight')"}) %> 
     <%if options[:show_assigned_resource] %>
       <% if assigned_taxons.present? %>
       <span>[t:<%= assigned_taxons.collect(&:name) %>]</span>
@@ -58,7 +58,7 @@ selected_id= (options[:selected_id]||layout_root.id )
       $("#layout_tree_form .click_editable").each(function(index,element){
       var jquery_element = $(element);
       jquery_element.editable(function(value, settings) { 
-            var url = Spree.routes.admin_template_theme_path+'/page_layout/'+jquery_element.data('lid');
+            var url = Spree.routes.admin_template_themes+'/'+jquery_element.data('tid')+'/page_layout/'+jquery_element.data('lid');
             var submitdata = {};
             submitdata[settings.name] = value;
             submitdata[settings.id] = self.id;

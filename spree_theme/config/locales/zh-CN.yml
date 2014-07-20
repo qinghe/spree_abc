@@ -1,6 +1,9 @@
 zh-CN:
   activerecord:
     attributes:
+      spree/page_layout:
+        section_context: section context
+        data_source: data source 
       spree/template_file: 
         attachment_file_name: 文件名字
         attachment_content_type: 类型
@@ -65,6 +68,9 @@ zh-CN:
       checkout: 付款
       thanks: 恭喜！支付成功
       taxonomy: 缺省菜单 
+    page_layout:
+      section_context: section context
+      data_source: data source 
     template_file:
       index: 图片素材
       new: 新建图片素材
@@ -78,13 +84,14 @@ zh-CN:
       link: Link
       meta_title: Meta Title
       page_navigation_title: "Pages"          
+    template_theme:
+      assign_resource: 分配素材
     theme_foreign: 模板商店
     theme_native: 可用模板
     theme_applied: 是否使用
     theme_yes: 是
     theme_no: 否 
     theme_apply: 使用
-    theme_assign_resource: 分配素材
     theme_assign_taxon: 分配菜单
     theme_assign_image: 分配图片
     theme_config: 设置

@@ -3,7 +3,7 @@ module Spree
     class PageLayoutController< ResourceController
       respond_to :html, :js
       
-        def update_config
+        def update_resource
           
           @theme = TemplateTheme.find( params[:template_theme_id])          
           assigned_resource_ids = params[:assigned_resource_ids].try(:[], @page_layout.id.to_s)
@@ -23,7 +23,16 @@ module Spree
           end
           respond_to do |format|
             format.js  { render :text => 'Ok' }
-          end
+          end         
+        end
+        
+        #update section_context
+        def update_context
+          
+        end
+        
+        #update datasource
+        def update_data_source
           
         end
         
