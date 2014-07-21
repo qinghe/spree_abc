@@ -6,9 +6,7 @@
       <%= form_for :page_layout, :url=> update_resource_admin_template_theme_page_layout_path(@template_theme,page_layout) do |f|%>
         <div class="field">
           <%= label_tag :assigned_resource, Spree.t(:assigned_resource) %><br>
-          <% page_layout_with_resource = Spree::PageLayout.includes(:section_pieces).where(["spree_page_layouts.id=? and spree_section_pieces.resources!=?", page_layout.id,''])
-    
-          %>
+          <% page_layout_with_resource = Spree::PageLayout.includes(:section_pieces).where(["spree_page_layouts.id=? and spree_section_pieces.resources!=?", page_layout.id,'']).first %>
           <% if page_layout_with_resource.present? %>
             <% page_layout = page_layout_with_resource %>   
             <% page_layout.section_pieces.first.wrapped_resources.each_with_index{| wrapped_resource,idx | %>
