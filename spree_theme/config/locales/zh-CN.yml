@@ -17,6 +17,9 @@ zh-CN:
         title: 名字
         slug: Slug
     models:
+      spree/page_layout:
+        one: 模块
+        other: 模块
       spree/template_file:
         one: 模板图片
       spree/template_text:

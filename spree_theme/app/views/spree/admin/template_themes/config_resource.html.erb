@@ -7,10 +7,7 @@
   <% end %>
 <% end %>
 <div id="page_layout_wrapper">
-  <fieldset class="no-border-bottom">
-    <legend align="center"><%= Spree.t(:currency_settings)%></legend>
       <%= render :partial=>'spree/admin/page_layouts/config_page_layout', :locals=>{ :page_layout=> @template_theme.page_layout } %>
-  </fieldset> 
 </div>
 
 <%= render :partial=>'theme_tabs',:locals=>{:current=>"AssignResource"}%>
