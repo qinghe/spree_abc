@@ -37,20 +37,8 @@ module Spree
         end
         
         # copy from backend/app/controllers/spree/resource_controller.rb        
-        def update
-          invoke_callbacks(:update, :before)
-          if @object.update_attributes(params[object_name])
-            invoke_callbacks(:update, :after)
-            flash[:success] = flash_message_for(@object, :successfully_updated)
-            respond_with(@object) do |format|
-              format.html { redirect_to location_after_save }
-              #format.js   { render :layout => false }
-              format.js   { render :text=>@object.to_json }
-            end
-          else
-            invoke_callbacks(:update, :fails)
-            respond_with(@object)
-          end
+        def config
+          @template_theme = TemplateTheme.find( params[:template_theme_id])
         end
 
     end

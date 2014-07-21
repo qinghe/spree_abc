@@ -1,6 +1,7 @@
 
 <fieldset id="page_layout_container" class="">
-  <% if @template_theme.present? %>  
+  <% if @page_layout.present? %>  
+      <% page_layout = @page_layout%>
       <legend align="center"><%= page_layout.title %></legend>
       <%= form_for :page_layout, :url=> update_resource_admin_template_theme_page_layout_path(@template_theme,page_layout) do |f|%>
         <div class="field">
@@ -36,7 +37,7 @@
         </div>
       <%end%>
   <% else %>
-      <legend align="center"><%= page_layout.title %></legend>
+      <legend align="center"><%= Spree.t('page_layout.please_select_one_to_config') %></legend>
       <div class="alpha twelve columns no-objects-found">
         <%= Spree.t(:no_resource_found, resource: I18n.t(:other, scope: 'activerecord.models.spree/page_layout')) %>,
       </div>

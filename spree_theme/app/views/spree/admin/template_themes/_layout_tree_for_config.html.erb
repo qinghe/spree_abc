@@ -8,9 +8,9 @@ selected_id= (options[:selected_id]||page_layout.id )
 
   <div id='page_layout_tree_inner' class="block">
   <ul >
-    <li>
+    <li data-lid=<%= page_layout.id %> data-tid=<%= theme.id %>>
     <%= link_to_function( page_layout.title, "",
-      {"class"=>(page_layout.id==selected_id ? "selected":""),"data-lid"=>page_layout.id})
+      {"class"=>(page_layout.id==selected_id ? "selected":"")})
       %>
       <%= render :partial=>'page_layout', :locals=>{:theme=>theme, :page_layout=>page_layout, :selected_id=>selected_id, :options=>options } %>
     </li>

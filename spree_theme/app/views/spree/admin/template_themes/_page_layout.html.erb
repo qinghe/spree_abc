@@ -10,9 +10,9 @@
 <% if children.present? %>
   <ul>
     <% for child in children %>
-    <li id="<%= child.id %>" rel="taxon">
+    <li data-lid=<%= child.id %> data-tid=<%= theme.id %>>
       <%= link_to_function(child.title, "",
-        {"class"=>(child.id==selected_id ? 'selected':'') ,"data-lid"=>child.id})
+        {"class"=>(child.id==selected_id ? 'selected':'') })
       %>
       <% assigned_resources =  theme.assigned_resources_by_page_layout child  %>
       <% if assigned_resources.present? %>

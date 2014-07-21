@@ -74,6 +74,7 @@ zh-CN:
     page_layout:
       section_context: section context
       data_source: data source 
+      please_select_one_to_config: 请选择需要配置的模块
     template_file:
       index: 图片素材
       new: 新建图片素材
