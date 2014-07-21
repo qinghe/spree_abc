@@ -2,7 +2,6 @@ module Spree
   module Admin
     class PageLayoutController< ResourceController
       respond_to :html, :js
-      
         def update_resource
           
           @theme = TemplateTheme.find( params[:template_theme_id])          
@@ -37,10 +36,10 @@ module Spree
         end
         
         # copy from backend/app/controllers/spree/resource_controller.rb        
-        def config
-          @template_theme = TemplateTheme.find( params[:template_theme_id])
+        def config_resource
+          @template_theme = TemplateTheme.find( params[:template_theme_id] )
+          
         end
-
     end
   end
 end

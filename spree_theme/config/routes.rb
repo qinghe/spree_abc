@@ -46,7 +46,7 @@ Spree::Core::Engine.routes.prepend do
       end
       resources :page_layout do
         member do
-          get :config
+          get :config_resource
           post :update_resource
           post :update_context
           post :update_data_source
