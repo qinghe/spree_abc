@@ -75,6 +75,7 @@ zh-CN:
       please_select_to_config: 请选择需要配置的模块
       section_context: 模块适用页面
       specific_taxon: 模块适用个别页面
+      config_resource: 模块可用素材
     section_context:
       home: 首页
       list: 列表页
@@ -105,7 +106,7 @@ zh-CN:
       meta_title: Meta Title
       page_navigation_title: "Pages"          
     template_theme:
-      assign_resource: 分配素材
+      assign_resource: 模板素材
       assign: 分配
     theme_foreign: 模板商店
     theme_native: 可用模板
@@ -115,7 +116,7 @@ zh-CN:
     theme_apply: 使用
     theme_assign_taxon: 分配菜单
     theme_assign_image: 分配图片
-    theme_config: 设置
+    theme_config: 设置模板
     theme_import: 购买
     theme_copy: 复制
     theme_prepare_import: 设置

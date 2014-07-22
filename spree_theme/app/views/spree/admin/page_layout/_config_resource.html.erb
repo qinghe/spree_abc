@@ -5,7 +5,7 @@
       <legend align="center"><%= page_layout.title %></legend>
       <%= form_for :page_layout, url: update_resource_admin_template_theme_page_layout_path(@template_theme,page_layout),remote: true do |f|%>
         <div class="field">
-          <%= label_tag :assigned_resource, Spree.t('page_layout.assigned_resource') %><br>
+          <%= label_tag :config_resource, Spree.t('page_layout.config_resource') %><br>
           <% page_layout_with_resource = Spree::PageLayout.includes(:section_pieces).where(["spree_page_layouts.id=? and spree_section_pieces.resources!=?", page_layout.id,'']).first %>
           <% if page_layout_with_resource.present? %>
             <% page_layout = page_layout_with_resource %>   
@@ -19,12 +19,6 @@
                <% assigned_resource_id = @template_theme.assigned_resource_id(SpreeTheme.taxon_class, page_layout) %>
                <%= select_tag "assigned_resource_ids[]",options_from_collection_for_select(SpreeTheme.taxon_class.resourceful(@template_theme ), :id, :name, assigned_resource_id ), include_blank: true,class: 'select2', multiple: "multiple" %>      
           <% end %>
-        </div>
-        <div class="field">
-          <% assigned_resources = @template_theme.assigned_resources(Spree::SpecificTaxon, page_layout)   %>
-    
-          <%= label_tag :specific_taxon, Spree.t('page_layout.specific_taxon') %><br>
-          <%= hidden_field_tag :specific_taxon_ids, assigned_resources.collect(&:id).join(',') %>
         </div>
         
         <div class="form-buttons filter-actions actions" data-hook="buttons">
