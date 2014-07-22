@@ -48,7 +48,6 @@ zh-CN:
     back_to_themes_list: 回到模板列表
     back_to_template_text_list: 回到素材列表
     back_to_template_file_list: 回到素材列表
-    apply_theme: 
     china_address:
       firstname: 收货人姓名
       phone: 电话
@@ -58,7 +57,19 @@ zh-CN:
     select_taxon: 选择菜单
     select_template_image: 选择图片    
     select_template_text: 选择文本 
-    select_from_foreign_themes: 到模板商店选择模板   
+    select_from_foreign_themes: 到模板商店选择模板
+    context:
+      home: 首页
+      list: 列表页
+      detail: 详细页
+      cart: 购物车
+      account: 我的账户
+      checkout: 支付页
+      thanks: 谢谢购物
+      signup: 注册页
+      login: 登陆页
+      password: 密码管理
+      either: 任意页
     default_page:
       home: 首页
       login: 登录
@@ -72,9 +83,10 @@ zh-CN:
       thanks: 恭喜！支付成功
       taxonomy: 缺省菜单 
     page_layout:
-      section_context: section context
-      data_source: data source 
-      please_select_one_to_config: 请选择需要配置的模块
+      data_source: 数据源 
+      please_select_to_config: 请选择需要配置的模块
+      section_context: 模块适用页面
+      specific_taxon: 模块适用个别页面
     template_file:
       index: 图片素材
       new: 新建图片素材
@@ -90,6 +102,7 @@ zh-CN:
       page_navigation_title: "Pages"          
     template_theme:
       assign_resource: 分配素材
+      assign: 分配
     theme_foreign: 模板商店
     theme_native: 可用模板
     theme_applied: 是否使用
@@ -105,8 +118,6 @@ zh-CN:
     theme_imported: 是否已购买
     theme_preview: 预览
     theme_release: 发布
-    page_layout:
-      context: 
-      date_source: 
+
       
                          

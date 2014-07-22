@@ -347,7 +347,7 @@ module Spree
       # return array of resources, no nil contained
       def assigned_resources_by_page_layout( page_layout )
         ordered_assinged_resources = []
-        [SpreeTheme.taxon_class, TemplateFile, TemplateText].each{|resource_class|
+        SectionPiece.resource_classes.each{|resource_class|
           assgined_resources_contained_nil = assigned_resources( resource_class, page_layout )
           if assgined_resources_contained_nil.present?
             ordered_assinged_resources.concat( assgined_resources_contained_nil.compact)

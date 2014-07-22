@@ -10,15 +10,21 @@
 <% if children.present? %>
   <ul>
     <% for child in children %>
-    <li data-lid=<%= child.id %> data-tid=<%= theme.id %>>
+    <li data-lid=<%= child.id %> data-tid=<%= theme.id %> data-action="<%= params[:action]%>">
       <%= link_to_function(child.title, "",
         {"class"=>(child.id==selected_id ? 'selected':'') })
       %>
       <% assigned_resources =  theme.assigned_resources_by_page_layout child  %>
       <% if assigned_resources.present? %>
-        ( <% assigned_resources.each{ |assigned_resource|%>
-          <span><%= assigned_resource.name %>    </span>
-          <% }%> )
+        <span class="<%= dom_class(assigned_resources.first) %>">
+          <% assigned_resources.each{ |assigned_resource|%>            
+          <%= assigned_resource.name %>
+          <% }%> 
+        </span>
+      <% else %>
+        <% Spree::SectionPiece.resource_classes.each{|resource_class| %>
+        <span class="<%= dom_class(resource_class) %>">  </span>
+        <% }%> 
       <% end %>
       <%= render :partial => 'page_layout', :locals => { :theme => theme, :page_layout=>child, :page_layouts=>page_layouts, :selected_id=>selected_id, :options=>options } %>
     </li>

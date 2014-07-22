@@ -3,28 +3,16 @@
   <% if @page_layout.present? %>  
       <% page_layout = @page_layout%>
       <legend align="center"><%= page_layout.title %></legend>
-      <%= form_for :page_layout, url: update_resource_admin_template_theme_page_layout_path(@template_theme,page_layout),remote: true do |f|%>
+      <%= form_for :page_layout, url: update_context_admin_template_theme_page_layout_path(@template_theme,page_layout),remote: true do |f|%>
         <div class="field">
-          <%= label_tag :assigned_resource, Spree.t(:assigned_resource) %><br>
-          <% page_layout_with_resource = Spree::PageLayout.includes(:section_pieces).where(["spree_page_layouts.id=? and spree_section_pieces.resources!=?", page_layout.id,'']).first %>
-          <% if page_layout_with_resource.present? %>
-            <% page_layout = page_layout_with_resource %>   
-            <% page_layout.section_pieces.first.wrapped_resources.each_with_index{| wrapped_resource,idx | %>
-              <%  
-                  assigned_resource_id = @template_theme.assigned_resource_id(wrapped_resource.resource_class, page_layout, idx)   
-                  onchange = "ajax_post('#{update_resource_admin_template_theme_page_layout_path(@template_theme,page_layout)}',this.form.id);"
-              %>  
-                <%= select_tag "assigned_resource_ids[#{page_layout.id}][]",options_from_collection_for_select(wrapped_resource.resource_class.resourceful(@template_theme ), :id, :name, assigned_resource_id ), include_blank: true, onchange: onchange, class: 'select2' %>
-            <% } %>
-          <% else %>
-               <% assigned_resource_id = @template_theme.assigned_resource_id(SpreeTheme.taxon_class, page_layout) %>
-               <%= select_tag "assigned_resource_ids[#{page_layout.id}][]",options_from_collection_for_select(SpreeTheme.taxon_class.resourceful(@template_theme ), :id, :name, assigned_resource_id ), include_blank: true,class: 'select2' %>      
-          <% end %>
+          <%= label_tag :section_context, Spree.t('page_layout.section_context') %><br>
+          <% current_contexts = page_layout.current_contexts  %>
+          <%= select_tag "section_context[]", options_for_select((Spree::PageLayout::ContextEnum.members-[:either]).collect{|section_context| [Spree.t("context.#{ section_context }"), section_context] }, current_contexts ), include_blank: true,class: 'select2', multiple: "multiple" %>      
         </div>
         <div class="field">
           <% assigned_resources = @template_theme.assigned_resources(Spree::SpecificTaxon, page_layout)   %>
     
-          <%= label_tag :specific_taxon, Spree.t(:specific_taxon) %><br>
+          <%= label_tag :specific_taxon, Spree.t('page_layout.specific_taxon') %><br>
           <%= hidden_field_tag :specific_taxon_ids, assigned_resources.collect(&:id).join(',') %>
         </div>
         
@@ -35,7 +23,7 @@
         </div>
       <%end%>
   <% else %>
-      <legend align="center"><%= Spree.t('page_layout.please_select_one_to_config') %></legend>
+      <legend align="center"><%= Spree.t('page_layout.please_select_to_config') %></legend>
       <div class="alpha twelve columns no-objects-found">
         <%= Spree.t(:no_resource_found, resource: I18n.t(:other, scope: 'activerecord.models.spree/page_layout')) %>,
       </div>
@@ -88,7 +76,7 @@
           return taxon.pretty_name;
         }
       });
-      $('.select2-container').css({width: '20em'});
+      $('.select2-container').css({width: '40em'});
     }
   });  
   

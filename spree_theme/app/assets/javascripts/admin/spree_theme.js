@@ -3,8 +3,8 @@
 //= require admin/resource_autocomplete
 jQuery(function ($) {
   $('#page_layout_tree_inner').bind('select_node.jstree', function (e, data) {
-    var selected_node = data.rslt.obj
-    var url = Spree.routes.admin_template_themes+'/'+selected_node.data('tid')+'/page_layout/'+selected_node.data('lid')+'/config_resource'
+    var selected_node = data.rslt.obj    
+    var url = [Spree.routes.admin_template_themes, selected_node.data('tid'), 'page_layout',selected_node.data('lid'), selected_node.data('action') ].join('/')
     $.ajax({ url: url, type: 'GET', dataType: "script"})
   }).bind('deselect_all.jstree', function (e, data) {
     //$(this).find('select').hide()
