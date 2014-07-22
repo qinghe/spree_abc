@@ -5,8 +5,9 @@ module Spree
       # first one is default 
       ContextEnum=Struct.new(:home, :list,:detail,:cart,:account,:checkout, :thanks,:signup,:login,:password, :either)[ :home, :list,:detail,:cart,:account,:checkout, :thanks,:signup,:login, :password, :""]
       
-      #context may be array, datasource is nil for array.
-      ContextDataSourceMap = { ContextEnum.list=>[:gpvs],ContextEnum.detail=>[:this_product]}
+      # context may be array, datasource is nil for array.
+      # gpvs is available to every context. 
+      ContextDataSourceMap = Hash.new([:gpvs]).merge!({ ContextEnum.detail=>[:this_product] })
       DataSourceChainMap = {:gpvs=>[:gpv_product,:gpv_group, :gpv_either],
         :gpv_product=>[:product_images,:product_options], 
         :gpv_group=>[:group_products,:group_images],    
@@ -14,7 +15,7 @@ module Spree
         :this_product=>[]
         #keys should inclde all data_sources, test required.
         }
-      DataSourceEnum  = Struct.new(:gpvs,:this_product, :menu )[:gpvs, :this_product, :menu]
+      DataSourceEnum  = Struct.new(:gpvs,:this_product )[:gpvs, :this_product]
       DataSourceEmpty = :""
       
       def context_either?

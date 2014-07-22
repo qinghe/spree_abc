@@ -6,7 +6,10 @@
     </li>
   <% end %>
 <% end %>
-<%= render :partial=>'theme_tabs',:locals=>{:current=>"DataSource"}%>
+<div id="page_layout_wrapper">
+      <%= render :partial=>'spree/admin/page_layout/config_data_source', :locals=>{ :page_layout=> @template_theme.page_layout } %>
+</div>
+<%= render :partial=>'theme_tabs',:locals=>{:current=>"ConfigDataSource"}%>
 <div class="">
-<%= render :partial=>'layout_tree_for_config', :locals=>{:theme=>@template_theme, :options=>{:config_data_source=>true} }%>
+<%= render :partial=>'layout_tree_for_config', :locals=>{:theme=>@template_theme, :current=>"ConfigDataSource" }%>
 </div>

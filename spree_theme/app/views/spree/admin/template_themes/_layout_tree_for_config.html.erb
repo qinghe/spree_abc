@@ -1,8 +1,8 @@
 <%
 # list layout tree in editor page.
-# local params: theme, selected_id
+# local params: theme, selected_id, current
 page_layout = theme.page_layout
-selected_id= (options[:selected_id]||page_layout.id )
+selected_id ||= page_layout.id 
 %>
 <%=form_tag(update_layout_tree_template_theme_path(theme), :id=>"layout_tree_form",:name=>"layout_tree_form", :remote=>true) do %>
 
@@ -12,7 +12,7 @@ selected_id= (options[:selected_id]||page_layout.id )
     <%= link_to_function( page_layout.title, "",
       {"class"=>(page_layout.id==selected_id ? "selected":"")})
       %>
-      <%= render :partial=>'page_layout', :locals=>{:theme=>theme, :page_layout=>page_layout, :selected_id=>selected_id, :options=>options } %>
+      <%= render :partial=>'page_layout', :locals=>{:theme=>theme, :page_layout=>page_layout, :selected_id=>selected_id, :current=>current  } %>
     </li>
   </ul>
   </div>

@@ -1,15 +1,6 @@
 
-<% if @assigned_resources.present? %>
-    <% @assigned_resources.each{|assigned_resource| %>
-    
-      $('[data-lid=<%=@page_layout.id%>] > .<%=dom_class(assigned_resource)%>' ).html( <%= raw assigned_resource.name.to_json %> );
-      
-    <% } %>
-<% else %>
-      <% Spree::SectionPiece.resource_classes.each{|resource_class| %>
-    
-      $('[data-lid=<%=@page_layout.id%>] > .<%=dom_class(resource_class)%>' ).html( '' );
-      
-    <% } %>
-
+<% if @assigned_resources.present? %>    
+      $('[data-lid=<%=@page_layout.id%>] > .config_resource' ).html( '' );
+<% else %>    
+      $('[data-lid=<%=@page_layout.id%>] > .config_resource' ).html( <%= raw @assigned_resources.map(&:name).to_json %> );           
 <% end %>

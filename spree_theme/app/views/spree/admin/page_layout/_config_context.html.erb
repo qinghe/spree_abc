@@ -7,7 +7,7 @@
         <div class="field">
           <%= label_tag :section_context, Spree.t('page_layout.section_context') %><br>
           <% current_contexts = page_layout.current_contexts  %>
-          <%= select_tag "section_context[]", options_for_select((Spree::PageLayout::ContextEnum.members-[:either]).collect{|section_context| [Spree.t("context.#{ section_context }"), section_context] }, current_contexts ), include_blank: true,class: 'select2', multiple: "multiple" %>      
+          <%= select_tag "section_contexts[]", options_for_select((Spree::PageLayout::ContextEnum.members-[:either]).collect{|section_context| [Spree.t("section_context.#{ section_context }"), section_context] }, current_contexts ), include_blank: true,class: 'select2', multiple: "multiple" %>      
         </div>
         <div class="field">
           <% assigned_resources = @template_theme.assigned_resources(Spree::SpecificTaxon, page_layout)   %>

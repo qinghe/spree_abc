@@ -10,7 +10,7 @@
       <%= render :partial=>'spree/admin/page_layout/config_resource', :locals=>{ :page_layout=> @template_theme.page_layout } %>
 </div>
 
-<%= render :partial=>'theme_tabs',:locals=>{:current=>"SectionContext"}%>
+<%= render :partial=>'theme_tabs',:locals=>{:current=>"ConfigContext"}%>
 <div class="">
-<%= render :partial=>'layout_tree_for_config', :locals=>{:theme=>@template_theme, :options=>{:config_context=>true} }%>
+<%= render :partial=>'layout_tree_for_config', :locals=>{:theme=>@template_theme, :current=>"ConfigContext" }%>
 </div>

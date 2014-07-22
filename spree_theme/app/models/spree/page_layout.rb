@@ -333,7 +333,7 @@ module Spree
       end
       
       #def context_either?
-      #  self.class.verify_contexts ContextEnum.either, current_contexts
+      #  current_contexts.include? ContextEnum.either
       #end
 
     end
@@ -379,7 +379,9 @@ module Spree
         if self.current_data_source != DataSourceEmpty
           if self.inherited_data_source == DataSourceEmpty # top level data source 
             available_data_sources =  ContextDataSourceMap[self.current_contexts.first]
+Rails.logger.debug "inherited_data_source = #{available_data_sources}"        
             if available_data_sources.present?
+Rails.logger.debug "available_data_sources = #{available_data_sources}, current_data_source=#{current_data_source}"        
               is_valid = ( available_data_sources.include? self.current_data_source )
             end          
           else #sub level data source
@@ -388,6 +390,7 @@ module Spree
         else
           is_valid = true  
         end      
+Rails.logger.debug "is_valid = #{is_valid}"        
         is_valid
       end
       

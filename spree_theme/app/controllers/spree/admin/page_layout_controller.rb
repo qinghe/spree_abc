@@ -34,12 +34,22 @@ module Spree
         
         #update section_context
         def update_context
-          
+          section_contexts = params[:section_contexts]
+          if section_contexts.present?
+            @page_layout.update_section_context(section_contexts )
+          else
+            @page_layout.update_section_context( PageLayout::ContextEnum.either )              
+          end
         end
         
         #update datasource
         def update_data_source
-          
+          section_data_source = params[:section_data_source]
+          if section_data_source.present?
+            @page_layout.update_data_source(section_data_source.to_sym )
+          else
+            @page_layout.update_data_source( PageLayout::DataSourceEmpty )              
+          end          
         end
         
         # copy from backend/app/controllers/spree/resource_controller.rb        
@@ -50,6 +60,11 @@ module Spree
         def config_context
           @template_theme = TemplateTheme.find( params[:template_theme_id] )
         end
+        
+        def config_data_source
+          @template_theme = TemplateTheme.find( params[:template_theme_id] )          
+        end
+        
     end
   end
 end

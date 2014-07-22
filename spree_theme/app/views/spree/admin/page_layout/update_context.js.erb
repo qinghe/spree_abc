@@ -1,0 +1,5 @@
+<% if @page_layout.section_context.present? %>    
+      $('[data-lid=<%=@page_layout.id%>] > .config_context' ).html( <%= raw  @page_layout.current_contexts.map{|section_context| Spree.t("section_context.#{section_context}")}.join(',').to_json %> );      
+<% else %>    
+      $('[data-lid=<%=@page_layout.id%>] > .config_context' ).html( '' );      
+<% end %>
