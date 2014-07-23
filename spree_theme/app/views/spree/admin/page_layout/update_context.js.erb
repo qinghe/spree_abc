@@ -5,7 +5,7 @@
 <% end %>
 
 <% if @specific_taxons.present? %>    
-      $('[data-lid=<%=@page_layout.id%>] > .specific_taxon' ).html( <%= raw @assigned_resources.map(&:name).to_json %> );      
+      $('[data-lid=<%=@page_layout.id%>] > .specific_taxon' ).html( <%= raw @specific_taxons.map(&:name).to_json %> );      
 <% else %>    
       $('[data-lid=<%=@page_layout.id%>] > .specific_taxon' ).html( '' );      
 <% end %>

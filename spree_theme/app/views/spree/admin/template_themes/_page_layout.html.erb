@@ -13,13 +13,11 @@
         {"class"=>(child.id==selected_id ? 'selected':'') })
       %>
       <% if current == 'ConfigResource'%>
-        <span class="config_resource">
-        <% assigned_resources =  theme.assigned_resources_by_page_layout child  %>
-        <% if assigned_resources.present? %>
-            <% assigned_resources.each{ |assigned_resource|%>            
+          <span class="config_resource">
+          <% assigned_resources =  theme.assigned_resources_by_page_layout child  %>
+            <% assigned_resources.each{ |assigned_resource| next if assigned_resource.kind_of?(Spree::SpecificTaxon) %>            
             <%= assigned_resource.name %>
             <% }%> 
-        <% end %>
           </span>
       <% elsif current == 'ConfigContext'%>
           <span class="config_context">
@@ -27,6 +25,10 @@
             <%= child.current_contexts.map{|section_context| Spree.t("section_context.#{section_context}")}.join(',')%>
             <% end %>  
           </span>        
+          <span class="specific_taxon">
+          <% assigned_resources =  theme.assigned_resources( Spree::SpecificTaxon, child ).compact %>
+          <%= assigned_resources.map(&:name).join(',') %>
+          </span>
       <% elsif current == 'ConfigDataSource'%>
           <span class="config_data_source">
           <% if child.data_source.present? %>
