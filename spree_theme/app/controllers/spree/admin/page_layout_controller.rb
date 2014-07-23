@@ -35,11 +35,27 @@ module Spree
         #update section_context
         def update_context
           section_contexts = params[:section_contexts]
+          specific_taxon_ids = params[:specific_taxon_ids]
           if section_contexts.present?
             @page_layout.update_section_context(section_contexts )
           else
             @page_layout.update_section_context( PageLayout::ContextEnum.either )              
           end
+          @template_theme = TemplateTheme.find( params[:template_theme_id])                    
+          if specific_taxon_ids.present?
+            @specific_taxons = Spree::SpecificTaxon.find specific_taxon_ids.split(',')
+            @specific_taxons.each_with_index{|resource, index|
+              @template_theme.assign_resource(resource, @page_layout, index)                    
+            }
+          else
+            @specific_taxons = []
+            @template_theme.assigned_resources(Spree::SpecificTaxon,@page_layout).each_with_index{|assigned_resource,index|
+              if assigned_resource.present?
+                @template_theme.unassign_resource(Spree::SpecificTaxon, @page_layout, index)
+              end
+            }
+          end
+          
         end
         
         #update datasource
