@@ -14,7 +14,8 @@ module Spree
                 resource = wrapped_resource.resource_class.find resource_id
                 @template_theme.assign_resource(resource, @page_layout, index)
               }
-            else# assigned taxon root
+            else# assigned taxon 
+              assigned_resource_ids = assigned_resource_ids.split(',') if assigned_resource_ids.kind_of? String
               assigned_resource_ids.each_with_index{|resource_id, index|
                 resource = SpreeTheme.taxon_class.find resource_id
                 @template_theme.assign_resource(resource, @page_layout, index)                    
