@@ -7,15 +7,17 @@ module Spree
       
       # context may be array, datasource is nil for array.
       # gpvs is available to every context. 
-      ContextDataSourceMap = Hash.new([:gpvs]).merge!({ ContextEnum.detail=>[:this_product] })
-      DataSourceChainMap = {:gpvs=>[:gpv_product,:gpv_group, :gpv_either],
+      ContextDataSourceMap = Hash.new( [:taxon, :gpvs] ).merge!( { ContextEnum.detail=>[:this_product] } )
+      DataSourceChainMap = {
+        :taxon =>[:gpvs],
+        :gpvs=>[:gpv_product,:gpv_group, :gpv_either],
         :gpv_product=>[:product_images,:product_options], 
         :gpv_group=>[:group_products,:group_images],    
         :group_products=>[:product_images,:product_options],
         :this_product=>[]
         #keys should inclde all data_sources, test required.
         }
-      DataSourceEnum  = Struct.new(:gpvs,:this_product )[:gpvs, :this_product]
+      DataSourceEnum  = Struct.new(:gpvs,:this_product,:taxon )[:gpvs, :this_product,:taxon]
       DataSourceEmpty = :""
       
       def context_either?

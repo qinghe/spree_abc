@@ -1,7 +1,7 @@
 module PageTag
   class Menus < Base
     class WrappedMenu < WrappedModel
-      self.accessable_attributes=[:id,:name,:icon,:page_home?,:depth, :leaf?]
+      self.accessable_attributes=[:id,:name,:icon,:page_home?,:depth, :leaf?,:root?]
       delegate *self.accessable_attributes, :to => :model
       delegate :taxonomy, :to => :model
       
@@ -86,7 +86,7 @@ module PageTag
           end
         end
       end
-      
+Rails.logger.debug "wrapped_page_layout=#{key}, menu_tree=#{menu_tree}"      
       if menus_cache[key].present?
         WrappedMenu.new( self, menus_cache[key].first)
       else        

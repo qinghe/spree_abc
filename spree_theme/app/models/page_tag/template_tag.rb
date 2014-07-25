@@ -56,8 +56,8 @@ module PageTag
         if assigned_id==0
           assigned_id = page_layout.ancestors.collect{|ancestor| 
             self.collection_tag.theme.assigned_resource_id(SpreeTheme.taxon_class, ancestor, resource_position) 
-          }.select{| ancestor_assigned_id | ancestor_assigned_id >0 }.first.to_i
-        end        
+          }.select{| ancestor_assigned_id | ancestor_assigned_id >0 }.last.to_i #last could be nil
+        end
         assigned_id
       end
       def assigned_image_id
@@ -117,11 +117,12 @@ module PageTag
           searcher = Spree::Config.searcher_class.new({:taxon => wrapped_taxon.id})
           #@searcher.current_user = try_spree_current_user
           #@searcher.current_currency = current_currency
-          objs = searcher.retrieve_products
+          objs = searcher.retrieve_products          
         when Spree::PageLayout::DataSourceEnum.this_product
           #default_taxon.id is 0 
           objs = [self.page_generator.resource]         
       end
+Rails.logger.debug "self.current_piece=#{self.current_piece.title},wrapped_taxon = #{wrapped_taxon.name},objs=#{objs.inspect}"      
       if objs.present?
         objs = Products.new( self.page_generator, objs)
       end

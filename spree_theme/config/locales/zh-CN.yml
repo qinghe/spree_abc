@@ -91,7 +91,7 @@ zh-CN:
     section_data_source:
       gpvs: 产品集合
       this_product: 当前选择产品
-      menu: 菜单  
+      taxon: 菜单  
     template_file:
       index: 图片素材
       new: 新建图片素材

@@ -378,19 +378,24 @@ module Spree
         is_valid = false
         if self.current_data_source != DataSourceEmpty
           if self.inherited_data_source == DataSourceEmpty # top level data source 
-            available_data_sources =  ContextDataSourceMap[self.current_contexts.first]
-Rails.logger.debug "inherited_data_source = #{available_data_sources}"        
-            if available_data_sources.present?
-Rails.logger.debug "available_data_sources = #{available_data_sources}, current_data_source=#{current_data_source}"        
-              is_valid = ( available_data_sources.include? self.current_data_source )
-            end          
+            section_contexts = self.current_contexts
+            if  section_contexts.length == 1
+              available_data_sources =  ContextDataSourceMap[section_contexts.first]
+              if available_data_sources.present?
+                is_valid = ( available_data_sources.include? self.current_data_source )
+              end 
+            else
+              #TODO validate data source for more than on section contexts
+              is_valid = true
+            end         
           else #sub level data source
+Rails.logger.debug "self.inherited_data_source=#{self.inherited_data_source}"            
             is_valid = ( DataSourceChainMap[self.inherited_data_source].include? self.current_data_source)
           end
         else
           is_valid = true  
         end      
-Rails.logger.debug "is_valid = #{is_valid}"        
+#Rails.logger.debug "is_valid = #{is_valid}"        
         is_valid
       end
       
@@ -454,18 +459,18 @@ Rails.logger.debug "is_valid = #{is_valid}"
           case node.current_data_source
             when DataSourceEnum.gpvs, DataSourceEnum.this_product
               subpieces = <<-EOS1 
-              <% @template.products( proc_page.call ).each{|product| %>
+              <% @template.products( (defined?(page) ? page : @current_page) ).each{|product| %>
                   #{subpieces}
               <% } %>
               EOS1
-            when DataSourceEnum.menu
+            when DataSourceEnum.taxon
               #assigned menu could be root or node
               subpieces = <<-EOS3 
               <% if @template.menu.present? %>
                 <% if @template.menu.root? %>
-                  <% @template.menu.children.each{|page| #{subpieces} }%>
+                  <% @template.menu.children.each{|page|%> #{subpieces} <%}%>
                 <% else %>  
-                  <% @template.menu.tap {|page| #{subpieces} } %>
+                  <% @template.menu.tap{|page| %> #{subpieces} <%}%>
                 <% end %>              
               <% end %>              
               EOS3
