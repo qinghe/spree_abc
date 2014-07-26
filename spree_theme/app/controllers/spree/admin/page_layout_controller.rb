@@ -6,6 +6,8 @@ module Spree
         def update_resource          
           @template_theme = TemplateTheme.find( params[:template_theme_id])          
           assigned_resource_ids = params[:assigned_resource_ids]
+          #assigned_resource_ids could be ['']
+          assigned_resource_ids.select!(&:present?) if assigned_resource_ids.kind_of? Array
           section_piece_with_resources = @page_layout.section_pieces.with_resources.first
           if assigned_resource_ids.present?
             if section_piece_with_resources.present?

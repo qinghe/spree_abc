@@ -97,6 +97,7 @@ module PageTag
     #                    
     def select(page_layout_id, section_id=0)
       #current selected section instance, page_layout record
+Rails.logger.debug "select page_layout_id=#{page_layout_id},section_id=#{section_id}"      
       page_layout = page_layout_tree.select{|node| node.id == page_layout_id}.first
       self.current_piece = WrappedPageLayout.new(self, page_layout, section_id)
     end
@@ -122,7 +123,7 @@ module PageTag
           #default_taxon.id is 0 
           objs = [self.page_generator.resource]         
       end
-Rails.logger.debug "self.current_piece=#{self.current_piece.title},wrapped_taxon = #{wrapped_taxon.name},objs=#{objs.inspect}"      
+#Rails.logger.debug "self.current_piece=#{self.current_piece.title},wrapped_taxon = #{wrapped_taxon.name},objs=#{objs.inspect}"      
       if objs.present?
         objs = Products.new( self.page_generator, objs)
       end

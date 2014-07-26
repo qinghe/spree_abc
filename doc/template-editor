@@ -44,4 +44,6 @@
              - 客房部
              - 清洁PA
              - 厨师服
-             
+7. 在模板中，我们希望有一个Section在product-list页面显示，但不在home中显示
+   案例. section 产品分类, 在product-list页面显示，不在home中显示
+      home context 不再兼容 product-list context            

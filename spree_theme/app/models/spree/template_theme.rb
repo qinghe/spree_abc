@@ -436,8 +436,8 @@ module Spree
     # called in current_page_tag
     # is page_layout valid to taxon, taxon is current page
     def valid_context?(page_layout, taxon)
-      specific_taxon = assigned_resources( Spree::SpecificTaxon, page_layout)
-      specific_taxon_ids = specific_taxon.collect(&:id)      
+      specific_taxons = assigned_resources( Spree::SpecificTaxon, page_layout).compact
+      specific_taxon_ids = specific_taxons.collect(&:id)
       (page_layout.valid_context?(taxon.current_context)) && (specific_taxon_ids.blank? || specific_taxon_ids.include?(taxon.id))
     end
     

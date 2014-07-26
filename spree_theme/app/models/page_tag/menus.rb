@@ -67,8 +67,8 @@ module PageTag
     # for menu assignment easy, method 1 is not support any more   
     def get( wrapped_page_layout, resource_position=0  )
       key = wrapped_page_layout.to_key 
+      menu_tree = nil
       unless menus_cache.key? key
-        menu_tree = nil
         #wrapped_page_layout.assigned_menu_id may not exist for some reason.        
         assigned_menu_id = wrapped_page_layout.assigned_menu_id(resource_position)
         if assigned_menu_id>0 and SpreeTheme.taxon_class.exists?( assigned_menu_id )
@@ -86,7 +86,7 @@ module PageTag
           end
         end
       end
-Rails.logger.debug "wrapped_page_layout=#{key}, menu_tree=#{menu_tree}"      
+#Rails.logger.debug "wrapped_page_layout=#{key}, menu_tree=#{menu_tree}"      
       if menus_cache[key].present?
         WrappedMenu.new( self, menus_cache[key].first)
       else        

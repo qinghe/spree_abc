@@ -591,23 +591,24 @@ product_price:
   is_selectable: "0"
   is_container: "0"
   html: |
-    <% if product.price_in(current_currency) and !product.price.nil? %>
-      <div data-hook="product_price" class="columns five <% if !product.has_variants? %> alpha <% else %> omega <% end %>">
-        <div id="product-price">
-          <div>
-            <span class="price selling" itemprop="price">
-              <%= display_price(product.master) %>
-            </span>            
+    <% if defined? product %>
+      <% if product.price_in(current_currency) and !product.price.nil? %>
+        <div data-hook="product_price" class="columns five <% if !product.has_variants? %> alpha <% else %> omega <% end %>">
+          <div id="product-price">
+            <div>
+              <span class="price selling" itemprop="price">
+                <%= display_price(product.master) %>
+              </span>            
+            </div>
           </div>
         </div>
-      </div>
-    <% else %>
-        <div id="product-price">
-          <br>
-          <div><span class="price selling" itemprop="price"><%= Spree.t('product_not_available_in_this_currency') %></span></div>
-        </div>
-    <% end %>    
-     
+      <% else %>
+          <div id="product-price">
+            <br>
+            <div><span class="price selling" itemprop="price"><%= Spree.t('product_not_available_in_this_currency') %></span></div>
+          </div>
+      <% end %>    
+    <% end %> 
   created_at: 2011-09-20 19:40:07
   updated_at: 2011-09-20 19:40:07
   css: ""
@@ -1337,6 +1338,25 @@ breadcrumbs:
     .<%=@template.current_piece.section_selector%> li{
       list-style-type:none; 
       display: inline-block;
+    }
+  js: ""
+taxon_icon:
+  id: 56
+  title: taxon icon
+  slug: taxon-icon
+  is_selectable: "1"
+  is_container: "0"
+  html: |    
+    <% if defined? page %>
+      <% if page.icon.present? %>
+        <%= link_to image_tag(page.icon.url(:original), :u=>'image', :alt=>page.name), page.path %>
+      <% end %>
+    <% end %>
+  created_at: 2011-09-20 19:40:07
+  updated_at: 2011-09-20 19:40:07
+  css: |
+    .<%=@template.current_piece.section_selector%> {
+      margin: 0; padding: 0;
     }
   js: ""
 

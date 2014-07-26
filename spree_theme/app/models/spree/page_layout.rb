@@ -78,10 +78,11 @@ module Spree
       #      [:cart]  is valid to [:account, :checkout, :thankyou, :cart]
       #      [:cart]  is invalid to [:account]
       #      [:list]  is invalid to [:home]
-      #      [:home]  is valid to [:list]
+      #      [:home]  is invalid to [:list]
       def self.verify_contexts( some_contexts, target_contexts )
         some_contexts = [some_contexts] unless some_contexts.kind_of?( Array )
-        ( target_contexts==[ContextEnum.either] || (target_contexts&some_contexts)==some_contexts || (some_contexts==[ContextEnum.home]&&target_contexts.include?(ContextEnum.list)) )
+        ( target_contexts==[ContextEnum.either] || (target_contexts&some_contexts)==some_contexts )
+        #|| (some_contexts==[ContextEnum.home]&&target_contexts.include?(ContextEnum.list)) 
       end
 
     #theme.document_path use it
@@ -389,7 +390,7 @@ module Spree
               is_valid = true
             end         
           else #sub level data source
-Rails.logger.debug "self.inherited_data_source=#{self.inherited_data_source}"            
+#Rails.logger.debug "self.inherited_data_source=#{self.inherited_data_source}"            
             is_valid = ( DataSourceChainMap[self.inherited_data_source].include? self.current_data_source)
           end
         else
