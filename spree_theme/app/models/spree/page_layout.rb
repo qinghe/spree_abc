@@ -7,7 +7,8 @@ module Spree
     belongs_to :section  
     has_many :themes, :class_name => "TemplateTheme",:primary_key=>:root_id,:foreign_key=>:page_layout_root_id
     has_many :param_values
-    #this table is used by other site, should not use scope here
+    # this table is used by other site, should not use scope here
+    # we want title to support multi-language, so disable friendly_id
     friendly_id :title, :use => :slugged
     #has_many :full_set_nodes, :class_name =>'PageLayout', :foreign_key=>:root_id, :primary_key=>:root_id
     has_many :sections, :class_name =>'Section', :foreign_key=>:root_id, :primary_key=>:section_id

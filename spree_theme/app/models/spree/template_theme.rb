@@ -309,9 +309,10 @@ module Spree
           # template = self.find_by_title template.title
           serialized_hash[:param_values].each do |record|
             table_name = ParamValue.table_name
-            #for unknown reason param_value.created_at may be nil
+            #for unknown reason param_value.created_at/updated_at may be nil
             attributes = record.attributes.except('id') 
             attributes['created_at']=Time.now if attributes['created_at'].blank?
+            attributes['updated_at']=attributes['created_at'] if attributes['updated_at'].blank?
             connection.insert_fixture(attributes, table_name)          
           end
           template.reload

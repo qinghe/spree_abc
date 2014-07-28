@@ -7,10 +7,13 @@ CREATE SCHEMA `spree_abc_xxx` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci
 
 https://github.com/capistrano/capistrano/wiki/Capistrano-Tasks
 cap local_staging deploy
-rake db:seed RAILS_ENV=local_staging
-rake spree_theme:reload_section_piece  RAILS_ENV=local_staging
-rake spree_theme:import_theme SEED_PATH=1 RAILS_ENV=local_staging
-rake assets:precompile:all RAILS_ENV=staging RAILS_GROUPS=assets
+bundle exec rake db:seed RAILS_ENV=local_staging
+bundle exec rake spree_theme:reload_section_piece  RAILS_ENV=local_staging
+bundle exec rake spree_theme:import_theme SEED_PATH=1 RAILS_ENV=local_staging
+bundle exec rake assets:precompile:all RAILS_ENV=staging RAILS_GROUPS=assets
+
+#useful task
+bundle exec rake spree_theme:import_theme THEME_ID=5 SEED_PATH=1 RAILS_ENV=local_staging
 
 chown apache.apache  public -R
 
