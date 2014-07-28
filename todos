@@ -3,7 +3,7 @@
 3. 支持百度统计
 4. 查看注册网站信息
 5. 分析Rails日志, 查看错误请求。
-
+6. remove redundant option_values from server db.
 
 
 

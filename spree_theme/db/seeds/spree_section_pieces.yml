@@ -388,7 +388,8 @@ menuitem:
   css: |-
       .<%=g_piece_selector%> {
        <%= @template.css :shell %>
-      }      
+      } 
+      /*override parent container .selector a */     
       .<%=g_piece_selector%> a{
        <%= @template.css :a %>  
       }
@@ -1206,7 +1207,7 @@ product_option_values:
         <ul>
           <% product.variants_and_option_values(current_currency).each_with_index do |variant, index| %>
             <li>
-              <%= radio_button_tag "products[#{product.id}]", variant.id, index == 0, 'data-price' => Spree::Money.new(variant.price, with_currency: true).to_s %>
+              <%= radio_button_tag "products[#{product.id}]", variant.id, index == 0, 'data-price' => display_price(variant).to_s %>
               <label for="<%= ['products', product.id, variant.id].join('_') %>">
                 <span class="variant-description">
                   <%= variant_options variant %>
