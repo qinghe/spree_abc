@@ -1,7 +1,6 @@
-class AddSpecificTaxonIds < ActiveRecord::Migration
+class WidenAssignedResourceIds < ActiveRecord::Migration
   def change
     #add_column :spree_template_themes, :specific_taxon_ids, :string, :default => ''
-    change_column :spree_template_files, :theme_id , :integer, :limit => 2, :null => false, :default => 0
+    change_column :spree_template_themes, :assigned_resource_ids , :string, :limit => 1024, :null => false, :default => ''
   end
-
 end
