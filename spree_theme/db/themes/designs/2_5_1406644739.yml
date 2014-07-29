@@ -59,6 +59,7 @@
         - 8
     created_at: 2014-06-28 10:16:01.000000000 Z
     updated_at: 2014-07-27 05:27:16.000000000 Z
+    specific_taxon_ids: ''
 :param_values:
 - !ruby/object:Spree::ParamValue
   attributes:
@@ -306,7 +307,7 @@
     created_at: 2013-04-08 13:27:05.000000000 Z
     updated_at: 2013-04-08 13:27:05.000000000 Z
 - !ruby/object:Spree::ParamValue
-  attributes:
+  attributes: &98941530
     id: 3547
     page_layout_root_id: 270
     page_layout_id: 280
@@ -397,7 +398,7 @@
     created_at: 2013-04-08 13:27:06.000000000 Z
     updated_at: 2013-10-02 10:05:06.000000000 Z
 - !ruby/object:Spree::ParamValue
-  attributes:
+  attributes: &99121720
     id: 3552
     page_layout_root_id: 270
     page_layout_id: 287
@@ -521,7 +522,7 @@
     created_at: 2013-04-08 13:27:07.000000000 Z
     updated_at: 2013-04-08 13:27:07.000000000 Z
 - !ruby/object:Spree::ParamValue
-  attributes:
+  attributes: &99299100
     id: 3560
     page_layout_root_id: 270
     page_layout_id: 288
@@ -792,7 +793,7 @@
     created_at: 2013-04-08 13:27:11.000000000 Z
     updated_at: 2013-04-08 13:27:11.000000000 Z
 - !ruby/object:Spree::ParamValue
-  attributes: &98422980
+  attributes:
     id: 3578
     page_layout_root_id: 270
     page_layout_id: 330
@@ -807,7 +808,7 @@
     created_at: 2013-04-08 13:27:11.000000000 Z
     updated_at: 2014-07-26 10:51:26.000000000 Z
 - !ruby/object:Spree::ParamValue
-  attributes:
+  attributes: &97465510
     id: 3579
     page_layout_root_id: 270
     page_layout_id: 330
@@ -947,7 +948,7 @@
     created_at: 2013-04-09 13:12:32.000000000 Z
     updated_at: 2013-04-09 13:12:32.000000000 Z
 - !ruby/object:Spree::ParamValue
-  attributes:
+  attributes: &97641550
     id: 3588
     page_layout_root_id: 270
     page_layout_id: 297
@@ -1101,7 +1102,7 @@
       theme_id: 1
       pvalue: !ruby/struct:ActiveRecord::AttributeMethods::Serialization::Attribute
         coder: !ruby/object:ActiveRecord::Coders::YAMLColumn
-          object_class: &68993890 !ruby/class 'Hash'
+          object_class: &68008810 !ruby/class 'Hash'
         value:
           15: height:100px
           15unset: '1'
@@ -1160,7 +1161,7 @@
     created_at: 2013-04-13 01:32:40.000000000 Z
     updated_at: 2013-04-13 01:32:40.000000000 Z
 - !ruby/object:Spree::ParamValue
-  attributes:
+  attributes: &97139490
     id: 3601
     page_layout_root_id: 270
     page_layout_id: 303
@@ -1179,7 +1180,7 @@
     created_at: 2013-04-13 01:32:40.000000000 Z
     updated_at: 2013-10-04 07:25:24.000000000 Z
 - !ruby/object:Spree::ParamValue
-  attributes:
+  attributes: &97143870
     id: 3602
     page_layout_root_id: 270
     page_layout_id: 300
@@ -1502,7 +1503,7 @@
     created_at: 2013-10-02 10:20:54.000000000 Z
     updated_at: 2014-07-27 05:02:26.000000000 Z
 - !ruby/object:Spree::ParamValue
-  attributes: &87989180
+  attributes:
     id: 3624
     page_layout_root_id: 270
     page_layout_id: 283
@@ -1890,7 +1891,7 @@
     created_at: 2013-10-05 00:38:17.000000000 Z
     updated_at: 2013-10-05 00:38:17.000000000 Z
 - !ruby/object:Spree::ParamValue
-  attributes: &97150370
+  attributes:
     id: 3652
     page_layout_root_id: 270
     page_layout_id: 286
@@ -2255,7 +2256,7 @@
     created_at: 2013-11-02 09:35:02.000000000 Z
     updated_at: 2013-11-02 09:35:02.000000000 Z
 - !ruby/object:Spree::ParamValue
-  attributes:
+  attributes: &98902910
     id: 3679
     page_layout_root_id: 270
     page_layout_id: 307
@@ -2408,7 +2409,7 @@
       8: border-width:0px 0px 1px 0px
       6unset: '0'
       6: ! 'border-color:transparent transparent #D9D9DB transparent'
-      32unset: '0'
+      *99121720: '0'
       32: padding:5px 0px 5px 0px
     unset: 
     computed_pvalue: 
@@ -2845,7 +2846,7 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: *98422980
+    created_at: 2013-11-02 09:38:02.000000000 Z
     updated_at: 2013-11-02 09:38:02.000000000 Z
 - !ruby/object:Spree::ParamValue
   attributes:
@@ -3211,7 +3212,7 @@
     unset: 
     computed_pvalue: 
     created_at: 2013-11-02 09:50:08.000000000 Z
-    updated_at: 2013-11-02 09:50:08.000000000 Z
+    updated_at: *97139490
 - !ruby/object:Spree::ParamValue
   attributes:
     id: 3754
@@ -3383,11 +3384,11 @@
     theme_id: 5
     pvalue:
       32unset: '0'
-      32: padding:12px 5px 13px 5px
+      32: padding:12px 10px 13px 10px
     unset: 
     computed_pvalue: 
     created_at: 2013-11-05 03:16:08.000000000 Z
-    updated_at: 2014-07-27 13:48:31.000000000 Z
+    updated_at: 2014-07-28 14:09:30.000000000 Z
 - !ruby/object:Spree::ParamValue
   attributes:
     id: 3767
@@ -3459,11 +3460,17 @@
     page_layout_id: 277
     section_param_id: 22
     theme_id: 5
-    pvalue: {}
+    pvalue:
+      3unset: '0'
+      3: background-image:nav_not.gif
+      4unset: '0'
+      4: background-position:right top
+      5unset: '0'
+      5: background-repeat:no-repeat
     unset: 
     computed_pvalue: 
     created_at: 2013-11-05 03:16:08.000000000 Z
-    updated_at: 2013-11-05 03:16:08.000000000 Z
+    updated_at: 2014-07-28 14:08:47.000000000 Z
 - !ruby/object:Spree::ParamValue
   attributes:
     id: 3773
@@ -3486,10 +3493,14 @@
     pvalue:
       3unset: '0'
       3: background-image:tab_on_1px.gif
+      4unset: '1'
+      4: background-position:left top
+      5unset: '0'
+      5: background-repeat:repeat
     unset: 
     computed_pvalue: 
     created_at: 2013-11-05 03:16:09.000000000 Z
-    updated_at: 2014-07-27 13:45:16.000000000 Z
+    updated_at: 2014-07-28 14:10:55.000000000 Z
 - !ruby/object:Spree::ParamValue
   attributes:
     id: 3775
@@ -3515,7 +3526,7 @@
     created_at: 2013-11-05 03:16:09.000000000 Z
     updated_at: 2013-11-05 03:16:09.000000000 Z
 - !ruby/object:Spree::ParamValue
-  attributes:
+  attributes: &95970820
     id: 3777
     page_layout_root_id: 270
     page_layout_id: 282
@@ -3850,7 +3861,7 @@
     created_at: 2013-11-25 06:53:16.000000000 Z
     updated_at: 2013-11-25 06:53:16.000000000 Z
 - !ruby/object:Spree::ParamValue
-  attributes:
+  attributes: &97873860
     id: 3802
     page_layout_root_id: 270
     page_layout_id: 273
@@ -4515,7 +4526,7 @@
       theme_id: 5
       pvalue: !ruby/struct:ActiveRecord::AttributeMethods::Serialization::Attribute
         coder: !ruby/object:ActiveRecord::Coders::YAMLColumn
-          object_class: *68993890
+          object_class: *68008810
         value:
           15hidden: '1'
           31unset: '0'
@@ -4791,7 +4802,7 @@
       theme_id: 1
       pvalue: !ruby/struct:ActiveRecord::AttributeMethods::Serialization::Attribute
         coder: !ruby/object:ActiveRecord::Coders::YAMLColumn
-          object_class: *68993890
+          object_class: *68008810
         value: {}
         state: :unserialized
       unset: 
@@ -5087,7 +5098,7 @@
     created_at: 2014-01-22 03:40:02.000000000 Z
     updated_at: 2014-01-22 03:40:02.000000000 Z
 - !ruby/object:Spree::ParamValue
-  attributes:
+  attributes: &101568800
     id: 3897
     page_layout_root_id: 270
     page_layout_id: 305
@@ -5215,7 +5226,7 @@
         theme_id: 1
         pvalue: !ruby/struct:ActiveRecord::AttributeMethods::Serialization::Attribute
           coder: !ruby/object:ActiveRecord::Coders::YAMLColumn
-            object_class: *68993890
+            object_class: *68008810
           value:
             disabled_ha_ids: '111'
           state: :unserialized
@@ -7149,7 +7160,7 @@
     theme_id: 5
     pvalue:
       101: float:left
-      101unset: *97150370
+      101unset: '0'
       15: height:100px
       15unset: '1'
     unset: 
@@ -7416,7 +7427,7 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2014-07-26 03:12:38.000000000 Z
+    created_at: *98902910
     updated_at: 2014-07-26 03:12:38.000000000 Z
 - !ruby/object:Spree::ParamValue
   attributes:
@@ -7434,17 +7445,7 @@
     created_at: 2014-07-26 03:12:38.000000000 Z
     updated_at: 2014-07-27 04:59:44.000000000 Z
 - !ruby/object:Spree::ParamValue
-  attributes:
-    id: 4083
-    page_layout_root_id: 270
-    page_layout_id: 352
-    section_param_id: 408
-    theme_id: 5
-    pvalue: {}
-    unset: 
-    computed_pvalue: 
-    created_at: 2014-07-26 03:12:38.000000000 Z
-    updated_at: 2014-07-26 03:12:38.000000000 Z
+  attributes: *98941530
 - !ruby/object:Spree::ParamValue
   attributes:
     id: 4084
@@ -7637,7 +7638,7 @@
     section_param_id: 8
     theme_id: 5
     pvalue:
-      15hidden: '1'
+      15hidden: *99299100
       15unset: '0'
       15: height:40px
     unset: 
@@ -7844,7 +7845,7 @@
     section_param_id: 8
     theme_id: 5
     pvalue:
-      15hidden: '1'
+      *97465510: '1'
       7unset: '1'
       7: border-style:solid none none none
       8unset: '1'
@@ -7957,19 +7958,7 @@
     created_at: 2014-07-27 03:20:52.000000000 Z
     updated_at: 2014-07-27 03:20:52.000000000 Z
 - !ruby/object:Spree::ParamValue
-  attributes:
-    id: 4121
-    page_layout_root_id: 270
-    page_layout_id: 278
-    section_param_id: 411
-    theme_id: 5
-    pvalue:
-      101unset: '0'
-      101: float:right
-    unset: 
-    computed_pvalue: 
-    created_at: 2014-07-27 03:20:52.000000000 Z
-    updated_at: 2014-07-27 03:21:57.000000000 Z
+  attributes: *97641550
 - !ruby/object:Spree::ParamValue
   attributes:
     id: 4122
@@ -8203,7 +8192,7 @@
     pvalue: {}
     unset: 
     computed_pvalue: 
-    created_at: 2014-07-27 04:41:03.000000000 Z
+    created_at: *97143870
     updated_at: 2014-07-27 04:41:03.000000000 Z
 - !ruby/object:Spree::ParamValue
   attributes:
@@ -8528,13 +8517,7 @@
     page_layout_id: 361
     section_param_id: 7
     theme_id: 5
-    pvalue:
-      101: float:left
-      101unset: '0'
-      15: height:200px
-      15unset: '0'
-      21unset: '0'
-      21: width:100%
+    pvalue: *95970820
     unset: 
     computed_pvalue: 
     created_at: 2014-07-27 05:07:38.000000000 Z
@@ -8827,25 +8810,7 @@
     created_at: 2014-07-02 13:33:58.000000000 Z
     updated_at: 2014-07-02 13:33:58.000000000 Z
 - !ruby/object:Spree::PageLayout
-  attributes:
-    id: 278
-    site_id: 2
-    root_id: 270
-    parent_id: 276
-    lft: 16
-    rgt: 17
-    title: Mini cart
-    slug: mini-cart--2
-    section_id: 121
-    section_instance: 1
-    section_context: ''
-    data_source: ''
-    data_filter: ''
-    is_enabled: true
-    copy_from_root_id: 208
-    is_full_html: false
-    created_at: 2014-07-02 13:33:58.000000000 Z
-    updated_at: 2014-07-27 03:20:52.000000000 Z
+  attributes: *97873860
 - !ruby/object:Spree::PageLayout
   attributes:
     id: 333
@@ -10144,7 +10109,7 @@
     is_enabled: true
     copy_from_root_id: 208
     is_full_html: false
-    created_at: 2014-07-02 13:33:59.000000000 Z
+    created_at: *101568800
     updated_at: 2014-07-12 06:27:39.000000000 Z
 - !ruby/object:Spree::PageLayout
   attributes:
@@ -10464,6 +10429,17 @@
     attachment_file_name: tiao.jpg
     attachment_updated_at: 2014-07-27 13:50:26.000000000 Z
     created_at: 2014-07-27 13:50:26.000000000 Z
+- !ruby/object:Spree::TemplateFile
+  attributes:
+    id: 25
+    theme_id: 5
+    attachment_width: 
+    attachment_height: 
+    attachment_file_size: 519
+    attachment_content_type: image/gif
+    attachment_file_name: nav_not.gif
+    attachment_updated_at: 2014-07-28 14:08:34.000000000 Z
+    created_at: 2014-07-28 14:08:34.000000000 Z
 :template_releases:
 - !ruby/object:Spree::TemplateRelease
   attributes:
@@ -10471,4 +10447,4 @@
     name: just a test
     theme_id: 5
     created_at: 2014-07-26 08:14:33.000000000 Z
-    *87989180: 2014-07-26 08:14:33.000000000 Z
+    updated_at: 2014-07-26 08:14:33.000000000 Z
