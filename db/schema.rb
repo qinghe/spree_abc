@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140606143001) do
+ActiveRecord::Schema.define(:version => 20140729142843) do
 
   create_table "ckeditor_assets", :force => true do |t|
     t.integer  "site_id",                         :default => 0, :null => false
@@ -821,14 +821,15 @@ ActiveRecord::Schema.define(:version => 20140606143001) do
   add_index "spree_template_texts", ["slug"], :name => "index_spree_template_texts_on_slug"
 
   create_table "spree_template_themes", :force => true do |t|
-    t.integer  "site_id",                             :default => 0
-    t.integer  "page_layout_root_id",                 :default => 0,  :null => false
-    t.integer  "release_id",                          :default => 0
-    t.string   "title",                 :limit => 64, :default => "", :null => false
-    t.string   "slug",                  :limit => 64, :default => "", :null => false
-    t.string   "assigned_resource_ids",               :default => "", :null => false
-    t.datetime "created_at",                                          :null => false
-    t.datetime "updated_at",                                          :null => false
+    t.integer  "site_id",                               :default => 0
+    t.integer  "page_layout_root_id",                   :default => 0,  :null => false
+    t.integer  "release_id",                            :default => 0
+    t.string   "title",                 :limit => 64,   :default => "", :null => false
+    t.string   "slug",                  :limit => 64,   :default => "", :null => false
+    t.string   "assigned_resource_ids", :limit => 1024, :default => "", :null => false
+    t.datetime "created_at",                                            :null => false
+    t.datetime "updated_at",                                            :null => false
+    t.string   "specific_taxon_ids",                    :default => ""
   end
 
   create_table "spree_tokenized_permissions", :force => true do |t|

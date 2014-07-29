@@ -14,6 +14,7 @@ bundle exec rake assets:precompile:all RAILS_ENV=staging RAILS_GROUPS=assets
 
 #useful task
 bundle exec rake spree_theme:import_theme THEME_ID=5 SEED_PATH=1 RAILS_ENV=local_staging
+bundle exec rake railties:install:migrations RAILS_ENV=local_staging
 
 chown apache.apache  public -R
 
