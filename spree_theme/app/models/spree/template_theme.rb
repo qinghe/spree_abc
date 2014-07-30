@@ -283,8 +283,9 @@ module Spree
         # template.page_layout.self_and_descendants would cause error
         # https://github.com/rails/rails/issues/5303
         # serializable_data.to_yaml, it only get error in rake task.
-        hash ={:template=>template, :param_values=>template.param_values, :page_layouts=>template.page_layout.self_and_descendants.all,
-            :template_files=>template.template_files,:template_releases=>template.template_releases
+        # serializable_data.to_json, key is string when load
+        hash ={'template'=>template, 'param_values'=>template.param_values, 'page_layouts'=>template.page_layout.self_and_descendants.all,
+            'template_files'=>template.template_files,'template_releases'=>template.template_releases
             } 
         hash      
       end
@@ -293,49 +294,63 @@ module Spree
       # params
       #   file - opened file
       # return imported theme 
-      def self.import_into_db( file )
-        # rake task require class 
-        Spree::ParamValue; Spree::PageLayout; Spree::TemplateFile;Spree::TemplateRelease;
-        serialized_hash = YAML::load(file)
-        template = serialized_hash[:template]
+      def self.import_into_db( serialized_data )
+        template = serialized_data.stringify_keys!.fetch 'template'
         transaction do 
-          if self.exists?(template[:id])
-            existing_template = self.find(template[:id])          
+          if self.exists?(template['id'])
+            existing_template = self.find(template['id'])          
             existing_template.destroy
           end
+          # support yaml/json, record is model/hash
           #site id is 1 in exported yml, in spree_abc, design.dalianshops.com is 2
-          connection.insert_fixture(template.attributes, self.table_name)
+          connection.insert_fixture(get_attributes_from_model(template), self.table_name)
           # we need new template id
           # template = self.find_by_title template.title
-          serialized_hash[:param_values].each do |record|
+          serialized_data['param_values'].each do |record|
             table_name = ParamValue.table_name
+            attributes = get_attributes_from_model(record).except('id') 
             #for unknown reason param_value.created_at/updated_at may be nil
-            attributes = record.attributes.except('id') 
             attributes['created_at']=Time.now if attributes['created_at'].blank?
             attributes['updated_at']=attributes['created_at'] if attributes['updated_at'].blank?
             connection.insert_fixture(attributes, table_name)          
           end
-          template.reload
-          original_nodes = serialized_hash[:page_layouts]
+          template = self.find(template['id'])
+          original_nodes = serialized_data['page_layouts']
+          original_nodes = original_nodes.collect{|node| build_model_from_hash( PageLayout, node)}
           new_nodes = PageLayout.copy_to_new( original_nodes )
           template.update_attribute(:page_layout_root_id, new_nodes.first.id)
           fix_related_data_for_copied_theme(template, new_nodes, original_nodes)
-          #serialized_hash[:page_layouts].each do |record|
+          #serialized_data[:page_layouts].each do |record|
           #  table_name = PageLayout.table_name
           #  connection.insert_fixture(record.attributes, table_name)          
           #end          
-          serialized_hash[:template_files].each do |record|
+          serialized_data['template_files'].each do |record|
             table_name = TemplateFile.table_name
-            connection.insert_fixture(record.attributes, table_name)          
+            connection.insert_fixture(get_attributes_from_model(record), table_name)          
           end        
-          serialized_hash[:template_releases].each do |record|
+          serialized_data['template_releases'].each do |record|
             table_name = TemplateRelease.table_name
-            connection.insert_fixture(record.attributes, table_name)          
+            connection.insert_fixture(get_attributes_from_model(record), table_name)          
           end
         end
         self.find(template[:id])
       end
+      
+      def self.build_model_from_hash(model_class, model_attributes)
+        if model_attributes.kind_of? Hash
+          model_class.new do|instance|
+            model_attributes.each_pair{|key, val|  instance[key] = val  }
+          end
+        else
+          model_attributes
+        end
+      end
+      
+      def self.get_attributes_from_model( model )
+        (model.kind_of? ActiveRecord::Base) ?  model.attributes : model
+      end
     end
+    
     def remove_relative_data
       if self.has_native_layout?
         self.page_layout.destroy

@@ -50,16 +50,17 @@ module Spree
     
     #belongs_to_html_attribute_ids could be Array or an html_attribute_id
     def attribute_values(belongs_to_html_attribute_ids)
-      belongs_to_html_attribute_ids ||= self.html_attribute_ids        
+      belongs_to_html_attribute_ids ||= self.html_attribute_ids
+      belongs_to_html_attribute_ids = belongs_to_html_attribute_ids.map(&:to_s)        
       return self.pvalue.slice(*belongs_to_html_attribute_ids).values if belongs_to_html_attribute_ids.kind_of?(Array)    
       self.pvalue.slice(belongs_to_html_attribute_ids).values
     end
     
     def pvalue_for_haid(html_attribute_id)    
-      self.pvalue[html_attribute_id] 
+      self.pvalue[html_attribute_id.to_s] 
     end
     def set_pvalue_for_haid(html_attribute_id, value_for_ha)    
-      self.pvalue[html_attribute_id]  = value_for_ha
+      self.pvalue[html_attribute_id.to_s]  = value_for_ha
     end
     def set_unset_for_haid(html_attribute_id, unset_for_ha)
       self.pvalue["#{html_attribute_id}unset"] = unset_for_ha
@@ -120,7 +121,7 @@ module Spree
         original_html_attribute_value = HtmlAttributeValue.parse_from(self,html_attribute)
         new_html_attribute_value = HtmlAttributeValue.parse_from(self, html_attribute, html_attribute_value_params)
         is_updated= false
-        Rails.logger.debug "original_html_attribute_value=#{original_html_attribute_value.properties.inspect},new_html_attribute_value=#{new_html_attribute_value.properties.inspect}"    
+        # Rails.logger.debug "original_html_attribute_value=#{original_html_attribute_value.properties.inspect},new_html_attribute_value=#{new_html_attribute_value.properties.inspect}"    
         unless original_html_attribute_value.equal_to?(new_html_attribute_value)
           # changed by user actions, some_event = [pv_changed|psv_changed|psu_changed|unset_changed]
           if EventEnum.key? some_event 

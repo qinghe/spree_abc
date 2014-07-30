@@ -25,20 +25,23 @@ namespace :spree_theme do
     serializable_data = theme.serializable_data
     #add site_id into name is required, later we want to import, just specify site_id is OK.
     if ENV['SEED_PATH']
-      file_path = File.join(SpreeTheme::Engine.root,'db','themes','designs', "#{theme.site_id}_#{theme.id}_#{Time.now.to_i}.yml")
+      file_path = File.join(SpreeTheme::Engine.root,'db','themes','designs', "#{theme.site_id}_#{theme.id}_#{Time.now.to_i}.json")
     else
-      file_path =  File.join(theme.site.document_path, "#{theme.site_id}_#{theme.id}_#{Time.now.to_i}.yml")
+      file_path =  File.join(theme.site.document_path, "#{theme.site_id}_#{theme.id}_#{Time.now.to_i}.json")
     end
     open(file_path,'w') do |file|      
-      file.write(serializable_data.to_yaml)
+      file.write(serializable_data.to_json(:root=>false)) #  Marshal.dump(serializable_data)
     end
     puts "exported file #{file_path}"
   end
   
-  desc "import theme. params SEED_PATH, SITE_ID, THEME_ID." 
-       "SEED_PATH='1' path = spree_theme/db/themes/designs/{site_id}_{theme_id}_{time}.yml"
-       "default path=shops/rails_env/shop_id/{site_id}_{theme_id}_{time}.yml"
+  desc "import theme. params SEED_PATH, SITE_ID, THEME_ID. 
+        SEED_PATH='1' path = spree_theme/db/themes/designs/{site_id}_{theme_id}_{time}.json|yml
+        default path=shops/rails_env/shop_id/{site_id}_{theme_id}_{time}.json|yml"
   task :import_theme => :environment do
+    # rake task require class 
+    Spree::ParamValue; Spree::PageLayout; Spree::TemplateFile;Spree::TemplateRelease;
+    
     if ENV['SITE_ID']
       SpreeTheme.site_class.current = SpreeTheme.site_class.find ENV['SITE_ID']
     else
@@ -48,16 +51,30 @@ namespace :spree_theme do
     theme_id = (ENV['THEME_ID'] || SpreeTheme.site_class.current.template_themes.first.id)
        
     if ENV['SEED_PATH']
-      file_path = File.join(SpreeTheme::Engine.root,'db','themes','designs', "#{SpreeTheme.site_class.current.id}_#{theme_id}*.yml")
+      file_path = File.join(SpreeTheme::Engine.root,'db','themes','designs', "#{SpreeTheme.site_class.current.id}_#{theme_id}*.{byte,yml,json}")
     else
-      file_path = File.join(SpreeTheme.site_class.current.document_path, "#{SpreeTheme.site_class.current.id}_#{theme_id}*.yml")
+      file_path = File.join(SpreeTheme.site_class.current.document_path, "#{SpreeTheme.site_class.current.id}_#{theme_id}*.{byte,yml,json}")
     end
-    file_path = Dir[file_path].sort.last      
-    open(file_path) do |file|
-      theme = Spree::TemplateTheme.import_into_db(file)
+    file_path = Dir[file_path].sort.last 
+    if file_path.end_with? 'byte'
+      serialized_data = open(file_path, 'rb') do |file|
+          Marshal.load(file)
+      end                              
+    elsif file_path.end_with? 'json'
+      serialized_data = open( file_path ) do |file|      
+          serialized_data = JSON.load(file)
+      end  
+    else
+      serialized_data = open( file_path ) do |file|      
+          serialized_data = YAML::load(file)
+      end  
+    end
+    if serialized_data.present?
+      theme = Spree::TemplateTheme.import_into_db(serialized_data)
       #Rake::Task['spree_theme:release_theme'].execute(theme.id)
       theme.release({},{:page_only=>true})
-    end    
+    end
+
     puts "imported file #{file_path}"
   end
   
