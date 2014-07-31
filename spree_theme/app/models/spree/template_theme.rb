@@ -51,6 +51,7 @@ module Spree
     belongs_to :current_template_release, :class_name=>"TemplateRelease", :foreign_key=>"release_id"
     
     scope :by_layout,  lambda { |layout_id| where(:page_layout_root_id => layout_id) }
+    #use string as key instead of integer page_layout.id, exported theme in json, after restore, key is always string
     serialize :assigned_resource_ids, Hash
     scope :within_site, lambda { |site|where(:site_id=> site.id) }
     
@@ -85,10 +86,12 @@ module Spree
         original_node_ids = original_nodes.collect(&:id)
         new_node_ids = new_nodes.collect(&:id)
           # # update param_values
-          original_node_ids.each_with_index{|node_id,index|
-            ParamValue.update_all({ :page_layout_id=> new_node_ids[index], :page_layout_root_id=>new_theme.page_layout_root_id },["theme_id=? and page_layout_id=?",new_theme.id, node_id])
-            if new_theme.assigned_resource_ids[node_id].present?             
-              new_theme.assigned_resource_ids[new_node_ids[index]] = new_theme.assigned_resource_ids.delete(node_id)            
+          original_nodes.each_with_index{|node,index|
+            new_node = new_nodes[index]
+            ParamValue.update_all({ :page_layout_id=> new_node.id, :page_layout_root_id=>new_theme.page_layout_root_id },["theme_id=? and page_layout_id=?",new_theme.id, node.id])
+            page_layout_key = get_page_layout_key(node)
+            if new_theme.assigned_resource_ids[page_layout_key].present?             
+              new_theme.assigned_resource_ids[get_page_layout_key(new_node)] = new_theme.assigned_resource_ids.delete(page_layout_key)            
             end
           }
           new_theme.save!        
@@ -376,8 +379,9 @@ module Spree
       # return menu roots/ images /texts,  if none assgined, return [nil] or []
       def assigned_resources( resource_class, page_layout )
         resource_key = get_resource_class_key(resource_class)
-        if assigned_resource_ids.try(:[],page_layout.id).try(:[],resource_key).present?
-          resource_ids = assigned_resource_ids[page_layout.id][resource_key]
+        page_layout_key = get_page_layout_key(page_layout)
+        if assigned_resource_ids.try(:[],page_layout_key).try(:[],resource_key).present?
+          resource_ids = assigned_resource_ids[page_layout_key][resource_key]
           #in prepare_import, we want to know assigned resources
           #current shop is not designshop, we need use unscope here.
           if resource_ids.include? 0
@@ -402,8 +406,9 @@ module Spree
       def assigned_resource_id( resource_class, page_layout, resource_position=0 )
         #resource_id = 0
         resource_key = get_resource_class_key(resource_class)
-        if assigned_resource_ids.try(:[],page_layout.id).try(:[],resource_key).present?
-          resource_id = assigned_resource_ids[page_layout.id][resource_key][resource_position]
+        page_layout_key = get_page_layout_key(page_layout)
+        if assigned_resource_ids.try(:[],page_layout_key).try(:[],resource_key).present?
+          resource_id = assigned_resource_ids[page_layout_key][resource_key][resource_position]
         end
         resource_id||0
       end
@@ -413,10 +418,11 @@ module Spree
         #assigned_resource_ids={page_layout_id={:menu_ids=>[]}}
         self.assigned_resource_ids = {} unless assigned_resource_ids.present?        
         resource_key = get_resource_class_key(resource.class)
-        unless( self.assigned_resource_ids[page_layout.id].try(:[],resource_key).try(:[], resource_position) ==  resource.id )
-          self.assigned_resource_ids[page_layout.id]||={}
-          self.assigned_resource_ids[page_layout.id][resource_key]||=[]
-          self.assigned_resource_ids[page_layout.id][resource_key][resource_position] = resource.id 
+        page_layout_key = get_page_layout_key(page_layout)
+        unless( self.assigned_resource_ids[page_layout_key].try(:[],resource_key).try(:[], resource_position) ==  resource.id )
+          self.assigned_resource_ids[page_layout_key]||={}
+          self.assigned_resource_ids[page_layout_key][resource_key]||=[]
+          self.assigned_resource_ids[page_layout_key][resource_key][resource_position] = resource.id 
         end
         #Rails.logger.debug "assigned_resource_ids=#{assigned_resource_ids.inspect}"
         self.save! 
@@ -426,26 +432,34 @@ module Spree
         #assigned_resource_ids={page_layout_id={:menu_ids=>[]}}
         self.assigned_resource_ids = {} unless assigned_resource_ids.present?        
         resource_key = get_resource_class_key(resource_class)
-        self.assigned_resource_ids[page_layout.id]||={}
-        self.assigned_resource_ids[page_layout.id][resource_key]||=[]
-        self.assigned_resource_ids[page_layout.id][resource_key][resource_position] = 0
-        #Rails.logger.debug "assigned_resource_ids=#{assigned_resource_ids.inspect}"
+        page_layout_key = get_page_layout_key page_layout
+        self.assigned_resource_ids[page_layout_key]||={}
+        self.assigned_resource_ids[page_layout_key][resource_key]||=[]
+        self.assigned_resource_ids[page_layout_key][resource_key][resource_position] = 0
         self.save! 
       end
       
       #clear assigned_resource from theme
       def unassign_resource_from_theme!( resource )
         resource_key = get_resource_class_key(resource.class)
-        self.assigned_resource_ids.each_pair{|page_layout_id, resourcs|
+        self.assigned_resource_ids.each_pair{|page_layout_key, resourcs|
             if resourcs.key? resource_key
               resourcs[resource_key].each_with_index{|resource_id,idx|
                 if resource_id == resource.id
-                  assigned_resource_ids[page_layout_id][resource_key][idx] = 0
+                  assigned_resource_ids[page_layout_key][resource_key][idx] = 0
                 end
               }
             end
         }
         self.save!         
+      end
+      
+      def assigned_resource_ids_by_page_layout( page_layout )
+        assigned_resource_ids[get_page_layout_key(page_layout)]
+      end
+      
+      def get_page_layout_key( page_layout )
+        page_layout.id.to_s
       end
     end
     
