@@ -1,3 +1,4 @@
+require 'fileutils'
 namespace :spree_theme do
   desc "load themes"
   task :load_themes  => :environment do
@@ -24,13 +25,21 @@ namespace :spree_theme do
     end
     serializable_data = theme.serializable_data
     #add site_id into name is required, later we want to import, just specify site_id is OK.
+    theme_key = "#{theme.site_id}_#{theme.id}_#{Time.now.to_i}"
+    
     if ENV['SEED_PATH']
-      file_path = File.join(SpreeTheme::Engine.root,'db','themes','designs', "#{theme.site_id}_#{theme.id}_#{Time.now.to_i}.json")
+      file_path = File.join(SpreeTheme::Engine.root,'db','themes','designs', "#{theme_key}.yml")
     else
-      file_path =  File.join(theme.site.document_path, "#{theme.site_id}_#{theme.id}_#{Time.now.to_i}.json")
+      file_path =  File.join(theme.site.document_path, "#{theme_key}.yml")
     end
     open(file_path,'w') do |file|      
       file.write(serializable_data.to_json(:root=>false)) #  Marshal.dump(serializable_data)
+      theme_template_file_path = File.expand_path(theme_key, File.dirname(file_path)) 
+      Dir.mkdir theme_template_file_path
+      serializable_data['template_files'].each{|template_file|        
+        FileUtils.cp template_file.attachment.path, File.expand_path(template_file.attachment_file_name, theme_template_file_path) 
+      }
+    
     end
     puts "exported file #{file_path}"
   end
@@ -56,22 +65,31 @@ namespace :spree_theme do
       file_path = File.join(SpreeTheme.site_class.current.document_path, "#{SpreeTheme.site_class.current.id}_#{theme_id}*.{byte,yml,json}")
     end
     file_path = Dir[file_path].sort.last 
-    if file_path.end_with? 'byte'
-      serialized_data = open(file_path, 'rb') do |file|
-          Marshal.load(file)
-      end                              
-    elsif file_path.end_with? 'json'
+    
+    if file_path.end_with? 'json'
       serialized_data = open( file_path ) do |file|      
           serialized_data = JSON.load(file)
       end  
+      theme_key = File.basename( file_path, ".json" ) 
     else
       serialized_data = open( file_path ) do |file|      
           serialized_data = YAML::load(file)
       end  
+      theme_key = File.basename( file_path, ".yml" ) 
     end
+    
     if serialized_data.present?
       theme = Spree::TemplateTheme.import_into_db(serialized_data)
-      #Rake::Task['spree_theme:release_theme'].execute(theme.id)
+      theme_template_file_path = File.expand_path(theme_key, File.dirname(file_path))
+      
+      theme.template_files
+      theme.template_files.each{|template_file|
+        File.open(File.join(theme_template_file_path, template_file.attachment_file_name) ) do|file|
+          template_file.attachment = file
+          template_file.save!
+        end
+      }
+     #Rake::Task['spree_theme:release_theme'].execute(theme.id)
       theme.release({},{:page_only=>true})
     end
 
