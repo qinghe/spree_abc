@@ -59,6 +59,11 @@ module Spree
     attr_accessible :site_id,:page_layout_root_id,:title
     attr_accessible :assigned_resource_ids, :template_files #import require it.
     
+    # called by class/instance
+    def self.get_page_layout_key( page_layout )
+      page_layout.id.to_s
+    end
+    
     class << self
       # template has page_layout & param_values
       # 
@@ -458,9 +463,6 @@ module Spree
         assigned_resource_ids[get_page_layout_key(page_layout)]
       end
       
-      def get_page_layout_key( page_layout )
-        page_layout.id.to_s
-      end
     end
     
     # called in current_page_tag
