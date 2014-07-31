@@ -59,10 +59,6 @@ module Spree
     attr_accessible :site_id,:page_layout_root_id,:title
     attr_accessible :assigned_resource_ids, :template_files #import require it.
     
-    # called by class/instance
-    def self.get_page_layout_key( page_layout )
-      page_layout.id.to_s
-    end
     
     class << self
       # template has page_layout & param_values
@@ -94,9 +90,9 @@ module Spree
           original_nodes.each_with_index{|node,index|
             new_node = new_nodes[index]
             ParamValue.update_all({ :page_layout_id=> new_node.id, :page_layout_root_id=>new_theme.page_layout_root_id },["theme_id=? and page_layout_id=?",new_theme.id, node.id])
-            page_layout_key = get_page_layout_key(node)
+            page_layout_key = new_theme.get_page_layout_key(node)
             if new_theme.assigned_resource_ids[page_layout_key].present?             
-              new_theme.assigned_resource_ids[get_page_layout_key(new_node)] = new_theme.assigned_resource_ids.delete(page_layout_key)            
+              new_theme.assigned_resource_ids[new_theme.get_page_layout_key(new_node)] = new_theme.assigned_resource_ids.delete(page_layout_key)            
             end
           }
           new_theme.save!        
@@ -459,10 +455,9 @@ module Spree
         self.save!         
       end
       
-      def assigned_resource_ids_by_page_layout( page_layout )
-        assigned_resource_ids[get_page_layout_key(page_layout)]
+      def get_page_layout_key( page_layout )
+        page_layout.id.to_s
       end
-      
     end
     
     # called in current_page_tag
