@@ -83,18 +83,23 @@ module Spree
         self.within_site(SpreeTheme.site_class.designsite )
       end        
       
-      def fix_related_data_for_copied_theme(new_theme, new_nodes, original_nodes)
-        original_node_ids = original_nodes.collect(&:id)
-        new_node_ids = new_nodes.collect(&:id)
+      # original_theme may be attributes in hash
+      def fix_related_data_for_copied_theme(new_theme, new_nodes, original_theme, original_nodes, created_at)
           # # update param_values
+          original_theme_id = original_theme['id']
+          new_theme_id = new_theme.id
           original_nodes.each_with_index{|node,index|
             new_node = new_nodes[index]
-            ParamValue.update_all({ :page_layout_id=> new_node.id, :page_layout_root_id=>new_theme.page_layout_root_id },["theme_id=? and page_layout_id=?",new_theme.id, node.id])
+            ParamValue.where( :theme_id=>original_theme_id, :page_layout_id=>node.id, :created_at=>created_at ).update_all( :page_layout_id=> new_node.id, :page_layout_root_id=>new_theme.page_layout_root_id, :theme_id=>new_theme_id )
             page_layout_key = new_theme.get_page_layout_key(node)
             if new_theme.assigned_resource_ids[page_layout_key].present?             
               new_theme.assigned_resource_ids[new_theme.get_page_layout_key(new_node)] = new_theme.assigned_resource_ids.delete(page_layout_key)            
             end
           }
+          if created_at.present?
+            TemplateFile.where(:created_at=>created_at, :theme_id=>original_theme_id).update_all( :theme_id=>new_theme_id )
+            TemplateRelease.where(:created_at=>created_at, :theme_id=>original_theme_id).update_all( :theme_id=>new_theme_id )            
+          end
           new_theme.save!        
       end      
     end
@@ -227,7 +232,7 @@ module Spree
         sql = %Q!INSERT INTO #{table_name}(#{table_column_names.join(',')}) SELECT #{table_column_values.join(',')} FROM #{table_name} WHERE  (theme_id =#{self.id})! 
         self.class.connection.execute(sql)
         #update layout_id to new_layout.id    
-        self.class.fix_related_data_for_copied_theme(new_theme, new_layout.self_and_descendants, original_layout.self_and_descendants)        
+        self.class.fix_related_data_for_copied_theme(new_theme, new_layout.self_and_descendants, original_theme, original_layout.self_and_descendants)        
         return new_theme
       end
     
@@ -298,46 +303,58 @@ module Spree
       # params
       #   file - opened file
       # return imported theme 
-      def self.import_into_db( serialized_data )
+      def self.import_into_db( serialized_data, replace_exisit= false )
+        new_template = nil
         template = serialized_data.stringify_keys!.fetch 'template'
         transaction do 
+          created_at =   DateTime.now       
           if self.exists?(template['id'])
-            existing_template = self.find(template['id'])          
-            existing_template.destroy
+            if replace_exisit
+              existing_template = self.find(template['id'])                      
+              existing_template.destroy
+            else
+              raise "template #{template['id']} exisiting!"
+            end
           end
           # support yaml/json, record is model/hash
           #site id is 1 in exported yml, in spree_abc, design.dalianshops.com is 2
-          connection.insert_fixture(get_attributes_from_model(template), self.table_name)
+          attributes = get_attributes_from_model(template).merge!( 'created_at'=>created_at )
+          unless replace_exisit
+            attributes.except!('id')
+          end
+          connection.insert_fixture(attributes, self.table_name)
+          new_template = self.where( attributes.slice('created_at','title','page_layout_root_id') ).first
           # we need new template id
           # template = self.find_by_title template.title
           serialized_data['param_values'].each do |record|
             table_name = ParamValue.table_name
             attributes = get_attributes_from_model(record).except('id') 
             #for unknown reason param_value.created_at/updated_at may be nil
-            attributes['created_at']=Time.now if attributes['created_at'].blank?
+            attributes['created_at']=created_at
             attributes['updated_at']=attributes['created_at'] if attributes['updated_at'].blank?
             connection.insert_fixture(attributes, table_name)          
           end
-          template = self.find(template['id'])
           original_nodes = serialized_data['page_layouts']
           original_nodes = original_nodes.collect{|node| build_model_from_hash( PageLayout, node)}
           new_nodes = PageLayout.copy_to_new( original_nodes )
-          template.update_attribute(:page_layout_root_id, new_nodes.first.id)
-          fix_related_data_for_copied_theme(template, new_nodes, original_nodes)
+          new_template.update_attribute(:page_layout_root_id, new_nodes.first.id)
           #serialized_data[:page_layouts].each do |record|
           #  table_name = PageLayout.table_name
           #  connection.insert_fixture(record.attributes, table_name)          
-          #end          
+          #end 
           serialized_data['template_files'].each do |record|
             table_name = TemplateFile.table_name
-            connection.insert_fixture(get_attributes_from_model(record), table_name)          
-          end        
+            attributes = get_attributes_from_model(record).except('id').merge!('created_at'=>created_at)
+            connection.insert_fixture(attributes, table_name)          
+          end 
           serialized_data['template_releases'].each do |record|
             table_name = TemplateRelease.table_name
-            connection.insert_fixture(get_attributes_from_model(record), table_name)          
+            attributes = get_attributes_from_model(record).except('id').merge!('created_at'=>created_at)
+            connection.insert_fixture(attributes, table_name)          
           end
+          fix_related_data_for_copied_theme(new_template, new_nodes, template,  original_nodes, created_at)
         end
-        self.find(template[:id])
+        new_template
       end
       
       def self.build_model_from_hash(model_class, model_attributes)

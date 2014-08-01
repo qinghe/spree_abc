@@ -79,7 +79,7 @@ namespace :spree_theme do
     end
     
     if serialized_data.present?
-      theme = Spree::TemplateTheme.import_into_db(serialized_data)
+      theme = Spree::TemplateTheme.import_into_db(serialized_data, ENV['REPLACE'].present?)
       theme_template_file_path = File.expand_path(theme_key, File.dirname(file_path))
       
       theme.template_files
@@ -87,8 +87,12 @@ namespace :spree_theme do
         File.open(File.join(theme_template_file_path, template_file.attachment_file_name) ) do|file|
           template_file.attachment = file
           template_file.save!
-        end
+        end      
       }
+      if theme.template_releases.present?
+        theme.current_template_release = theme.template_releases.last
+        theme.save!
+      end
      #Rake::Task['spree_theme:release_theme'].execute(theme.id)
       theme.release({},{:page_only=>true})
     end

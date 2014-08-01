@@ -22,9 +22,8 @@ Rails.logger.debug "section_params.size = #{section_params.size }"
     temp_file.write( serializable_data.to_yaml )
     temp_file.size.should be > 0 #cause flush
     File.exists?(temp_file.path).should be_true
-    temp_file.rewind
 Rails.logger.debug "temp_file=#{temp_file.size}"    
-    Spree::TemplateTheme.import_into_db(temp_file)    
+    Spree::TemplateTheme.import_into_db(serializable_data)    
     temp_file.close    
   end
 
