@@ -312,8 +312,6 @@ module Spree
             if replace_exisit
               existing_template = self.find(template['id'])                      
               existing_template.destroy
-            else
-              raise "template #{template['id']} exisiting!"
             end
           end
           # support yaml/json, record is model/hash
