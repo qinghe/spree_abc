@@ -113,7 +113,11 @@ module Spree
             #    }
             #  end
               # remove original specify_taxon, taxon, template_file
-              new_theme.assigned_resource_ids[new_page_layout_key].clear
+              begin 
+                new_theme.new_theme.assigned_resources_by_page_layout new_node
+              rescue ActiveRecord::RecordNotFound
+                new_theme.assigned_resource_ids[new_page_layout_key].clear                 
+              end
             end  
           }          
           if created_at.present?
@@ -121,12 +125,6 @@ module Spree
             TemplateRelease.where(:created_at=>created_at, :theme_id=>original_theme_id).update_all( :theme_id=>new_theme_id )            
           end
           new_theme.save!
-          
-          
-          
-                    
-
-                  
       end      
     end
     
