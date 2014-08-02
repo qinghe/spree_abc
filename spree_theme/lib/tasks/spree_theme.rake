@@ -97,7 +97,7 @@ namespace :spree_theme do
       theme.release({},{:page_only=>true})
     end
 
-    puts "imported file #{file_path}"
+    puts "imported file #{file_path}, imported theme id is #{theme.id}"
   end
   
   desc "release theme without new template_release, rake spree_theme:release_theme[1]"
@@ -170,7 +170,18 @@ namespace :spree_theme do
       end      
     end
   end
-  
+  desc "load file from spree_theme/seeds in transaction, ex. load_seed['file_name']"
+  task :load_seed, [:seed_name] => :environment do |t, args|
+    file_path = File.join(SpreeTheme::Engine.root,'db','seeds',args.seed_name)
+    if File.exists? file_path
+      Spree::TemplateTheme.connection.transaction do
+        load file_path
+        puts "loaded file #{file_path}"
+      end
+    else
+      puts "can not find file #{file_path}"
+    end
+  end
   
   def exported_theme_file_name( theme )
     "#{theme.site_id}_#{template.id}_#{Time.now.to_i}.yml"
