@@ -22,16 +22,16 @@ module Spree
       #     ex. {"30"=>[""], "3"=>[""]} 
       #   template_files: required, a array of template_file attributes                        
       def import
-        template_files = params[:template_files].collect{|file| TemplateFile.new( file) }.select{|file| file.attachment.present? }
+        #FIXME support config template when import theme
+        #template_files = params[:template_files].collect{|file| TemplateFile.new( file) }.select{|file| file.attachment.present? }        
+        #assigned_resource_ids = Hash[ params[:assigned_resource_ids].collect{|key,val|
+        #   [key.to_i,{ @template_theme.get_resource_class_key(SpreeTheme.taxon_class) => val.select(&:present?).collect(&:to_i)}]
+        #}]
+        #new_theme_attributes = { :assigned_resource_ids=>assigned_resource_ids,
+        #  :template_files => template_files
+        #}
         
-        assigned_resource_ids = Hash[ params[:assigned_resource_ids].collect{|key,val|
-           [key.to_i,{ @template_theme.get_resource_class_key(SpreeTheme.taxon_class) => val.select(&:present?).collect(&:to_i)}]
-        }]
-        new_theme_attributes = { :assigned_resource_ids=>assigned_resource_ids,
-          :template_files => template_files
-        }
-        
-        imported_theme = @template_theme.import( new_theme_attributes )
+        imported_theme = @template_theme.import( new_theme_attributes = {} )
         if imported_theme.present?
           flash[:success] = Spree.t('notice_messages.theme_imported')
         else

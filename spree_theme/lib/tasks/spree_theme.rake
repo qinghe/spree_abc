@@ -122,8 +122,8 @@ namespace :spree_theme do
     #section_pieces = Spree::SectionPiece.all(:include=>:section_piece_params)    
     #sections =  Spree::Section.all(:include=>{:section_params=>:section_piece_params})
     #page_layouts = Spree::PageLayout.all(:include=>{:section_params=>:section_piece_params})    
-    if ENV['SITE_ID']
-      theme = SpreeTheme.site_class.find( ENV['SITE_ID'] ).template_themes.first 
+    if ENV['THEME_ID']
+      theme = Spree::TemplateTheme.find( ENV['THEME_ID'] )
     else
       theme = Spree::TemplateTheme.first        
     end    
