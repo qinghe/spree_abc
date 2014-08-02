@@ -502,7 +502,7 @@ module Spree
       end
     
       def get_resource_class_key( resource_class)
-        resource_class.to_s.underscore.to_sym
+        resource_class.to_s.underscore
       end
     end  
     
