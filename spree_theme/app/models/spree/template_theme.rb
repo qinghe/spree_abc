@@ -256,7 +256,7 @@ module Spree
         sql = %Q!INSERT INTO #{table_name}(#{table_column_names.join(',')}) SELECT #{table_column_values.join(',')} FROM #{table_name} WHERE  (theme_id =#{self.id})! 
         self.class.connection.execute(sql)
         #update layout_id to new_layout.id    
-        self.class.fix_related_data_for_copied_theme(new_theme, new_layout.self_and_descendants, new_template_files, original_theme, original_layout.self_and_descendants, original_template_files)        
+        self.class.fix_related_data_for_copied_theme(new_theme, new_layout.self_and_descendants, new_template_files=nil, self, original_layout.self_and_descendants, original_template_files=nil, nil)        
         return new_theme
       end
     

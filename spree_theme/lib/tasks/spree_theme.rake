@@ -108,13 +108,13 @@ namespace :spree_theme do
   end  
 
   desc "get css of theme one, rake spree_theme:get_css[1,2,'block']"
-  task :get_css, [:page_layout_id,:section_id, :class_name] =>[ :environment ] do |t, args|
+  task :get_css, [:theme_id, :page_layout_id,:section_id, :class_name] =>[ :environment ] do |t, args|
     #theme = Spree::TemplateTheme.first
     class_name = args.class_name
-    lg = PageGenerator.generator( DefaultTaxon.instance, SpreeTheme.site_class.designsite.template_theme)
+    lg = PageGenerator.generator( DefaultTaxon.instance, SpreeTheme.site_class.designsite.template_themes.find(args.theme_id) )
     template = lg.context[:template]
     template.select(args.page_layout_id.to_i, args.section_id.to_i)
-    puts "template 1, page_layout_id=#{args.page_layout_id}_#{args.section_id}, #{class_name}= #{template.css(class_name)}"
+    puts "template #{args.theme_id}, page_layout_id=#{args.page_layout_id}_#{args.section_id}, #{class_name}= #{template.css(class_name)}"
   end
   
   desc "test theme"
