@@ -97,22 +97,22 @@ module Spree
             new_page_layout_key = new_theme.get_page_layout_key(new_node)
             if new_theme.assigned_resource_ids[page_layout_key].present? 
               new_theme.assigned_resource_ids[new_page_layout_key] = new_theme.assigned_resource_ids.delete(page_layout_key)            
+              # set template_file id with new created        
+              if new_theme.assigned_resource_ids[new_page_layout_key][template_file_key].present?
+                new_theme.assigned_resource_ids[new_page_layout_key][template_file_key].each_with_index{|assigned_template_file_id, assigned_template_file_index|
+                  if assigned_template_file_id>0 #has assigned template file, replace it with new id
+                    new_template_file = nil
+                    original_template_files.each_with_index{|attributes, original_template_file_index|
+                      if attributes['id']==assigned_template_file_id
+                        new_template_file = new_template_files[original_template_file_index]
+                        break
+                      end
+                    }
+                    new_theme.assigned_resource_ids[new_page_layout_key][template_file_key][assigned_template_file_index] = new_template_file.id 
+                  end
+                }
+              end
             end  
-            # set template_file id with new created        
-            if new_theme.assigned_resource_ids[new_page_layout_key][template_file_key].present?
-              new_theme.assigned_resource_ids[new_page_layout_key][template_file_key].each_with_index{|assigned_template_file_id, assigned_template_file_index|
-                if assigned_template_file_id>0 #has assigned template file, replace it with new id
-                  new_template_file = nil
-                  original_template_files.each_with_index{|attributes, original_template_file_index|
-                    if attributes['id']==assigned_template_file_id
-                      new_template_file = new_template_files[original_template_file_index]
-                      break
-                    end
-                  }
-                  new_theme.assigned_resource_ids[new_page_layout_key][template_file_key][assigned_template_file_index] = new_template_file.id 
-                end
-              }
-            end
           }          
           if created_at.present?
             TemplateFile.where(:created_at=>created_at, :theme_id=>original_theme_id).update_all( :theme_id=>new_theme_id )
