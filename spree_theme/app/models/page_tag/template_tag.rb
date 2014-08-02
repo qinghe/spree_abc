@@ -97,7 +97,6 @@ module PageTag
     #                    
     def select(page_layout_id, section_id=0)
       #current selected section instance, page_layout record
-Rails.logger.debug "select page_layout_id=#{page_layout_id},section_id=#{section_id}"      
       page_layout = page_layout_tree.select{|node| node.id == page_layout_id}.first
       self.current_piece = WrappedPageLayout.new(self, page_layout, section_id)
     end
