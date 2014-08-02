@@ -11,7 +11,8 @@ describe Spree::TemplateTheme do
     page_layouts = new_theme.page_layout.self_and_descendants    
     
     page_layouts.size.should == serializable_data['page_layouts'].size
-
+    #template_file same
+    #template.assigned_resource_ids updated for new resource_id, like template_file
   end
 
 end

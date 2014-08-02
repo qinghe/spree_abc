@@ -84,23 +84,47 @@ module Spree
       end        
       
       # original_theme may be attributes in hash
-      def fix_related_data_for_copied_theme(new_theme, new_nodes, original_theme, original_nodes, created_at)
+      def fix_related_data_for_copied_theme(new_theme, new_nodes, new_template_files, original_theme, original_nodes, original_template_files, created_at)
           # # update param_values
           original_theme_id = original_theme['id']
           new_theme_id = new_theme.id
+          template_file_key = new_theme.get_resource_class_key( Spree::TemplateFile )
+          
           original_nodes.each_with_index{|node,index|
             new_node = new_nodes[index]
             ParamValue.where( :theme_id=>original_theme_id, :page_layout_id=>node.id, :created_at=>created_at ).update_all( :page_layout_id=> new_node.id, :page_layout_root_id=>new_theme.page_layout_root_id, :theme_id=>new_theme_id )
             page_layout_key = new_theme.get_page_layout_key(node)
-            if new_theme.assigned_resource_ids[page_layout_key].present?             
-              new_theme.assigned_resource_ids[new_theme.get_page_layout_key(new_node)] = new_theme.assigned_resource_ids.delete(page_layout_key)            
+            new_page_layout_key = new_theme.get_page_layout_key(new_node)
+            if new_theme.assigned_resource_ids[page_layout_key].present? 
+              new_theme.assigned_resource_ids[new_page_layout_key] = new_theme.assigned_resource_ids.delete(page_layout_key)            
+            end  
+            # set template_file id with new created        
+            if new_theme.assigned_resource_ids[new_page_layout_key][template_file_key].present?
+              new_theme.assigned_resource_ids[new_page_layout_key][template_file_key].each_with_index{|assigned_template_file_id, assigned_template_file_index|
+                if assigned_template_file_id>0 #has assigned template file, replace it with new id
+                  new_template_file = nil
+                  original_template_files.each_with_index{|attributes, original_template_file_index|
+                    if attributes['id']==assigned_template_file_id
+                      new_template_file = new_template_files[original_template_file_index]
+                      break
+                    end
+                  }
+                  new_theme.assigned_resource_ids[new_page_layout_key][template_file_key][assigned_template_file_index] = new_template_file.id 
+                end
+              }
             end
-          }
+          }          
           if created_at.present?
             TemplateFile.where(:created_at=>created_at, :theme_id=>original_theme_id).update_all( :theme_id=>new_theme_id )
             TemplateRelease.where(:created_at=>created_at, :theme_id=>original_theme_id).update_all( :theme_id=>new_theme_id )            
           end
-          new_theme.save!        
+          new_theme.save!
+          
+          
+          
+                    
+
+                  
       end      
     end
     
@@ -232,7 +256,7 @@ module Spree
         sql = %Q!INSERT INTO #{table_name}(#{table_column_names.join(',')}) SELECT #{table_column_values.join(',')} FROM #{table_name} WHERE  (theme_id =#{self.id})! 
         self.class.connection.execute(sql)
         #update layout_id to new_layout.id    
-        self.class.fix_related_data_for_copied_theme(new_theme, new_layout.self_and_descendants, original_theme, original_layout.self_and_descendants)        
+        self.class.fix_related_data_for_copied_theme(new_theme, new_layout.self_and_descendants, new_template_files, original_theme, original_layout.self_and_descendants, original_template_files)        
         return new_theme
       end
     
@@ -339,18 +363,20 @@ module Spree
           #serialized_data[:page_layouts].each do |record|
           #  table_name = PageLayout.table_name
           #  connection.insert_fixture(record.attributes, table_name)          
-          #end 
+          #end
+          new_template_files = [] 
           serialized_data['template_files'].each do |record|
             table_name = TemplateFile.table_name
-            attributes = get_attributes_from_model(record).except('id').merge!('created_at'=>created_at)
-            connection.insert_fixture(attributes, table_name)          
+            attributes = get_attributes_from_model(record).except('id').merge!('created_at'=>created_at,'theme_id'=>new_template.id)
+            connection.insert_fixture(attributes, table_name)  
+            new_template_files << TemplateFile.where( attributes.slice('created_at','theme_id') ).first         
           end 
           serialized_data['template_releases'].each do |record|
             table_name = TemplateRelease.table_name
-            attributes = get_attributes_from_model(record).except('id').merge!('created_at'=>created_at)
+            attributes = get_attributes_from_model(record).except('id').merge!('created_at'=>created_at,'theme_id'=>new_template.id)
             connection.insert_fixture(attributes, table_name)          
           end
-          fix_related_data_for_copied_theme(new_template, new_nodes, template,  original_nodes, created_at)
+          fix_related_data_for_copied_theme(new_template, new_nodes, new_template_files, template,  original_nodes, serialized_data['template_files'], created_at)
         end
         new_template
       end
@@ -501,7 +527,7 @@ module Spree
         end
       end
     
-      def get_resource_class_key( resource_class)
+      def get_resource_class_key( resource_class )
         resource_class.to_s.underscore
       end
     end  
