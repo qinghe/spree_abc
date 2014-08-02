@@ -114,7 +114,7 @@ module Spree
             #  end
               # remove original specify_taxon, taxon, template_file
               begin 
-                new_theme.new_theme.assigned_resources_by_page_layout new_node
+                new_theme.assigned_resources_by_page_layout new_node
               rescue ActiveRecord::RecordNotFound
                 new_theme.assigned_resource_ids[new_page_layout_key].clear                 
               end
