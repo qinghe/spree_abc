@@ -7,7 +7,8 @@ module PageTag
     
     def param_values_hash
       if @param_values_hash.nil?
-        param_values =  Spree::ParamValue.find(:all,:conditions=>["theme_id=?", self.template_tag.id],
+        theme_id = self.template_tag.theme.original_template_theme.id
+        param_values =  Spree::ParamValue.find(:all,:conditions=>["theme_id=?", theme_id],
           :include=>[:section_param=>:section_piece_param], :order=>'spree_param_values.page_layout_id,spree_section_piece_params.class_name '
         )
         

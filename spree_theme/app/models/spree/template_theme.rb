@@ -228,6 +228,10 @@ module Spree
         SpreeTheme.site_class.current.template_theme ==self 
       end
       
+      # template theme contained native page layout and param values
+      def original_template_theme
+        self.class.where(:page_layout_root_id=>self.page_layout_root_id).first
+      end
       # Usage: user want to copy this layout&theme to new for editing or backup.
       #        we need copy param_value and theme_images
       #        note that it is only for root. 

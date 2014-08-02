@@ -86,9 +86,9 @@ module PageTag
       self.page_layout_tree = theme.page_layout.self_and_descendants()
     end
     
-    def id
-      page_generator.theme.id
-    end
+    #def id
+    #  page_generator.theme.id
+    #end
         
     #Usage: call this in template to initialize current section and section_piece
     #        should call this before call any method.
