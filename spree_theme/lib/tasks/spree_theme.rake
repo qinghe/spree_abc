@@ -111,7 +111,7 @@ namespace :spree_theme do
   task :get_css, [:theme_id, :page_layout_id,:section_id, :class_name] =>[ :environment ] do |t, args|
     #theme = Spree::TemplateTheme.first
     class_name = args.class_name
-    lg = PageGenerator.generator( DefaultTaxon.instance, SpreeTheme.site_class.designsite.template_themes.find(args.theme_id) )
+    lg = PageGenerator.generator( DefaultTaxon.instance, Spree::TemplateTheme.find(args.theme_id) )
     template = lg.context[:template]
     template.select(args.page_layout_id.to_i, args.section_id.to_i)
     puts "template #{args.theme_id}, page_layout_id=#{args.page_layout_id}_#{args.section_id}, #{class_name}= #{template.css(class_name)}"
