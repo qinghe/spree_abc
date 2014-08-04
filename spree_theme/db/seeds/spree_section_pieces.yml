@@ -1284,7 +1284,7 @@ slider:
         { height: $('.<%=@template.current_piece.section_selector%>_inner').css( 'height' ),
           width: $('.<%=@template.current_piece.section_selector%>_inner').css( 'width' )}
       );
-      var options = { $AutoPlay: true ,
+      var options = { $FillMode: 2,  $AutoPlay: true ,
         $BulletNavigatorOptions: { $Class: $JssorBulletNavigator$, $ChanceToShow: 2,  $AutoCenter:1  }
         };
       var jssor_slider1 = new $JssorSlider$('<%=g_piece_selector%>', options);
