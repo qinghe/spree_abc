@@ -1256,7 +1256,7 @@ slider:
   is_selectable: "1"
   is_container: "0"
   html: |    
-    <div id="<%=g_piece_selector%>" style="">
+    <div id="<%=g_piece_selector%>" style="<%=@template.css(:slides)%>">
     <% if @template.menu.present? %>
       <!-- Loading Screen -->
       <div u="loading" style="position: absolute; top: 0px; left: 0px;width: 100%;height:100%;">
@@ -1280,10 +1280,10 @@ slider:
     </div>
     <script>
     jQuery(document).ready(function ($) {
-      $('#<%=g_piece_selector%>').css(
-        { height: $('.<%=@template.current_piece.section_selector%>_inner').css( 'height' ),
-          width: $('.<%=@template.current_piece.section_selector%>_inner').css( 'width' )}
-      );
+      //$('#<%=g_piece_selector%>').css(
+      //  { height: $('.<%=@template.current_piece.section_selector%>_inner').css( 'height' ),
+      //    width: $('.<%=@template.current_piece.section_selector%>_inner').css( 'width' )}
+      //);
       var options = { $FillMode: 2,  $AutoPlay: true ,
         $BulletNavigatorOptions: { $Class: $JssorBulletNavigator$, $ChanceToShow: 2,  $AutoCenter:1  }
         };
@@ -1299,9 +1299,9 @@ slider:
       }
       //Scale slider immediately
       ScaleSlider();
-      if (!navigator.userAgent.match(/(iPhone|iPod|iPad|BlackBerry|IEMobile)/)) {
-          $(window).bind('resize', ScaleSlider);
-      }
+      //if (!navigator.userAgent.match(/(iPhone|iPod|iPad|BlackBerry|IEMobile)/)) {
+      //    $(window).bind('resize', ScaleSlider);
+      //}
       //responsive code end
     });
     </script>
