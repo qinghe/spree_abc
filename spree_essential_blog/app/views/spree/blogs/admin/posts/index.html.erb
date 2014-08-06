@@ -1,0 +1,55 @@
+<div class='toolbar'>
+  <ul class='actions'>
+    <li>
+      <p><%= button_link_to "New Post", new_object_url, :icon => 'add' %></p>
+    </li>
+  </ul>
+  <br class='clear' />
+</div>
+
+<h1>Listing Posts</h1>
+
+<table class="index">
+  <thead>
+	<tr>
+    	<th><%= sort_link @search, :title, t("activerecord.attributes.post.title") %></th>
+    	<th><%= sort_link @search, :blog,  t("activerecord.attributes.blog.model_name") %></th>
+    	<th><%= sort_link @search, :posted_at, t("activerecord.attributes.post.posted_at") %></th>
+    	<th><%= sort_link @search, :live, t("activerecord.attributes.post.live") %></th>
+    	<th><%= t("action") %></th>
+	</tr>
+  </thead>
+  <tbody>
+    <%- @collection.each do |post|%>
+    <tr id="<%= dom_id post %>">
+      <td><%= link_to post.title, object_url(post) %></td>
+      <td><%= post.blog.nil? ? "n/a" : link_to(post.blog.name, admin_posts_path(:search => { :blog_id_equals => post.blog_id })) %></td>
+      <td><%= l post.posted_at, :format => :date_time %></td>
+      <td><%= post.live ? 'Yes' : 'No' %></td>
+      <td>
+      	<%= link_to_edit post %> &nbsp;
+      	<%= link_to_delete post %>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= paginate @collection %>
+
+<% content_for :sidebar do %>
+  <div class="box">
+    <h3><%= t(:search) %></h3>
+    <%= search_form_for [:admin, @search] do |f| %>
+      <p>
+        <%= f.label :blog_id_eq, t("activerecord.attributes.blog.model_name") %><br />
+        <%= f.select :blog_id_eq, Spree::Blog.to_options, :selected => (params[:q][:blog_id_eq] if params[:q]), :include_blank => true %>
+      </p>
+      <p>
+        <%= f.label :title_cont, t("activerecord.attributes.post.title") %><br />
+        <%= f.text_field :title_cont, :size => 25 %>
+      </p>
+      <p><%= button t("search") %></p>
+    <% end %>
+  </div>
+<% end %>
