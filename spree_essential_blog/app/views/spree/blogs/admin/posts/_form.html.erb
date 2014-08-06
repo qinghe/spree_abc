@@ -1,6 +1,6 @@
 <%= form.field_container :blog_id do %>
   <%= form.label :blog_id, t("activerecord.attributes.blog.model_name") %><br />
-  <%= form.select :blog_id, Spree::Blog.to_options, :class => 'title' %>
+  <%= form.select :blog_id, SpreeEssentialBlog.taxon_class.to_options, :class => 'title' %>
   <%= error_message_on :post, :blog_id %>
 <% end %>
 

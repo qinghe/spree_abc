@@ -25,7 +25,7 @@ private
     @extension_routes ||= SpreeEssentials.essentials.map { |key, cls|
       route = cls.tab[:route] || "admin_#{key}"
       send("#{route}_path") rescue "##{key}"      
-    }.push(spree.admin_uploads_path)    
+    }    
   end
   
 end

@@ -8,19 +8,16 @@ class ActsAsTaggableOnPosts < ActiveRecord::Migration
 
     create_table :spree_taggings do |t|
       t.references :tag
-
       # You should make sure that the column created is
       # long enough to store the required class names.
       t.references :taggable, :polymorphic => true
       t.references :tagger, :polymorphic => true
-
       t.string :context
-
       t.datetime :created_at
     end
 
     add_index :spree_taggings, :tag_id
-    add_index :spree_taggings, [:taggable_id, :taggable_type, :context]
+    add_index :spree_taggings, [:taggable_id, :taggable_type, :context], :name=>"spree_taggings_id_type_context"
   end
 
   def self.down

@@ -7,10 +7,10 @@ class Spree::Post < ActiveRecord::Base
   # for flash messages    
   alias_attribute :name, :title
   
-  has_and_belongs_to_many :post_categories, :join_table => "spree_post_categories_posts", :class_name => "Spree::PostCategory"
+  has_and_belongs_to_many :post_categories, :join_table => "spree_taxons_posts", :class_name => "Spree::Taxon"
   alias_attribute :categories, :post_categories
   
-  belongs_to :blog, :class_name => "Spree::Blog"
+  belongs_to :blog, :class_name => "Spree::Taxon"
   has_many :post_products, :dependent => :destroy
   has_many :products, :through => :post_products
   has_many :images, :as => :viewable, :class_name => "Spree::PostImage", :order => :position, :dependent => :destroy

@@ -43,7 +43,7 @@
     <%= search_form_for [:admin, @search] do |f| %>
       <p>
         <%= f.label :blog_id_eq, t("activerecord.attributes.blog.model_name") %><br />
-        <%= f.select :blog_id_eq, Spree::Blog.to_options, :selected => (params[:q][:blog_id_eq] if params[:q]), :include_blank => true %>
+        <%= f.select :blog_id_eq, SpreeEssentialBlog.taxon_class.to_options, :selected => (params[:q][:blog_id_eq] if params[:q]), :include_blank => true %>
       </p>
       <p>
         <%= f.label :title_cont, t("activerecord.attributes.post.title") %><br />

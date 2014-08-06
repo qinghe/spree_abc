@@ -1,6 +1,7 @@
 module SpreeEssentialBlog  
   class Engine < Rails::Engine
-  
+    #require 'spree/core'  
+    #isolate_namespace Spree
     engine_name "spree_essential_blog"
 
     config.autoload_paths += %W(#{config.root}/lib)
