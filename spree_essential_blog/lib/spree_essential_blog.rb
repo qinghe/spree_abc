@@ -12,7 +12,7 @@ module SpreeEssentialBlog
   end
   
   def self.sub_tab
-    [:posts, { :label => "spree.admin.subnav.posts", :match_path => "/posts" }]
+    [:posts, { :label => "spree.admin.tab.posts", :match_path => "/posts" }]
   end
 
   def self.taxon_class

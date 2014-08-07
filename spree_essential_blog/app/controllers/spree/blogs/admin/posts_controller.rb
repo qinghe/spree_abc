@@ -16,11 +16,7 @@ private
   end
   
   def location_after_save
-    if @post.created_at == @post.updated_at
-      edit_admin_post_url(@post)
-    else
-      admin_posts_url
-    end
+    admin_posts_url
   end 
   
   def find_resource

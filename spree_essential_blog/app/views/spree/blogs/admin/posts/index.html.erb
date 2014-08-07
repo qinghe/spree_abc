@@ -1,10 +1,10 @@
 <% content_for :page_title do %>
-  <%= Spree.t(:listing_posts) %>
+  <%= Spree.t('post_list') %>
 <% end %>
 
 <% content_for :page_actions do %>
   <li>
-    <%= button_link_to Spree.t(:new_post), new_admin_post_url, :icon => 'icon-plus', :id => 'admin_new_post' %>
+    <%= button_link_to Spree.t('new_post'), new_admin_post_url, :icon => 'icon-plus', :id => 'admin_new_post' %>
   </li>
 <% end if can? :edit, Spree::Post.new %>
 
@@ -41,8 +41,7 @@
 
 <table class="index">
     <colgroup>
-       <col style="width: 35%;">
-       <col style="width: 20%;">
+       <col style="width: 50%;">
        <col style="width: 18%;">
        <col style="width: 10%;">
        <col style="width: 14%;">
@@ -50,7 +49,6 @@
   <thead>
 	<tr>
     	<th><%= sort_link @search, :title, t("activerecord.attributes.post.title") %></th>
-    	<th><%= sort_link @search, :blog,  t("activerecord.attributes.blog.model_name") %></th>
     	<th><%= sort_link @search, :posted_at, t("activerecord.attributes.post.posted_at") %></th>
     	<th><%= sort_link @search, :live, t("activerecord.attributes.post.live") %></th>
     	<th class="actions"></th>
@@ -60,7 +58,6 @@
     <%- @collection.each do |post|%>
     <tr id="<%= spree_dom_id post %>" class="<%= cycle('odd', 'even') %>">
       <td ><%= link_to post.title, object_url(post) %></td>
-      <td class="align-center"><%= post.blog.nil? ? "n/a" : link_to(post.blog.name, admin_posts_path(:search => { :blog_id_equals => post.blog_id })) %></td>
       <td class="align-center"><%= pretty_time post.posted_at %></td>
       <td class="align-center"><%= post.live ? 'Yes' : 'No' %></td>
       <td class="actions">

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140729142843) do
+ActiveRecord::Schema.define(:version => 20140807132804) do
 
   create_table "ckeditor_assets", :force => true do |t|
     t.integer  "site_id",                         :default => 0, :null => false
@@ -369,6 +369,29 @@ ActiveRecord::Schema.define(:version => 20140729142843) do
   end
 
   add_index "spree_payments", ["order_id"], :name => "index_spree_payments_on_order_id"
+
+  create_table "spree_post_products", :force => true do |t|
+    t.integer "post_id"
+    t.integer "product_id"
+    t.integer "position"
+  end
+
+  create_table "spree_posts", :force => true do |t|
+    t.string   "title"
+    t.string   "path"
+    t.string   "teaser"
+    t.datetime "posted_at"
+    t.text     "body"
+    t.string   "author"
+    t.boolean  "live",       :default => true
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
+  end
+
+  create_table "spree_posts_taxons", :id => false, :force => true do |t|
+    t.integer "post_id"
+    t.integer "taxon_id"
+  end
 
   create_table "spree_preferences", :force => true do |t|
     t.text     "value"
@@ -829,7 +852,6 @@ ActiveRecord::Schema.define(:version => 20140729142843) do
     t.string   "assigned_resource_ids", :limit => 1024, :default => "", :null => false
     t.datetime "created_at",                                            :null => false
     t.datetime "updated_at",                                            :null => false
-    t.string   "specific_taxon_ids",                    :default => ""
   end
 
   create_table "spree_tokenized_permissions", :force => true do |t|
@@ -917,6 +939,23 @@ ActiveRecord::Schema.define(:version => 20140729142843) do
     t.datetime "created_at",                            :null => false
     t.datetime "updated_at",                            :null => false
     t.integer  "site_id"
+  end
+
+  create_table "taggings", :force => true do |t|
+    t.integer  "tag_id"
+    t.integer  "taggable_id"
+    t.string   "taggable_type"
+    t.integer  "tagger_id"
+    t.string   "tagger_type"
+    t.string   "context"
+    t.datetime "created_at"
+  end
+
+  add_index "taggings", ["tag_id"], :name => "index_taggings_on_tag_id"
+  add_index "taggings", ["taggable_id", "taggable_type", "context"], :name => "taggings_id_type_context"
+
+  create_table "tags", :force => true do |t|
+    t.string "name"
   end
 
 end

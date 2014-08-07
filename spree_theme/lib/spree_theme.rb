@@ -6,7 +6,7 @@ require 'spree_theme/section_piece_param_helper'
 
 module SpreeTheme
   
-  mattr_accessor :site_class, :taxon_class
+  mattr_accessor :site_class, :taxon_class, :post_class
 
   def self.site_class
     if @@site_class.is_a?(Class)
@@ -22,6 +22,14 @@ module SpreeTheme
       raise "Spree.taxon_class MUST be a String object, not a Class object."
     elsif @@taxon_class.is_a?(String)
       @@taxon_class.constantize
+    end
+  end
+
+  def self.post_class
+    if @@post_class.is_a?(Class)
+      raise "Spree.post_class MUST be a String object, not a Class object."
+    elsif @@post_class.is_a?(String)
+      @@post_class.constantize
     end
   end
 end
