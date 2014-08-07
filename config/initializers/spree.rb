@@ -25,6 +25,6 @@ SpreeMultiSite::Config.tap do |config|
 end
 
 SpreeEditor::Config.tap do |config|
-  config.ids = "product_description taxon_description template_text_body"
+  config.ids = "product_description taxon_description template_text_body, post_body"
   config.current_editor = "CKEditor"
 end
