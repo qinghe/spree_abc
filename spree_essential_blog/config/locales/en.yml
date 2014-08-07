@@ -20,6 +20,10 @@ en:
         model_name: Category
         name: Name
         permalink: Permalink
+    models:
+      spree/post:
+        one: post
+        other: posts
 
   spree:
 

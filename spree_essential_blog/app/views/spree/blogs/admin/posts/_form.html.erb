@@ -1,44 +1,35 @@
-<%= form.field_container :blog_id do %>
-  <%= form.label :blog_id, t("activerecord.attributes.blog.model_name") %><br />
-  <%= form.select :blog_id, SpreeEssentialBlog.taxon_class.to_options, :class => 'title' %>
-  <%= error_message_on :post, :blog_id %>
-<% end %>
-
 <%= form.field_container :title do %>
   <%= form.label :title, t("activerecord.attributes.post.title") %><br />
-  <%= form.text_field :title, :class => 'title' %>
+  <%= form.text_field :title, :class => 'title fullwidth' %>
   <%= error_message_on :post, :title %>
 <% end %>
 
 <%= form.field_container :posted_at do %>
   <%= form.label :posted_at, t("activerecord.attributes.post.posted_at") %><br />
-  <%= form.text_field :posted_at, :class => 'text', :value => ((l @post.posted_at, :format => :long) unless @post.posted_at.nil?) %><br />
+  <%= form.text_field :posted_at, :class => 'datetime fullwidth' %>
+  
   <%= error_message_on :post, :posted_at %>
 <% end %>
 
 <%= form.field_container :body do %>
-  <%= form.label :body, t("activerecord.attributes.post.body") %><%= markdown_helper %><br />
-  <%= form.text_area :body  %>
+  <%= form.label :body, t("activerecord.attributes.post.body") %><br />
+  <%= form.text_area :body, :class => 'fullwidth'  %>
   <%= error_message_on :post, :body %>
 <% end %>
 
 <%= form.field_container :tag_list do %>
   <%= form.label :tag_list, t("activerecord.attributes.post.tags") %><br />
-  <%= form.text_field :tag_list, :class => 'text' %><br />
+  <%= form.text_field :tag_list, :class => 'text fullwidth' %><br />
   <%= error_message_on :post, :tag_list %>
 <% end %>
+
+<%= form.field_container :taxons do %>
+  <%= form.label :taxon_ids, Spree.t('taxons') %><br>
+  <%= form.hidden_field :taxon_ids, :value => @post.taxon_ids.join(','), :class => 'text fullwidth'  %>
+<% end %>
+
 
 <%= form.field_container :live do %>
   <%= form.check_box :live  %> <%= form.label :live, t("activerecord.attributes.post.live") %><br />
 <% end %>
 
-<% content_for :head do %>
-  <script type="text/javascript">
-  //<![CDATA[
-    $(document).ready(function() {
-      $('#post_posted_at').autodate();
-      $('#post_body').markItUp(markdownSettings);
-    });
-  //]]>
-  </script>
-<% end %>

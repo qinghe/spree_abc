@@ -1,55 +1,83 @@
-<div class='toolbar'>
-  <ul class='actions'>
-    <li>
-      <p><%= button_link_to "New Post", new_object_url, :icon => 'add' %></p>
-    </li>
-  </ul>
-  <br class='clear' />
-</div>
+<% content_for :page_title do %>
+  <%= Spree.t(:listing_posts) %>
+<% end %>
 
-<h1>Listing Posts</h1>
+<% content_for :page_actions do %>
+  <li>
+    <%= button_link_to Spree.t(:new_post), new_admin_post_url, :icon => 'icon-plus', :id => 'admin_new_post' %>
+  </li>
+<% end if can? :edit, Spree::Post.new %>
+
+<% content_for :table_filter_title do %>
+  <%= Spree.t(:search) %>
+<% end %>
+
+<% content_for :table_filter do %>
+  <div data-hook="admin_posts_sidebar">
+
+    <%= search_form_for [:admin, @search] do |f| %>
+
+        <div data-hook="admin_posts_index_search">
+          <div class="alpha nine columns">
+            <div class="field">
+            <%= f.label :title_cont, t("activerecord.attributes.post.title") %><br />
+            <%= f.text_field :title_cont, :size => 25 %>
+            </div>
+          </div>
+        </div>
+
+        <div class="clear"></div>
+
+        <div class="form-buttons actions filter-actions" data-hook="admin_posts_index_search_buttons">
+          <%= button Spree.t(:search), 'icon-search' %>
+        </div>
+    <% end %>
+  </div>
+<% end %>
+
+<%= paginate @collection %>
+
+<% if @collection.any? %>
 
 <table class="index">
+    <colgroup>
+       <col style="width: 35%;">
+       <col style="width: 20%;">
+       <col style="width: 18%;">
+       <col style="width: 10%;">
+       <col style="width: 14%;">
+    </colgroup>    
   <thead>
 	<tr>
     	<th><%= sort_link @search, :title, t("activerecord.attributes.post.title") %></th>
     	<th><%= sort_link @search, :blog,  t("activerecord.attributes.blog.model_name") %></th>
     	<th><%= sort_link @search, :posted_at, t("activerecord.attributes.post.posted_at") %></th>
     	<th><%= sort_link @search, :live, t("activerecord.attributes.post.live") %></th>
-    	<th><%= t("action") %></th>
+    	<th class="actions"></th>
 	</tr>
   </thead>
   <tbody>
     <%- @collection.each do |post|%>
-    <tr id="<%= dom_id post %>">
-      <td><%= link_to post.title, object_url(post) %></td>
-      <td><%= post.blog.nil? ? "n/a" : link_to(post.blog.name, admin_posts_path(:search => { :blog_id_equals => post.blog_id })) %></td>
-      <td><%= l post.posted_at, :format => :date_time %></td>
-      <td><%= post.live ? 'Yes' : 'No' %></td>
-      <td>
-      	<%= link_to_edit post %> &nbsp;
-      	<%= link_to_delete post %>
+    <tr id="<%= spree_dom_id post %>" class="<%= cycle('odd', 'even') %>">
+      <td ><%= link_to post.title, object_url(post) %></td>
+      <td class="align-center"><%= post.blog.nil? ? "n/a" : link_to(post.blog.name, admin_posts_path(:search => { :blog_id_equals => post.blog_id })) %></td>
+      <td class="align-center"><%= pretty_time post.posted_at %></td>
+      <td class="align-center"><%= post.live ? 'Yes' : 'No' %></td>
+      <td class="actions">
+          <%= link_to_edit post, :no_text => true, :class => 'edit' if can?(:edit, post) %>
+          &nbsp;
+          <%= link_to_delete post, :no_text => true if can?(:delete, post)  %>
       </td>
     </tr>
     <% end %>
   </tbody>
 </table>
+<% else %>
+  <div class="alpha twelve columns no-objects-found">
+    <%= Spree.t(:no_resource_found, resource: I18n.t(:other, scope: 'activerecord.models.spree/post')) %>,
+    <%= link_to Spree.t(:add_one), spree.new_admin_post_path %>!
+  </div>
+<% end %>
 
 <%= paginate @collection %>
 
-<% content_for :sidebar do %>
-  <div class="box">
-    <h3><%= t(:search) %></h3>
-    <%= search_form_for [:admin, @search] do |f| %>
-      <p>
-        <%= f.label :blog_id_eq, t("activerecord.attributes.blog.model_name") %><br />
-        <%= f.select :blog_id_eq, options_from_collection_for_select(SpreeEssentialBlog.taxon_class.roots,'id','name', (params[:q][:blog_id_eq] if params[:q])), :include_blank => true %>
-      </p>
-      <p>
-        <%= f.label :title_cont, t("activerecord.attributes.post.title") %><br />
-        <%= f.text_field :title_cont, :size => 25 %>
-      </p>
-      <p><%= button t("search") %></p>
-    <% end %>
-  </div>
-<% end %>

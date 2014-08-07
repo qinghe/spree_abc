@@ -10,8 +10,8 @@ class Spree::Blogs::Admin::PostsController < Spree::Admin::ResourceController
 private
   
   def set_category_ids
-    if params[:post] && params[:post][:post_category_ids].is_a?(Array)
-      params[:post][:post_category_ids].reject!{|i| i.to_i == 0 }
+    if params[:post] && params[:post][:taxon_ids].is_a?(Array)
+      params[:post][:taxon_ids].reject!{|i| i.to_i == 0 }
     end
   end
   

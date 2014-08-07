@@ -1,21 +1,21 @@
 class Spree::Post < ActiveRecord::Base
   
-  attr_accessible :blog_id, :title, :teaser, :body, :posted_at, :author, :live, :tag_list, :post_category_ids, :product_ids_string
+  attr_accessible :blog_id, :title, :teaser, :body, :posted_at, :author, :live, :tag_list, :taxon_ids, :product_ids_string
   
   acts_as_taggable
 
   # for flash messages    
   alias_attribute :name, :title
   
-  has_and_belongs_to_many :post_categories, :join_table => "spree_taxons_posts", :class_name => "Spree::Taxon"
-  alias_attribute :categories, :post_categories
+  has_and_belongs_to_many :taxons, :join_table => "spree_taxons_posts", :class_name => "Spree::Taxon"
+  alias_attribute :categories, :taxons
   
-  belongs_to :blog, :class_name => "Spree::Taxon"
-  has_many :post_products, :dependent => :destroy
+  #belongs_to :blog, :class_name => "Spree::Taxon"
+  has_many :taxons, :dependent => :destroy
   has_many :products, :through => :post_products
   has_many :images, :as => :viewable, :class_name => "Spree::PostImage", :order => :position, :dependent => :destroy
   
-  validates :blog_id, :title, :presence => true
+  #validates :blog_id, :title, :presence => true
   validates :path,  :presence => true, :uniqueness => true, :if => proc{ |record| !record.title.blank? }
   validates :body,  :presence => true
   validates :posted_at, :datetime => true
@@ -37,6 +37,13 @@ class Spree::Post < ActiveRecord::Base
       self.posted_at.send(method)
     end
   end
+  
+  # all post belongs to taxon which context is blog, in this way, we cuold list all post of website. ex. page blogs list recent posts  
+  def taxon
+    
+  end
+  
+  alias_method :blog, :taxon
   	
 	def rendered_preview
     preview = body.split("<!-- more -->")[0]

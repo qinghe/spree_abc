@@ -8,8 +8,8 @@
         <% @post_categories.each_with_index do |category, index| -%>
           <tr id="<%= dom_id(category) %>" class="<%= index % 2 == 0 ? 'alt' : 'row' %>">
             <td>
-              <%= check_box_tag "post[post_category_ids][]", category.id, @post.post_categories.include?(category), :id => "post_category_id_#{index}" -%>
-              <%= label_tag "post_category_id_#{index}", category.name -%>
+              <%= check_box_tag "post[taxon_ids][]", category.id, @post.post_categories.include?(category), :id => "taxon_id_#{index}" -%>
+              <%= label_tag "taxon_id_#{index}", category.name -%>
             </td>
             <td class="options" style="width: 120px">
               <%= link_to_with_icon('edit', t("edit"), edit_admin_post_category_url(@post, category.id)) %> &nbsp;
@@ -18,7 +18,7 @@
           </tr>
         <% end -%>
       </table>
-      <%= hidden_field_tag "post[post_category_ids][]", 0 %>
+      <%= hidden_field_tag "post[taxon_ids][]", 0 %>
       <%= hidden_field_tag :redirect_to, request.fullpath %>
       <%= button t("update") %>
     </fieldset>

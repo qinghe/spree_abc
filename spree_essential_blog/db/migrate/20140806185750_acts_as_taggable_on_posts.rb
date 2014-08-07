@@ -1,12 +1,13 @@
 class ActsAsTaggableOnPosts < ActiveRecord::Migration
   def self.up
+    #table tags, tagings are part of gem acts-as-taggable-on, no spree namespace 
     return if table_exists? :tags
     
-    create_table :spree_tags do |t|
+    create_table :tags do |t|
       t.string :name
     end
 
-    create_table :spree_taggings do |t|
+    create_table :taggings do |t|
       t.references :tag
       # You should make sure that the column created is
       # long enough to store the required class names.
@@ -16,14 +17,14 @@ class ActsAsTaggableOnPosts < ActiveRecord::Migration
       t.datetime :created_at
     end
 
-    add_index :spree_taggings, :tag_id
-    add_index :spree_taggings, [:taggable_id, :taggable_type, :context], :name=>"spree_taggings_id_type_context"
+    add_index :taggings, :tag_id
+    add_index :taggings, [:taggable_id, :taggable_type, :context], :name=>"taggings_id_type_context"
   end
 
   def self.down
-    return unless table_exists? :spree_tags
-    drop_table :spree_tags
-    drop_table :spree_taggings
+    return unless table_exists? :tags
+    drop_table :tags
+    drop_table :taggings
   end
   
 end

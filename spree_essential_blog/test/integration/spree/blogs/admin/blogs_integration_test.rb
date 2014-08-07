@@ -23,7 +23,7 @@ class Spree::Blogs::Admin::BlogsIntegrationTest < SpreeEssentials::IntegrationCa
       
     should "Create a new blog" do
       visit spree.admin_blogs_path
-      btn = find("#new_blog_link").native
+      btn = find("#admin_new_blog").native
       assert_match /#{spree.new_admin_blog_path}$/, btn.attribute('href')
       assert_equal "New Blog", btn.text
       btn.click

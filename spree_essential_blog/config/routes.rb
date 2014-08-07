@@ -2,6 +2,8 @@ Spree::Core::Engine.routes.append do
   scope(:module => "blogs") do
     namespace :admin do
       resources :posts do 
+        resources :products, :controller => "post_products"
+        resources :categories, :controller => "post_categories"
       end
     end
   end  
