@@ -10,14 +10,17 @@ class Spree::Blogs::Admin::PostsController < Spree::Admin::ResourceController
 private
   
   def set_category_ids
-    if params[:post] && params[:post][:taxon_ids].is_a?(Array)
-      params[:post][:taxon_ids].reject!{|i| i.to_i == 0 }
-    end
+    if params[:post] && params[:post][:taxon_ids].present?
+      params[:post][:taxon_ids] = params[:post][:taxon_ids].split(',')
+    end    
   end
   
   def location_after_save
-    path = params[:redirect_to].to_s.strip.sub(/^\/+/, "/")
-    path.blank? ? object_url : path
+    if @post.created_at == @post.updated_at
+      edit_admin_post_url(@post)
+    else
+      admin_posts_url
+    end
   end 
   
   def find_resource
