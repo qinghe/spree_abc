@@ -80,12 +80,7 @@ class Spree::Post < ActiveRecord::Base
   end
   
 	private
-	
-    def render(val)
-      val = val.is_a?(Symbol) ? send(val) : val
-      RDiscount.new(val).to_html.html_safe
-    end
-		
+			
     def create_path
   		count = 2
   		new_path = title.to_s.parameterize

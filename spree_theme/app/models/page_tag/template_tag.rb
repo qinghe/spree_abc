@@ -69,7 +69,7 @@ module PageTag
     end
     
     attr_accessor :page_layout_tree
-    attr_accessor :param_values_tag, :menus_tag, :image_tag, :text_tag
+    attr_accessor :param_values_tag, :menus_tag, :image_tag, :text_tag, :blog_posts_tag
     delegate :css, :to => :param_values_tag 
     delegate :menu,:menu2, :to => :menus_tag
     delegate :image, :to => :image_tag
@@ -102,13 +102,6 @@ module PageTag
     end
     
     def products( wrapped_taxon )
-      #get data source of current_piece
-      # if gpvs, 
-      #   if higher_level_data_source == menu
-      #     wrapped_taxon.data_source
-      #   else
-      #        
-      # if this_product
       objs = []
       case self.current_piece.current_data_source
         when Spree::PageLayout::DataSourceEnum.gpvs
@@ -128,5 +121,27 @@ module PageTag
       end
       objs      
     end
+
+
+    def posts( wrapped_taxon )
+     
+      objs = []
+      case self.current_piece.current_data_source
+        when Spree::PageLayout::DataSourceEnum.blog
+          #copy from taxons_controller#show
+          searcher = Spree::Config.searcher_class.new({:taxon => wrapped_taxon.id})
+          #@searcher.current_user = try_spree_current_user
+          #@searcher.current_currency = current_currency
+          objs = searcher.retrieve_products          
+        when Spree::PageLayout::DataSourceEnum.post
+          #default_taxon.id is 0 
+          objs = [self.page_generator.resource]         
+      end
+      if objs.present?
+        objs = Posts.new( self.page_generator, objs)
+      end
+      objs      
+    end
+
   end
 end
