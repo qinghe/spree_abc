@@ -102,6 +102,8 @@ class PageGenerator
     url = nil
     if model.kind_of?( SpreeTheme.taxon_class )
       url= self.url_prefix+ model.path
+    elsif model.kind_of?( SpreeTheme.post_class )      
+      url= [self.url_prefix, "post", self.menu.id.to_i, model.id].join('/')
     else  
       # menu.id would be nil if it is class DefaultTaxon
       # nil.to_i => 0

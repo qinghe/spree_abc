@@ -1,7 +1,7 @@
 module Spree
   module Admin
     class PageLayoutController< ResourceController
-        respond_to :html, :js
+        respond_to :html, :json, :js #update title required json
 
         def update_resource          
           @template_theme = TemplateTheme.find( params[:template_theme_id])          

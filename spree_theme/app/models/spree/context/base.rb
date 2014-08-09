@@ -10,7 +10,7 @@ module Spree
       # gpvs is available to every context. 
       ContextDataSourceMap = Hash.new( [:taxon, :gpvs, :blog] ).merge!( { ContextEnum.detail=>[:this_product] } )
       DataSourceChainMap = {
-        :taxon =>[:gpvs],
+        :taxon =>[:gpvs,:blog],
         #:gpvs=>[:gpv_product,:gpv_group, :gpv_either],
         #:gpv_product=>[:product_images,:product_options], 
         #:gpv_group=>[:group_products,:group_images],    

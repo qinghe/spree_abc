@@ -467,7 +467,7 @@ product_description:
   updated_at: 2011-09-20 19:40:07
   css: ""
   js: ""    
-product_name:
+title:
   id: 13
   title: Product name
   slug: product-name
@@ -1361,4 +1361,59 @@ taxon_icon:
       margin: 0; padding: 0;
     }
   js: ""
-
+post_title:
+  id: 57
+  title: post title
+  slug: post-title
+  is_selectable: "0"
+  is_container: "0"
+  html: |    
+    <% if defined? post %>     
+     <a href="<%= post.path %>"> <%=post.title %> </a>
+    <% end %>
+  created_at: 2011-09-20 19:40:07
+  updated_at: 2011-09-20 19:40:07
+  css: ""
+  js: ""
+post_author:
+  id: 58
+  title: post author
+  slug: post-author
+  is_selectable: "0"
+  is_container: "0"
+  html: |    
+    <% if defined? post %>     
+      <%=post.author %>
+    <% end %>
+  created_at: 2011-09-20 19:40:07
+  updated_at: 2011-09-20 19:40:07
+  css: ""
+  js: ""
+post_time:
+  id: 59
+  title: post time
+  slug: post-time
+  is_selectable: "0"
+  is_container: "0"
+  html: |    
+    <% if defined? post %>     
+      <%= post.posted_at %>
+    <% end %>
+  created_at: 2011-09-20 19:40:07
+  updated_at: 2011-09-20 19:40:07
+  css: ""
+  js: ""
+post_body:
+  id: 60
+  title: post body
+  slug: post-body
+  is_selectable: "0"
+  is_container: "0"
+  html: |    
+    <% if defined? post %>     
+      <%=raw post.body %>
+    <% end %>
+  created_at: 2011-09-20 19:40:07
+  updated_at: 2011-09-20 19:40:07
+  css: ""
+  js: ""
