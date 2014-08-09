@@ -129,10 +129,10 @@ module PageTag
       case self.current_piece.current_data_source
         when Spree::PageLayout::DataSourceEnum.blog
           #copy from taxons_controller#show
-          searcher = Spree::Config.searcher_class.new({:taxon => wrapped_taxon.id})
+          searcher = Spree_theme.post_class.searcher_class.new({:taxon => wrapped_taxon.id})
           #@searcher.current_user = try_spree_current_user
           #@searcher.current_currency = current_currency
-          objs = searcher.retrieve_products          
+          objs = searcher.retrieve_posts          
         when Spree::PageLayout::DataSourceEnum.post
           #default_taxon.id is 0 
           objs = [self.page_generator.resource]         

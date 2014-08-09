@@ -3,6 +3,7 @@ require "spree_essentials"
 require "acts-as-taggable-on"
 require "spree_essential_blog/version"
 require "spree_essential_blog/engine"
+require "spree_essential_blog/search"
 
 module SpreeEssentialBlog
   mattr_accessor :site_class, :taxon_class

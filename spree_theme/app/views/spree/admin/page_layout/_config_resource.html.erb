@@ -39,7 +39,7 @@
   <script>
   $(document).ready(function () {
     <% if page_layout_with_resource.blank? %>
-    <%= render :partial=>'select2_taxon', :locals=>{:dom_id=>"assigned_resource_ids_"} %>
+    <%= render :partial=>'spree/admin/shared/select2_taxon', :locals=>{:dom_id=>"assigned_resource_ids_"} %>
     <% end %>
     $('.select2-container').css({width: '40em'});
   });    

@@ -3,8 +3,8 @@ module Spree
     module Base
       # use string instead of symbol, parameter from client is string
       # first one is default 
-      ContextEnum=Struct.new(:home, :list, :detail, :cart, :account, :checkout, :thanks, :signup, :login, :password, :blog, :post, :either)
-                           [ :home, :list, :detail, :cart, :account, :checkout, :thanks, :signup, :login, :password, :blog, :post, :""]
+      ContextEnum=Struct.new(:home, :list, :detail, :cart, :account, :checkout, :thanks, :signup, :login, :password, :blog, :post, :either
+                          ) [ :home, :list, :detail, :cart, :account, :checkout, :thanks, :signup, :login, :password, :blog, :post, :""]
       
       # context may be array, datasource is nil for array.
       # gpvs is available to every context. 

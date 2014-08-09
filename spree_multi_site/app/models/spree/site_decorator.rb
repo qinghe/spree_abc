@@ -120,4 +120,9 @@ Spree::Zone.class_eval do
   validates :name, :presence => true, :uniqueness => { :scope => [:site_id] }
 end    
 
-
+Rails.application.config.spree_multi_site.site_scope_required_classes_from_other_gems.each do |extra_class|
+  extra_class.class_eval do
+    belongs_to :site
+    default_scope  { where(:site_id =>  Spree::Site.current.id) }
+  end  
+end
