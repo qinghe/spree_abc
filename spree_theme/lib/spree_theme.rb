@@ -9,6 +9,7 @@ module SpreeTheme
   mattr_accessor :site_class, :taxon_class, :post_class
 
   def self.site_class
+    @@site_class ||= "Spree::Site"
     if @@site_class.is_a?(Class)
       raise "Spree.site_class MUST be a String object, not a Class object."
     elsif @@site_class.is_a?(String)
@@ -18,6 +19,7 @@ module SpreeTheme
   
   
   def self.taxon_class
+    @@taxon_class ||= "Spree::Taxon"
     if @@taxon_class.is_a?(Class)
       raise "Spree.taxon_class MUST be a String object, not a Class object."
     elsif @@taxon_class.is_a?(String)
@@ -26,6 +28,7 @@ module SpreeTheme
   end
 
   def self.post_class
+    @@post_class ||= "Spree::Post"
     if @@post_class.is_a?(Class)
       raise "Spree.post_class MUST be a String object, not a Class object."
     elsif @@post_class.is_a?(String)

@@ -8,7 +8,7 @@ module Spree
       
       # context may be array, datasource is nil for array.
       # gpvs is available to every context. 
-      ContextDataSourceMap = Hash.new( [:taxon, :gpvs, :blog] ).merge!( { ContextEnum.detail=>[:this_product] } )
+      ContextDataSourceMap = Hash.new( [:taxon, :gpvs, :blog] ).merge!( { ContextEnum.detail=>[:this_product], ContextEnum.post=>[:post] } )
       DataSourceChainMap = {
         :taxon =>[:gpvs,:blog],
         #:gpvs=>[:gpv_product,:gpv_group, :gpv_either],

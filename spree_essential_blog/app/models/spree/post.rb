@@ -31,7 +31,7 @@ module Spree
    	before_validation :create_permalink, :if => proc{ |record| record.title_changed? }
     
     # add search related
-    cattr_accessor :search_class do
+    cattr_accessor :searcher_class do
       SpreeEssentialBlog::Search
     end
     cattr_accessor :search_scopes do

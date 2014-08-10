@@ -51,7 +51,7 @@ module PageTag
                   # should output hidden pv
                   # hidden= pv.hidden?(ha.id)
                   pv_for_ha = pv.pvalue_for_haid(ha.id)
-Rails.logger.debug "pv=#{pv.inspect} ha=#{ha.inspect}"                  
+#Rails.logger.debug "pv=#{pv.inspect} ha=#{ha.inspect}"                  
                   val <<  ( pv_for_ha+';' )                    
                 end                                
               end

@@ -465,6 +465,12 @@ module Spree
                   #{subpieces}
               <% } %>
               EOS1
+            when DataSourceEnum.blog, DataSourceEnum.post
+              subpieces = <<-EOS1 
+              <% @template.posts( (defined?(page) ? page : @current_page) ).each{|post| %>
+                  #{subpieces}
+              <% } %>
+              EOS1
             when DataSourceEnum.taxon
               #assigned menu could be root or node
               subpieces = <<-EOS3 

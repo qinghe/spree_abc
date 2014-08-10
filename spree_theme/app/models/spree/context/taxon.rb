@@ -56,6 +56,8 @@ module Spree
               ContextEnum.thanks
             when /^\/signup/
               ContextEnum.signup
+            when /^\/post/
+              ContextEnum.post
             when '/',/^\/\?/, /^\/template_themes/ 
               ContextEnum.home
             else

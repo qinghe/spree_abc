@@ -53,6 +53,9 @@ module SpreeTheme::System
       if params[:r]
         @resource = Spree::Product.find_by_id(params[:r])
       end
+      if params[:p]
+        @resource = Spree::Post.find_by_id(params[:p])
+      end
       if params[:c] and params[:c].to_i>0 
         @menu = SpreeTheme.taxon_class.find_by_id(params[:c])
       elsif website.index_page > 0
@@ -102,9 +105,9 @@ module SpreeTheme::System
       end
       # we have initialize PageGenerator here, page like login  do not go to template_thems_controller/page
       if @is_designer
-        @lg = PageGenerator.generator( @menu, @theme, {:resource=>@resource,:controller=>self})                  
+        @lg = PageGenerator.generator( @menu, @theme, {:resource=>@resource, :controller=>self})                  
       else
-        @lg = PageGenerator.generator( @menu, @theme, {:resource=>@resource,:controller=>self})          
+        @lg = PageGenerator.generator( @menu, @theme, {:resource=>@resource, :controller=>self})          
       end      
       @lg.context.each_pair{|key,val|
         instance_variable_set( "@#{key}", val)

@@ -17,8 +17,9 @@ Spree.config do |config|
   #config.currency = 'CNY'
 end
 Spree.user_class = "Spree::User"
-SpreeTheme.site_class = "Spree::Site"
-SpreeTheme.taxon_class = "Spree::Taxon"
+#SpreeTheme.site_class = "Spree::Site"
+#SpreeTheme.taxon_class = "Spree::Taxon"
+#SpreeTheme.post_class = "Spree::Post"
 #TODO uncomment it after complete the db/sample
 #SpreeMultiSite::Config.tap do |config|
 #end

@@ -98,6 +98,7 @@ module PageTag
     def select(page_layout_id, section_id=0)
       #current selected section instance, page_layout record
       page_layout = page_layout_tree.select{|node| node.id == page_layout_id}.first
+      #Rails.logger.debug "select #{page_layout.title}, section_id=#{section_id}"      
       self.current_piece = WrappedPageLayout.new(self, page_layout, section_id)
     end
     
@@ -113,7 +114,9 @@ module PageTag
           objs = searcher.retrieve_products          
         when Spree::PageLayout::DataSourceEnum.this_product
           #default_taxon.id is 0 
-          objs = [self.page_generator.resource]         
+          if self.page_generator.resource.kind_of? Spree::Product
+            objs = [self.page_generator.resource]         
+          end
       end
 #Rails.logger.debug "self.current_piece=#{self.current_piece.title},wrapped_taxon = #{wrapped_taxon.name},objs=#{objs.inspect}"      
       if objs.present?
@@ -129,13 +132,14 @@ module PageTag
       case self.current_piece.current_data_source
         when Spree::PageLayout::DataSourceEnum.blog
           #copy from taxons_controller#show
-          searcher = Spree_theme.post_class.searcher_class.new({:taxon => wrapped_taxon.id})
+          searcher = SpreeTheme.post_class.searcher_class.new({:taxon => wrapped_taxon.id})
           #@searcher.current_user = try_spree_current_user
           #@searcher.current_currency = current_currency
           objs = searcher.retrieve_posts          
         when Spree::PageLayout::DataSourceEnum.post
-          #default_taxon.id is 0 
-          objs = [self.page_generator.resource]         
+          if self.page_generator.resource.kind_of? Spree::Post
+            objs = [self.page_generator.resource]
+          end         
       end
       if objs.present?
         objs = Posts.new( self.page_generator, objs)
