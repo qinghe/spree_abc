@@ -1,7 +1,7 @@
 module Spree
   class Post < ActiveRecord::Base
     
-    attr_accessible :blog_id, :title, :teaser, :body, :posted_at, :author, :live, :tag_list, :taxon_ids, :product_ids_string
+    attr_accessible :title, :cover, :teaser, :body, :posted_at, :author, :live, :tag_list, :taxon_ids, :product_ids_string
     
     acts_as_taggable
   
@@ -19,9 +19,13 @@ module Spree
     validates :permalink,  :presence => true, :uniqueness => true, :if => proc{ |record| !record.title.blank? }
     validates :body,  :presence => true
     validates :posted_at, :datetime => true
-    
-    cattr_reader :per_page
-    @@per_page = 10
+
+    has_attached_file :cover,
+      styles: { small: '180x120>', normal: '280x190>', big: '670x370>'},
+      default_style: :normal,
+      url: '/spree/posts/:id/:style/:basename.:extension',
+      path: ':rails_root/public/spree/posts/:id/:style/:basename.:extension',
+      default_url: '/assets/default_post.png'
   
     scope :ordered, order("posted_at DESC")
     scope :future,  where("posted_at > ?", Time.now).order("posted_at ASC")
@@ -87,10 +91,6 @@ module Spree
     def live?
       live && live == true
     end
-  
-    def to_param
-  		permalink
-  	end
   	
     def product_ids_string
       product_ids.join(',')

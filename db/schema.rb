@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140807132804) do
+ActiveRecord::Schema.define(:version => 20140810051421) do
 
   create_table "ckeditor_assets", :force => true do |t|
     t.integer  "site_id",                         :default => 0, :null => false
@@ -377,15 +377,21 @@ ActiveRecord::Schema.define(:version => 20140807132804) do
   end
 
   create_table "spree_posts", :force => true do |t|
+    t.integer  "site_id",           :default => 0,    :null => false
     t.string   "title"
-    t.string   "path"
+    t.string   "permalink"
     t.string   "teaser"
     t.datetime "posted_at"
     t.text     "body"
     t.string   "author"
-    t.boolean  "live",       :default => true
-    t.datetime "created_at",                   :null => false
-    t.datetime "updated_at",                   :null => false
+    t.boolean  "live",              :default => true
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
+    t.integer  "position",          :default => 0
+    t.string   "icon_file_name"
+    t.string   "icon_content_type"
+    t.integer  "icon_file_size",    :default => 0
+    t.datetime "icon_updated_at"
   end
 
   create_table "spree_posts_taxons", :id => false, :force => true do |t|

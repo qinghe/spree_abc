@@ -11,6 +11,12 @@
   <%= error_message_on :post, :posted_at %>
 <% end %>
 
+<%= form.field_container :cover do %>
+  <%= form.label :cover, Spree.t(:icon) %><br />
+  <%= form.file_field :cover %>
+  <%= error_message_on :post, :cover %>
+<% end %>
+    
 <%= form.field_container :body do %>
   <%= form.label :body, t("activerecord.attributes.post.body") %><br />
   <%= form.text_area :body, :class => 'fullwidth'  %>
