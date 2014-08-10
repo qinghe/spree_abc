@@ -1417,3 +1417,19 @@ post_body:
   updated_at: 2011-09-20 19:40:07
   css: ""
   js: ""
+post_cover:
+  id: 61
+  title: post cover
+  slug: post-cover
+  is_selectable: "1"
+  is_container: "0"
+  html: |    
+    <% if defined? post %>
+      <% if post.cover.present? %>
+        <%= link_to image_tag(post.cover.url(:original), :u=>'image', :alt=>post.title), post.path %>
+      <% end %>
+    <% end %>
+  created_at: 2011-09-20 19:40:07
+  updated_at: 2011-09-20 19:40:07
+  css: ''
+  js: ""
