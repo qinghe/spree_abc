@@ -1,14 +1,16 @@
 module Spree
   class Section < ActiveRecord::Base
     extend FriendlyId
-    acts_as_nested_set #:scope=>"root_id"
+    acts_as_nested_set :dependent=>:destroy #:scope=>"root_id"
     #has_many :full_set_nodes, :class_name =>'Section', :foreign_key=>:root_id, :primary_key=>:root_id
     belongs_to :section_piece  
-    has_many :section_params
+    has_many :section_params, :dependent=>:destroy #remove related param_value
     has_many :page_layouts
     
     friendly_id :title, :use => :slugged
     attr_accessible :section_piece_id, :title, :global_events, :subscribed_global_events,:is_enabled
+    
+    before_destroy
     # usage: attribute section_piece_id, title required
     # params: default_param_values,  is a hash,  class_name=>{htmal_attribute_id=>default_value,..}
     def self.create_section(section_piece_id,attrs = {}, default_param_values={})
