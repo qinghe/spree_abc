@@ -55,24 +55,21 @@ module Spree
     serialize :assigned_resource_ids, Hash
     scope :within_site, lambda { |site|where(:site_id=> site.id) }
     
+    before_validation :fix_special_attributes
     before_destroy :remove_relative_data
-    attr_accessible :site_id,:page_layout_root_id,:title
+    after_create :initialize_page_layout_for_plain_theme
+    
+    attr_accessor :section_root_id
+    attr_accessible :site_id,:page_layout_root_id,:title, :section_root_id # section_root_id is only required for create- initialize_page_layout
     attr_accessible :assigned_resource_ids, :template_files #import require it.
     
     
     class << self
       # template has page_layout & param_values
       # 
-      def create_plain_template( section, title, attrs={})
+      def create_plain_template(  section_root, title, attrs={})
         #create a theme first.
-        site_id = SpreeTheme.site_class.current.id
-        template = TemplateTheme.create({:site_id=>site_id,:title=>title}) do|template|
-          #fix Attribute was supposed to be a Hash, but was a String
-          template.assigned_resource_ids={}
-        end
-        page_layout_root = template.add_section( section ) 
-        template.update_attribute("page_layout_root_id",page_layout_root.id)
-        template
+        template = TemplateTheme.create({:title=>title, :section_root_id=>section_root.id}.merge(attrs))         
       end
       
       def native
@@ -232,6 +229,7 @@ module Spree
       def original_template_theme
         self.class.where(:page_layout_root_id=>self.page_layout_root_id).first
       end
+      
       # Usage: user want to copy this layout&theme to new for editing or backup.
       #        we need copy param_value and theme_images
       #        note that it is only for root. 
@@ -535,6 +533,27 @@ module Spree
         resource_class.to_s.underscore
       end
     end  
+    
+    private
+    def fix_special_attributes
+      if site_id == 0
+        self.site_id = SpreeTheme.site_class.current.id
+      end
+      #fix Attribute was supposed to be a Hash, but was a String
+      #if new_record? && assigned_resource_ids.blank?
+      #  self.assigned_resource_ids={}
+      #end
+    end
+    
+    # it is for create plain theme, create would trigger it.
+    # copy_to_new,  import do not call it
+    def initialize_page_layout_for_plain_theme
+      if section_root_id.present?
+        root_section = Section.roots.find(section_root_id)
+        page_layout_root = add_section( root_section ) 
+        self.update_attribute("page_layout_root_id",page_layout_root.id)
+      end      
+    end
     
   end
 end

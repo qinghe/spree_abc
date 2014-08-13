@@ -64,6 +64,8 @@ namespace :spree_theme do
     else
       file_path = File.join(SpreeTheme.site_class.current.document_path, "#{SpreeTheme.site_class.current.id}_#{theme_id}*.{byte,yml,json}")
     end
+    puts "theme_path = #{file_path}" 
+
     file_path = Dir[file_path].sort.last 
     
     if file_path.end_with? 'json'

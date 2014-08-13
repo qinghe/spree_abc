@@ -4,7 +4,7 @@ module SpreeTheme
     included do
       cattr_accessor :designshop_url
       belongs_to :template_theme, :foreign_key=>"theme_id"
-      has_many :template_themes
+      has_many :template_themes, :foreign_key=>"site_id" #compatible with fack_websites
       #belongs_to :template_release, :foreign_key=>"template_release_id"
       attr_accessible :index_page,:theme_id
       self.designshop_url = 'design.dalianshops.com'
@@ -18,9 +18,12 @@ module SpreeTheme
       def current
         if Thread.current[:spree_site].nil?
           website = self.find_or_initialize_by_domain_and_name(designshop_url,'DalianShops Design Site' )
-          if website.new_record?
-            website.theme_id = 1
-            website.save!
+          if Rails.env.test? #or Rails.env.development?
+            if website.new_record?
+              website.id = 2
+              website.theme_id = 1
+              website.save!
+            end
           end
           Thread.current[:spree_site] = website
         end

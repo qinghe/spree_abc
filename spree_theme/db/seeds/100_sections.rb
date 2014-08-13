@@ -71,7 +71,7 @@ product_image = Spree::Section.create_section(section_piece_hash['container'].id
   {'block'=>{'disabled_ha_ids'=>'111'},
    #'content_horizontal'=>{'disabled_ha_ids'=>'101'},
    'inner'=>{'15hidden'=>bool_true}})
-product_image.add_section_piece(section_piece_hash['product_image'].id)
+product_image.add_section_piece(section_piece_hash['product-image'].id)
 
 
 ################################################ center area start ##############################################  

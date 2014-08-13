@@ -81,8 +81,8 @@ rake spree_theme:install:migrations
 rake db:migrate
 rails r "SpreeeTheme::Engine.load_seed"
 in config/spree.rb
-  SpreeTheme.website_class = FakeWebsite
-  SpreeTheme.taxon_class = Spree::Taxon
+  SpreeTheme.website_class = 'Spree::FakeWebsite'
+  SpreeTheme.taxon_class = 'Spree::Taxon'
 
 
 Load sample
@@ -92,6 +92,10 @@ rake spree_theme:import_theme
 
 Testing
 -------
+rake test_app
+change db from sqlite to mysql,  fix id setting, rails sqlite adapter ignore id setting  
+rake db:seed RAILS_ENV=test
+rake spree_theme:import_theme  RAILS_ENV=test  SEED_PATH=1 THEME_ID=2
 
 
 Be sure to bundle your dependencies and then create a dummy test app for the specs to run against.

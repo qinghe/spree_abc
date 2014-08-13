@@ -6,7 +6,8 @@ module Spree
     has_many  :sections
     has_many  :section_piece_params
     friendly_id :title, :use => :slugged
-    scope :with_resources, where(["resources!=?",''])    
+    scope :with_resources, where(["resources!=?",''])
+    scope :html_roots, where(:is_root=>true)
     # resources m:/m:signup
     # return array of struct{:resource, :context}    
     def wrapped_resources

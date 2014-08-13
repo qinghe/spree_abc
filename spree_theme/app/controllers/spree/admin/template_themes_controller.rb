@@ -6,6 +6,7 @@ module Spree
       def index
         native
       end
+      
       #list themes
       def native
         @themes = TemplateTheme.native
@@ -77,10 +78,30 @@ module Spree
           render :action=>'native' 
         end
         
+      
+        def create
+          invoke_callbacks(:create, :before)
+          @object.attributes = params[object_name]
+          if @object.save
+            invoke_callbacks(:create, :after)
+            flash[:success] = flash_message_for(@object, :successfully_created)
+            respond_with(@object) do |format|
+              format.html { redirect_to location_after_save }
+              format.js   { render :layout => false }
+            end
+          else
+            invoke_callbacks(:create, :fails)
+            respond_with(@object)
+          end
+        end
+
       end
+      
+      
+      
       protected
       def collection_actions
-        [:index,:native, :foreign]
+        [:index, :native, :foreign]
       end
       
       #def find_resource

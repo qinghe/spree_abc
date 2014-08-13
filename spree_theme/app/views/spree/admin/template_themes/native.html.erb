@@ -3,6 +3,15 @@
   <%= Spree.t(:theme_native) %> 
 <% end %>
 
+<% if SpreeTheme.site_class.current.design?  %>
+  <% content_for :page_actions do %>  
+    <li><%= button_link_to Spree.t("template_theme.new"), new_object_url, :icon => 'icon-plus',:remote=>:true, :id=>'admin_new_template_theme' %></li>
+  <% end %>
+<% end %>
+
+<div id="new_template_theme_wrapper" data-hook></div>
+
+
 <% if @themes.any? %>
 <table>
   <tr>

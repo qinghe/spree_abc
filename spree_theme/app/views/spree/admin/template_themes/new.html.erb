@@ -1,11 +1,5 @@
-<h1>New theme</h1>
-
-<% form_for(@theme) do |f| %>
-  <%= f.error_messages %>
-
-  <p>
-    <%= f.submit 'Create' %>
-  </p>
+<%= render :partial => 'spree/shared/error_messages', :locals => { :target => @template_theme } %>
+<%= form_for [:admin, @template_theme]  do |f| %>
+  <%= render :partial => 'form', :locals => { :f => f } %>
+  <%= render :partial => 'spree/admin/shared/new_resource_links' %>
 <% end %>
-
-<%= link_to 'Back', template_themes_path %>
