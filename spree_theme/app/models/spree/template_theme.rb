@@ -542,9 +542,9 @@ module Spree
         self.site_id = SpreeTheme.site_class.current.id
       end
       #fix Attribute was supposed to be a Hash, but was a String
-      #if new_record? && assigned_resource_ids.blank?
-      #  self.assigned_resource_ids={}
-      #end
+      if new_record? && assigned_resource_ids.blank?
+        self.assigned_resource_ids={}
+      end
     end
     
     # it is for create plain theme, create would trigger it.

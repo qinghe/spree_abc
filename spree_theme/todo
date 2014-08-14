@@ -21,3 +21,12 @@ set input font-color:red, unset it does not work.
 category 'brand' do not work.
 
 https://github.com/spree/spree_fancy
+
+
+=====================================================================================================
+20140813
+1. product pagination,
+
+2. post pagination
+
+3. float online help section 

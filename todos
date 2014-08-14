@@ -4,7 +4,7 @@
 4. 查看注册网站信息
 5. 分析Rails日志, 查看错误请求。
 6. remove redundant option_values from server db.
-7. css(:image_style), sliders width,  only place read param_values in layout. try to remove it.
+7. css(:image_style), css(:slides),  those situation is reading param_values in layout. try to remove it.
 
 
 
