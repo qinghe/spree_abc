@@ -1,5 +1,6 @@
 //= require admin/spree_backend
 //= require jquery.ajax
+//= require jquery.jeditable
 //= require admin/resource_autocomplete
 jQuery(function ($) {
   $('#page_layout_tree_inner').bind('select_node.jstree', function (e, data) {
@@ -16,4 +17,21 @@ jQuery(function ($) {
     }      
   ); 
   //$('#page_layout_tree_inner select.select22').select2();
+  
+  
+  $('#listing_template_themes .editable').editable(function(value, settings) {
+	  var jquery_element = $(this)
+      var url = Spree.routes.admin_template_themes+'/'+jquery_element.data('id')
+      var submitdata = {};
+      submitdata[settings.name] = value;
+      $.ajax({ dataType: 'json', url: url, type: 'put',  data : submitdata   });             
+      return(value);
+    },        
+    { //since dblclick would trigger click, for a link, we should not click,dblclick together
+      event     : "dblclick",
+      name      : "template_theme[title]",
+      width     : '80%',
+      height    : '25px',
+      style  : "inherit" });
+  
 });

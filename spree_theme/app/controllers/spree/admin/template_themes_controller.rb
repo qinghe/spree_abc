@@ -2,6 +2,7 @@ module Spree
   module Admin
     class TemplateThemesController < ResourceController #Spree::Admin::BaseController
       #before_filter :load_theme, :only => [:apply, :import, :edit, :update, :release, :copy_theme]
+      respond_to :html, :json, :js #update title required json
 
       def index
         native

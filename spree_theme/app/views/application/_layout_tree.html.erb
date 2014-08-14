@@ -61,7 +61,7 @@ selected_id= (options[:selected_id]||layout_root.id )
             var url = Spree.routes.admin_template_themes+'/'+jquery_element.data('tid')+'/page_layout/'+jquery_element.data('lid');
             var submitdata = {};
             submitdata[settings.name] = value;
-            submitdata[settings.id] = self.id;
+            //submitdata[settings.id] = self.id;
             $.ajax({ dataType: 'json', url: url, type: 'put',  data : submitdata,
                 success: function(data){
                   jquery_element.html(data.page_layout.title);

@@ -16,6 +16,7 @@ zh-CN:
       spree/template_theme: &template_theme_labels
         title: 名字
         slug: Slug
+        section_root_id: 基础模块
     models:
       spree/page_layout:
         one: 模块
@@ -115,6 +116,7 @@ zh-CN:
     template_theme:
       assign_resource: 模板素材
       assign: 分配
+      new: 新建空白模板
     theme_foreign: 模板商店
     theme_native: 可用模板
     theme_applied: 是否使用
