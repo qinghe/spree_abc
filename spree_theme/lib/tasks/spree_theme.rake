@@ -33,7 +33,7 @@ namespace :spree_theme do
       file_path =  File.join(theme.site.document_path, "#{theme_key}.yml")
     end
     open(file_path,'w') do |file|      
-      file.write(serializable_data.to_json(:root=>false)) #  Marshal.dump(serializable_data)
+      file.write(serializable_data.to_yaml) #  Marshal.dump(serializable_data)
       theme_template_file_path = File.expand_path(theme_key, File.dirname(file_path)) 
       Dir.mkdir theme_template_file_path
       serializable_data['template_files'].each{|template_file|        

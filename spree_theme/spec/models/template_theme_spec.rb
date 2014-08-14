@@ -42,13 +42,16 @@ Rails.logger.debug "temp_file=#{temp_file.size}"
   end
   
   it "should copy to new" do
-     copy_template = template.copy_to_new     
-     copy_template.page_layout_root_id.should_not eq template.page_layout_root_id
+     copied_template = template.copy_to_new     
+     copied_template.page_layout_root_id.should_not eq template.page_layout_root_id
      
-     new_node_ids = copy_template.page_layout.self_and_descendants.collect{|node| node.id }     
+     new_node_ids = copied_template.page_layout.self_and_descendants.collect{|node| node.id }     
      template.assigned_resource_ids.keys{| node_id |
        new_node_ids.should include node_id
      }     
+     copied_template.page_layout.self_and_descendants.size.should eq template.page_layout.self_and_descendants.size 
+     copied_template.param_values.size.should eq template.param_values.size
+     copied_template.template_files.size.should eq template.template_files.size
   end
   
   it "destroy imported one" do
