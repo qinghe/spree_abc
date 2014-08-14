@@ -49,6 +49,8 @@
       home context 不再兼容 product-list context  
       
 8. 在模板中，我们希望分页显示产品列表或文章列表页面。
-   添加列 page_layouts.data_source_params，配置数据源的参数， 如果数据源是一个集合， 可以设置分页信息 
+   添加列 page_layouts.data_source_params，配置数据源的参数， 如果数据源是一个集合， 可以设置分页信息
+   
+9. float online help section  
    
           
