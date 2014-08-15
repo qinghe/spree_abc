@@ -343,16 +343,14 @@ module Spree
     begin 'handle data source'
       # * data source has two parts, data and filter, separated by '|'
       # * current data_source could be nil
-      def current_data_source
+      def current_data_source        
         self.data_source.present? ? self.data_source.to_sym : DataSourceEmpty 
-  
       end
       
       def inherited_data_source      
         return DataSourceEmpty if self.root?
         ancestor_data_source = self.ancestors.collect{|page_layout| page_layout.data_source }.last      
         ancestor_data_source.present? ? ancestor_data_source.to_sym : DataSourceEmpty
-        
       end
       
       # verify new_data_source
@@ -416,7 +414,17 @@ module Spree
           end
         end
         data_sources
-      end    
+      end 
+      
+      def wrapped_data_source_param
+        params = {}
+        if data_source_param.present?
+          if current_data_source == DataSourceEnum.gpvs || current_data_source == DataSourceEnum.blog
+            params[:per_page]= data_source_param.to_i
+          end
+        end
+        params
+      end   
     end
     
     
@@ -446,7 +454,6 @@ module Spree
         for child in subnodes
           next unless child.is_enabled?
           subpiece = build_section_html(tree, child, section_hash)        
-  # Rails.logger.debug "layout_id = #{child.id}, html=#{subpiece}" 
           subpieces.concat(subpiece)
         end
       end  
@@ -461,13 +468,13 @@ module Spree
           case node.current_data_source
             when DataSourceEnum.gpvs, DataSourceEnum.this_product
               subpieces = <<-EOS1 
-              <% @template.products( (defined?(page) ? page : @current_page) ).each{|product| %>
+              <% @var_collection = @template.products( (defined?(page) ? page : @current_page) ).each{|product| %>
                   #{subpieces}
               <% } %>
               EOS1
             when DataSourceEnum.blog, DataSourceEnum.post
               subpieces = <<-EOS1 
-              <% @template.posts( (defined?(page) ? page : @current_page) ).each{|post| %>
+              <% @var_collection = @template.posts( (defined?(page) ? page : @current_page) ).each{|post| %>
                   #{subpieces}
               <% } %>
               EOS1
@@ -483,7 +490,9 @@ module Spree
               <% end %>              
               EOS3
           end
-        end                    
+        end    
+        # we recovery template.select after ~~content~~
+        subpieces << get_section_script( node )        
         piece.insert(pos,subpieces)        
       end
        
@@ -509,7 +518,7 @@ module Spree
     end
   
     def get_section_script(node)
-      "<% g_page_layout_id=#{node.id};@template.select(g_page_layout_id); %>#{$/}"
+      "<% g_page_layout_id=#{node.id}; @template.select(g_page_layout_id); %>#{$/}"
     end
     
     # proc available in template

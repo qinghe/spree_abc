@@ -67,8 +67,7 @@ module Spree
     preference :max_level_in_taxons_menu, :integer, default: 1 # maximum nesting level in taxons menu
     preference :orders_per_page, :integer, default: 15
     preference :prices_inc_tax, :boolean, default: false
-#    preference :products_per_page, :integer, default: 12  #if a menu have no assigned resource, show all available products up to 100
-    preference :products_per_page, :integer, default: 100
+    preference :products_per_page, :integer, default: 12  # we support pagination now. do not need: if a menu have no assigned resource, show all available products up to 100
     preference :redirect_https_to_http, :boolean, :default => false
     preference :require_master_price, :boolean, default: true
     preference :shipment_inc_vat, :boolean, default: false

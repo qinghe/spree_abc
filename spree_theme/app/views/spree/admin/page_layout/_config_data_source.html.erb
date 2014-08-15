@@ -5,7 +5,7 @@
       <legend align="center"><%= page_layout.title %></legend>
       <%= form_for :page_layout, url: update_data_source_admin_template_theme_page_layout_path(@template_theme,page_layout),remote: true do |f|%>
         <div class="field">
-          <%= label_tag :section_data_source, Spree.t('page_layout.section_data_source') %><br>
+          <%= label_tag :section_data_source, Spree.t('page_layout.data_source') %><br>
           <% current_data_source = page_layout.current_data_source
              options = options_for_select((Spree::PageLayout::DataSourceEnum.members).collect{|section_data_source| [Spree.t("section_data_source.#{ section_data_source }"), section_data_source] }, current_data_source )          
           %>

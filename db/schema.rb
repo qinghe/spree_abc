@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140810051421) do
+ActiveRecord::Schema.define(:version => 20140815024001) do
 
   create_table "ckeditor_assets", :force => true do |t|
     t.integer  "site_id",                         :default => 0, :null => false
@@ -316,6 +316,7 @@ ActiveRecord::Schema.define(:version => 20140810051421) do
     t.boolean  "is_full_html",                     :default => false, :null => false
     t.datetime "created_at",                                          :null => false
     t.datetime "updated_at",                                          :null => false
+    t.string   "data_source_param",                :default => ""
   end
 
   create_table "spree_param_categories", :force => true do |t|
@@ -570,6 +571,7 @@ ActiveRecord::Schema.define(:version => 20140810051421) do
     t.string  "html_attribute_ids", :limit => 1000, :default => "",   :null => false
     t.string  "param_conditions",   :limit => 1000
     t.boolean "is_editable",                        :default => true
+    t.string  "editable_condition",                 :default => ""
   end
 
   create_table "spree_section_pieces", :force => true do |t|

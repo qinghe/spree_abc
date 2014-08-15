@@ -41,8 +41,23 @@ module Spree
         end
       end  
     end
-
     
+    # is it editable for specified data_source
+    def editable?(data_source)
+      if editable_condition.present?
+        case data_source
+        when Spree::PageLayout::DataSourceEnum.gpvs
+          editable_condition.include?( "data_source:gpvs")
+        when Spree::PageLayout::DataSourceEnum.blog
+          editable_condition.include?( "data_source:blog")
+        else
+          false
+        end
+      else
+        true
+      end
+    end
+       
     private
     #add section_param where section.section_piece_id = ? for each section tree.
     def add_section_params

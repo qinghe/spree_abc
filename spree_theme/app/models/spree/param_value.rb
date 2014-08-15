@@ -20,6 +20,11 @@ module Spree
       
     attr_accessible :page_layout_root_id, :page_layout_id,:section_id
     attr_accessor :updated_html_attribute_values, :original_html_attribute_values, :page_events
+    
+    # is it editable by editor, ex. pagination param_value should not appear if page_layout have no data source 
+    def editable?      
+      section_param.section_piece_param.editable? page_layout.current_data_source      
+    end
       
     # usage: return all html_attribute_values this param value contains. 
     #   return a hash, values are instance of HtmlAttributeValue, keys are html_attribute_id and html_attribute.slug. 
