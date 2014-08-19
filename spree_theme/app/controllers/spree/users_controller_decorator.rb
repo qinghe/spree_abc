@@ -25,7 +25,6 @@ module Spree
       @user = Spree::User.new(params[:user] )
       @user.valid?
       result = ((!!@user.errors.include?(:email))== false)
-      Rails.logger.debug result.inspect
       render :text=> result.to_json
     end
   end

@@ -5,7 +5,7 @@ module PageEvent
       param_conditions = self.param_value.section_param.section_piece_param.param_conditions
       
       unless param_conditions[self.html_attribute.id].nil?
-        Rails.logger.debug "param_conditions=#{param_conditions.inspect},self.event=#{self.event}"
+#        Rails.logger.debug "param_conditions=#{param_conditions.inspect},self.event=#{self.event}"
         #event handler is html_attribute.slug + event + handler      
         if param_conditions[self.html_attribute.id].include?(self.event)
           #html_attribute.slug may contain '-', we only allow a-z,A-Z,0-9,_ by [/\w+/]
@@ -102,7 +102,6 @@ module PageEvent
       block_width = html_attribute_values("block_width")
       block_margin =  html_attribute_values("block_margin")
       block_inner_margin = html_attribute_values("inner_margin")
-  Rails.logger.debug "is_fixed = #{is_fixed}, handle section=#{self.section.slug}"    
   
       if is_fixed
         to_fixed()

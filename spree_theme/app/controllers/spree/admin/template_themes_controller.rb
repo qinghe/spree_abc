@@ -56,7 +56,6 @@ module Spree
       begin 'design shop'
         
         def prepare_import
-          logger.debug "action=#{action.inspect}"
         end
         
         #copy selected theme to new theme
@@ -106,7 +105,6 @@ module Spree
       end
       
       #def find_resource
-      #  logger.debug "action=#{action.inspect}"
       #  if parent_data.present?
       #    parent.send(controller_name).find(params[:id])
       #  elsif ['import', 'prepare_import'].include? action

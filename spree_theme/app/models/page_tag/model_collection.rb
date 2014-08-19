@@ -22,6 +22,7 @@ module PageTag
       self.wrapped_models.each{|item|
         yield item
       }
+      self
     end
   end
 end
