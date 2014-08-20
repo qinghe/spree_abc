@@ -81,7 +81,7 @@ module SpreeTheme::System
     #get template from query string 
     if @is_designer
       if session[:theme_id].present?
-        if Spree::TemplateTheme.exists? session[:theme_id]  #theme could be deleted
+        if Spree::TemplateTheme.exists? session[:theme_id]  #theme could be deleted.
           @theme = Spree::TemplateTheme.find( session[:theme_id] )
         end
       end
