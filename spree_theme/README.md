@@ -73,6 +73,9 @@ configure
   website theme_id, index_page should greater than 0.
   website index_page could equal to 0.
 
+extra feature for theme
+-----------------------
+  option value has image, please look at https://github.com/citrus/spree_variant_options  for detail
 
 Installation
 ============
