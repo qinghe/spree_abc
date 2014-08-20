@@ -1,7 +1,7 @@
 require 'spec_helper'
-describe PageGenerator do
+describe PageTag::PageGenerator do
   let (:page_generator) {     
-      PageGenerator.previewer( DefaultTaxon.instance, SpreeTheme.site_class.current.template_theme, :controller=>Spree::TemplateThemesController.new) 
+      PageTag::PageGenerator.previewer( DefaultTaxon.instance, SpreeTheme.site_class.current.template_theme, :controller=>Spree::TemplateThemesController.new) 
     }
     
   it "menu section should use default taxon in case no taxon assigned" do

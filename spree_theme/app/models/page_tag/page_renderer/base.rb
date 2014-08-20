@@ -1,4 +1,4 @@
-module PageRenderer
+module PageTag::PageRenderer
   class Base  
     attr_accessor :html, :css, :js
     #ruby embeded source

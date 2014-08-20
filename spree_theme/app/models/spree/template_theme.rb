@@ -136,7 +136,7 @@ module Spree
         template_release.save!
       end
       self.reload # release_id shoulb be template_release.id
-      @lg = PageGenerator.releaser( self )
+      @lg = PageTag::PageGenerator.releaser( self )
       @lg.release  
       self.current_template_release    
     end

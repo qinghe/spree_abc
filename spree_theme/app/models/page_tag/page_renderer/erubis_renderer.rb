@@ -1,4 +1,4 @@
-module PageRenderer
+module PageTag::PageRenderer
   class ErubisRenderer < Base
     cattr_accessor :pattern
     self.pattern = '<\% \%>'

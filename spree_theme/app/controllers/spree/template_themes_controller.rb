@@ -75,7 +75,7 @@ module Spree
     #    c: menu_id
     def preview
      
-    #  @lg = PageGenerator.previewer( @menu, @theme, {:resource=>(@resource.nil? ? nil:@resource),:controller=>self})
+    #  @lg = PageTag::PageGenerator.previewer( @menu, @theme, {:resource=>(@resource.nil? ? nil:@resource),:controller=>self})
     #  html = @lg.generate
     #  css,js  = @lg.generate_assets        
       #insert css to html

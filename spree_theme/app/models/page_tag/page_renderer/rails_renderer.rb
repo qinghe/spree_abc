@@ -1,4 +1,4 @@
-module PageRenderer
+module PageTag::PageRenderer
   class RailsRenderer < Base
         
     def initialize( ehtml, ecss, ejs, context, controller)

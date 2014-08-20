@@ -224,9 +224,7 @@ container:
           <div class="<%=g_piece_selector%>_inner clear-block">          
           ~~content~~
           <% if @template.current_piece.current_data_source.present? %>
-            <% Rails.logger.debug "@var_collection=#{@var_collection.present?},#{@var_collection.class}" %>
-            <% if @var_collection.respond_to?(:num_pages) %>
-              <% Rails.logger.debug "@var_collection.respond_to?(:num_pages)" %>
+            <% if @var_collection.has_pages? %>
               <%= paginate @var_collection %>
             <% end %>
           <% end %>
@@ -253,7 +251,7 @@ container:
       <%end%>
     }
     /* #copy from spree_backend/assets/stylesheets/admin/components/pagination */
-    .<%=g_piece_selector%> .pagination { text-align: center; }
+    .<%=g_piece_selector%> .pagination { float:left; }
     .<%=g_piece_selector%> .pagination .page{ display: inline-block; text-align: center;
       <%=@template.css(:pagination_page)%> 
     }

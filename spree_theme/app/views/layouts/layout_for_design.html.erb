@@ -1,5 +1,5 @@
 <%
-  @lg = PageGenerator.previewer( @menu, @theme, {:resource=>(@resource.nil? ? nil:@resource),:controller=>controller})
+  @lg = PageTag::PageGenerator.previewer( @menu, @theme, {:resource=>(@resource.nil? ? nil:@resource),:controller=>controller})
   ehtml = @lg.ehtml
   css,js  = @lg.generate_assets        
   #insert css to html

@@ -1,4 +1,13 @@
 zh-CN:
+########################################### start for template ###########################################    
+  views:
+    pagination:
+      first: "&laquo; 首页"
+      last: "末页 &raquo;"      
+      next: 下一页 &raquo;
+      previous: ! '&laquo; 上一页'
+      truncate: ! '&hellip;'
+########################################### end for template ###########################################    
   activerecord:
     attributes:
       spree/page_layout:

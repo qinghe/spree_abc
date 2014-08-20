@@ -66,7 +66,7 @@ module SpreeTheme::System
         @menu = DefaultTaxon.instance
       end
     end
-    #menu should be same instance pass to PageGenerator, it require  request_fullpath
+    #menu should be same instance pass to PageTag::PageGenerator, it require  request_fullpath
     @menu.request_fullpath = request.fullpath
     @is_designer = false
     if website.design?
@@ -103,11 +103,11 @@ module SpreeTheme::System
            @editor_panel = render_to_string :partial=>'layout_editor_panel'
         end
       end
-      # we have initialize PageGenerator here, page like login  do not go to template_thems_controller/page
+      # we have initialize PageTag::PageGenerator here, page like login  do not go to template_thems_controller/page
       if @is_designer
-        @lg = PageGenerator.generator( @menu, @theme, {:resource=>@resource, :controller=>self})                  
+        @lg = PageTag::PageGenerator.generator( @menu, @theme, {:resource=>@resource, :controller=>self, :page=>params[:page]})                  
       else
-        @lg = PageGenerator.generator( @menu, @theme, {:resource=>@resource, :controller=>self})          
+        @lg = PageTag::PageGenerator.generator( @menu, @theme, {:resource=>@resource, :controller=>self, :page=>params[:page]})          
       end      
       @lg.context.each_pair{|key,val|
         instance_variable_set( "@#{key}", val)
