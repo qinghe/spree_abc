@@ -378,7 +378,7 @@ ActiveRecord::Schema.define(:version => 20140815024001) do
   end
 
   create_table "spree_posts", :force => true do |t|
-    t.integer  "site_id",            :default => 0
+    t.integer  "site_id",            :default => 0,    :null => false
     t.string   "title"
     t.string   "permalink"
     t.string   "teaser"

@@ -252,9 +252,10 @@ module Spree
         table_column_names = ParamValue.column_names
         table_column_names.delete('id')        
         table_column_values  = table_column_names.dup
-        table_column_values[table_column_values.index('page_layout_root_id')] = new_layout.id
-        table_column_values[table_column_values.index('theme_id')] = new_theme.id
-        table_column_values[table_column_values.index('created_at')] = "'#{created_at.to_s(:db)}'" #=>'2014-08-20 02:48:23'        
+        # method fix_related_data_for_copied_theme handle theme_id, page_layout_root_id
+        #table_column_values[table_column_values.index('page_layout_root_id')] = new_layout.id
+        #table_column_values[table_column_values.index('theme_id')] = new_theme.id
+        table_column_values[table_column_values.index('created_at')] = "'#{created_at.utc.to_s(:db)}'" #=>'2014-08-20 02:48:23'        
         #copy param value from origin to new.
         sql = %Q!INSERT INTO #{table_name}(#{table_column_names.join(',')}) SELECT #{table_column_values.join(',')} FROM #{table_name} WHERE  (theme_id =#{self.id})! 
         self.class.connection.execute(sql)

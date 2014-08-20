@@ -52,11 +52,12 @@ Rails.logger.debug "temp_file=#{temp_file.size}"
      original_page_layouts = template.page_layout.self_and_descendants
      copied_template.page_layout.self_and_descendants.size.should eq original_page_layouts.size 
      copied_template.param_values.size.should eq template.param_values.size
-     copied_template.template_files.size.should eq template.template_files.size
      
      copied_template.page_layout.self_and_descendants.each_with_index{|pl,index|
        pl.param_values.size.should eq original_page_layouts[index].param_values.size
+       pl.param_values.first.theme_id.should eq copied_template.id
      }
+     copied_template.template_files.size.should eq template.template_files.size
   end
   
   it "destroy imported one" do
