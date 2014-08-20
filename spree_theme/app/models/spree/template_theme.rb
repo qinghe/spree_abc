@@ -120,8 +120,8 @@ module Spree
             end  
           }          
           if created_at.present?
-            TemplateFile.where(:created_at=>created_at, :theme_id=>original_theme_id).update_all( :theme_id=>new_theme_id )
-            TemplateRelease.where(:created_at=>created_at, :theme_id=>original_theme_id).update_all( :theme_id=>new_theme_id )            
+            Spree::TemplateFile.where(:created_at=>created_at, :theme_id=>original_theme_id).update_all( :theme_id=>new_theme_id )
+            Spree::TemplateRelease.where(:created_at=>created_at, :theme_id=>original_theme_id).update_all( :theme_id=>new_theme_id )            
           end
           new_theme.save!
       end      
@@ -236,7 +236,7 @@ module Spree
       #        we need copy param_value and theme_images
       #        note that it is only for root. 
       def copy_to_new()
-    
+        created_at =   DateTime.now       
         original_layout = self.page_layout    
         #copy new whole tree
         new_layout = original_layout.copy_to_new
@@ -250,17 +250,16 @@ module Spree
         table_name = ParamValue.table_name
         
         table_column_names = ParamValue.column_names
-        table_column_names.delete('id')
-        
+        table_column_names.delete('id')        
         table_column_values  = table_column_names.dup
         table_column_values[table_column_values.index('page_layout_root_id')] = new_layout.id
         table_column_values[table_column_values.index('theme_id')] = new_theme.id
-        
+        table_column_values[table_column_values.index('created_at')] = "'#{created_at.to_s(:db)}'" #=>'2014-08-20 02:48:23'        
         #copy param value from origin to new.
         sql = %Q!INSERT INTO #{table_name}(#{table_column_names.join(',')}) SELECT #{table_column_values.join(',')} FROM #{table_name} WHERE  (theme_id =#{self.id})! 
         self.class.connection.execute(sql)
         #update layout_id to new_layout.id    
-        self.class.fix_related_data_for_copied_theme(new_theme, new_layout.self_and_descendants, new_template_files=nil, self, original_layout.self_and_descendants, original_template_files=nil, nil)        
+        self.class.fix_related_data_for_copied_theme(new_theme, new_layout.self_and_descendants, new_template_files=nil, self, original_layout.self_and_descendants, original_template_files=nil, created_at)        
         return new_theme
       end
     

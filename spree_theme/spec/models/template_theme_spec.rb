@@ -49,9 +49,14 @@ Rails.logger.debug "temp_file=#{temp_file.size}"
      template.assigned_resource_ids.keys{| node_id |
        new_node_ids.should include node_id
      }     
-     copied_template.page_layout.self_and_descendants.size.should eq template.page_layout.self_and_descendants.size 
+     original_page_layouts = template.page_layout.self_and_descendants
+     copied_template.page_layout.self_and_descendants.size.should eq original_page_layouts.size 
      copied_template.param_values.size.should eq template.param_values.size
      copied_template.template_files.size.should eq template.template_files.size
+     
+     copied_template.page_layout.self_and_descendants.each_with_index{|pl,index|
+       pl.param_values.size.should eq original_page_layouts[index].param_values.size
+     }
   end
   
   it "destroy imported one" do
