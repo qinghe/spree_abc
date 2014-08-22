@@ -24,6 +24,7 @@ module Spree
         end
           
         def path
+          return href if href.present?
           context_routes[current_context] || "/#{self.id}"     
         end
       end
