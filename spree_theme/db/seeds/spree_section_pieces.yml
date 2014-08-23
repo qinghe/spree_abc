@@ -374,12 +374,12 @@ menuitem:
     <% lambda_item = lambda{ |page| 
         if page.clickable? 
            if page.current?
-             link_to page.name, page.path,{:id=>"pi#{g_piece_selector}_page.id", :class=>"selected depth#{page.depth}"}
+             link_to page.name, page.path, page.extra_html_attributes.merge( {:id=>"pi#{g_piece_selector}_page.id", :class=>"selected depth#{page.depth}"} )
            else
-             link_to page.name, page.path,{:id=>"pi#{g_piece_selector}_page.id", :class=>"depth#{page.depth}"}
+             link_to page.name, page.path, page.extra_html_attributes.merge( {:id=>"pi#{g_piece_selector}_page.id", :class=>"depth#{page.depth}"} )
            end 
         else
-          link_to page.name, page.path, {:id=>"pi#{g_piece_selector}_page.id", :class=>"noclick depth#{page.depth}", :href=>''}
+          link_to page.name, page.path, page.extra_html_attributes.merge( {:id=>"pi#{g_piece_selector}_page.id", :class=>"noclick depth#{page.depth}", :href=>''} )
         end
       }
     %>

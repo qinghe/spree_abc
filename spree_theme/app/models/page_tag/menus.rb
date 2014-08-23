@@ -1,7 +1,7 @@
 module PageTag
   class Menus < Base
     class WrappedMenu < WrappedModel
-      self.accessable_attributes=[:id,:name,:icon,:page_home?,:depth, :leaf?,:root?]
+      self.accessable_attributes=[:id,:name,:icon,:page_home?,:depth, :leaf?,:root?,:extra_html_attributes]
       delegate *self.accessable_attributes, :to => :model
       delegate :taxonomy, :to => :model
       

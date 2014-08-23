@@ -816,7 +816,7 @@ ActiveRecord::Schema.define(:version => 20140822091710) do
     t.string   "meta_keywords"
     t.integer  "depth"
     t.integer  "page_context",      :default => 0
-    t.string   "href"
+    t.string   "html_attributes"
   end
 
   add_index "spree_taxons", ["parent_id"], :name => "index_taxons_on_parent_id"

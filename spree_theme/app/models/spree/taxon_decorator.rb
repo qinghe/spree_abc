@@ -11,7 +11,15 @@ module Spree
       }
     end
     
-    
+    def extra_html_attributes
+      if @extra_html_attributes.nil?
+        if html_attributes.present?
+          @extra_html_attributes = Hash[ html_attributes.split(';').collect{|pair| pair.split(':')} ] 
+        end
+        @extra_html_attributes ||= {}
+      end
+      @extra_html_attributes
+    end
     
   end
 end
