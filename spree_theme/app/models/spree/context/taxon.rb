@@ -18,13 +18,13 @@ module Spree
           ContextEnum.login =>"/login",
           ContextEnum.either =>"/" #default_taxon for context :either is home
           }
+        scope :homes, ->{ where(:page_context=> 1 )}
         #FIXME what if home is not assigned to theme? 
         def self.home
-          where(:page_context=> 1 ).first
+          homes.first
         end
           
         def path
-          return href if href.present?
           context_routes[current_context] || "/#{self.id}"     
         end
       end

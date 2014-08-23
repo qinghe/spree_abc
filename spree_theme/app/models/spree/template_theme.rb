@@ -536,6 +536,30 @@ module Spree
       end
     end  
     
+    # taxon_id which is assigned to template_theme and its context is index 
+    def index_page
+      taxon_id = 0
+      assigned_taxon_ids = []
+      resource_key = get_resource_class_key SpreeTheme.taxon_class 
+      if assigned_resource_ids.present?
+        assigned_resource_ids.each_pair{|plid, resource_key_and_resource_ids|
+          if resource_key_and_resource_ids.key? resource_key
+            resource_key_and_resource_ids[resource_key].each{|resource_id|
+              assigned_taxon_ids << resource_id if resource_id > 0
+            }
+          end
+        }
+        if assigned_taxon_ids.present?
+          taxons = SpreeTheme.taxon_class.find(assigned_taxon_ids)
+          taxon_home = SpreeTheme.taxon_class.homes.where(["taxonomy_id in (?)", taxons.map(&:taxonomy_id ) ]).first
+          if taxon_home.present?
+            taxon_id = taxon_home.id
+          end
+        end        
+      end
+      taxon_id      
+    end
+    
     private
     def fix_special_attributes
       if site_id == 0
@@ -555,6 +579,12 @@ module Spree
         page_layout_root = add_section( root_section ) 
         self.update_attribute("page_layout_root_id",page_layout_root.id)
       end      
+    end
+    
+    def try_to_get_resource_ids( resource_class, page_layout )
+      resource_key = get_resource_class_key(resource_class)
+      page_layout_key = get_page_layout_key page_layout
+      assigned_resource_ids.try(:[],page_layout_key).try(:[],resource_key)
     end
     
   end

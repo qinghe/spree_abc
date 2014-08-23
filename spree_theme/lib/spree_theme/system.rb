@@ -45,29 +45,7 @@ module SpreeTheme::System
     end  
       
     website = SpreeTheme.site_class.current
-    if params[:controller]=~/cart|checkout|order/
-      @menu = DefaultTaxon.instance
-    elsif params[:controller]=~/user/
-      @menu = DefaultTaxon.instance
-    else
-      if params[:r]
-        @resource = Spree::Product.find_by_id(params[:r])
-      end
-      if params[:p]
-        @resource = Spree::Post.find_by_id(params[:p])
-      end
-      if params[:c] and params[:c].to_i>0 
-        @menu = SpreeTheme.taxon_class.find_by_id(params[:c])
-      elsif website.index_page > 0
-        @menu = SpreeTheme.taxon_class.find_by_id(website.index_page)
-      elsif SpreeTheme.taxon_class.home.present? #just set home page in taxon is ok as well 
-        @menu = SpreeTheme.taxon_class.home
-      else
-        @menu = DefaultTaxon.instance
-      end
-    end
-    #menu should be same instance pass to PageTag::PageGenerator, it require  request_fullpath
-    @menu.request_fullpath = request.fullpath
+    # get theme first, then look for page for selected theme. design shop require index page for each template
     @is_designer = false
     if website.design?
       #add website condition 
@@ -89,12 +67,38 @@ module SpreeTheme::System
         @theme = Spree::TemplateTheme.find( params[:id] )
         session[:theme_id] = params[:id]
       end
-    end
+    end    
     #browse template by public
     if @theme.blank? and SpreeTheme.site_class.current.template_theme.present?       
       @theme = SpreeTheme.site_class.current.template_theme
     end
 #Rails.logger.debug "menu.context=#{@menu.current_context}, @is_designer=#{@is_designer}, request.xhr?=#{request.xhr?}"
+    if params[:controller]=~/cart|checkout|order/
+      @menu = DefaultTaxon.instance
+    elsif params[:controller]=~/user/
+      @menu = DefaultTaxon.instance
+    else
+      if params[:r]
+        @resource = Spree::Product.find_by_id(params[:r])
+      end
+      if params[:p]
+        @resource = Spree::Post.find_by_id(params[:p])
+      end
+      if params[:c] and params[:c].to_i>0 
+        @menu = SpreeTheme.taxon_class.find_by_id(params[:c])
+      elsif(( index_page = @theme.index_page) > 0 )
+        @menu = SpreeTheme.taxon_class.find_by_id(index_page)
+      elsif(( index_page = website.index_page) > 0 )
+        @menu = SpreeTheme.taxon_class.find_by_id(index_page)
+      elsif SpreeTheme.taxon_class.home.present? #just set home page in taxon is ok as well 
+        @menu = SpreeTheme.taxon_class.home
+      else
+        @menu = DefaultTaxon.instance
+      end
+    end
+    #menu should be same instance pass to PageTag::PageGenerator, it require  request_fullpath
+    @menu.request_fullpath = request.fullpath
+
     # site has a released theme    
     if @theme.present?  
       unless request.xhr?
