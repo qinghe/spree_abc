@@ -9,6 +9,7 @@ https://github.com/capistrano/capistrano/wiki/Capistrano-Tasks
 cap local_staging deploy
 bundle exec rake db:seed RAILS_ENV=local_staging
 bundle exec rake spree_theme:reload_section_piece  RAILS_ENV=local_staging
+bundle exec rake spree_theme:load_seed[03_param_categories.rb] RAILS_ENV=local_staging
 bundle exec rake spree_theme:import_theme SEED_PATH=1 RAILS_ENV=local_staging
 bundle exec rake assets:precompile:all RAILS_ENV=staging RAILS_GROUPS=assets
 
