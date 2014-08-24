@@ -86,7 +86,7 @@ module SpreeTheme::System
       end
       if params[:c] and params[:c].to_i>0 
         @menu = SpreeTheme.taxon_class.find_by_id(params[:c])
-      elsif(( index_page = @theme.try(:index_page)) > 0 )
+      elsif(( index_page = @theme.try(:index_page)) && index_page > 0 )
         @menu = SpreeTheme.taxon_class.find_by_id(index_page)
       elsif(( index_page = website.index_page) > 0 )
         @menu = SpreeTheme.taxon_class.find_by_id(index_page)
