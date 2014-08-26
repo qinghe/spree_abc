@@ -1,3 +1,4 @@
+#encoding: utf-8
 require 'test_helper'
 
 class Spree::PostTest < ActiveSupport::TestCase
@@ -21,21 +22,17 @@ class Spree::PostTest < ActiveSupport::TestCase
   should have_many(:products).through(:post_products)
   should have_many(:images)
   
-  should "automatically set path" do
-    @post = Factory.create(:spree_post, :title => "This should parameterize")
-    assert_equal "this-should-parameterize", @post.path
-  end
-  
-  should "increment path when it already exists" do
-    @post = Factory.create(:spree_post, :title => "This should parameterize")
-    @post2 = Factory.create(:spree_post, :title => "This should parameterize")
-    assert_equal "this-should-parameterize-2", @post2.path
-  end
   
   context "a new post" do
   
     setup do
       @post = Factory.build(:spree_post)
+    end
+    
+    should "have permalink" do
+      @post.title = "中文标题"
+      assert @post.valid?
+      assert @post.permalink.present?
     end
   
     should "validate date time" do

@@ -10,8 +10,8 @@ ENV["RAILS_ROOT"] = File.expand_path("../dummy",  __FILE__)
 
 begin require "turn"; rescue LoadError => e; end
 
-require "spree_essentials/testing/test_helper"
-require "spree_essentials/testing/integration_case"
+require "spree_essential_blog/testing/test_helper"
+require "spree_essential_blog/testing/integration_case"
 
 # Require Spree's product factory.. and it's dependencies...
 require "spree/core/testing_support/factories/tax_category_factory"

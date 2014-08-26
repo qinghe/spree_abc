@@ -1,4 +1,4 @@
-#encoding utf8
+#encoding: utf-8
 # * 这是一个示例页面
 # *    <html> 
 # *      <body> hello world!</body> 
