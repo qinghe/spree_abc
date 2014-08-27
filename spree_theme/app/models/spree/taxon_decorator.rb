@@ -5,6 +5,9 @@ module Spree
     #for resource_class.resourceful
     scope :resourceful,->(theme){ roots }
     
+    belongs_to :replacer, class_name: 'Spree::Taxon', foreign_key: 'replaced_by' 
+
+
     def remove_from_theme
       TemplateTheme.native.each{|theme|
         theme.unassign_resource_from_theme! self 
