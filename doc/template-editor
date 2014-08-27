@@ -51,6 +51,12 @@
 8. 在模板中，我们希望分页显示产品列表或文章列表页面。
    添加列 page_layouts.data_source_param，配置数据源的参数， 如果数据源是一个集合， 可以设置分页信息
    添加列 section_piece_params.editable_condition，参数依赖于其他配置来决定是否可编辑。 如：模块配置了分页，那么可以设置分页的样式， 反之则不可以。
-9. float online help section  
+9. 在模板的主菜单中，希望有一个菜单项指向已有分类。
+   案例：
+     主菜单：  首页，产品分类，聚划算
+     我们已经创建了“产品分类菜单”，  希望 主菜单中“产品分类” 指向   “产品分类菜单“ 就可以了。
+   在taxon  
+   注意： taxon是有context的，在设计预览和客户浏览是路径可能不一样。
+10. float online help section  
    
           
