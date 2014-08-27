@@ -98,8 +98,9 @@ module SpreeTheme::System
     end
     #menu should be same instance pass to PageTag::PageGenerator, it require  request_fullpath
     @menu.request_fullpath = request.fullpath
-    if @menu.replaced_by
-      
+    # support feature replaced_by 
+    if @menu.replacer.present?
+      @menu = @menu.replacer
     end
     # site has a released theme    
     if @theme.present?  

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140822091710) do
+ActiveRecord::Schema.define(:version => 20140827091317) do
 
   create_table "ckeditor_assets", :force => true do |t|
     t.integer  "site_id",                         :default => 0, :null => false
@@ -378,7 +378,7 @@ ActiveRecord::Schema.define(:version => 20140822091710) do
   end
 
   create_table "spree_posts", :force => true do |t|
-    t.integer  "site_id",            :default => 0
+    t.integer  "site_id",            :default => 0,    :null => false
     t.string   "title"
     t.string   "permalink"
     t.string   "teaser"
@@ -817,6 +817,7 @@ ActiveRecord::Schema.define(:version => 20140822091710) do
     t.integer  "depth"
     t.integer  "page_context",      :default => 0
     t.string   "html_attributes"
+    t.integer  "replaced_by",       :default => 0, :null => false
   end
 
   add_index "spree_taxons", ["parent_id"], :name => "index_taxons_on_parent_id"
