@@ -32,7 +32,7 @@ module Spree
     scope :past,    where("posted_at <= ?", Time.now).ordered
     scope :live,    where(:live => true )
   
-   	before_validation :create_permalink, :if => proc{ |record| record.title_changed? }
+   	make_permalink
     
     # add search related
     cattr_accessor :searcher_class do
@@ -100,24 +100,10 @@ module Spree
       self.product_ids = s.to_s.split(',').map(&:strip)
     end
     
-  	private
-  			
-      def create_permalink
-    		count = 2
-    		new_permalink = title.to_s.parameterize
-    		exists = permalink_exists?(new_permalink)
-    		while exists do
-    			dupe_permalink = "#{new_permalink}-#{count}"
-    			exists = permalink_exists?(dupe_permalink)
-    			count += 1
-    		end
-    		self.permalink = dupe_permalink || new_permalink
-    	end
-    	
-    	def permalink_exists?(new_permalink)
-    		post = Spree::Post.find_by_permalink(new_permalink)
-    		post != nil && !(post == self)
-    	end  	
+    def to_param
+      permalink.present? ? permalink : (permalink_was || title.to_s.to_url)
+    end
+
   end
   
 end

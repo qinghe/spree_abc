@@ -224,7 +224,7 @@ container:
           <div class="<%=g_piece_selector%>_inner clear-block">          
           ~~content~~
           <% if @template.current_piece.current_data_source.present? %>
-            <% if @var_collection.has_pages? %>
+            <% if @var_collection.try( :has_pages? ) %>
               <%= paginate @var_collection %>
             <% end %>
           <% end %>
