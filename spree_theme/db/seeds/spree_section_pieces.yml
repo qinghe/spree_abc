@@ -1245,7 +1245,7 @@ taxon_description:
   is_selectable: "1"
   is_container: "0"
   html: |    
-    <%=raw @current_page.menu.description %>
+    <%=raw (defined?(page) ? page : @current_page).description %>
   css: ""
   js: ""  
 site_form:
