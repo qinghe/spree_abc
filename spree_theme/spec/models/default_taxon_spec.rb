@@ -1,9 +1,9 @@
 require 'spec_helper'
 describe DefaultTaxon do
-  let (:taxon) { DefaultTaxon.instance}
+  let (:default_taxon) { DefaultTaxonRoot.instance.children.first}
 
   it "should be default root" do
-    taxon_root = DefaultTaxonRoot.instance
+    taxon_root = default_taxon.root
     taxon_root.should be_a_kind_of DefaultTaxonRoot
     taxon_root.root.should == taxon_root
     taxon_root.children.size.should eq 1
@@ -13,13 +13,13 @@ describe DefaultTaxon do
   end
   
   it "has right context" do
-    taxon.current_context.should == :list
-    taxon.request_fullpath = '/0'
-    taxon.current_context.should == :list
-    taxon.request_fullpath = '/0/1'
-    taxon.current_context.should == :detail
-    taxon.request_fullpath = '/cart'
-    taxon.current_context.should == :cart    
+    default_taxon.current_context.should == :list
+    default_taxon.request_fullpath = '/0'
+    default_taxon.current_context.should == :list
+    default_taxon.request_fullpath = '/0/1'
+    default_taxon.current_context.should == :detail
+    default_taxon.request_fullpath = '/cart'
+    default_taxon.current_context.should == :cart    
     
     taxon = Spree::Taxon.new
     taxon.request_fullpath.should be_blank
@@ -41,12 +41,12 @@ describe DefaultTaxon do
   end
   
   it "should has path/context" do
-    taxon.path.should be_present
-    taxon.current_context.should be_present
+    default_taxon.path.should be_present
+    default_taxon.current_context.should be_present
   end
   
   it "support inherited page context" do
-    taxon_root = DefaultTaxonRoot.instance
+    taxon_root = default_taxon.root
     taxon_root.page_context = 1    
     taxon_root.children.each{ |default_taxon|
       default_taxon.root.should eq taxon_root     
