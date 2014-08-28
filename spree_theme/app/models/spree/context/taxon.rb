@@ -35,8 +35,36 @@ module Spree
       # return :either(detail or list), cart, checkout, register, login
       def current_context
         # consider query_string d=www.dalianshops.com and preview path /template_themes/2/preview
+        @context_context = nil
         if request_fullpath.present? #for current page, request_fullpath is present
-          case self.request_fullpath
+          @context_context = get_context_by_full_path( request_fullpath )
+        end
+        
+        if @context_context.nil?          
+          target_page_context = ( self.page_context>0 ? self.page_context : inherited_page_context )
+          @context_context = get_context_by_page_context( target_page_context )
+        end
+        @context_context
+      end
+      
+      def context_either?
+        current_context ==ContextEnum.either
+      end
+      
+      #is it a home page?
+      def page_home?
+        page_context == 1
+      end
+      
+      #support feature 
+      def inherited_page_context
+        root.page_context
+        #return page_context if root?
+        #ancestors.map(&:page_context).select{|i| i>0 }.last || 0
+      end
+      
+      def get_context_by_full_path( full_path )
+          case full_path
             when /^\/[\d]+\/[\d]+/
               ContextEnum.detail
             when /^\/cart/
@@ -62,10 +90,12 @@ module Spree
             when '/',/^\/\?/, /^\/template_themes/ 
               ContextEnum.home
             else
-              ContextEnum.list
+              # it could be blog or list              
+              nil # we can not identify it just from path
           end
-        else          
-          target_page_context = ( self.page_context>0 ? self.page_context : inherited_page_context )
+      end
+  
+      def get_context_by_page_context( target_page_context )
           case target_page_context
             when 1 #home
               ContextEnum.home
@@ -86,24 +116,7 @@ module Spree
             else
               ContextEnum.list  
           end
-        end
       end
-      
-      def context_either?
-        current_context ==ContextEnum.either
-      end
-      
-      #is it a home page?
-      def page_home?
-        page_context == 1
-      end
-      
-      #support feature 
-      def inherited_page_context
-        root.page_context
-        #return page_context if root?
-        #ancestors.map(&:page_context).select{|i| i>0 }.last || 0
-      end      
     end
   end
   

@@ -20,7 +20,7 @@ private
   end 
   
   def find_resource
-  	@object ||= Spree::Post.find(params[:id])
+  	@object ||= Spree::Post.find_by_permalink!(params[:id])
   end
   
   def collection
