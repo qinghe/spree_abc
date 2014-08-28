@@ -18,12 +18,20 @@ class DefaultTaxon < SpreeTheme.taxon_class
   end
 
   
-  begin "get default taxon tree,  default menu tree using by theme"
+    # get default taxon tree,  default menu tree using by theme
     # menu section would call default_taxon.children
     def children
       []
     end
-  end
+    #
+    def ancestors
+      [root]
+    end
+    
+    def root?
+      false
+    end
+  
      
   def name
     case current_context       

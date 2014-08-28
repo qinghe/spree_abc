@@ -57,6 +57,11 @@
      我们已经创建了“产品分类菜单”，  希望 主菜单中“产品分类” 指向   “产品分类菜单“ 就可以了。
    在taxon  
    注意： taxon是有context的，在设计预览和客户浏览是路径可能不一样。
-10. float online help section  
+
+10. 为了方便操作， 我们希望菜单的context是可继承的，设置了根的context，那么整个菜单都是这个context, 无需设置每一个菜单的context.
+   案例：
+     菜单名字是‘文章中心’，菜单项有 公司公告，业内新闻，政策法规   
+     设置‘文章中心’的context为blog, 那么‘公司公告’，‘业内新闻’，‘政策法规’的缺省context为blog
+11. float online help section  
    
           

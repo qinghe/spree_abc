@@ -64,8 +64,9 @@ module Spree
             else
               ContextEnum.list
           end
-        else
-          case self.page_context
+        else          
+          target_page_context = self.page_context>0 ? self.page_context : inherited_page_context
+          case target_page_context
             when 1 #home
               ContextEnum.home
             when 2 #cart
@@ -95,6 +96,12 @@ module Spree
       #is it a home page?
       def page_home?
         page_context == 1
+      end
+      
+      #support feature 
+      def inherited_page_context
+        return page_context if root?
+        ancestors.map(&:page_context).last
       end      
     end
   end

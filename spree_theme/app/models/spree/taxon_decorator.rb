@@ -1,6 +1,5 @@
-module Spree
-  Taxon.class_eval do
-    include Context::Taxon
+SpreeTheme.taxon_class.class_eval do
+    include Spree::Context::Taxon
     before_destroy :remove_from_theme
     #for resource_class.resourceful
     scope :resourceful,->(theme){ roots }
@@ -24,6 +23,5 @@ module Spree
       @extra_html_attributes
     end
     
-  end
 end
 
