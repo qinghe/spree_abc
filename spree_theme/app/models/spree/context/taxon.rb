@@ -80,6 +80,8 @@ module Spree
               ContextEnum.login
             when 7 #accout
               ContextEnum.account
+            when 8 
+              ContextEnum.blog
             else
               ContextEnum.list  
           end
