@@ -65,7 +65,7 @@ module Spree
               ContextEnum.list
           end
         else          
-          target_page_context = self.page_context>0 ? self.page_context : inherited_page_context
+          target_page_context = ( self.page_context>0 ? self.page_context : inherited_page_context )
           case target_page_context
             when 1 #home
               ContextEnum.home
@@ -100,8 +100,9 @@ module Spree
       
       #support feature 
       def inherited_page_context
-        return page_context if root?
-        ancestors.map(&:page_context).last
+        root.page_context
+        #return page_context if root?
+        #ancestors.map(&:page_context).select{|i| i>0 }.last || 0
       end      
     end
   end
