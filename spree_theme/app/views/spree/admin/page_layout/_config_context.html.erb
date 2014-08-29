@@ -6,7 +6,7 @@
       <%= form_for :page_layout, url: update_context_admin_template_theme_page_layout_path(@template_theme,page_layout),remote: true do |f|%>
         <div class="field">
           <%= label_tag :section_context, Spree.t('page_layout.section_context') %><br>
-          <% current_contexts = page_layout.current_contexts  %>
+          <% current_contexts = page_layout.current_contexts if page_layout.section_context.present?  %>
           <%= select_tag "section_contexts[]", options_for_select((Spree::PageLayout::ContextEnum.members-[:either]).collect{|section_context| [Spree.t("section_context.#{ section_context }"), section_context] }, current_contexts ), include_blank: true,class: 'select2', multiple: "multiple" %>      
         </div>
         <div class="field">

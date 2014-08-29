@@ -75,14 +75,17 @@ module Spree
       
       # verify :come_contexts valid to :target_contexts
       #   home is special list
-      # ex.  [:cart]  is valid to [:either]
+      # ex.  [:cart]  is valid to [:either]  taxon  <->  page_layout
       #      [:cart]  is valid to [:account, :checkout, :thankyou, :cart]
       #      [:cart]  is invalid to [:account]
       #      [:list]  is invalid to [:home]
       #      [:home]  is invalid to [:list]
+      #      [:either] is valid to [:home]    page_layout <-> page_layout, called by update_section_context
+      
       def self.verify_contexts( some_contexts, target_contexts )
         some_contexts = [some_contexts] unless some_contexts.kind_of?( Array )
-        ( target_contexts==[ContextEnum.either] || (target_contexts&some_contexts)==some_contexts )
+        #Rails.logger.debug "some_contexts=#{some_contexts.inspect}, target_contexts=#{target_contexts}, [ContextEnum.either]=#{[ContextEnum.either].inspect}"        
+        ( some_contexts==[ContextEnum.either] || target_contexts==[ContextEnum.either] || (target_contexts&some_contexts)==some_contexts )
         #|| (some_contexts==[ContextEnum.home]&&target_contexts.include?(ContextEnum.list)) 
       end
 
@@ -300,7 +303,7 @@ module Spree
       #   * new_context - one value of Contexts or an array of contexts 
       def update_section_context( new_context)
         new_context  = [new_context] unless new_context.kind_of?( Array )
-
+        new_context = new_context.map(&:to_sym) # "".to_sym == ContextEnum.either
         raise ArgumentError unless self.class.verify_contexts( new_context, inherited_contexts)
         # test would check section_context,so keep it as string
         self.update_attribute(:section_context,new_context.join(','))
