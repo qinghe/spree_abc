@@ -90,8 +90,11 @@ module SpreeTheme::System
         @menu = SpreeTheme.taxon_class.find_by_id(index_page)
       elsif(( index_page = website.index_page) > 0 )
         @menu = SpreeTheme.taxon_class.find_by_id(index_page)
-      elsif SpreeTheme.taxon_class.home.present? #just set home page in taxon is ok as well 
-        @menu = SpreeTheme.taxon_class.home
+      #elsif SpreeTheme.taxon_class.home.present? 
+      # #it is discarded, it is conflict with feature theme has own index page. it would show product assigned index page of other theme   
+      # #now each theme has own index page. website has own index page. 
+      # #just set home page in taxon is ok as well       
+      #  @menu = SpreeTheme.taxon_class.home
       else
         @menu = DefaultTaxon.instance
       end
