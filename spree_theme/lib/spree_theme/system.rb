@@ -26,7 +26,7 @@ module SpreeTheme::System
     if @is_layout_for_login_required
       return 'layout_for_login'
     end
-    SpreeTheme.site_class.current.layout || Spree::Config[:layout]
+    @theme.layout_path || SpreeTheme.site_class.current.layout || Spree::Config[:layout]
   end
 
   def initialize_template
@@ -48,26 +48,27 @@ module SpreeTheme::System
     # get theme first, then look for page for selected theme. design shop require index page for each template
     @is_designer = false
     if website.design?
-      #add website condition 
-      @is_designer = ( Spree::TemplateTheme.accessible_by( current_ability, :read).where(:site_id=>website.id).count >0 )
+      #add website condition, design can edit template_theme 
+      @is_designer = ( Spree::TemplateTheme.accessible_by( current_ability, :edit).where(:site_id=>website.id).count >0 )
     end
     
     #login, forget_password page only available fore unlogged user. we need this flag to show editor even user have not log in.
     if cookies[:_dalianshops_designer]=='1'
       @is_designer = true
     end     
-    #get template from query string 
-    if @is_designer
+    # user could select theme to view in design shop. 
+    if website.design?
+      #get template from query string
+      if params[:action]=='preview' && params[:id].present?
+        @theme = Spree::TemplateTheme.find( params[:id] )
+        session[:theme_id] = params[:id]
+      end
       if session[:theme_id].present?
         if Spree::TemplateTheme.exists? session[:theme_id]  #theme could be deleted.
           @theme = Spree::TemplateTheme.find( session[:theme_id] )
         end
       end
-      if params[:action]=='preview' && params[:id].present?
-        @theme = Spree::TemplateTheme.find( params[:id] )
-        session[:theme_id] = params[:id]
-      end
-    end    
+    end
     #browse template by public
     if @theme.blank? and SpreeTheme.site_class.current.template_theme.present?       
       @theme = SpreeTheme.site_class.current.template_theme

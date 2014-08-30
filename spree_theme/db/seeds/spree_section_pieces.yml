@@ -27,6 +27,9 @@ root:
     <%= render "spree/shared/analytics" %>
     </head>
     <body class="clear-block">
+      <% if @current_page.site_design? %>
+        <%= render "spree/shared/theme_selection_for_nondesigner" %>      
+      <% end %>
       <%= flash_messages %>
       <div id="page-wrapper" class="<%='ui-layout-center' if @current_page.is_preview %>">
       <div id="page" class='<%=g_piece_selector%>'><div id="page-inner" class="<%=g_piece_selector%>_inner clear-block">

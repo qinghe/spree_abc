@@ -15,6 +15,7 @@ module PageTag
     attr_accessor :page_generator,:website_tag, :template_tag, :product_tag
     delegate :theme, :menu,:resource, :to => :page_generator
     delegate :is_preview, :to => :page_generator    
+    delegate :design?, :to => :website_tag, :prefix=>"site"    
     alias_attribute :model, :menu #Menus::WrappedMenu use model
     
     def initialize(page_generator_instance)
