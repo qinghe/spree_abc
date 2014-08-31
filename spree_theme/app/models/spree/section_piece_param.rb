@@ -32,6 +32,20 @@ module Spree
       self.html_attribute_ids.split(',').collect{|i| [i.to_i, "#{i}unset", "#{i}hidden"]}.flatten
     end
     
+    def insert_html_attribute( html_attribute, before_existing_html_attribute = nil )
+      existing_html_attributes = html_attributes
+      raise "html_attrubte #{html_attribute.title} already exsiting." if existing_html_attributes.include? html_attribute
+      if before_existing_html_attribute.present?
+        insert_position = existing_html_attributes.index( before_existing_html_attribute )
+        raise "can not found exsiting html attribute #{before_existing_html_attribute.title}" if insert_position.nil?
+        existing_html_attributes.insert( insert_position, html_attribute)
+      else
+        existing_html_attributes.push( html_attribute )
+      end
+     self.update_attributes! :html_attribute_ids=>existing_html_attributes.map(&:id).join(',')    
+      
+    end
+    
     # only for seed or data patch
     def add_param_value_event( html_attribute, event)
       if param_conditions[html_attribute.id]
