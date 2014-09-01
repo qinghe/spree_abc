@@ -71,7 +71,11 @@ module Spree
           end          
         end
         
-        # copy from backend/app/controllers/spree/resource_controller.rb        
+        def update_other
+          view_as_clickable = params[:view_as_clickable]    
+          @page_layout.update_content_param( {:view_as_clickable=>view_as_clickable} )              
+        end 
+        
         def config_resource
           @template_theme = TemplateTheme.find( params[:template_theme_id] )          
         end
@@ -82,6 +86,10 @@ module Spree
         
         def config_data_source
           @template_theme = TemplateTheme.find( params[:template_theme_id] )          
+        end
+        
+        def config_other
+          @template_theme = TemplateTheme.find( params[:template_theme_id] )                    
         end
         
     end

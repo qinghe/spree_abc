@@ -479,7 +479,7 @@ product_description:
   updated_at: 2011-09-20 19:40:07
   css: ""
   js: ""    
-title:
+product_name:
   id: 13
   title: Product name
   slug: product-name
@@ -488,15 +488,19 @@ title:
   html: |    
     <% if defined? product %>
      <%# span only for selector  .g_piece_selector a %>
-     <span class="<%=g_piece_selector%>"><a href="<%= product.path %>"> <%=product.name %> </a> </span>
+     <% if @template.current_piece.view_as_clickable? %>
+       <a href="<%= product.path %>"> <%=product.name %> </a>
+     <% else %>
+       <%=product.name %>
+     <% end %>
     <% end %>
   created_at: 2011-09-20 19:40:07
   updated_at: 2011-09-20 19:40:07
   css: |
-    .<%=g_piece_selector%> a{
+    .<%=@template.current_piece.section_selector%>  a{
       <%= @template.css :a %> 
     }
-    .<%=g_piece_selector%> a:hover{
+    .<%=@template.current_piece.section_selector%>  a:hover{
       <%= @template.css :a_h %> 
     }
   js: ""
@@ -811,8 +815,14 @@ taxon_name:
   slug: taxon-name
   is_selectable: "1"
   is_container: "0"
-  html: |    
-    <%= (defined?(page) ? page : @current_page).name %>
+  html: |
+    <% (defined?(page) ? page : @current_page).tap{|page| %>
+      <% if @template.current_piece.view_as_clickable? %>
+        <%= link_to page.name, page.path, page.extra_html_attributes %>    
+      <% else %>
+        <%= page.name %>
+      <% end %>
+    <% }%>
   created_at: 2011-09-20 19:40:07
   updated_at: 2011-09-20 19:40:07
   css: |
@@ -1381,7 +1391,11 @@ post_title:
   is_container: "0"
   html: |    
     <% if defined? post %>     
-     <a href="<%= post.path %>"> <%=post.title %> </a>
+     <% if @template.current_piece.view_as_clickable? %>
+       <a href="<%= post.path %>"> <%=post.title %> </a>
+     <% else %>
+       <%=post.title %>
+     <% end %>
     <% end %>
   created_at: 2011-09-20 19:40:07
   updated_at: 2011-09-20 19:40:07

@@ -1,3 +1,7 @@
+#flaws
+after theme release, if we modify page_layout tree, this would cause theme generating error. 
+
+
 #todos
 0. go through whole process, create new template -> edit it-> release it-> other shop apply it
 

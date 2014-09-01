@@ -94,10 +94,28 @@ module Spree
       SpreeTheme.site_class.find( self.site_id )      
     end
     
-    # a page_layout tree could be whole html or partial html, it depend's on self.section.section_piece.is_root?,  
-    # it is only for root.
-    def is_html_root?
-      self.section.section_piece.is_root? 
+    
+    begin ' page_layout content'
+      # a page_layout tree could be whole html or partial html, it depend's on self.section.section_piece.is_root?,  
+      # it is only for root.
+      def is_html_root?
+        self.section.section_piece.is_root? 
+      end
+      
+      # view content clickable? ex. taxon_name, render as <a> or <span>? 
+      def view_as_clickable?        
+        # first bit is clickable
+        if respond_to? :content_param
+          content_param&1 >0
+        else
+          true
+        end 
+      end
+      
+      def update_content_param( options )
+        content_param |= options[:view_as_clickable].to_i 
+        save!          
+      end
     end
     
     def has_child?
