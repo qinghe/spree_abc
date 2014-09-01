@@ -246,6 +246,7 @@ module Spree
         new_layout = original_layout.copy_to_new
         #create theme record
         new_theme = self.dup
+        new_theme.release_id = 0 # new copied theme should have no release
         new_theme.page_layout_root_id = new_layout.id
         new_theme.save!
         
@@ -263,8 +264,15 @@ module Spree
         #copy param value from origin to new.
         sql = %Q!INSERT INTO #{table_name}(#{table_column_names.join(',')}) SELECT #{table_column_values.join(',')} FROM #{table_name} WHERE  (theme_id =#{self.id})! 
         self.class.connection.execute(sql)
+        #copy template_files
+        new_template_files = self.template_files.map{|template_file|
+          new_template_file = template_file.dup
+          new_template_file.theme_id = new_theme.id
+          new_template_file.created_at = created_at          
+          new_template_file.save!
+        }
         #update layout_id to new_layout.id    
-        self.class.fix_related_data_for_copied_theme(new_theme, new_layout.self_and_descendants, new_template_files=nil, self, original_layout.self_and_descendants, original_template_files=nil, created_at)        
+        self.class.fix_related_data_for_copied_theme(new_theme, new_layout.self_and_descendants, new_template_files, self, original_layout.self_and_descendants, self.template_files, created_at)        
         return new_theme
       end
     

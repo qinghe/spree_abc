@@ -22,5 +22,11 @@ module Spree
     #it is required, even for logo, app_configuration has default logo, each theme could customize logo 
     validate :template_theme, :presence=>true
     
+    #deep dup
+    def dup
+      original_dup = super
+      original_dup.attachment = self.attachment
+      original_dup
+    end
   end
 end

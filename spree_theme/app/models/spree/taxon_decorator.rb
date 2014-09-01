@@ -8,7 +8,7 @@ SpreeTheme.taxon_class.class_eval do
 
 
     def remove_from_theme
-      TemplateTheme.native.each{|theme|
+      Spree::TemplateTheme.native.each{|theme|
         theme.unassign_resource_from_theme! self 
       }
     end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140827091317) do
+ActiveRecord::Schema.define(:version => 20140901120003) do
 
   create_table "ckeditor_assets", :force => true do |t|
     t.integer  "site_id",                         :default => 0, :null => false
@@ -317,6 +317,7 @@ ActiveRecord::Schema.define(:version => 20140827091317) do
     t.datetime "created_at",                                          :null => false
     t.datetime "updated_at",                                          :null => false
     t.string   "data_source_param",                :default => ""
+    t.integer  "content_param",                    :default => 0,     :null => false
   end
 
   create_table "spree_param_categories", :force => true do |t|
@@ -378,7 +379,7 @@ ActiveRecord::Schema.define(:version => 20140827091317) do
   end
 
   create_table "spree_posts", :force => true do |t|
-    t.integer  "site_id",            :default => 0,    :null => false
+    t.integer  "site_id",            :default => 0
     t.string   "title"
     t.string   "permalink"
     t.string   "teaser"
@@ -587,6 +588,7 @@ ActiveRecord::Schema.define(:version => 20140827091317) do
     t.string   "usage",         :limit => 10,    :default => "",    :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "is_clickable",                   :default => false, :null => false
   end
 
   add_index "spree_section_pieces", ["slug"], :name => "index_spree_section_pieces_on_slug", :unique => true
@@ -611,6 +613,7 @@ ActiveRecord::Schema.define(:version => 20140827091317) do
     t.boolean "is_enabled",                              :default => true, :null => false
     t.string  "global_events",            :limit => 200, :default => "",   :null => false
     t.string  "subscribed_global_events", :limit => 200, :default => "",   :null => false
+    t.integer "content_param",                           :default => 0,    :null => false
   end
 
   create_table "spree_shipments", :force => true do |t|

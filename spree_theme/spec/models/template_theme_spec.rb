@@ -42,7 +42,8 @@ Rails.logger.debug "temp_file=#{temp_file.size}"
   end
   
   it "should copy to new" do
-     copied_template = template.copy_to_new     
+     copied_template = template.copy_to_new
+          
      copied_template.page_layout_root_id.should_not eq template.page_layout_root_id
      
      new_node_ids = copied_template.page_layout.self_and_descendants.collect{|node| node.id }     
@@ -57,7 +58,9 @@ Rails.logger.debug "temp_file=#{temp_file.size}"
        pl.param_values.size.should eq original_page_layouts[index].param_values.size
        pl.param_values.first.theme_id.should eq copied_template.id
      }
+Rails.logger.debug "copied_template.template_files.size=#{copied_template.template_files.size}"     
      copied_template.template_files.size.should eq template.template_files.size
+     copied_template.current_template_release.should be_blank
   end
   
   it "destroy imported one" do
@@ -145,7 +148,7 @@ Rails.logger.debug "............strart test import................."
     SpreeTheme.site_class.current = template.website
     taxon = Spree::SpecificTaxon.first
     template.assign_resource( taxon, template.page_layout )
-    template.assigned_resource_ids[template.page_layout.id][:'spree/specific_taxon' ].should include(taxon.id)
+    template.assigned_resource_ids[template.page_layout.id]['spree/specific_taxon' ].should include(taxon.id)
   end
   
   it "should has valid context" do
