@@ -1,7 +1,7 @@
 objs=[
   {"id"=>1, "position"=>1, "is_enabled"=>true, "editor_id"=>1, "slug"=>"general_config" },
   {"id"=>2, "position"=>1, "is_enabled"=>true, "editor_id"=>2, "slug"=>"general_position" },
-  #{"id"=>3, "position"=>1, "is_enabled"=>true, "editor_id"=>3, "slug"=>"general_background" },
+  {"id"=>3, "position"=>3, "is_enabled"=>true, "editor_id"=>3, "slug"=>"general_hover" },
   #{"id"=>4, "position"=>1, "is_enabled"=>true, "editor_id"=>4, "slug"=>"general_text" },
 
   {"id"=>4, "position"=>4, "is_enabled"=>true, "editor_id"=>0, "slug"=>"dialog_title" },

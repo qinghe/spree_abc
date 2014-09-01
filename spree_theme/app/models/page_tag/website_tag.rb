@@ -1,7 +1,7 @@
 module PageTag
   class WebsiteTag < Base
     class_attribute :accessable_attributes
-    self.accessable_attributes = [:id,:name]
+    self.accessable_attributes = [:id,:name,:design?]
     delegate *self.accessable_attributes, :to => :website
 
     def website

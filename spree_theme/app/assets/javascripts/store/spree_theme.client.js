@@ -7,6 +7,7 @@ function center_template_section( selector )
     ele.show();
 }
 
+
 $.extend({
     keys: function(obj){
         var a = [];
@@ -14,6 +15,18 @@ $.extend({
         return a;
     }
 });
+$(document).ready(function() {
+  $( "#embeded_content_wrapper" ).hover(
+    function() { $(this).show(); $( "#embeded_content_wrapper_icon" ).hide();},
+    function() { $(this).hide(); $( "#embeded_content_wrapper_icon" ).show();}
+  );
+  $( "#embeded_content_wrapper_icon" ).hover(
+    function() { $( "#embeded_content_wrapper" ).show(); }
+  );
+    
+});
+
+
 
 function VariantOptions(params) {
 

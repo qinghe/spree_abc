@@ -27,3 +27,8 @@ category 'brand' do not work.
 https://github.com/spree/spree_fancy
 
 
+# new features
+link add margin
+link add hover param,  same as link
+container add hover param 
+disable taxon/post link

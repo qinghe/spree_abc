@@ -54,6 +54,7 @@ module Spree
     #use string as key instead of integer page_layout.id, exported theme in json, after restore, key is always string
     serialize :assigned_resource_ids, Hash
     scope :within_site, lambda { |site|where(:site_id=> site.id) }
+    scope :released, where("release_id>0")
     
     before_validation :fix_special_attributes
     before_destroy :remove_relative_data
@@ -182,7 +183,10 @@ module Spree
       def document_file_path( target )
         File.join( document_path, file_name(target) )
       end
-       
+      
+      #def released?
+      #  release_id > 0 
+      #end 
     end
     
     begin 'edit template'
