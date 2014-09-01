@@ -18,3 +18,4 @@ public/shops/development
 public/shops
 config/deploy/production.rb
 db/full_sql
+rdoc
