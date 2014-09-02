@@ -42,8 +42,21 @@ index page
   1. 在设计商店, 每一个模板，期望有自己的主页，显示相应的产品。 
   2. 在一般商店，如果当前页是系统缺省页面，默认所有产品分配给当前页.   
      期望用户做最少的事情，实现他想要的效果。
-  
 
+模板发布后，可以继续修改而不影响已发布内容（当它成为一个问题时再处理）
+-----------------------------------  
+  1. 保证生成页面过程中，不再访问page_layouts，sections, section_pieces, param_values 
+    page_layouts，sections, section_pieces => html.erb 
+    param_values => css
+    
+    @template.css(:image_style)
+    @template.css(:slides)
+  2. assigned_resource_id 是否可以更改？ 
+  
+  add table released_page_layout?
+  
+  
+  
 #themes-+      
         +- foreign :  themes from design shop
         +- native -+ has native layout, can edit, release 
