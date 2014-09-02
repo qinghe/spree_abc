@@ -1477,16 +1477,14 @@ grouped_option_values_selector:
           <% product.grouped_option_values.each do |type, values| %>
             <div id="<%= dom_id(type) %>" class="variant-options index-<%= index %>">
               <h6 class="variant-option-type"><%= type.presentation %></h6>
-              <ul class="variant-option-values">
+              <ul class="variant-option-values clear-block">
               <% values.sort_by(&:position).each do |value| %>
                 <% classes = ["option-value"] %>
                 <% unless (variants = product.variants_for_option_value(value)).empty? %>
                   <% classes << ( Spree::Config[:allow_backorder_shipping] || product.total_on_hand > 0 ? "in-stock" : "out-of-stock" ) if index == 0 %>
-                  <li><%= link_to value.image.present? ? image_tag(value.image.attachment.url, :alt => value.presentation) : content_tag(:span, value.presentation), "#", :title => value.presentation, :class => classes.join(" "), :rel => "#{type.id}-#{value.id}" %></li>
+                  <li><%= link_to value.image.present? ? image_tag(value.image.attachment.url, :alt => value.presentation) : content_tag(:span, value.presentation), "javascript:void(0);", :title => value.presentation, :class => classes.join(" "), :rel => "#{type.id}-#{value.id}" %></li>
                 <% end %>
               <% end %>
-                <li class="clear-option"><%= link_to "X", "#clear", :class => "clear-button clear-index-#{index}" %></li>
-                <li class="clear"></li>
               </ul>
             </div>
             <% index += 1 %>
@@ -1532,32 +1530,13 @@ grouped_option_values_selector:
       margin: 3px 3px 0 0;
       text-decoration: none;
       cursor: pointer;
-      -webkit-border-radius: 4px;
-      -moz-border-radius: 4px;
       border-radius: 4px;
-    }
-    .variant-option-values li.clear {
-      border: 0;
-      float: none;
-      clear: both;
-    }
-    li.clear-option a.clear-button {
-      display: none;
-      font-weight: bold;
-      background-color: #fff;
-      border-color: #FDE2E2;
-      color: #c00e0e;
-    }
-    li.clear-option a.clear-button:hover {
-      border-color: #c00e0e;
-      background-color: #EF2E2E;
-      color: #fff;
     }
     .option-value.selected,
     .option-value.in-stock:hover {
       background-color: #1491EB;
       border-color: #1072B9;
-      color: #fff;
+      color: #ffffff;
     }
     .option-value.out-of-stock {
       display: block;
@@ -1578,4 +1557,62 @@ grouped_option_values_selector:
       -khtml-opacity: 0.5;
       opacity: 0.5;
     }
+  js: ""
+grouped_option_values_selector_in_slider_style:
+  id: 63
+  title: grouped option values selector in slider style
+  slug: grouped-option-values-selector-in-slider-style
+  is_selectable: "1"
+  is_container: "0"
+  html: |    
+    <% if defined? product %>
+      <% if product.has_variants? %>
+        <div id="product-variants">
+          <h2><%= Spree.t('variants') %></h2>
+          <% index = 0 %>
+          <% product.grouped_option_values.each do |type, values| %>
+            <div id="<%= dom_id(type) %>" class="variant-options index-<%= index %>">
+              <h6 class="variant-option-type"><%= type.presentation %></h6>
+              <ul class="variant-option-values clear-block">
+              <% values.sort_by(&:position).each do |value| %>
+                <% classes = ["option-value"] %>
+                <% unless (variants = product.variants_for_option_value(value)).empty? %>
+                  <% classes << ( product.total_on_hand > 0 ? "in-stock" : "out-of-stock" ) if index == 0 %>
+                  <li class="olge"><%= link_to value.image.present? ? image_tag(value.image.attachment.url(:large), :alt => value.presentation) : content_tag(:span, value.presentation), "#", :title => value.presentation, :class => classes.join(" "), :rel => "#{type.id}-#{value.id}" %></li>
+                <% end %>
+              <% end %>
+              </ul>
+
+
+              <ul class="variant-option-values clear-block">
+              <% values.sort_by(&:position).each do |value| %>
+                <% classes = ["option-value"] %>
+                <% unless (variants = product.variants_for_option_value(value)).empty? %>
+                  <% classes << ( product.total_on_hand > 0 ? "in-stock" : "out-of-stock" ) if index == 0 %>
+                  <li class="otmb"><%= link_to value.image.present? ? image_tag(value.image.attachment.url(:mini), :alt => value.presentation) : content_tag(:span, value.presentation), "#", :title => value.presentation, :class => classes.join(" "), :rel => "#{type.id}-#{value.id}" %></li>
+                <% end %>
+              <% end %>
+              </ul>
+            </div>
+            <% index += 1 %>
+          <% end %>
+          <%= hidden_field_tag "products[#{product.id}]", "", :id => "variant_id", :class => "hidden" %>
+          <%= button_tag "Back" %> <%= button_tag "Next" %>
+          <script type="text/javascript">
+          //<![CDATA[
+            var variant_options = new VariantOptionsInSliderStyle({
+              options: <%== product.variant_options_hash.to_json -%>,
+              track_inventory_levels: false,
+              allow_backorders: true,
+              allow_select_outofstock: true,
+              default_instock: true
+            });
+          //]]>
+          </script>
+        </div>
+      <% end%>
+    <% end%>
+  created_at: 2011-09-20 19:40:07
+  updated_at: 2011-09-20 19:40:07
+  css: 
   js: ""
