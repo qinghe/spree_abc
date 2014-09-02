@@ -30,7 +30,7 @@ function VariantOptions(params) {
     var allow_select_outofstock = params['allow_select_outofstock'];
     var default_instock = params['default_instock'];
 
-    var variant, divs, parent, index = 0;
+    var variant, option_type_container, parent, index = 0;
     // divs: all option_types included option_values
     // parent: a container for  option_values of an option_type
     var selection = [];
@@ -80,7 +80,7 @@ function VariantOptions(params) {
 
     function inventory(btns) {
         var keys, variants, count = 0, selected = {};
-        var sels = $.map(divs.find('a.selected'), function(i) { return i.rel });
+        var sels = $.map(divs.find('a.selected'), function(i) { return i.option_type_container });
         $.each(sels, function(key, value) {
             key = value.split('-');
             var v = options[key[0]][key[1]];
@@ -292,53 +292,56 @@ function VariantOptionsInSliderStyle(params) {
     var options = params['options'];
     var allow_backorders = !params['track_inventory_levels'] ||  params['allow_backorders'];
     var allow_select_outofstock = params['allow_select_outofstock'];
-    var default_instock = params['default_instock'];
 
-    var variant, divs, parent, index = 0;
-    // divs: all option_types included option_values
-    // parent: a container for  option_values of an option_type
+    var variant, option_types_container, option_values_container, index = 0;
+    // option_type_container: all option_types included option_values
+    // option_values_container: a container for  option_values of an option_type
     var selection = [];
     var buttons;
 
 
     function init() {
-        divs = $('#product-variants .variant-options');
-        update_model();
-        divs.find('a.option-value').click(handle_click);
-
-        if (default_instock) {
-            divs.each(function(){
-                $(this).find("ul.variant-option-values li a.in-stock:first").click();
-            });
-        }
+        option_types_container = $('#product-variants .variant-options');
+        option_types_container.find('a.option-value').click(handle_click);
+        
+        option_types_container.find('button.next').click(next_step_click);
+        option_types_container.find('button.back').click(back_step_click);
+        
+        initialize_option_view();
     }
 
-    // update
-    // update data, parent,buttons
-    function update_model(i) {
+    function initialize_option_view (i) {
         index = isNaN(i) ? index : i;
-        parent = $(divs.get(index));
-        buttons = parent.find('a.option-value');
+        update_model();
+        option_types_container.find(".variant-options").hide();
+        option_values_container.find("a.option-value:first").click();
+        option_values_container.show()     
+    }
+    // update
+    // update data, option_values_container,buttons
+    function update_model() {
+        option_values_container = $(option_types_container.get(index));
+        buttons = option_values_container.find('a.option-value');
     }
     
     // update price?    
-    function update_view(i) {
-        variant = null;
-        
+    function update_view() {
+        //show 
+        var option_type_id_and_option_value_id =  buttons.filter('.selected').attr('rel').split('-');
+        $('#product-variants .olge').hide();
+        $('#product-variants .lge'+option_type_id_and_option_value_id[1]).show();
     }
     
-    // enable option values of current option type
-    function enable(btns) {
-        buttons.removeClass('selected');
-        
-        var bt = btns.not('.unavailable').removeClass('locked')
-        if (!allow_select_outofstock && !allow_backorders){
-            bt = bt.filter('.in-stock')
-        }            
-        bt.addClass('selected')
-
+    function next_step_click() {
+        index++;
+        initialize_option_view();
     }
-
+    
+    function first_step_click() {
+        index--;
+        initialize_option_view();
+    }
+        
     function handle_click(evt) {
         evt.preventDefault();
         variant = null;
@@ -356,7 +359,7 @@ function VariantOptionsInSliderStyle(params) {
             buttons.removeClass('selected');
             a.addClass('selected');
         }
-        update_view(divs.index(a.parents('.variant-options:first')));
+        update_view();
 
     }
 
