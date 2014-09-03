@@ -5,7 +5,9 @@
 5. 分析Rails日志, 查看错误请求。
 6. remove redundant option_values from server db.
 7. css(:image_style), css(:slides),  those situation is reading param_values in layout. try to remove it.
-
+8. 在seeds 中设置产品的配送类型。否则导致产品无法更新。
+9. replace 'canonical' tag in original spree.
+10. select variant in radio list. it is not working now.
 
 
 https://github.com/spree/spree/issues/1906

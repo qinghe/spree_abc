@@ -9,6 +9,7 @@ function center_template_section( selector )
 
 
 $(document).ready(function() {
+  // template theme selection for designer shop
   $( "#embeded_content_wrapper" ).hover(
     function() { $(this).show(); $( "#embeded_content_wrapper_icon" ).hide();},
     function() { $(this).hide(); $( "#embeded_content_wrapper_icon" ).show();}
@@ -211,7 +212,7 @@ function VariantOptions(params) {
         //    bt = bt.filter('.in-stock')
         //}            
         
-        if (a.filter('.selected').length){
+        if (a.filter('.selected').length>0){
             // unclick selected, 
             clear(divs.index(a.parents('.variant-options:first')));
         }else{
@@ -287,13 +288,13 @@ function VariantOptions(params) {
     $(document).ready(init);
 
 };
-function VariantOptionsInSliderStyle(params) {
-
+function VariantOptionsInSliderStyle(params) {    
     var options = params['options'];
+    var container_selector = params['container_selector']
     var allow_backorders = !params['track_inventory_levels'] ||  params['allow_backorders'];
     var allow_select_outofstock = params['allow_select_outofstock'];
 
-    var variant, option_types_container, option_values_container, index = 0;
+    var variant, option_types, option_values_container, index = 0;
     // option_type_container: all option_types included option_values
     // option_values_container: a container for  option_values of an option_type
     var selection = [];
@@ -301,26 +302,28 @@ function VariantOptionsInSliderStyle(params) {
 
 
     function init() {
-        option_types_container = $('#product-variants .variant-options');
-        option_types_container.find('a.option-value').click(handle_click);
-        
-        option_types_container.find('button.next').click(next_step_click);
-        option_types_container.find('button.back').click(back_step_click);
+        option_types = $(container_selector+" .variant-option");
+        option_types.find('a.option-value').click(handle_click);        
+        $(container_selector+' button.next').click(next_step_click);
+        $(container_selector+' button.back').click(back_step_click);
         
         initialize_option_view();
     }
 
     function initialize_option_view (i) {
         index = isNaN(i) ? index : i;
+        option_types.hide();
         update_model();
-        option_types_container.find(".variant-options").hide();
-        option_values_container.find("a.option-value:first").click();
+        //keep selected before
+        if( option_values_container.find("a.option-value.selected").length == 0)  {
+          option_values_container.find("a.option-value:first").click();
+        }
         option_values_container.show()     
     }
     // update
     // update data, option_values_container,buttons
     function update_model() {
-        option_values_container = $(option_types_container.get(index));
+        option_values_container = $(option_types.get(index));
         buttons = option_values_container.find('a.option-value');
     }
     
@@ -328,8 +331,8 @@ function VariantOptionsInSliderStyle(params) {
     function update_view() {
         //show 
         var option_type_id_and_option_value_id =  buttons.filter('.selected').attr('rel').split('-');
-        $('#product-variants .olge').hide();
-        $('#product-variants .lge'+option_type_id_and_option_value_id[1]).show();
+        option_values_container.find(' .olge').hide();
+        option_values_container.find(' .lge-'+option_type_id_and_option_value_id[1]).show();
     }
     
     function next_step_click() {
@@ -337,30 +340,21 @@ function VariantOptionsInSliderStyle(params) {
         initialize_option_view();
     }
     
-    function first_step_click() {
+    function back_step_click() {
         index--;
         initialize_option_view();
     }
         
     function handle_click(evt) {
         evt.preventDefault();
-        variant = null;
-        selection = [];
         var a = $(this);
         //return if has class unavailable locked
-        if( a.hasClass("unavailable") || a.hasClass("locked")){
+        if( a.hasClass("unavailable") || a.hasClass("locked")|| a.hasClass("selected")){
             return
         }          
-        
-        if (a.filter('.selected').length){
-            // unclick selected,
-            a.removeClass('selected');
-        }else{
-            buttons.removeClass('selected');
-            a.addClass('selected');
-        }
+        buttons.removeClass('selected');
+        a.addClass('selected');
         update_view();
-
     }
 
     $(document).ready(init);

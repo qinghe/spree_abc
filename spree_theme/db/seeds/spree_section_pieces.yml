@@ -13,7 +13,7 @@ root:
       <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
       <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8" />
       <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"/>
-      <%# it is in main app/assets/ include spree_theme, spree_china_checkout %>      
+      <%# it is in main app/assets/ include spree_theme, spree_china_checkout, store/product, store/cart, store/checkout ... %>      
       <%= javascript_include_tag 'store/all' %>      
     <% if @current_page.is_preview %>
       <%= stylesheet_link_tag 'store/spree_theme', :media => 'screen' %>
@@ -477,7 +477,9 @@ product_description:
   is_selectable: "0"
   is_container: "0"
   html: |      
+    <% if defined? product %>
        <%=raw product.description %>
+    <% end %>
   created_at: 2011-09-20 19:40:07
   updated_at: 2011-09-20 19:40:07
   css: ""
@@ -641,13 +643,13 @@ product_quantity:
   is_selectable: "0"
   is_container: "0"
   html: |       
-    <span class="<%=g_piece_selector%>"><%= number_field_tag ( "variants[#{product.master.id}]"),
-            1, :class => 'title', :min => 1 %> </span>
+    <% # products[product_id]&quantity for product contained options or just variants[id]=>quantity, more detail in Spree::OrderPopulator %>
+    <%= number_field_tag (product.variants_and_option_values.any? ? :quantity : "variants[#{product.master.id}]"), 1, :class => 'title', :min => 1 %> 
 
   created_at: 2011-09-20 19:40:07
   updated_at: 2011-09-20 19:40:07
   css: |
-    .<%=g_piece_selector%> input{
+    .<%=@template.current_piece.section_selector%>  input{
       <%= @template.css :input %> 
     }
   js: ""
@@ -658,16 +660,13 @@ product_atc:
   is_selectable: "0"
   is_container: "0"
   html: |   
-    <%= form_for :order, :url => populate_orders_path, :html=>{:class=>[g_piece_selector]} do |f| %>
-      <%= hidden_field_tag  "variants[#{product.master.id}]", 1 %>
       <%= button_tag  :id => 'add-to-cart-button', :type => :submit  do %>
             <%= Spree.t(:add_to_cart) %>
       <% end %>
-    <% end %>
   created_at: 2011-09-20 19:40:07
   updated_at: 2011-09-20 19:40:07
   css: |
-    .<%=g_piece_selector%> button{
+    .<%=@template.current_piece.section_selector%> button{
       <%= @template.css :button %> 
     }
   js: ""
@@ -1567,10 +1566,10 @@ option_values_in_slide_style:
   html: |    
     <% if defined? product %>
       <% if product.has_variants? %>
-        <div id="product-variants">
+        <div class="<%=g_piece_selector%>">
           <h2><%= Spree.t('variants') %></h2>
           <% product.grouped_option_values.each do |type, values| %>
-            <div id="<%= dom_id(type) %>" class="variant-options">
+            <div id="<%= dom_id(type) %>" class="variant-option">
               <h6 class="variant-option-type"><%= type.presentation %></h6>
               <ul class="variant-option-values variant-option-value-large-images clear-block">
               <% values.sort_by(&:position).each do |value| %>
@@ -1584,17 +1583,22 @@ option_values_in_slide_style:
               <% values.sort_by(&:position).each do |value| %>
                 <% classes = ["option-value"] %>
                 <% unless (variants = product.variants_for_option_value(value)).empty? %>
-                  <li class="otmb" ><%= link_to value.image.present? ? image_tag(value.image.attachment.url(:mini), :alt => value.presentation) : content_tag(:span, value.presentation), "javascript:void(0)", :title => value.presentation, :class => classes.join(" "), :rel => "#{type.id}-#{value.id}" %></li>
+                  <li class="otmb" ><%= link_to value.image.present? ? image_tag(value.image.attachment.url(:mini), :alt => value.presentation) : content_tag(:span, value.presentation), "#", :title => value.presentation, :class => classes.join(" "), :rel => "#{type.id}-#{value.id}" %></li>
                 <% end %>
               <% end %>
               </ul>
             </div>
           <% end %>
-          <%= hidden_field_tag "products[#{product.id}]", "", :id => "variant_id", :class => "hidden" %>
+          <%= hidden_field_tag "products[#{product.id}]", product.master.id, :id => "variant_id", :class => "hidden" %>
           <%= button_tag "Back",:class=>'back' %> <%= button_tag "Next",:class=>'next' %>
+            <%= button_tag  :id => 'add-to-cart-button', :type => :submit  do %>
+                  <%= Spree.t(:add_to_cart) %>
+            <% end %>
+
           <script type="text/javascript">
           //<![CDATA[
             var variant_options = new VariantOptionsInSliderStyle({
+              container_selector: <%== ('.'+g_piece_selector).to_json -%>,
               options: <%== product.variant_options_hash.to_json -%>,
               track_inventory_levels: false,
               allow_backorders: true,
@@ -1608,5 +1612,24 @@ option_values_in_slide_style:
     <% end%>
   created_at: 2011-09-20 19:40:07
   updated_at: 2011-09-20 19:40:07
-  css: ""
+  css: |
+    .<%=g_piece_selector%> .variant-option{
+      display:none;
+    }
+    .<%=g_piece_selector%> ul.variant-option-values {
+      list-style-type: none;
+      margin:0;
+      padding:0;  
+    }
+    .<%=g_piece_selector%> .variant-option-values li {
+      display: block;
+      position: relative;
+      float: left;
+    }
+    .option-value.selected,
+    .option-value.in-stock:hover {
+      background-color: #1491EB;
+      border-color: #1072B9;
+      color: #ffffff;
+    }
   js: ""

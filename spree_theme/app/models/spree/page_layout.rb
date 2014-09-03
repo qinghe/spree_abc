@@ -488,9 +488,12 @@ module Spree
         if node.data_source.present? #node.data_source.singularize
           case node.current_data_source
             when DataSourceEnum.gpvs, DataSourceEnum.this_product
+              # for this_product, we have to wrapped with form, or option_value radio would not work.
               subpieces = <<-EOS1 
               <% @var_collection = @template.products( (defined?(page) ? page : @current_page) ).each{|product| %>
+                  <%= form_for :order, :url => populate_orders_path do |f| %>
                   #{subpieces}
+                  <% end %>
               <% } %>
               EOS1
             when DataSourceEnum.blog, DataSourceEnum.post
