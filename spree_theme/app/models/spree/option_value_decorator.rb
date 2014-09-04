@@ -31,6 +31,8 @@ Spree::Product.class_eval do
     @_variant_option_values.select { |i| i.option_value_ids.include?(value.id) }
   end
 
+  # return { option_id=>{ option_value_id=>{ variant_id=>variant } } }
+  #
   def variant_options_hash
     return @_variant_options_hash if @_variant_options_hash
     hash = {}

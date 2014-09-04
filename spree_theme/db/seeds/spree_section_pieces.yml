@@ -1590,14 +1590,15 @@ option_values_in_slide_style:
             </div>
           <% end %>
           <%= hidden_field_tag "products[#{product.id}]", product.master.id, :id => "variant_id", :class => "hidden" %>
-          <%= button_tag "Back",:class=>'back' %> <%= button_tag "Next",:class=>'next' %>
+          <%= button_tag "Back",:class=>'back', :type=>:button %> <%= button_tag "Next",:class=>'next', :type=>:button %>
             <%= button_tag  :id => 'add-to-cart-button', :type => :submit  do %>
                   <%= Spree.t(:add_to_cart) %>
             <% end %>
 
           <script type="text/javascript">
           //<![CDATA[
-            var variant_options = new VariantOptionsInSliderStyle({
+            var variant_options = new VariantOptions({
+              view_style: 'slide',
               container_selector: <%== ('.'+g_piece_selector).to_json -%>,
               options: <%== product.variant_options_hash.to_json -%>,
               track_inventory_levels: false,
