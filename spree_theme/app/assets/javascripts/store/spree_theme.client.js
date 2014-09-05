@@ -82,7 +82,7 @@ function VariantOptions(params) {
         enable(buttons);
     }
 
-
+    // after use click a option value, we should reset next all option_values
     function clear(i) {
         update(i);
         enable(buttons.removeClass('selected'));
@@ -309,6 +309,7 @@ function VariantOptions(params) {
     }
 
     function find_variant() {
+        var form_container = $(container_selector).parents('form:first')
         var selected = option_types.find('a.selected');
         var variants = get_variant_objects(selected.get(0).rel, available_variant_ids);
         if (selected.length == option_types.length) {
@@ -320,9 +321,9 @@ function VariantOptions(params) {
                 return to_f(a) < to_f(b) ? -1 : 1;
             });
             if (prices.length == 1) {
-                $('#product-price .price').html('<span class="price assumed">' + prices[0] + '</span>');
+                form_container.find('.price').html('<span class="price assumed">' + prices[0] + '</span>');
             } else {
-                $('#product-price .price').html('<span class="price from">' + prices[0] + '</span> - <span class="price to">' + prices[prices.length - 1] + '</span>');
+                form_container.find('.price').html('<span class="price from">' + prices[0] + '</span> - <span class="price to">' + prices[prices.length - 1] + '</span>');
             }
             return false;
         }
