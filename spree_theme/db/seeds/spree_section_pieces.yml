@@ -1470,11 +1470,10 @@ grouped_option_values_selector:
   html: |    
     <% if defined? product %>
       <% if product.has_variants? %>
-        <div id="product-variants">
-          <h2><%= Spree.t('variants') %></h2>
+        <div class="<%=g_piece_selector%>">
           <% index = 0 %>
           <% product.grouped_option_values.each do |type, values| %>
-            <div id="<%= dom_id(type) %>" class="variant-options index-<%= index %>">
+            <div id="<%= dom_id(type) %>" class="variant-option index-<%= index %>">
               <h6 class="variant-option-type"><%= type.presentation %></h6>
               <ul class="variant-option-values clear-block">
               <% values.sort_by(&:position).each do |value| %>
@@ -1488,11 +1487,12 @@ grouped_option_values_selector:
             </div>
             <% index += 1 %>
           <% end %>
-          <%= hidden_field_tag "products[#{product.id}]", "", :id => "variant_id", :class => "hidden" %>
+          <%= hidden_field_tag "products[#{product.id}]", "", :class => "hidden variant_id" %>
           <script type="text/javascript">
           //<![CDATA[
             var variant_options = new VariantOptions({
               options: <%== product.variant_options_hash.to_json -%>,
+              container_selector: <%== ('.'+g_piece_selector).to_json -%>,
               track_inventory_levels: false,
               allow_backorders: true,
               allow_select_outofstock: true,
@@ -1512,7 +1512,7 @@ grouped_option_values_selector:
     .variant-option-type {
       margin-bottom: 0;
     }
-    #product-variants ul.variant-option-values {
+    .<%=g_piece_selector%> ul.variant-option-values {
       list-style-type: none;  
       margin-bottom: 1em;
     }
@@ -1567,7 +1567,6 @@ option_values_in_slide_style:
     <% if defined? product %>
       <% if product.has_variants? %>
         <div class="<%=g_piece_selector%>">
-          <h2><%= Spree.t('variants') %></h2>
           <% product.grouped_option_values.each do |type, values| %>
             <div id="<%= dom_id(type) %>" class="variant-option">
               <h6 class="variant-option-type"><%= type.presentation %></h6>
@@ -1589,12 +1588,11 @@ option_values_in_slide_style:
               </ul>
             </div>
           <% end %>
-          <%= hidden_field_tag "products[#{product.id}]", product.master.id, :id => "variant_id", :class => "hidden" %>
+          <%= hidden_field_tag "products[#{product.id}]", product.master.id, :class => "hidden variant_id" %>
           <%= button_tag "Back",:class=>'back', :type=>:button %> <%= button_tag "Next",:class=>'next', :type=>:button %>
             <%= button_tag  :id => 'add-to-cart-button', :type => :submit  do %>
                   <%= Spree.t(:add_to_cart) %>
             <% end %>
-
           <script type="text/javascript">
           //<![CDATA[
             var variant_options = new VariantOptions({

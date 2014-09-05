@@ -34,7 +34,7 @@ function VariantOptions(params) {
     var allow_select_outofstock = params['allow_select_outofstock'];
     var default_instock = params['default_instock'];
 
-    var variant, option_types, option_values_container, index = 0;
+    var option_types, option_values_container, index = 0;
     // option_types: all option_types included option_values
     // option_values_container: a container for  option_values of an option_type
     var available_variant_ids = []; // base on selected option value, there are some available variant ids 
@@ -42,7 +42,7 @@ function VariantOptions(params) {
 
 
     function init() {
-        option_types = $('#product-variants .variant-options');
+        option_types = $(container_selector+" .variant-option");
         disable(option_types.find('a.option-value').addClass('locked'));
         update();
         enable(option_values_container.find('a.option-value'));
@@ -55,8 +55,8 @@ function VariantOptions(params) {
             });
         }
     }
-
-    // update data, option_values_container,buttons
+    
+    // set current option type
     function update(i) {
         index = isNaN(i) ? index : i;
         option_values_container = $(option_types.get(index));
@@ -83,31 +83,7 @@ function VariantOptions(params) {
     }
 
 
-    function toggle() {
-        if (variant) {
-            $('#variant_id, form[data-form-type="variant"] input[name$="[variant_id]"]').val(variant.id);
-            $('#product-price .price').removeClass('unselected').text(variant.price);
-            if (variant.count > 0 || allow_backorders)
-                $('#cart-form button[type=submit]').attr('disabled', false).fadeTo(100, 1);
-            $('form[data-form-type="variant"] button[type=submit]').attr('disabled', false).fadeTo(100, 1);
-            try {
-                show_variant_images(variant.id);
-            } catch(error) {
-                // depends on modified version of product.js
-            }
-        } else {
-            $('#variant_id, form[data-form-type="variant"] input[name$="[variant_id]"]').val('');
-            $('#cart-form button[type=submit], form[data-form-type="variant"] button[type=submit]').attr('disabled', true).fadeTo(0, 0.5);
-            var price = $('#product-price .price').addClass('unselected')
-            // Replace product price by "(select)" only when there are at least 1 variant not out-of-stock
-            variants = $("div.variant-options.index-0")
-            if (variants.find("a.option-value.out-of-stock").length != variants.find("a.option-value").length)
-                price.text('(select)');
-        }
-    }
-
     function clear(i) {
-        variant = null;
         update(i);
         enable(buttons.removeClass('selected'));
         toggle();
@@ -119,7 +95,7 @@ function VariantOptions(params) {
 
     function handle_click(evt) {
         evt.preventDefault();
-        variant = null;
+        var target_variant = null;
         available_variant_ids = [];
         var a = $(this);
         //return if has class unavailable locked
@@ -132,16 +108,16 @@ function VariantOptions(params) {
         
         if (a.filter('.selected').length>0){
             // unclick selected, 
-            clear(option_types.index(a.parents('.variant-options:first')));
+            clear(option_types.index(a.parents('.variant-option:first')));
         }else{
             if (!option_values_container.has(a).length) {
-                clear(option_types.index(a.parents('.variant-options:first')));
+                clear(option_types.index(a.parents('.variant-option:first')));
             }
             disable(buttons);
             var a = enable(a.addClass('selected'));
             advance();
-            if (find_variant()) {
-                toggle();
+            if (target_variant=find_variant()) {
+                toggle(target_variant);
             }            
         }        
     }
@@ -224,7 +200,19 @@ function VariantOptions(params) {
         index = isNaN(i) ? index : i;
         option_types.hide();
         update_model();
-        //keep selected before
+        // hide button back if index =0
+        if (index==0){
+          $(container_selector+' button.back').attr('disabled', true);    
+        }else{
+          $(container_selector+' button.back').attr('disabled', false);                
+        }
+        if ((index+1) == option_types.length){
+            $(container_selector+' button.next').attr('disabled', true);                
+        }else{
+            $(container_selector+' button.next').attr('disabled', false);                
+        }
+        
+        // select one, or no option image show.
         if( option_values_container.find("a.option-value.selected").length == 0)  {
           option_values_container.find("a.option-value:first").click();
         }
@@ -258,6 +246,7 @@ function VariantOptions(params) {
     function handle_click_for_slide_style(evt) {
         evt.preventDefault();
         var a = $(this);
+        var target_variant= null;
         //return if has class unavailable locked
         if( a.hasClass("unavailable") || a.hasClass("locked")|| a.hasClass("selected")){
             return
@@ -267,8 +256,9 @@ function VariantOptions(params) {
         
         update_view();
         
-        find_variant();
-        
+        if (target_variant=find_variant()) {
+          toggle(target_variant);
+        }                    
     }
     //                                end slide style
     //==========================================================================================
@@ -322,7 +312,7 @@ function VariantOptions(params) {
         var selected = option_types.find('a.selected');
         var variants = get_variant_objects(selected.get(0).rel, available_variant_ids);
         if (selected.length == option_types.length) {
-            return variant = variants[available_variant_ids[0]];
+            return variants[available_variant_ids[0]];
         } else {
             var prices = [];
             $.each(variants, function(key, value) { prices.push(value.price) });
@@ -369,10 +359,45 @@ function VariantOptions(params) {
         return variants;
     }
 
+    function toggle( target_variant) {
+        var form_container = $(container_selector).parents('form:first')
+        if (target_variant) {
+            form_container.find('input.variant_id').val(target_variant.id);
+            form_container.find('.price').removeClass('unselected').text(target_variant.price);
+            if (target_variant.count > 0 || allow_backorders)
+                form_container.find('button[type=submit]').attr('disabled', false).fadeTo(100, 1);
+            try {
+                show_variant_images(target_variant.id);
+            } catch(error) {
+                // depends on modified version of product.js
+            }
+        } else {
+            form_container.find('input.variant_id').val('');
+            form_container.find('button[type=submit]').attr('disabled', true).fadeTo(0, 0.5);
+            var price = form_container.find('.price').addClass('unselected')
+            // Replace product price by "(select)" only when there are at least 1 variant not out-of-stock
+            variants = $("div.variant-option.index-0")
+            if (variants.find("a.option-value.out-of-stock").length != variants.find("a.option-value").length)
+                price.text('(select)');
+        }
+    }
 
     //                               end common methods 
     //==========================================================================================
-
+    
+    // it is unused for now.
+    function option_value_click_handler(){
+        evt.preventDefault();
+        available_variant_ids = [];
+        var a = $(this);
+        //return if has class unavailable locked selected
+        if( a.hasClass("unavailable") || a.hasClass("locked") ||  a.hasClass("selected")){
+            return
+        }        
+        // select option type
+        // select current clicked option value
+        // correct next all selected option value          
+    }
     
     if( view_style == 'slide' ){
       $(document).ready(init_for_slide_style);      
