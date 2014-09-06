@@ -9,7 +9,7 @@ module Spree
     # slug db,bool,text,src pvalue are special
     #possible selected value for manual entry
     self.psv_for_manual_entry_enum =  {:href=>'0u', :bool=>'0b', :text=>'0t', :size=>'l1', :color=>'0c', :src=>'0i',:db=>'0d', :image=>'0i'}
-    self.unit_collection = {:l=>['px']}
+    self.unit_collection = {:l=>['px','em']}
     
     friendly_id :title, :use => :slugged
   
