@@ -234,7 +234,7 @@ container:
           </div>          
     </div> 
   css: |-
-    /* background, margin, border, skinnables */
+    /* width,height, skinnables */
     .<%=g_piece_selector%>
     { float:left; overflow:hidden;  padding:0;  margin:0 auto; 
       position:relative;
