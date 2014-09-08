@@ -156,29 +156,21 @@ function VariantOptions(params) {
       // given option_values, Intersection of those collections is final available variants   
         var variant_ids, variants, count = 0, selected = {};
         var sels = $.map(option_types.find('a.selected'), function(i) { return i.rel });
-        $.each(sels, function(i, value) {
-            var ids = value.split('-');
-            var variant_id_variant_hash = options[ids[0]][ids[1]];
-            variant_ids = get_keys_of_object( variant_id_variant_hash );
-            var m = find_same_in_array(available_variant_ids.concat(variant_ids));
-            if (available_variant_ids.length == 0) {// first time available_variant_ids.length == 0
-                available_variant_ids = variant_ids;
-            } else if (m) {
-                available_variant_ids = m;
-            }
-        });
+        
+        variants = get_variant_objects(sels);
+        available_variant_ids = $.map(variants, function(i) { return i.id });
         btns.removeClass('in-stock out-of-stock unavailable').each(function(i, element) {
-            variants = get_variant_objects(element.rel, available_variant_ids);
-            variant_ids = get_keys_of_object(variants);
+            variants = get_variant_objects([].concat( sels, element.rel));
+            variant_ids = $.map(variants, function(i) { return i.id });
             if (variant_ids.length == 0) {
                 disable($(element).addClass('unavailable locked'));
             } else if (variant_ids.length == 1) {
-                var _var = variants[variant_ids[0]];
+                var _var = variants.pop();
                 $(element).addClass((allow_backorders || _var.count) ? available_variant_ids.length == 1 ? 'in-stock auto-click' : 'in-stock' : 'out-of-stock');
             } else if (allow_backorders) {
                 $(element).addClass('in-stock');
             } else {
-                $.each(variants, function(key, value) { count += value.count });
+                $.each(variants, function(variant) { count += variant.count });
                 $(element).addClass(count ? 'in-stock' : 'out-of-stock');
             }
         });
@@ -267,14 +259,6 @@ function VariantOptions(params) {
     // common method for option value
     //------------------------------------------------------------------------------------------
     
-    // for object, it return property names
-    // for array, it return indexes
-    function get_keys_of_object(obj){
-        var a = [];
-        $.each(obj, function(i){ a.push(i) });
-        return a;
-    }
-    
     function index_of_array(array, obj) {
         for(var i = 0; i < array.length; i++){
             if(array[i] == obj) {
@@ -283,40 +267,21 @@ function VariantOptions(params) {
         }
         return -1;
     }
-    
-    function find_same_in_array(a) {
-        var i, m = [];
-        a = a.sort();
-        i = a.length
-        while(i--) {
-            if (a[i - 1] == a[i]) {
-                m.push(a[i]);
-            }
-        }
-        if (m.length == 0) {
-            return false;
-        }
-        return m;
-    }
-    
+       
     function to_f(string) {
         return parseFloat(string.replace(/[^\d\.]/g, ''));
     }
 
-    function get_available_variant_ids(){
-        var selected = option_types.find('a.selected');
-              
-    }
-
     function find_variant() {
         var form_container = $(container_selector).parents('form:first')
-        var selected = option_types.find('a.selected');
-        var variants = get_variant_objects(selected.get(0).rel, available_variant_ids);
-        if (selected.length == option_types.length) {
-            return variants[available_variant_ids[0]];
+        var rels = $.map(option_types.find('a.selected'), function(i) { return i.rel });
+
+        var variants = get_variant_objects(rels);
+        if (rels.length == option_types.length) {
+            return variants.pop();
         } else {
             var prices = [];
-            $.each(variants, function(key, value) { prices.push(value.price) });
+            $.each(variants, function(i, variant) { prices.push(variant.price) });
             prices = $.unique(prices).sort(function(a, b) {
                 return to_f(a) < to_f(b) ? -1 : 1;
             });
@@ -328,36 +293,35 @@ function VariantOptions(params) {
             return false;
         }
     }
-
-    function get_variant_objects(rels, scoped_variant_ids) {
+    
+    // get variants by selected option_vlaues
+    function get_variant_objects(rels) {
+      var variant_objects = []
         var i, ids, obj, variants = {};
         if (typeof(rels) == 'string') { rels = [rels]; }
         var otid, ovid, opt, opv;
         i = rels.length;
         try {
-            while (i--) {
+            for(var i=0; i<rels.length; i++){              
                 ids = rels[i].split('-');
                 otid = ids[0];
                 ovid = ids[1];
                 opt = options[otid];
                 if (opt) {
                     opv = opt[ovid];
-                    ids = get_keys_of_object(opv);
-                    if (opv && ids.length) {
-                        var j = ids.length;
-                        while (j--) {
-                            obj = opv[ids[j]];
-                            if (obj && get_keys_of_object(obj).length && 0 <= index_of_array(scoped_variant_ids,obj.id.toString())) {
-                                variants[obj.id] = obj;
-                            }
-                        }
+                    if (opv) {
+                      if( i == 0){//
+                        variant_objects = $.map(opv, function(variant, variant_id) { return variant });
+                      }else{
+                        variant_objects = variant_objects.filter(function(variant) {  return opv[variant.id.toString()] } );                        
+                      }                       
                     }
                 }
             }
         } catch(error) {
             //console.log(error);
         }
-        return variants;
+        return variant_objects;
     }
 
     function toggle( target_variant) {

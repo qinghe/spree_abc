@@ -261,63 +261,7 @@ container:
     .<%=g_piece_selector%> .pagination .current{
       <%=@template.css(:pagination_current)%> 
     }    
-      <% if @template.css :use_img_tlc %>
-    #<%= g_piece_selector%>_tlc
-    {
-      <%= @template.css :img_tlc %>
-      background-position: 0% 0%;
-      background-repeat:no-repeat;
-    }
-      <% end %>
-      <% if @template.css :use_img_trc %>
-    #<%= g_piece_selector%>_trc
-    {
-      <%= @template.css :img_trc %>
-      background-position: 100% 0%;
-      background-repeat:no-repeat;
-    }
-      <% end %>
-      <% if @template.css :use_img_blc %>
-    #<%= g_piece_selector%>_blc
-    {
-      <%= @template.css :img_blc %>
-      background-position: 0% 100%;
-      background-repeat:no-repeat;
-    }
-      <% end %>
-      <% if @template.css :use_img_brc %>
-    #<%= g_piece_selector%>_brc
-    {
-      <%= @template.css :img_brc %>
-      background-position: 100% 100%;
-      background-repeat:no-repeat;
-    }
-      <% end %>
-      <% if @template.css :use_img_tb %>
-    #<%= g_piece_selector%>_tb
-    {
-      <%= @template.css :img_tb %>
-    }
-      <% end %>
-      <% if @template.css :use_img_bb %>
-    #<%= g_piece_selector%>_bb
-    {
-      <%= @template.css :img_bb %>
-      background-position: 50% 100%;
-    }
-      <% end %>
-      <% if @template.css :use_img_rb %>
-    #<%= g_piece_selector%>_rb
-    {
-      <%= @template.css :img_rb %>
-    }
-      <% end %>
-      <% if @template.css :use_img_lb %>
-    #<%= g_piece_selector%>_lb
-    {
-      <%= @template.css :img_lb %>
-    }
-      <% end %>
+
   title: container
   slug: container
   
