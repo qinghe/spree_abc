@@ -97,6 +97,14 @@ PATH
       spree_core (~> 2.0.11.beta)
 
 PATH
+  remote: ./spree_flexi_variants
+  specs:
+    spree_flexi_variants (2.0.0)
+      carrierwave
+      mini_magick
+      spree (>= 2.0)
+
+PATH
   remote: ./spree_multi_site
   specs:
     spree_multi_site (2.0.4)
@@ -192,6 +200,11 @@ GEM
     capybara-accessible (0.2.0)
       capybara (~> 2.0)
       selenium-webdriver
+    carrierwave (0.10.0)
+      activemodel (>= 3.2.0)
+      activesupport (>= 3.2.0)
+      json (>= 1.7)
+      mime-types (>= 1.16)
     childprocess (0.5.2)
       ffi (~> 1.0, >= 1.0.11)
     choice (0.1.6)
@@ -256,6 +269,8 @@ GEM
     mail_view (2.0.4)
       tilt
     mime-types (1.25.1)
+    mini_magick (3.8.0)
+      subexec (~> 0.2.1)
     mini_portile (0.5.3)
     monetize (0.2.0)
       money (~> 6.1.0.beta1)
@@ -358,6 +373,7 @@ GEM
       term-ansicolor
     state_machine (1.2.0)
     stringex (1.5.1)
+    subexec (0.2.3)
     term-ansicolor (1.3.0)
       tins (~> 1.0)
     therubyracer (0.12.1)
@@ -420,6 +436,7 @@ DEPENDENCIES
   spree_china_checkout!
   spree_editor!
   spree_essential_blog!
+  spree_flexi_variants!
   spree_multi_site!
   spree_theme!
   therubyracer

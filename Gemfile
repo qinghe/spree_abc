@@ -70,6 +70,8 @@ gem 'spree_editor',  :github => "spree/spree_editor", :branch=>"2-0-stable"
 gem 'tinymce-rails-langs'
 
 gem 'spree_essential_blog',   :path => './spree_essential_blog'
+# copy from https://github.com/RuanShan/spree_flexi_variants/tree/2-1-stable
+gem 'spree_flexi_variants',   :path => './spree_flexi_variants'
 
 group :test, :development do
   gem 'mail_view'  #, :git => 'https://github.com/37signals/mail_view.git'
