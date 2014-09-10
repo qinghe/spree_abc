@@ -18,6 +18,9 @@ Spree::Core::Engine.routes.prepend do
           get :selected
         end
       end
+      collection do
+        post :update_values_positions        
+      end
     end
 
     resources :product_customization_types

@@ -3,10 +3,6 @@ module Spree
     before_filter :load_product, :only => [:selected, :available, :remove]
     before_filter :load_calculators, :only => [:new, :edit]
 
-    def load_calculators
-      @calculators = ProductCustomizationType.calculators.sort_by(&:name)
-    end
-
     def edit
       @product_customization_type= ProductCustomizationType.find(params[:id])
 
@@ -68,6 +64,10 @@ module Spree
     private
     def load_product
       @product = Product.find_by_param!(params[:product_id])
+    end
+
+    def load_calculators
+      @calculators = ProductCustomizationType.calculators.sort_by(&:name)
     end
 
     def set_available_product_customization_types
