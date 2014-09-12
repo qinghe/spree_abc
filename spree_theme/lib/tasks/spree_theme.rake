@@ -99,6 +99,8 @@ namespace :spree_theme do
   desc "release theme without new template_release, rake spree_theme:release_theme[1]"
   task :release_theme, [:theme_id] =>[ :environment ] do |t, args|
     theme = Spree::TemplateTheme.find( args.theme_id)
+    # current site is required for build css( image url )
+    SpreeTheme.site_class.current = theme.site
     theme.release({},{:page_only=>true})
     puts "released #{theme.site.layout}"
   end  
