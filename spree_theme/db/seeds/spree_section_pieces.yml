@@ -242,7 +242,7 @@ container:
     }
     /* background, margin, border, padding */
     .<%=g_piece_selector%> .<%=g_piece_selector%>_inner
-    {
+    { overflow: hidden;/* keep border visible*/
       <%=@template.css(:inner)%>
     }
     .<%=@template.current_piece.child_selector%> 
