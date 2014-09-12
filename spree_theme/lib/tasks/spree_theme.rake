@@ -17,8 +17,11 @@ namespace :spree_theme do
   desc "export theme. params: :site_id,:theme_id,:format, :seed_path
         ex. rake spree_theme:export_theme[2,1,json,1]"
   task :export_theme, [:site_id,:theme_id,:format, :seed_path] => :environment do |t, args|
-    site_id, theme_id, format, seed_path = args.site_id, args.theme_id, args.format, args.seed_path     
-    theme = SpreeTheme.site_class.find( site_id ).template_themes.find( theme_id )    
+    site_id, theme_id, format, seed_path = args.site_id, args.theme_id, args.format, args.seed_path
+    # current site is required to get template file path  
+    SpreeTheme.site_class.current = SpreeTheme.site_class.find site_id
+   
+    theme = SpreeTheme.site_class.current.template_themes.find( theme_id )    
     serializable_data = theme.serializable_data
     #add site_id into name is required, later we want to import, just specify site_id is OK.
     theme_key = "#{theme.site_id}_#{theme.id}_#{Time.now.to_i}"
