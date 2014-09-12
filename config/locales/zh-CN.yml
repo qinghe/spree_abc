@@ -372,7 +372,7 @@ zh-CN:
     back_to_properties_list: 回到产品列表
     back_to_prototypes_list: 回到原型列表
     back_to_reports_list: 回到报告列表
-    back_to_shipping_categories: 回到物流分类列表
+    back_to_shipping_categories_list: 回到物流分类列表
     back_to_shipping_methods_list: 回到邮寄方式列表
     back_to_states_list: 回到省份列表
     back_to_stock_locations_list: 回到仓库地址列表
@@ -1229,7 +1229,7 @@ zh-CN:
     shipped: 已发货
     shipping: 配送中
     shipping_address: 收货地址
-    shipping_categories: 配送类型
+    shipping_categories: 配送分类
     shipping_categories_description: 管理配送分类以决定哪些产品可以通过哪些方式进行配送
     shipping_category: 配送分类
     shipping_flat_rate_per_item: 
