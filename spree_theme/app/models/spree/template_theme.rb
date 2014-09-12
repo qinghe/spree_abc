@@ -348,32 +348,35 @@ module Spree
         template = serialized_data.stringify_keys!.fetch 'template'
         transaction do 
           created_at =   DateTime.now       
-          if self.exists?(template['id'])
+          # support yaml/json, record is model/hash
+          #site id is 1 in exported yml, in spree_abc, design.dalianshops.com is 2
+          original_template_attributes = get_attributes_serialized_data(template).merge!( 'created_at'=>created_at )
+          
+          if self.exists?(original_template_attributes['id'])
             if replace_exisit
-              existing_template = self.find(template['id'])                      
+              existing_template = self.find(original_template_attributes['id'])                      
               existing_template.destroy
             end
           end
-          # support yaml/json, record is model/hash
-          #site id is 1 in exported yml, in spree_abc, design.dalianshops.com is 2
-          attributes = get_attributes_from_model(template).merge!( 'created_at'=>created_at )
-          unless replace_exisit
-            attributes.except!('id')
+
+          if replace_exisit
+            connection.insert_fixture(original_template_attributes, self.table_name)          
+          else
+            connection.insert_fixture(original_template_attributes.except('id'), self.table_name)
           end
-          connection.insert_fixture(attributes, self.table_name)
-          new_template = self.where( attributes.slice('created_at','title','page_layout_root_id') ).first
+          new_template = self.where( original_template_attributes.slice('created_at','title','page_layout_root_id') ).first
           # we need new template id
           # template = self.find_by_title template.title
           serialized_data['param_values'].each do |record|
             table_name = ParamValue.table_name
-            attributes = get_attributes_from_model(record).except('id') 
+            attributes = get_attributes_serialized_data(record).except('id') 
             #for unknown reason param_value.created_at/updated_at may be nil
             attributes['created_at']=created_at
             attributes['updated_at']=attributes['created_at'] if attributes['updated_at'].blank?
             connection.insert_fixture(attributes, table_name)          
           end
-          original_nodes = serialized_data['page_layouts']
-          original_nodes = original_nodes.collect{|node| build_model_from_hash( PageLayout, node)}
+          original_nodes = serialized_data['page_layouts']          
+          original_nodes = original_nodes.collect{|node| build_model_from_serialized_data( PageLayout, node)}
           new_nodes = PageLayout.copy_to_new( original_nodes )
           new_template.update_attribute(:page_layout_root_id, new_nodes.first.id)
           #serialized_data[:page_layouts].each do |record|
@@ -381,34 +384,40 @@ module Spree
           #  connection.insert_fixture(record.attributes, table_name)          
           #end
           new_template_files = [] 
-          serialized_data['template_files'].each do |record|
+          original_template_files = []
+          serialized_data['template_files'].each_with_index do |record, i|
             table_name = TemplateFile.table_name
-            attributes = get_attributes_from_model(record).except('id').merge!('created_at'=>created_at,'theme_id'=>new_template.id)
+            original_template_file_attributes = get_attributes_serialized_data(record)
+            attributes = original_template_file_attributes.except('id').merge!('created_at'=>created_at,'theme_id'=>new_template.id)
             connection.insert_fixture(attributes, table_name)  
-            new_template_files << TemplateFile.where( attributes.slice('created_at','theme_id') ).first         
+            new_template_files << TemplateFile.where( attributes.slice('created_at','theme_id') ).first
+            original_template_files << original_template_file_attributes         
           end 
           serialized_data['template_releases'].each do |record|
             table_name = TemplateRelease.table_name
-            attributes = get_attributes_from_model(record).except('id').merge!('created_at'=>created_at,'theme_id'=>new_template.id)
+            attributes = get_attributes_serialized_data(record).except('id').merge!('created_at'=>created_at,'theme_id'=>new_template.id)
             connection.insert_fixture(attributes, table_name)          
           end
-          fix_related_data_for_copied_theme(new_template, new_nodes, new_template_files, template,  original_nodes, serialized_data['template_files'], created_at)
+          fix_related_data_for_copied_theme(new_template, new_nodes, new_template_files, original_template_attributes,  original_nodes, original_template_files, created_at)
         end
         new_template
       end
       
-      def self.build_model_from_hash(model_class, model_attributes)
-        if model_attributes.kind_of? Hash
+      def self.build_model_from_serialized_data(model_class, serialized_data)
+        if serialized_data.kind_of? ActiveRecord::Base
+          serialized_data
+        else
+          #serialized_data.kind_of? Hash, json
+          model_attributes = get_attributes_serialized_data( serialized_data )
           model_class.new do|instance|
             model_attributes.each_pair{|key, val|  instance[key] = val  }
-          end
-        else
-          model_attributes
+          end          
         end
       end
       
-      def self.get_attributes_from_model( model )
-        (model.kind_of? ActiveRecord::Base) ?  model.attributes : model
+      def self.get_attributes_serialized_data( serialized_data )
+        # {:a=>1}.shift.last =>1,   serialized_data in json { model_name=>{att1=>att1_value ...}}
+        (serialized_data.kind_of? ActiveRecord::Base) ?  serialized_data.attributes : serialized_data.shift.last
       end
     end
     

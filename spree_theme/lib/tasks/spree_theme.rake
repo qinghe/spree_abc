@@ -14,32 +14,31 @@ namespace :spree_theme do
     }    
   end
   
-  desc "export theme. params: SITE_ID, THEME_ID, SEED_PATH."
-  task :export_theme => :environment do
-    if ENV['SITE_ID']
-      theme = SpreeTheme.site_class.find( ENV['SITE_ID'] ).template_themes.first 
-    elsif ENV['THEME_ID']
-      theme = Spree::TemplateTheme.find ENV['THEME_ID'] 
-    else
-      theme = Spree::TemplateTheme.first        
-    end
+  desc "export theme. params: :site_id,:theme_id,:format, :seed_path
+        ex. rake spree_theme:export_theme[2,1,json,1]"
+  task :export_theme, [:site_id,:theme_id,:format, :seed_path] => :environment do |t, args|
+    site_id, theme_id, format, seed_path = args.site_id, args.theme_id, args.format, args.seed_path     
+    theme = SpreeTheme.site_class.find( site_id ).template_themes.find( theme_id )    
     serializable_data = theme.serializable_data
     #add site_id into name is required, later we want to import, just specify site_id is OK.
     theme_key = "#{theme.site_id}_#{theme.id}_#{Time.now.to_i}"
     
-    if ENV['SEED_PATH']
-      file_path = File.join(SpreeTheme::Engine.root,'db','themes','designs', "#{theme_key}.yml")
+    if seed_path=='1'
+      file_path = File.join(SpreeTheme::Engine.root,'db','themes','designs', "#{theme_key}.#{format}")
     else
-      file_path =  File.join(theme.site.document_path, "#{theme_key}.yml")
+      file_path =  File.join(theme.site.document_path, "#{theme_key}.#{format}")
     end
-    open(file_path,'w') do |file|      
-      file.write(serializable_data.to_yaml) #  Marshal.dump(serializable_data)
+    open(file_path,'w') do |file| 
+      if format == 'json'
+        file.write(serializable_data.to_json)
+      else
+        file.write(serializable_data.to_yaml)          
+      end     
       theme_template_file_path = File.expand_path(theme_key, File.dirname(file_path)) 
       Dir.mkdir theme_template_file_path
       serializable_data['template_files'].each{|template_file|        
         FileUtils.cp template_file.attachment.path, File.expand_path(template_file.attachment_file_name, theme_template_file_path) 
-      }
-    
+      }    
     end
     puts "exported file #{file_path}"
   end
@@ -47,22 +46,17 @@ namespace :spree_theme do
   desc "import theme. params SEED_PATH, SITE_ID, THEME_ID. 
         SEED_PATH='1' path = spree_theme/db/themes/designs/{site_id}_{theme_id}_{time}.json|yml
         default path=shops/rails_env/shop_id/{site_id}_{theme_id}_{time}.json|yml"
-  task :import_theme => :environment do
+  task :import_theme , [:site_id,:theme_id,:format, :seed_path] => :environment do |t, args|
+    site_id, theme_id, format, seed_path = args.site_id, args.theme_id, args.format, args.seed_path     
     # rake task require class 
     Spree::ParamValue; Spree::PageLayout; Spree::TemplateFile;Spree::TemplateRelease;
     
-    if ENV['SITE_ID']
-      SpreeTheme.site_class.current = SpreeTheme.site_class.find ENV['SITE_ID']
+    SpreeTheme.site_class.current = SpreeTheme.site_class.find site_id
+     
+    if seed_path=='1'
+      file_path = File.join(SpreeTheme::Engine.root,'db','themes','designs', "#{SpreeTheme.site_class.current.id}_#{theme_id}*.#{format}")
     else
-      SpreeTheme.site_class.current = SpreeTheme.site_class.designsite      
-    end 
-    
-    theme_id = (ENV['THEME_ID'] || SpreeTheme.site_class.current.template_themes.first.id)
-       
-    if ENV['SEED_PATH']
-      file_path = File.join(SpreeTheme::Engine.root,'db','themes','designs', "#{SpreeTheme.site_class.current.id}_#{theme_id}*.{byte,yml,json}")
-    else
-      file_path = File.join(SpreeTheme.site_class.current.document_path, "#{SpreeTheme.site_class.current.id}_#{theme_id}*.{byte,yml,json}")
+      file_path = File.join(SpreeTheme.site_class.current.document_path, "#{SpreeTheme.site_class.current.id}_#{theme_id}*.#{format}")
     end
     puts "theme_path = #{file_path}" 
 
@@ -120,15 +114,11 @@ namespace :spree_theme do
   end
   
   desc "test theme"
-  task :test_theme =>[ :environment ] do |t, args|
+  task :test_theme, [:theme_id] =>[ :environment ] do |t, args|
     #section_pieces = Spree::SectionPiece.all(:include=>:section_piece_params)    
     #sections =  Spree::Section.all(:include=>{:section_params=>:section_piece_params})
     #page_layouts = Spree::PageLayout.all(:include=>{:section_params=>:section_piece_params})    
-    if ENV['THEME_ID']
-      theme = Spree::TemplateTheme.find( ENV['THEME_ID'] )
-    else
-      theme = Spree::TemplateTheme.first        
-    end    
+    theme = Spree::TemplateTheme.find args.theme_id
     incomplete_page_layouts = []
     # section_param and param_value match each other.
     for page_layout in theme.page_layout.self_and_descendants.includes(:section)     
