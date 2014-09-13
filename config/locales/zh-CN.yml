@@ -31,7 +31,7 @@ zh-CN:
         quantity: 数量
       spree/option_type:
         name: 名称
-        presentation: 描述
+        presentation: 显示
       spree/order:
         checkout_complete: 完成结账
         completed_at: 结账日期
@@ -98,7 +98,7 @@ zh-CN:
         usage_limit: 使用次数限制
       spree/property:
         name: 名称
-        presentation: 描述
+        presentation: 显示
       spree/prototype:
         name: 名称
       spree/return_authorization: 
@@ -937,7 +937,7 @@ zh-CN:
     please_define_payment_methods: 请先设定支付方式。
     populate_get_error: Something went wrong. Please try adding the item again.
     powered_by: Powered by
-    presentation: 描述
+    presentation: 显示
     preview: 预览
     previous: 上一页
     price: 价格

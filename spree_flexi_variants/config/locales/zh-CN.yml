@@ -15,13 +15,10 @@ zh-CN:
   product_customization_types: '定制选项'
   product_customization_type: '定制选项'
   customizable_product_options: 'Customizable Options'
-  new_product_customization_type: 'New Product Customization Type'
-  new_customizable_product_option: 'New Customizable Option'
   new_ad_hoc_variant_exclusion: 'New Exclusion'
   add_product_customization_type: 'Add Product Customization Type'
   add_product_customization_types: 'Add Product Customization Types'
   add_customizable_product_option: 'Add Customizable Option'
-  editing_product_customization_type: 'Editing Product Customization Type'
   form_label: 'HTML Form Label'
   data_type: 'Data Type (for input validation)'
   default_value: 'Default Value'
@@ -48,8 +45,27 @@ zh-CN:
   position_within_product: 'Display order relative to other Ad Hoc Options (low numbers are displayed first)'
   selected_by_default: 'Selected by default?'
 
+  activerecord:
+    attributes:
+      spree/product_customization_type:
+        name: '名称'
+        presentation: '显示' 
+        description: '描述'
+    models:
+      spree/product_customization_type:
+        one: 定制选项类型
+        other: 定制选项类型
+      spree/customizable_product_option:
+        one: 'Customizable Options'
+        other: 'Customizable Options'
   spree:
+    editing_product_customization_type: '编辑定制选项类型'
+    new_product_customization_type: '新建定制选项类型'
+    customizable_product_options: '定制选项'
+    product_customization_types: '定制选项类型'
+    product_customization_types_list: '回到定制选项类型列表'
+    product_customization_type: '定制选项类型'
     admin:
       tab:
-        product_customization_types: '定制选项'
-        product_customization_type: '定制选项'
+        product_customization_types: '定制选项类型'
+        product_customization_type: '定制选项类型'

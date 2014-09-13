@@ -12,8 +12,9 @@ module Spree
     end
 
     def create_options
-      # This calculator knows that it needs one CustomizableOption named amount
+      # This calculator knows that it needs one CustomizableOption named message
       [
+       CustomizableProductOption.create(:name=>"message", :presentation=>"Message")
       ]
     end
 

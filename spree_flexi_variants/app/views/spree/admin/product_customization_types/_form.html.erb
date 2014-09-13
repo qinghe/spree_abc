@@ -1,19 +1,28 @@
-<%= f.field_container :name do %>
-  <%= f.label :name, t("name") %><br />
-  <%= f.text_field :name %>
-  <%= f.error_message_on :name %>
-<% end %>
-
-<%= f.field_container :presentation do %>
-  <%= f.label :presentation, t("presentation") %><br />
-  <%= f.text_field :presentation %>
-  <%= f.error_message_on :presentation %>
-<% end %>
-
-<%= f.field_container :description do %>
-  <%= f.label :description, t("description") %><br />
-  <%= f.text_field :description %>
-  <%= f.error_message_on :description %>
-<% end %>
-
-<%= render "spree/admin/shared/calculator_fields", :f => f %>
+<div data-hook="admin_customerization_type_form_fields" class="">
+  <div class="row">
+    <div class="alpha eight columns">
+    <%= f.field_container :name do %>
+      <%= f.label :name %><br />
+      <%= f.text_field :name, :class => 'fullwidth title' %>
+      <%= f.error_message_on :name %>
+    <% end %>
+    </div>
+    
+    <div class="omega eight columns">
+    <%= f.field_container :presentation do %>
+      <%= f.label :presentation %><br />
+      <%= f.text_field :presentation, :class => 'fullwidth title' %>
+      <%= f.error_message_on :presentation %>
+    <% end %>
+    </div>
+  </div>
+  <div class="row" >
+  <%= f.field_container :description do %>
+    <%= f.label :description %><br />
+    <%= f.text_field :description, :class => 'fullwidth title' %>
+    <%= f.error_message_on :description %>
+  <% end %>
+  </div>
+</div>
+  
+  <%= render "spree/admin/shared/calculator_fields", :f => f %>

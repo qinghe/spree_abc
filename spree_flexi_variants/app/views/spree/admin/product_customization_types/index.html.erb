@@ -3,17 +3,21 @@
 <% content_for(:page_title, Spree.t("product_customization_types")) %>
 <% content_for(:page_actions) do %>
   <li id="new_product_customization_type_link">
-    <%= button_link_to Spree.t("new_product_customization_type"), new_admin_product_customization_type_url, {:icon => 'add', :id => 'new_product_customization_type_link'} %>
+    <%= button_link_to Spree.t("new_product_customization_type"), new_admin_product_customization_type_url, { :remote => true, :icon => 'icon-plus',  :id => 'new_product_customization_type_link' }  %>
   </li>
 <% end %>
 
+<div id="new_product_customization_type"></div>
+
+<% if @product_customization_types.any? %>
+
 <table class="index sortable" id='listing_product_customization_types'>
   <colgroup>
+    <col style="width: 5%">
+    <col style="width: 15%">
+    <col style="width: 25%">
+    <col style="width: 40%">
     <col style="width: 10%">
-    <col style="width: 30%">
-    <col style="width: 30%">
-    <col style="width: 15%">
-    <col style="width: 15%">
   </colgroup>
   <thead data-hook="product_customization_type_header">
       <tr>
@@ -37,3 +41,9 @@
     </tr>
   <% end %>
 </table>
+<% else %>
+  <div class="alpha twelve columns no-objects-found">
+    <%= Spree.t(:no_resource_found, resource: I18n.t(:other, scope: 'activerecord.models.spree/product_customization_type')) %>,
+    <%= link_to Spree.t(:add_one), spree.new_admin_product_customization_type_path %>!
+  </div>
+<% end %>

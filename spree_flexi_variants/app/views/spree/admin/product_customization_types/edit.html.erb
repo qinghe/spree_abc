@@ -18,17 +18,22 @@
     <legend align="center"><%= Spree.t(:product_customization_types) %></legend>
 
     <%= render :partial => "form", :locals => { :f => f } %>
-  <h3><%= t("customizable_product_options") %></h3>
+  <h3><%= Spree.t("customizable_product_options") %></h3>
 
   <table class="index sortable" data-hook data-sortable-link="<%= update_values_positions_admin_product_customization_types_url %>">
 
   <table class="index">
+    <colgroup>
+      <col style="width: 20%">
+      <col style="width: 39%">
+      <col style="width: 39%">
+    </colgroup>
+
     <thead>
       <tr>
-        <th><%= t("name") %></th>
-        <th><%= t("presentation") %></th>
-        <th><%= t("description") %></th>
-        <th class="actions"></th>
+        <th><%= Spree.t("name") %></th>
+        <th><%= Spree.t("presentation") %></th>
+        <th><%= Spree.t("description") %></th>
       </tr>
     </thead>
     <tbody id="customizable_product_options">
