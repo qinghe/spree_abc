@@ -153,7 +153,7 @@ module SpreeTheme::System
       
       @page_layout = page_layout #current selected page_layout, the node of the layout tree.
       @page_layout||= theme.page_layout
-      @sections = Spree::Section.roots
+      @sections = Spree::Section.where(:is_enabled=>true).roots
       #template selection
       @template_themes = Spree::TemplateTheme.where(:site_id=>SpreeTheme.site_class.current.id)
   end
