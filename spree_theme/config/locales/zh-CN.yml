@@ -13,6 +13,8 @@ zh-CN:
       spree/page_layout:
         section_context: section context
         data_source: data source 
+      spree/taxon:
+        page_context: 页面显示内容
       spree/template_file: 
         attachment_file_name: 文件名字
         attachment_content_type: 类型
@@ -83,6 +85,8 @@ zh-CN:
       taxonomy: 缺省菜单 
       blog: 文章列表
       post: 文章内容
+    page_context:
+        
     page_layout:
       data_source: 数据源 
       please_select_to_config: 请选择需要配置的模块

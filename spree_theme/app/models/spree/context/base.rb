@@ -5,7 +5,7 @@ module Spree
       # first one is default 
       ContextEnum=Struct.new(:home, :list, :detail, :cart, :account, :checkout, :thanks, :signup, :login, :password, :blog, :post, :either
                           ) [ :home, :list, :detail, :cart, :account, :checkout, :thanks, :signup, :login, :password, :blog, :post, :""]
-      
+
       # context may be array, datasource is nil for array.
       # gpvs is available to every context. 
       ContextDataSourceMap = Hash.new( [:taxon, :gpvs, :blog] ).merge!( { ContextEnum.detail=>[:this_product], ContextEnum.post=>[:post] } )

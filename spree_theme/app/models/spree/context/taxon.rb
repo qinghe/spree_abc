@@ -94,7 +94,9 @@ module Spree
               nil # we can not identify it just from path
           end
       end
-  
+
+      PageContextEnum = Struct.new(:home, :cart, :account, :signup, :login)[1, 2, 7, 5, 6]
+
       def get_context_by_page_context( target_page_context )
           case target_page_context
             when 1 #home

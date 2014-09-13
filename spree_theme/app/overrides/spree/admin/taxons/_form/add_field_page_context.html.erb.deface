@@ -1,0 +1,7 @@
+<!-- insert_bottom '[data-hook="admin_inside_taxon_form"] .alpha.five.columns' -->
+    <%= f.field_container :page_context do %>
+      <%= f.label :page_context %><br />
+      <%= f.select(:page_context, options_for_select(page_contexts_for_options),
+        { :include_blank => Spree.t('match_choices.none') }, { :class => 'select2 fullwidth' }) %>
+      <%= f.error_message_on :page_context %>
+    <% end %>
