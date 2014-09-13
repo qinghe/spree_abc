@@ -9,7 +9,7 @@ module Spree
     # allowed customizations
     has_and_belongs_to_many :product_customization_types, :join_table=>'spree_product_customization_types_products'
 
-
+    attr_accessible :product_customization_type_ids
     private
 
     def attach_option_values(ad_hoc_option_type)
