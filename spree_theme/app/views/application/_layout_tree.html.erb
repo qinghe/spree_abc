@@ -64,7 +64,8 @@ selected_id= (options[:selected_id]||layout_root.id )
             //submitdata[settings.id] = self.id;
             $.ajax({ dataType: 'json', url: url, type: 'put',  data : submitdata,
                 success: function(data){
-                  jquery_element.html(data.page_layout.title);
+                  // data is null, "nocontent" returned
+                  // jquery_element.html(data.page_layout.title);
                 }
             });             
             return(value);
