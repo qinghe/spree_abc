@@ -1,7 +1,7 @@
       <% if product.has_variants? %>
           <% product.grouped_option_values.each do |type, values| %>
             <div id="<%= dom_id(type) %>" class="variant-option">
-              <div class="variant-option-type title"><%= type.presentation %></div>
+              <div class="variant-option-type theme_title"><%= type.presentation %></div>
               <ul class="variant-option-values variant-option-value-large-images clear-block">
               <% values.sort_by(&:position).each do |value| %>
                 <% classes = ["option-value-large-image"] %>
