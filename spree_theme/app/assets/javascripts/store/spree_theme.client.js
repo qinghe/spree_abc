@@ -248,9 +248,9 @@ function VariantOptions(params) {
         
         update_view();
         
-        if (target_variant=find_variant()) {
-          toggle(target_variant);
-        }                    
+        target_variant=find_variant()
+        toggle(target_variant);
+                            
     }
     //                                end slide style
     //==========================================================================================
