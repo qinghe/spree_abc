@@ -24,9 +24,10 @@ objs=[
   {"id"=>24, "position"=>24, "is_enabled"=>true, "editor_id"=>0, "slug"=>"thumbnail_navigator" },
   
   #product img
-  {"id"=>28, "position"=>28, "is_enabled"=>true, "editor_id"=>2, "slug"=>"image_style" },
-  {"id"=>30, "position"=>30, "is_enabled"=>true, "editor_id"=>2, "slug"=>"main_image" },
-  {"id"=>31, "position"=>31, "is_enabled"=>true, "editor_id"=>2, "slug"=>"thumb_image" },
+  {"id"=>28, "position"=>28, "is_enabled"=>true, "editor_id"=>0, "slug"=>"image_style" },
+  {"id"=>30, "position"=>30, "is_enabled"=>true, "editor_id"=>0, "slug"=>"main_image" },
+  {"id"=>31, "position"=>31, "is_enabled"=>true, "editor_id"=>0, "slug"=>"thumb_image" },
+  {"id"=>32, "position"=>32, "is_enabled"=>true, "editor_id"=>0, "slug"=>"thumb_image_selected" },
 
   #form
   {"id"=>39, "position"=>39, "is_enabled"=>true, "editor_id"=>0, "slug"=>"form" },
