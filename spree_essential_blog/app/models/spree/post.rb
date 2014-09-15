@@ -16,7 +16,7 @@ module Spree
     has_many :products, :through => :post_products
     
     #validates :blog_id, :title, :presence => true
-    validates :permalink,  :presence => true, :uniqueness => true, :if => proc{ |record| !record.title.blank? }
+    validates :permalink,  :presence => true, :uniqueness => true, :scope=>:site_id, :if => proc{ |record| !record.title.blank? }
     validates :body,  :presence => true
     validates :posted_at, :datetime => true
 
