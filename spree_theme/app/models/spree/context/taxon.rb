@@ -95,7 +95,7 @@ module Spree
           end
       end
 
-      PageContextEnum = Struct.new(:home, :cart, :account, :signup, :login)[1, 2, 7, 5, 6]
+      PageContextEnum = Struct.new(:list, :home, :cart, :account, :signup, :login, :blog)[0, 1, 2, 7, 5, 6, 8]
 
       def get_context_by_page_context( target_page_context )
           case target_page_context
