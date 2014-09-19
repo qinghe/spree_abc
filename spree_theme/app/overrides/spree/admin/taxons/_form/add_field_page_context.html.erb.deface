@@ -1,7 +1,7 @@
 <!-- insert_bottom '[data-hook="admin_inside_taxon_form"] .alpha.five.columns' -->
     <%= f.field_container :replaced_by do %>
       <%= f.label :replaced_by %><br />
-      <%= f.hidden_field :replaced_by %>      
+      <%= f.hidden_field :replaced_by, { :class => 'fullwidth' }%>      
       <%= f.error_message_on :replaced_by %>
     <% end %>
     <%= f.field_container :page_context do %>
@@ -15,5 +15,6 @@
   $(document).ready(function () {
     <%= render :partial=>'spree/admin/shared/select2_taxon', :locals=>{:dom_id=>"taxon_replaced_by",:multiple=>false} %>
   });  
+  
   </script>
 <% end %>
