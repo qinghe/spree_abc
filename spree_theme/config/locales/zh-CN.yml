@@ -14,7 +14,8 @@ zh-CN:
         section_context: section context
         data_source: data source 
       spree/taxon:
-        page_context: 页面显示内容
+        page_context: 页面显示内容分类
+        replaced_by: 页面显示内容置换
       spree/template_file: 
         attachment_file_name: 文件名字
         attachment_content_type: 类型

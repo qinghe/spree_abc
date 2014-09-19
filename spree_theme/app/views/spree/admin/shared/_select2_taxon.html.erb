@@ -12,7 +12,11 @@
             ids: element.val()
           });
           return $.getJSON(url, null, function (data) {
+            <% if multiple %>
             return callback(data['taxons']);
+            <% else %>
+            return callback(data['taxons'].pop());
+            <% end %>
           });
         },
         ajax: {
