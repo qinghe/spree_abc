@@ -514,8 +514,8 @@ zh-CN:
     date_range: 时间范围
     debit: 借方??
     default: 缺省
-    default_meta_description: 缺省元描述
-    default_meta_keywords: 缺省元关键字
+    default_meta_description: 缺省SEO描述
+    default_meta_keywords: 缺省SEO关键字
     default_seo_title: 缺省SEO标题
     default_tax: 缺省缴税
     default_tax_zone: 缺省缴税区域
@@ -743,8 +743,9 @@ zh-CN:
       one: One
     max_items: 最大商品项??
     may_be_combined_with_other_promotions: May be combined with other promotions
-    meta_description: 元描述
-    meta_keywords: 关键字
+    meta_description: SEO描述
+    meta_keywords: SEO关键字
+    meta_title: SEO标题
     metadata: 元数据
     minimal_amount: 少量
     missing_required_information: 缺少必须的信息
