@@ -1,12 +1,12 @@
 <%
   # copy from spree/backend/assets/javascripts/admin/taxon_autocomlete.js.erb
-  # locals {:dom_id}
+  # locals {:dom_id,:multiple}
 %>
     'use strict';
     if ($('#<%=dom_id%>').length > 0) {
       $('#<%=dom_id%>').select2({
         placeholder: Spree.translations.taxon_placeholder,
-        multiple: true,
+        multiple: <%== multiple.to_json %>,
         initSelection: function (element, callback) {
           var url = Spree.url(Spree.routes.taxons_search, {
             ids: element.val()
