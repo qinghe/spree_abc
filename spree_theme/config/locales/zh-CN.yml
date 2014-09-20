@@ -55,6 +55,7 @@ zh-CN:
       import: 购买
     admin:
       tab:
+        taxonomies: 分类
         template_themes: 模板
         theme_texts: 模板素材
         native_themes: 模板
