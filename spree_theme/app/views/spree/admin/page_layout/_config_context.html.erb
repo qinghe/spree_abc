@@ -10,7 +10,7 @@
           <%= select_tag "section_contexts[]", options_for_select((Spree::PageLayout::ContextEnum.members-[:either]).collect{|section_context| [Spree.t("section_context.#{ section_context }"), section_context] }, current_contexts ), include_blank: true,class: 'select2', multiple: "multiple" %>      
         </div>
         <div class="field">
-          <% assigned_resources = @template_theme.assigned_resources(Spree::SpecificTaxon, page_layout)   %>
+          <% assigned_resources = @template_theme.assigned_resources(Spree::SpecificTaxon, page_layout).compact   %>
     
           <%= label_tag :specific_taxon, Spree.t('page_layout.specific_taxon') %><br>
           <%= hidden_field_tag :specific_taxon_ids, assigned_resources.collect(&:id).join(',') %>
