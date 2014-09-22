@@ -56,7 +56,7 @@ root:
       <% if @template.css(:font_family)== 'serif' %>
       font-family: Times, "Times New Roman", Georgia, SimSun, "5b8b4f53", serif;
       <% else %>
-      font-family: Tahoma, Verdana, Arial, Helvetica, STXihei, "534E65877EC69ED1", "Microsoft YaHei", "5fae8f6f96c59ed1", sans-serif;
+      font-family: Tahoma, Verdana, Arial, Helvetica, STXihei, "534E65877EC69ED1", "Microsoft YaHei", "5fae8f6f96c59ed1", SimHei, "9ED14F53",sans-serif;
       <% end %>
     }    
     /*ol,ul { list-style: none; }*/
