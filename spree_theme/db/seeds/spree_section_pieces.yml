@@ -54,9 +54,9 @@ root:
     body, caption, th, td, input, textarea, select, option, legend, fieldset
     {
       <% if @template.css(:font_family)== 'serif' %>
-      font-family: Times, "Times New Roman", Georgia, "Bitstream Vera Serif", serif;
+      font-family: Times, "Times New Roman", Georgia, SimSun, 5b8b4f53, serif;
       <% else %>
-      font-family: Tahoma, Verdana, Arial, Helvetica, "Bitstream Vera Sans", Sans, sans-serif;
+      font-family: Tahoma, Verdana, Arial, Helvetica, STXihei, 534E65877EC69ED1, “Microsoft YaHei”, 5fae8f6f96c59ed1, sans-serif;
       <% end %>
     }    
     /*ol,ul { list-style: none; }*/
