@@ -9,11 +9,21 @@ module Spree
       end
     end
 
+    # copy original method merge! here, only change the way get current_line_item
     def merge!(order, user = nil)
       order.line_items.each do |line_item|
-        self.add_variant(line_item.variant, line_item.quantity, line_item.ad_hoc_option_value_ids, line_item.product_customizations)
+        next unless line_item.currency == currency
+        # change the way get current_line_item
+        current_line_item = find_line_item_by_variant( line_item.variant, line_item.ad_hoc_option_value_ids, line_item.product_customizations )
+        if current_line_item
+          current_line_item.quantity += line_item.quantity
+          current_line_item.save
+        else
+          line_item.order_id = self.id
+          line_item.save
+        end
       end
-
+      
       self.associate_user!(user) if !self.user && !user.blank?
 
       # So that the destroy doesn't take out line items which may have been re-assigned
