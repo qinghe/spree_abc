@@ -42,6 +42,7 @@ module PageTag
       #Rails.logger.debug "valid=#{menu.current_context}, self.template_tag.current_piece=#{self.template_tag.current_piece.title}"
       ret = theme.valid_context?(template_tag.current_piece.page_layout, menu)
       #Rails.logger.debug "ret=#{ret}"            
+      
       #(self.template_tag.current_piece.context? menu.current_context)      
     end
     
