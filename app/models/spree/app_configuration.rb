@@ -23,7 +23,7 @@ module Spree
     # Alphabetized to more easily lookup particular preferences
     preference :address_requires_state, :boolean, default: true # should state/state_name be required
 #    preference :admin_interface_logo, :string, default: 'logo/spree_50.png'
-    preference :admin_interface_logo, :string, default: 'logo/logo2c.gif'
+    preference :admin_interface_logo, :string, default: 'logo/logo2c.png'
     preference :admin_products_per_page, :integer, default: 10
     preference :allow_backorder_shipping, :boolean, default: false # should only be true if you don't need to track inventory
     preference :allow_checkout_on_gateway_error, :boolean, default: false
@@ -63,7 +63,7 @@ module Spree
 #    preference :layout, :string, default: 'spree/layouts/spree_application'
     preference :layout, :string, default: '/layouts/abc_application.html.erb'
 #    preference :logo, :string, default: 'logo/spree_50.png'
-    preference :logo, :string, default: 'logo/dalianshops.gif'
+    preference :logo, :string, default: 'logo/dalianshops.png'
     preference :max_level_in_taxons_menu, :integer, default: 1 # maximum nesting level in taxons menu
     preference :orders_per_page, :integer, default: 15
     preference :prices_inc_tax, :boolean, default: false
