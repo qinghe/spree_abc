@@ -6,11 +6,12 @@
 <!--[if gt IE 9]><!--><html lang="<%= I18n.locale %>"><!--<![endif]-->
   <head data-hook="inside_head">
     <%= render :partial => 'spree/shared/head' %>
+    <%= stylesheet_link_tag :admin_login %>
   </head>
   <body class="<%= body_class %>" id="<%= @body_id || 'default' %>" data-hook="body">
 
-    <div class="container">
-    <h2>administrator login.</h2>
+    <div class="container admin-container admin-box">
+    <h2 class="admin-container-title"> <%= Spree.t(:welcome_to_admin_login)%></h2>
       <div id="wrapper" class="row" data-hook>
 
         <div id="content" class="columns <%= !content_for?(:sidebar) ? "sixteen" : "twelve" %>" data-hook>

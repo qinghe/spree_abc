@@ -6,7 +6,8 @@ module Spree
     #these methos has to be in BaseHelpler, controller may be TemplateThemes Cart Checkout User Order..
     #override original in BaseHelper
     def breadcrumbs(current_page_tag, separator="&nbsp;&raquo;&nbsp;")
-      return "" if current_page?("/") || current_page_tag.page_home?
+      # current_page_tag is nil in page /unauthorized
+      return "" if current_page?("/") || current_page_tag.nil? ||current_page_tag.page_home?
       separator = raw(separator)
       crumbs = [content_tag(:li, link_to(Spree.t(:home), spree.root_path) + separator)]
       if current_page_tag

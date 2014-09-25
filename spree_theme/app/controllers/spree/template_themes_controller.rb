@@ -31,7 +31,7 @@ module Spree
       if spree_user_signed_in? and current_spree_user.admin?
         redirect_to "/admin"
       else
-        render "new_admin_session", layout:"under_construction"
+        render "new_admin_session", layout:"layout_for_login"
       end
     end
     
