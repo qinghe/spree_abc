@@ -1144,7 +1144,7 @@ logged_and_unlogged_menu:
     </ul>
     <% end %>
   css: |-
-    .<%=g_piece_selector%> ul{ margin: 0; padding: 0;}
+    ul.<%=g_piece_selector%> { margin: 0; padding: 0;}
     .<%=g_piece_selector%> li{ 
       list-style-type:none;
       display:inline;}
