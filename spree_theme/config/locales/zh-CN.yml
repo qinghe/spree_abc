@@ -103,8 +103,8 @@ zh-CN:
       account: 我的账户
       checkout: 支付页
       thanks: 谢谢购物
-      signup: 注册页
-      login: 登陆页
+      signup: 用户注册
+      login: 用户登录
       password: 密码管理
       blog: 文章列表
       post: 文章内容
@@ -148,7 +148,7 @@ zh-CN:
     theme_imported: 是否已购买
     theme_preview: 预览
     theme_release: 发布
-    welcome_to_admin_login: Dalianshops管理系统登陆
-    welcome_to_under_construction: 网站建设中，请登陆管理系统
+    welcome_to_admin_login: Dalianshops管理系统登录
+    welcome_to_under_construction: 网站建设中，请登录管理系统
       
                          

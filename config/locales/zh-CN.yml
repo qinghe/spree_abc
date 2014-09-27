@@ -719,12 +719,12 @@ zh-CN:
     locale_changed: Locale已变更
     location: 位置
     lock: 锁住/冻结
-    logged_in_as: 已登陆为
-    logged_in_succesfully: 登陆成功
+    logged_in_as: 已登录陆为
+    logged_in_succesfully: 登录成功
     logged_out: 您已经登出系统
     login: 登录
-    login_as_existing: 作为一个已有客户登陆
-    login_failed: 登陆认证失败。
+    login_as_existing: 作为一个已有客户登录
+    login_failed: 登录认证失败。
     login_name: 用户名
     logout: 登出/注销
     look_for_similar_items: 寻找类似的产品
@@ -890,7 +890,7 @@ zh-CN:
     overview: 首页
     overview_welcome: 欢迎来到商店首页，现在我们还没有足够的数据来显示仪表盘。<br/><br/> 当系统中有有限订单后，系统会自动生成统计数据，并显示在仪表盘中。
     package_from: 包裹来自
-    page_only_viewable_when_logged_in: 您试图访问一个只有登陆后才能访问的页面
+    page_only_viewable_when_logged_in: 您试图访问一个只有登录后才能访问的页面
     page_only_viewable_when_logged_out: 您试图访问一个只有登出/注销后才能访问的页面
     pagination:
       next_page: 下一页 &raquo;
@@ -1361,7 +1361,7 @@ zh-CN:
     unrecognized_card_type: 无法辨识的支付卡种类
     unshippable_items: 无法邮寄的商品
     update: 更新
-    update_password: 更新我的密码并登陆
+    update_password: 更新我的密码并登录
     updated_successfully: 更新成功
     updating: 更新中
     usage_limit: 使用限制

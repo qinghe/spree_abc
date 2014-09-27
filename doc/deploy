@@ -36,3 +36,8 @@ http://www.dotkam.com/2008/09/14/configure-rails-and-mysql-to-support-utf-8/
   
 3. install pg
 https://community.jboss.org/wiki/InstallPostgreSQLonFedora?_sscc=t
+
+4. install imagemagick
+#http://www.imagemagick.org/script/install-source.php
+wget http://www.imagemagick.org/download/ImageMagick.tar.gz
+tar xvzf ImageMagick.tar.gz
