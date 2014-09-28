@@ -102,18 +102,43 @@ module Spree
         self.section.section_piece.is_root? 
       end
       
-      # view content clickable? ex. taxon_name, render as <a> or <span>? 
+      # view content image_style ex. taxon_name, render as <a> or <span>? 
       def view_as_clickable?        
         # first bit is clickable
         if respond_to? :content_param
-          content_param&1 >0
+          get_content_param_by_key(:clickable)
         else
           true
         end 
       end
       
+      # * description - content_param is integer, each bit has own mean for each section.
+      # * params
+      #   * key - clickable, taxon_name, render as <a> or <span>?
+      #         - image-size,  main product image size, [small|product|large|original]
+      #
+      def get_content_param_by_key(key)
+        case key
+        when :clickable
+          content_param&1 >0
+        when :main_image_style
+          #bit 2,3,4
+          idx = (content_param&14)>>1
+          [:product,:large,:original, :small ].fetch( idx, :product )
+        when :thumbnail_style
+          #bit 5,6,7
+          idx = (content_param&112)>>4
+          [:mini, :large, :original, :small].fetch( idx, :mini )
+        else 
+          nil
+        end 
+      end
+      
+      #:clickable,:main_image_style,:thumbnail_style
       def update_content_param( options )
-        content_param |= options[:view_as_clickable].to_i 
+        options.each_pair{|key, val|
+          content_param |= val.to_i          
+        }        
         save!          
       end
     end

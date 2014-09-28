@@ -7,7 +7,7 @@ module PageTag
 # template is collection of page_layout. each page_layout is section instance 
   class TemplateTag < Base
     class WrappedPageLayout < WrappedModel
-      self.accessable_attributes=[:id,:title,:current_data_source,:wrapped_data_source_param, :data_filter,:current_contexts, :context_either?, :view_as_clickable?]
+      self.accessable_attributes=[:id,:title,:current_data_source,:wrapped_data_source_param, :data_filter,:current_contexts, :context_either?, :view_as_clickable?, :get_content_param_by_key]
       attr_accessor :section_id, :page_layout
       delegate *self.accessable_attributes, :to => :page_layout
       

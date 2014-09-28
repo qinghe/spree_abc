@@ -18,6 +18,18 @@ module Spree
       crumb_list = content_tag(:ul, raw(crumbs.flatten.map{|li| li.mb_chars}.join), class: 'inline')
       content_tag(:nav, crumb_list, id: 'breadcrumbs', class: 'sixteen columns')
     end
+    
+    def link_to_product_thumbnail( current_piece, i )
+      link_to( image_tag(i.attachment.url( current_piece.get_content_param_by_key(:thumbnail_style))), 
+                         i.attachment.url( current_piece.get_content_param_by_key(:main_image_style))
+                         )      
+    end
+    
+    def product_main_image( current_piece, product )
+      main_image_style = current_piece.get_content_param_by_key(:main_image_style)
+      send("#{main_image_style}_image", product, :itemprop => "image")
+      
+    end
             
     #==================================================================================================
     # Editor methods
