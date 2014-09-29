@@ -9,5 +9,20 @@ namespace :spree_abc do
     puts "#{mysqldump} --ignore-table=#{db_config['database']}.schema_migrations > #{file_path}"
     `#{mysqldump} --ignore-table=#{db_config['database']}.schema_migrations > #{file_path}`
   end
+  # rake paperclip:refresh:thumbnails CLASS=Spree::Image
+  task :refresh_images, [:style] => :environment do |t, args|
+    Rails.logger.debug "start task :refresh_images"
+    image_style = args.style
+    Spree::Site.all.each{|site|
+      Rails.logger.debug "start site #{site.id}"
+      Spree::Site.current = site
+      if site.assets.any?
+        site.assets.each{|asset|
+          asset.attachment.reprocess!(image_style.to_sym)
+        }
+      end
+    }
+    Rails.logger.debug "end task :refresh_images"
+  end
   
 end
