@@ -298,8 +298,10 @@ module Spree
             ""          
           when /inner/
             "_#{target}"
-          when 'as_h' #selected:hover
-            " .selected"
+          when 'as_h','a_sel' #selected:hover, selected
+            " a.selected"
+          when 'a_una' #  unavailable, unclickable
+            " a.unavailable"
           when 'a','a_h'
             " a"
           when /\_h$/  #button_h

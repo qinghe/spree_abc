@@ -51,7 +51,7 @@ function VariantOptions(params) {
 
         if (default_instock) {
             option_types.each(function(){
-                $(this).find("ul.variant-option-values li a.in-stock:first").click();
+                $(this).find("ul.option_values li a.in-stock:first").click();
             });
         }
     }

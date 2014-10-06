@@ -5,14 +5,14 @@
 #
 #
 # section slugs= [root,container,menu]
-theme_title = "test_for_page_resources"
-Spree::TemplateTheme.destroy_all(:title => theme_title)
+header3 = "test_for_page_resources"
+Spree::TemplateTheme.destroy_all(:title => header3)
 
 categories = SpreeTheme.taxon_class.find_by_name("Categories")
 objects = Spree::Section.roots
 section_hash= objects.inject({}){|h,sp| h[sp.slug] = sp; h}
 # puts "section_hash=#{section_hash.keys}"
-template = Spree::TemplateTheme.create_plain_template(section_hash['root2'], theme_title)
+template = Spree::TemplateTheme.create_plain_template(section_hash['root2'], header3)
 document = template.page_layout
 
 menu_container = template.add_section(section_hash['container'], document)

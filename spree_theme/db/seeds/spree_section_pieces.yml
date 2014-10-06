@@ -777,9 +777,9 @@ container_title:
   is_container: "1"
   html: ~~content~~    
   css: |
-    .<%=@template.current_piece.section_selector%> .theme_title{
+    .<%=@template.current_piece.section_selector%> .header3{
       margin: 0; padding: 0; font-size: 100%;line-height:1em;
-      <%= @template.css :s_theme_title %> 
+      <%= @template.css :s_header3 %> 
     }
   js: ""
 order_number:
@@ -801,7 +801,7 @@ order_address:
   html: |
     <% if @order.has_step?("address") %>
       <% if @order.has_step?("delivery") %>
-        <h6 class="theme_title"><%= Spree.t(:shipping_address) %> <%= link_to "(#{Spree.t(:edit)})", checkout_state_path(:address) unless @order.completed? %></h6>
+        <h6 class="header3"><%= Spree.t(:shipping_address) %> <%= link_to "(#{Spree.t(:edit)})", checkout_state_path(:address) unless @order.completed? %></h6>
         <div class="columns alpha four" data-hook="order-ship-address">
           <%= render :partial => 'spree/shared/address', :locals => { :address => @order.ship_address } %>
         </div>
@@ -816,7 +816,7 @@ order_payment:
   is_selectable: "1"
   is_container: "0"
   html: |    
-    <<h6 class="theme_title">><%= Spree.t(:payment_information) %> <%= link_to "(#{Spree.t(:edit)})", checkout_state_path(:payment) unless @order.completed? %></h6>
+    <h6 class="header3"><%= Spree.t(:payment_information) %> <%= link_to "(#{Spree.t(:edit)})", checkout_state_path(:payment) unless @order.completed? %></h6>
     <div class="payment-info">
       <% @order.payments.valid.each do |payment| %>
         <%= render payment%><br/>
@@ -842,7 +842,7 @@ payment_form:
   is_container: "0"
   html: |    
     <div id="checkout_form_payment" >
-      <h6 class="theme_title"><%= Spree.t(:payment_information) %></h6>
+      <h6 class="header3"><%= Spree.t(:payment_information) %></h6>
       <% @order.available_payment_methods.each do |method| %>
       <p>
         <label>
@@ -881,7 +881,7 @@ ship_form:
   html: |    
     <div id="checkout_form_address" data-hook="billing_fieldset_wrapper">
       <%= form.fields_for :bill_address do |bill_form| %>
-        <h6 class="theme_title"><%= Spree.t(:shipping_address) %></h6>
+        <h6 class="header3"><%= Spree.t(:shipping_address) %></h6>
         <%= render :partial => 'spree/address/form', :locals => { :form => bill_form, :address_type => 'billing', :address => @order.bill_address } %>
       <% end %>
       <%= form.fields_for :ship_address do |ship_form| %>
@@ -1014,7 +1014,9 @@ container_link:
   html: ~~content~~    
   css: |
     .<%=@template.current_piece.section_selector%> a{ display: inline-block; <%=@template.css(:s_a) %> }
-    .<%=@template.current_piece.section_selector%> a:hover{ <%=@template.css(:s_a_h) %> }    
+    .<%=@template.current_piece.section_selector%> a:hover{ <%=@template.css(:s_a_h) %> }  
+    .<%=@template.current_piece.section_selector%> a.selected{ <%=@template.css(:s_a_sel) %> }
+    .<%=@template.current_piece.section_selector%> a.unavailable{ <%=@template.css(:s_a_una) %> }
   js: ""
 container_table:
   id: 43
@@ -1407,37 +1409,7 @@ grouped_option_values_selector:
   html: |    
     <% if defined? product %>
       <% if product.has_variants? %>
-        <div class="<%=g_piece_selector%>">
-          <% index = 0 %>
-          <% product.grouped_option_values.each do |type, values| %>
-            <div id="<%= dom_id(type) %>" class="variant-option index-<%= index %>">
-              <h6 class="variant-option-type"><%= type.presentation %></h6>
-              <ul class="variant-option-values clear-block">
-              <% values.sort_by(&:position).each do |value| %>
-                <% classes = ["option-value"] %>
-                <% unless (variants = product.variants_for_option_value(value)).empty? %>
-                  <% classes << ( Spree::Config[:allow_backorder_shipping] || product.total_on_hand > 0 ? "in-stock" : "out-of-stock" ) if index == 0 %>
-                  <li><%= link_to value.image.present? ? image_tag(value.image.attachment.url, :alt => value.presentation) : content_tag(:span, value.presentation), "javascript:void(0);", :title => value.presentation, :class => classes.join(" "), :rel => "#{type.id}-#{value.id}" %></li>
-                <% end %>
-              <% end %>
-              </ul>
-            </div>
-            <% index += 1 %>
-          <% end %>
-          <%= hidden_field_tag "products[#{product.id}]", "", :class => "hidden variant_id" %>
-          <script type="text/javascript">
-          //<![CDATA[
-            var variant_options = new VariantOptions({
-              options: <%== product.variant_options_hash.to_json -%>,
-              container_selector: <%== ('.'+g_piece_selector).to_json -%>,
-              track_inventory_levels: false,
-              allow_backorders: true,
-              allow_select_outofstock: true,
-              default_instock: true
-            });
-          //]]>
-          </script>
-        </div>
+       <%= render :partial => 'themes/grouped_option_values_selector', :locals=>{:product=>product,:g_piece_selector=>g_piece_selector} %>
       <% end%>
     <% end%>
   created_at: 2011-09-20 19:40:07
@@ -1446,33 +1418,28 @@ grouped_option_values_selector:
     #product-details .price.unselected {
       color: #bbb;  
     }
-    .variant-option-type {
-      margin-bottom: 0;
+    .<%=g_piece_selector%> .option_type {
+       <%=@template.css(:option_type)%> 
     }
-    .<%=g_piece_selector%> ul.variant-option-values {
-      list-style-type: none;  
-      margin-bottom: 1em;
+    .<%=g_piece_selector%> .option_value {
+       <%=@template.css(:option_value)%> 
     }
-    .variant-option-values li {
+    .<%=g_piece_selector%> ul.option_values {
+      list-style-type: none;    
+      margin: 0; padding: 0;
+    }
+    .<%=g_piece_selector%> .option_values li {
       display: block;
       position: relative;
       float: left;
     }
-    .variant-option-values li a {
+    .<%=g_piece_selector%> .option_values li a {
       display: block;
-      background-color: #f9f9f9;
-      border: 2px solid #eee;  
-      padding: 2px 9px;
-      margin: 3px 3px 0 0;
-      text-decoration: none;
       cursor: pointer;
-      border-radius: 4px;
+      text-decoration: none;
     }
     .option-value.selected,
-    .option-value.in-stock:hover {
-      background-color: #1491EB;
-      border-color: #1072B9;
-      color: #ffffff;
+    .option-value.in-stock:hover {      
     }
     .option-value.out-of-stock {
       display: block;
@@ -1481,10 +1448,7 @@ grouped_option_values_selector:
       cursor: default;
     }
     .option-value.locked,
-    .option-value.locked:hover {
-      background-color: #fff;  
-      border-color: #f0f0f0;
-      color: #ddd;
+    .option-value.locked:hover {      
       cursor: default;
     }
     .option-value.locked img {
@@ -1512,12 +1476,12 @@ option_values_in_slide_style:
     .<%=g_piece_selector%> .variant-option{
       display:none;
     }
-    .<%=g_piece_selector%> ul.variant-option-values {
+    .<%=g_piece_selector%> ul.option_values {
       list-style-type: none;
       margin:0;
       padding:0;  
     }
-    .<%=g_piece_selector%> .variant-option-values li {
+    .<%=g_piece_selector%> .option_values li {
       display: block;
       position: relative;
       float: left;
@@ -1528,7 +1492,7 @@ option_values_in_slide_style:
       border-color: #1072B9;
       color: #ffffff;
     }
-    .<%=g_piece_selector%> .title{ <%=@template.css(:title)%> }
+    .<%=g_piece_selector%> .option_type{ <%=@template.css(:option_type)%> }
     .<%=g_piece_selector%> .large_image{ <%=@template.css(:large_image)%>  }
     .<%=g_piece_selector%> .thumb_image{ <%=@template.css(:thumb_image)%>  }
   js: ""
@@ -1545,4 +1509,17 @@ product_customization_options:
   created_at: 2011-09-20 19:40:07
   updated_at: 2011-09-20 19:40:07
   css: ''
+  js: ""
+container_header0:
+  id: 65
+  title: container header0
+  slug: container-header0
+  is_selectable: "0"
+  is_container: "1"
+  html: ~~content~~    
+  css: |
+    .<%=@template.current_piece.section_selector%> .header0 {
+      margin: 0; padding: 0; font-size: 100%;line-height:1em;
+      <%= @template.css :s_header0 %> 
+    }
   js: ""

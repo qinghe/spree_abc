@@ -1,5 +1,5 @@
 <% cust_dom_id = "no_charge_input_#{product_customization_type.customizable_product_options.first.id}" %>
-<div class="theme_title"> <%= product_customization_type.presentation %></div>
+<div class="header3"> <%= product_customization_type.presentation %></div>
 <% option = product_customization_type.customizable_product_options.first %>
 <% if option.presentation.present? %>
 <label for="<%= cust_dom_id %>"><%= option.presentation %></label> <br/>
