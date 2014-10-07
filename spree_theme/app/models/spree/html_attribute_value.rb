@@ -285,8 +285,10 @@ module Spree
           when /page/
             "#page"
           when /content_layout/
-            ".c_#{self.param_value.page_layout_id}"          
-          when 'as_h','a_h','a','th','td', /(label|input|li|img|button)/
+            ".c_#{self.param_value.page_layout_id}"  
+          when /(label|input|img|button)/ # product_atc, product_quantity
+            ".s_#{self.param_value.page_layout_id}_#{self.param_value.section_param.section_root_id}"                      
+          when 'as_h','a_h','a','th','td','li' 
             ".s_#{self.param_value.page_layout_id}_#{self.param_value.section_param.section_id}"
           else
             ".s_#{self.param_value.page_layout_id}_#{self.param_value.section_param.section_id}"
