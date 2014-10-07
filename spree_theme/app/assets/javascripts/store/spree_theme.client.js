@@ -341,7 +341,7 @@ function VariantOptions(params) {
             form_container.find('button[type=submit]').attr('disabled', true).fadeTo(0, 0.5);
             var price = form_container.find('.price').addClass('unselected')
             // Replace product price by "(select)" only when there are at least 1 variant not out-of-stock
-            variants = $("div.variant-option.index-0")
+            var variants = $("div.variant-option.index-0")
             if (variants.find("a.option-value.out-of-stock").length != variants.find("a.option-value").length)
                 price.text('(select)');
         }
