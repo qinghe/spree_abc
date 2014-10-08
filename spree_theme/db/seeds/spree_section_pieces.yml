@@ -620,7 +620,6 @@ cart:
     <% if @order.line_items.empty? %>    
       <div class="<%=g_piece_selector%>" data-hook="empty_cart">
         <p><%= Spree.t(:your_cart_is_empty) %></p>
-        <p><%= link_to Spree.t(:continue_shopping), products_path, :class => 'button continue' %></p>
       </div>    
     <% else %>
       <div class="<%=g_piece_selector%>"  data-hook="outside_cart_form">
