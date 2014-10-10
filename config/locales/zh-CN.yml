@@ -684,8 +684,8 @@ zh-CN:
     is_not_available_to_shipment_address: 无法送达要求的配送地址
     iso_name: ISO名称
     issue_number: 问题编号
-    item: 商品项
-    item_description: 商品项描述
+    item: 商品信息
+    item_description: 商品描述
     item_total: 项目总计
     item_total_rule:
       operators:
@@ -1337,7 +1337,7 @@ zh-CN:
     to_add_variants_you_must_first_define: 要添加具体型号，您需要先定义
     to_state: To State
     top_grossing_products: 毛利最高产品
-    total: 总计
+    total: 金额
     tracking: 追踪
     tracking_number: 
     tracking_url: 
