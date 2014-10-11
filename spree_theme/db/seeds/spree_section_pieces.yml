@@ -1000,7 +1000,7 @@ dialog:
       display:none;
       ~~PageParams.get:outer~~
     }
-
+    .simplemodal-overlay{ background-color:black; }
   js: ''
 container_link:
   id: 42
