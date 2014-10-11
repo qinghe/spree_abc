@@ -5,4 +5,4 @@ target_view = ( params[:action]=='update' ? 'edit' : params[:action] )
 
 $("<%=dialog_content_container_selector%>").html(<%= raw ( render :partial => target_view ).to_json %>)
 
-center_template_section("#dialog")
+$("#dialog").modal();

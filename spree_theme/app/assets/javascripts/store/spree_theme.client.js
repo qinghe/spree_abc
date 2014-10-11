@@ -1,4 +1,6 @@
+//= require jquery
 //= require jquery.validate/localization/messages_zh-CN.js
+//= require jquery.simplemodal.js
 function center_template_section( selector )
 {
     var ele = $(selector);

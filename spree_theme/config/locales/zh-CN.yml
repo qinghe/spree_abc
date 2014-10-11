@@ -76,6 +76,7 @@ zh-CN:
     default_page:
       home: 首页
       login: 登录
+      logout: 退出
       account: 我的账户
       signup: 注册
       password: 忘记密码
@@ -108,6 +109,7 @@ zh-CN:
       password: 密码管理
       blog: 文章列表
       post: 文章内容
+      logout: 用户退出
       either: 任意页
     section_data_source:
       gpvs: 产品集合

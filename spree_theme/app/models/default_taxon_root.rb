@@ -4,18 +4,24 @@ class DefaultTaxonRoot < DefaultTaxon
   def default_taxon
     if @default_taxon.nil?    
       @default_taxon = DefaultTaxon.instance( self.request_fullpath )
-      @default_taxon.root = self
+      @default_taxon.root = self # required by inherited_page_context
     end
     @default_taxon
   end
     
   def children
-    [self.default_taxon]
+    taxons = case current_context
+      when ContextEnum.login
+        [ DefaultTaxon.instance_by_context( ContextEnum.login ), 
+          DefaultTaxon.instance_by_context( ContextEnum.signup )  ].each{|taxon| taxon.root = self}
+      when ContextEnum.account
+        [ DefaultTaxon.instance_by_context( ContextEnum.account ), 
+          DefaultTaxon.instance_by_context( ContextEnum.logout )  ].each{|taxon| taxon.root = self}
+      else   
+        [self.default_taxon]
+      end
+      
   end
-  
-  #def descendants
-  #  [self.default_taxon]    
-  #end
   
   def taxonomy
     @taxonomy ||= DefaultTaxonomy.new( self )

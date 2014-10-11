@@ -47,4 +47,5 @@ class DefaultTaxon < SpreeTheme.taxon_class
   def page_home?
     current_context == ContextEnum.home
   end
+  
 end

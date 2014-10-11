@@ -1143,7 +1143,7 @@ logged_and_unlogged_menu:
     ul.<%=g_piece_selector%> { margin: 0; padding: 0;}
     .<%=g_piece_selector%> li{ 
       list-style-type:none;
-      display:inline;}
+      display:inline;float: left;}
     .<%=g_piece_selector%> a{ 
      display:inline-block;
      float:left;

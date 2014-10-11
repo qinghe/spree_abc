@@ -12,6 +12,7 @@ module Spree
         self.context_routes = { 
           ContextEnum.home =>"/",
           ContextEnum.account =>"/account",
+          ContextEnum.logout =>"/logout",
           ContextEnum.checkout =>"/checkout",
           ContextEnum.cart =>"/cart",
           ContextEnum.signup =>"/signup",
@@ -87,6 +88,8 @@ module Spree
               ContextEnum.signup
             when /^\/post/
               ContextEnum.post
+            when /^\/logout/
+              ContextEnum.logout
             when '/',/^\/\?/, /^\/template_themes/ 
               ContextEnum.home
             else
