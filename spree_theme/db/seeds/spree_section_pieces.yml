@@ -997,9 +997,7 @@ dialog:
   css: |
     div.<%=g_piece_selector%>
     { 
-      position:absolute;
       display:none;
-      z-index:1001;
       ~~PageParams.get:outer~~
     }
 
@@ -1054,7 +1052,7 @@ dialog_title:
   html: |
     <!-- outer and inner are required, in this way dialog content always go to the inner. -->
     <div class="<%=g_piece_selector%>">
-      <div class="title"> <span >this is dialog title </span>  <a href="javascript:void(0)" onclick="$('#dialog').hide();" class="close">X</a> </div>
+      <div class="title"> <span >this is dialog title </span>   </div>
     </div>    
   css: | 
     .<%=g_piece_selector%> .title{ <%=@template.css(:title) %> }
