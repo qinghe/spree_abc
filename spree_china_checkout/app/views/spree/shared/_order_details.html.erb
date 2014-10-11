@@ -5,7 +5,7 @@
   
   <% if order.has_step?("address") %>
     <div class="columns alpha five">
-      <h6><%= t(:shipping_address) %> <%= link_to "(#{t(:edit)})", checkout_state_path(:address) unless @order.completed? %></h6>
+      <h6><%= Spree.t(:shipping_address) %> <%= link_to "(#{Spree.t(:edit)})", checkout_state_path(:address) unless @order.completed? %></h6>
       <div class="address">
         <%= order.ship_address %>
       </div>
@@ -13,27 +13,23 @@
 
     <% if @order.has_step?("delivery") %>
       <div class="columns alpha five">
-        <h6><%= t(:shipping_method) %> <%= link_to "(#{t(:edit)})", checkout_state_path(:delivery) unless @order.completed? %></h6>
+        <h6><%= Spree.t(:shipping_method) %> <%= link_to "(#{Spree.t(:edit)})", checkout_state_path(:delivery) unless @order.completed? %></h6>
         <div class="delivery">
-          <%= order.shipping_method.name %>
+          <% order.shipments.each do |shipment| %>
+            <%= shipment.stock_location.name %>
+            <%= shipment.shipping_method.name %>
+            <br/>
+          <% end %>
         </div>
       </div>
     <% end %>
   <% end %>
 
   <div class="columns omega five">
-    <h6><%= t(:payment_information) %> <%= link_to "(#{t(:edit)})", checkout_state_path(:payment) unless @order.completed? %></h6>
+    <h6><%= Spree.t(:payment_information) %> <%= link_to "(#{Spree.t(:edit)})", checkout_state_path(:payment) unless @order.completed? %></h6>
     <div class="payment-info">
-      <% unless order.credit_cards.empty? %>
-        <span class="cc-type">
-          <%= image_tag "credit_cards/icons/#{order.credit_cards.first.cc_type}.png" %>
-          <%= t(:ending_in)%> <%= order.credit_cards.first.last_digits %>
-        </span>
-        <br />
-        <span class="full-name">
-          <%= order.credit_cards.first.first_name %>
-          <%= order.credit_cards.first.last_name %>
-        </span>
+      <% order.payments.valid.each do |payment| %>
+        <%= render payment%><br/>
       <% end %>
     </div>
   </div>
@@ -44,17 +40,17 @@
 
 <table class="index columns alpha omega sixteen" data-hook="order_details">
   <col width="15%" valign="middle" halign="center">
-  <col width="70%" valign="middle">
+  <col width="65%" valign="middle">
   <col width="5%" valign="middle" halign="center">
   <col width="5%" valign="middle" halign="center">
   <col width="5%" valign="middle" halign="center">
 
   <thead id="line-items" data-hook>
     <tr data-hook="order_details_line_items_headers">
-      <th colspan="2"><%= t(:item) %></th>
-      <th class="price"><%= t(:price) %></th>
-      <th class="qty"><%= t(:qty) %></th>
-      <th class="total"><span><%= t(:total) %></span></th>
+      <th colspan="2"><%= Spree.t(:item) %></th>
+      <th class="price"><%= Spree.t(:price) %></th>
+      <th class="qty"><%= Spree.t(:qty) %></th>
+      <th class="total"><span><%= Spree.t(:total) %></span></th>
     </tr>
   </thead>
 
@@ -70,7 +66,7 @@
         </td>
         <td data-hook="order_item_description">
           <h4><%= item.variant.product.name %></h4>
-          <%= truncate(item.variant.product.description, :length => 100, :omission => "...") %>
+          <%= truncated_product_description(item.variant.product) %>
           <%= "(" + variant_options(item.variant) + ")" unless item.variant .option_values.empty? %>
         </td>
         <td data-hook="order_item_price" class="price"><span><%= money item.price %></span></td>
@@ -81,7 +77,7 @@
   </tbody>
   <tfoot id="order-total" data-hook="order_details_total">
     <tr class="total">
-      <td colspan="4"><b><%= t(:order_total) %>:</b></td>
+      <td colspan="4"><b><%= Spree.t(:order_total) %>:</b></td>
       <td class="total"><span id="order_total"><%= money @order.total %></span></td>
     </tr>
   </tfoot>
@@ -97,7 +93,7 @@
   <% end %>
   <tfoot id="subtotal" data-hook="order_details_subtotal">
     <tr class="total" id="subtotal-row">
-      <td colspan="4"><b><%= t(:subtotal) %>:</b></td>
+      <td colspan="4"><b><%= Spree.t(:subtotal) %>:</b></td>
       <td class="total"><span><%= money @order.item_total %></span></td>
     </tr>
   </tfoot>
