@@ -30,6 +30,11 @@ module Spree
       send("#{main_image_style}_image", product, :itemprop => "image")
       
     end
+    
+    # override resource path, add taxon into path
+    def product_path( product )
+      "/0/#{product.id}"
+    end
             
     #==================================================================================================
     # Editor methods
