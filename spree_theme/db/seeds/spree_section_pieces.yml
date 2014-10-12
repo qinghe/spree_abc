@@ -1052,7 +1052,7 @@ dialog_title:
   html: |
     <!-- outer and inner are required, in this way dialog content always go to the inner. -->
     <div class="<%=g_piece_selector%>">
-      <div class="title"> <span >this is dialog title </span>   </div>
+      <div class="title"> <%= Spree.t(:dialog_title) %>  </div>
     </div>    
   css: | 
     .<%=g_piece_selector%> .title{ <%=@template.css(:title) %> }
@@ -1064,6 +1064,7 @@ dialog_content:
   slug: dialog-content
   is_selectable: "0"
   is_container: "1"
+  usage: "dial-cont"
   html: |
     <!-- container  -->
     <div class="<%=g_piece_selector%> content_layout" >

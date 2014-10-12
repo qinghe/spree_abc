@@ -29,7 +29,8 @@ module Spree
     end
     
     def param_keys
-      self.html_attribute_ids.split(',').collect{|i| [i.to_i, "#{i}unset", "#{i}hidden"]}.flatten
+      # key may in string or integer in seed, since key is string in param_value, we may eliminate integer key.
+      self.html_attribute_ids.split(',').collect{|i| [i.to_i, i, "#{i}unset", "#{i}hidden"]}.flatten
     end
     
     def insert_html_attribute( html_attribute, before_existing_html_attribute = nil )

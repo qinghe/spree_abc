@@ -289,7 +289,7 @@ module Spree
         if section.root? 
           section_instance = 1
           if selected_page_layout.present?
-            raise ArgugemntError, 'only container could has child section' unless selected_page_layout.section.section_piece.is_container       
+            raise 'only container could has child section' unless selected_page_layout.section.section_piece.is_container       
             whole_tree = selected_page_layout.root.self_and_descendants
             section_instance = whole_tree.select{|xnode| xnode.section_id==section.id}.size.succ
           end
@@ -319,7 +319,7 @@ module Spree
       
       def dialog_content_container_selector
         dialog = find_section_by_usage( 'dialog' )
-        dialog_content_container = dialog.section.leaves.includes(:section_piece).select{|section| section.section_piece.is_container?}.first
+        dialog_content_container = dialog.section.descendants.includes(:section_piece).select{|section| section.section_piece.usage=='dial-cont'}.first
         dialog.css_selector(dialog_content_container)+"_inner"
       end
                 
