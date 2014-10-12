@@ -800,7 +800,7 @@ order_address:
   html: |
     <% if @order.has_step?("address") %>
       <% if @order.has_step?("delivery") %>
-        <h6 class="header3"><%= Spree.t(:shipping_address) %> <%= link_to "(#{Spree.t(:edit)})", checkout_state_path(:address) unless @order.completed? %></h6>
+        <h3 class="header3"><%= Spree.t(:shipping_address) %> <%= link_to "(#{Spree.t(:edit)})", checkout_state_path(:address) unless @order.completed? %></h3>
         <div class="columns alpha four" data-hook="order-ship-address">
           <%= render :partial => 'spree/shared/address', :locals => { :address => @order.ship_address } %>
         </div>
@@ -815,7 +815,7 @@ order_payment:
   is_selectable: "1"
   is_container: "0"
   html: |    
-    <h6 class="header3"><%= Spree.t(:payment_information) %> <%= link_to "(#{Spree.t(:edit)})", checkout_state_path(:payment) unless @order.completed? %></h6>
+    <h3 class="header3"><%= Spree.t(:payment_information) %> <%= link_to "(#{Spree.t(:edit)})", checkout_state_path(:payment) unless @order.completed? %></h3>
     <div class="payment-info">
       <% @order.payments.valid.each do |payment| %>
         <%= render payment%><br/>
@@ -841,7 +841,7 @@ payment_form:
   is_container: "0"
   html: |    
     <div id="checkout_form_payment" >
-      <h6 class="header3"><%= Spree.t(:payment_information) %></h6>
+      <h3 class="header3"><%= Spree.t(:payment_information) %></h3>
       <% @order.available_payment_methods.each do |method| %>
       <p>
         <label>
@@ -880,7 +880,7 @@ ship_form:
   html: |    
     <div id="checkout_form_address" data-hook="billing_fieldset_wrapper">
       <%= form.fields_for :bill_address do |bill_form| %>
-        <h6 class="header3"><%= Spree.t(:shipping_address) %></h6>
+        <h3 class="header3"><%= Spree.t(:shipping_address) %></h3>
         <%= render :partial => 'spree/address/form', :locals => { :form => bill_form, :address_type => 'billing', :address => @order.bill_address } %>
       <% end %>
       <%= form.fields_for :ship_address do |ship_form| %>

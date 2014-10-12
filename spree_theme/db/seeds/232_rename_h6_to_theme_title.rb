@@ -1,6 +1,6 @@
 
 # add html_attribute margin into a
-spps = Spree::SectionPieceParam.where(:class_name=>'s_h6').all
+spps = Spree::SectionPieceParam.where(['class_name in (?)',['s_h6','s_theme_title']]).all
 
 if spps.size >0
   spps.each{|spp|
