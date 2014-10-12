@@ -68,7 +68,7 @@ zh-CN:
       phone: 电话
       state: 邮编
       city: 所在地区
-      street: 街道地址
+      street: 详细地址
     select_taxon: 选择菜单
     select_template_image: 选择图片    
     select_template_text: 选择文本 

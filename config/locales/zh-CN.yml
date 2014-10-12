@@ -1229,7 +1229,7 @@ zh-CN:
     shipments: 配送
     shipped: 已发货
     shipping: 配送中
-    shipping_address: 收货地址
+    shipping_address: 收货人信息
     shipping_categories: 配送分类
     shipping_categories_description: 管理配送分类以决定哪些产品可以通过哪些方式进行配送
     shipping_category: 配送分类

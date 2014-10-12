@@ -135,7 +135,7 @@ module SpreeTheme::System
       @param_values_for_editors = Array.new(@editors.size){|i| []}
       editor_ids = @editors.collect{|e|e.id}
       page_layout ||= theme.page_layout
-      param_values =theme.param_values().where(:page_layout_id=>page_layout.id).includes([:section_param=>[:section_piece_param=>:param_category]]).order("spree_param_categories.position, spree_section_params.section_id, spree_section_piece_params.position") 
+      param_values =theme.param_values().includes([:section_param=>[:section_piece_param=>:param_category]]).where(["spree_param_values.page_layout_id=? and spree_section_params.is_enabled",page_layout.id]).order("spree_param_categories.position, spree_section_params.section_id, spree_section_piece_params.position") 
       #get param_values for each editors
       for pv in param_values
         #only get pv blong to root section
