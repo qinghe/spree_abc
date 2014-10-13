@@ -39,7 +39,9 @@ objs=[
   {"id"=>45, "position"=>45, "is_enabled"=>true, "editor_id"=>0, "slug"=>"button" },
   {"id"=>46, "position"=>46, "is_enabled"=>true, "editor_id"=>0, "slug"=>"button_hover" },
   #{"id"=>64, "position"=>64, "is_enabled"=>true, "editor_id"=>3, "slug"=>"link_selected_hover_background" },
-  #{"id"=>65, "position"=>65, "is_enabled"=>true, "editor_id"=>3, "slug"=>"unclickable_link" },
+  #dl dt dd
+  {"id"=>70, "position"=>70, "is_enabled"=>true, "editor_id"=>0, "slug"=>"term" },
+  {"id"=>71, "position"=>71, "is_enabled"=>true, "editor_id"=>0, "slug"=>"term description" },
   #table
   {"id"=>78, "position"=>78, "is_enabled"=>true, "editor_id"=>0, "slug"=>"table" },
   {"id"=>79, "position"=>79, "is_enabled"=>true, "editor_id"=>0, "slug"=>"table_title" },

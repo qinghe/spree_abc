@@ -92,6 +92,7 @@ namespace :spree_theme do
         theme.current_template_release = theme.template_releases.last
         theme.save!
       end
+      puts "try to release it..."
      #Rake::Task['spree_theme:release_theme'].execute(theme.id)
       theme.release({},{:page_only=>true})
     end
