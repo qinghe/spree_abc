@@ -46,7 +46,7 @@ root:
   css: |
     body
     { font-size: 100%;
-      line-height: 1em; 
+      /*line-height: 1em;*/ 
       margin: 0;
       padding: 0;
       <%= @template.css :body %>
@@ -1529,7 +1529,7 @@ container_dl:
   is_container: "1"
   html: ~~content~~    
   css: |
-    .<%=@template.current_piece.section_selector%> dl{ margin:0;padding:0; }
+    .<%=@template.current_piece.section_selector%> dl,dd{ margin:0;padding:0; }
     .<%=@template.current_piece.section_selector%> dt{ <%= @template.css :s_dt %>  }
     .<%=@template.current_piece.section_selector%> dd{ <%= @template.css :s_dd %>  }
   js: ""

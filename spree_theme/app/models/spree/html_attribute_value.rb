@@ -310,7 +310,7 @@ module Spree
             " #{target.delete('_h')}"
           when 'error' #s_error
             " label.error"  
-          when 'table','label','input','li','img','button','td','th','h6'
+          when 'table','label','input','li','img','button','td','th','h6','dt','dd'
             # product quantity,atc section_piece content just input,add a <span> wrap it.
             # product images content thumb and main images so here should be section_id,
             " #{target}"
