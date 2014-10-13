@@ -46,7 +46,7 @@ root:
   css: |
     body
     { font-size: 100%;
-      line-height: 1; /* it is in css reset */
+      line-height: 1em; 
       margin: 0;
       padding: 0;
       <%= @template.css :body %>
