@@ -950,7 +950,7 @@ order_list:
   is_selectable: "1"
   is_container: "0"
   html: |    
-    <h3><%= Spree.t(:my_orders) %></h3>
+    <h3 class="header3"><%= Spree.t(:my_orders) %></h3>
     <% if @orders.present? %>
       <table class="order-summary">
         <thead>

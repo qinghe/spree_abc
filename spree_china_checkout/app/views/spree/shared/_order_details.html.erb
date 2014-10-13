@@ -1,39 +1,35 @@
-<% # copy from spree/core/app/views/shared/_order_details.html.erb
+<% # @theme - show order detail  
+   # copy from spree/core/app/views/shared/_order_details.html.erb
    # just removed bill_address
 %>
 <div class="row steps-data">
-  
+  <dl>
   <% if order.has_step?("address") %>
-    <div class="columns alpha five">
-      <h6><%= Spree.t(:shipping_address) %> <%= link_to "(#{Spree.t(:edit)})", checkout_state_path(:address) unless @order.completed? %></h6>
-      <div class="address">
+      <dt><%= Spree.t(:shipping_address) %> <%= link_to "(#{Spree.t(:edit)})", checkout_state_path(:address) unless @order.completed? %></dt>
+      <dd class="address">
         <%= order.ship_address %>
-      </div>
-    </div>
+      </dd>
 
     <% if @order.has_step?("delivery") %>
-      <div class="columns alpha five">
-        <h6><%= Spree.t(:shipping_method) %> <%= link_to "(#{Spree.t(:edit)})", checkout_state_path(:delivery) unless @order.completed? %></h6>
-        <div class="delivery">
+        <dt><%= Spree.t(:shipping_method) %> <%= link_to "(#{Spree.t(:edit)})", checkout_state_path(:delivery) unless @order.completed? %></dt>
+        <dd class="delivery">
           <% order.shipments.each do |shipment| %>
+            <div>
             <%= shipment.stock_location.name %>
             <%= shipment.shipping_method.name %>
-            <br/>
+            </div>
           <% end %>
-        </div>
-      </div>
+        </dd>      
     <% end %>
   <% end %>
 
-  <div class="columns omega five">
-    <h6><%= Spree.t(:payment_information) %> <%= link_to "(#{Spree.t(:edit)})", checkout_state_path(:payment) unless @order.completed? %></h6>
-    <div class="payment-info">
+    <dt><%= Spree.t(:payment_information) %> <%= link_to "(#{Spree.t(:edit)})", checkout_state_path(:payment) unless @order.completed? %></dt>
+    <dd class="payment-info">
       <% order.payments.valid.each do |payment| %>
-        <%= render payment%><br/>
+        <div> <%= render payment%>  </div>
       <% end %>
-    </div>
-  </div>
-
+    </dd>
+  </dl>
 </div>
 
 <table class="index columns alpha omega sixteen" data-hook="order_details">
