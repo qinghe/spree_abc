@@ -16,6 +16,10 @@ module PageTag
       def product_properties
         self.model.product_properties.includes(:property)
       end
+      
+      def partial_path
+        "/#{model.id}-#{model.permalink}"
+      end      
     end  
         
     def wrapped_models

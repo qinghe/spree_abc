@@ -22,8 +22,8 @@ Spree::Core::Engine.routes.prepend do
      end
   end
   
-  match '(/:c(/:r))' => 'template_themes#page', :c => /[\d]+/
-  match '/post/:c/:p' => 'template_themes#page', :c => /[\d]+/
+  match '(/:c(/:r))' => 'template_themes#page' , :c => /\d[^\/]*/ # :c, taxon_id-permalink,  :r, product_id-permalink   
+  match '/post/:c/:p' => 'template_themes#page', :c => /\d[^\/]*/ #
   #match 'preview(/:c(/:r))' => 'template_themes#preview' #preview home
  
   namespace :admin do

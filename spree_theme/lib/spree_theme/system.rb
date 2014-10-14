@@ -85,7 +85,7 @@ module SpreeTheme::System
       if params[:p]
         @resource = Spree::Post.find_by_id(params[:p])
       end
-      if params[:c] and params[:c].to_i>0 
+      if params[:c] && params[:c].to_i>0 
         @menu = SpreeTheme.taxon_class.find_by_id(params[:c])
       elsif(( index_page = @theme.try(:index_page)) && index_page > 0 )
         @menu = SpreeTheme.taxon_class.find_by_id(index_page)

@@ -8,6 +8,10 @@ module PageTag
       self.accessable_attributes=[:id, :title, :body, :posted_at, :cover]
       delegate *self.accessable_attributes, :to => :model
       
+      
+      def partial_path
+        "/#{model.id}-#{model.permalink}"
+      end
     end  
     
     

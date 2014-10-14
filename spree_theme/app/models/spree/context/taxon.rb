@@ -26,7 +26,8 @@ module Spree
         end
           
         def path
-          context_routes[current_context] || "/#{self.id}"     
+          # menu.id would be nil if it is class DefaultTaxon
+          context_routes[current_context] || "/#{self.id.to_i}-#{self.permalink.split('/').last}"     
         end
       end
       
@@ -66,7 +67,7 @@ module Spree
       
       def get_context_by_full_path( full_path )
           case full_path
-            when /^\/[\d]+\/[\d]+/
+            when /^\/\d[^\/]*\/\d[^\/]*/ #"/3-bags/1-ruby-on-rails-tote"
               ContextEnum.detail
             when /^\/cart/
               ContextEnum.cart

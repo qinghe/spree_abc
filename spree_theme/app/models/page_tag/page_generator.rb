@@ -102,16 +102,14 @@ module PageTag
       @renderer
     end
    
-    def build_path(model)    
+    def build_path( wrapped_model )    
       url = nil
-      if model.kind_of?( SpreeTheme.taxon_class )
-        url= self.url_prefix+ model.path
-      elsif model.kind_of?( SpreeTheme.post_class )      
-        url= [self.url_prefix, "post", self.menu.id.to_i, model.id].join('/')
-      else  
-        # menu.id would be nil if it is class DefaultTaxon
-        # nil.to_i => 0
-        url= [self.url_prefix, self.menu.id.to_i, model.id].join('/')    
+      if wrapped_model.kind_of?( Menus::WrappedMenu )
+        url= url_prefix+ wrapped_model.model.path
+      elsif wrapped_model.kind_of?( Posts::WrappedPost )      
+        url= url_prefix+ "/post"+ current_page_tag.partial_path + wrapped_model.partial_path
+      else          
+        url= url_prefix+ current_page_tag.partial_path + wrapped_model.partial_path    
       end    
       url
     end

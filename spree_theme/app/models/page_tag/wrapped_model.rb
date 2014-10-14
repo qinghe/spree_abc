@@ -10,7 +10,7 @@ module PageTag
     end
     
     def path
-      self.collection_tag.page_generator.build_path( self.model)
+      self.collection_tag.page_generator.build_path( self )
     end
     
 #    def [](attribute_name)
