@@ -1093,7 +1093,7 @@ logo:
   resources: i
   html: | 
     <% if @template.image.present? %>    
-         <img src="<%= @template.image.url %>"  border="0" />
+         <%= link_to image_tag( @template.image.url ),  spree.root_path %>  
     <% else %>
          <%= logo %>         
     <% end %>
