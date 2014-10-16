@@ -15,6 +15,9 @@ module SpreeTheme::System
   # override spree's
   # only cart|account using layout while rendering, product list|detail page render without layout.
   def get_layout_if_use
+    if request.xhr?
+      return false
+    end
     #for designer
     if @is_designer
       return 'layout_for_design'
