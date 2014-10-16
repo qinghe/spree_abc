@@ -56,6 +56,9 @@ module SpreeTheme::System
     if cookies[:_dalianshops_designer]=='1'
       @is_designer = true
     end     
+    if cookies[:_dalianshops_designer]=='0'
+      @is_designer = false
+    end     
     # user could select theme to view in design shop. 
     if website.design?
       #get template from query string
@@ -73,7 +76,7 @@ module SpreeTheme::System
     if @theme.blank? and SpreeTheme.site_class.current.template_theme.present?       
       @theme = SpreeTheme.site_class.current.template_theme
     end
-#Rails.logger.debug "menu.context=#{@menu.current_context}, @is_designer=#{@is_designer}, request.xhr?=#{request.xhr?}"
+#Rails.logger.debug "@theme=#{@theme.inspect}, @is_designer=#{@is_designer},website=#{website.inspect} request.xhr?=#{request.xhr?}"
     if params[:controller]=~/cart|checkout|order/
       @menu = DefaultTaxon.instance
     elsif params[:controller]=~/user/
