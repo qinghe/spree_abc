@@ -34,7 +34,7 @@ module SpreeMultiSite
         # for development or test, enable get site from cookie
         #Rails.logger.debug "request.cookie_jar=#{request.cookie_jar.inspect},#{request.cookie_jar[:abc_development_domain]},#{request.cookie_jar['abc_development_domain']}"
         #string and symbol both OK.  cookie.domain should be exactly same as host, www.domain.com != domain.com
-        cookie_domain = request.cookies['abc_development_domain'] 
+        cookie_domain = request.cookies['_dalianshops_domain'] 
         if cookie_domain.present?
           site = Spree::Site.find_by_domain( cookie_domain )
         end        
