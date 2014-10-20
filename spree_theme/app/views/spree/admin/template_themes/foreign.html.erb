@@ -17,7 +17,7 @@
 <% @themes.each do |theme| %>
   <tr>
     <td><%= theme.title %></td>
-    <td align="center"><%= theme.imported? ? Spree.t(:theme_yes) : Spree.t(:theme_no) %></td>
+    <td align="center"><%= theme.imported? ? Spree.t(:yes) : Spree.t(:not) %></td>
     <td class="actions"><%= link_to_with_icon 'icon-eye', Spree.t(:theme_preview), preview_template_theme_url(theme, :host=>SpreeTheme.site_class.designsite.domain),{:target=>'_blank',:no_text => true} %>
     <%=link_to_with_icon 'icon-tag', Spree.t(:theme_import), prepare_import_admin_template_theme_path(theme),{:disabled=>theme.imported?,:no_text => true} %>
     </td>
