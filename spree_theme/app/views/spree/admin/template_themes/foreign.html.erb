@@ -3,6 +3,12 @@
   <%= Spree.t(:theme_foreign) %> 
 <% end %>
 <table>
+  <colgroup>
+       <col style="width: 70%;">
+       <col style="width: 12%;">
+       <col style="width: 15%;">
+  </colgroup>  
+
   <tr>
     <th><%= Spree::TemplateTheme.human_attribute_name(:title) %></th>
     <th><%= Spree.t(:theme_imported) %></th>
