@@ -15,20 +15,24 @@
 <% if @themes.any? %>
 <table id="listing_template_themes">
   <colgroup>
-       <col style="width: 60%;">
+       <col style="width: 55%;">
+       <col style="width: 10%;">
        <col style="width: 10%;">
        <col style="width: 25%;">
   </colgroup>  
   <thead>  <tr>
     <th><%= Spree::TemplateTheme.human_attribute_name(:title) %></th>
     <th>  <%= Spree.t(:theme_applied) %> </th>    
+    <th><%= Spree::TemplateTheme.human_attribute_name(:is_public) %> </th>    
   </tr> </thead>
 
 
 <% @themes.each do |theme| %>
   <tr class="<%= cycle('odd', 'even') %>">
     <td> <span class="editable" data-id="<%=theme.id%>"><%= theme.title %></span></td>
-    <td align="center"><%= theme.applied? ? Spree.t(:theme_yes) : Spree.t(:theme_no) %></td>
+    <td align="center"><%= theme.applied? ? Spree.t(:yes) : Spree.t(:no) %></td>
+    <td><%= check_box_tag "template_theme[is_public]", true, theme.is_public %> 
+    </td>
     <td class="actions">
     <%= link_to_with_icon 'icon-cogs', Spree.t(:theme_config), config_resource_admin_template_theme_path(theme), {:method=>:get,:no_text => true} %>
     <%= link_to_with_icon 'icon-check-circle', Spree.t(:theme_apply), apply_admin_template_theme_path(theme), {:method=>:post,:no_text => true} %>

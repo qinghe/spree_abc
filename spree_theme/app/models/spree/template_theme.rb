@@ -62,7 +62,7 @@ module Spree
     
     validates :title, presence: true
 
-    attr_accessor :section_root_id
+    attr_accessor :section_root_id, :is_public
     attr_accessible :site_id,:page_layout_root_id,:title, :section_root_id # section_root_id is only required for create- initialize_page_layout
     attr_accessible :assigned_resource_ids, :template_files #import require it.
     
@@ -80,7 +80,7 @@ module Spree
       end
       
       def foreign
-        self.within_site(SpreeTheme.site_class.designsite )
+        self.within_site(SpreeTheme.site_class.designsite ).where(:is_public=>true)
       end        
       
       # original_theme may be attributes in hash

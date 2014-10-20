@@ -30,6 +30,7 @@ zh-CN:
         title: 名字
         slug: Slug
         section_root_id: 基础模块
+        is_public: 是否公开
     models:
       spree/page_layout:
         one: 模块
@@ -139,8 +140,6 @@ zh-CN:
     theme_foreign: 模板商店
     theme_native: 可用模板
     theme_applied: 是否使用
-    theme_yes: 是
-    theme_no: 否 
     theme_apply: 使用
     theme_assign_taxon: 分配菜单
     theme_assign_image: 分配图片
