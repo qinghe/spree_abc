@@ -7,11 +7,12 @@ module Spree
         fire_event('spree.checkout.update')
 
         while(@order.next) do
-          if pay_by_billing_integration?
+          if pay_with_billing_integration?
             break
           end
         end
-        if pay_by_billing_integration?
+        #since update is override, call it explicitly for alipay 
+        if pay_with_billing_integration?
           handle_billing_integration
           return
         end
@@ -53,6 +54,13 @@ module Spree
       params[:order]
     end
     
-
+    def pay_with_billing_integration?
+      if @order.next_step_complete?
+        if @order.pending_payments.first.payment_method.kind_of? BillingIntegration 
+          return true
+        end
+      end
+      return false
+    end
   end
 end

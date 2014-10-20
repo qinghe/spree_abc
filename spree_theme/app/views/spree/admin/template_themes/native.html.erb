@@ -31,7 +31,10 @@
   <tr class="<%= cycle('odd', 'even') %>">
     <td> <span class="editable" data-id="<%=theme.id%>"><%= theme.title %></span></td>
     <td align="center"><%= theme.applied? ? Spree.t(:yes) : Spree.t(:no) %></td>
-    <td><%= check_box_tag "template_theme[is_public]", true, theme.is_public %> 
+    <td align="center">
+      <%= form_for [:admin,theme], :remote=>true do |f|%>
+      <%= f.check_box "is_public"  %>
+      <% end %> 
     </td>
     <td class="actions">
     <%= link_to_with_icon 'icon-cogs', Spree.t(:theme_config), config_resource_admin_template_theme_path(theme), {:method=>:get,:no_text => true} %>

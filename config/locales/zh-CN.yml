@@ -808,7 +808,7 @@ zh-CN:
     none: 没有
     none_available: 没有可用的
     normal_amount: Normal Amount
-    not: false
+    not: 否
     not_available: N/A
     not_enough_stock: 
     not_found: 未找到%{resource}

@@ -33,5 +33,7 @@ jQuery(function ($) {
       width     : '80%',
       height    : '25px',
       style  : "inherit" });
-  
+  $('#listing_template_themes form input:checkbox').change(
+    function(){ $(this.form).trigger('submit'); }
+  )
 });

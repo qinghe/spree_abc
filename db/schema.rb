@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140913070528) do
+ActiveRecord::Schema.define(:version => 20141020134110) do
 
   create_table "ckeditor_assets", :force => true do |t|
     t.integer  "site_id",                         :default => 0, :null => false
@@ -896,7 +896,7 @@ ActiveRecord::Schema.define(:version => 20140913070528) do
     t.string   "meta_description"
     t.string   "meta_keywords"
     t.integer  "depth"
-    t.integer  "page_context",      :default => 0
+    t.integer  "page_context",      :default => 0, :null => false
     t.string   "html_attributes"
     t.integer  "replaced_by",       :default => 0, :null => false
   end
@@ -936,13 +936,14 @@ ActiveRecord::Schema.define(:version => 20140913070528) do
 
   create_table "spree_template_themes", :force => true do |t|
     t.integer  "site_id",                               :default => 0
-    t.integer  "page_layout_root_id",                   :default => 0,  :null => false
+    t.integer  "page_layout_root_id",                   :default => 0,     :null => false
     t.integer  "release_id",                            :default => 0
-    t.string   "title",                 :limit => 64,   :default => "", :null => false
-    t.string   "slug",                  :limit => 64,   :default => "", :null => false
-    t.string   "assigned_resource_ids", :limit => 1024, :default => "", :null => false
-    t.datetime "created_at",                                            :null => false
-    t.datetime "updated_at",                                            :null => false
+    t.string   "title",                 :limit => 64,   :default => "",    :null => false
+    t.string   "slug",                  :limit => 64,   :default => "",    :null => false
+    t.string   "assigned_resource_ids", :limit => 1024, :default => "",    :null => false
+    t.datetime "created_at",                                               :null => false
+    t.datetime "updated_at",                                               :null => false
+    t.boolean  "is_public",                             :default => false, :null => false
   end
 
   create_table "spree_tokenized_permissions", :force => true do |t|
