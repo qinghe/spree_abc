@@ -44,7 +44,7 @@ index page
      期望用户做最少的事情，实现他想要的效果。
 
 模板发布后，可以继续修改而不影响已发布内容（当它成为一个问题时再处理）
------------------------------------  
+--------------------------------------------------------------------------------  
   1. 保证生成页面过程中，不再访问page_layouts，sections, section_pieces, param_values 
     page_layouts，sections, section_pieces => html.erb 
     param_values => css
@@ -55,7 +55,11 @@ index page
   
   add table released_page_layout?
   
-  
+使模板导入简单，用户预览模板，看到喜欢的， 点‘导入’，完成。 import_with_resource 
+--------------------------------------------------------------------------------  
+    模板中使用了taxon， 它表示菜单和分类，如：主菜单，产品分类，图片轮播(slider)。
+    为了方便用户使用模板，简化导入过程，导入模板时无需配置taxon, 直接拷贝模板所用分类。
+    
   
 #themes-+      
         +- foreign :  themes from design shop

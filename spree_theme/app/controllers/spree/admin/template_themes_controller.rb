@@ -19,33 +19,22 @@ module Spree
         @themes = @themes.select{|theme| theme.template_releases.present?}
       end
 
-      # params
-      #   assigned_resource_ids: required, a hash, key is page_layout_id
-      #     ex. {"30"=>[""], "3"=>[""]} 
-      #   template_files: required, a array of template_file attributes                        
-      def import
-        #FIXME support config template when import theme
-        #template_files = params[:template_files].collect{|file| TemplateFile.new( file) }.select{|file| file.attachment.present? }        
-        #assigned_resource_ids = Hash[ params[:assigned_resource_ids].collect{|key,val|
-        #   [key.to_i,{ @template_theme.get_resource_class_key(SpreeTheme.taxon_class) => val.select(&:present?).collect(&:to_i)}]
-        #}]
-        #new_theme_attributes = { :assigned_resource_ids=>assigned_resource_ids,
-        #  :template_files => template_files
-        #}
+      # description - import theme with taxonomy into current site
+      #               in this way, it is simpler for user, click 'buy', done. 
+      def import_with_resource
         
-        imported_theme = @template_theme.import( new_theme_attributes = {} )
+        imported_theme = @template_theme.import_with_resource( )
         if imported_theme.present?
           flash[:success] = Spree.t('notice_messages.theme_imported')
         else
           flash[:success] = Spree.t('notice_messages.theme_not_imported')
         end
-
         
         respond_to do |format|
           format.html { redirect_to(foreign_admin_template_themes_url) }
         end    
       end
-      
+            
       #apply this theme to site
       def apply
         SpreeTheme.site_class.current.apply_theme @template_theme                    
@@ -113,6 +102,35 @@ module Spree
       #    model_class.find(params[:id])
       #  end
       #end
+      
+      # description -  it is not using       
+      # params
+      #   assigned_resource_ids: required, a hash, key is page_layout_id
+      #     ex. {"30"=>[""], "3"=>[""]} 
+      #   template_files: required, a array of template_file attributes                        
+      def import
+        #FIXME support config template when import theme
+        #template_files = params[:template_files].collect{|file| TemplateFile.new( file) }.select{|file| file.attachment.present? }        
+        #assigned_resource_ids = Hash[ params[:assigned_resource_ids].collect{|key,val|
+        #   [key.to_i,{ @template_theme.get_resource_class_key(SpreeTheme.taxon_class) => val.select(&:present?).collect(&:to_i)}]
+        #}]
+        #new_theme_attributes = { :assigned_resource_ids=>assigned_resource_ids,
+        #  :template_files => template_files
+        #}
+        
+        imported_theme = @template_theme.import( new_theme_attributes = {} )
+        if imported_theme.present?
+          flash[:success] = Spree.t('notice_messages.theme_imported')
+        else
+          flash[:success] = Spree.t('notice_messages.theme_not_imported')
+        end
+
+        
+        respond_to do |format|
+          format.html { redirect_to(foreign_admin_template_themes_url) }
+        end    
+      end
+      
     end
   end
 end

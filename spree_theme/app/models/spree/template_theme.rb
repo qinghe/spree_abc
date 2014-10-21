@@ -190,29 +190,35 @@ module Spree
     end
     
     begin 'edit template'
-      #import theme into current site
+      #import template theme design into current site
       #only create template record, do not copy param_value,page_layout,template_file...
       # * params
       #   * resource_config - new configuration for resource
       def import(new_attributes={})
-        raise ArgumentError unless self.template_releases.exists?
-        #only released template is importable
+        raise ArgumentError unless self.template_releases.exists? && self.is_public?
+        #only released template and :is_public is importable
         #create theme record
         new_theme = self.dup
         #set resource to site native
         new_theme.title = "Imported "+ new_theme.title
         new_theme.attributes = new_attributes
+        new_theme.assigned_resource_ids = {}
         new_theme.site_id = SpreeTheme.site_class.current.id
         new_theme.save!
-        if new_theme.template_files.present?
-          new_theme.template_files.each{|file|
-            original_file = new_attributes[:template_files].first
-#Rails.logger.debug "#{file.page_layout_id},#{original_file.page_layout_id},#{file.object_id},#{original_file.object_id},#{file.inspect}, #{original_file.inspect}"            
-            new_theme.assign_resource( file, PageLayout.find(file.page_layout_id))
-          }          
-        end
         new_theme
       end
+      
+      # for simple to user, copy taxonomy as well when import.
+      #
+      def import_with_resource( new_attributes={})
+        self.transaction do
+          new_theme = import( new_attributes )          
+          resources = get_all_assigned_resouces #include taxon, image, file, specific-taxon
+          
+          #new_theme.assign_resource( file, PageLayout.find(file.page_layout_id))
+        end
+      end
+      
       
       # theme from design shop has been imported into current site or not
       def imported?
@@ -429,6 +435,26 @@ module Spree
     
     begin 'assigned resource'
       
+      def get_all_assigned_resouces
+        resource_collection = []
+        key_and_class_map = {}
+        SectionPiece.resource_classes.each{|resource_class|
+          key_and_class_map[get_resource_class_key( resource_class )] = resource_class
+        }
+        assigned_resource_ids.each_pair{|page_layout_key, resources|
+          if resources.present?
+            resources.each_pair{|resource_key, resource_ids|
+              resource_ids = resource_ids.uniq.select{|i| i>0 }
+              if resource_ids.present?
+                resource_class = key_and_class_map[resource_key]
+                resource_collection.concat resource_class.unscoped.find( resource_ids )
+              end
+            }
+          end
+        }
+        resource_collection
+      end
+      
       # get resources order by taxon/image/text,  
       # return array of resources, no nil contained
       def assigned_resources_by_page_layout( page_layout )
@@ -553,7 +579,13 @@ module Spree
       end
     
       def get_resource_class_key( resource_class )
+        # Spree::TemplateFile => "spree/template_file"
         resource_class.to_s.underscore
+      end
+      
+      def get_resource_class_by_key( resource_key )
+        # "spree/template_file" => Spree::TemplateFile
+        resource_key.classify.constantize
       end
     end  
     

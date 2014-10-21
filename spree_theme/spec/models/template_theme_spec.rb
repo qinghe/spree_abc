@@ -167,5 +167,8 @@ Rails.logger.debug "............strart test import................."
     template.valid_context?( template.page_layout, another_taxon ).should be false    
   end
   
-    
+  it "should has resources" do
+    assigned_resources = template.get_all_assigned_resources 
+    assigned_resources.should be_present
+  end    
 end
