@@ -213,7 +213,7 @@ module Spree
       def import_with_resource( new_attributes={})
         self.transaction do
           new_theme = import( new_attributes )          
-          resources = get_all_assigned_resouces #include taxon, image, file, specific-taxon
+          resources = get_all_assigned_resources #include taxon, image, file, specific-taxon
           
           #new_theme.assign_resource( file, PageLayout.find(file.page_layout_id))
         end
@@ -435,7 +435,7 @@ module Spree
     
     begin 'assigned resource'
       
-      def get_all_assigned_resouces
+      def get_all_assigned_resources
         resource_collection = []
         key_and_class_map = {}
         SectionPiece.resource_classes.each{|resource_class|
