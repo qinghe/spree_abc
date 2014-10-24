@@ -92,17 +92,7 @@ module Spree
       def collection_actions
         [:index, :native, :foreign]
       end
-      
-      #def find_resource
-      #  if parent_data.present?
-      #    parent.send(controller_name).find(params[:id])
-      #  elsif ['import', 'prepare_import'].include? action
-      #    
-      #  else
-      #    model_class.find(params[:id])
-      #  end
-      #end
-      
+           
       # description -  it is not using       
       # params
       #   assigned_resource_ids: required, a hash, key is page_layout_id
