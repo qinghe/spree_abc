@@ -5,5 +5,11 @@ module Spree
     #for resource_class.resourceful
     scope :resourceful, ->(theme){ where("1=1") }
     default_scope ->{ where(:site_id=>Site.current.id)}
+
+
+    # it is resource of template_theme
+    def importable?    
+      true
+    end 
   end
 end

@@ -11,5 +11,10 @@ module Spree
     # comma separated taxon_id
     # it has to be in template_theme, use  assigned_resource_ids  
   class SpecificTaxon < SpreeTheme.taxon_class
+
+    # it is resource of template_theme
+    def importable?    
+      false
+    end 
   end
 end

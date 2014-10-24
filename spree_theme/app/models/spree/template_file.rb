@@ -28,5 +28,10 @@ module Spree
       original_dup.attachment = self.attachment
       original_dup
     end
+
+    # it is resource of template_theme
+    def importable?    
+      false
+    end 
   end
 end

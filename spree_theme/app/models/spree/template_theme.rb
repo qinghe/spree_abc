@@ -125,7 +125,39 @@ module Spree
             Spree::TemplateRelease.where(:created_at=>created_at, :theme_id=>original_theme_id).update_all( :theme_id=>new_theme_id )            
           end
           new_theme.save!
-      end      
+      end     
+
+      # copy taxon,text from original_theme to new_theme
+      def import_assigned_resource( original_theme,  new_theme ) 
+        original_assigned_resources = original_theme.get_all_assigned_resources
+
+        # import each resource
+        new_assigned_resources = []
+        original_assigned_resources.each_with_index{| assigned_resource, i |
+           if assigned_resource.importable?
+             new_assigned_resources[i] = assigned_resource.find_or_copy
+           end
+        }
+        # assgin imported resource to new_theme
+
+        #key_and_resource_map = {}
+        key_and_class_map = {}
+        SectionPiece.resource_classes.each{|resource_class|
+          key_and_class_map[original_theme.get_resource_class_key( resource_class )] = resource_class
+        }
+        #original_theme.assigned_resource_ids.each_pair{|page_layout_key, resources|
+        #  if resources.present?
+        #    resources.each_pair{|resource_key, resource_ids|
+        #      resource_class = key_and_class_map[resource_key]              
+        #      if resource_ids.present?
+        #        # a resource could be assigned to several page_layouts
+        #        resource_ids.each_with_index{|resource_id, i|
+        #        }
+        #      end
+        #    }
+        #  end
+        #}
+      end
     end
     
     # params
@@ -213,6 +245,7 @@ module Spree
       def import_with_resource( new_attributes={})
         self.transaction do
           new_theme = import( new_attributes )          
+          self.class.import_assigned_resource( original_theme,  new_theme )
           resources = get_all_assigned_resources #include taxon, image, file, specific-taxon
           
           #new_theme.assign_resource( file, PageLayout.find(file.page_layout_id))
