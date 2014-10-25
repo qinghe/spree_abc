@@ -57,9 +57,9 @@
   <tbody>
     <%- @collection.each do |post|%>
     <tr id="<%= spree_dom_id post %>" class="<%= cycle('odd', 'even') %>">
-      <td ><%= link_to post.title, object_url(post) %></td>
+      <td ><%=  post.title %></td>
       <td class="align-center"><%= pretty_time post.posted_at %></td>
-      <td class="align-center"><%= post.live ? 'Yes' : 'No' %></td>
+      <td class="align-center"><%= post.live ? Spree.t('say_yes') : Spree.t('not') %></td>
       <td class="actions">
           <%= link_to_edit post, :no_text => true, :class => 'edit' if can?(:edit, post) %>
           &nbsp;
