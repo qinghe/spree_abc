@@ -147,7 +147,8 @@ zh-CN:
     theme_import: 购买
     theme_copy: 复制
     theme_prepare_import: 设置
-    theme_imported: 是否已购买
+    theme_is_imported: 是否已购买
+    theme_is_free: 是否免费
     theme_preview: 预览
     theme_release: 发布
     welcome_to_admin_login: Dalianshops管理系统登录
