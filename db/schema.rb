@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20141020134110) do
+ActiveRecord::Schema.define(:version => 20141025083324) do
 
   create_table "ckeditor_assets", :force => true do |t|
     t.integer  "site_id",                         :default => 0, :null => false
@@ -927,12 +927,12 @@ ActiveRecord::Schema.define(:version => 20141020134110) do
     t.integer  "site_id",    :default => 0, :null => false
     t.string   "name"
     t.text     "body"
-    t.string   "slug"
+    t.string   "permalink"
     t.datetime "created_at",                :null => false
     t.datetime "updated_at",                :null => false
   end
 
-  add_index "spree_template_texts", ["slug"], :name => "index_spree_template_texts_on_slug"
+  add_index "spree_template_texts", ["permalink"], :name => "index_spree_template_texts_on_slug"
 
   create_table "spree_template_themes", :force => true do |t|
     t.integer  "site_id",                               :default => 0

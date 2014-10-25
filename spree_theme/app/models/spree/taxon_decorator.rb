@@ -1,6 +1,6 @@
 SpreeTheme.taxon_class.class_eval do
     include Spree::Context::Taxon
-    include AssignedResource::SourceInterface
+    include Spree::AssignedResource::SourceInterface
 
     before_destroy :remove_from_theme
     #for resource_class.resourceful

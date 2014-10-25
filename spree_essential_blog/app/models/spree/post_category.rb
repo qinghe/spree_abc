@@ -17,7 +17,7 @@ class Spree::PostCategory < ActiveRecord::Base
   
     def create_permalink
       count = 2
-      new_permalink = name.to_s.parameterize
+      new_permalink = name.to_s.to_url
       exists = permalink_exists?(new_permalink)
       while exists do
         dupe_permalink = "#{new_permalink}_#{count}"

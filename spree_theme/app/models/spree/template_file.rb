@@ -2,7 +2,7 @@ module Spree
   
   # file uploaded for template
   class TemplateFile < ActiveRecord::Base
-    include AssignedResource::SourceInterface
+    include Spree::AssignedResource::SourceInterface
 
     belongs_to :template_theme, :foreign_key=>"theme_id"
   

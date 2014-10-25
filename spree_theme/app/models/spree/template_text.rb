@@ -1,13 +1,13 @@
 module Spree 
   class TemplateText < ActiveRecord::Base
-    include AssignedResource::SourceInterface
+    include Spree::AssignedResource::SourceInterface
     
     validates_presence_of :name
     attr_accessible :name, :body
     #for resource_class.resourceful
     scope :resourceful, ->(theme){ where("1=1") }
     default_scope ->{ where(:site_id=>Site.current.id)}
-    make_permalink field: :slug
+    before_validation :normalize_permalink
 
 
     # it is resource of template_theme
@@ -25,5 +25,12 @@ module Spree
       existing_text||cloned_branch
 
     end
+    
+    private
+
+    def normalize_permalink
+      self.permalink = (permalink.blank? ? name.to_s.to_url : permalink).downcase.gsub(/(^[\/\-\_]+)|([\/\-\_]+$)/, "")
+    end
+      
   end
 end
