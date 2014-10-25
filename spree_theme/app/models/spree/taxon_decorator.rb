@@ -49,10 +49,11 @@ SpreeTheme.taxon_class.class_eval do
       cloned_branch = nil
         self.site.tap{|site|
           original_current_site = Spree::Site.current
-          Spree::Site.current = site
-      
+          Spree::Site.current = site      
             #copy from http://stackoverflow.com/questions/866528/how-to-best-copy-clone-an-entire-nested-set-from-a-root-element-down-with-new-tr
-            h = { self => self.clone } #we start at the root    
+            new_taxonomy = self.taxonomy.dup
+            # should not save new_taxonomy here, or new_taxonomy.root.site_id is not current site id
+            h = { self => self.dup } #we start at the root    
             ordered = self.descendants 
             #clone subitems
             ordered.each do |item|
@@ -65,7 +66,12 @@ SpreeTheme.taxon_class.class_eval do
               item_parent.children << cloned if item_parent
               # handle icon
             end
-            h.values.each{|cloned| cloned.site_id = site.id }
+            h.values.each{|cloned|
+              cloned.site = original_current_site 
+              cloned.taxonomy = new_taxonomy
+            }
+            new_taxonomy.site = original_current_site
+            new_taxonomy.root = h[self]
             cloned_branch = h[self]
           Spree::Site.current = original_current_site
         }

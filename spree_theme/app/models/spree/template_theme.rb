@@ -113,10 +113,10 @@ module Spree
       # copy taxon,text from original_theme to new_theme
       def import_assigned_resource( original_theme,  new_theme ) 
         original_template_resources = original_theme.template_resources
-
+        # new_theme.assigned_resource_ids is empty now
+        new_theme.assigned_resource_ids = original_theme.assigned_resource_ids.dup
         # import each resource
-        new_template_resources = []
-        new_theme.template_resources.each_with_index{| template_resource, i |
+        new_theme.template_resources.each{| template_resource |
           unscoped_source = template_resource.unscoped_source
           if unscoped_source.present? && unscoped_source.importable?            
              new_source = template_resource.source_class.find_or_copy unscoped_source
@@ -126,20 +126,6 @@ module Spree
           end
         }
         # assgin imported resource to new_theme
-
-       
-        #original_theme.assigned_resource_ids.each_pair{|page_layout_key, resources|
-        #  if resources.present?
-        #    resources.each_pair{|resource_key, resource_ids|
-        #      resource_class = key_and_class_map[resource_key]              
-        #      if resource_ids.present?
-        #        # a resource could be assigned to several page_layouts
-        #        resource_ids.each_with_index{|resource_id, i|
-        #        }
-        #      end
-        #    }
-        #  end
-        #}
       end
     end
     
@@ -228,10 +214,9 @@ module Spree
       def import_with_resource( new_attributes={})
         self.transaction do
           new_theme = import( new_attributes )          
-          self.class.import_assigned_resource( original_theme,  new_theme )
           #include taxon, image, file, specific-taxon
-          
-          #new_theme.assign_resource( file, PageLayout.find(file.page_layout_id))
+          self.class.import_assigned_resource( self,  new_theme )          
+          new_theme
         end
       end
       
