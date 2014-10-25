@@ -1,16 +1,17 @@
 require 'spec_helper'
-describe Spree::Taxon do
+describe Spree::TemplateText do
 
   
   it "should copy" do
     Spree::Site.current = Spree::Site.find 2
     
-    taxon = Spree::Taxon.roots.first
+    text = Spree::TemplateText.create!( :name=>"惟一用途",:body=>"内容")
     Spree::Site.current = Spree::Site.find 1
-    new_taxon = Spree::Taxon.find_or_copy taxon
-    new_taxon.reload
-    new_taxon.taxonomy.should be_present?
-    new_taxon.children.should eq taxon.children    
+    new_text = Spree::TemplateText.find_or_copy text
+    new_text.reload
+    new_text.site.should eq Spree::Site.current
+    new_text.name.should eq text.name
+    new_text.body.should eq text.body
   end
   
   #TODO
