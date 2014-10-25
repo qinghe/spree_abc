@@ -1,19 +1,13 @@
 SpreeTheme.taxon_class.class_eval do
     include Spree::Context::Taxon
+    include AssignedResource::SourceInterface
+
     before_destroy :remove_from_theme
     #for resource_class.resourceful
     scope :resourceful,->(theme){ roots }
     
     belongs_to :replacer, class_name: 'Spree::Taxon', foreign_key: 'replaced_by' 
     attr_accessible :page_context, :replaced_by
-
-    
-    def self.find_or_copy( taxon )
-      raise "only support taxon root" unless taxon.root?
-      
-      existing_taxon = roots.find_by_permalink( taxon.permalink )
-      existing_taxon||= taxon.copy
-    end
 
     
     def remove_from_theme
@@ -32,31 +26,51 @@ SpreeTheme.taxon_class.class_eval do
       @extra_html_attributes
     end
     
-    #copy self into current site
-    def copy
-      #raise "only copy taxon from design site" unless taxon.site.design?
-      #raise "taxon exists in current site" if self.class.exists(:permalink=>self.permalink)
-      
-      #copy from http://stackoverflow.com/questions/866528/how-to-best-copy-clone-an-entire-nested-set-from-a-root-element-down-with-new-tr
-      h = { self => self.clone } #we start at the root    
-      ordered = self.descendants 
-      #clone subitems
-      ordered.each do |item|
-        h[item] = item.dup
-      end    
-      #resolve relations
-      ordered.each do |item|
-        cloned = h[item]
-        item_parent = h[item.parent]
-        item_parent.children << cloned if item_parent
-        # handle icon
-      end
-      h[self].save!
-      h[self]
-    end   
     # it is resource of template_theme
     def importable?    
       root?
     end 
+    # taxon is from other site
+    def self.find_or_copy( taxon )
+      raise "only support taxon root" unless taxon.root?
+      
+      existing_taxon = roots.find_by_permalink( taxon.permalink )
+      if existing_taxon.blank?
+        cloned_branch = taxon.clone_branch(  )
+        cloned_branch.save!          
+      end
+      existing_taxon||cloned_branch
+    end
+    
+    #copy self into current site
+    def clone_branch(  )
+      #raise "only copy taxon from design site" unless taxon.site.design?
+      #raise "taxon exists in current site" if self.class.exists(:permalink=>self.permalink)
+      cloned_branch = nil
+        self.site.tap{|site|
+          original_current_site = Spree::Site.current
+          Spree::Site.current = site
+      
+            #copy from http://stackoverflow.com/questions/866528/how-to-best-copy-clone-an-entire-nested-set-from-a-root-element-down-with-new-tr
+            h = { self => self.clone } #we start at the root    
+            ordered = self.descendants 
+            #clone subitems
+            ordered.each do |item|
+              h[item] = item.dup
+            end    
+            #resolve relations
+            ordered.each do |item|
+              cloned = h[item]
+              item_parent = h[item.parent]
+              item_parent.children << cloned if item_parent
+              # handle icon
+            end
+            h.values.each{|cloned| cloned.site_id = site.id }
+            cloned_branch = h[self]
+          Spree::Site.current = original_current_site
+        }
+        cloned_branch
+    end   
+    
 end
 

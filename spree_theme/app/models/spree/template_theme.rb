@@ -116,10 +116,14 @@ module Spree
 
         # import each resource
         new_template_resources = []
-        original_template_resources.each_with_index{| template_resource, i |
-           if assigned_resource.importable?
-             new_assigned_resources[i] = assigned_resource.find_or_copy
-           end
+        new_theme.template_resources.each_with_index{| template_resource, i |
+          unscoped_source = template_resource.unscoped_source
+          if unscoped_source.present? && unscoped_source.importable?            
+             new_source = template_resource.source_class.find_or_copy unscoped_source
+             template_resource.update_attribute!(:source_id, new_source.id)
+          else
+           template_resource.destroy!
+          end
         }
         # assgin imported resource to new_theme
 
@@ -450,14 +454,6 @@ module Spree
       # get resources order by taxon/image/text,  
       # return array of resources, no nil contained
       def assigned_resources_by_page_layout( page_layout )
-        #ordered_assinged_resources = []
-        #SectionPiece.resource_classes.each{|resource_class|
-        #  assgined_resources_contained_nil = assigned_resources( resource_class, page_layout )
-        #  if assgined_resources_contained_nil.present?
-        #    ordered_assinged_resources.concat( assgined_resources_contained_nil.compact)
-        #  end
-        #}
-        #ordered_assinged_resources
         template_resources.select{|template_resource|
           template_resource.page_layout_id==page_layout.id 
         }.collect(&:source)
@@ -466,25 +462,6 @@ module Spree
       # all resources used by this theme
       # return menu roots/ images /texts,  if none assgined, return [nil] or []
       def assigned_resources( resource_class, page_layout )
-        #resource_key = get_resource_class_key(resource_class)
-        #page_layout_key = get_page_layout_key(page_layout)
-        #if assigned_resource_ids.try(:[],page_layout_key).try(:[],resource_key).present?
-        #  resource_ids = assigned_resource_ids[page_layout_key][resource_key]
-        #  #in prepare_import, we want to know assigned resources
-        #  #current shop is not designshop, we need use unscope here.
-        #  if resource_ids.include? 0
-        #    resources = resource_ids.collect{|resource_id|
-        #      if resource_id > 0
-        #        resource_class.unscoped.find resource_id
-        #      else
-        #        nil  
-        #      end
-        #    }
-        #  else
-        #    resources = resource_class.unscoped.find resource_ids  
-        #  end
-        #end
-        #resources||[]
         template_resources.select{|template_resource|
           template_resource.source_class ==  resource_class && template_resource.page_layout_id==page_layout.id 
         }.collect(&:source)
@@ -495,13 +472,6 @@ module Spree
       #   resource_position: get first( position 0 ) of assigned resources by default
       #     logged_and_unlogged_menu required this feature
       def assigned_resource_id( resource_class, page_layout, resource_position=0 )
-        ##resource_id = 0
-        #resource_key = get_resource_class_key(resource_class)
-        #page_layout_key = get_page_layout_key(page_layout)
-        #if assigned_resource_ids.try(:[],page_layout_key).try(:[],resource_key).present?
-        #  resource_id = assigned_resource_ids[page_layout_key][resource_key][resource_position]
-        #end
-        #resource_id||0
         template_resources.select{|template_resource|
           template_resource.source_class ==  resource_class && template_resource.page_layout_id==page_layout.id && template_resource.position == resource_position
         }.first.to_i
@@ -509,29 +479,10 @@ module Spree
     
       # assign resource to page_layout node
       def assign_resource( resource, page_layout, resource_position=0 )
-        ##assigned_resource_ids={page_layout_id={:menu_ids=>[]}}
-        #self.assigned_resource_ids = {} unless assigned_resource_ids.present?        
-        #resource_key = get_resource_class_key(resource.class)
-        #page_layout_key = get_page_layout_key(page_layout)
-        #unless( self.assigned_resource_ids[page_layout_key].try(:[],resource_key).try(:[], resource_position) ==  resource.id )
-        #  self.assigned_resource_ids[page_layout_key]||={}
-        #  self.assigned_resource_ids[page_layout_key][resource_key]||=[]
-        #  self.assigned_resource_ids[page_layout_key][resource_key][resource_position] = resource.id 
-        #end
-        ##Rails.logger.debug "assigned_resource_ids=#{assigned_resource_ids.inspect}"
-        #self.save!
         create_template_resource( page_layout, resource, resource_position ) 
       end
       # unassign resource from page_layout node
       def unassign_resource( resource_class, page_layout, resource_position=0 )
-        ##assigned_resource_ids={page_layout_id={:menu_ids=>[]}}
-        #self.assigned_resource_ids = {} unless assigned_resource_ids.present?        
-        #resource_key = get_resource_class_key(resource_class)
-        #page_layout_key = get_page_layout_key page_layout
-        #self.assigned_resource_ids[page_layout_key]||={}
-        #self.assigned_resource_ids[page_layout_key][resource_key]||=[]
-        #self.assigned_resource_ids[page_layout_key][resource_key][resource_position] = 0
-        #self.save!
         template_resources.select{|template_resource|
           template_resource.source_class ==  resource_class && template_resource.page_layout_id==page_layout.id && template_resource.position == resource_position
         }.each(&:destroy!)
@@ -540,17 +491,6 @@ module Spree
       
       #clear assigned_resource from theme
       def unassign_resource_from_theme!( resource )
-        #resource_key = get_resource_class_key(resource.class)
-        #self.assigned_resource_ids.each_pair{|page_layout_key, resourcs|
-        #    if resourcs.key? resource_key
-        #      resourcs[resource_key].each_with_index{|resource_id,idx|
-        #        if resource_id == resource.id
-        #          assigned_resource_ids[page_layout_key][resource_key][idx] = 0
-        #        end
-        #      }
-        #    end
-        #}
-        #self.save!        
         template_resources.select{|template_resource|
           template_resource.source ==  resource 
         }.each(&:destroy!)

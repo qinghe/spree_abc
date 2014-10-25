@@ -33,8 +33,10 @@ module Spree
       if key == :page_layout_id
         new_page_layout_key = val.to_s
         template_theme.assigned_resource_ids[new_page_layout_key] = template_theme.assigned_resource_ids.delete(page_layout_key)
-        template_theme.save!
+      elsif key == :source_id
+        template_theme.assigned_resource_ids[page_layout_key][source_key][position] = val
       end
+      template_theme.save!
     end    
     
     def source_class(  )
@@ -45,6 +47,8 @@ module Spree
     def source
       source_class.find_by_id source_id
     end
-    
+    def unscoped_source
+      source_class.unscoped.find_by_id source_id
+    end
   end
 end

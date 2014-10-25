@@ -2,6 +2,8 @@ module Spree
   
   # file uploaded for template
   class TemplateFile < ActiveRecord::Base
+    include AssignedResource::SourceInterface
+
     belongs_to :template_theme, :foreign_key=>"theme_id"
   
     #validates_uniqueness_of :file_name

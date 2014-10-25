@@ -58,13 +58,11 @@ Rails.logger.debug "temp_file=#{temp_file.size}"
        pl.param_values.size.should eq original_page_layouts[index].param_values.size
        pl.param_values.first.theme_id.should eq copied_template.id
      }
-Rails.logger.debug "copied_template.template_files.size=#{copied_template.template_files.size}"     
      copied_template.template_files.size.should eq template.template_files.size
      copied_template.current_template_release.should be_blank
   end
   
   it "destroy imported one" do
-Rails.logger.debug "............strart test import................."    
     #template.template_releases.stub(:exists?) { true }  
     # release first
     imported_template = template.import

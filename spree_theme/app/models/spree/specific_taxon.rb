@@ -6,11 +6,11 @@
 # 这里我们通过继承，创建新的关键字 :spree_specific_taxon
 #
 
-module Spree
-    
+module Spree    
     # comma separated taxon_id
     # it has to be in template_theme, use  assigned_resource_ids  
   class SpecificTaxon < SpreeTheme.taxon_class
+    include AssignedResource::SourceInterface
 
     # it is resource of template_theme
     def importable?    
