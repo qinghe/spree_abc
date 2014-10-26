@@ -77,6 +77,12 @@ SpreeTheme.taxon_class.class_eval do
         }
         cloned_branch
     end   
-    
+   
+    #deep dup, include icon
+    def dup
+      original_dup = super
+      original_dup.icon = self.icon
+      original_dup
+    end    
 end
 
