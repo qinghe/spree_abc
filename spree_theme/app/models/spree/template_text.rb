@@ -16,7 +16,7 @@ module Spree
     end 
     
     def self.find_or_copy( text )
-      existing_text = find_by_permalink( text.slug )
+      existing_text = find_by_permalink( text.permalink )
       if existing_text.blank?
         cloned_branch = text.dup
         cloned_branch.site_id = Spree::Site.current.id
