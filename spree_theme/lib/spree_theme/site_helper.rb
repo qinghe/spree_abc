@@ -5,6 +5,7 @@ module SpreeTheme
       cattr_accessor :designshop_url
       belongs_to :template_theme, :foreign_key=>"theme_id"
       has_many :template_themes, :foreign_key=>"site_id" #compatible with fack_websites
+      has_many :template_texts, :foreign_key=>"site_id" #compatible with fack_websites
       #belongs_to :template_release, :foreign_key=>"template_release_id"
       attr_accessible :index_page,:theme_id
       self.designshop_url = 'design.dalianshops.com'
