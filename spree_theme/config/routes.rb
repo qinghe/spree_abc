@@ -25,7 +25,24 @@ Spree::Core::Engine.routes.prepend do
   match '(/:c(/:r))' => 'template_themes#page' , :c => /\d[^\/]*/ # :c, taxon_id-permalink,  :r, product_id-permalink   
   match '/post/:c/:p' => 'template_themes#page', :c => /\d[^\/]*/ #
   #match 'preview(/:c(/:r))' => 'template_themes#preview' #preview home
- 
+   
+  get '/under_construction', :to => 'template_themes#under_construction', :as => :under_construction
+  post '/create_admin_session', :to => 'template_themes#create_admin_session', :as => :create_admin_session
+  get '/new_admin_session', :to => 'template_themes#new_admin_session', :as => :new_admin_session
+  post '/check_email', :to => 'users#check_email', :as => :check_email
+end
+
+Spree::Core::Engine.routes.draw do
+
+  #api extension
+  namespace :api, :defaults => { :format => 'json' } do
+    resources :taxons, :only => [:index] do
+      collection do
+       get :global
+     end
+    end    
+  end
+  
   namespace :admin do
     resources :template_texts
     resources :template_files
@@ -57,16 +74,4 @@ Spree::Core::Engine.routes.prepend do
       end
     end
   end
-  #namespace :api, :defaults => { :format => 'json' } do
-  #  resources :template_themes do
-  #    resources :page_layout do
-  #    end
-  #  end    
-  #end
-  
-  get '/under_construction', :to => 'template_themes#under_construction', :as => :under_construction
-  post '/create_admin_session', :to => 'template_themes#create_admin_session', :as => :create_admin_session
-  get '/new_admin_session', :to => 'template_themes#new_admin_session', :as => :new_admin_session
-  post '/check_email', :to => 'users#check_email', :as => :check_email
-
 end

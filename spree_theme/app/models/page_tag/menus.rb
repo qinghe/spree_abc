@@ -41,6 +41,8 @@ module PageTag
           elsif data_source == 'this_product'
             #default_taxon.id is 0 
             objs = [self.resource] #menu.products.where(:id=>resource.id)        
+          elsif data_source == 'gpvs_theme'
+
           end
           if objs.present?
             objs = Products.new( self.collection_tag.page_generator, objs)

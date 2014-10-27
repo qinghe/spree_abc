@@ -12,6 +12,11 @@ module SpreeTheme
     end
     
     module ClassMethods
+      #supply global taxon to other site.
+      def globalsite
+        first
+      end
+      
       def designsite
         find_by_domain designshop_url
       end     

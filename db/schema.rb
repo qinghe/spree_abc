@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20141025083324) do
+ActiveRecord::Schema.define(:version => 20141027132320) do
 
   create_table "ckeditor_assets", :force => true do |t|
     t.integer  "site_id",                         :default => 0, :null => false
@@ -530,6 +530,7 @@ ActiveRecord::Schema.define(:version => 20141025083324) do
     t.datetime "created_at",                           :null => false
     t.datetime "updated_at",                           :null => false
     t.integer  "site_id"
+    t.integer  "theme_id",             :default => 0,  :null => false
   end
 
   add_index "spree_products", ["available_on"], :name => "index_spree_products_on_available_on"
@@ -537,6 +538,14 @@ ActiveRecord::Schema.define(:version => 20141025083324) do
   add_index "spree_products", ["name"], :name => "index_spree_products_on_name"
   add_index "spree_products", ["permalink"], :name => "index_spree_products_on_permalink"
   add_index "spree_products", ["site_id", "permalink"], :name => "permalink_idx_unique", :unique => true
+
+  create_table "spree_products_global_taxons", :id => false, :force => true do |t|
+    t.integer "product_id"
+    t.integer "taxon_id"
+  end
+
+  add_index "spree_products_global_taxons", ["product_id"], :name => "index_spree_products_global_taxons_on_product_id"
+  add_index "spree_products_global_taxons", ["taxon_id"], :name => "index_spree_products_global_taxons_on_taxon_id"
 
   create_table "spree_products_promotion_rules", :id => false, :force => true do |t|
     t.integer "product_id"

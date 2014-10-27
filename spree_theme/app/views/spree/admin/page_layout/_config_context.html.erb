@@ -35,7 +35,7 @@
   // copy from spree/backend/assets/javascripts/admin/taxon_autocomlete.js.erb
 // assign resource to theme
   $(document).ready(function () {
-    <%= render :partial=>'spree/admin/shared/select2_taxon', :locals=>{:dom_id=>"specific_taxon_ids",:multiple=>true} %>
+    <%= render :partial=>'spree/admin/shared/select2_taxon', :locals=>{:dom_id=>"specific_taxon_ids",:multiple=>true, :search_url=>"Spree.routes.taxons_search"} %>
     $('.select2-container').css({width: '40em'});
   });  
   

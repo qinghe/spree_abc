@@ -13,6 +13,8 @@ zh-CN:
       spree/page_layout:
         section_context: section context
         data_source: data source 
+      spree/product:
+        theme_id: 销售模板
       spree/taxon:
         page_context: 页面显示内容分类
         replaced_by: 页面显示内容置换
@@ -31,6 +33,7 @@ zh-CN:
         slug: Slug
         section_root_id: 基础模块
         is_public: 是否公开
+      
     models:
       spree/page_layout:
         one: 模块
@@ -117,6 +120,7 @@ zh-CN:
       taxon: 菜单  
       blog: 文章集合
       post: 当前选择文章
+      gpvs_theme: 模板集合
     template_file:
       index: 图片素材
       new: 新建图片素材

@@ -18,7 +18,7 @@ module Spree
         :this_product=>[]
         #keys should inclde all data_sources, test required.
         }
-      DataSourceEnum  = Struct.new(:gpvs,:this_product,:taxon, :blog, :post )[:gpvs, :this_product, :taxon, :blog, :post]
+      DataSourceEnum  = Struct.new(:gpvs, :this_product, :taxon, :blog, :post, :gpvs_theme )[:gpvs, :this_product, :taxon, :blog, :post, :gpvs_theme]
       DataSourceEmpty = :""
       
       def context_either?

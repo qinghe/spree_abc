@@ -48,6 +48,9 @@ end
 
 Spree::Product.class_eval do
   belongs_to :site
+  has_many :global_classifications, dependent: :delete_all
+  has_many :global_taxons, through: :global_classifications, source: :taxon
+ 
   default_scope  { where(:site_id =>  Spree::Site.current.id) }
 end
 
@@ -76,6 +79,9 @@ end
 
 Spree::Taxon.class_eval do
   belongs_to :site
+  has_many :global_classifications, dependent: :delete_all
+  has_many :global_products, through: :global_classifications, source: :product
+  
   default_scope  { where(:site_id =>  Spree::Site.current.id) }
 end
 

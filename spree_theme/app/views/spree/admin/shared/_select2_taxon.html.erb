@@ -1,6 +1,6 @@
 <%
   # copy from spree/backend/assets/javascripts/admin/taxon_autocomlete.js.erb
-  # locals {:dom_id,:multiple}
+  # locals {:dom_id,:multiple, :search_url}  # Spree.routes.taxons_search or Spree.routes.global_taxons_search  
 %>
     'use strict';
     if ($('#<%=dom_id%>').length > 0) {
@@ -8,7 +8,7 @@
         placeholder: Spree.translations.taxon_placeholder,
         multiple: <%== multiple.to_json %>,
         initSelection: function (element, callback) {
-          var url = Spree.url(Spree.routes.taxons_search, {
+          var url = Spree.url(<%=search_url%>, {
             ids: element.val()
           });
           return $.getJSON(url, null, function (data) {
@@ -20,7 +20,7 @@
           });
         },
         ajax: {
-          url: Spree.routes.taxons_search,
+          url: <%=search_url%>,
           datatype: 'json',
           data: function (term, page) {
             return {
