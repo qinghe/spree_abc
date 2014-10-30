@@ -18,6 +18,7 @@ end
 
 
 Spree::Product.class_eval do
+  
   def option_values
     @_option_values ||= Spree::OptionValue.for_product(self).order(:position).sort_by {|ov| ov.option_type.position }
   end

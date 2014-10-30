@@ -90,6 +90,7 @@ zh-CN:
       blog: 文章列表
       post: 文章内容
     dialog_title: 对话框
+    global_taxons: 全局分类
     notice_messages:
       theme_imported: 模板已经购买成功
       theme_not_imported: 模板无法导入        

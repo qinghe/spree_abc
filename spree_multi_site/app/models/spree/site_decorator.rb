@@ -47,11 +47,22 @@ Spree::PaymentMethod.class_eval do
 end    
 
 Spree::Product.class_eval do
-  belongs_to :site
+  include Spree::MultiSiteSystem
+  
   has_many :global_classifications, dependent: :delete_all
   has_many :global_taxons, through: :global_classifications, source: :taxon
- 
-  default_scope  { where(:site_id =>  Spree::Site.current.id) }
+  attr_accessible :global_taxon_ids, :global_taxons 
+  # global_taxon_ids: empty ids, global_taxons: assign new taxons
+  
+  #def global_taxon_ids
+  #  global_classifications.select('taxon_id').map(&:taxon_id)
+  #end
+  
+  #def global_taxons
+  #  #http://stackoverflow.com/questions/3963124/default-scope-and-associations
+  #  Spree::Taxon.unscoped{ super.order }  
+  #end
+  
 end
 
 Spree::Property.class_eval do
@@ -78,11 +89,11 @@ end
 
 
 Spree::Taxon.class_eval do
-  belongs_to :site
+  include Spree::MultiSiteSystem
+
   has_many :global_classifications, dependent: :delete_all
   has_many :global_products, through: :global_classifications, source: :product
   
-  default_scope  { where(:site_id =>  Spree::Site.current.id) }
 end
 
 Spree::TaxCategory.class_eval do
