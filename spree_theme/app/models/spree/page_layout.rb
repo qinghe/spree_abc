@@ -404,7 +404,7 @@ module Spree
         # update self data_source
         original_data_source = self.data_source 
         self.data_source = new_data_source
-        if new_data_source.blank? or self.is_valid_data_source?
+        if new_data_source.blank? || self.is_valid_data_source?
           self.update_attribute(:data_source,new_data_source )
           #verify descendants, fix them.
           verify_required_descendants = self.descendants.where('data_source!=?', DataSourceEmpty)
