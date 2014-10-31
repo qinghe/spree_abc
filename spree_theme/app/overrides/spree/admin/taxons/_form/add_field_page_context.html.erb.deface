@@ -13,7 +13,7 @@
 <% unless Rails.env.test? %>
   <script>
   $(document).ready(function () {
-    <%= render :partial=>'spree/admin/shared/select2_taxon', :locals=>{:dom_id=>"taxon_replaced_by",:multiple=>false} %>
+    <%= render :partial=>'spree/admin/shared/select2_taxon', :locals=>{:dom_id=>"taxon_replaced_by",:multiple=>false, :search_url=>"Spree.routes.taxons_search"} %>
   });  
   
   </script>
