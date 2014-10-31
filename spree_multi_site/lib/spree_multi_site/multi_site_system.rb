@@ -23,6 +23,10 @@ module Spree
     
     included do
       belongs_to :site
+      # rails 3.2.19
+      # fix: Spree::Taxon.create!({ taxonomy_id: 0, name: 'name' }, without_protection: true) =>
+      # <Spree::Taxon id: 30, name: "name", taxonomy_id: 0, site_id: nil,  depth: 0, page_context: 0, html_attributes: nil, replaced_by: 0> 
+      before_create {|record| record.site_id||= Spree::Site.current.id }      
     end
     
     module ClassMethods
@@ -45,6 +49,25 @@ module Spree
     def self.setup_context(  new_multi_site_context = nil)
       self.multi_site_context = new_multi_site_context
     end
-      
+    
+    # do block with given context
+    def self.with_context( new_context, &block )
+      original_context = self.multi_site_context
+      begin
+        self.multi_site_context = new_context
+        yield
+      ensure
+        self.multi_site_context = original_context
+      end
+    end
+    
+    def self.with_context_admin_site_product(&block)
+      with_context( 'admin_site_product', &block )
+    end
+
+    def self.with_context_site1_themes(&block)
+      with_context( 'site1_themes', &block )
+    end
+    
   end
 end

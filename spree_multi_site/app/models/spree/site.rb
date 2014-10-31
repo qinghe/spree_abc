@@ -48,6 +48,17 @@ class Spree::Site < ActiveRecord::Base
     def current=(some_site)
       ::Thread.current[:spree_site] = some_site      
     end
+    
+    # execute block with given site
+    def with_site(new_site)
+      original_current = self.current
+      begin
+        self.current = new_site
+        yield
+      ensure
+        self.current = original_current  
+      end
+    end
   end
   
   def dalianshops?

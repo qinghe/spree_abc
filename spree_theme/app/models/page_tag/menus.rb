@@ -1,7 +1,7 @@
 module PageTag
   class Menus < Base
     class WrappedMenu < WrappedModel
-      self.accessable_attributes=[:id,:name,:icon, :permalink, :page_home?,:depth, :leaf?,:root?,:extra_html_attributes, :description]
+      self.accessable_attributes=[:id,:name,:icon, :permalink, :page_home?,:depth, :leaf?,:root?,:persisted?, :extra_html_attributes, :description]
       delegate *self.accessable_attributes, :to => :model
       delegate :taxonomy, :to => :model
       
@@ -26,35 +26,32 @@ module PageTag
         true
       end
       
+      # template.products replace it.
       #get current page's resource by template.current_piece 
-      def resources()
-        objs = []
-        data_source = self.collection_tag.template_tag.current_piece.data_source
-        if data_source.present?
-          if data_source == 'gpvs'
-            #objs = menu.products
-            #copy from taxons_controller#show
-            searcher = Spree::Config.searcher_class.new({:taxon => self.id})
-            objs = searcher.retrieve_products
-          elsif data_source == 'this_product'
-            #default_taxon.id is 0 
-            objs = [self.resource] #menu.products.where(:id=>resource.id)        
-          elsif data_source == 'gpvs_theme'
-            begin
-              Spree::MultiSiteSystem.setup_context('site1_themes')
-              searcher = Spree::Config.searcher_class.new({:taxon => self.id})
-              objs = searcher.retrieve_products.where('spree_products.theme_id>0')
-            ensure
-              Spree::MultiSiteSystem.setup_context
-            end
-            objs
-          end
-          if objs.present?
-            objs = Products.new( self.collection_tag.page_generator, objs)
-          end
-        end
-        objs
-      end
+      #def resources()
+      #  objs = []
+      #  data_source = self.collection_tag.template_tag.current_piece.data_source
+      #  if data_source.present?
+      #    if data_source == 'gpvs'
+      #      #objs = menu.products
+      #      #copy from taxons_controller#show
+      #      searcher = Spree::Config.searcher_class.new({:taxon => self.id})
+      #      objs = searcher.retrieve_products
+      #    elsif data_source == 'this_product'
+      #      #default_taxon.id is 0 
+      #      objs = [self.resource] #menu.products.where(:id=>resource.id)        
+      #    elsif data_source == 'gpvs_theme'
+      #        objs = Spree::MultiSiteSystem.with_context_site1_themes{
+      #          searcher = Spree::Config.searcher_class.new({:taxon => self.id})
+      #          searcher.retrieve_products.where('spree_products.theme_id>0')                
+      #        }
+      #    end
+      #    if objs.present?
+      #      objs = Products.new( self.collection_tag.page_generator, objs)
+      #    end
+      #  end
+      #  objs
+      #end
       
       def partial_path
         # menu.id would be nil if it is class DefaultTaxon    

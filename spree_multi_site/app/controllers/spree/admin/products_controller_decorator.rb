@@ -2,9 +2,9 @@
       update.before :prepare_more_params
       create.before :prepare_more_params
       around_filter :only=>[:create,:edit, :update, :destroy] do |controller, action_block|
-        Spree::MultiSiteSystem.setup_context('admin_site_product')
-        action_block.call
-        Spree::MultiSiteSystem.setup_context #reset multi_site_system
+        Spree::MultiSiteSystem.with_context_admin_site_product{
+          action_block.call  
+        }
       end
    
       

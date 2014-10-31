@@ -512,7 +512,7 @@ module Spree
       if(pos = (piece=~/~~content~~/))
         if node.data_source.present? #node.data_source.singularize
           case node.current_data_source
-            when DataSourceEnum.gpvs, DataSourceEnum.this_product
+            when DataSourceEnum.gpvs, DataSourceEnum.this_product, DataSourceEnum.gpvs_theme
               # for this_product, we have to wrapped with form, or option_value radio would not work.
               subpieces = <<-EOS1 
               <% @var_collection = @template.products( (defined?(page) ? page : @current_page) ).each{|product| %>
