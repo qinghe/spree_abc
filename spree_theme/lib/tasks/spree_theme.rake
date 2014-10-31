@@ -46,8 +46,8 @@ namespace :spree_theme do
     puts "exported file #{file_path}"
   end
   
-  desc "import theme. params SEED_PATH, SITE_ID, THEME_ID. 
-        SEED_PATH='1' path = spree_theme/db/themes/designs/{site_id}_{theme_id}_{time}.json|yml
+  desc "import theme. params SPREE_REPLACE. 
+        path = spree_theme/db/themes/designs/{site_id}_{theme_id}_{time}.json|yml
         default path=shops/rails_env/shop_id/{site_id}_{theme_id}_{time}.json|yml"
   task :import_theme , [:site_id,:theme_id,:format, :seed_path] => :environment do |t, args|
     site_id, theme_id, format, seed_path = args.site_id, args.theme_id, args.format, args.seed_path     
@@ -78,7 +78,7 @@ namespace :spree_theme do
     end
     
     if serialized_data.present?
-      theme = Spree::TemplateTheme.import_into_db(serialized_data, ENV['REPLACE'].present?)
+      theme = Spree::TemplateTheme.import_into_db(serialized_data, ENV['SPREE_REPLACE'].present?)
       theme_template_file_path = File.expand_path(theme_key, File.dirname(file_path))
       
       theme.template_files
