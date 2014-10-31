@@ -1,8 +1,7 @@
 # order model by alphabet
 
 Spree::Asset.class_eval do
-  belongs_to :site
-  default_scope  { where(:site_id =>  Spree::Site.current.id) }
+  include Spree::MultiSiteSystem
 end
 Spree::Configuration.class_eval do
   belongs_to :site

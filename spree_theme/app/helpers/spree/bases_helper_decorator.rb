@@ -26,9 +26,10 @@ module Spree
     end
     
     def product_main_image( current_piece, product )
-      main_image_style = current_piece.get_content_param_by_key(:main_image_style)
-      send("#{main_image_style}_image", product, :itemprop => "image")
-      
+      Spree::MultiSiteSystem.with_context_site_product_images{
+        main_image_style = current_piece.get_content_param_by_key(:main_image_style)
+        send("#{main_image_style}_image", product, :itemprop => "image")
+      }
     end
     
     # override resource path, add taxon into path

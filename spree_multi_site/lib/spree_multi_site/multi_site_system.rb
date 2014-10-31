@@ -31,11 +31,15 @@ module Spree
     
     module ClassMethods
       def default_scope  
-        # admin_site_product: create,update
+        # admin_site_product, create or update global taxon.
         if self == Spree::Taxon  && multi_site_context=='admin_site_product'
           scoped 
+        # first site list template themes 
         elsif self == Spree::Product  && multi_site_context=='site1_themes'
           scoped 
+        # first site list product images  
+        elsif self == Spree::Image && multi_site_context=='site_product_images'
+          scoped           
         else  
           where(:site_id =>  Spree::Site.current.id)
         end 
@@ -67,6 +71,9 @@ module Spree
 
     def self.with_context_site1_themes(&block)
       with_context( 'site1_themes', &block )
+    end
+    def self.with_context_site_product_images(&block)
+      with_context( 'site_product_images', &block )
     end
     
   end

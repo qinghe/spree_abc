@@ -485,10 +485,18 @@ module Spree
     
     # called in current_page_tag
     # is page_layout valid to taxon, taxon is current page
+    # return true if taxon is decendant of specific_taxons
     def valid_context?(page_layout, taxon)
-      specific_taxons = assigned_resources( Spree::SpecificTaxon, page_layout).compact
+      specific_taxons  = assigned_resources( Spree::SpecificTaxon, page_layout).compact
       specific_taxon_ids = specific_taxons.collect(&:id)
-      (page_layout.valid_context?(taxon.current_context)) && (specific_taxon_ids.blank? || specific_taxon_ids.include?(taxon.id))
+      is_valid = (page_layout.valid_context?(taxon.current_context)) 
+      if is_valid && specific_taxon_ids.present?
+        is_valid = specific_taxon_ids.include?(taxon.id)
+        unless is_valid
+          is_valid = specific_taxons.map{|specific_taxon| taxon.is_descendant_of?(specific_taxon) }.include?( true )
+        end
+      end
+      is_valid
     end
     
     begin 'param values'

@@ -12,17 +12,20 @@ module Spree
     self.attachment_definitions[:attachment][:path] = ":rails_root/public/shops/:rails_env/:site/:class/:id/:basename_:style.:extension"
     self.attachment_definitions[:attachment][:default_url] = "/images/:style/missing.png"
   
-    delegate :url, :to => :attachment
+    delegate :url, :to => :attachment    
+    delegate :site_id, :to => :template_theme # required by Paperclip.interpolates :site
     #it is required while import theme with new template_file. we would set theme.assigned_resources while import.
     attr_accessor :page_layout_id
     attr_accessible :theme_id, :attachment, :page_layout_id
-    #for resource_class.resourceful
-    scope :resourceful, ->(theme){ where(:theme_id=>theme.id)}
     #get resource name.
     alias_attribute(:name, :attachment_file_name)
     
     #it is required, even for logo, app_configuration has default logo, each theme could customize logo 
     validate :template_theme, :presence=>true
+    
+    #for resource_class.resourceful
+    scope :resourceful, ->(theme){ where(:theme_id=>theme.id)}
+    
     
     #deep dup
     def dup
