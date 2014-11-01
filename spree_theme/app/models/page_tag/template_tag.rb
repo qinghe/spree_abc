@@ -117,10 +117,9 @@ module PageTag
           objs = Spree::MultiSiteSystem.with_context_site1_themes{
             searcher_params ={}
             if wrapped_taxon.persisted?
-              searcher_params.merge!(:in_global_taxon=>wrapped_taxon.model )
+              searcher_params.merge!(:search=>{:in_global_taxon=>wrapped_taxon.model} )
             end
             searcher_params.merge!(self.current_piece.wrapped_data_source_param ).merge!(self.page_generator.resource_options)
-Rails.logger.debug "......... searcher_params =#{searcher_params}"            
             searcher = Spree::Config.searcher_class.new(searcher_params)
             searcher.retrieve_products.theme_only.to_a # explicitly load some records, or default_scope would work when out of this block. 
           }        
