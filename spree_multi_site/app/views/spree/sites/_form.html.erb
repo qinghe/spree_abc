@@ -2,12 +2,12 @@
   <div class="clearfix">
     <div class="left" data-hook="admin_site_form_left">
       <p>
-        <%= f.label :name, t(:name,:scope=>['activerecord','attributes','site']) %> <span class="required">*</span><br />
+        <%= f.label :name %> <span class="required">*</span><br />
         <%= f.text_field :name, :class => 'fullwidth title' %>
       </p>
 
       <p>
-        <%= f.label :short_name, t(:short_name,:scope=>['activerecord','attributes','site']) %> <span class="required">*</span><br />
+        <%= f.label :short_name %> <span class="required">*</span><br />
         <label id="protocol" for="site_short_name">http://</label>
         <%= f.text_field :short_name, :class => 'fullwidth title' %>
         <span id="dalianshops">.dalianshops.com</span>  <br />
@@ -16,14 +16,17 @@
         </span>          
       </p>
    
-      <p>
-        <%= f.label :has_sample, t(:site_has_sample) %> <br />
-        <%= f.check_box :has_sample, :class => 'fullwidth title' %>
-      </p>
-      <% if @site.new_record? %>
-        
-        <%= render :partial => 'spree/sites/user', :locals => { :user => @user } %>
-            
+      <% if @site.new_record? %>        
+        <%= render :partial => 'spree/sites/user', :locals => { :user => @user } %>            
+      <% end %>
+
+      <% if @template_theme.present? %>
+        <p>
+          <%= f.label :theme_id %> <br />
+          <%= f.hidden :theme_id, @template_theme.id %> <br />
+          <%= text_field_tag :template_theme_name, @template_theme.title, :class => 'fullwidth title' %>
+        </p>
+      
       <% end %>
     </div>
   </div>

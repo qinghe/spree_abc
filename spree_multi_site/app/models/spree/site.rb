@@ -38,7 +38,7 @@ class Spree::Site < ActiveRecord::Base
   class << self
     def dalianshops
       #in development, we may change site domain
-      find(1)#find_by_domain 
+      find_by_short_name('first')#find_by_domain 
     end
     
     def current

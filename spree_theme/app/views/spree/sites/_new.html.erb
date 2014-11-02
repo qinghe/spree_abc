@@ -1,0 +1,8 @@
+<%= render :partial => 'spree/shared/error_messages', :locals => { :target => @site } %>
+<div id="new-site">
+  <h3 class="header3"><%= Spree.t(:new_site) %></h3>
+<%= form_for @site, :url=>create_site_path, :remote=>true do |f| %>
+  <%= render :partial => "form", :locals => { :f => f } %>
+  <p><%= f.submit Spree.t(:create), :class => 'button primary' %></p>
+<% end %>
+</div>

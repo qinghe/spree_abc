@@ -27,3 +27,4 @@ zh-CN:
     site:
       index: 商店列表
       new:
+    site_successfully_opened: ! 您的商店'%{site_name}'创建成功了。

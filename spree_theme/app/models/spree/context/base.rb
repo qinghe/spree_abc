@@ -1,11 +1,11 @@
 module Spree
   module Context
     module Base
-      # use string instead of symbol, parameter from client is string
-      # first one is default 
+      
+      # taxon|page_layout contexts, mainly it is about special path
       ContextEnum=Struct.new(:home, :list, :detail, :cart, :account, :checkout, :thanks, :signup, :login, :password, :blog, :post, :logout, :either
                           ) [:home, :list, :detail, :cart, :account, :checkout, :thanks, :signup, :login, :password, :blog, :post, :logout, :""]
-
+      
       # context may be array, if inherited_data_source is empty, [:taxon, :gpvs, :blog, :gpvs_theme] are available datasource for current.
       # gpvs is available to every context. 
       ContextDataSourceMap = Hash.new( [:taxon, :gpvs, :blog, :gpvs_theme] ).merge!( { ContextEnum.detail=>[:this_product], ContextEnum.post=>[:post] } )

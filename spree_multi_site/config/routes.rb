@@ -4,7 +4,8 @@ Spree::Core::Engine.routes.prepend do
     resources :sites
   end
   post '/quick_lunch',:to => 'sites#quick_lunch', :as => :quick_lunch
-  match 'new_site' => 'sites#new', :as => :new_site
+  get 'new_site' => 'sites#new', :as => :new_site
+  post 'create_site' => 'sites#create', :as => :create_site
   resources :sites, :only => [:show]
 
   if Rails.env.development?

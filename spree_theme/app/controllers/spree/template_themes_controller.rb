@@ -35,40 +35,7 @@ module Spree
       end
     end
     
-    
-    # GET /themes/1
-    # GET /themes/1.xml
-    def show
-      @theme = TemplateTheme.find(params[:id])
-  
-      respond_to do |format|
-        format.html # show.html.erb
-        format.xml  { render :xml => @theme }
-      end
-    end
-  
-  
-    # GET /themes/1/edit
-    def edit
-      @theme = TemplateTheme.find(params[:id])
-    end
-  
-    # PUT /themes/1
-    # PUT /themes/1.xml
-    def update
-      @theme = TemplateTheme.find(params[:id])
-  
-      respond_to do |format|
-        if @theme.update_attributes(params[:theme])
-          format.html { redirect_to(@theme, :notice => 'TemplateTheme was successfully updated.') }
-          format.xml  { head :ok }
-        else
-          format.html { render :action => "edit" }
-          format.xml  { render :xml => @theme.errors, :status => :unprocessable_entity }
-        end
-      end
-    end
-      
+        
     
     # params for preview
     #    d: domain of website
@@ -88,61 +55,7 @@ module Spree
     #  end
           
     end
-          
-    def assign_default
-      website_params = params[:website]
-      self.website[:index_page] = website_params[:index_page].to_i
-      self.website.save
-      render_message("yes, updated!")    
-      
-    end
-    
-    def assign
-      # "commit"=>[Update&Preview|Update|Preview]
-      commit_command = params[:commit]
-      keys = params.keys.select{|k|k=~/menu[\d]+/}
-      menus_params = params.values_at(*keys)
-      
-      if commit_command=~/Update/
-        #update default page
-        website_params = params[:website]
-        self.site_class.current.attributes = website_params
-        self.site_class.current.save
-      end
-      
-      if commit_command=~/Publish/
-        do_publish
-      end
-      
-      respond_to do |format|
-        format.js  {
-          if commit_command=~/Preview/
-            render "preview"          
-          else# commit_command=~/Publish/
-            render_message("yes, publish")
-          end    
-        }
-      end   
-  
-    end
-    
-    def select_tree
-      @menu = taxon_class.find(params[:menu_id])
-      render :partial=>"menu_and_template"
-    end
-    
-    def edit_layout
-      
-    end
-      
-    def editor
-      theme_id = 0
-      layout_id = 0
-      theme = TemplateTheme.find(params[:id])
-      prepare_params_for_editors(theme)
-    end  
-  
-  
+                     
     # params
     #   layout_id: selected page_layout_id
     #   selected_section_id: selected section_root_id
@@ -185,7 +98,6 @@ module Spree
       layout = PageLayout.find(layout_id)
       se = PageEvent::SectionEvent.new("disable_section", layout )
       se.notify
-      
     end
     
     def get_param_values
@@ -203,22 +115,7 @@ module Spree
         format.js  {render :partial=>'editors1'}
       end    
     end
-  
-    #FIXME, fix do_update_param_value
-    def update_param_values
-      selected_theme_id = params[:selected_theme_id]
-      selected_editor_id = params[:selected_editor_id]
-      param_value_keys = params.keys.select{|k| k=~/pv[\d]+/}
-      
-      for pvk in param_value_keys
-        param_value_params = params[pvk]
-        pv_id = pvk[/\d+/].to_i
-        param_value = ParamValue.find(pv_id, :include=>[:section_param, :section])
-        do_update_param_value(param_value, param_value_params) 
-      end
-      
-    end
-    
+     
     def update_param_value
       param_value_event = params[:param_value_event]
       editing_param_value_id = params[:editing_param_value_id].to_i
@@ -314,6 +211,11 @@ module Spree
       else
         # render "upload"      
       end
+    end
+    
+    # path for /new_site,  view new_site is placeholder as cart, account...
+    def new_site
+      
     end
       
     private
