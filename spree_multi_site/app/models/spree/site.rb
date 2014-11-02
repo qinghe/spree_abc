@@ -1,6 +1,6 @@
 #encoding: utf-8
 class Spree::Site < ActiveRecord::Base
-  cattr_accessor :unknown,:subdomain_regexp, :loading_fake_order_with_sample, :dalianshops_url
+  cattr_accessor :unknown,:subdomain_regexp, :loading_fake_order_with_sample
   has_many :taxonomies,:inverse_of =>:site,:dependent=>:destroy
   has_many :products,:inverse_of =>:site,:dependent=>:destroy
   has_many :orders,:inverse_of =>:site,:dependent=>:destroy
@@ -28,7 +28,6 @@ class Spree::Site < ActiveRecord::Base
   # so it require a default value.
   self.subdomain_regexp = /^([a-z0-9\-])*$/
   self.loading_fake_order_with_sample = false
-  self.dalianshops_url = "www.dalianshops.com"
   validates :name, length: 4..32 #"中国".length=> 2
   validates :short_name, uniqueness: true, presence: true, length: 4..32, format: {with: subdomain_regexp} #, unless: "domain.blank?"
   validates_uniqueness_of :domain, :allow_blank=>true 
@@ -38,7 +37,8 @@ class Spree::Site < ActiveRecord::Base
   
   class << self
     def dalianshops
-      find_by_domain dalianshops_url
+      #in development, we may change site domain
+      find(1)#find_by_domain 
     end
     
     def current
@@ -62,7 +62,7 @@ class Spree::Site < ActiveRecord::Base
   end
   
   def dalianshops?
-    self.domain == dalianshops_url
+    self == self.class.dalianshops 
   end
   
   def unknown?
