@@ -22,9 +22,9 @@
 
       <% if @template_theme.present? %>
         <p>
-          <%= f.label :theme_id %> <br />
-          <%= f.hidden :theme_id, @template_theme.id %> <br />
-          <%= text_field_tag :template_theme_name, @template_theme.title, :class => 'fullwidth title' %>
+          <%= f.label :foreign_theme_id %> <br />
+          <%= f.hidden_field :foreign_theme_id, :value=>@template_theme.id %> 
+          <%= text_field_tag :template_theme_name, @template_theme.title, :class => 'fullwidth title', :readonly=>true %>
         </p>
       
       <% end %>

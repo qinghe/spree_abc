@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20141027132320) do
+ActiveRecord::Schema.define(:version => 20141102072539) do
 
   create_table "ckeditor_assets", :force => true do |t|
     t.integer  "site_id",                         :default => 0, :null => false
@@ -778,6 +778,7 @@ ActiveRecord::Schema.define(:version => 20141027132320) do
     t.integer  "index_page",          :default => 0
     t.integer  "theme_id",            :default => 0
     t.integer  "template_release_id", :default => 0
+    t.integer  "foreign_theme_id",    :default => 0,     :null => false
   end
 
   create_table "spree_state_changes", :force => true do |t|

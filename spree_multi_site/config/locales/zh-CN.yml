@@ -16,6 +16,7 @@ zh-CN:
         short_name: 二级域名
         domain: 网店域名
         created_at: 创建时间
+        foreign_theme_id: 模板
   spree:
     admin_store: 管理商店
     errors:
