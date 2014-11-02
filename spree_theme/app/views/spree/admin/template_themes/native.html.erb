@@ -47,7 +47,7 @@
     <%= link_to_with_icon 'icon-cogs', Spree.t(:theme_config), config_resource_admin_template_theme_path(theme), {:method=>:get,:no_text => true} %>
     <%= link_to_with_icon 'icon-check-circle', Spree.t(:theme_apply), apply_admin_template_theme_path(theme), {:method=>:post,:no_text => true} %>
     <% if theme.has_native_layout? %>    
-      <%= link_to_with_icon 'icon-eye', Spree.t(:theme_preview), preview_template_theme_path(theme), {:target=>'_blank',:no_text => true} %>
+      <%= link_to_with_icon 'icon-eye', Spree.t(:preview_theme), preview_template_theme_path(theme), {:target=>'_blank',:no_text => true} %>
       <% if SpreeTheme.site_class.current.design? %>    
       <%= link_to_with_icon 'icon-copy', Spree.t(:theme_copy), copy_admin_template_theme_path(theme), {:method=>:post,:no_text => true} %>
       <% end %>

@@ -115,6 +115,7 @@ zh-CN:
       post: 文章内容
       logout: 用户退出
       either: 任意页
+      new_site: 注册开店
     section_data_source:
       gpvs: 产品集合
       this_product: 当前选择产品
@@ -152,7 +153,8 @@ zh-CN:
     theme_prepare_import: 设置
     theme_is_imported: 是否已购买
     theme_is_free: 是否免费
-    theme_preview: 预览
+    preview_theme: 预览
+    install_theme_with_site: 安装
     theme_release: 发布
     welcome_to_admin_login: Dalianshops管理系统登录
     welcome_to_under_construction: 网站建设中，请登录管理系统
