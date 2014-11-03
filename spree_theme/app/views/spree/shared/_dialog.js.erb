@@ -9,6 +9,6 @@ $("<%=dialog_content_container_selector%>").html(<%= raw ( render :partial => ta
 // append dialog into page-inner, apply global css on dialog.
 // global css a apply close button of dialog, it cause wrong size of dialog, show disable 'close'
 $("#dialog").modal({appendTo:'#page-inner',closeHTML:'', escClose:true, overlayClose:true});
-$("#dialog button.cancel").click( function(){
+$("#dialog a.cancel,#dialog button.cancel").click( function(){
   $.modal.close();
 });

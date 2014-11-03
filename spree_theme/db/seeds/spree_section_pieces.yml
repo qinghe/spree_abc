@@ -1050,12 +1050,16 @@ dialog_title:
   is_selectable: "0"
   is_container: "0"
   html: |
-    <!-- outer and inner are required, in this way dialog content always go to the inner. -->
     <div class="<%=g_piece_selector%>">
-      <div class="title"> <%= Spree.t(:dialog_title) %>  </div>
+      <div class="title"> <%= Spree.t(:dialog_title) %> <a class="cancel">X</a> </div>
     </div>    
   css: | 
     .<%=g_piece_selector%> .title{ <%=@template.css(:title) %> }
+    .<%=g_piece_selector%> a.cancel{      
+      border:0;  padding:0;  margin:0; background: transparent none; text-decoration: none;/*reset it, prevent root's default */
+      float:right; cursor:pointer; 
+      <%=@template.css(:cancel) %> 
+     }
   js: ""
 # set padding, margin, without affecting dialog title
 dialog_content:
