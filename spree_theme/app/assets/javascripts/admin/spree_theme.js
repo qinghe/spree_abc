@@ -36,4 +36,7 @@ jQuery(function ($) {
   $('#listing_template_themes form input:checkbox').change(
     function(){ $(this.form).trigger('submit'); }
   )
+  $('#listing_template_themes form input:radio').change(
+    function(){ $(this.form).trigger('submit'); }
+  )
 });

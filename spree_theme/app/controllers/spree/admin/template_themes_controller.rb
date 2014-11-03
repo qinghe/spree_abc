@@ -40,8 +40,7 @@ module Spree
       #apply this theme to site
       def apply
         SpreeTheme.site_class.current.apply_theme @template_theme                    
-        @themes = TemplateTheme.native          
-        render :action=>'native' 
+        respond_with(@template_theme)  
       end
 
       begin 'design shop'

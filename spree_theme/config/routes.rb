@@ -53,9 +53,9 @@ Spree::Core::Engine.routes.draw do
         post :copy
         post :release
         post :import
-        post :apply
-        
+        put :apply        
       end
+      
       resources :page_layout do
         member do
           get :config_resource

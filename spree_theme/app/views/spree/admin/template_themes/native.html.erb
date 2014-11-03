@@ -35,7 +35,11 @@
 <% @themes.each do |theme| %>
   <tr class="<%= cycle('odd', 'even') %>">
     <td> <span class="editable" data-id="<%=theme.id%>"><%= theme.title %></span></td>
-    <td align="center"><%= theme.applied? ? Spree.t(:say_yes) : Spree.t(:not) %></td>
+    <td align="center">      
+        <%= form_for [:admin,theme],:url=>apply_admin_template_theme_path(theme), :remote=>true do |f|%>
+        <%= radio_button_tag "is_applied", theme.id, theme.applied?  %>       
+        <% end %> 
+    </td>
     <% if has_column_is_public %>
       <td align="center">
         <%= form_for [:admin,theme], :remote=>true do |f|%>
@@ -45,7 +49,6 @@
     <% end %>
     <td class="actions">
     <%= link_to_with_icon 'icon-cogs', Spree.t(:theme_config), config_resource_admin_template_theme_path(theme), {:method=>:get,:no_text => true} %>
-    <%= link_to_with_icon 'icon-check-circle', Spree.t(:theme_apply), apply_admin_template_theme_path(theme), {:method=>:post,:no_text => true} %>
     <% if theme.has_native_layout? %>    
       <%= link_to_with_icon 'icon-eye', Spree.t(:preview_theme), preview_template_theme_path(theme), {:target=>'_blank',:no_text => true} %>
       <% if SpreeTheme.site_class.current.design? %>    
