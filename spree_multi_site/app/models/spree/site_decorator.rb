@@ -115,6 +115,10 @@ Spree::Tracker.class_eval do
 end
 
 Spree.user_class.class_eval do
+  # user.email validation is unique, it is defined in devise/lib/models/validatable.rb
+  # 1. we required dalianshops user have unique email,
+  # 2. we allow user modify their password after sign up.
+  # fix unique with scope [site_id] would conflict with 1
   belongs_to :site
   default_scope  { where(:site_id =>  Spree::Site.current.id) }
 end
