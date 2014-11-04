@@ -117,3 +117,4 @@ developer todo
 1. 商店登录
 2. user.email unique for each site.
 3. use current site mail server before send mail.
+4. body:background
