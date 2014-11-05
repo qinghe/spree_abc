@@ -28,8 +28,10 @@ module Spree
           sign_in :spree_user,user 
         end 
       end
+      #spree_user_signed_in? defined in devise/lib/controllers/helpers.rb
       if spree_user_signed_in? and current_spree_user.admin?
-        redirect_to "/admin"
+        #warden.authenticate?
+        redirect_to admin_url(:host=>current_spree_user.site.subdomain)
       else
         render "new_admin_session", layout:"layout_for_login"
       end

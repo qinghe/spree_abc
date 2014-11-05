@@ -112,4 +112,9 @@ designer todo
 4. 帮助中心
 5. 定制模板过程
 
-
+developer todo
+==============================================================================================
+1. 商店登录
+2. user.email unique for each site.
+3. use current site mail server before send mail.
+4. body:background
