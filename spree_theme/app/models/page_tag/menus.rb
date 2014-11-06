@@ -19,7 +19,7 @@ module PageTag
           
       # url link to the menu itme's page(each menu itme link to a page).
       def current?
-        self.collection_tag.template_tag.page_generator.menu.id == self.model.id
+        (self.collection_tag.template_tag.page_generator.menu.id == self.model.id) || (self.collection_tag.template_tag.page_generator.menu.id == self.model.replaced_by)
       end
       
       def clickable?
