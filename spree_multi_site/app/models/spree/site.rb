@@ -64,6 +64,10 @@ class Spree::Site < ActiveRecord::Base
     self == self.class.dalianshops 
   end
   
+  def current?
+    self == self.class.current
+  end
+  
   def unknown?
     !(self.id>0)
   end
@@ -145,6 +149,7 @@ class Spree::Site < ActiveRecord::Base
   
   # current site'subdomain => short_name.dalianshops.com
   def subdomain
+    return self.domain if dalianshops? #fix: first.dalianshops.com
     ([self.short_name] + self.class.dalianshops.domain.split('.')[1..-1]).join('.')
   end
   

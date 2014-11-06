@@ -22,16 +22,17 @@ module Spree
     
     def create_admin_session
       user_params = params[:spree_user]
-      user = Spree.user_class.find_for_authentication(:email => user_params[:email])
+      user = Spree.user_class.unscoped.admin.find_for_authentication(:email => user_params[:email])
       if user.present?
         if user.valid_password?(user_params[:password])
           sign_in :spree_user,user 
         end 
       end
       #spree_user_signed_in? defined in devise/lib/controllers/helpers.rb
-      if spree_user_signed_in? and current_spree_user.admin?
+      if spree_user_signed_in?
         #warden.authenticate?
-        redirect_to admin_url(:host=>current_spree_user.site.subdomain)
+        # host is required, current_user.site may not be current site, we allow user login from dalianshops.com 
+        redirect_to admin_url(:host=> current_spree_user.site.subdomain )
       else
         render "new_admin_session", layout:"layout_for_login"
       end
