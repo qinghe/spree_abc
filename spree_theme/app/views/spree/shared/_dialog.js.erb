@@ -1,11 +1,11 @@
 <%
 dialog_content_container_selector = @theme.dialog_content_container_selector
-target_view = params[:action]
+target_view ||= params[:action]
 target_view =  'edit' if ( params[:action]=='update' )
 target_view =  'new' if ( params[:action]=='create' )
 %>
 
-$("<%=dialog_content_container_selector%>").html(<%= raw ( render :partial => target_view,:formats=>[:html] ).to_json %>)
+$("<%=dialog_content_container_selector%>").html(<%== ( render :partial => target_view,:formats=>[:html] ).to_json %>)
 // append dialog into page-inner, apply global css on dialog.
 // global css a apply close button of dialog, it cause wrong size of dialog, show disable 'close'
 $("#dialog").modal({appendTo:'#page-inner',closeHTML:'', escClose:true, overlayClose:true});

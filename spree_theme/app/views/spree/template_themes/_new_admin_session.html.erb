@@ -1,4 +1,7 @@
-<%= form_for Spree::User.new, :as => :spree_user, :url => create_admin_session_path do |f| %>
+<% #show error message in dialog %>
+<%= flash_messages if request.xhr? %>
+
+<%= form_for @user, :as => :spree_user, :url => create_admin_session_path, :remote=>request.xhr? do |f| %>
   <div id="password-credentials">
     <p>
       <%= f.label :email, Spree.t(:email) %><br />
@@ -9,6 +12,5 @@
       <%= f.password_field :password, :class => 'title', :tabindex => 2 %>
     </p>
   </div>
-
   <p><%= f.submit Spree.t(:login), :class => 'button primary', :tabindex => 3 %></p>
 <% end %>

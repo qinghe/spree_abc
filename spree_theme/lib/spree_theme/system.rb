@@ -18,6 +18,11 @@ module SpreeTheme::System
     if request.xhr?
       return false
     end
+    # keep it before check "designer", page for admin login never need design
+    if @is_layout_for_login_required
+      return 'layout_for_login'
+    end
+
     #for designer
     if @is_designer
       return 'layout_for_design'
@@ -26,9 +31,6 @@ module SpreeTheme::System
     #if @is_preview 
     #  return 'layout_for_preview'
     #end  
-    if @is_layout_for_login_required
-      return 'layout_for_login'
-    end
     @theme.layout_path || SpreeTheme.site_class.current.layout || Spree::Config[:layout]
   end
 
@@ -41,9 +43,6 @@ module SpreeTheme::System
     # fullpath may contain ?n=www.domain.com    
     case request.fullpath
       when /^\/under_construction/, /^\/user\/spree_user\/logout/ ,/^\/logout/, /^\/admin/
-        return
-      when /^\/create_admin_session/,/^\/new_admin_session/
-        @is_layout_for_login_required = true
         return
     end  
       
@@ -112,6 +111,14 @@ module SpreeTheme::System
     if @menu.replacer.present?
       @menu = @menu.replacer
     end
+
+    # @theme is required since we support create admin session by ajax.    
+    case request.fullpath
+      when /^\/create_admin_session/,/^\/new_admin_session/
+        @is_layout_for_login_required = true
+        return
+    end  
+    
     # site has a released theme    
     if @theme.present?  
       unless request.xhr?
