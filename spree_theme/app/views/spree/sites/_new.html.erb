@@ -4,7 +4,7 @@
 <%= form_for @site, :url=>create_site_path, :remote=>true do |f| %>
   <%= render :partial => "form", :locals => { :f => f } %>
   <p><%= f.submit Spree.t(:create), :class => 'button' %>
-     <%= f.button Spree.t('actions.cancel'), :class => 'button cancel' %>
+     <%= f.button Spree.t('actions.cancel'), :class => 'button cancel', :type=>:button %>
   </p>
 <% end %>
 </div>
