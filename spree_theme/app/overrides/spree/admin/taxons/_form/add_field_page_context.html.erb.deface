@@ -10,6 +10,12 @@
         { :include_blank => Spree.t('default') }, { :class => 'select2 fullwidth' }) %>
       <%= f.error_message_on :page_context %>
     <% end %>
+    <%= f.field_container :is_clickable do %>
+      <label>
+      <%= f.check_box :is_clickable %> <%= Spree.t(:is_taxon_clickable) %>     
+      </label>
+      <%= f.error_message_on :is_clickable %>
+    <% end %>
 <% unless Rails.env.test? %>
   <script>
   $(document).ready(function () {

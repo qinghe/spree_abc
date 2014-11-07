@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20141102072539) do
+ActiveRecord::Schema.define(:version => 20141107113617) do
 
   create_table "ckeditor_assets", :force => true do |t|
     t.integer  "site_id",                         :default => 0, :null => false
@@ -889,7 +889,7 @@ ActiveRecord::Schema.define(:version => 20141102072539) do
   create_table "spree_taxons", :force => true do |t|
     t.integer  "parent_id"
     t.integer  "position",          :default => 0
-    t.string   "name",                             :null => false
+    t.string   "name",                                :null => false
     t.string   "permalink"
     t.integer  "taxonomy_id"
     t.integer  "lft"
@@ -899,16 +899,17 @@ ActiveRecord::Schema.define(:version => 20141102072539) do
     t.integer  "icon_file_size"
     t.datetime "icon_updated_at"
     t.text     "description"
-    t.datetime "created_at",                       :null => false
-    t.datetime "updated_at",                       :null => false
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
     t.integer  "site_id"
     t.string   "meta_title"
     t.string   "meta_description"
     t.string   "meta_keywords"
     t.integer  "depth"
-    t.integer  "page_context",      :default => 0, :null => false
+    t.integer  "page_context",      :default => 0,    :null => false
     t.string   "html_attributes"
-    t.integer  "replaced_by",       :default => 0, :null => false
+    t.integer  "replaced_by",       :default => 0,    :null => false
+    t.boolean  "is_clickable",      :default => true, :null => false
   end
 
   add_index "spree_taxons", ["parent_id"], :name => "index_taxons_on_parent_id"

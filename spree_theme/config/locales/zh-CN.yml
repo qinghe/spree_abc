@@ -155,6 +155,7 @@ zh-CN:
     theme_is_free: 是否免费
     preview_theme: 预览
     install_theme_with_site: 安装
+    is_taxon_clickable: 分类是否可点击
     theme_release: 发布
     welcome_to_admin_login: Dalianshops管理系统登录
     welcome_to_under_construction: 网站建设中，请登录管理系统

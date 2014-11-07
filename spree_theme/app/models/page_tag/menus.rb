@@ -1,7 +1,7 @@
 module PageTag
   class Menus < Base
     class WrappedMenu < WrappedModel
-      self.accessable_attributes=[:id,:name,:icon, :permalink, :page_home?,:depth, :leaf?,:root?,:persisted?, :extra_html_attributes, :description]
+      self.accessable_attributes=[:id,:name,:icon, :permalink, :is_clickable?, :page_home?,:depth, :leaf?,:root?,:persisted?, :extra_html_attributes, :description]
       delegate *self.accessable_attributes, :to => :model
       delegate :taxonomy, :to => :model
       
@@ -23,7 +23,7 @@ module PageTag
       end
       
       def clickable?
-        true
+        is_clickable?
       end
       
       # template.products replace it.

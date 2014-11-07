@@ -7,7 +7,7 @@ SpreeTheme.taxon_class.class_eval do
     scope :resourceful,->(theme){ roots }
     
     belongs_to :replacer, class_name: 'Spree::Taxon', foreign_key: 'replaced_by' 
-    attr_accessible :page_context, :replaced_by
+    attr_accessible :page_context, :replaced_by, :is_clickable
 
     
     def remove_from_theme
