@@ -361,7 +361,7 @@ menuitem:
         <%= @template.css :selected %> 
       }
       .<%=g_piece_selector%> a.selected:hover{  <%= @template.css :as_h %> }
-      .<%=g_piece_selector%> .noclick{ <%= @template.css :noclick %> }
+      .<%=g_piece_selector%> .noclick{ cursor:default; <%= @template.css :noclick %> }
       .<%=g_piece_selector%> a.depth1{ <%= @template.css :depth1 %>  }
       .<%=g_piece_selector%> a.depth2{ <%= @template.css :depth2 %>  }
       .<%=g_piece_selector%> a.depth3{ <%= @template.css :depth3 %>  }
