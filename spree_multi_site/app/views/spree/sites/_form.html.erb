@@ -2,18 +2,14 @@
   <div class="clearfix">
     <div class="left" data-hook="admin_site_form_left">
       <p>
-        <%= f.label :name %> <span class="required">*</span><br />
-        <%= f.text_field :name, :class => 'fullwidth title' %>
+        <%= f.label :name %> <br />
+        <%= f.text_field :name, :class => 'fullwidth title', :minlength=>4, :maxlength=>30, :required=>""  %>
       </p>
 
       <p>
-        <%= f.label :short_name %> <span class="required">*</span><br />
-        <label id="protocol" for="site_short_name">http://</label>
-        <%= f.text_field :short_name, :class => 'fullwidth title' %>
-        <span id="dalianshops">.dalianshops.com</span>  <br />
-        <span class="hint"> 
-          如果您拥有像<strong>www.example.com</strong>这样的顶级域名，您可以稍候在后台管理中绑定它
-        </span>          
+        <%= f.label :short_name %> <br />
+        <%= f.text_field :short_name, :class => 'fullwidth title', :minlength=>4, :maxlength=>30, :required=>""  %>
+        <span id="dalianshops">.dalianshops.com</span> 
       </p>
    
       <% if @site.new_record? %>        
@@ -24,9 +20,8 @@
         <p>
           <%= f.label :foreign_theme_id %> <br />
           <%= f.hidden_field :foreign_theme_id, :value=>@template_theme.id %> 
-          <%= text_field_tag :template_theme_name, @template_theme.title, :class => 'fullwidth title', :readonly=>true %>
-        </p>
-      
+          <%= text_field_tag :template_theme_name, @template_theme.title, :class => 'fullwidth title', :readonly=>true, :size=>30 %>
+        </p>      
       <% end %>
     </div>
   </div>

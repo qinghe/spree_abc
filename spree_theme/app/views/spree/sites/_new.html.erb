@@ -8,3 +8,26 @@
   </p>
 <% end %>
 </div>
+<script>
+$("#new_site").validate({
+  rules: {
+    'user[email]': {
+      required: true,
+      email: true,
+      remote: {
+        url: <%== check_email_path.to_json %>,
+        type: "post"
+      }
+    }
+  },
+  messages:{
+    'user[email]': {
+      remote: <%== Spree.t('errors.messages.email_existing').to_json %>
+    }
+  },
+  wrapper:'div', // show it in next line
+  errorPlacement: function(error, element) {
+    error.appendTo( element.parent() );
+  }
+})
+</script>
