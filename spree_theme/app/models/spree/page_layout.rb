@@ -15,6 +15,7 @@ module Spree
     has_many :section_pieces, :through=>:sections
     # remove section relatives after page_layout destroyed.
     before_destroy :remove_section
+    before_save :fix_data_source_param
     
     scope :full_html_roots, where(:is_full_html=>true,:parent_id=>nil)
     attr_accessible :section_id,:title
@@ -623,7 +624,13 @@ module Spree
         node.copy_to_new_parent(clone_node, cached_whole_tree, added_section_ids)
       end                  
     end
-         
+    
+    # empty data_source_param when data_source is empty
+    def fix_data_source_param
+      if self.data_source.blank? && self.data_source_param.present?
+        self.data_source_param = ''
+      end
+    end     
   end
 
 end
