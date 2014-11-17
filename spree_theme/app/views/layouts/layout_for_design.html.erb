@@ -1,5 +1,5 @@
 <%
-  @lg = PageTag::PageGenerator.previewer( @menu, @theme, {:resource=>(@resource.nil? ? nil:@resource),:controller=>controller})
+  #@lg = PageTag::PageGenerator.previewer( @menu, @theme, {:resource=>(@resource.nil? ? nil:@resource),:controller=>controller})
   ehtml = @lg.ehtml
   css,js  = @lg.generate_assets        
   #insert css to html
@@ -9,10 +9,6 @@
   ehtml.insert(ehtml.index("</head>"),style)
   ehtml.insert(ehtml.index("</head>"),script)
   ehtml.insert(ehtml.index("</body>"),@editor_panel)
-
-  @lg.context.each_pair{|key,val|
-    instance_variable_set( "@#{key}", val)
-  }  
 
 %>
 

@@ -131,11 +131,12 @@ module SpreeTheme::System
       end
       # we have initialize PageTag::PageGenerator here, page like login  do not go to template_thems_controller/page
       if @is_designer
-        @lg = PageTag::PageGenerator.generator( @menu, @theme, {:resource=>@resource, :controller=>self, :page=>params[:page]})                  
+        @lg = PageTag::PageGenerator.previewer( @menu, @theme, {:resource=>@resource, :controller=>self, :page=>params[:page]})                  
       else
         @lg = PageTag::PageGenerator.generator( @menu, @theme, {:resource=>@resource, :controller=>self, :page=>params[:page]})          
       end      
       @lg.context.each_pair{|key,val|
+        # expose variable to view
         instance_variable_set( "@#{key}", val)
       }      
     else
