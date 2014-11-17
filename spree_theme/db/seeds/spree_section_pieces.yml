@@ -256,8 +256,8 @@ container:
         clear:both;
       <%end%>
     }
-    /* #copy from spree_backend/assets/stylesheets/admin/components/pagination */
-    .<%=g_piece_selector%> .pagination { float:left; }
+    /* #copy from spree_backend/assets/stylesheets/admin/components/pagination */    
+    .<%=g_piece_selector%> .pagination { float:left; clear:both; } /* add clear */
     .<%=g_piece_selector%> .pagination .page{ display: inline-block; text-align: center;
       <%=@template.css(:pagination_page)%> 
     }
