@@ -227,11 +227,13 @@ container:
     <div class="<%=g_piece_selector%> <%=@template.current_piece.as_child_selector%> content_layout" >
           <div class="<%=g_piece_selector%>_inner clear-block">          
           ~~content~~
-          <% if @template.current_piece.current_data_source.present? %>
-            <% if @var_collection.present? && @var_collection.try( :has_pages? ) %>
+          <% if @template.current_piece.current_data_source.present? 
+              if @var_collection.present? && @var_collection.try( :has_pages? ) %>
               <%= paginate @var_collection %>
-            <% end %>
-          <% end %>
+              <% #set it to nil, or render pagination more times 
+                @var_collection = nil 
+              end 
+             end %>
           </div>          
     </div> 
   css: |-
