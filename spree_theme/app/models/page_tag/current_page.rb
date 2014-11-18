@@ -13,9 +13,9 @@ module PageTag
   class CurrentPage < Menus::WrappedMenu
 
     attr_accessor :page_generator,:website_tag, :template_tag, :product_tag
-    delegate :theme, :menu,:resource, :to => :page_generator
+    delegate :theme, :menu, :resource, :to => :page_generator
     delegate :is_preview, :to => :page_generator    
-    delegate :design?, :to => :website_tag, :prefix=>"site"    
+    delegate :design?, :to => :website_tag, :prefix=>"site"   
     alias_attribute :model, :menu #Menus::WrappedMenu use model
     
     def initialize(page_generator_instance)
@@ -34,7 +34,11 @@ module PageTag
     
     #title is current page title,  resource.title-menu.title-website.title
     def title
-      "#{menu.name} - #{website_tag.name}"
+      if detail_page?
+        "#{resource.name} - #{menu.name} - #{website_tag.name}"
+      else
+        "#{menu.name} - #{website_tag.name}"    
+      end      
     end
 
     #is given section context valid to current page 
@@ -42,6 +46,10 @@ module PageTag
       #Rails.logger.debug "valid=#{menu.current_context}, self.template_tag.current_piece=#{self.template_tag.current_piece.title}"
       ret = theme.valid_context?(template_tag.current_piece.page_layout, menu)
       #(self.template_tag.current_piece.context? menu.current_context)      
+    end
+    
+    def detail_page?
+      resource.present?
     end
     
     # when render for cart/account, should output '<%=yield %>'
