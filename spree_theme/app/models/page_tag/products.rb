@@ -18,7 +18,7 @@ module PageTag
       end
            
       def path
-        collection_tag.wrapped_taxon.path + "/#{model.id}-#{model.permalink}"
+        collection_tag.wrapped_taxon.partial_path + "/#{model.id}-#{model.permalink}"
       end    
     end  
            
