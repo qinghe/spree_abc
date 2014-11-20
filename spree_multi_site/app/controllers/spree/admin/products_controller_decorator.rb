@@ -13,9 +13,6 @@
         if params[:product][:global_taxon_ids].present?
           params[:product][:global_taxon_ids] = params[:product][:global_taxon_ids].split(',')
         end
-        if params[:product][:option_type_ids].present?
-          params[:product][:option_type_ids] = params[:product][:option_type_ids].split(',')
-        end        
       end  
       
       #def prepare_multi_site_context
