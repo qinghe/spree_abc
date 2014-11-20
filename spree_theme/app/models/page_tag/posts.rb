@@ -9,9 +9,9 @@ module PageTag
       delegate *self.accessable_attributes, :to => :model
       
       
-      def partial_path
-        "/#{model.id}-#{model.permalink}"
-      end
+      def path
+        "/post"+ collection_tag.wrapped_taxon.path + "/#{model.id}-#{model.permalink}"
+      end     
     end  
     
     

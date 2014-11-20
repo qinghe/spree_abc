@@ -5,12 +5,13 @@ module PageTag
     self.accessable_attributes=[:num_pages,:current_page,:total_pages,:limit_value] 
     delegate *self.accessable_attributes, :to => :models
 
-    attr_accessor :models
+    attr_accessor :models, :wrapped_taxon
 
     
-    def initialize(page_generator_instance, models)
+    def initialize(page_generator_instance, models, wrapped_taxon)
       super(page_generator_instance)
-      @models = models
+      self.models = models
+      self.wrapped_taxon = wrapped_taxon
     end
 
     def wrapped_models

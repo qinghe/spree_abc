@@ -131,7 +131,8 @@ module PageTag
       end
       #Rails.logger.debug "self.current_piece=#{self.current_piece.title},wrapped_taxon = #{wrapped_taxon.name},objs=#{objs.inspect}"      
       if objs.present?
-        objs = Products.new( self.page_generator, objs)
+        # wrapped_taxon may not be current taxon
+        objs = Products.new( self.page_generator, objs, wrapped_taxon )
       end
       objs      
     end
@@ -154,7 +155,7 @@ module PageTag
           end         
       end
       if objs.present?
-        objs = Posts.new( self.page_generator, objs)
+        objs = Posts.new( self.page_generator, objs, wrapped_taxon)
       end
       objs      
     end

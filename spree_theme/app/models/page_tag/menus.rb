@@ -1,7 +1,7 @@
 module PageTag
   class Menus < Base
     class WrappedMenu < WrappedModel
-      self.accessable_attributes=[:id,:name,:icon, :permalink, :is_clickable?, :page_home?,:depth, :leaf?,:root?,:persisted?, :extra_html_attributes, :description]
+      self.accessable_attributes=[:id,:name,:icon, :permalink,:path, :is_clickable?, :page_home?,:depth, :leaf?,:root?,:persisted?, :extra_html_attributes, :description]
       delegate *self.accessable_attributes, :to => :model
       delegate :taxonomy, :to => :model
       
@@ -53,14 +53,14 @@ module PageTag
       #  objs
       #end
       
-      def partial_path
-        # menu.id would be nil if it is class DefaultTaxon    
-        if model.permalink.present?    
-          "/#{self.model.id.to_i}-#{self.model.permalink.split('/').last}"
-        else
-          "/#{self.model.id.to_i}"
-        end
-      end
+      #def partial_path
+      #  # menu.id would be nil if it is class DefaultTaxon    
+      #  if model.permalink.present?    
+      #    "/#{self.model.id.to_i}-#{self.model.permalink.split('/').last}"
+      #  else
+      #    "/#{self.model.id.to_i}"
+      #  end
+      #end
     end
     attr_accessor :menus_cache #store all menus of template, key is page_layout_id, value is menu tree
     attr_accessor :template_tag, :page_generator

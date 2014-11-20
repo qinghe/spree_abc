@@ -106,10 +106,8 @@ module PageTag
       url = nil
       if wrapped_model.kind_of?( Menus::WrappedMenu )
         url= url_prefix+ wrapped_model.model.path
-      elsif wrapped_model.kind_of?( Posts::WrappedPost )      
-        url= url_prefix+ "/post"+ current_page_tag.partial_path + wrapped_model.partial_path
       else          
-        url= url_prefix+ current_page_tag.partial_path + wrapped_model.partial_path    
+        url= url_prefix+ wrapped_model.path    
       end    
       url
     end
