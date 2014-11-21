@@ -7,7 +7,7 @@
   <% if order.has_step?("address") %>
       <dt><%= Spree.t(:shipping_address) %> <%= link_to "(#{Spree.t(:edit)})", checkout_state_path(:address) unless @order.completed? %></dt>
       <dd class="address">
-        <%= order.ship_address %>
+        <%= render :partial => 'spree/shared/address', :locals => { :address => order.ship_address } %>
       </dd>
 
     <% if @order.has_step?("delivery") %>
