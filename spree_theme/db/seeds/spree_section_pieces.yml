@@ -98,10 +98,11 @@ root:
       width:100%; 
     }
     /* set padding margin to label */
-    #page form label {
+    #page form[id] label {
       display: inline-block;
     }
-    #page form p {
+    #page form[id] p { /* checkout_form, login_form, site_form...
+      exclude product_form, product form could have product description which have html element p ul... */
       margin: 0; padding: 0;
     }
           
