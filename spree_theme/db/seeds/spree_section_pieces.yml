@@ -101,8 +101,11 @@ root:
     #page form[id] label {
       display: inline-block;
     }
-    #page form[id] p { /* checkout_form, login_form, site_form...
-      exclude product_form, product form could have product description which have html element p ul... */
+    /* 
+     * product description should escape css reset 
+     * checkout_form, login_form, site_form... 
+     */
+    #page form[id] p {       
       margin: 0; padding: 0;
     }
           
