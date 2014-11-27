@@ -246,6 +246,7 @@ container:
     /* background, margin, border, padding */
     .<%=g_piece_selector%> .<%=g_piece_selector%>_inner
     { overflow: hidden;/* keep border visible*/
+      min-height:1px;min-width:1px;  /* it is required as placeholder */
       <%=@template.css(:inner)%>
     }
     .<%=@template.current_piece.child_selector%> 
@@ -264,7 +265,14 @@ container:
     .<%=g_piece_selector%> .pagination .current{
       <%=@template.css(:pagination_current)%> 
     }    
-
+    /* !unused, css for first/last child, feature center content */
+    <% if @template.current_piece.current_data_source.present? %>
+    .<%=@template.current_piece.child_selector%>:first-child{
+    } 
+    .<%=@template.current_piece.child_selector%>:last-child{
+    }     
+    <% end %> 
+   
   title: container
   slug: container
   
