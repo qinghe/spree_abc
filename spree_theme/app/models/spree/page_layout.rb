@@ -125,11 +125,15 @@ module Spree
         when :main_image_style
           #bit 2,3,4
           idx = (content_param&14)>>1
-          [:product,:large,:original, :small ].fetch( idx, :product )
+          #default is medium
+          [:medium, :large, :product, :small, :original ].fetch( idx, :medium )
         when :thumbnail_style
           #bit 5,6,7
           idx = (content_param&112)>>4
-          [:mini, :large, :original, :small].fetch( idx, :mini )
+          [:mini, :large, :medium, :small, :original].fetch( idx, :mini )
+        when :zoomable
+          #bit 8
+          content_param&128>0
         else 
           nil
         end 
