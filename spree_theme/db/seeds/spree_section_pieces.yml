@@ -906,7 +906,8 @@ ship_form:
           <%= hidden_field_tag 'order[use_billing]', '1' %>
       <% end %>
     </div>
-  css: ""
+  css: |
+    #baddress1 input{ width:480px; }
   js: ""
 order_summary:
   id: 35
