@@ -665,6 +665,7 @@ cart:
     .<%=g_piece_selector%> button{
       <%= @template.css :button %>
     }
+    .<%=g_piece_selector%> .line_item_quantity{ width:60px; }
   js: ""
 account:
   id: 21
