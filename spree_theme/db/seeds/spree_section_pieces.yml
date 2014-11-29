@@ -889,6 +889,7 @@ payment_form:
   css: |-
     #checkout_form_payment ul{ margin: 0; padding: 0;}
     #checkout_form_payment li{ list-style-type:none; }
+    #checkout_form_payment fieldset{ margin: 0; padding: 0; border: none; }
   js: ""
 ship_form:
   id: 34
