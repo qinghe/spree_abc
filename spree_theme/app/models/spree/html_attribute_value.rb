@@ -284,7 +284,7 @@ module Spree
             ".s_#{self.param_value.page_layout_id}_#{self.param_value.section_param.section_root_id}"
           when /page/
             "#page"
-          when /content_layout/
+          when 'content_layout','first_child','last_child'
             ".c_#{self.param_value.page_layout_id}"  
           when /(label|input|img|button)/ # product_atc, product_quantity
             ".s_#{self.param_value.page_layout_id}_#{self.param_value.section_param.section_root_id}"                      
@@ -306,6 +306,11 @@ module Spree
             " a.unavailable"
           when 'a','a_h'
             " a"
+          #when 'first_child','last_child'
+          #  # it is not right way to center content, 
+          #  # in html, we may add form to wrap each child, first-child do not work in this case.
+          #  # padding,margin is applied to inner, it also affect width of outer div
+          #  ":#{target[/[a-z]+/]} "
           when /\_h$/  #button_h
             " #{target.delete('_h')}"
           when 'error' #s_error
