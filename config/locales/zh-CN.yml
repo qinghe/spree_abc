@@ -338,6 +338,8 @@ zh-CN:
     analytics_desc_list_4: 完全免费
     analytics_trackers: 追踪分析
     and: 以及
+    api:
+      key: Key
     apply: 应用
     are_you_sure: 你确定么？
     are_you_sure_category: 你确定你要删除这个分类么?
