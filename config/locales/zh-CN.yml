@@ -338,6 +338,8 @@ zh-CN:
     analytics_desc_list_4: 完全免费
     analytics_trackers: 追踪分析
     and: 以及
+    api:
+      key: Key
     apply: 应用
     are_you_sure: 你确定么？
     are_you_sure_category: 你确定你要删除这个分类么?
@@ -760,7 +762,7 @@ zh-CN:
     new_adjustment: 新建调整
     new_billing_integration: 新建支付集成
     new_category: 新建目录
-    new_customer: 新建客户
+    new_customer: 新建帐号
     new_group: New Group
     new_image: 新建图片
     new_mail_method: 新建邮件服务
