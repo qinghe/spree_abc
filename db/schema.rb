@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20141107113617) do
+ActiveRecord::Schema.define(:version => 20141202074650) do
 
   create_table "ckeditor_assets", :force => true do |t|
     t.integer  "site_id",                         :default => 0, :null => false
@@ -168,6 +168,28 @@ ActiveRecord::Schema.define(:version => 20141107113617) do
     t.string  "abbr"
     t.integer "state_id"
   end
+
+  create_table "spree_comment_types", :force => true do |t|
+    t.string   "name"
+    t.string   "applies_to"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "spree_comments", :force => true do |t|
+    t.string   "title",            :limit => 50, :default => ""
+    t.text     "comment"
+    t.integer  "commentable_id"
+    t.string   "commentable_type"
+    t.integer  "user_id"
+    t.integer  "comment_type_id"
+    t.datetime "created_at",                                     :null => false
+    t.datetime "updated_at",                                     :null => false
+  end
+
+  add_index "spree_comments", ["commentable_id"], :name => "index_spree_comments_on_commentable_id"
+  add_index "spree_comments", ["commentable_type"], :name => "index_spree_comments_on_commentable_type"
+  add_index "spree_comments", ["user_id"], :name => "index_spree_comments_on_user_id"
 
   create_table "spree_configurations", :force => true do |t|
     t.string   "name"

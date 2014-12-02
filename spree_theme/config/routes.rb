@@ -16,6 +16,12 @@ Spree::Core::Engine.routes.prepend do
      end
   end
   
+  resources :comments, :only=>[:create] do
+    collection do
+      get :new_to_site
+    end
+  end
+  
   match '(/:c(/:r))' => 'template_themes#page' , :c => /\d[^\/]*/ # :c, taxon_id-permalink,  :r, product_id-permalink   
   match '/post/:c/:p' => 'template_themes#page', :c => /\d[^\/]*/ #
   #match 'preview(/:c(/:r))' => 'template_themes#preview' #preview home

@@ -102,7 +102,8 @@ module SpreeTheme::System
       # #just set home page in taxon is ok as well       
       #  @menu = SpreeTheme.taxon_class.home
       else
-        @menu = DefaultTaxon.instance
+        # get default_taxon from root, or it has no root, inherited_page_context cause error
+        @menu = DefaultTaxonRoot.instance(request.fullpath).children.first
       end
     end
     #menu should be same instance pass to PageTag::PageGenerator, it require  request_fullpath
