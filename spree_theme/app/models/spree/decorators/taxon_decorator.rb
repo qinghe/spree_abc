@@ -7,29 +7,22 @@ SpreeTheme.taxon_class.class_eval do
     scope :resourceful,->(theme){ roots }
     
     belongs_to :replacer, class_name: 'Spree::Taxon', foreign_key: 'replaced_by' 
+    serialize :html_attributes, Hash
     attr_accessible :page_context, :replaced_by, :is_clickable
 
+    alias_attribute :extra_html_attributes, :html_attributes
     
     def remove_from_theme
       Spree::TemplateTheme.native.each{|theme|
         theme.unassign_resource_from_theme! self 
       }
     end
-    
-    def extra_html_attributes
-      if @extra_html_attributes.nil?
-        if html_attributes.present?
-          @extra_html_attributes = Hash[ html_attributes.split(';').collect{|pair| pair.split(':')} ] 
-        end
-        @extra_html_attributes ||= {}
-      end
-      @extra_html_attributes
-    end
-    
+        
     # it is resource of template_theme
     def importable?    
       root?
     end 
+    
     # taxon is from other site
     def self.find_or_copy( taxon )
       raise "only support taxon root" unless taxon.root?
