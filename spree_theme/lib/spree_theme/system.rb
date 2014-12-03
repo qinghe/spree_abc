@@ -31,14 +31,15 @@ module SpreeTheme::System
     @theme.layout_path || SpreeTheme.site_class.current.layout || Spree::Config[:layout]
   end
 
-  def initialize_template
+  def initialize_template( request_fullpath = nil )
+    request_fullpath ||= request.fullpath
     # in case  tld/create_admin_session, should show system layout, theme may have no login section. ex www.dalianshops.com
     @special_layout = nil
     #dalianshops use template now.
     #return if SpreeTheme.site_class.current.dalianshops?
-    #Rails.logger.debug "request.fullpath=#{request.fullpath}"
+    #Rails.logger.debug "request_fullpath=#{request_fullpath}"
     # fullpath may contain ?n=www.domain.com    
-    case request.fullpath
+    case request_fullpath
       when /^\/under_construction/, /^\/user\/spree_user\/logout/ ,/^\/logout/, /^\/admin/
         return
     end  
@@ -100,18 +101,18 @@ module SpreeTheme::System
       #  @menu = SpreeTheme.taxon_class.home
       else
         # get default_taxon from root, or it has no root, inherited_page_context cause error
-        @menu = DefaultTaxonRoot.instance(request.fullpath).children.first
+        @menu = DefaultTaxonRoot.instance(request_fullpath).children.first
       end
     end
     #menu should be same instance pass to PageTag::PageGenerator, it require  request_fullpath
-    @menu.request_fullpath = request.fullpath
+    @menu.request_fullpath = request_fullpath
     # support feature replaced_by 
     if @menu.replacer.present?
       @menu = @menu.replacer
     end
 
     # @theme is required since we support create admin session by ajax.    
-    case request.fullpath
+    case request_fullpath
       when /^\/create_admin_session/,/^\/new_admin_session/
         @special_layout = 'layout_for_login'
         return
@@ -168,7 +169,7 @@ module SpreeTheme::System
       
       @page_layout = page_layout #current selected page_layout, the node of the layout tree.
       @page_layout||= theme.page_layout
-      @sections = Spree::Section.where(:is_enabled=>true).roots
+      @sections = Spree::Section.where(:is_enabled=>true).order("title").roots
       #template selection
       @template_themes = Spree::TemplateTheme.where(:site_id=>SpreeTheme.site_class.current.id)
   end

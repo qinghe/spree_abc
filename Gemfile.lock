@@ -90,6 +90,15 @@ PATH
       spree_core (~> 2.0.4)
 
 PATH
+  remote: ./spree_comments
+  specs:
+    spree_comments (2.0.0)
+      acts_as_commentable (= 3.0.1)
+      spree_api
+      spree_backend
+      spree_core (>= 2.0.1)
+
+PATH
   remote: ./spree_essential_blog
   specs:
     spree_essential_blog (2.0.11.beta)
@@ -161,6 +170,7 @@ GEM
       multi_json (~> 1.0)
     acts-as-taggable-on (2.2.2)
       rails (~> 3.0)
+    acts_as_commentable (3.0.1)
     acts_as_list (0.3.0)
       activerecord (>= 3.0)
     addressable (2.3.6)
@@ -434,6 +444,7 @@ DEPENDENCIES
   spree_alipay!
   spree_auth_devise!
   spree_china_checkout!
+  spree_comments!
   spree_editor!
   spree_essential_blog!
   spree_flexi_variants!

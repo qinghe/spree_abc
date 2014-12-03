@@ -43,7 +43,7 @@ bugs
 
 4. .s_1_75 .error, should be label.error,  input has class="error".
 
-6. fix rails r "load 'db/patch/20140329_fix_shipping_categories_site_id.rb'"
+5. fix rails r "load 'db/patch/20140329_fix_shipping_categories_site_id.rb'"
 Connecting to database specified by database.yml
   Spree::Preference Load (4.4ms)  SELECT `spree_preferences`.* FROM `spree_preferences` WHERE `spree_preferences`.`key` = 'spree/app_configuration/show_raw_product_description/0' LIMIT 1
    (0.1ms)  BEGIN
@@ -56,7 +56,7 @@ Connecting to database specified by database.yml
   Spree::Preference Load (0.3ms)  SELECT `spree_preferences`.* FROM `spree_preferences` WHERE `spree_preferences`.`key` = 'spree/editor_configuration/ids' LIMIT 1
    (0.1ms)  BEGIN
    (0.2ms)  UPDATE `spree_preferences` SET `value_type` = 'string', `updated_at` = '2014-03-30 13:59:05' WHERE `spree_preferences`.`id` = 16
-7. upload background image 
+6. upload background image 
 ActionView::MissingTemplate (Missing template base/model_dialog with {:locale=>[:"zh-CN"], :formats=>[:js, :html], :handlers=>[:erb, :builder, :coffee, :rabl], :versions=>[:v1]}. Searched in:
   * "/var/www/workspace/spree_abc/app/views"
   * "/home/david/.rvm/gems/ruby-1.9.3-p448@spree_abc/bundler/gems/spree_editor-4312b29cc270/app/views"
@@ -78,6 +78,16 @@ ActionView::MissingTemplate (Missing template base/model_dialog with {:locale=>[
   * "/"
 ):
 
+7. http://design.david.com:3000/account
+  change user email, redirect to /account, ->store_controller#unauthorize
+  filter initialize_template is not called, so raise error below
+  ActionView::Template::Error (private method `select' called for nil:NilClass):
+    1: <% g_page_layout_id=50; @template.select(g_page_layout_id); %>
+    2: <% proc_page=Proc.new{ defined?(page) ? page : @current_page } %> 
+    3:            <% g_section_id=75;
+    4:               @template.select(g_page_layout_id, g_section_id);
+  public/shops/development/2/layouts/t1_r7/l50.html.erb:1:in `_53ce8eaa1b7edb8381f2b4ce61ca8d2f'
+  
 
 new todo
 ==============================================================================================
