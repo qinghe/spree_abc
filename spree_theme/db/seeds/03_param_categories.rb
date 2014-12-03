@@ -1,12 +1,12 @@
 objs=[
   {"id"=>1, "position"=>1, "is_enabled"=>true, "editor_id"=>1, "slug"=>"general_config" },
-  {"id"=>2, "position"=>1, "is_enabled"=>true, "editor_id"=>2, "slug"=>"general_position" },
-  {"id"=>3, "position"=>3, "is_enabled"=>true, "editor_id"=>3, "slug"=>"general_hover" },
-  #{"id"=>4, "position"=>1, "is_enabled"=>true, "editor_id"=>4, "slug"=>"general_text" },
+  {"id"=>2, "position"=>3, "is_enabled"=>true, "editor_id"=>0, "slug"=>"general_position" },
+  {"id"=>3, "position"=>4, "is_enabled"=>true, "editor_id"=>0, "slug"=>"general_hover" },
 
-  {"id"=>4, "position"=>4, "is_enabled"=>true, "editor_id"=>0, "slug"=>"dialog_title" },
-  {"id"=>5, "position"=>5, "is_enabled"=>true, "editor_id"=>0, "slug"=>"dialog_content" },
-  {"id"=>6, "position"=>6, "is_enabled"=>true, "editor_id"=>0, "slug"=>"title" }, #header3
+  {"id"=>4, "position"=>5, "is_enabled"=>true, "editor_id"=>0, "slug"=>"dialog_title" },
+  {"id"=>5, "position"=>6, "is_enabled"=>true, "editor_id"=>0, "slug"=>"dialog_content" },
+  {"id"=>6, "position"=>7, "is_enabled"=>true, "editor_id"=>0, "slug"=>"title" }, #header3
+  {"id"=>7, "position"=>2, "is_enabled"=>true, "editor_id"=>0, "slug"=>"fixed_position" },
   {"id"=>10, "position"=>10, "is_enabled"=>true, "editor_id"=>0, "slug"=>"header0" }, #header0
   # a
   {"id"=>11, "position"=>11, "is_enabled"=>true, "editor_id"=>4, "slug"=>"link" },
@@ -49,6 +49,8 @@ objs=[
   {"id"=>81, "position"=>81, "is_enabled"=>true, "editor_id"=>2, "slug"=>"th" },
   {"id"=>82, "position"=>82, "is_enabled"=>true, "editor_id"=>2, "slug"=>"td" },
   #{"id"=>84, "position"=>84, "is_enabled"=>true, "editor_id"=>4, "slug"=>"td_text" },
+  {"id"=>91, "position"=>91, "is_enabled"=>true, "editor_id"=>0, "slug"=>"first_child" },
+  {"id"=>92, "position"=>92, "is_enabled"=>true, "editor_id"=>0, "slug"=>"last_child" },
   ]
 
 Spree::ParamCategory.delete_all              

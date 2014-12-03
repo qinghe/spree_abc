@@ -791,7 +791,7 @@ container_title:
   id: 28
   title: container title
   slug: container-title
-  is_selectable: "1"
+  is_selectable: "0"
   is_container: "1"
   html: ~~content~~    
   css: |
@@ -1027,7 +1027,7 @@ container_link:
   id: 42
   title: container link
   slug: container-link
-  is_selectable: "1"
+  is_selectable: "0"
   is_container: "1"
   html: ~~content~~    
   css: |
@@ -1040,7 +1040,7 @@ container_table:
   id: 43
   title: container table
   slug: container-table
-  is_selectable: "1"
+  is_selectable: "0"
   is_container: "1"
   html: ~~content~~    
   css: |
@@ -1053,7 +1053,7 @@ container_form:
   id: 44
   title: container form
   slug: container-form
-  is_selectable: "1"
+  is_selectable: "0"
   is_container: "1"
   html: ~~content~~    
   css: |
@@ -1586,16 +1586,15 @@ install_theme_with_site_button:
   updated_at: 2011-09-20 19:40:07
   css: "" 
   js: ""
-admin_login_button:
+container_fixed:
   id: 69
-  title: admin login button
-  slug: admin-login-button
+  title: container fixed
+  slug: container-fixed
   is_selectable: "0"
-  is_container: "0"
-  html: |
-      <%=link_to Spree.t(:sign_in), new_admin_session_path, {:remote=>true} %>  
-  created_at: 2011-09-20 19:40:07
-  updated_at: 2011-09-20 19:40:07
-  css: "" 
+  is_container: "1"
+  html: ~~content~~    
+  css: |
+    .<%=@template.current_piece.section_selector%> { position: fixed; right:0; top:250px; <%=@template.css(:position) %>}
   js: ""
+
   

@@ -13,6 +13,10 @@ class Spree::Comment < ActiveRecord::Base
   # NOTE: Comments belong to a user
   belongs_to :user
 
-  attr_accessible :commentable_id, :commentable_type, :user_id, :comment_type_id, :comment
+  attr_accessible :commentable_id, :commentable_type, :user_id, :comment_type_id, :comment, :cellphone, :email
 
+  # for translations,  for each commentable object, title could be different 
+  def comment_scope
+    commentable.class.name.demodulize.underscore
+  end
 end

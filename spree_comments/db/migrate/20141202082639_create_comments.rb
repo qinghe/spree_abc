@@ -5,6 +5,9 @@ class CreateComments < ActiveRecord::Migration
       t.text :comment, :default => "" 
       t.references :commentable, :polymorphic => true
       t.references :user
+      #for unlogged customer, we store email and cellphone for later touch
+      t.string :email, :limit => 50, :default => "" 
+      t.string :cellphone, :limit => 50, :default => "" 
       t.integer :comment_type_id
       t.timestamps
     end

@@ -3,14 +3,15 @@ module Spree
     before_filter :initialize_comment, :only => [:create, :new_to_site]
     
     def new_to_site
-      
+      @comment.commentable = Spree::Site.current
     end
   
     def create
       @comment.attributes =  object_params    
       if @comment.save
-        flash[:success] = flash_message_for(@comment, :successfully_created)
+        flash[:success] = Spree.t(:comment_successfully_created, :scope=>@comment.comment_scope)
         respond_with(@comment) do |format|
+          format.html { redirect_to :back }
           format.js   { render :layout => false }
         end
       else
@@ -23,7 +24,6 @@ module Spree
     def initialize_comment
       @comment = Comment.new(  )
       @comment.user = try_spree_current_user
-      @comment.user ||= Spree.user_class.new
     end
      
     # comment{commentable_id, commentable_type, user_email}

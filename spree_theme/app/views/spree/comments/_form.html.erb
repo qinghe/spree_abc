@@ -1,42 +1,29 @@
+<% # site_instance.class.name.demodulize.underscore => 'site'  
+   t_scope = @comment.comment_scope
+%>
 
-<div class="site-add-comment">
-  <%= form_for :comment  do |f| %>
-    <%= hidden_field_tag 'comment[commentable_id]', commentable.id %>
-    <%= hidden_field_tag 'comment[commentable_type]', commentable.class %>
-    <%= hidden_field_tag 'comment[user_id]', @comment.user.id %>
+    <%= hidden_field_tag 'comment[commentable_id]', @comment.commentable.id %>
+    <%= hidden_field_tag 'comment[commentable_type]', @comment.commentable.class %>
 
-    <fieldset data-hook="admin_comment_form_fields" class="no-border-top">
-      <fieldset class="index no-border-bottom">
-        <legend align="center"><%= Spree.t(:add_comment) %></legend>
-
-        <div data-hook="comment_fields" class="row">
-          <div class="alpha twelve columns">
-            <% if @comment_types.present? %>
-              <div class="field">
-                <%= f.label :comment_type_id, Spree.t(:type) %>
-                <%= f.select :comment_type_id, @comment_types.map{|ct| [ct.name, ct.id]},{} ,:class => 'fullwidth' %>
-              </div>
-            <% end %>
-            <div class="field">
-              <% unless try_spree_current_user %> 
-                  <%= fields_for :user, @comment.user do |user_fields| %>
-                    <%= user_fields.label :email %>
-                    <%= user_fields.text_field :email %>
-                  <% end %>
-              <% end %>
-
-              <%= f.label :comment, Spree.t(:comment) %>
-              <%= f.text_area :comment, :style => 'height:150px;', :class => 'fullwidth' %>
-            </div>
-          </div>
-        </div>
-      </fieldset>
-
-      <div class="clear"></div>
-
-      <div class="form-buttons filter-actions actions" data-hook="buttons">
-        <%= button Spree.t(:add_comment), 'icon-arrow-right' %>
-      </div>
-    </fieldset>
-  <% end %>
-</div>
+    <% if @comment_types.present? %>
+          <p class="field">
+            <%= f.label :comment_type_id, Spree.t(:type) %>
+            <%= f.select :comment_type_id, @comment_types.map{|ct| [ct.name, ct.id]},{} ,:class => 'fullwidth' %>
+          </p>
+    <% end %>        
+    <p class="field">
+      <%= f.label :comment, Spree.t(:comment,:scope=>t_scope) %><br />
+      <%= f.text_area :comment, :style => 'height:120px;', :class => 'fullwidth' %>
+    </p>
+    <% if @comment.user %> 
+      <%= hidden_field_tag 'comment[user_id]', @comment.user.id %>
+    <% else %>
+      <p class="field">
+        <%= f.label :cellphone, Spree.t(:commenter_cellphone,:scope=>t_scope) %><br />
+        <%= f.text_field :cellphone %>
+      </p>
+      <p class="field">
+        <%= f.label :email, Spree.t(:commenter_email,:scope=>t_scope) %><br />
+        <%= f.text_field :email %>
+      </p>
+    <% end %>        

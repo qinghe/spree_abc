@@ -19,14 +19,11 @@ module SpreeTheme::System
       return false
     end
     # keep it before check "designer", page for admin login never need design
-    if @is_layout_for_login_required
-      return 'layout_for_login'
-    end
+    return @special_layout if @special_layout.present?
 
     #for designer
-    if @is_designer
-      return 'layout_for_design'
-    end 
+    return 'layout_for_design' if @is_designer
+
     #for customer, do not support it now.
     #if @is_preview 
     #  return 'layout_for_preview'
@@ -36,7 +33,7 @@ module SpreeTheme::System
 
   def initialize_template
     # in case  tld/create_admin_session, should show system layout, theme may have no login section. ex www.dalianshops.com
-    @is_layout_for_login_required = false
+    @special_layout = nil
     #dalianshops use template now.
     #return if SpreeTheme.site_class.current.dalianshops?
     #Rails.logger.debug "request.fullpath=#{request.fullpath}"
@@ -116,8 +113,11 @@ module SpreeTheme::System
     # @theme is required since we support create admin session by ajax.    
     case request.fullpath
       when /^\/create_admin_session/,/^\/new_admin_session/
-        @is_layout_for_login_required = true
+        @special_layout = 'layout_for_login'
         return
+      when /^\/comments/ # it need layout when development, in fact it is always ajax.
+        @special_layout = 'under_construction'
+        return        
     end  
     
     # site has a released theme    

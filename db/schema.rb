@@ -182,6 +182,8 @@ ActiveRecord::Schema.define(:version => 20141202074650) do
     t.integer  "commentable_id"
     t.string   "commentable_type"
     t.integer  "user_id"
+    t.string   "email",            :limit => 50, :default => ""
+    t.string   "cellphone",        :limit => 50, :default => ""
     t.integer  "comment_type_id"
     t.datetime "created_at",                                     :null => false
     t.datetime "updated_at",                                     :null => false
