@@ -11,11 +11,11 @@ module Spree
           user = Spree::User.reset_password_by_token(params[:user])
           sign_in(@user, :event => :authentication, :bypass => !Spree::Auth::Config[:signout_after_password_change])
         end
-        if request.xhr?
-          render "spree/shared/close_dialog"
-        else
-          redirect_to spree.account_url, :notice => Spree.t(:account_updated)            
-        end
+        
+        respond_with(@user) do |format|
+          format.html { redirect_to spree.account_url, :notice => Spree.t(:account_updated) }
+          format.js   { render :layout => false }
+        end        
       else
         render :edit
       end

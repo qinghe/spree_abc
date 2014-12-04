@@ -1,6 +1,6 @@
 
-<h3 class="header3"><%= Spree.t(:add_comment,:scope=>'site') %></h3>
-<%= form_for @comment  do |f| %>
+<h3 class="header3"><%= Spree.t(:add_comment,:scope=>'site', :site_name=>Spree::Site.current.name) %></h3>
+<%= form_for @comment, :remote=>request.xhr?  do |f| %>
   <%= render :partial=>'form', :locals=>{:commentable=>Spree::Site.current,  :f => f } %>
   <p><%= f.button Spree.t(:create), :class => 'button', :type=>:submit %>
      <%= f.button Spree.t('actions.cancel'), :class => 'button cancel', :type=>:button %>
