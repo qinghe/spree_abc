@@ -21,7 +21,7 @@ Rails.logger.debug "product=#{product.inspect}"
   test "remove samples" do
     
     @site.save!
-    @site.load_sample(false)
+    @site.unload_sample
     Spree::Site.current = @site
     assert_equal Spree::Product.count,0
     assert_equal Spree::Zone.count, 0
