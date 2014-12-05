@@ -114,14 +114,14 @@ class Spree::Site < ActiveRecord::Base
         }
         self.products.each{|product|
           product.variants.each{|variant| variant.inventory_units.clear}
+          product.destroy! # it is acts_as_paranoid
         }
-        self.products.clear
         self.properties.clear
-        self.payment_methods.each{|pm| pm.delete}
+        self.payment_methods.each{|pm| pm.destroy! } # it is acts_as_paranoid
         self.prototypes.clear
         self.option_types.clear
         self.shipping_categories.clear
-        self.tax_categories.clear
+        self.tax_categories.each{|pm| pm.destroy! } # it is acts_as_paranoid
         self.taxonomies.each{|taxonomy|
           taxonomy.root.destroy # remove taxons
           taxonomy.destroy
