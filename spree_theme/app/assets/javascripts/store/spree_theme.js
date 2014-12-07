@@ -10,6 +10,7 @@
 //= require store/spree_theme.client
 //= require interface.js
 //= require jquery.jeditable.js
+//= require jquery.floatBar.js
 
 $(document).ready(function() {
   if (typeof(g_is_preview) != 'undefined' && g_is_preview==true)

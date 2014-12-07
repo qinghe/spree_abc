@@ -1,14 +1,6 @@
 //= require jquery
 //= require jquery.validate/localization/messages_zh-CN.js
 //= require jquery.simplemodal.js
-function center_template_section( selector )
-{
-    var ele = $(selector);
-    ele.css("top", ($('#page').height() - ele.outerHeight(true)) / 2 + $('#page').scrollTop() + "px");
-    ele.css("left", ($('#page').width() - ele.outerWidth(true)) / 2 + $('#page').scrollLeft() + "px");
-    ele.show();
-}
-
 
 $(document).ready(function() {
   // template theme selection for designer shop
@@ -19,7 +11,13 @@ $(document).ready(function() {
   $( "#embeded_content_wrapper_icon" ).hover(
     function() { $( "#embeded_content_wrapper" ).show(); }
   );
-    
+  
+});
+$(document).ready(function() {
+  // initialize sections    
+  $($("input.fixed_container").val()).floatBar({
+    bodyWidth:980, vertical:"top",  moveOnOff:false, focusOnOff:false
+  });
 });
 
 // copy from project https://github.com/citrus/spree_variant_options

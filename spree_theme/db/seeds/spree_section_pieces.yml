@@ -1592,9 +1592,8 @@ container_fixed:
   slug: container-fixed
   is_selectable: "0"
   is_container: "1"
-  html: ~~content~~    
+  html: ~~content~~
+    <input type="hidden" class="fixed_container" value=".<%=@template.current_piece.section_selector%>">    
   css: |
     .<%=@template.current_piece.section_selector%> { position: fixed; right:0; top:250px; <%=@template.css(:position) %>}
-  js: ""
-
-  
+  js: ''
