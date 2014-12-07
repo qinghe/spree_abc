@@ -56,6 +56,7 @@ module Spree
     serialize :assigned_resource_ids, Hash
     scope :within_site, lambda { |site|where(:site_id=> site.id) }
     scope :released, where("release_id>0")
+    scope :published, lambda { released.where(:is_public=>true) }
     
     before_validation :fix_special_attributes
     before_destroy :remove_relative_data
@@ -81,7 +82,7 @@ module Spree
       end
       
       def foreign
-        self.within_site(SpreeTheme.site_class.designsite ).where(:is_public=>true)
+        self.within_site(SpreeTheme.site_class.designsite ).published
       end        
       
       # original_theme may be attributes in hash

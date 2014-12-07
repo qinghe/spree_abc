@@ -12,8 +12,8 @@ zh-CN:
     comments: Comments
     comment: Comment
     site:
-      add_comment: 亲爱的用户：欢迎您抢先体验“DalianShops”，有任何意见和建议，或在使用过程中遇到问题，请告诉我们，我们会每天关注反馈信息，不断优化产品，为您提供更好的服务！
-      comment: 请留下您对“DalianShops”的意见和建议！
+      add_comment: 亲爱的用户：欢迎您抢先体验“%{site_name}”，有任何意见和建议，或在使用过程中遇到问题，请告诉我们，我们会每天关注反馈信息，不断优化产品，为您提供更好的服务！
+      comment: 请留下您对“%{site_name}”的意见和建议！
       commenter_email: 您常用的电子邮箱
       commenter_cellphone: 您常用的联系电话
       comment_successfully_created: 谢谢您的反馈，我们已收到。      

@@ -72,9 +72,9 @@ class Spree::Site < ActiveRecord::Base
     !(self.id>0)
   end
   
-  def load_sample(be_loading = true)
+  def load_sample(  )
     require 'ffaker'
-    # global talbes
+    # global tables
     #   countries,states, zones, zone_members, roles #admin
     # activators,
     # tables belongs to site
@@ -97,54 +97,57 @@ class Spree::Site < ActiveRecord::Base
     # unused table
     #   credit_cars(site?), gateways(site?)
     #
-    original_current_website, self.class.current = self.class.current, self 
-    
-    if be_loading!=true #
-      self.orders.each{|order|
-        order.state_changes.clear
-        order.inventory_units.clear
-        order.tokenized_permission.delete
-        order.destroy
-      }
-      self.products.each{|product|
-        product.variants.each{|variant| variant.inventory_units.clear}
-      }
-      self.products.clear
-      self.properties.clear
-      self.payment_methods.each{|pm| pm.delete}
-      self.prototypes.clear
-      self.option_types.clear
-      self.shipping_categories.clear
-      self.tax_categories.clear
-      self.taxonomies.each{|taxonomy|
-        taxonomy.root.destroy # remove taxons
-        taxonomy.destroy
-      }
-      
-      self.zones.each{|zone|
-        zone.destroy
-      }
-      self.shipping_methods.clear
-      
-      #TODO fix taxons.taconomy_id
-      self.users.find(:all,:include=>[:ship_address,:bill_address],:offset=>1, :order=>'id').each{|user|
-        user.bill_address.destroy
-        user.ship_address.destroy
-        user.destroy
-        } #skip first admin
-      #shipping_method, calculator, creditcard, inventory_units, state_change,tokenized_permission
-      #TODO remove image files
-      self.assets.clear
-      #FIXME seems it do not work 
-      self.clear_preferences #remove preferences
-      #TODO clear those tables
-      # creditcarts,preferences
-      self.state_changes.clear 
-    else
-      load_sample_products  
+    raise "exists products" if self.products.any?
+    self.class.with_site( self ) do 
+        load_sample_products  
     end
-    
-   self.class.current = original_current_website
+    self
+  end
+  
+  def unload_sample
+    self.class.with_site( self ) do 
+        self.orders.each{|order|
+          order.state_changes.clear
+          order.inventory_units.clear
+          order.tokenized_permission.delete
+          order.destroy
+        }
+        self.products.each{|product|
+          product.variants.each{|variant| variant.inventory_units.clear}
+          product.destroy! # it is acts_as_paranoid
+        }
+        self.properties.clear
+        self.payment_methods.each{|pm| pm.destroy! } # it is acts_as_paranoid
+        self.prototypes.clear
+        self.option_types.clear
+        self.shipping_categories.clear
+        self.tax_categories.each{|pm| pm.destroy! } # it is acts_as_paranoid
+        self.taxonomies.each{|taxonomy|
+          taxonomy.root.destroy # remove taxons
+          taxonomy.destroy
+        }
+        
+        self.zones.each{|zone|
+          zone.destroy
+        }
+        self.shipping_methods.clear
+        
+        #TODO fix taxons.taconomy_id
+        self.users.find(:all,:include=>[:ship_address,:bill_address],:offset=>1, :order=>'id').each{|user|
+          user.bill_address.destroy
+          user.ship_address.destroy
+          user.destroy
+          } #skip first admin
+        #shipping_method, calculator, creditcard, inventory_units, state_change,tokenized_permission
+        #TODO remove image files
+        self.assets.clear
+        #FIXME seems it do not work 
+        self.clear_preferences #remove preferences
+        #TODO clear those tables
+        # creditcarts,preferences
+        self.state_changes.clear 
+    end
+    self
   end
   
   # current site'subdomain => short_name.dalianshops.com

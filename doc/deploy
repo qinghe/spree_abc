@@ -41,3 +41,10 @@ https://community.jboss.org/wiki/InstallPostgreSQLonFedora?_sscc=t
 #http://www.imagemagick.org/script/install-source.php
 wget http://www.imagemagick.org/download/ImageMagick.tar.gz
 tar xvzf ImageMagick.tar.gz
+
+system recovery
+--------------------------------------------------------------
+mysql -uroot spree_abc_staging < spree_abc20141204.sql
+tar -zxvf spree_abc20141204.tar.gz
+mv /webroot/spree_abc /webroot/spree_abc.bak
+mv webroot/spree_abc /webroot/

@@ -10,6 +10,7 @@ class SiteTest < ActiveSupport::TestCase
     @site.save!
     Spree::Site.current = @site
     @site.load_sample
+    @site.reload
     assert @site.shipping_categories.present?
     product = @site.products.first
 Rails.logger.debug "product=#{product.inspect}"    
@@ -19,11 +20,15 @@ Rails.logger.debug "product=#{product.inspect}"
   
   
   test "remove samples" do
-    
     @site.save!
-    @site.load_sample(false)
+    @site.load_sample    
+    @site.reload
+    @site.unload_sample
     Spree::Site.current = @site
     assert_equal Spree::Product.count,0
+    assert_equal Spree::Variant.count,0
+    assert_equal Spree::PaymentMethod.count,0
+    assert_equal Spree::TaxCategories.count,0
     assert_equal Spree::Zone.count, 0
     assert_equal Spree::StateChange.count, 0
     #product variants

@@ -12,7 +12,7 @@
           </p>
     <% end %>        
     <p class="field">
-      <%= f.label :comment, Spree.t(:comment,:scope=>t_scope) %><br />
+      <%= f.label :comment, Spree.t(:comment,:scope=>t_scope, :site_name=>Spree::Site.current.name) %><br />
       <%= f.text_area :comment, :style => 'height:120px;', :class => 'fullwidth' %>
     </p>
     <% if @comment.user %> 

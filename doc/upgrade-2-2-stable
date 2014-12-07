@@ -2,3 +2,5 @@
    details at https://github.com/spree/spree/commit/b1d6c5e4b9801d888cc76c05116b814945122207
    our template are using it. we should implement it.
 
+2. acts_as_paranoid for Rails 4
+   destroy! => really_desroy!
