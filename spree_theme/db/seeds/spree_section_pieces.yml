@@ -1592,8 +1592,22 @@ container_fixed:
   slug: container-fixed
   is_selectable: "0"
   is_container: "1"
-  html: ~~content~~
-    <input type="hidden" class="fixed_container" value=".<%=@template.current_piece.section_selector%>">    
+  html: |
+    ~~content~~    
+    <input type="hidden" class="fixed_container" value=".<%=@template.current_piece.section_selector%>">
   css: |
     .<%=@template.current_piece.section_selector%> { position: fixed; right:0; top:250px; <%=@template.css(:position) %>}
+  js: ''
+container_hover_effect:
+  id: 70
+  title: container hover effect
+  slug: container-hover-effect
+  is_selectable: "0"
+  is_container: "1"
+  html: |
+    ~~content~~    
+    <input type="hidden" class="hover_effect_container" value=".<%=@template.current_piece.section_selector%>">
+  css: |
+    /* since ie 6-8 do not support :last_child, have first child hidden initially */
+    .<%=@template.current_piece.section_selector%>_inner>:first-child { display:none; <%=@template.css(:position) %>}
   js: ''

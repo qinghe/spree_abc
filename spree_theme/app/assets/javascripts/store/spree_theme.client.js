@@ -15,9 +15,17 @@ $(document).ready(function() {
 });
 $(document).ready(function() {
   // initialize sections    
-  $($("input.fixed_container").val()).floatBar({
-    bodyWidth:980, vertical:"top",  moveOnOff:false, focusOnOff:false
-  });
+    $($("input.fixed_container").val()).floatBar({
+        bodyWidth:980, vertical:"top",  moveOnOff:false, focusOnOff:false
+      });
+    $("input.hover_effect_container").each(function(index, element){
+      var children = $(element).siblings('div');
+      if( children.length == 2){
+        var child1 = $(children[0]); var child2 = $(children[1]);   
+        child2.on('mouseenter',function(){ child1.show();child2.hide(); })  
+        child1.on('mouseout', function(){child2.show();child1.hide();})  
+      }
+    })      
 });
 
 // copy from project https://github.com/citrus/spree_variant_options
