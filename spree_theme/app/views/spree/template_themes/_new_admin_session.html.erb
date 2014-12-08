@@ -1,7 +1,7 @@
 <% #show error message in dialog %>
 <%= flash_messages if request.xhr? %>
 
-<%= form_for @user, :as => :spree_user, :url => create_admin_session_path, :remote=>request.xhr? do |f| %>
+<%= form_for @user, :as => :spree_user, :url => create_admin_session_path, :method=>:post, :remote=>request.xhr? do |f| %>
   <div id="password-credentials">
     <p>
       <%= f.label :email, Spree.t(:email) %><br />
