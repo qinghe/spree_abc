@@ -19,3 +19,4 @@ public/shops/test
 config/deploy/production.rb
 db/full_sql
 rdoc
+.settings
