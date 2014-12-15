@@ -129,3 +129,30 @@ sales todo
 1. 市场调查
 2.0 制定客户调查范围，流程
 2.1 执行客户电话调查
+
+
+When upgrading
+
+Re-run the migrations generator
+
+    rake acts_as_taggable_on_engine:install:migrations
+
+It will create any new migrations and skip existing ones
+
+
+##Breaking changes:
+
+  - ActsAsTaggableOn::Tag is not extend with ActsAsTaggableOn::Utils anymore.
+    Please use ActsAsTaggableOn::Utils instead
+Post-install message from capistrano-stats:
+    Capistrano will ask you the next time you run it if you would like to share
+    anonymous usage statistics with the maintainance team to help guide our
+    development efforts. We emplore you to opt-in, but we understand if your
+    privacy is important to you in this regard.
+Post-install message from capistrano:
+Capistrano 3.1 has some breaking changes. Please check the CHANGELOG: http://goo.gl/SxB0lr
+
+If you're upgrading Capistrano from 2.x, we recommend to read the upgrade guide: http://goo.gl/4536kB
+
+The `deploy:restart` hook for passenger applications is now in a separate gem called capistrano-passenger.  Just add it to your Gemfile and require it in your Capfile.
+
