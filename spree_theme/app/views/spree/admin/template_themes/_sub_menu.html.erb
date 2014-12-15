@@ -1,8 +1,8 @@
 <% content_for :sub_menu do %>
   <ul id="sub_nav" data-hook="admin_template_theme_sub_tabs" class="inline-menu">
-    <%= tab :native_themes, :route=>"native_admin_template_themes" , :match_path => '/template_themes/native' %>
+    <%= tab :native_themes, :route=>"native_admin_template_themes" , :match_path => /native|config|apply/ %>
     <%= tab :theme_texts, :route=>"admin_template_texts" ,:match_path => '/template_texts' %>
-    <%= tab :foreign_themes, :route=>"foreign_admin_template_themes" ,:match_path => '/template_themes/foreign' %>
+    <%= tab :foreign_themes, :route=>"foreign_admin_template_themes" ,:match_path => /foreign|import/ %>
     
   </ul>
 <% end %>

@@ -1,6 +1,6 @@
 #encoding: utf-8
 class Spree::Site < ActiveRecord::Base
-  cattr_accessor :unknown,:subdomain_regexp, :loading_fake_order_with_sample, :dalianshops_url
+  cattr_accessor :unknown,:subdomain_regexp, :loading_fake_order_with_sample
   has_many :taxonomies,:inverse_of =>:site,:dependent=>:destroy
   has_many :products,:inverse_of =>:site,:dependent=>:destroy
   has_many :orders,:inverse_of =>:site,:dependent=>:destroy
@@ -16,8 +16,7 @@ class Spree::Site < ActiveRecord::Base
   has_many :payment_methods,:dependent=>:destroy
   has_many :assets,:dependent=>:destroy
   has_many :zones,:dependent=>:destroy
-  has_many :state_changes,:dependent=>:destroy
-  
+  has_many :state_changes,:dependent=>:destroy  
   #acts_as_nested_set
   accepts_nested_attributes_for :users
   
@@ -28,7 +27,6 @@ class Spree::Site < ActiveRecord::Base
   # so it require a default value.
   self.subdomain_regexp = /^([a-z0-9\-])*$/
   self.loading_fake_order_with_sample = false
-  self.dalianshops_url = "www.dalianshops.com"
   validates :name, length: 4..32 #"中国".length=> 2
   validates :short_name, uniqueness: true, presence: true, length: 4..32, format: {with: subdomain_regexp} #, unless: "domain.blank?"
   validates_uniqueness_of :domain, :allow_blank=>true 
@@ -38,7 +36,8 @@ class Spree::Site < ActiveRecord::Base
   
   class << self
     def dalianshops
-      find_by_domain dalianshops_url
+      #in development, we may change site domain
+      find_by_short_name('first')#find_by_domain 
     end
     
     def current
@@ -48,19 +47,34 @@ class Spree::Site < ActiveRecord::Base
     def current=(some_site)
       ::Thread.current[:spree_site] = some_site      
     end
+    
+    # execute block with given site
+    def with_site(new_site)
+      original_current = self.current
+      begin
+        self.current = new_site
+        yield
+      ensure
+        self.current = original_current  
+      end
+    end
   end
   
   def dalianshops?
-    self.domain == dalianshops_url
+    self == self.class.dalianshops 
+  end
+  
+  def current?
+    self == self.class.current
   end
   
   def unknown?
     !(self.id>0)
   end
   
-  def load_sample(be_loading = true)
+  def load_sample(  )
     require 'ffaker'
-    # global talbes
+    # global tables
     #   countries,states, zones, zone_members, roles #admin
     # activators,
     # tables belongs to site
@@ -83,58 +97,62 @@ class Spree::Site < ActiveRecord::Base
     # unused table
     #   credit_cars(site?), gateways(site?)
     #
-    original_current_website, self.class.current = self.class.current, self 
-    
-    if be_loading!=true #
-      self.orders.each{|order|
-        order.state_changes.clear
-        order.inventory_units.clear
-        order.tokenized_permission.delete
-        order.destroy
-      }
-      self.products.each{|product|
-        product.variants.each{|variant| variant.inventory_units.clear}
-      }
-      self.products.clear
-      self.properties.clear
-      self.payment_methods.each{|pm| pm.delete}
-      self.prototypes.clear
-      self.option_types.clear
-      self.shipping_categories.clear
-      self.tax_categories.clear
-      self.taxonomies.each{|taxonomy|
-        taxonomy.root.destroy # remove taxons
-        taxonomy.destroy
-      }
-      
-      self.zones.each{|zone|
-        zone.destroy
-      }
-      self.shipping_methods.clear
-      
-      #TODO fix taxons.taconomy_id
-      self.users.find(:all,:include=>[:ship_address,:bill_address],:offset=>1, :order=>'id').each{|user|
-        user.bill_address.destroy
-        user.ship_address.destroy
-        user.destroy
-        } #skip first admin
-      #shipping_method, calculator, creditcard, inventory_units, state_change,tokenized_permission
-      #TODO remove image files
-      self.assets.clear
-      #FIXME seems it do not work 
-      self.clear_preferences #remove preferences
-      #TODO clear those tables
-      # creditcarts,preferences
-      self.state_changes.clear 
-    else
-      load_sample_products  
+    raise "exists products" if self.products.any?
+    self.class.with_site( self ) do 
+        load_sample_products  
     end
-    
-   self.class.current = original_current_website
+    self
+  end
+  
+  def unload_sample
+    self.class.with_site( self ) do 
+        self.orders.each{|order|
+          order.state_changes.clear
+          order.inventory_units.clear
+          order.tokenized_permission.delete
+          order.destroy
+        }
+        self.products.each{|product|
+          product.variants.each{|variant| variant.inventory_units.clear}
+          product.destroy! # it is acts_as_paranoid
+        }
+        self.properties.clear
+        self.payment_methods.each{|pm| pm.destroy! } # it is acts_as_paranoid
+        self.prototypes.clear
+        self.option_types.clear
+        self.shipping_categories.clear
+        self.tax_categories.each{|pm| pm.destroy! } # it is acts_as_paranoid
+        self.taxonomies.each{|taxonomy|
+          taxonomy.root.destroy # remove taxons
+          taxonomy.destroy
+        }
+        
+        self.zones.each{|zone|
+          zone.destroy
+        }
+        self.shipping_methods.clear
+        
+        #TODO fix taxons.taconomy_id
+        self.users.find(:all,:include=>[:ship_address,:bill_address],:offset=>1, :order=>'id').each{|user|
+          user.bill_address.destroy
+          user.ship_address.destroy
+          user.destroy
+          } #skip first admin
+        #shipping_method, calculator, creditcard, inventory_units, state_change,tokenized_permission
+        #TODO remove image files
+        self.assets.clear
+        #FIXME seems it do not work 
+        self.clear_preferences #remove preferences
+        #TODO clear those tables
+        # creditcarts,preferences
+        self.state_changes.clear 
+    end
+    self
   end
   
   # current site'subdomain => short_name.dalianshops.com
   def subdomain
+    return self.domain if dalianshops? #fix: first.dalianshops.com
     ([self.short_name] + self.class.dalianshops.domain.split('.')[1..-1]).join('.')
   end
   
@@ -161,5 +179,5 @@ class Spree::Site < ActiveRecord::Base
       end
     end
   end
-    
+
 end

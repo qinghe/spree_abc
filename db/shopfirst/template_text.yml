@@ -4,9 +4,9 @@
     id: 1
     site_id: 1
     name: 广告词
-    body: ! "<h1>真金不怕火炼</h1>\r\n<p>把&ldquo;电子&rdquo;的事情交给我们，让您轻松做&ldquo;商务&rdquo;</p>\r\n<h3
+    body: ! "<h1>独立网店开店平台</h1>\r\n<p>把&ldquo;电子&rdquo;的事情交给我们，让您轻松做&ldquo;商务&rdquo;</p>\r\n<h3
       style=\"padding-left: 30px;\"><em>行不行，试过就知道</em></h3>"
-    slug: 
+    permalink: 
     created_at: 2014-03-15 15:08:19.000000000 Z
     updated_at: 2014-03-16 11:49:15.000000000 Z
 - !ruby/object:Spree::TemplateText
@@ -21,7 +21,7 @@
       &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>\r\n<li>博客、微博、微信一键分享，玩转社交营销。</li>\r\n</ul>\r\n</td>\r\n<td>\r\n<h3>4.
       数据和分析</h3>\r\n<ul>\r\n<li>客户，产品访问，订单，运营数据一个不漏。</li>\r\n<li>有多少客户完成下单，哪些商品卖的最好...商业智能分析帮你做决策。</li>\r\n<li>支持主流网站统计工具,
       专业的工具给你专业的答案。</li>\r\n</ul>\r\n</td>\r\n</tr>\r\n</tbody>\r\n</table>"
-    slug: 
+    permalink: 
     created_at: 2014-03-17 14:51:04.000000000 Z
     updated_at: 2014-03-18 13:16:50.000000000 Z
 - !ruby/object:Spree::TemplateText
@@ -36,7 +36,7 @@
       定制网店模板，保持与企业网站风格一致<br><br>四. 我是一名开发人员，了解开发和部署的辛苦，想找个可用的网店系统。<br>&nbsp; 它是你的选择，不用自己动手，注册一下就好。不满意的功能，请告诉我们，一定及时改正。<br><br>五.
       我有网站， 但不满意，我需要&lsquo;非常强大&rsquo;的商城系统。<br>&nbsp; 希望我们能够为您服务，但目前这款系统还不适合您，<br>&nbsp;
       您可以选择 shopex, hishop</p>
-    slug: 
+    permalink: 
     created_at: 2014-03-18 13:14:49.000000000 Z
     updated_at: 2014-03-18 13:14:49.000000000 Z
 - !ruby/object:Spree::TemplateText
@@ -45,6 +45,6 @@
     site_id: 1
     name: powered by dalianshops
     body: <p><em>powered by dalianshops</em></p>
-    slug: 
+    permalink: 
     created_at: 2014-03-18 13:50:59.000000000 Z
     updated_at: 2014-03-18 13:50:59.000000000 Z

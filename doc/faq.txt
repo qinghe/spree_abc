@@ -22,3 +22,11 @@ rake spree_theme:import_theme RAILS_ENV=local_staging SEED_PATH=1
   
 6. setup test env
    rake db:test:clone
+   
+7. How to generate rdoc
+  rdoc --op=./rdoc --include= app lib
+  rake doc:app #old style.
+
+8. get attachment styles
+ Spree::Image.attachment_definitions[:attachment][:styles]
+ 

@@ -40,7 +40,16 @@ Rails.logger.debug "new_param_value_count=#{new_param_value_count},original_para
       Spree::ParamValue.where(:section_param_id=>section_param.id).should be_blank
     end
     
-    
   end
    
+   
+  it "insert html_attribute" do
+    padding = Spree::HtmlAttribute.find 32
+    margin = Spree::HtmlAttribute.find 31
+    spp = Spree::SectionPieceParam.where(:editor_id=>2, :class_name=>'content_layout').first    
+    spp.insert_html_attribute( padding)    
+    spp.insert_html_attribute( padding).should raise_error
+    spp.insert_html_attribute( padding, margin).should raise_error
+    
+  end   
 end

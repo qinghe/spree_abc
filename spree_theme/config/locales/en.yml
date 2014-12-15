@@ -1,6 +1,14 @@
 en:
   activerecord:
     attributes:
+      spree/page_layout:
+        section_context: section context
+        data_source: data source 
+      spree/template_file: 
+        attachment_file_name: File name
+        attachment_content_type: type
+        attachment_file_size: File size
+        created_at: created at
       spree/template_text: 
         name: Title
         slug: Slug
@@ -10,6 +18,9 @@ en:
         slug: Slug
         body: Body
     models:
+      spree/template_file:
+        one: template file
+        many: template files
       spree/template_text:
         one: template text
         many: template texts
@@ -34,21 +45,30 @@ en:
         theme_texts: template materials
         native_themes: 模板
         foreign_themes: 模板商店
+    back_to_template_file_list: back to template file list
     back_to_themes_list: 回到模板列表
-    apply_theme: 
-    config_theme:
-    configing_theme: 配置模板 
-    copy_theme:
-    delete_theme: 删除 
-    release_theme: 
+    back_to_template_text_list: 回到素材列表
+    back_to_template_file_list: 回到素材列表
     select_taxon: 选择菜单
     select_template_image: 选择图片    
-    taxon:
-      default_home: Home
-      default_login: Login as Existing Customer
-      default_account: My account
-      default_signup: Registration
-      default_password: Forgot Password 
+    select_from_foreign_themes: 到模板商店选择模板   
+    default_page:
+      home: home
+      login: login
+      account: account
+      signup: signup
+      password: password
+      list: list
+      detail: detail
+      unknown: unknown
+      checkout: checkout
+      thanks: thanks
+      taxonomy: taxonomy 
+    default_shipping_category_name: Default
+    template_file:
+      index: 图片素材
+      new: 新建图片素材
+    template_resource: template_resource
     template_text:
       static_pages: Static pages
       static_pages_desc: Manage static page with WYSIWYG editor.
@@ -59,6 +79,8 @@ en:
       meta_title: Meta Title
       page_navigation_title: "Pages"
     template_theme:
+      native_themes: native_themes
+      config: config 
       assign_resource:
     page_layout:
       context: 

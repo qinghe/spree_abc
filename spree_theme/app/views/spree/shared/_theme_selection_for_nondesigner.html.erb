@@ -1,0 +1,11 @@
+<% # notice: it is called by client page. @current_page is from theme tag  
+   @template_themes = Spree::TemplateTheme.native.published  
+%>
+<div id="embeded_content_wrapper" class="">
+  <div class="theme_selection_wrapper">
+    <%=render :partial=>"theme_selection", :locals=>{:template_themes=>@template_themes, :selected=>@current_page.theme} %>
+  </div>
+</div>
+<div id="embeded_content_wrapper_icon" class="">
+  模板
+</div>

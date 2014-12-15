@@ -57,8 +57,9 @@ gem 'spree_theme',   :path => './spree_theme'
 
 #only specify it here, then could use ActiveMerchant::Billing::Integrations::Alipay::Helper directly
 gem 'activemerchant', :require => 'active_merchant'
-gem 'activemerchant_patch_for_china' #support alipay
-gem 'spree_alipay',   :github => "RuanShan/spree_alipay", :branch=>"master"
+#0.2.1 changed alipay service url
+gem 'activemerchant_patch_for_china', '0.2.0' #support alipay
+gem 'spree_alipay',   :github => "RuanShan/spree_alipay", :branch=>"2-0-stable"
 
 gem 'spree_china_checkout',   :path => './spree_china_checkout'
 
@@ -68,6 +69,12 @@ gem 'spree_china_checkout',   :path => './spree_china_checkout'
 gem 'spree_editor',  :github => "spree/spree_editor", :branch=>"2-0-stable"
 gem 'tinymce-rails-langs'
 
+gem 'spree_essential_blog',   :path => './spree_essential_blog'
+# copy from https://github.com/RuanShan/spree_flexi_variants/tree/2-1-stable
+gem 'spree_flexi_variants',   :path => './spree_flexi_variants'
+
+# copy from https://github.com/spree-contrib/spree_comments/tree/2-0-stable
+gem 'spree_comments',   :path => './spree_comments'
 
 group :test, :development do
   gem 'mail_view'  #, :git => 'https://github.com/37signals/mail_view.git'

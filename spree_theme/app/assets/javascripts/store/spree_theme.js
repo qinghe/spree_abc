@@ -1,12 +1,16 @@
 //= require jquery
-//= require jquery.ui.all
+//= require jquery.ui.dialog
+//= require jquery.ui.dialog
 //= require jquery_ujs
 //= require jquery.form
 //= require jquery.layout
 //= require jquery.ajax
+//= require jssor.slider.one
 //= require store/spree_frontend
 //= require store/spree_theme.client
 //= require interface.js
+//= require jquery.jeditable.js
+//= require jquery.floatBar.js
 
 $(document).ready(function() {
   if (typeof(g_is_preview) != 'undefined' && g_is_preview==true)
@@ -42,3 +46,4 @@ function submit_layout_tree_form (op, layout_id, selected_section_id) {
   if (selected_section_id) $('#selected_section_id').val(selected_section_id);
   $('#layout_tree_form').trigger('submit');
 }
+

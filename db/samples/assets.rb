@@ -1,23 +1,24 @@
+#encoding: utf-8
 #Spree::Sample.load_sample("products")
 #Spree::Sample.load_sample("variants")
 
 products = {}
-products[:ror_baseball_jersey] = Spree::Product.find_by_name!("Ruby on Rails Baseball Jersey") 
-products[:ror_tote] = Spree::Product.find_by_name!("Ruby on Rails Tote")
-products[:ror_bag] = Spree::Product.find_by_name!("Ruby on Rails Bag")
-products[:ror_jr_spaghetti] = Spree::Product.find_by_name!("Ruby on Rails Jr. Spaghetti")
-products[:ror_mug] = Spree::Product.find_by_name!("Ruby on Rails Mug")
-products[:ror_ringer] = Spree::Product.find_by_name!("Ruby on Rails Ringer T-Shirt")
-products[:ror_stein] = Spree::Product.find_by_name!("Ruby on Rails Stein")
-products[:spree_baseball_jersey] = Spree::Product.find_by_name!("Spree Baseball Jersey")
-products[:spree_stein] = Spree::Product.find_by_name!("Spree Stein")
-products[:spree_jr_spaghetti] = Spree::Product.find_by_name!("Spree Jr. Spaghetti")
-products[:spree_mug] = Spree::Product.find_by_name!("Spree Mug")
-products[:spree_ringer] = Spree::Product.find_by_name!("Spree Ringer T-Shirt")
-products[:spree_tote] = Spree::Product.find_by_name!("Spree Tote")
-products[:spree_bag] = Spree::Product.find_by_name!("Spree Bag")
-products[:ruby_baseball_jersey] = Spree::Product.find_by_name!("Ruby Baseball Jersey")
-products[:apache_baseball_jersey] = Spree::Product.find_by_name!("Apache Baseball Jersey")
+products[:ror_baseball_jersey] = Spree::Product.find_by_name!("代德杯子") 
+products[:ror_tote] = Spree::Product.find_by_name!("加维克台灯") 
+products[:ror_bag] = Spree::Product.find_by_name!("卡秋塔台灯") 
+products[:ror_jr_spaghetti] = Spree::Product.find_by_name!("奥米欧茶壶")
+products[:ror_mug] = Spree::Product.find_by_name!("布朗达布兰科上菜用碗")
+products[:ror_ringer] = Spree::Product.find_by_name!("莱思比茶杯")
+products[:ror_stein] = Spree::Product.find_by_name!("巴尔巴托盘")
+products[:spree_baseball_jersey] = Spree::Product.find_by_name!("斯德哥尔摩意式咖啡杯")
+products[:spree_stein] = Spree::Product.find_by_name!("弗斯拉碗")
+products[:spree_jr_spaghetti] = Spree::Product.find_by_name!("沃格特茶滤")
+products[:spree_mug] = Spree::Product.find_by_name!("奥芬利托盘")
+products[:spree_ringer] = Spree::Product.find_by_name!("昂顿大杯")
+products[:spree_tote] = Spree::Product.find_by_name!("维迪亚台灯")
+products[:spree_bag] = Spree::Product.find_by_name!("克劳比工作灯")
+products[:ruby_baseball_jersey] = Spree::Product.find_by_name!("哈里大杯")
+products[:apache_baseball_jersey] = Spree::Product.find_by_name!("盖尔杯碟")
 
 
 def image(name, type="jpeg")
@@ -80,12 +81,12 @@ images = {
   ],
   products[:apache_baseball_jersey].master => [
     {
-      :attachment => image("apache_baseball", "png")
+      :attachment => image("apache_baseball")
     },
   ],
   products[:ruby_baseball_jersey].master => [
     {
-      :attachment => image("ruby_baseball", "png")
+      :attachment => image("ruby_baseball")
     },
   ],
   products[:spree_bag].master => [
@@ -142,9 +143,9 @@ images = {
 
 products[:ror_baseball_jersey].variants.each do |variant|
   color = variant.option_value("tshirt-color").downcase
-  main_image = image("ror_baseball_jersey_#{color}", "png")
+  main_image = image("ror_baseball_jersey_#{color}")
   variant.images.create!(:attachment => main_image)
-  back_image = image("ror_baseball_jersey_back_#{color}", "png")
+  back_image = image("ror_baseball_jersey_back_#{color}")
   if back_image
     variant.images.create!(:attachment => back_image)
   end

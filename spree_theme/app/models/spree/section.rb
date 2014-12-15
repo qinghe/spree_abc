@@ -1,14 +1,16 @@
 module Spree
   class Section < ActiveRecord::Base
     extend FriendlyId
-    acts_as_nested_set #:scope=>"root_id"
-    has_many :full_set_nodes, :class_name =>'Section', :foreign_key=>:root_id, :primary_key=>:root_id
+    acts_as_nested_set :dependent=>:destroy #:scope=>"root_id"
+    #has_many :full_set_nodes, :class_name =>'Section', :foreign_key=>:root_id, :primary_key=>:root_id
     belongs_to :section_piece  
-    has_many :section_params
+    has_many :section_params, :dependent=>:destroy #remove related param_value
     has_many :page_layouts
     
     friendly_id :title, :use => :slugged
     attr_accessible :section_piece_id, :title, :global_events, :subscribed_global_events,:is_enabled
+    
+    
     # usage: attribute section_piece_id, title required
     # params: default_param_values,  is a hash,  class_name=>{htmal_attribute_id=>default_value,..}
     def self.create_section(section_piece_id,attrs = {}, default_param_values={})
@@ -99,7 +101,7 @@ module Spree
       def build_html_piece(tree, node, section_piece_hash)
         # .dup, do not alter the model, or affect other method. it may be in cache. 
          piece = node.section_piece.html.dup
-         piece.insert(0,get_header_script(node))
+         piece.insert(0,get_section_script(node))
          unless node.leaf?              
            children = tree.select{|n| n.parent_id==node.id}
            for child in children
@@ -125,7 +127,7 @@ module Spree
       def build_css_piece(tree, node, section_piece_hash)
         #duplicate the css, then modify it.
          piece = section_piece_hash[node.section_piece_id].css.dup
-         piece.insert(0,get_header_script(node))
+         piece.insert(0,get_section_script(node))
          unless node.leaf?              
            children = tree.select{|n| n.parent_id==node.id}
            for child in children
@@ -149,7 +151,7 @@ module Spree
         piece
       end
       
-      def get_header_script(node)
+      def get_section_script(node)
         
         #only set @param_values, @menus for root piece.
         header= <<-EOS

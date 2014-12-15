@@ -1,11 +1,9 @@
-<h1>New theme</h1>
+<%= render :partial => 'spree/shared/error_messages', :locals => { :target => @template_theme } %>
+<%= form_for [:admin, @template_theme]  do |f| %>
+  <fieldset data-hook="new_template_theme">
 
-<% form_for(@theme) do |f| %>
-  <%= f.error_messages %>
-
-  <p>
-    <%= f.submit 'Create' %>
-  </p>
+    <legend align="center"><%= Spree.t("template_theme.new") %></legend>
+    <%= render :partial => 'form', :locals => { :f => f } %>
+    <%= render :partial => 'spree/admin/shared/new_resource_links' %>
+  </fieldset>
 <% end %>
-
-<%= link_to 'Back', template_themes_path %>

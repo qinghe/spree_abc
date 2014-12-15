@@ -3,7 +3,7 @@ module Spree
     attr_accessor :html_attribute, :param_value
     attr_accessor :properties #hash {pvalue0, psvalue0, unit0, psvalue0_desc, unset, computed}
     
-    
+    delegate :default_properties, :to=>:html_attribute
     # create an instance from a string it is param_value.pvalue[html_attribute_id]
     # create an instance from hash {pvalue0, psvalue0, unit0}  
     # params: computed, html_attribute_id is in section_piece_param.computed_ha_ids.
@@ -20,11 +20,10 @@ module Spree
           if html_attribute.manual_entry?( psvalue )            
             if pvalue_properties["pvalue#{i}"].blank?
               #user select manual_entry, but have not entry any value
-              pvalue_properties["pvalue#{i}"] = html_attribute.default_manual_value
-            end
-              
-          else
-            pvalue_properties.except!(["pvalue#{i}","unit#{i}"])          
+              pvalue_properties["pvalue#{i}"], pvalue_properties["unit#{i}"] = html_attribute.default_manual_value
+            end              
+          #else
+          #  pvalue_properties.except!(["pvalue#{i}","unit#{i}"])          
           end
         }
         # if unset is uncheck, 'unset' is nil in posted params.
@@ -115,9 +114,31 @@ module Spree
       elsif html_attribute.is_special? :bool
         pvalue_string = pvalue_properties["pvalue0"]
       elsif html_attribute.is_special? :db
-        pvalue_string = pvalue_properties["pvalue0"]
-      else      
-        vals = html_attribute.repeats.times.collect{|i|
+        pvalue_string = pvalue_properties["pvalue0"]      
+      elsif html_attribute.is_special? :image 
+        #background-image is special, 
+        # for param_value: format is  css_name:file_name; in this way, editor is easy to parse and render
+        # for css: format is css_name:url(file_url); 
+        pvalue_string = html_attribute.css_name+':'+ ( html_attribute.manual_entry?(pvalue_properties["psvalue0"]) ? "#{pvalue_properties["pvalue0"]}" : pvalue_properties["psvalue0"] ) 
+      else
+        pvalue_string = html_attribute.css_name+':'+ build_css_property_value( html_attribute, pvalue_properties )
+      end
+      pvalue_string
+    end
+    
+    def self.build_css_property_value( html_attribute, pvalue_properties )
+      val = ''
+      if html_attribute.is_special?(:image)
+        if html_attribute.manual_entry?(pvalue_properties["psvalue0"])
+          file = TemplateFile.find_by_attachment_file_name( pvalue_properties["pvalue0"] )
+          if file.present?
+            val = "url(#{file.attachment.url})"
+          end
+        else
+          val = pvalue_properties["psvalue0"]
+        end    
+      else
+        val = html_attribute.repeats.times.collect{|i|
           if html_attribute.is_special? :color #no need unit for color
             html_attribute.manual_entry?(pvalue_properties["psvalue#{i}"]) ? 
               "#{pvalue_properties["pvalue#{i}"]}" : pvalue_properties["psvalue#{i}"]                      
@@ -125,12 +146,10 @@ module Spree
             html_attribute.manual_entry?(pvalue_properties["psvalue#{i}"]) ? 
               "#{pvalue_properties["pvalue#{i}"]}#{pvalue_properties["unit#{i}"]}" : pvalue_properties["psvalue#{i}"]            
           end
-        }
-        pvalue_string = html_attribute.css_name+':'+ vals.join(' ')
+        }.join(' ')
       end
-      pvalue_string
+      val
     end
-    
   
     def self.ultra_initialize(param_value, html_attribute, properties)
       hav = HtmlAttributeValue.new
@@ -265,34 +284,45 @@ module Spree
             ".s_#{self.param_value.page_layout_id}_#{self.param_value.section_param.section_root_id}"
           when /page/
             "#page"
-          when /content_layout/
-            ".c_#{self.param_value.page_layout_id}"          
-          when "as_h","a_h","a", /(label|input|li|img|button|td|th)/ #a, a_h
+          when 'content_layout','first_child','last_child'
+            ".c_#{self.param_value.page_layout_id}"  
+          when /(label|input|img|button)/ # product_atc, product_quantity
+            ".s_#{self.param_value.page_layout_id}_#{self.param_value.section_param.section_root_id}"                      
+          when 'as_h','a_h','a','th','td','li' 
             ".s_#{self.param_value.page_layout_id}_#{self.param_value.section_param.section_id}"
           else
             ".s_#{self.param_value.page_layout_id}_#{self.param_value.section_param.section_id}"
           end
         
-        #it has to apply to inner, for root, outer is body, it include editor panel, some css would affect it. 
+        # it has to apply to inner, for root, outer is body, it include editor panel, some css would affect it. 
         selector = case target
           when /content_layout/,/block/,/cell/,'page'
             ""          
           when /inner/
             "_#{target}"
-          when 'as_h' #selected:hover
-            " .selected"
+          when 'as_h','a_sel' #selected:hover, selected
+            " a.selected"
+          when 'a_una' #  unavailable, unclickable
+            " a.unavailable"
           when 'a','a_h'
             " a"
+          #when 'first_child','last_child'
+          #  # it is not right way to center content, 
+          #  # in html, we may add form to wrap each child, first-child do not work in this case.
+          #  # padding,margin is applied to inner, it also affect width of outer div
+          #  ":#{target[/[a-z]+/]} "
           when /\_h$/  #button_h
             " #{target.delete('_h')}"
-          when /(table|label|input|li|img|button|td|th|h6)/
-          #product quantity,atc section_piece content just input,add a <span> wrap it.
-          #product images content thumb and main images so here should be section_id,
+          when 'error' #s_error
+            " label.error"  
+          when 'table','label','input','li','img','button','td','th','h6','dt','dd'
+            # product quantity,atc section_piece content just input,add a <span> wrap it.
+            # product images content thumb and main images so here should be section_id,
             " #{target}"
           else  #noclick, selected
             " .#{target}"
           end
-Rails.logger.debug "css selector:#{prefix+selector}, #{attribute_name}:#{attribute_value}"          
+#Rails.logger.debug "css selector:#{prefix+selector}, #{attribute_name}:#{attribute_value}"          
         prefix+selector
       end 
       
@@ -300,32 +330,8 @@ Rails.logger.debug "css selector:#{prefix+selector}, #{attribute_name}:#{attribu
         self.html_attribute.css_name
       end
       def attribute_value
-        val = nil
-        if unset?
-          html_attribute.default_possible_selected_value
-        else
-          if html_attribute.css_name== 'background-image'
-            if html_attribute.manual_entry?(self["psvalue"])
-              file = TemplateFile.find_by_attachment_file_name( self["pvalue"] )
-              if file.present?
-                val="url(#{file.attachment.url})"
-              end
-            else
-              val=self["psvalue"]
-            end
-    
-          else
-            val = html_attribute.repeats.times.collect{|i|
-              if html_attribute.css_name== 'border-color'
-                html_attribute.manual_entry?(properties["psvalue#{i}"]) ? 
-                  "#{properties["pvalue#{i}"]}" : properties["psvalue#{i}"]
-              else
-                html_attribute.manual_entry?(properties["psvalue#{i}"]) ? 
-                  "#{properties["pvalue#{i}"]}#{properties["unit#{i}"]}" : properties["psvalue#{i}"]
-              end
-            }.join(' ')
-          end
-        end
+        target_properties = unset? ? default_properties : properties        
+        self.class.build_css_property_value( self.html_attribute, target_properties )        
       end
     end
     

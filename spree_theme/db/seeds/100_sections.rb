@@ -26,7 +26,7 @@ root = Spree::Section.create_section(section_piece_hash['root'].id, {:title=>"ro
    })
 
 container = Spree::Section.create_section(section_piece_hash['container'].id, {:title=>"container",:subscribed_global_events=>"page_layout_fixed"},{'content_layout'=>{86=>bool_true,'86unset'=>bool_false},
-'block'=>{15=>"height:100px",'15unset'=>bool_false,101=>"float:left",'101unset'=>bool_false}, 'inner'=>{'15hidden'=>bool_true,'15hidden'=>bool_true}})
+'block'=>{15=>"height:100px",'15unset'=>bool_false,101=>"float:left",'101unset'=>bool_false}, 'inner'=>{'15hidden'=>bool_true}})
 
 
 hmenu = Spree::Section.create_section(section_piece_hash['container'].id, {:title=>"hmenu"},
@@ -71,7 +71,7 @@ product_image = Spree::Section.create_section(section_piece_hash['container'].id
   {'block'=>{'disabled_ha_ids'=>'111'},
    #'content_horizontal'=>{'disabled_ha_ids'=>'101'},
    'inner'=>{'15hidden'=>bool_true}})
-product_image.add_section_piece(section_piece_hash['product_image'].id)
+product_image.add_section_piece(section_piece_hash['product-image'].id)
 
 
 ################################################ center area start ##############################################  

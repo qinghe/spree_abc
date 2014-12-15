@@ -1,16 +1,28 @@
+app server 
+--------------------------------------------------------
+echo export TMOUT=1000000 >> /root/.bash_profile
+
 
 CREATE SCHEMA `spree_abc_xxx` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ;
 
 https://github.com/capistrano/capistrano/wiki/Capistrano-Tasks
 cap local_staging deploy
-rake db:seed RAILS_ENV=local_staging
-rake spree_theme:reload_section_piece  RAILS_ENV=local_staging
-rake spree_theme:import_theme SEED_PATH=1 RAILS_ENV=local_staging
+bundle exec rake db:seed RAILS_ENV=local_staging
+bundle exec rake spree_theme:reload_section_piece  RAILS_ENV=local_staging
+bundle exec rake spree_theme:load_seed[03_param_categories.rb] RAILS_ENV=local_staging
+bundle exec rake spree_theme:import_theme SEED_PATH=1 RAILS_ENV=local_staging
+bundle exec rake assets:precompile:all RAILS_ENV=staging RAILS_GROUPS=assets
+
+#useful task
+bundle exec rake spree_theme:import_theme REPLACE=1 THEME_ID=5 SEED_PATH=1 RAILS_ENV=local_staging
+bundle exec rake railties:install:migrations RAILS_ENV=local_staging
 
 chown apache.apache  public -R
 
 https://help.github.com/articles/deploying-with-capistrano
 
+db server
+-----------------------------------------------------------
 1. configure mysql to support utf-8
   [mysqld]
   character_set_server= utf8    
@@ -20,3 +32,19 @@ http://www.dotkam.com/2008/09/14/configure-rails-and-mysql-to-support-utf-8/
 2. yum install libxml2-devel libxslt-devel
   nokogiri required 
   https://github.com/sparklemotion/nokogiri
+
+  
+3. install pg
+https://community.jboss.org/wiki/InstallPostgreSQLonFedora?_sscc=t
+
+4. install imagemagick
+#http://www.imagemagick.org/script/install-source.php
+wget http://www.imagemagick.org/download/ImageMagick.tar.gz
+tar xvzf ImageMagick.tar.gz
+
+system recovery
+--------------------------------------------------------------
+mysql -uroot spree_abc_staging < spree_abc20141204.sql
+tar -zxvf spree_abc20141204.tar.gz
+mv /webroot/spree_abc /webroot/spree_abc.bak
+mv webroot/spree_abc /webroot/

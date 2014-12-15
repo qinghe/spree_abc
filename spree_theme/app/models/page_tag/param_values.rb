@@ -7,7 +7,8 @@ module PageTag
     
     def param_values_hash
       if @param_values_hash.nil?
-        param_values =  Spree::ParamValue.find(:all,:conditions=>["theme_id=?", self.template_tag.id],
+        theme_id = self.template_tag.theme.original_template_theme.id
+        param_values =  Spree::ParamValue.find(:all,:conditions=>["theme_id=?", theme_id],
           :include=>[:section_param=>:section_piece_param], :order=>'spree_param_values.page_layout_id,spree_section_piece_params.class_name '
         )
         
@@ -36,28 +37,24 @@ module PageTag
           # section_piece_param which have same class_name should be given same plass
           spp = pv.section_param.section_piece_param
           if spp.class_name == class_name
-            if options[:source]=='computed' #computed param value must be css 
-              val<< pv.computed_pvalue.values.join(';')                           
-            else
               html_attributes = Spree::HtmlAttribute.find_by_ids(pv.html_attribute_ids)
               for ha in  html_attributes
-                if ha.is_special?(:image) or ha.is_special?(:src)
-                  hav= pv.html_attribute_value(ha)
-                  file_name = hav['pvalue0']
-                  if file_name
-                    val << "#{ha.slug}:url(#{build_path(file_name)});"
-                  end
+                next if pv.unset?(ha.id)
+                if ha.is_special?(:image)
+                  # background-image is special, pvalue is image name, we should make up the whole url
+                  #Rails.logger.debug "pv.html_attribute_value( ha )=#{pv.html_attribute_value( ha ).inspect}"
+                  val << (ha.css_name+':'+pv.html_attribute_value( ha ).attribute_value+';')
+                elsif ha.is_special?(:text)
+                  pv_for_ha = pv.pvalue_for_haid(ha.id)
+                  val <<  pv_for_ha
                 else
-                  unset = pv.unset?(ha.id)
                   # should output hidden pv
                   # hidden= pv.hidden?(ha.id)
                   pv_for_ha = pv.pvalue_for_haid(ha.id)
-                  if !unset 
-                      val <<  ( pv_for_ha+';' )                    
-                  end                
-                end
+#Rails.logger.debug "pv=#{pv.inspect} ha=#{ha.inspect}"                  
+                  val <<  ( pv_for_ha+';' )                    
+                end                                
               end
-            end
           end
         end
       end
@@ -73,11 +70,6 @@ module PageTag
         "#{section['section_id']}_#{section['section_instance']}_#{root_piece['section_piece_id']}_#{root_piece['section_piece_instance']}" #section_piece_instance always 1.  
       end
     end    
-    
-    def build_path(file_name)
-      "/shops/#{::Rails.env}/#{1}/template_files/#{file_name}"
-      
-    end
-    
+       
   end
 end

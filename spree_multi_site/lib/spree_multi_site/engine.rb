@@ -10,8 +10,11 @@ module SpreeMultiSite
     end
 
     initializer "spree.multisite.environment", :before => "spree.environment" do |app|
-      SpreeMultiSite::Config = Spree::MultiSiteConfiguration.new
-      
+      app.config.spree_multi_site = SpreeMultiSite::Environment.new
+      SpreeMultiSite::Config  = app.config.spree_multi_site.preferences #legacy access
+      app.config.spree_multi_site.site_scope_required_classes_from_other_gems = []
+
+
       # preferences contains two kind of records
       # 1. override AppConfiguration's default value.
       #     a. some preferences in AppConfiguration are for whole application, so override record site_id=0, like seed_dir
@@ -36,7 +39,7 @@ module SpreeMultiSite
         end
       end
     end
-      
+          
     initializer "spree.multisite.add_middleware" do |app|
       app.middleware.use SpreeMultiSite::Middleware
     end  
@@ -48,6 +51,7 @@ module SpreeMultiSite
     end
     #spree_abc require #{config.root}/app/mailers
     config.autoload_paths += %W(#{config.root}/app/models/spree #{config.root}/app/jobs)
+    #Defines generic callbacks to run before after_initialize. 
     config.to_prepare &method(:activate).to_proc
     
     

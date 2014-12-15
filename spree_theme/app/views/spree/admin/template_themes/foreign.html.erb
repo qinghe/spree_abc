@@ -1,19 +1,29 @@
 <%= render :partial => 'sub_menu' %>
 <% content_for :page_title do %>
-  <%= Spree.t(:foreign_themes) %> 
+  <%= Spree.t(:theme_foreign) %> 
 <% end %>
 <table>
+  <colgroup>
+       <col style="width: 65%;">
+       <col style="width: 10%;">
+       <col style="width: 12%;">
+       <col style="width: 10%;">
+  </colgroup>  
+
   <tr>
-    <th>TemplateTheme</th>
-    <th>IsImported</th>
+    <th><%= Spree::TemplateTheme.human_attribute_name(:title) %></th>
+    <th><%= Spree.t(:theme_is_free) %></th>
+    <th><%= Spree.t(:theme_is_imported) %></th>
   </tr>
 
 <% @themes.each do |theme| %>
   <tr>
     <td><%= theme.title %></td>
-    <td><%= theme.imported? %></td>
-    <td class="actions"><%= link_to 'Preview', preview_template_theme_url(theme, :host=>SpreeTheme.site_class.designsite.domain) %>
-    <%= link_to_unless theme.imported?, 'Import', prepare_import_admin_template_theme_path(theme) %></td>
+    <td align="center"><%= Spree.t(:say_yes) %></td>
+    <td align="center"><%= theme.imported? ? Spree.t(:say_yes) : Spree.t(:not) %></td>
+    <td class="actions"><%= link_to_with_icon 'icon-eye', Spree.t(:preview_theme), preview_template_theme_url(theme, :host=>SpreeTheme.site_class.designsite.domain),{:target=>'_blank',:no_text => true} %>
+    <%=link_to_with_icon 'icon-tag', Spree.t(:theme_import), import_admin_template_theme_path(theme),{:disabled=>theme.imported?, :no_text => true, :method=>:post} %>
+    </td>
   </tr>
 <% end %>
 </table>

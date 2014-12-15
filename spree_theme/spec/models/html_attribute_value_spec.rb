@@ -16,4 +16,12 @@ describe Spree::SectionPiece do
     html_attribute_id, html_attribute_value = pv.html_attribute_values_hash.first
     html_attribute_value.css_selector.should eq '#page'
   end  
+
+  it "generate right css selector2" do
+    spp = Spree::SectionPieceParam.find_by_class_name 'depth1'
+    pv = spp.section_params.first.param_values.first
+    css_selector_prefix = ".s_#{pv.page_layout_id}_#{pv.section_param.section_id}"
+    html_attribute_id, html_attribute_value = pv.html_attribute_values_hash.first
+    html_attribute_value.css_selector.should eq  css_selector_prefix+" .depth1"
+  end  
 end

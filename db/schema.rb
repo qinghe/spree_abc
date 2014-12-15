@@ -11,7 +11,24 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140315025930) do
+ActiveRecord::Schema.define(:version => 20141202074650) do
+
+  create_table "ckeditor_assets", :force => true do |t|
+    t.integer  "site_id",                         :default => 0, :null => false
+    t.string   "data_file_name",                                 :null => false
+    t.string   "data_content_type"
+    t.integer  "data_file_size"
+    t.integer  "assetable_id"
+    t.string   "assetable_type",    :limit => 30
+    t.string   "type",              :limit => 30
+    t.integer  "width"
+    t.integer  "height"
+    t.datetime "created_at",                                     :null => false
+    t.datetime "updated_at",                                     :null => false
+  end
+
+  add_index "ckeditor_assets", ["site_id", "assetable_type", "assetable_id"], :name => "idx_ckeditor_assetable"
+  add_index "ckeditor_assets", ["site_id", "assetable_type", "type", "assetable_id"], :name => "idx_ckeditor_assetable_type"
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0
@@ -43,6 +60,40 @@ ActiveRecord::Schema.define(:version => 20140315025930) do
     t.string   "path"
     t.datetime "created_at",                      :null => false
     t.datetime "updated_at",                      :null => false
+  end
+
+  create_table "spree_ad_hoc_option_types", :force => true do |t|
+    t.integer  "product_id"
+    t.integer  "option_type_id"
+    t.integer  "position",            :default => 0,     :null => false
+    t.string   "price_modifier_type"
+    t.boolean  "is_required",         :default => false
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
+  end
+
+  create_table "spree_ad_hoc_option_values", :force => true do |t|
+    t.integer  "ad_hoc_option_type_id"
+    t.integer  "option_value_id"
+    t.integer  "position"
+    t.boolean  "selected"
+    t.decimal  "price_modifier",        :precision => 8, :scale => 2, :default => 0.0, :null => false
+    t.decimal  "cost_price_modifier",   :precision => 8, :scale => 2
+    t.datetime "created_at",                                                           :null => false
+    t.datetime "updated_at",                                                           :null => false
+  end
+
+  create_table "spree_ad_hoc_option_values_line_items", :force => true do |t|
+    t.integer  "line_item_id"
+    t.integer  "ad_hoc_option_value_id"
+    t.datetime "created_at",             :null => false
+    t.datetime "updated_at",             :null => false
+  end
+
+  create_table "spree_ad_hoc_variant_exclusions", :force => true do |t|
+    t.integer  "product_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "spree_addresses", :force => true do |t|
@@ -118,6 +169,30 @@ ActiveRecord::Schema.define(:version => 20140315025930) do
     t.integer "state_id"
   end
 
+  create_table "spree_comment_types", :force => true do |t|
+    t.string   "name"
+    t.string   "applies_to"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "spree_comments", :force => true do |t|
+    t.string   "title",            :limit => 50, :default => ""
+    t.text     "comment"
+    t.integer  "commentable_id"
+    t.string   "commentable_type"
+    t.integer  "user_id"
+    t.string   "email",            :limit => 50, :default => ""
+    t.string   "cellphone",        :limit => 50, :default => ""
+    t.integer  "comment_type_id"
+    t.datetime "created_at",                                     :null => false
+    t.datetime "updated_at",                                     :null => false
+  end
+
+  add_index "spree_comments", ["commentable_id"], :name => "index_spree_comments_on_commentable_id"
+  add_index "spree_comments", ["commentable_type"], :name => "index_spree_comments_on_commentable_type"
+  add_index "spree_comments", ["user_id"], :name => "index_spree_comments_on_user_id"
+
   create_table "spree_configurations", :force => true do |t|
     t.string   "name"
     t.string   "type",       :limit => 50
@@ -151,10 +226,34 @@ ActiveRecord::Schema.define(:version => 20140315025930) do
     t.datetime "updated_at",                  :null => false
   end
 
+  create_table "spree_customizable_product_options", :force => true do |t|
+    t.integer  "product_customization_type_id"
+    t.integer  "position"
+    t.string   "presentation",                  :null => false
+    t.string   "name",                          :null => false
+    t.string   "description"
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+  end
+
+  create_table "spree_customized_product_options", :force => true do |t|
+    t.integer  "product_customization_id"
+    t.integer  "customizable_product_option_id"
+    t.string   "value"
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
+    t.string   "customization_image"
+  end
+
   create_table "spree_editors", :force => true do |t|
     t.string   "slug",       :limit => 200, :default => "", :null => false
     t.datetime "created_at",                                :null => false
     t.datetime "updated_at",                                :null => false
+  end
+
+  create_table "spree_excluded_ad_hoc_option_values", :force => true do |t|
+    t.integer "ad_hoc_variant_exclusion_id"
+    t.integer "ad_hoc_option_value_id"
   end
 
   create_table "spree_gateways", :force => true do |t|
@@ -299,6 +398,8 @@ ActiveRecord::Schema.define(:version => 20140315025930) do
     t.boolean  "is_full_html",                     :default => false, :null => false
     t.datetime "created_at",                                          :null => false
     t.datetime "updated_at",                                          :null => false
+    t.string   "data_source_param",                :default => ""
+    t.integer  "content_param",                    :default => 0,     :null => false
   end
 
   create_table "spree_param_categories", :force => true do |t|
@@ -353,6 +454,35 @@ ActiveRecord::Schema.define(:version => 20140315025930) do
 
   add_index "spree_payments", ["order_id"], :name => "index_spree_payments_on_order_id"
 
+  create_table "spree_post_products", :force => true do |t|
+    t.integer "post_id"
+    t.integer "product_id"
+    t.integer "position"
+  end
+
+  create_table "spree_posts", :force => true do |t|
+    t.integer  "site_id",            :default => 0
+    t.string   "title"
+    t.string   "permalink"
+    t.string   "teaser"
+    t.datetime "posted_at"
+    t.text     "body"
+    t.string   "author"
+    t.boolean  "live",               :default => true
+    t.datetime "created_at",                           :null => false
+    t.datetime "updated_at",                           :null => false
+    t.integer  "position",           :default => 0
+    t.string   "cover_file_name"
+    t.string   "cover_content_type"
+    t.integer  "cover_file_size",    :default => 0
+    t.datetime "cover_updated_at"
+  end
+
+  create_table "spree_posts_taxons", :id => false, :force => true do |t|
+    t.integer "post_id"
+    t.integer "taxon_id"
+  end
+
   create_table "spree_preferences", :force => true do |t|
     t.text     "value"
     t.string   "key"
@@ -371,6 +501,26 @@ ActiveRecord::Schema.define(:version => 20140315025930) do
   end
 
   add_index "spree_prices", ["variant_id", "currency"], :name => "index_spree_prices_on_variant_id_and_currency"
+
+  create_table "spree_product_customization_types", :force => true do |t|
+    t.string   "name"
+    t.string   "presentation"
+    t.string   "description"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  create_table "spree_product_customization_types_products", :id => false, :force => true do |t|
+    t.integer "product_customization_type_id"
+    t.integer "product_id"
+  end
+
+  create_table "spree_product_customizations", :force => true do |t|
+    t.integer  "line_item_id"
+    t.integer  "product_customization_type_id"
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+  end
 
   create_table "spree_product_option_types", :force => true do |t|
     t.integer  "position"
@@ -404,6 +554,7 @@ ActiveRecord::Schema.define(:version => 20140315025930) do
     t.datetime "created_at",                           :null => false
     t.datetime "updated_at",                           :null => false
     t.integer  "site_id"
+    t.integer  "theme_id",             :default => 0,  :null => false
   end
 
   add_index "spree_products", ["available_on"], :name => "index_spree_products_on_available_on"
@@ -411,6 +562,14 @@ ActiveRecord::Schema.define(:version => 20140315025930) do
   add_index "spree_products", ["name"], :name => "index_spree_products_on_name"
   add_index "spree_products", ["permalink"], :name => "index_spree_products_on_permalink"
   add_index "spree_products", ["site_id", "permalink"], :name => "permalink_idx_unique", :unique => true
+
+  create_table "spree_products_global_taxons", :id => false, :force => true do |t|
+    t.integer "product_id"
+    t.integer "taxon_id"
+  end
+
+  add_index "spree_products_global_taxons", ["product_id"], :name => "index_spree_products_global_taxons_on_product_id"
+  add_index "spree_products_global_taxons", ["taxon_id"], :name => "index_spree_products_global_taxons_on_taxon_id"
 
   create_table "spree_products_promotion_rules", :id => false, :force => true do |t|
     t.integer "product_id"
@@ -524,6 +683,7 @@ ActiveRecord::Schema.define(:version => 20140315025930) do
     t.string  "html_attribute_ids", :limit => 1000, :default => "",   :null => false
     t.string  "param_conditions",   :limit => 1000
     t.boolean "is_editable",                        :default => true
+    t.string  "editable_condition",                 :default => ""
   end
 
   create_table "spree_section_pieces", :force => true do |t|
@@ -539,6 +699,7 @@ ActiveRecord::Schema.define(:version => 20140315025930) do
     t.string   "usage",         :limit => 10,    :default => "",    :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "is_clickable",                   :default => false, :null => false
   end
 
   add_index "spree_section_pieces", ["slug"], :name => "index_spree_section_pieces_on_slug", :unique => true
@@ -563,6 +724,7 @@ ActiveRecord::Schema.define(:version => 20140315025930) do
     t.boolean "is_enabled",                              :default => true, :null => false
     t.string  "global_events",            :limit => 200, :default => "",   :null => false
     t.string  "subscribed_global_events", :limit => 200, :default => "",   :null => false
+    t.integer "content_param",                           :default => 0,    :null => false
   end
 
   create_table "spree_shipments", :force => true do |t|
@@ -640,6 +802,7 @@ ActiveRecord::Schema.define(:version => 20140315025930) do
     t.integer  "index_page",          :default => 0
     t.integer  "theme_id",            :default => 0
     t.integer  "template_release_id", :default => 0
+    t.integer  "foreign_theme_id",    :default => 0,     :null => false
   end
 
   create_table "spree_state_changes", :force => true do |t|
@@ -750,7 +913,7 @@ ActiveRecord::Schema.define(:version => 20140315025930) do
   create_table "spree_taxons", :force => true do |t|
     t.integer  "parent_id"
     t.integer  "position",          :default => 0
-    t.string   "name",                             :null => false
+    t.string   "name",                                :null => false
     t.string   "permalink"
     t.integer  "taxonomy_id"
     t.integer  "lft"
@@ -760,14 +923,17 @@ ActiveRecord::Schema.define(:version => 20140315025930) do
     t.integer  "icon_file_size"
     t.datetime "icon_updated_at"
     t.text     "description"
-    t.datetime "created_at",                       :null => false
-    t.datetime "updated_at",                       :null => false
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
     t.integer  "site_id"
     t.string   "meta_title"
     t.string   "meta_description"
     t.string   "meta_keywords"
     t.integer  "depth"
-    t.integer  "page_context",      :default => 0
+    t.integer  "page_context",      :default => 0,    :null => false
+    t.string   "html_attributes"
+    t.integer  "replaced_by",       :default => 0,    :null => false
+    t.boolean  "is_clickable",      :default => true, :null => false
   end
 
   add_index "spree_taxons", ["parent_id"], :name => "index_taxons_on_parent_id"
@@ -796,22 +962,23 @@ ActiveRecord::Schema.define(:version => 20140315025930) do
     t.integer  "site_id",    :default => 0, :null => false
     t.string   "name"
     t.text     "body"
-    t.string   "slug"
+    t.string   "permalink"
     t.datetime "created_at",                :null => false
     t.datetime "updated_at",                :null => false
   end
 
-  add_index "spree_template_texts", ["slug"], :name => "index_spree_template_texts_on_slug"
+  add_index "spree_template_texts", ["permalink"], :name => "index_spree_template_texts_on_slug"
 
   create_table "spree_template_themes", :force => true do |t|
-    t.integer  "site_id",                             :default => 0
-    t.integer  "page_layout_root_id",                 :default => 0,  :null => false
-    t.integer  "release_id",                          :default => 0
-    t.string   "title",                 :limit => 64, :default => "", :null => false
-    t.string   "slug",                  :limit => 64, :default => "", :null => false
-    t.string   "assigned_resource_ids",               :default => "", :null => false
-    t.datetime "created_at",                                          :null => false
-    t.datetime "updated_at",                                          :null => false
+    t.integer  "site_id",                               :default => 0
+    t.integer  "page_layout_root_id",                   :default => 0,     :null => false
+    t.integer  "release_id",                            :default => 0
+    t.string   "title",                 :limit => 64,   :default => "",    :null => false
+    t.string   "slug",                  :limit => 64,   :default => "",    :null => false
+    t.string   "assigned_resource_ids", :limit => 1024, :default => "",    :null => false
+    t.datetime "created_at",                                               :null => false
+    t.datetime "updated_at",                                               :null => false
+    t.boolean  "is_public",                             :default => false, :null => false
   end
 
   create_table "spree_tokenized_permissions", :force => true do |t|
@@ -830,6 +997,7 @@ ActiveRecord::Schema.define(:version => 20140315025930) do
     t.boolean  "active",       :default => true
     t.datetime "created_at",                     :null => false
     t.datetime "updated_at",                     :null => false
+    t.integer  "site_id"
   end
 
   create_table "spree_users", :force => true do |t|
@@ -898,6 +1066,23 @@ ActiveRecord::Schema.define(:version => 20140315025930) do
     t.datetime "created_at",                            :null => false
     t.datetime "updated_at",                            :null => false
     t.integer  "site_id"
+  end
+
+  create_table "taggings", :force => true do |t|
+    t.integer  "tag_id"
+    t.integer  "taggable_id"
+    t.string   "taggable_type"
+    t.integer  "tagger_id"
+    t.string   "tagger_type"
+    t.string   "context"
+    t.datetime "created_at"
+  end
+
+  add_index "taggings", ["tag_id"], :name => "index_taggings_on_tag_id"
+  add_index "taggings", ["taggable_id", "taggable_type", "context"], :name => "taggings_id_type_context"
+
+  create_table "tags", :force => true do |t|
+    t.string "name"
   end
 
 end

@@ -1,20 +1,15 @@
-<div id="section_select_dialog" class="clear-block" title="Section dialog" style="display: none;"> 
-
-    
+<div id="section_select_dialog" class="clear-block" title="Section dialog" style="display: none;">    
     <ul class="fl titles" style="width:200px;">
       <% sections.each_index{|i| s = sections[i]%>
       <li <%= 'class=selected' if i==0%> <%="data-section-id=#{s.id}"%> ><%=s.slug%></li>
       <% }%>
-    </ul>
-  
+    </ul>  
   <div class="fl details" style="width:200px;">
       <% sections.each_index{|i| s = sections[i]%>
       <div <%= 'class=selected' if i==0%>>
         <%= s.slug%>
       </div>
       <% }%>
-  </div>
-    
+  </div>    
   <input type="hidden" name="selected_section_id" value="<%=sections.first.id%>" />
-
 </div>

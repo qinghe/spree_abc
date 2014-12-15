@@ -15,6 +15,7 @@ config/deploy/*
 Gemfile.lock
 Gemfile.lock
 public/shops/development
-public/shops
+public/shops/test
 config/deploy/production.rb
 db/full_sql
+rdoc

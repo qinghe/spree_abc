@@ -1,6 +1,7 @@
+#encoding: utf-8
 products =
   { 
-    "Ruby on Rails Baseball Jersey" => 
+    "代德杯子" => #Ruby on Rails Baseball Jersey 
     { 
       "Manufacturer" => "Wilson",
       "Brand" => "Wannabe Sports",
@@ -11,7 +12,7 @@ products =
       "Fit" => "Loose",
       "Gender" => "Men's"
     },
-    "Ruby on Rails Jr. Spaghetti" =>
+    "奥米欧茶壶" => #Ruby on Rails Jr. Spaghetti
     {
       "Manufacturer" => "Jerseys",
       "Brand" => "Resiliance",
@@ -22,7 +23,7 @@ products =
       "Fit" => "Form",
       "Gender" => "Women's"
     },
-    "Ruby on Rails Ringer T-Shirt" =>
+    "莱思比茶杯" =>
     {
       "Manufacturer" => "Jerseys",
       "Brand" => "Conditioned",
@@ -33,49 +34,49 @@ products =
       "Fit" => "Loose",
       "Gender" => "Men's"
     },
-    "Ruby on Rails Tote" =>
+    "加维克台灯" => #ror_tote
     {
       "Type" => "Tote",
       "Size" => %Q{15" x 18" x 6"},
       "Material" => "Canvas"
     },
-    "Ruby on Rails Bag" =>
+    "卡秋塔台灯" => # ror_bag
     {
       "Type" => "Messenger",
       "Size" => %Q{14 1/2" x 12" x 5"},
       "Material" => "600 Denier Polyester"
     },
-    "Ruby on Rails Mug" => 
+    "布朗达布兰科上菜用碗" => #ror_mug 
     {
       "Type" => "Mug",
       "Size" => %Q{4.5" tall, 3.25" dia.}
     },
-    "Ruby on Rails Stein" =>
+    "巴尔巴托盘" => #ror_stein
     {
       "Type" => "Stein",
       "Size" => %Q{6.75" tall, 3.75" dia. base, 3" dia. rim}
     },
-    "Spree Stein" =>
+    "弗斯拉碗" => #Spree Stein
     {
       "Type" => "Stein",
       "Size" => %Q{6.75" tall, 3.75" dia. base, 3" dia. rim}
     },
-    "Spree Mug" => 
+    "奥芬利托盘" => #Spree Mug 
     {
       "Type" => "Mug",
       "Size" => %Q{4.5" tall, 3.25" dia.}
     },
-    "Spree Tote" => 
+    "维迪亚台灯" => #Spree Tote 
     {
       "Type" => "Tote",
       "Size" => %Q{15" x 18" x 6"}
     },
-    "Spree Bag" => 
+    "克劳比工作灯" => 
     {
       "Type" => "Messenger",
       "Size" => %Q{14 1/2" x 12" x 5"}
     },
-    "Spree Baseball Jersey" =>
+    "斯德哥尔摩意式咖啡杯" => #Spree Baseball Jersey
     {
       "Manufacturer" => "Wilson",
       "Brand" => "Wannabe Sports",
@@ -86,7 +87,7 @@ products =
       "Fit" => "Loose",
       "Gender" => "Men's"
     },
-    "Spree Jr. Spaghetti" =>
+    "沃格特茶滤" =>
     {
       "Manufacturer" => "Jerseys",
       "Brand" => "Resiliance",
@@ -97,7 +98,7 @@ products =
       "Fit" => "Form",
       "Gender" => "Women's"
     },
-    "Spree Ringer T-Shirt" =>
+    "昂顿大杯" => #Spree Ringer T-Shirt
     {
       "Manufacturer" => "Jerseys",
       "Brand" => "Conditioned",

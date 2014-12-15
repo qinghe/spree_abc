@@ -5,7 +5,7 @@ module Spree
     before_validation :set_short_name
     
     def set_short_name
-      self.short_name = self.name.parameterize
+      self.short_name = self.name.to_url
     end
 
   end

@@ -15,37 +15,68 @@ module SpreeTheme::System
   # override spree's
   # only cart|account using layout while rendering, product list|detail page render without layout.
   def get_layout_if_use
+    if request.xhr?
+      return false
+    end
+    # keep it before check "designer", page for admin login never need design
+    return @special_layout if @special_layout.present?
+
     #for designer
-    if @is_designer
-      return 'layout_for_design'
-    end 
+    return 'layout_for_design' if @is_designer
+
     #for customer, do not support it now.
     #if @is_preview 
     #  return 'layout_for_preview'
     #end  
-    if @is_layout_for_login_required
-      return 'layout_for_login'
-    end
-    SpreeTheme.site_class.current.layout || Spree::Config[:layout]
+    @theme.layout_path || SpreeTheme.site_class.current.layout || Spree::Config[:layout]
   end
 
-  def initialize_template
+  def initialize_template( request_fullpath = nil )
+    request_fullpath ||= request.fullpath
     # in case  tld/create_admin_session, should show system layout, theme may have no login section. ex www.dalianshops.com
-    @is_layout_for_login_required = false
+    @special_layout = nil
     #dalianshops use template now.
     #return if SpreeTheme.site_class.current.dalianshops?
-    #Rails.logger.debug "request.fullpath=#{request.fullpath}"
+    #Rails.logger.debug "request_fullpath=#{request_fullpath}"
     # fullpath may contain ?n=www.domain.com    
-    case request.fullpath
+    case request_fullpath
       when /^\/under_construction/, /^\/user\/spree_user\/logout/ ,/^\/logout/, /^\/admin/
-        return
-      when /^\/create_admin_session/,/^\/new_admin_session/
-        @is_layout_for_login_required = true
         return
     end  
       
     website = SpreeTheme.site_class.current
-    #DefaultTaxon.instance.id => 0
+    # get theme first, then look for page for selected theme. design shop require index page for each template
+    @is_designer = false
+    if website.design?
+      #add website condition, design can edit template_theme 
+      @is_designer = ( Spree::TemplateTheme.accessible_by( current_ability, :edit).where(:site_id=>website.id).count >0 )
+    end
+    
+    #login, forget_password page only available fore unlogged user. we need this flag to show editor even user have not log in.
+    if cookies[:_dalianshops_designer]=='1'
+      @is_designer = true
+    end     
+    if cookies[:_dalianshops_designer]=='0'
+      @is_designer = false
+    end     
+    # user could select theme to view in design shop. 
+    if website.design?
+      #get template from query string
+      if params[:action]=='preview' && params[:id].present?
+        @theme = Spree::TemplateTheme.find( params[:id] )
+        session[:theme_id] = params[:id]
+      end
+      if session[:theme_id].present?
+        if Spree::TemplateTheme.exists? session[:theme_id]  #theme could be deleted.
+          @theme = Spree::TemplateTheme.find( session[:theme_id] )
+        end
+      end
+    end
+    #browse template by public
+    if @theme.blank? and SpreeTheme.site_class.current.template_theme.present?       
+      @theme = SpreeTheme.site_class.current.template_theme
+    end
+#Rails.logger.debug "@theme=#{@theme.inspect}, @is_designer=#{@is_designer},website=#{website.inspect} request.xhr?=#{request.xhr?}"
     if params[:controller]=~/cart|checkout|order/
       @menu = DefaultTaxon.instance
     elsif params[:controller]=~/user/
@@ -54,43 +85,42 @@ module SpreeTheme::System
       if params[:r]
         @resource = Spree::Product.find_by_id(params[:r])
       end
-      if params[:c] and params[:c].to_i>0 
+      if params[:p]
+        @resource = Spree::Post.find_by_id(params[:p])
+      end
+      if params[:c] && params[:c].to_i>0 
         @menu = SpreeTheme.taxon_class.find_by_id(params[:c])
-      elsif website.index_page > 0
-        @menu = SpreeTheme.taxon_class.find_by_id(website.index_page)
-      elsif SpreeTheme.taxon_class.home.present? #just set home page in taxon is ok as well 
-        @menu = SpreeTheme.taxon_class.home
+      elsif(( index_page = @theme.try(:index_page)) && index_page > 0 )
+        @menu = SpreeTheme.taxon_class.find_by_id(index_page)
+      elsif(( index_page = website.index_page) > 0 )
+        @menu = SpreeTheme.taxon_class.find_by_id(index_page)
+      #elsif SpreeTheme.taxon_class.home.present? 
+      # #it is discarded, it is conflict with feature theme has own index page. it would show product assigned index page of other theme   
+      # #now each theme has own index page. website has own index page. 
+      # #just set home page in taxon is ok as well       
+      #  @menu = SpreeTheme.taxon_class.home
       else
-        @menu = DefaultTaxon.instance
+        # get default_taxon from root, or it has no root, inherited_page_context cause error
+        @menu = DefaultTaxonRoot.instance(request_fullpath).children.first
       end
     end
-    #menu should be same instance pass to PageGenerator, it require  request_fullpath
-    @menu.request_fullpath = request.fullpath
-    @is_designer = false
-    if website.design?
-      #add website condition 
-      @is_designer = ( Spree::TemplateTheme.accessible_by( current_ability, :read).where(:site_id=>website.id).count >0 )
+    #menu should be same instance pass to PageTag::PageGenerator, it require  request_fullpath
+    @menu.request_fullpath = request_fullpath
+    # support feature replaced_by 
+    if @menu.replacer.present?
+      @menu = @menu.replacer
     end
+
+    # @theme is required since we support create admin session by ajax.    
+    case request_fullpath
+      when /^\/create_admin_session/,/^\/new_admin_session/
+        @special_layout = 'layout_for_login'
+        return
+      when /^\/comments/ # it need layout when development, in fact it is always ajax.
+        @special_layout = 'under_construction'
+        return        
+    end  
     
-    #login, forget_password page only available fore unlogged user. we need this flag to show editor even user have not log in.
-    if cookies[:_dalianshops_designer]=='1'
-      @is_designer = true
-    end     
-    #get template from query string 
-    if @is_designer
-      if session[:theme_id].present?
-        @theme = Spree::TemplateTheme.find( session[:theme_id] )
-      end
-      if params[:action]=='preview' && params[:id].present?
-        @theme = Spree::TemplateTheme.find( params[:id] )
-        session[:theme_id] = params[:id]
-      end
-    end
-    #browse template by public
-    if @theme.blank? and SpreeTheme.site_class.current.template_theme.present?       
-      @theme = SpreeTheme.site_class.current.template_theme
-    end
-#Rails.logger.debug "menu.context=#{@menu.current_context}, @is_designer=#{@is_designer}, request.xhr?=#{request.xhr?}"
     # site has a released theme    
     if @theme.present?  
       unless request.xhr?
@@ -101,13 +131,14 @@ module SpreeTheme::System
            @editor_panel = render_to_string :partial=>'layout_editor_panel'
         end
       end
-      # we have initialize PageGenerator here, page like login  do not go to template_thems_controller/page
+      # we have initialize PageTag::PageGenerator here, page like login  do not go to template_thems_controller/page
       if @is_designer
-        @lg = PageGenerator.generator( @menu, @theme, {:resource=>@resource,:controller=>self})                  
+        @lg = PageTag::PageGenerator.previewer( @menu, @theme, {:resource=>@resource, :controller=>self, :page=>params[:page]})                  
       else
-        @lg = PageGenerator.generator( @menu, @theme, {:resource=>@resource,:controller=>self})          
+        @lg = PageTag::PageGenerator.generator( @menu, @theme, {:resource=>@resource, :controller=>self, :page=>params[:page]})          
       end      
       @lg.context.each_pair{|key,val|
+        # expose variable to view
         instance_variable_set( "@#{key}", val)
       }      
     else
@@ -120,7 +151,7 @@ module SpreeTheme::System
       @param_values_for_editors = Array.new(@editors.size){|i| []}
       editor_ids = @editors.collect{|e|e.id}
       page_layout ||= theme.page_layout
-      param_values =theme.param_values().where(:page_layout_id=>page_layout.id).includes([:section_param=>[:section_piece_param=>:param_category]]).order("spree_param_categories.position, spree_section_params.section_id, spree_section_piece_params.position") 
+      param_values =theme.param_values().includes([:section_param=>[:section_piece_param=>:param_category]]).where(["spree_param_values.page_layout_id=? and spree_section_params.is_enabled",page_layout.id]).order("spree_param_categories.position, spree_section_params.section_id, spree_section_piece_params.position") 
       #get param_values for each editors
       for pv in param_values
         #only get pv blong to root section
@@ -138,7 +169,7 @@ module SpreeTheme::System
       
       @page_layout = page_layout #current selected page_layout, the node of the layout tree.
       @page_layout||= theme.page_layout
-      @sections = Spree::Section.roots
+      @sections = Spree::Section.where(:is_enabled=>true).order("title").roots
       #template selection
       @template_themes = Spree::TemplateTheme.where(:site_id=>SpreeTheme.site_class.current.id)
   end

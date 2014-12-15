@@ -1,6 +1,46 @@
 module Spree
   module BaseHelper
-  
+    #==================================================================================================
+    # template methods, using by template
+    #==================================================================================================
+    #these methos has to be in BaseHelpler, controller may be TemplateThemes Cart Checkout User Order..
+    #override original in BaseHelper
+    def breadcrumbs(current_page_tag, separator="&nbsp;&raquo;&nbsp;")
+      # current_page_tag is nil in page /unauthorized
+      return "" if current_page?("/") || current_page_tag.nil? ||current_page_tag.page_home?
+      separator = raw(separator)
+      crumbs = [content_tag(:li, link_to(Spree.t(:home), spree.root_path) + separator)]
+      if current_page_tag
+        #crumbs << content_tag(:li, link_to(Spree.t(:products), products_path) + separator)
+        crumbs << current_page_tag.ancestors.collect { |ancestor| content_tag(:li, link_to(ancestor.name , (ancestor.path)) + separator) } unless current_page_tag.ancestors.empty?
+        crumbs << content_tag(:li, content_tag(:span, link_to(current_page_tag.name , current_page_tag.path)))          
+      end
+      crumb_list = content_tag(:ul, raw(crumbs.flatten.map{|li| li.mb_chars}.join), class: 'inline')
+      content_tag(:nav, crumb_list, id: 'breadcrumbs', class: 'sixteen columns')
+    end
+    
+    def link_to_product_thumbnail( current_piece, i )
+      link_to( image_tag(i.attachment.url( current_piece.get_content_param_by_key(:thumbnail_style))), 
+                         i.attachment.url( current_piece.get_content_param_by_key(:main_image_style))
+                         )      
+    end
+    
+    def product_main_image( current_piece, product )
+      Spree::MultiSiteSystem.with_context_site_product_images{
+        main_image_style = current_piece.get_content_param_by_key(:main_image_style)
+        send("#{main_image_style}_image", product, :itemprop => "image")
+      }
+    end
+    
+    # override resource path, add taxon into path
+    def product_path( product )
+      "/0/#{product.id}"
+    end
+            
+    #==================================================================================================
+    # Editor methods
+    #==================================================================================================
+    
     def my_remote_function(options)
       full_query_path = options[:query_path]+"?"+options[:query_params].to_param 
       form =  options[:submit]
@@ -81,7 +121,7 @@ module Spree
         if html_attribute.is_special?(:bool)
           manual_value_tag << radio_button_tag("#{pv_ele_id}[pvalue#{i}]", bool_true,pvalue==bool_true, :onchange=>manual_value_onchange )+"Yes" 
           manual_value_tag << radio_button_tag("#{pv_ele_id}[pvalue#{i}]", bool_false,pvalue==bool_false, :onchange=>manual_value_onchange )+"No"
-        elsif html_attribute.is_special?(:image) or html_attribute.is_special?(:src)
+        elsif html_attribute.is_special?(:image)
           manual_value_tag << select("#{pv_ele_id}","pvalue#{i}", Spree::TemplateFile.all.collect{|item| [item.attachment_file_name, item.attachment_file_name]}, {:selected=>pvalue ,:include_blank=>"Please select "},{ :onchange=>manual_value_onchange}) 
           manual_value_tag << link_to( "upload file...",{:action=>"upload_file_dialog",:param_value_id=>param_value.id, :html_attribute_id=>html_attribute.id, :selected_editor_id=>@editor.id},:method =>:get,:remote=>true )  
         else

@@ -22,7 +22,8 @@ module Spree
 
     # Alphabetized to more easily lookup particular preferences
     preference :address_requires_state, :boolean, default: true # should state/state_name be required
-    preference :admin_interface_logo, :string, default: 'logo/spree_50.png'
+#    preference :admin_interface_logo, :string, default: 'logo/spree_50.png'
+    preference :admin_interface_logo, :string, default: 'logo/logo2c.png'
     preference :admin_products_per_page, :integer, default: 10
     preference :allow_backorder_shipping, :boolean, default: false # should only be true if you don't need to track inventory
     preference :allow_checkout_on_gateway_error, :boolean, default: false
@@ -61,12 +62,12 @@ module Spree
     preference :last_check_for_spree_alerts, :string, default: nil
 #    preference :layout, :string, default: 'spree/layouts/spree_application'
     preference :layout, :string, default: '/layouts/abc_application.html.erb'
-    preference :logo, :string, default: 'logo/spree_50.png'
+#    preference :logo, :string, default: 'logo/spree_50.png'
+    preference :logo, :string, default: 'logo/dalianshops.png'
     preference :max_level_in_taxons_menu, :integer, default: 1 # maximum nesting level in taxons menu
     preference :orders_per_page, :integer, default: 15
     preference :prices_inc_tax, :boolean, default: false
-#    preference :products_per_page, :integer, default: 12  #if a menu have no assigned resource, show all available products up to 100
-    preference :products_per_page, :integer, default: 100
+    preference :products_per_page, :integer, default: 12  # we support pagination now. do not need: if a menu have no assigned resource, show all available products up to 100
     preference :redirect_https_to_http, :boolean, :default => false
     preference :require_master_price, :boolean, default: true
     preference :shipment_inc_vat, :boolean, default: false
@@ -84,10 +85,14 @@ module Spree
     preference :track_inventory_levels, :boolean, default: true # Determines whether to track on_hand values for variants / products.
 
     # Preferences related to image settings
-    preference :attachment_default_url, :string, default: '/spree/products/:id/:style/:basename.:extension'
-    preference :attachment_path, :string, default: ':rails_root/public/spree/products/:id/:style/:basename.:extension'
-    preference :attachment_url, :string, default: '/spree/products/:id/:style/:basename.:extension'
-    preference :attachment_styles, :string, default: "{\"mini\":\"48x48>\",\"small\":\"100x100>\",\"product\":\"240x240>\",\"large\":\"600x600>\"}"
+    # because of :update_paperclip_settings, we need to override default for mulit_site
+#    preference :attachment_default_url, :string, default: '/spree/products/:id/:style/:basename.:extension'
+    preference :attachment_default_url, :string, default: '/shops/:rails_env/:site/products/:id/:basename_:style.:extension'
+#    preference :attachment_path, :string, default: ':rails_root/public/spree/products/:id/:style/:basename.:extension'
+    preference :attachment_path, :string, default: ':rails_root/public/shops/:rails_env/:site/products/:id/:basename_:style.:extension'
+#    preference :attachment_url, :string, default: '/spree/products/:id/:style/:basename.:extension'
+    preference :attachment_url, :string, default: '/shops/:rails_env/:site/products/:id/:basename_:style.:extension'
+    preference :attachment_styles, :string, default: "{\"mini\":\"48x48>\",\"small\":\"100x100>\",\"medium\":\"240x240>\",\"product\":\"350x350>\",\"large\":\"520x520>\"}"
     preference :attachment_default_style, :string, default: 'product'
     preference :s3_access_key, :string
     preference :s3_bucket, :string

@@ -1,10 +1,10 @@
 attributes = {  
     :name =>  "Dalian shops",
     :domain => "www.dalianshops.com",
-    :short_name => "firstshop"
+    :short_name => "first"
   }
-Spree::Site.create!(attributes)    
-Spree::Site.current = Spree::Site.first
+site = Spree::Site.create!(attributes)    
+Spree::Site.current = site
 
 # see last line where we create an admin if there is none, asking for email and password
 =begin

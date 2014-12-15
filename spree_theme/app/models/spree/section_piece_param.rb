@@ -16,7 +16,7 @@ module Spree
     #section_piece.section_piece_params.create!(:editor_id=>1) would cause ActiveRecord::RecordInvalid: Validation failed: Editor can't be blank
     #validates :editor, :presence=>true
     #validates :param_category, :presence=>true
-    validates :section_piece, :presence=>true
+    validates :editor, :param_category, :section_piece, :presence=>true
     after_create :add_section_params
     
     def html_attributes
@@ -29,7 +29,22 @@ module Spree
     end
     
     def param_keys
-      self.html_attribute_ids.split(',').collect{|i| [i.to_i, "#{i}unset", "#{i}hidden"]}.flatten
+      # key may in string or integer in seed, since key is string in param_value, we may eliminate integer key.
+      self.html_attribute_ids.split(',').collect{|i| [i.to_i, i, "#{i}unset", "#{i}hidden"]}.flatten
+    end
+    
+    def insert_html_attribute( html_attribute, before_existing_html_attribute = nil )
+      existing_html_attributes = html_attributes
+      raise "html_attrubte #{html_attribute.title} already exsiting." if existing_html_attributes.include? html_attribute
+      if before_existing_html_attribute.present?
+        insert_position = existing_html_attributes.index( before_existing_html_attribute )
+        raise "can not found exsiting html attribute #{before_existing_html_attribute.title}" if insert_position.nil?
+        existing_html_attributes.insert( insert_position, html_attribute)
+      else
+        existing_html_attributes.push( html_attribute )
+      end
+     self.update_attributes! :html_attribute_ids=>existing_html_attributes.map(&:id).join(',')    
+      
     end
     
     # only for seed or data patch
@@ -41,8 +56,23 @@ module Spree
         end
       end  
     end
-
     
+    # is it editable for specified data_source
+    def editable?(data_source)
+      if editable_condition.present?
+        case data_source
+        when Spree::PageLayout::DataSourceEnum.gpvs
+          editable_condition.include?( "data_source:gpvs")
+        when Spree::PageLayout::DataSourceEnum.blog
+          editable_condition.include?( "data_source:blog")
+        else
+          false
+        end
+      else
+        true
+      end
+    end
+       
     private
     #add section_param where section.section_piece_id = ? for each section tree.
     def add_section_params

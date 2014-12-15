@@ -1,15 +1,15 @@
 <%= render :partial => 'sub_menu' %>
 <% content_for :page_title do %>
-   <%= t("static_content.static_pages") %> <i class="icon-arrow-right"></i> <%= t("static_content.new_page") %>
+   <%= Spree.t("template_text.index") %> <i class="icon-arrow-right"></i> <%= Spree.t("template_text.new") %>
 <% end %>
 
 <% content_for :page_actions do %>
-  <li><%= button_link_to t(:back_to_static_pages_list), spree.admin_template_texts_url, :icon => 'icon-arrow-left' %></li>
+  <li><%= button_link_to Spree.t(:back_to_template_text_list), spree.admin_template_texts_url, :icon => 'icon-arrow-left' %></li>
 <% end %>
 
 <%= render "spree/shared/error_messages", :target => @template_text %>
 
 <%= form_for [:admin, @template_text]  do |f| %>
   <%= render :partial => 'form', :locals => { :f => f } %>
-  <%= render :partial => 'spree/admin/shared/edit_resource_links' %>
+  <%= render :partial => 'spree/admin/shared/new_resource_links' %>
 <% end %>

@@ -22,9 +22,8 @@ Rails.logger.debug "section_params.size = #{section_params.size }"
     temp_file.write( serializable_data.to_yaml )
     temp_file.size.should be > 0 #cause flush
     File.exists?(temp_file.path).should be_true
-    temp_file.rewind
 Rails.logger.debug "temp_file=#{temp_file.size}"    
-    Spree::TemplateTheme.import_into_db(temp_file)    
+    Spree::TemplateTheme.import_into_db(serializable_data)    
     temp_file.close    
   end
 
@@ -43,17 +42,27 @@ Rails.logger.debug "temp_file=#{temp_file.size}"
   end
   
   it "should copy to new" do
-     copy_template = template.copy_to_new     
-     copy_template.page_layout_root_id.should_not eq template.page_layout_root_id
+     copied_template = template.copy_to_new
+          
+     copied_template.page_layout_root_id.should_not eq template.page_layout_root_id
      
-     new_node_ids = copy_template.page_layout.self_and_descendants.collect{|node| node.id }     
+     new_node_ids = copied_template.page_layout.self_and_descendants.collect{|node| node.id }     
      template.assigned_resource_ids.keys{| node_id |
        new_node_ids.should include node_id
      }     
+     original_page_layouts = template.page_layout.self_and_descendants
+     copied_template.page_layout.self_and_descendants.size.should eq original_page_layouts.size 
+     copied_template.param_values.size.should eq template.param_values.size
+     
+     copied_template.page_layout.self_and_descendants.each_with_index{|pl,index|
+       pl.param_values.size.should eq original_page_layouts[index].param_values.size
+       pl.param_values.first.theme_id.should eq copied_template.id
+     }
+     copied_template.template_files.size.should eq template.template_files.size
+     copied_template.current_template_release.should be_blank
   end
   
   it "destroy imported one" do
-Rails.logger.debug "............strart test import................."    
     #template.template_releases.stub(:exists?) { true }  
     # release first
     imported_template = template.import
@@ -114,13 +123,13 @@ Rails.logger.debug "............strart test import................."
   end 
   
   it "should be imported" do
-    open(File.join( SpreeTheme::Engine.root,'db', 'themes', 'template_images', 'logo.gif')) do|f|
-      template_file = Spree::TemplateFile.new(:attachment=>f, :page_layout_id=>template.page_layout_root_id)      
-      new_template = template.import(:template_files => [template_file] )
-      new_template.current_template_release.should be_present
-      new_template.should be_a_kind_of Spree::TemplateTheme
-      new_template.assigned_resources( Spree::TemplateFile,template.page_layout ).should be_present
-    end
+    #open(File.join( SpreeTheme::Engine.root,'db', 'themes', 'template_images', 'logo.gif')) do|f|
+    #  template_file = Spree::TemplateFile.new(:attachment=>f, :page_layout_id=>template.page_layout_root_id)      
+    #  new_template = template.import(:template_files => [template_file] )
+    #  new_template.current_template_release.should be_present
+    #  new_template.should be_a_kind_of Spree::TemplateTheme
+    #  new_template.assigned_resources( Spree::TemplateFile,template.page_layout ).should be_present
+    #end
   end
   
   it "should unassign resource from theme after taxon destroy" do
@@ -132,4 +141,32 @@ Rails.logger.debug "............strart test import................."
     template.assigned_resource_id( taxon.class, template.page_layout ).should eq 0
     
   end  
+  
+  it "should assign specific taxon to theme" do
+    SpreeTheme.site_class.current = template.website
+    taxon = Spree::SpecificTaxon.first
+    template.assign_resource( taxon, template.page_layout )
+    template.assigned_resource_id( taxon.class, template.page_layout ).should eq taxon.id
+  end
+  
+  it "should has valid context" do
+    SpreeTheme.site_class.current = template.website
+    taxon = Spree::Taxon.first
+    template.valid_context?( template.page_layout, taxon ).should be true
+    
+  end
+  
+  it "should has invalid context" do
+    SpreeTheme.site_class.current = template.website
+    taxon = Spree::SpecificTaxon.first
+    template.assign_resource( taxon, template.page_layout )
+    another_taxon = Spree::Taxon.last
+    (taxon.id == another_taxon.id).should be false      
+    template.valid_context?( template.page_layout, another_taxon ).should be false    
+  end
+  
+  it "should has resources" do
+    template_resources = template.template_resources 
+    template_resources.should be_present
+  end    
 end

@@ -1,0 +1,5 @@
+<% if @page_layout.data_source.present? %>    
+      $('[data-lid=<%=@page_layout.id%>] > .config_data_source' ).html( <%= raw Spree.t("section_data_source.#{@page_layout.current_data_source}").to_json %> );      
+<% else %>    
+      $('[data-lid=<%=@page_layout.id%>] > .config_data_source' ).html( '' );      
+<% end %>

@@ -8,25 +8,24 @@ selected_id= (options[:selected_id]||layout_root.id )
 <%=form_tag(update_layout_tree_template_theme_path(theme), :id=>"layout_tree_form",:name=>"layout_tree_form", :remote=>true) do %>
 
   <div id='page_layout_tree_inner' class="block">
-  <% for layout in layout_root.self_and_descendants%>
-    <% assigned_taxons = theme.assigned_resources(SpreeTheme.taxon_class, layout)
+  <% for page_layout in layout_root.self_and_descendants%>
+    <% assigned_taxons = theme.assigned_resources(SpreeTheme.taxon_class, page_layout)
     %>
   <div class="clear-block">
     <div class="fl">
-    <%=raw("&nbsp;&nbsp;"*layout.cached_level)%>
-    <%# do not call form.submit. 
+    <%=raw("&nbsp;&nbsp;"*page_layout.cached_level)%>
+    <% # do not call form.submit. 
+      page_layout_class = 'click_editable'
+      page_layout_class << ' selected' if page_layout.id==selected_id 
     %>
-    <%= link_to_function(layout.title, 
-      "$('#selected_page_layout_id').val(#{layout.id});$('#layout_editor_form').trigger('submit')",
-      {"class"=>(layout.id==selected_id ? "selected":""),"data-lid"=>layout.id, :onmouseout=>"$('#{layout.css_selector}').trigger('dehighlight')",:onmouseover=>"$('#{layout.css_selector}').trigger('highlight')"})
-      %>
+    <%= link_to( page_layout.title, "", {"href"=>'javascript:void(0)', "class"=>page_layout_class,"data-lid"=>page_layout.id,"data-tid"=>theme.id, :onmouseout=>"$('#{page_layout.css_selector}').trigger('dehighlight')",:onmouseover=>"$('#{page_layout.css_selector}').trigger('highlight')"}) %> 
     <%if options[:show_assigned_resource] %>
       <% if assigned_taxons.present? %>
       <span>[t:<%= assigned_taxons.collect(&:name) %>]</span>
       <%end%>
     <%end%>  
     <%if options[:show_context] %>      
-    <span><%= layout.current_contexts if layout.section_context.present? %></span>
+    <span><%= page_layout.current_contexts if page_layout.section_context.present? %></span>
     <%end%>  
     </div>
     <% if options[:configurable] %>
@@ -40,12 +39,12 @@ selected_id= (options[:selected_id]||layout_root.id )
     <% end %>
     <% if options[:editable] %>
       <div class="fr">
-      <%= link_to_function "+","$('#layout_id').val(#{layout.id});$('#section_select_dialog').dialog('open')"%>
-      <%= link_to_function "-","if (confirm('Really?')) submit_layout_tree_form('del_self',#{layout.id} )"%>
-      <%= link_to_function "u","submit_layout_tree_form('move_left',#{layout.id} )"%>
-      <%= link_to_function "d","submit_layout_tree_form('move_right',#{layout.id} )"%>
-      <%= link_to_function "<","submit_layout_tree_form('promote',#{layout.id} )"%>
-      <%= link_to_function ">","submit_layout_tree_form('demote',#{layout.id} )"%>
+      <%= link_to_function "+","$('#layout_id').val(#{page_layout.id});$('#section_select_dialog').dialog('open')"%>
+      <%= link_to_function "-","if (confirm('Really?')) submit_layout_tree_form('del_self',#{page_layout.id} )"%>
+      <%= link_to_function "u","submit_layout_tree_form('move_left',#{page_layout.id} )"%>
+      <%= link_to_function "d","submit_layout_tree_form('move_right',#{page_layout.id} )"%>
+      <%= link_to_function "<","submit_layout_tree_form('promote',#{page_layout.id} )"%>
+      <%= link_to_function ">","submit_layout_tree_form('demote',#{page_layout.id} )"%>
       </div>
     <% end %>
   </div>
@@ -54,5 +53,36 @@ selected_id= (options[:selected_id]||layout_root.id )
 <%=hidden_field_tag "selected_section_id" %>
 <%=hidden_field_tag "op" %>
 <%=hidden_field_tag "layout_id" %>
+<script>
+<% #keep js in this file, update_layout_tree would update page layout tree, js should be reset as well %>
+      $("#layout_tree_form .click_editable").each(function(index,element){
+      var jquery_element = $(element);
+      jquery_element.editable(function(value, settings) { 
+            var url = Spree.routes.admin_template_themes+'/'+jquery_element.data('tid')+'/page_layout/'+jquery_element.data('lid');
+            var submitdata = {};
+            submitdata[settings.name] = value;
+            //submitdata[settings.id] = self.id;
+            $.ajax({ dataType: 'json', url: url, type: 'put',  data : submitdata,
+                success: function(data){
+                  // data is null, "nocontent" returned
+                  // jquery_element.html(data.page_layout.title);
+                }
+            });             
+            return(value);
+          },        
+          { //since dblclick would trigger click, for a link, we should not click,dblclick together
+            event     : "click_editable",
+            name      : "page_layout[title]",
+            style  : "inherit" });
+      jquery_element.click(function(){
+        if($('#page_layout_editable').is(':checked')){
+          jquery_element.trigger('click_editable')
+        }else{
+          $('#selected_page_layout_id').val(jquery_element.data('lid'));
+          $('#layout_editor_form').trigger('submit')
+        }          
+      })        
+    })
+</script>
 
 <%end%>

@@ -1,0 +1,38 @@
+      <% if product.has_variants? %>
+          <% product.grouped_option_values.each do |type, values| %>
+            <div id="<%= dom_id(type) %>" class="variant-option">
+              <div class="option_type"><%= type.presentation %></div>
+              <ul class="option_values variant-option-value-large-images clear-block">
+              <% values.sort_by(&:position).each do |value| %>
+                <% classes = ["option-value-large-image"] %>
+                <% unless (variants = product.variants_for_option_value(value)).empty? %>
+                  <li class="olge lge-<%=value.id%>  large_image"><%= link_to value.image.present? ? image_tag(value.image.attachment.url(:large), :alt => value.presentation) : content_tag(:span, value.presentation), "javascript:void(0)", :title => value.presentation, :class => classes.join(" "), :rel => "#{type.id}-#{value.id}" %></li>
+                <% end %>
+              <% end %>
+              </ul>
+              <ul class="option_values variant-option-value-thumb-images clear-block">
+              <% values.sort_by(&:position).each do |value| %>
+                <% classes = ["option-value"] %>
+                <% unless (variants = product.variants_for_option_value(value)).empty? %>
+                  <li class="otmb thumb_image" ><%= link_to value.image.present? ? image_tag(value.image.attachment.url(:mini), :alt => value.presentation) : content_tag(:span, value.presentation), "#", :title => value.presentation, :class => classes.join(" "), :rel => "#{type.id}-#{value.id}" %></li>
+                <% end %>
+              <% end %>
+              </ul>
+            </div>
+          <% end %>
+          <%= hidden_field_tag "products[#{product.id}]", product.master.id, :class => "hidden variant_id" %>
+          <%= button_tag "Back",:class=>'back', :type=>:button %> <%= button_tag "Next",:class=>'next', :type=>:button %>
+          <script type="text/javascript">
+          //<![CDATA[
+            var variant_options = new VariantOptions({
+              view_style: 'slide',
+              container_selector: <%== ('.'+g_piece_selector).to_json -%>,
+              options: <%== product.variant_options_hash.to_json -%>,
+              track_inventory_levels: false,
+              allow_backorders: true,
+              allow_select_outofstock: true,
+              default_instock: true
+            });
+          //]]>
+          </script>
+      <% end%>

@@ -1,58 +1,83 @@
 zh-CN:
+########################################### start for template ###########################################    
+  views:
+    pagination:
+      first: "&laquo; 首页"
+      last: "末页 &raquo;"      
+      next: 下一页 &raquo;
+      previous: ! '&laquo; 上一页'
+      truncate: ! '&hellip;'
+########################################### end for template ###########################################    
   activerecord:
     attributes:
+      spree/page_layout:
+        section_context: section context
+        data_source: data source 
+      spree/product:
+        theme_id: 销售模板
+      spree/taxon:
+        page_context: 页面显示内容分类
+        replaced_by: 页面显示内容置换
+      spree/template_file: 
+        attachment_file_name: 文件名字
+        attachment_content_type: 类型
+        attachment_file_size: 文件大小
+        template_theme: 所属模板
+        created_at: 上传时间
       spree/template_text:
         name: 用途
         slug: Slug
         body: 内容
       spree/template_theme: &template_theme_labels
-        title: Title
+        title: 名字
         slug: Slug
-        body: Body
+        section_root_id: 基础模块
+        is_public: 是否公开
+      
     models:
+      spree/page_layout:
+        one: 模块
+        other: 模块
       spree/template_file:
         one: 模板图片
       spree/template_text:
         one: 模板素材
       spree/template_theme:
         one: 模板
+        other: 模板
   helpers:
     label:
       template_theme:
         <<: *template_theme_labels
-  notice_messages:
-    template_theme_imported: 模板已经导入
-    template_theme_not_imported: 模板无法导入
   template_theme: Theme
   template_themes: Themes
   spree:
     actions:
-      import: 导入
+      import: 购买
     admin:
       tab:
+        taxonomies: 分类
         template_themes: 模板
         theme_texts: 模板素材
         native_themes: 模板
         foreign_themes: 模板商店
     back_to_themes_list: 回到模板列表
-    apply_theme: 
+    back_to_template_text_list: 回到素材列表
+    back_to_template_file_list: 回到素材列表
     china_address:
       firstname: 收货人姓名
       phone: 电话
       state: 邮编
       city: 所在地区
-      street: 街道地址
-    config_theme:
-    configing_theme: 配置模板 
-    copy_theme:
-    delete_theme: 删除 
-    release_theme: 
+      street: 详细地址
     select_taxon: 选择菜单
     select_template_image: 选择图片    
-    select_template_text: 选择文本    
+    select_template_text: 选择文本 
+    select_from_foreign_themes: 到模板商店选择模板
     default_page:
       home: 首页
       login: 登录
+      logout: 退出
       account: 我的账户
       signup: 注册
       password: 忘记密码
@@ -61,19 +86,78 @@ zh-CN:
       unknown: 未知
       checkout: 付款
       thanks: 恭喜！支付成功
+      taxonomy: 缺省菜单 
+      blog: 文章列表
+      post: 文章内容
+    dialog_title: 对话框
+    global_taxons: 全局分类
+    notice_messages:
+      theme_imported: 模板已经购买成功
+      theme_not_imported: 模板无法导入        
+    page_layout:
+      data_source: 数据源 
+      please_select_to_config: 请选择需要配置的模块
+      section_context: 模块适用页面
+      specific_taxon: 模块适用个别页面
+      config_resource: 模块可用素材
+    section_context:
+      home: 首页
+      list: 产品列表
+      detail: 产品详细
+      cart: 购物车
+      account: 我的账户
+      checkout: 支付页
+      thanks: 谢谢购物
+      signup: 用户注册
+      login: 用户登录
+      password: 密码管理
+      blog: 文章列表
+      post: 文章内容
+      logout: 用户退出
+      either: 任意页
+      new_site: 注册开店
+    section_data_source:
+      gpvs: 产品集合
+      this_product: 当前选择产品
+      taxon: 菜单  
+      blog: 文章集合
+      post: 当前选择文章
+      gpvs_theme: 模板集合
+    template_file:
+      index: 图片素材
+      new: 新建图片素材
+    template_resource: 网站素材
     template_text:
-      static_pages: Static pages
+      index: 文本素材
       static_pages_desc: Manage static page with WYSIWYG editor.
-      new_page: New page
+      new: 新建文本素材
       editing_page: Editing page
       confirm_delete: Are you sure ?
       link: Link
       meta_title: Meta Title
       page_navigation_title: "Pages"          
+    template_themes: 模板
     template_theme:
-      assign_resource:
-    page_layout:
-      context: 
-      date_source: 
+      assign_resource: 模板素材
+      assign: 分配
+      new: 新建空白模板
+    theme_foreign: 模板商店
+    theme_native: 可用模板
+    theme_applied: 是否使用
+    theme_apply: 使用
+    theme_assign_taxon: 分配菜单
+    theme_assign_image: 分配图片
+    theme_config: 设置模板
+    theme_import: 购买
+    theme_copy: 复制
+    theme_prepare_import: 设置
+    theme_is_imported: 是否已购买
+    theme_is_free: 是否免费
+    preview_theme: 预览
+    install_theme_with_site: 安装
+    is_taxon_clickable: 分类是否可点击
+    theme_release: 发布
+    welcome_to_admin_login: Dalianshops管理系统登录
+    welcome_to_under_construction: 网站建设中，请登录管理系统
       
                          

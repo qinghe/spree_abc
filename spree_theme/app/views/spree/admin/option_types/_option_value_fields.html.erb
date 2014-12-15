@@ -1,0 +1,20 @@
+<% # override file of spree_backend, add image field 
+%>
+
+
+<tr class="option_value fields" id="spree_<%= dom_id(f.object) %>"  data-hook="option_value" class="<%= cycle('odd', 'even')%>">
+  <td class="no-border">
+    <span class="handle"></span>
+    <%= f.hidden_field :id %>
+  </td>
+  <td class="name"><%= f.text_field :name %></td>
+  <td class="presentation"><%= f.text_field :presentation %></td>
+  <td><%= image_tag f.object.image.mini_url if f.object.image.present? %></td>
+  <td>
+     <% f.object.build_image if f.object.image.blank? %>
+     <%= f.fields_for :image do |image_form|%> 
+        <%= image_form.file_field :attachment %>
+     <% end %>
+  </td>
+  <td class="actions"><%= link_to_remove_fields Spree.t(:remove), f, :no_text => true %></td>
+</tr>

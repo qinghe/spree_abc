@@ -4,7 +4,7 @@
 %>
 <div id="editor_<%=editor.id%>" class="block param_value_editor">
 <%#render :partial=>"param_value", :collection=>param_values %>
-<%param_values.each{|param_value| %>
+<%param_values.each{|param_value| next unless param_value.editable? %>
 <%= raw partial_param_value( param_value )%>
 <% }%>
 

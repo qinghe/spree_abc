@@ -7,6 +7,11 @@ describe Spree::PageLayout do
     html.present?.should be_true
     css.present?.should be_true
   end
+
+  it "has page script" do
+    html, css, js = page_layout.build_content
+    html.should match(/proc_page=/)
+  end
   
   it "has partial html" do
     page_layout.partial_html.should be_kind_of Spree::HtmlPage::PartialHtml
@@ -90,5 +95,15 @@ describe Spree::PageLayout do
   
   it "should get available data sources" do
     
+  end
+  
+  it "should copy page_layout to new" do
+    nodes = Spree::PageLayout.root.self_and_descendants
+    new_nodes = Spree::PageLayout.copy_to_new(nodes)
+    new_nodes.size.should eq nodes.size
+    (new_nodes&nodes).should be_blank
+    new_nodes.each_with_index{|new_node, index|
+      new_node.title.should eq nodes[index].title
+    }
   end
 end

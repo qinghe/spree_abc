@@ -1,20 +1,20 @@
 <%= render :partial => 'sub_menu' %>
 <% content_for :page_title do %>
-  <%= Spree.t(:configing_theme) %> &ldquo;<%= @template_theme.title %>&rdquo;
+  <%= Spree.t(:theme_prepare_import) %> &ldquo;<%= @template_theme.title %>&rdquo;
 <% end %>
 <%= form_for :template_theme, :url=>import_admin_template_theme_path, :html=>{ :multipart => true} do |f| %>
   <fieldset class="no-border-top">
     <div class="row">
         <div class="alpha eight columns">
           <fieldset class="security no-border-bottom">
-            <legend align="center">Assign taxon</legend>
+            <legend align="center"><%= Spree.t(:theme_assign_taxon) %></legend>
             <% @template_theme.page_layout.self_and_descendants.each do |page_layout|
-              assigned_taxonomies = @template_theme.assigned_resources( SpreeTheme.taxon_class, page_layout) 
-              next if assigned_taxonomies.blank?
+              assigned_taxons = @template_theme.assigned_resources( SpreeTheme.taxon_class, page_layout) 
+              next if assigned_taxons.blank?
             %>
             <div class="field">
               <%= label :page_layout, :title, page_layout.title  %> <br />
-              <% assigned_taxonomies.each{|taxon| %>
+              <% assigned_taxons.each{|taxon| next if taxon.blank? %>                
                 <%= select_tag "assigned_resource_ids[#{page_layout.id}][]",options_from_collection_for_select(taxon.class.roots, :id, :name), prompt: (Spree.t :select_taxon) %>
               <%}%>
             </div>
@@ -23,7 +23,7 @@
         </div>
         <div class="omega eight columns">
           <fieldset class="currency no-border-bottom">
-            <legend align="center">Assign image</legend>
+            <legend align="center"><%= Spree.t(:theme_assign_image) %></legend>
             <% @template_theme.page_layout.self_and_descendants.each do |page_layout|
               assigned_images = @template_theme.assigned_resources( Spree::TemplateFile, page_layout) 
               next if assigned_images.blank?
@@ -45,7 +45,7 @@
   <div class="form-buttons filter-actions actions" data-hook="buttons">
     <%= button Spree.t('actions.import'), 'icon-ok' %>
     <span class="or"><%= Spree.t(:or) %></span>
-    <%= link_to_with_icon 'icon-remove', Spree.t('actions.cancel'), collection_url, :class => 'button' %>
+    <%= link_to_with_icon 'icon-remove', Spree.t('actions.cancel'), session[:return_to] || foreign_admin_template_themes_path, :class => 'button' %>
   </div>
 </fieldset>
 <% end %>

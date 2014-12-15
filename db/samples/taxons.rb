@@ -1,3 +1,4 @@
+#encoding: utf-8
 #Spree::Sample.load_sample("taxonomies")
 #Spree::Sample.load_sample("products")
 
@@ -5,22 +6,22 @@ categories = Spree::Taxonomy.find_by_name!("Categories")
 brands = Spree::Taxonomy.find_by_name!("Brand")
 
 products = { 
-  :ror_tote => "Ruby on Rails Tote",
-  :ror_bag => "Ruby on Rails Bag",
-  :ror_mug => "Ruby on Rails Mug",
-  :ror_stein => "Ruby on Rails Stein",
-  :ror_baseball_jersey => "Ruby on Rails Baseball Jersey",
-  :ror_jr_spaghetti => "Ruby on Rails Jr. Spaghetti",
-  :ror_ringer => "Ruby on Rails Ringer T-Shirt",
-  :spree_stein => "Spree Stein",
-  :spree_mug => "Spree Mug",
-  :spree_ringer => "Spree Ringer T-Shirt",
-  :spree_baseball_jersey =>  "Spree Baseball Jersey",
-  :spree_tote => "Spree Tote",
-  :spree_bag => "Spree Bag",
-  :spree_jr_spaghetti => "Spree Jr. Spaghetti",
-  :apache_baseball_jersey => "Apache Baseball Jersey",
-  :ruby_baseball_jersey => "Ruby Baseball Jersey",
+  :ror_tote => "加维克台灯",
+  :ror_bag => "卡秋塔台灯",
+  :ror_mug => "布朗达布兰科上菜用碗",
+  :ror_stein => "巴尔巴托盘",
+  :ror_baseball_jersey => "代德杯子",
+  :ror_jr_spaghetti => "奥米欧茶壶",
+  :ror_ringer => "莱思比茶杯",
+  :spree_stein => "弗斯拉碗",
+  :spree_mug => "奥芬利托盘",
+  :spree_ringer => "昂顿大杯",
+  :spree_baseball_jersey =>  "斯德哥尔摩意式咖啡杯",
+  :spree_tote => "维迪亚台灯",
+  :spree_bag => "克劳比工作灯",
+  :spree_jr_spaghetti => "沃格特茶滤",
+  :apache_baseball_jersey => "盖尔杯碟",
+  :ruby_baseball_jersey => "哈里大杯", #Ruby Baseball Jersey
 }
 
 

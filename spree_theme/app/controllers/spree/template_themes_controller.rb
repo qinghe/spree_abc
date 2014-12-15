@@ -16,66 +16,41 @@ module Spree
       render "under_construction", layout:"under_construction"            
     end
     
+    # @theme is required for xhr
     def new_admin_session
-      
+      @user = Spree::User.new
     end
     
+    # @theme is required for xhr
     def create_admin_session
       user_params = params[:spree_user]
-      user = Spree.user_class.find_for_authentication(:email => user_params[:email])
-      if user.present?
-        if user.valid_password?(user_params[:password])
-          sign_in :spree_user,user 
+      @user = Spree.user_class.unscoped.admin.find_for_authentication(:email => user_params[:email])
+      if @user.present?
+        if @user.valid_password?(user_params[:password])
+          sign_in :spree_user, @user 
         end 
       end
-      if spree_user_signed_in? and current_spree_user.admin?
-        redirect_to "/admin"
-      else
-        render "new_admin_session", layout:"under_construction"
-      end
-    end
-    
-    
-    # GET /themes/1
-    # GET /themes/1.xml
-    def show
-      @theme = TemplateTheme.find(params[:id])
-  
-      respond_to do |format|
-        format.html # show.html.erb
-        format.xml  { render :xml => @theme }
-      end
-    end
-  
-  
-    # GET /themes/1/edit
-    def edit
-      @theme = TemplateTheme.find(params[:id])
-    end
-  
-    # PUT /themes/1
-    # PUT /themes/1.xml
-    def update
-      @theme = TemplateTheme.find(params[:id])
-  
-      respond_to do |format|
-        if @theme.update_attributes(params[:theme])
-          format.html { redirect_to(@theme, :notice => 'TemplateTheme was successfully updated.') }
-          format.xml  { head :ok }
-        else
-          format.html { render :action => "edit" }
-          format.xml  { render :xml => @theme.errors, :status => :unprocessable_entity }
+      #spree_user_signed_in? defined in devise/lib/controllers/helpers.rb
+      if spree_user_signed_in?
+        #warden.authenticate?
+        # host is required, current_user.site may not be current site, we allow user login from dalianshops.com
+        respond_with  do |format|
+          format.html{ redirect_to admin_url(:host=> current_spree_user.site.subdomain ) }          
         end
+      else
+        flash.now[:error] = t('devise.failure.invalid')        
+        render "new_admin_session"
       end
     end
-      
+    
+        
     
     # params for preview
     #    d: domain of website
     #    c: menu_id
     def preview
      
-    #  @lg = PageGenerator.previewer( @menu, @theme, {:resource=>(@resource.nil? ? nil:@resource),:controller=>self})
+    #  @lg = PageTag::PageGenerator.previewer( @menu, @theme, {:resource=>(@resource.nil? ? nil:@resource),:controller=>self})
     #  html = @lg.generate
     #  css,js  = @lg.generate_assets        
       #insert css to html
@@ -88,61 +63,7 @@ module Spree
     #  end
           
     end
-          
-    def assign_default
-      website_params = params[:website]
-      self.website[:index_page] = website_params[:index_page].to_i
-      self.website.save
-      render_message("yes, updated!")    
-      
-    end
-    
-    def assign
-      # "commit"=>[Update&Preview|Update|Preview]
-      commit_command = params[:commit]
-      keys = params.keys.select{|k|k=~/menu[\d]+/}
-      menus_params = params.values_at(*keys)
-      
-      if commit_command=~/Update/
-        #update default page
-        website_params = params[:website]
-        self.site_class.current.attributes = website_params
-        self.site_class.current.save
-      end
-      
-      if commit_command=~/Publish/
-        do_publish
-      end
-      
-      respond_to do |format|
-        format.js  {
-          if commit_command=~/Preview/
-            render "preview"          
-          else# commit_command=~/Publish/
-            render_message("yes, publish")
-          end    
-        }
-      end   
-  
-    end
-    
-    def select_tree
-      @menu = taxon_class.find(params[:menu_id])
-      render :partial=>"menu_and_template"
-    end
-    
-    def edit_layout
-      
-    end
-      
-    def editor
-      theme_id = 0
-      layout_id = 0
-      theme = TemplateTheme.find(params[:id])
-      prepare_params_for_editors(theme)
-    end  
-  
-  
+                     
     # params
     #   layout_id: selected page_layout_id
     #   selected_section_id: selected section_root_id
@@ -185,7 +106,6 @@ module Spree
       layout = PageLayout.find(layout_id)
       se = PageEvent::SectionEvent.new("disable_section", layout )
       se.notify
-      
     end
     
     def get_param_values
@@ -203,22 +123,7 @@ module Spree
         format.js  {render :partial=>'editors1'}
       end    
     end
-  
-    #FIXME, fix do_update_param_value
-    def update_param_values
-      selected_theme_id = params[:selected_theme_id]
-      selected_editor_id = params[:selected_editor_id]
-      param_value_keys = params.keys.select{|k| k=~/pv[\d]+/}
-      
-      for pvk in param_value_keys
-        param_value_params = params[pvk]
-        pv_id = pvk[/\d+/].to_i
-        param_value = ParamValue.find(pv_id, :include=>[:section_param, :section])
-        do_update_param_value(param_value, param_value_params) 
-      end
-      
-    end
-    
+     
     def update_param_value
       param_value_event = params[:param_value_event]
       editing_param_value_id = params[:editing_param_value_id].to_i
@@ -279,10 +184,10 @@ module Spree
       @dialog_content="upload_dialog_content"
       @param_value_id = params[:param_value_id]
       @html_attribute_id = params[:html_attribute_id].to_i
-  @param_value = ParamValue.find(@param_value_id, :include=>[:section_param=>:section_piece_param])
-  @editor = @param_value.section_param.section_piece_param.editor
-      if request.post?
-        
+      @param_value = ParamValue.find(@param_value_id, :include=>[:section_param=>:section_piece_param])
+      #@editor = @param_value.section_param.section_piece_param.editor
+      if request.post?        
+        #TODO replace same name of template file 
         uploaded_image = TemplateFile.new( params[:template_file] )
         if uploaded_image.valid?
           uploaded_image['theme_id']=@param_value.theme_id              
@@ -291,10 +196,9 @@ module Spree
                 param_value_params={@html_attribute_id.to_s=>{"unset"=>"0", "pvalue0"=>uploaded_image.attachment_file_name, "psvalue0"=>"0i"}}
                 param_value_event = ParamValue::EventEnum[:pv_changed]
                 editing_html_attribute_id = @html_attribte_id
-                do_update_param_value(@param_value, param_value_params, param_value_event, editing_html_attribute_id) 
+                @updated_html_attribute_values = do_update_param_value(@param_value, param_value_params, param_value_event, editing_html_attribute_id) 
                 # get all param values by selected editor
-                # since we redirect to editors, these are unused
-                @param_values = ParamValue.within_section(@param_value).within_editor(@editor)
+                #@param_values = ParamValue.within_section(@param_value).within_editor(@editor)
                 # update param value
                 render :partial=>'after_upload_dialog' 
           end
@@ -316,19 +220,24 @@ module Spree
         # render "upload"      
       end
     end
+    
+    # path for /new_site,  view new_site is placeholder as cart, account...
+    def new_site
+      
+    end
       
     private
     def model_dialog(dialog_title, dialog_content)
       @dialog_title = dialog_title
       @content_string = render_to_string :partial => dialog_content
       respond_to do |format|
-        format.js{ render "base/model_dialog"}
+        format.js{ render "application/model_dialog"}
       end
     end
     
     def render_message(message)
       respond_to do |format|
-          format.js{ render "base/message_box", :locals=>{:message=>message}}
+          format.js{ render "message_box", :locals=>{:message=>message}}
       end
     end
 

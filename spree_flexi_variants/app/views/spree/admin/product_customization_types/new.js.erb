@@ -1,0 +1,5 @@
+$("#new_product_customization_type").html('<%= escape_javascript(render :template => "spree/admin/product_customization_types/new", :formats => [:html], :handlers => [:erb]) %>');
+$("#new_product_customization_type_link").parent().hide();
+<% unless Rails.env.test? %>
+  $('.select2').select2();
+<% end %>

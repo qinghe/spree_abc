@@ -1,0 +1,37 @@
+<%
+ @site ||= SpreeTheme.site_class.new
+ @user ||= @site.users.build
+%>
+<%= form_for :site, :url => quick_lunch_path, :html=>{:id=>"site_form"} do |f| %>
+    <div >
+        <p>
+          <%= f.text_field :name, :class => 'fullwidth title', :placeholder => Spree.t(:name_store), :minlength=>4, :maxlength=>24, :required=>""  %>
+        </p>
+        <p>
+          <%= email_field :user, :email, :placeholder => Spree.t(:email)%>
+        </p>
+        <p>
+          <%= password_field :user,:password, :placeholder=>Spree.t(:password), :minlength=>6, :maxlength=>24, :required=>"" %>
+        </p>
+        <p><%= f.button Spree.t(:new_site), :class => 'button primary' %></p>
+    </div>
+<% end %>
+<script>
+$("#site_form").validate({
+  rules: {
+    'user[email]': {
+      required: true,
+      email: true,
+      remote: {
+        url: <%=raw check_email_path.to_json %>,
+        type: "post"
+      }
+    }
+  },
+  messages:{
+    'user[email]': {
+      remote: <%=raw Spree.t('errors.messages.email_existing').to_json %>
+    }
+  }
+})
+</script>

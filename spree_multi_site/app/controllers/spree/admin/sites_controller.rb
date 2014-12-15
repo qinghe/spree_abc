@@ -1,8 +1,14 @@
 module Spree
   module Admin
     class SitesController< Spree::Admin::ResourceController
+      before_filter :ensure_access_allowed
       #resource_controller
       self.create.after( :create_after )
+      
+      def index
+        @sites = Site.ransack(params[:q]).result.page(params[:page]).per(params[:per_page])
+      end
+      
       def new
         @user = @site.users.build
         super                    
@@ -26,9 +32,11 @@ module Spree
       end
      
       private
-      #def collection
-      #  @collection ||= current_site.self_and_children
-      #end
+      def ensure_access_allowed
+        unless Spree::Site.current.dalianshops?
+          redirect_to Spree::Site.current.admin_url
+        end
+      end
     end
   end
 end

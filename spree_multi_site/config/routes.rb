@@ -1,9 +1,11 @@
-Spree::Core::Engine.routes.draw do
+Spree::Core::Engine.routes.prepend do
 
   namespace :admin do
     resources :sites
   end
-  match 'new_site' => 'sites#new', :as => :new_site
+  post '/quick_lunch',:to => 'sites#quick_lunch', :as => :quick_lunch
+  get 'new_site' => 'sites#new', :as => :new_site
+  post 'create_site' => 'sites#create', :as => :create_site
   resources :sites, :only => [:show]
 
   if Rails.env.development?

@@ -1,0 +1,37 @@
+<%= render :partial => 'spree/shared/error_messages', :locals => { :target => @site } %>
+<div id="new-site">
+  <h3 class="header3"><%= Spree.t(:new_site) %></h3>
+<%= form_for @site, :url=>create_site_path, :remote=>true do |f| %>
+  <%= render :partial => "form", :locals => { :f => f } %>
+  <p><%= f.button Spree.t(:create), :class => 'button', :type=>:submit %>
+     <%= f.button Spree.t('actions.cancel'), :class => 'button cancel', :type=>:button %>
+  </p>
+<% end %>
+</div>
+<script>
+$("#new_site").validate({
+  rules: {
+    'user[email]': {
+      required: true,
+      email: true,
+      remote: {
+        url: <%== check_email_path.to_json %>,
+        type: "post"
+      }
+    },    
+    'user[password_confirmation]':{
+      equalTo:'#user_password'  
+    }
+    
+  },
+  messages:{
+    'user[email]': {
+      remote: <%== Spree.t('errors.messages.email_existing').to_json %>
+    }
+  },
+  wrapper:'div', // show it in next line
+  errorPlacement: function(error, element) {
+    error.appendTo( element.parent() );
+  }
+})
+</script>

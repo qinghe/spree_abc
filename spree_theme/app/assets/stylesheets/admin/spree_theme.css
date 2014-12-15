@@ -3,3 +3,24 @@
  *= require admin/spree_backend
  *= require admin/plugins/font-awesome-extra.css
 */
+
+/*
+#page_layout_tree_inner li a{
+    background-color: #F3F8FC;
+    border: 1px solid #CEE1F4;
+    color: #6788A2;
+    font-weight: 600;
+    height: auto;
+    line-height: inherit;
+    margin-bottom: 5px;
+    padding: 5px 0 5px 10px;
+    text-shadow: none;
+    width: 90%;
+}
+#page_layout_tree_inner ul {
+    background-image: none;
+}
+*/
+#page_layout_config_form .select2-container {
+    width: 100% !important;
+}

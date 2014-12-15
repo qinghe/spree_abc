@@ -1,9 +1,5 @@
 <% address_id = address_type.chars.first %>
 <div class="inner" data-hook=<%="#{address_type}_inner" %>>
-  <p class="field" id=<%="#{address_id}firstname" %>>
-    <%= form.label :firstname, Spree.t('china_address.firstname') %><span class="required">*</span><br />
-    <%= form.text_field :firstname, :class => 'required' %>
-  </p>
   <%= form.hidden_field :lastname, :class => '', :value=>'unused' %>
   <% if Spree::Config[:company] %>
     <p class="field" id=<%="#{address_id}company" %>>
@@ -11,10 +7,7 @@
       <%= form.text_field :company %>
     </p>
   <% end %>
-  <p class="field" id=<%="#{address_id}address1" %>>
-    <%= form.label :address1, Spree.t('china_address.street') %><span class="required">*</span><br />
-    <%= form.text_field :address1, :class => 'required' %>
-  </p>
+
 
   <p class="field" id=<%="#{address_id}country" %>>
     <%= form.label :country_id, Spree.t('china_address.city') %><span class="required">*</span><br />
@@ -67,12 +60,21 @@
   <% end %>
   </p>
 
-
+  <p class="field" id=<%="#{address_id}address1" %>>
+    <%= form.label :address1, Spree.t('china_address.street') %><span class="required">*</span><br />
+    <%= form.text_field :address1, :class => 'required' %>
+  </p>
 
   <p class="field" id=<%="#{address_id}zipcode" %>>
     <%= form.label :zipcode, Spree.t(:zip) %><span class="required">*</span><br />
     <%= form.text_field :zipcode, :class => 'required' %>
   </p>
+
+  <p class="field" id=<%="#{address_id}firstname" %>>
+    <%= form.label :firstname, Spree.t('china_address.firstname') %><span class="required">*</span><br />
+    <%= form.text_field :firstname, :class => 'required' %>
+  </p>
+
   <p class="field" id=<%="#{address_id}phone" %>>
     <%= form.label :phone, Spree.t(:phone) %><span class="required">*</span><br />
     <%= form.phone_field :phone, :class => 'required' %>
