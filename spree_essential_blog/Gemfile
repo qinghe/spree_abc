@@ -1,10 +1,3 @@
-source 'https://rubygems.org'
-
-# Provides basic authentication functionality for testing parts of your engine
-gem 'spree_auth_devise', github: 'spree/spree_auth_devise', branch: '2-0-stable'
-
-group :test,:development do
-  gem 'spree_sample', '~> 2.0.11'
-end
+source 'http://ruby.taobao.org/'
 
 gemspec

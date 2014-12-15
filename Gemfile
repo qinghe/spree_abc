@@ -1,18 +1,20 @@
 #source 'http://rubygems.org'
 source 'http://ruby.taobao.org/'
 # Bundle edge Rails instead:
-# gem 'rails',     :git => 'git://github.com/rails/rails.git'
+ruby '1.9.3'
+
+gem 'rails', '4.1.8'
 
 gem 'mysql2'
 
+# Use SCSS for stylesheets
+gem 'sass-rails', '~> 4.0.2'
 
-# Gems used only for assets and not required
-# in production environments by default.
-group :assets do
-  gem 'sass-rails',   '~> 3.2.5'
-  gem 'coffee-rails', '~> 3.2'
-  gem 'uglifier', '>= 1.0.3'
-end
+# Use Uglifier as compressor for JavaScript assets
+gem 'uglifier', '>= 1.3.0'
+
+# Use CoffeeScript for .js.coffee assets and views
+gem 'coffee-rails', '~> 4.0.0'
 
 #gem 'jquery-rails'
 
@@ -32,18 +34,20 @@ end
 #  gem "capybara"
 #end
 
-gem 'ruby-hmac' #http://ryanbigg.com/2009/07/no-such-file-to-load-hmac-sha1/
+#gem 'ruby-hmac' #http://ryanbigg.com/2009/07/no-such-file-to-load-hmac-sha1/
 
-gem 'spree', :github => "spree/spree", :branch => "2-0-stable"
+gem 'spree', :github => "spree/spree", :branch => "2-4-stable"
 
 # bundle config --local local.spree_simple_dash ../spree_simple_dash, using local for development 
 # :path => '../spree_simple_dash' 
 # replace Spree Analytics
 # gem 'spree_simple_dash', :github=>"RuanShan/spree_simple_dash", :branch=>"1-2-stable"
 
-# gem 'spree_auth_devise', :git => 'git://github.com/spree/spree_auth_devise'
 # referer to https://github.com/spree/spree/issues/2013
-gem 'spree_auth_devise', :github => "spree/spree_auth_devise", :branch => "2-0-stable"
+gem 'spree_auth_devise', :github => "spree/spree_auth_devise", :branch => "2-4-stable"
+#support rich_editor 
+gem 'spree_editor',  :github => "spree/spree_editor", :branch=>"2-4-stable"
+gem 'tinymce-rails-langs'
 #gem 'daemons'
 #gem 'delayed_job_active_record'
 #'bundle update spree_multi_site' to update gem
@@ -59,17 +63,12 @@ gem 'spree_theme',   :path => './spree_theme'
 gem 'activemerchant', :require => 'active_merchant'
 #0.2.1 changed alipay service url
 gem 'activemerchant_patch_for_china', '0.2.0' #support alipay
-gem 'spree_alipay',   :github => "RuanShan/spree_alipay", :branch=>"2-0-stable"
+gem 'spree_alipay',   :github => "RuanShan/spree_alipay", :branch=>"master"
 
 gem 'spree_china_checkout',   :path => './spree_china_checkout'
 
-#gem 'spree_static_content', :github => 'RuanShan/spree_static_content', :branch => '1-2-stable'
-
-#support rich_editor 
-gem 'spree_editor',  :github => "spree/spree_editor", :branch=>"2-0-stable"
-gem 'tinymce-rails-langs'
-
 gem 'spree_essential_blog',   :path => './spree_essential_blog'
+
 # copy from https://github.com/RuanShan/spree_flexi_variants/tree/2-1-stable
 gem 'spree_flexi_variants',   :path => './spree_flexi_variants'
 
