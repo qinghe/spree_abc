@@ -26,11 +26,9 @@ module Spree
       # rails 3.2.19
       # fix: Spree::Taxon.create!({ taxonomy_id: 0, name: 'name' }, without_protection: true) =>
       # <Spree::Taxon id: 30, name: "name", taxonomy_id: 0, site_id: nil,  depth: 0, page_context: 0, html_attributes: nil, replaced_by: 0> 
-      before_create {|record| record.site_id||= Spree::Site.current.id }      
-    end
-    
-    module ClassMethods
-      def default_scope  
+      before_create {|record| record.site_id||= Spree::Site.current.id }   
+      
+      default_scope {
         # admin_site_product, create or update global taxon.
         if self == Spree::Taxon  && multi_site_context=='admin_site_product'
           scoped 
@@ -40,10 +38,16 @@ module Spree
         # first site list product images  
         elsif self == Spree::Image && multi_site_context=='site_product_images'
           scoped           
+        elsif multi_site_context=='admin_migration'
+          scoped           
         else  
           where(:site_id =>  Spree::Site.current.id)
-        end 
-      end  
+        end      
+      }
+         
+    end
+    
+    module ClassMethods
       # remove it after upgrade to rails 4.0
       def multi_site_context
         MultiSiteSystem.multi_site_context

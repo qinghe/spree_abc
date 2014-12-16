@@ -24,7 +24,7 @@ Spree.user_class = "Spree::User"
 #SpreeMultiSite::Config.tap do |config|
 #end
 SpreeAbc::Application.configure do
-  config.spree_multi_site.site_scope_required_classes_from_other_gems << Spree::Post
+  config.spree_multi_site.site_scope_required_classes_with_image_from_other_gems.merge!( { cover: Spree::Post })
   config.spree_multi_site.preferences.seed_dir= File.join(SpreeAbc::Application.root,'db')
 end
 SpreeEditor::Config.tap do |config|
