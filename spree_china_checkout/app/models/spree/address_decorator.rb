@@ -1,5 +1,5 @@
 Spree::Address.class_eval do
-  attr_accessible :city_name, :city_id # follow state
+  #attr_accessible :city_name, :city_id # follow state
    
   before_validation :set_city, :only=>[:city]
     def self.default

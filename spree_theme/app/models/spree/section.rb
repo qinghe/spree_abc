@@ -8,7 +8,7 @@ module Spree
     has_many :page_layouts
     
     friendly_id :title, :use => :slugged
-    attr_accessible :section_piece_id, :title, :global_events, :subscribed_global_events,:is_enabled
+    #attr_accessible :section_piece_id, :title, :global_events, :subscribed_global_events,:is_enabled
     
     
     # usage: attribute section_piece_id, title required

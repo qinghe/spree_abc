@@ -30,7 +30,7 @@ class Spree::Site < ActiveRecord::Base
   validates :name, length: 4..32 #"中国".length=> 2
   validates :short_name, uniqueness: true, presence: true, length: 4..32, format: {with: subdomain_regexp} #, unless: "domain.blank?"
   validates_uniqueness_of :domain, :allow_blank=>true 
-  attr_accessible :name, :domain, :short_name, :has_sample
+  #attr_accessible :name, :domain, :short_name, :has_sample
   #generate short name fro name
   before_validation :set_short_name
   

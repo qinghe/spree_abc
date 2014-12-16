@@ -16,7 +16,7 @@ module Spree
     delegate :site_id, :to => :template_theme # required by Paperclip.interpolates :site
     #it is required while import theme with new template_file. we would set theme.assigned_resources while import.
     attr_accessor :page_layout_id
-    attr_accessible :theme_id, :attachment, :page_layout_id
+    #attr_accessible :theme_id, :attachment, :page_layout_id
     #get resource name.
     alias_attribute(:name, :attachment_file_name)
     

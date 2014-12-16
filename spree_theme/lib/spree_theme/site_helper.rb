@@ -6,7 +6,6 @@ module SpreeTheme
       has_many :template_texts, :foreign_key=>"site_id" #compatible with fack_websites
       has_many :template_themes, :foreign_key=>"site_id", :dependent=>:destroy
       belongs_to :foreign_template_theme, :foreign_key=>'foreign_theme_id', :class_name=>'TemplateTheme'
-      attr_accessible :index_page,:theme_id,:foreign_theme_id
       
       after_create :initialize_first_theme_if_selected # site_id is required for it
     end

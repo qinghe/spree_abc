@@ -3,7 +3,7 @@ require_dependency 'spree/calculator'
 module Spree
   class Calculator::Engraving < Calculator
     preference :price_per_letter, :decimal
-    attr_accessible :preferred_price_per_letter
+    #attr_accessible :preferred_price_per_letter
 
     def self.description
       "Engraving Calculator"

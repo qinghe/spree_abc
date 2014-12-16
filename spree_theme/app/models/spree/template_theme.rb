@@ -65,8 +65,8 @@ module Spree
     validates :title, presence: true
 
     attr_accessor :section_root_id
-    attr_accessible :is_public, :site_id,:page_layout_root_id,:title, :section_root_id # section_root_id is only required for create- initialize_page_layout
-    attr_accessible :assigned_resource_ids, :template_files #import require it.
+    #attr_accessible :is_public, :site_id,:page_layout_root_id,:title, :section_root_id # section_root_id is only required for create- initialize_page_layout
+    #attr_accessible :assigned_resource_ids, :template_files #import require it.
     
     
     class << self

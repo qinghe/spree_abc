@@ -31,4 +31,6 @@ SpreeAbc::Application.configure do
   config.after_initialize do
     Spree::Site.loading_fake_order_with_sample = true  
   end  
+  
+  config.eager_load  = false
 end

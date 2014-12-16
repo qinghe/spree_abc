@@ -51,9 +51,6 @@ Spree::Product.class_eval do
   
   has_many :global_classifications, dependent: :delete_all
   has_many :global_taxons, through: :global_classifications, source: :taxon
-  attr_accessible :global_taxon_ids, :global_taxons 
-  
-
 
 end
 
@@ -89,13 +86,12 @@ Spree::Taxon.class_eval do
 end
 
 Spree::TaxCategory.class_eval do
-  extend AttributeValidatorCleaner
   
   belongs_to :site
 
   default_scope  { where(:site_id =>  Spree::Site.current.id) }
 
-  remove_attribute_validator(:name)
+  clear_validators!
   # Add new validates_uniqueness_of with correct scope
   validates :name, :uniqueness => { :scope => [:site_id,:deleted_at] }
 
@@ -105,8 +101,7 @@ end
 # in TaxRate.match it called method :all, so we have to add joins=>tax_category
 # in fact, we should never use TaxRate in spree_abc for now. 
 Spree::TaxRate.class_eval do
-  default_scope :joins => :tax_category
-  default_scope {where("spree_tax_categories.site_id=?", Spree::Site.current.id)}
+  default_scope { joins( :tax_category). where("spree_tax_categories.site_id=?", Spree::Site.current.id) }
 end
 
 Spree::Tracker.class_eval do
@@ -124,11 +119,10 @@ Spree.user_class.class_eval do
 end
 
 Spree::Zone.class_eval do
-  extend AttributeValidatorCleaner  
   belongs_to :site
   default_scope  { where(:site_id =>  Spree::Site.current.id) }
   
-  remove_attribute_validator(:name)
+  clear_validators!
   # Add new validates_uniqueness_of with correct scope
   validates :name, :presence => true, :uniqueness => { :scope => [:site_id] }
 end    

@@ -18,7 +18,7 @@ module Spree
     before_save :fix_data_source_param
     
     scope :full_html_roots, where(:is_full_html=>true,:parent_id=>nil)
-    attr_accessible :section_id,:title
+    #attr_accessible :section_id,:title
     attr_accessor :current_contexts, :inherited_contexts
   
     class << self
@@ -27,15 +27,15 @@ module Spree
       # section.root.section_piece_id should be 'root'
       def create_layout(section, title, attrs={})
         #create record in table page_layouts
-        obj = create!(:section_id=>section.id) do |obj|
+        layout = create!(:section_id=>section.id) do |obj|
           obj.title = title
           obj.site_id = SpreeTheme.site_class.current.id
           obj.attributes = attrs unless attrs.empty?
           obj.section_instance = 1
           obj.is_full_html = section.section_piece.is_root?
         end
-        obj.update_attribute("root_id",obj.id)
-        obj
+        layout.update_attribute("root_id",obj.id)
+        layout
       end
       
   

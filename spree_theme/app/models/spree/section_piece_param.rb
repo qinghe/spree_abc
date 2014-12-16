@@ -7,7 +7,7 @@ module Spree
     belongs_to :editor
     has_many :section_params, :dependent=>:destroy
     serialize :param_conditions, Hash #{html_attribute_id=>[:change]}  
-    attr_accessible :editor,:param_category, :section_piece, :class_name, :pclass, :html_attribute_ids
+    #attr_accessible :editor,:param_category, :section_piece, :class_name, :pclass, :html_attribute_ids
     
     PCLASS_DB="db" # param which contain html_attribute db should named as 'db'
     PCLASS_CSS="css" 

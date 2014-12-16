@@ -1,7 +1,7 @@
 module Spree
   class Post < ActiveRecord::Base
     
-    attr_accessible :title, :cover, :teaser, :body, :posted_at, :author, :live, :tag_list, :taxon_ids, :product_ids_string
+    #attr_accessible :title, :cover, :teaser, :body, :posted_at, :author, :live, :tag_list, :taxon_ids, :product_ids_string
     
     acts_as_taggable
   
@@ -27,10 +27,10 @@ module Spree
       path: ':rails_root/public/spree/posts/:id/:style/:basename.:extension',
       default_url: '/assets/default_post.png'
   
-    scope :ordered, order("posted_at DESC")
-    scope :future,  where("posted_at > ?", Time.now).order("posted_at ASC")
-    scope :past,    where("posted_at <= ?", Time.now).ordered
-    scope :live,    where(:live => true )
+    scope :ordered, -> { order("posted_at DESC") }
+    scope :future, -> { where("posted_at > ?", Time.now).order("posted_at ASC") }
+    scope :past, -> { where("posted_at <= ?", Time.now).ordered }
+    scope :live, -> {  where(:live => true ) }
   
    	make_permalink
     

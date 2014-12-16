@@ -1,6 +1,13 @@
 GIT
+  remote: git://github.com/RuanShan/activemerchant_patch_for_china.git
+  revision: ead71ea3bb7f67eef6f95036dfdb4b58686773eb
+  branch: for_offsite_payments
+  specs:
+    activemerchant_patch_for_china (0.2.0)
+
+GIT
   remote: git://github.com/RuanShan/spree_alipay.git
-  revision: 9f40df846520f77c789c984c0eb004b12b23f6c5
+  revision: a109adf38722a64b91b28f3f1eb7f79b57397a8d
   branch: master
   specs:
     spree_alipay (2.4.0)
@@ -155,7 +162,6 @@ GEM
       json (~> 1.7)
       nokogiri (~> 1.4)
       offsite_payments (~> 2.0.0)
-    activemerchant_patch_for_china (0.2.0)
     activemodel (4.1.8)
       activesupport (= 4.1.8)
       builder (~> 3.1)
@@ -372,6 +378,7 @@ GEM
       rspec-support (~> 3.1.0)
     rspec-support (3.1.2)
     ruby-graphviz (1.0.9)
+    ruby-hmac (0.4.0)
     safe_yaml (1.0.4)
     sass (3.2.19)
     sass-rails (4.0.5)
@@ -435,8 +442,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  activemerchant
-  activemerchant_patch_for_china (= 0.2.0)
+  activemerchant_patch_for_china!
   capistrano
   capistrano-rails (~> 1.1.0)
   capistrano-rvm (~> 0.1.0)
@@ -448,9 +454,11 @@ DEPENDENCIES
   friendly_id
   mail_view
   mysql2
+  offsite_payments
   rails (= 4.1.8)
   rails-erd
   rspec-rails
+  ruby-hmac
   sass-rails (~> 4.0.2)
   spree!
   spree_alipay!

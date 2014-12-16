@@ -8,7 +8,7 @@ SpreeTheme.taxon_class.class_eval do
     
     belongs_to :replacer, class_name: 'Spree::Taxon', foreign_key: 'replaced_by' 
     serialize :html_attributes, Hash
-    attr_accessible :page_context, :replaced_by, :is_clickable
+    #attr_accessible :page_context, :replaced_by, :is_clickable
 
     alias_attribute :extra_html_attributes, :html_attributes
     

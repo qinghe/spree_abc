@@ -5,6 +5,6 @@
 module Spree
   class MultiSiteConfiguration < Preferences::Configuration
     #description start with global means it is for whole application, not just one site 
-    preference :seed_dir, :string, :default => File.join(SpreeMultiSite::Engine.root,'db'), :description=>"global_seed_dir"
+    preference :seed_dir, :string, :default => File.join(SpreeMultiSite::Engine.root,'db')
   end
 end

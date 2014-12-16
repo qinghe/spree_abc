@@ -1,6 +1,6 @@
 class Spree::Blog < ActiveRecord::Base
   
-  attr_accessible :name, :permalink
+  #attr_accessible :name, :permalink
    
   has_many :posts, :class_name => "Spree::Post", :dependent => :destroy
   has_many :categories, :through => :posts, :source => :post_categories, :uniq => true

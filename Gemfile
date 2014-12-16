@@ -34,7 +34,7 @@ gem 'coffee-rails', '~> 4.0.0'
 #  gem "capybara"
 #end
 
-#gem 'ruby-hmac' #http://ryanbigg.com/2009/07/no-such-file-to-load-hmac-sha1/
+gem 'ruby-hmac' #http://ryanbigg.com/2009/07/no-such-file-to-load-hmac-sha1/
 
 gem 'spree', :github => "spree/spree", :branch => "2-4-stable"
 
@@ -60,9 +60,8 @@ gem "friendly_id" # spree_theme require it.
 gem 'spree_theme',   :path => './spree_theme'
 
 #only specify it here, then could use ActiveMerchant::Billing::Integrations::Alipay::Helper directly
-gem 'activemerchant', :require => 'active_merchant'
-#0.2.1 changed alipay service url
-gem 'activemerchant_patch_for_china', '0.2.0' #support alipay
+gem 'offsite_payments'
+gem 'activemerchant_patch_for_china', github:'RuanShan/activemerchant_patch_for_china', branch:'for_offsite_payments'
 gem 'spree_alipay',   :github => "RuanShan/spree_alipay", :branch=>"master"
 
 gem 'spree_china_checkout',   :path => './spree_china_checkout'
