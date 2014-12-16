@@ -1,4 +1,4 @@
-Spree::Core::Engine.routes.prepend do
+Spree::Core::Engine.routes.draw do
   root :to => 'template_themes#page'
   # Add your extension routes here
   resources :template_themes do
@@ -22,8 +22,8 @@ Spree::Core::Engine.routes.prepend do
     end
   end
   
-  match '(/:c(/:r))' => 'template_themes#page' , :c => /\d[^\/]*/ # :c, taxon_id-permalink,  :r, product_id-permalink   
-  match '/post/:c/:p' => 'template_themes#page', :c => /\d[^\/]*/ #
+  get '(/:c(/:r))' => 'template_themes#page' , :c => /\d[^\/]*/ # :c, taxon_id-permalink,  :r, product_id-permalink   
+  get '/post/:c/:p' => 'template_themes#page', :c => /\d[^\/]*/ #
   #match 'preview(/:c(/:r))' => 'template_themes#preview' #preview home
    
   get '/under_construction', :to => 'template_themes#under_construction', :as => :under_construction

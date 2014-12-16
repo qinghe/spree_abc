@@ -10,7 +10,7 @@ class LastFixUniqueIndex < ActiveRecord::Migration
       add_index "spree_preferences", ["site_id","key"], :name => "index_spree_preferences_on_key", :unique => true
 
       remove_index :spree_products, :name => 'permalink_idx_unique'
-      add_index "spree_products", ["site_id", "permalink"], :name => "permalink_idx_unique", :unique => true
+      add_index "spree_products", ["site_id", "slug"], :name => "permalink_idx_unique", :unique => true
     end
   end
 end

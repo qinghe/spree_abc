@@ -6,16 +6,12 @@ class UpgradeAdjustments < ActiveRecord::Migration
       belongs_to :originator, polymorphic: true
     end
     # Shipping adjustments are now tracked as fields on the object
-    Spree::Site.all.each{|site|
-      Spree::Site.with_site( site ) do
         Spree::Adjustment.where(:source_type => "Spree::Shipment").find_each do |adjustment|
           # Account for possible invalid data
           next if adjustment.source.nil?
           adjustment.source.update_column(:cost, adjustment.amount)
-          adjustment.destroy
+          adjustment.delete
         end
-      end
-    }
 
     # Tax adjustments have their sources altered
     #Spree::Adjustment.where(:originator_type => "Spree::TaxRate").find_each do |adjustment|
