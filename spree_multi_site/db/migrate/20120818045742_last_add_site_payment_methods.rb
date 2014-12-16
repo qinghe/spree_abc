@@ -22,9 +22,9 @@ class LastAddSitePaymentMethods < ActiveRecord::Migration
      remove_column Spree::Configuration.table_name, :site_id
      remove_column Spree::LogEntry.table_name, :site_id
      remove_column Spree::StateChange.table_name, :site_id
-    # support RuanShan/spree_static_content
-    if Spree::Configuration.connection.table_exists?(:spree_pages)
-      remove_column :spree_pages, :site_id
-    end
+     # support RuanShan/spree_static_content
+     if Spree::Configuration.connection.table_exists?(:spree_pages)
+       remove_column :spree_pages, :site_id
+     end
   end
 end
