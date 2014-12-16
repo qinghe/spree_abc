@@ -25,7 +25,7 @@ class Spree::Site < ActiveRecord::Base
   # it is load before create site table. self.new would trigger error "Table spree_sites' doesn't exist"
   # db/migrate/some_migration is using Spree::Product, it has default_scope using Site.current.id
   # so it require a default value.
-  self.subdomain_regexp = /^([a-z0-9\-])*$/
+  self.subdomain_regexp = /\A([a-z0-9\-])*\Z/
   self.loading_fake_order_with_sample = false
   validates :name, length: 4..32 #"中国".length=> 2
   validates :short_name, uniqueness: true, presence: true, length: 4..32, format: {with: subdomain_regexp} #, unless: "domain.blank?"
