@@ -1,4 +1,3 @@
-<% Rails.logger.debug "controller = #{controller_name}" %>
 <% unless controller_name=~/taxon/%>
   <% content_for :sidebar_title do %>
     <%= Spree.t(:configurations) %>
@@ -8,10 +7,6 @@
     <nav class="menu">
       <ul class="sidebar" data-hook="admin_configurations_sidebar_menu">
         <%= configurations_sidebar_menu_item Spree.t(:general_settings), edit_admin_general_settings_path %>
-        <% if Spree::Config[:override_actionmailer_config] %>
-          <%= configurations_sidebar_menu_item Spree.t(:mail_method_settings), edit_admin_mail_method_path %>
-        <% end %>
-        <%= configurations_sidebar_menu_item Spree.t(:image_settings), edit_admin_image_settings_path %>
         <%= configurations_sidebar_menu_item Spree.t(:zones), admin_zones_path %>
         <%= configurations_sidebar_menu_item Spree.t(:payment_methods), admin_payment_methods_path %>
         <%= configurations_sidebar_menu_item Spree.t(:shipping_methods), admin_shipping_methods_path %>
