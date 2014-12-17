@@ -93,7 +93,7 @@ zh-CN:
         event_name: 事件名称
         expires_at: 过期日期
         name: 名称
-        path: Path
+        path: 路径
         starts_at: 开始日期
         usage_limit: 使用次数限制
       spree/property:
@@ -101,11 +101,11 @@ zh-CN:
         presentation: 显示
       spree/prototype:
         name: 名称
-      spree/return_authorization: 
+      spree/return_authorization:
         amount: 金额
-      spree/role: 
+      spree/role:
         name: 名称
-      spree/state: 
+      spree/state:
         abbr: 缩写
         name: 名称
       spree/tax_category:
@@ -154,10 +154,10 @@ zh-CN:
       spree/cheque_payment: 
         one: 支票支付
         other: 支票支付
-      spree/country: 
+      spree/country:
         one: 国家
         other: 国家
-      spree/credit_card: 
+      spree/credit_card:
         one: 信用卡
         other: 信用卡
       spree/creditcard_payment: 
@@ -166,55 +166,55 @@ zh-CN:
       spree/creditcard_txn: 
         one: 信用卡交易
         other: 信用卡交易
-      spree/inventory_unit: 
+      spree/inventory_unit:
         one: 库存单位
         other: 库存单位
-      spree/line_item: 
+      spree/line_item:
         one: 所列项目
         other: 所列项目
-      spree/option_type: 
+      spree/option_type:
         one: 选项类型
         other: 选项类型
-      spree/order: 
+      spree/order:
         one: 订单
         other: 订单
-      spree/payment: 
+      spree/payment:
         one: 支付
         other: 支付
       spree/payment_method: 
         one: 支付方式
         other: 支付方式
-      spree/product: 
+      spree/product:
         one: 产品
         other: 产品
-      spree/product_group: 
+      spree/product_group:
         one: 产品组
         other: 产品组
-      spree/promotion: 
+      spree/promotion:
         one: 促销
         other: 促销
-      spree/property: 
+      spree/property:
         one: 属性
         other: 属性
-      spree/prototype: 
+      spree/prototype:
         one: 原型
         other: 原型
-      spree/return_authorization: 
+      spree/return_authorization:
         one: 退款
         other: 退款
-      spree/role: 
+      spree/role:
         one: 角色
         other: 角色
-      spree/shipment: 
+      spree/shipment:
         one: 物流
         other: 物流
-      spree/shipping_category: 
+      spree/shipping_category:
         one: 物流分类
         other: 物流分类
       spree/shipping_method: 
         one: 配送方式
         other: 配送方式
-      spree/state: 
+      spree/state:
         one: 省份
         other: 省份
       spree/stock_location: 
@@ -223,28 +223,28 @@ zh-CN:
       spree/stock_transfer: 
         one: 库存转储
         other: 库存转储记录        
-      spree/tax_category: 
+      spree/tax_category:
         one: 缴税分类
         other: 缴税分类
-      spree/tax_rate: 
+      spree/tax_rate:
         one: 税率
         other: 税率
-      spree/taxon: 
+      spree/taxon:
         one: 分类
         other: 分类
-      spree/taxonomy: 
+      spree/taxonomy:
         one: 分类
         other: 分类
       spree/tracker: 
         one: 网站统计工具
         other: 网站统计工具
-      spree/user: 
+      spree/user:
         one: 用户
         other: 用户
-      spree/variant: 
+      spree/variant:
         one: 具体型号
         other: 具体型号
-      spree/zone: 
+      spree/zone:
         one: 区域
         other: 区域
   spree:
@@ -341,6 +341,9 @@ zh-CN:
     api:
       key: Key
     apply: 应用
+    approve: 核准
+    approver: 核准者
+    approved_at: 核准日期
     are_you_sure: 你确定么？
     are_you_sure_category: 你确定你要删除这个分类么?
     are_you_sure_delete: 你确定你要删除这条记录么?
@@ -496,7 +499,7 @@ zh-CN:
     customer_details: 顾客详细信息
     customer_details_updated: 已更新客户的详细信息
     customer_search: 顾客搜索
-    cut: Cut
+    cut: "剪切"
     dash:
       jirafe:
         app_id: 
@@ -596,7 +599,7 @@ zh-CN:
         user:
           signup: 用户注册
     exceptions:
-      count_on_hand_setter: 
+      count_on_hand_setter: 无法手动设置 count_on_hand, 将会在 recalculate_count_on_hand 中被自动设定。请使用 `update_column(:count_on_hand, value)`
     expiration: 过期
     expiration_month: 过期月份
     expiration_year: 过期年份
@@ -661,7 +664,7 @@ zh-CN:
     image_settings: 图片设置
     image_settings_description: Image Settings Description
     image_settings_updated: 已成功更新图片设置
-    image_settings_warning: 如果您更新了paperclip的样式，您需要重新生成缩略图。您可以通过运行“rake paperclip:refresh:thumbnails CLASS=Spree::Image”以达到目标。
+    image_settings_warning: 如果您更新了paperclip的样式，您需要重新生成缩略图。您可以通过运行“rake paperclip:refresh:thumbnails CLASS=Spree::Image”以完成目标。
     images: 图片
     images_for: Images for
     in_progress: 处理中
@@ -741,8 +744,7 @@ zh-CN:
     master_price: 默认价格
     match_choices:
       all: 全部
-      none: None
-      one: One
+      none: 清空
     max_items: 最大商品项??
     may_be_combined_with_other_promotions: May be combined with other promotions
     meta_description: SEO描述
@@ -852,18 +854,18 @@ zh-CN:
         instructions: 您的订单已被取消。请保留此取消信息记录。
         order_summary_canceled: 订单总览 [已取消]
         subject: 取消订单
-        subtotal: 小记：%{subtotal}
-        total: 总计：%{total}
+        subtotal: "小记：%{subtotal}"
+        total: "总计：%{total}"
       confirm_email:
         dear_customer: 亲爱的顾客，
         instructions: 请仔细阅读并保留以下订单信息记录。
         order_summary: 订单总览
         subject: 订单确认
         subtotal: 小记：%{subtotal}
-        thanks: 谢谢您的交易。
+        thanks: 谢谢您的购买。
         total: 总计：%{total}
     order_not_found: 我们无法找到您的订单。请重新尝试。
-    order_number: 订单号
+    order_number: "订单号 %{number}"
     order_populator:
       out_of_stock: ! '%{item} 库存不足'
       please_enter_reasonable_quantity: 请输入一个合理的数量
@@ -905,7 +907,7 @@ zh-CN:
     password_reset_instructions_are_mailed: 如何重置密码的步骤已经通过电子邮件发送给您，请检查您的电子邮件。
     password_reset_token_not_found: 对不起，我们无法找到您的帐号。如果您遇到问题，请尝试从您的电子邮件中重新复制粘铁URL到浏览器中，或者重新进行重置密码的步骤
     password_updated: 密码更新成功
-    paste: 粘帖
+    paste: 粘贴
     path: 路径
     pay: 支付
     payment: 支付
@@ -938,8 +940,8 @@ zh-CN:
     place_order: 下单
     please_create_user: 请创建一个用户帐号
     please_define_payment_methods: 请先设定支付方式。
-    populate_get_error: Something went wrong. Please try adding the item again.
-    powered_by: Powered by
+    populate_get_error: 出错了，请重新添加项目。
+    powered_by: 技术支持
     presentation: 显示
     preview: 预览
     previous: 上一页
@@ -1088,15 +1090,18 @@ zh-CN:
     promotion_action: 优惠方式
     promotion_action_types:
       create_adjustment:
-        description: Creates a promotion credit adjustment on the order
-        name: 添加价格调整
+        description: 为订单添加促销用的价格调整
+        name: 添加订单的价格调整
+      create_item_adjustments:
+        description: 为订单上的单项产品添加一笔促销用的价格调整
+        name: 添加单项的价格调整
       create_line_items:
-        description: Populates the cart with the specified quantity of variant
+        description: 增加特定商品到订单中
         name: 赠送礼品
-      give_store_credit:
-        description: Gives the user store credit of the amount specified
-        name: 赠送店内积分
-    promotion_actions: 优惠fang shi
+      free_shipping:
+        description: 整张订单免费发货
+        name: 免运费
+    promotion_actions: 优惠方式
     promotion_form:
       match_policies:
         all: 匹配任意规则
@@ -1111,19 +1116,24 @@ zh-CN:
         name: 小记
       landing_page:
         description: 客户必须访问了指定的页面
-        name: Landing Page
+        name: 登陆页面
+      one_use_per_user:
+        description: 每人只可使用一次
+        name: 每人一次
       product:
         description: 订单包含指定的产品
-        name: chan pin
+        name: 产品
       user:
         description: 只对指定的用户生效
         name: 用户
       user_logged_in:
         description: 只对已经登录的用户有效
         name: 用户登录
+      taxon:
+        description: 订单中包括指定分类产品
+        name: 分类
     promotions: 促销
-    promotions_description: Manage offers and coupons with promotions
-    propagate_all_variants: 适用所有产品
+    promotion_uses: 促销使用频率
     properties: 属性
     property: 属性
     prototype: 原型
@@ -1235,9 +1245,9 @@ zh-CN:
     shipping_categories: 配送分类
     shipping_categories_description: 管理配送分类以决定哪些产品可以通过哪些方式进行配送
     shipping_category: 配送分类
-    shipping_flat_rate_per_item: 
+    shipping_flat_rate_per_item: 以单项计固定费率
     shipping_flat_rate_per_order: 固定费率
-    shipping_flexible_rate: 
+    shipping_flexible_rate: 以每项计弹性价格
     shipping_instructions: 配送指南
     shipping_method: 配送方式
     shipping_methods: 配送方式
@@ -1270,9 +1280,9 @@ zh-CN:
     smtp_send_all_emails_as_from_following_address: 所有邮件都从以下地址发出.
     smtp_send_copy_to_this_addresses: 向如下地址发送一份所有发出邮件的副本。多个邮件地址之间以逗号隔开。
     smtp_username: SMTP用户名
-    source: 源地址
+    source: 来源
     special_instructions: 特别说明
-    split: 
+    split: 分拆
     spree/order:
       coupon_code: 优惠券号码
     spree_gateway_error_flash_for_checkout: 您的支付信息存在错误。请检查您的信息后再次尝试。
@@ -1288,10 +1298,10 @@ zh-CN:
     stock_location_info: 
     stock_locations: 仓库地址
     stock_management: 库存管理
-    stock_management_requires_a_stock_location: 
+    stock_management_requires_a_stock_location: 请先新增库存区域，才可使用库存管理
     stock_movements: 库存变动 
-    stock_movements_for_stock_location: 
-    stock_successfully_transferred: 
+    stock_movements_for_stock_location: "%{stock_location_name} 的库存动向"
+    stock_successfully_transferred: 库存已成功在两区域转移
     stock_transfer: 库存转储
     stock_transfers: 库存转储
     stop: 结束
