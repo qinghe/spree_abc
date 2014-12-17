@@ -42,6 +42,13 @@ https://community.jboss.org/wiki/InstallPostgreSQLonFedora?_sscc=t
 wget http://www.imagemagick.org/download/ImageMagick.tar.gz
 tar xvzf ImageMagick.tar.gz
 
+spree~>2.4 only
+--------------------------------------------------------------
+bundle show spree
+# /home/david/.rvm/gems/ruby-1.9.3-p448/bundler/gems/spree-442b9f8ad45b
+comment out spree/front_end/config/routes.rb
+#  root :to => 'home#index'
+
 system recovery
 --------------------------------------------------------------
 mysql -uroot spree_abc_staging < spree_abc20141204.sql

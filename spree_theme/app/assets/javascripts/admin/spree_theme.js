@@ -1,4 +1,4 @@
-//= require admin/spree_backend
+//= require admin/spree/backend
 //= require jquery.ajax
 //= require jquery.jeditable
 //= require admin/resource_autocomplete

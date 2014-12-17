@@ -20,7 +20,7 @@ module Spree
   
     def param_values
         # only get param_values of section.root
-        pvs = ParamValue.all(:conditions=>["#{ParamValue.table_name}.theme_id=? and #{SectionParam.table_name}.section_root_id=#{SectionParam.table_name}.section_id", self.template.id], :include=>[:section_param=>:section_piece_param])      
+        pvs = ParamValue.eager_load(section_param: :section_piece_param).where(["#{ParamValue.table_name}.theme_id=? and #{SectionParam.table_name}.section_root_id=#{SectionParam.table_name}.section_id", self.template.id])      
     end
     
     # disassemble template into partial_html

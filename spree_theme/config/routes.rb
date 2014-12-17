@@ -1,4 +1,5 @@
 Spree::Core::Engine.routes.draw do
+  
   root :to => 'template_themes#page'
   # Add your extension routes here
   resources :template_themes do

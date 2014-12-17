@@ -18,7 +18,7 @@ module PageTag
       end
       
       def section
-        page_layout.sections.find(section_id, :include=>[:section_piece])
+        page_layout.sections.select{|section| section.id == section_id }.first
       end
             
       #Usage: css selector for current section piece instance

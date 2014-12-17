@@ -927,7 +927,7 @@ ActiveRecord::Schema.define(version: 20141216074457) do
     t.string   "slug",          limit: 100,                   null: false
     t.string   "html",          limit: 12000, default: "",    null: false
     t.string   "css",           limit: 8000,  default: "",    null: false
-    t.string   "js",            limit: 1000,  default: "",    null: false
+    t.string   "js",            limit: 60,    default: "",    null: false
     t.boolean  "is_root",                     default: false, null: false
     t.boolean  "is_container",                default: false, null: false
     t.boolean  "is_selectable",               default: false, null: false

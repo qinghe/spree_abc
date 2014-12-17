@@ -1,4 +1,4 @@
-Spree::Core::Engine.routes.prepend do
+Spree::Core::Engine.add_routes do
 
   namespace :admin do
     resources :sites
@@ -12,8 +12,3 @@ Spree::Core::Engine.routes.prepend do
     mount Spree::UserMailer::Preview => 'mail_view'
   end
 end
-
-#map.namespace :admin do |admin|
-#  admin.resources :sites
-  ## admin.resources :taxonomies, :has_many => [:variants, :images, :product_properties] do |product|
-#end  

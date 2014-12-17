@@ -2,6 +2,9 @@ Spree::Image.class_eval do
 #override attachement[:path]      
   Spree::Image.attachment_definitions[:attachment][:url] = '/shops/:rails_env/:site/products/:id/:basename_:style.:extension'
   Spree::Image.attachment_definitions[:attachment][:path] = ':rails_root/public/shops/:rails_env/:site/products/:id/:basename_:style.:extension'
+
+  Spree::Image.attachment_definitions[:attachment][:styles] = { mini: '48x48>', small: '100x100>', product: '240x240>', medium: '350x350>', large: '600x600>' }
+
 end
 
 Spree::Taxon.class_eval do

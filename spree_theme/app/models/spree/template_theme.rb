@@ -51,12 +51,12 @@ module Spree
     # template_release may be in current or design site
     belongs_to :current_template_release, :class_name=>"TemplateRelease", :foreign_key=>"release_id"
     
-    scope :by_layout,  lambda { |layout_id| where(:page_layout_root_id => layout_id) }
+    scope :by_layout,  ->(layout_id) { where(:page_layout_root_id => layout_id) }
     #use string as key instead of integer page_layout.id, exported theme in json, after restore, key is always string
     serialize :assigned_resource_ids, Hash
-    scope :within_site, lambda { |site|where(:site_id=> site.id) }
-    scope :released, where("release_id>0")
-    scope :published, lambda { released.where(:is_public=>true) }
+    scope :within_site, ->(site){ where(:site_id=> site.id) }
+    scope :released, ->{ where("release_id>0") }
+    scope :published, -> { released.where(:is_public=>true) }
     
     before_validation :fix_special_attributes
     before_destroy :remove_relative_data
@@ -506,17 +506,17 @@ module Spree
       end
         
       # param values of self.
-      def full_param_values(editor_id=0)
-        if editor_id>0
-        ParamValue.find(:all, :include=>[:section_param=>[:section_piece_param=>:param_category]], 
-         :conditions=>["theme_id=? and section_piece_params.editor_id=?", self.id, editor_id],
-         :order=>"section_piece_params.editor_id, param_categories.position")
-        else
-        ParamValue.find(:all, :include=>[:section_param=>[:section_piece_param=>:param_category]], 
-         :conditions=>["theme_id=?", self.id],
-         :order=>"section_piece_params.editor_id, param_categories.position")
-        end
-      end
+      #def full_param_values(editor_id=0)
+      #  if editor_id>0
+      #  ParamValue.find(:all, :include=>[:section_param=>[:section_piece_param=>:param_category]], 
+      #   :conditions=>["theme_id=? and section_piece_params.editor_id=?", self.id, editor_id],
+      #   :order=>"section_piece_params.editor_id, param_categories.position")
+      #  else
+      #  ParamValue.find(:all, :include=>[:section_param=>[:section_piece_param=>:param_category]], 
+      #   :conditions=>["theme_id=?", self.id],
+      #   :order=>"section_piece_params.editor_id, param_categories.position")
+      #  end
+      #end
         
       def get_resource_class_by_key( resource_key )
         # "spree/template_file" => Spree::TemplateFile

@@ -8,10 +8,8 @@ module PageTag
     def param_values_hash
       if @param_values_hash.nil?
         theme_id = self.template_tag.theme.original_template_theme.id
-        param_values =  Spree::ParamValue.find(:all,:conditions=>["theme_id=?", theme_id],
-          :include=>[:section_param=>:section_piece_param], :order=>'spree_param_values.page_layout_id,spree_section_piece_params.class_name '
-        )
-        
+        param_values =  Spree::ParamValue.eager_load(section_param: :section_piece_param).where( theme_id: theme_id).order( 'spree_param_values.page_layout_id,spree_section_piece_params.class_name ')          
+                
         @param_values_hash = param_values.inject({}){|h,pv|
           sp = pv.section_param
           key =  "#{pv.page_layout_id}_#{sp.section_id}" #keep it same as WrappedPageLayout.to_key

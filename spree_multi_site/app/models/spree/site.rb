@@ -81,11 +81,13 @@ class Spree::Site < ActiveRecord::Base
     #   addresses -> user(site)
     #   configuration(site)
     #   log_entries(site)
-    #   orders(site)->[state_changes,inventory_units,tokenized_permission]
+    #   orders(site)->[state_changes,inventory_units,tokenized_permission, orders_promotions ]
     #   [properties(site), prototypes(site)] -> properties_prototypes
     #                    , option_types(site)] ->option_type_prototypes
     #         ->products(site)->variants(site?)->assets(site)
     #   payment_methods(site)->payments->adjustments 
+    #                                  ->payment_capture_events
+    #                                  ->alipay_transactions( source )
     #   preference(site)
     #   tax_categories(site)-> tax_rates -> [shipping_methods, promotions,calculators]
     #   taxonomies(site) -> taxons(site) -> products_taxons(site?)
@@ -93,9 +95,26 @@ class Spree::Site < ActiveRecord::Base
     # to be confirm
     #   spree_tracker, state_changes
     #   return_authorizations
-    #   mail_methods, pending_promotions, product_promotion_*
+    #   mail_methods, 
+    #   friendly_id_slugs
+    # promotion_categories -> promotions -> promotion_rules
+    #                                    -> promotion_actions 
+    # product_promotion_rules, taxons_promotion_rules, 
+    #   
+    #   stores
+    #:spree_refunds
+    #:spree_return_authorization_inventory_units
+    #:spree_return_authorizations
+    #:spree_refund_reasons
+    #:spree_customer_returns
+    
+    #:spree_reimbursements
+    #:spree_reimbursement_types
+    #:spree_reimbursement_credits
+    #:spree_taxons_prototypes
+    
     # unused table
-    #   credit_cars(site?), gateways(site?)
+    #   credit_cards(site?), gateways(site?)
     #
     raise "exists products" if self.products.any?
     self.class.with_site( self ) do 
@@ -133,7 +152,7 @@ class Spree::Site < ActiveRecord::Base
         self.shipping_methods.clear
         
         #TODO fix taxons.taconomy_id
-        self.users.find(:all,:include=>[:ship_address,:bill_address],:offset=>1, :order=>'id').each{|user|
+        self.users.includes(:ship_address,:bill_address).offset(1).each{|user|
           user.bill_address.destroy
           user.ship_address.destroy
           user.destroy

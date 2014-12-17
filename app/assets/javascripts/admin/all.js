@@ -7,7 +7,7 @@
 //= require jquery
 //= require jquery_ujs
 
-//= require admin/spree_backend
+//= require spree/backend
 //= require admin/spree_theme
 //= require admin/spree_editor
 //= require admin/spree_essential_blog

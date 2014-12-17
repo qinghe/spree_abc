@@ -1,15 +1,26 @@
-<div id="section_select_dialog" class="clear-block" title="Section dialog" style="display: none;">    
-    <ul class="fl titles" style="width:200px;">
-      <% sections.each_index{|i| s = sections[i]%>
-      <li <%= 'class=selected' if i==0%> <%="data-section-id=#{s.id}"%> ><%=s.slug%></li>
-      <% }%>
-    </ul>  
-  <div class="fl details" style="width:200px;">
-      <% sections.each_index{|i| s = sections[i]%>
-      <div <%= 'class=selected' if i==0%>>
-        <%= s.slug%>
+<div id="section_select_dialog" class="clear-block" title="Section dialog" style="display: none; position: relative;">
+    
+  <div style="position: absolute">  
+        
+      <ul class="titles" style="position:absolute; width:50%;left:0; top:0; bottom:30px;">
+          <% sections.each_index{|i| s = sections[i]%>
+          <li <%= 'class=selected' if i==0%> <%="data-section-id=#{s.id}"%> ><%=s.slug%></li>
+          <% }%>
+      </ul>  
+      <div class="details" style="position:absolute; width:50%;right:0; top:0; bottom:30px;">
+          <% sections.each_index{|i| s = sections[i]%>
+          <div <%= 'class=selected' if i==0%>>
+            <%= s.slug%>
+          </div>
+          <% }%>
+      </div>   
+      
+      <div style="position: absolute;bottom: 0;">
+          <%=link_to "cancel", "#", { class:'dialog_close_button' }%>
+          <%=link_to "ok", "#", { class:'dialog_ok_button' }%>
       </div>
-      <% }%>
-  </div>    
+       
+  </div>
   <input type="hidden" name="selected_section_id" value="<%=sections.first.id%>" />
+  
 </div>

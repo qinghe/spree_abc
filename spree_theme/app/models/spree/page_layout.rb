@@ -231,7 +231,6 @@ module Spree
        
       def remove_param_value()
         #layout_root_id = self.root_id
-        #themes = TemplateTheme.find(:all,:conditions=>['layout_id=?',layout_root_id])
         #ParamValue.delete_all(["page_layout_id=? and theme_id in (?)", self.id, themes.collect{|obj|obj.id }])
         ParamValue.delete_all(["page_layout_id=? ", self.id])    
       end
@@ -267,9 +266,9 @@ module Spree
     
     begin 'section content, html, css, js'
       def build_content()
-        tree = self.self_and_descendants.all(:include=>[:section=>:section_piece])
+        tree = self.self_and_descendants.includes(:section=>:section_piece)
         # have to Section.all, we do not know how many section_pieces each section contained.
-        sections = Section.all(:include=>:section_piece)
+        sections = Section.includes(:section_piece)
         section_hash = sections.inject({}){|h, s| h[s.id] = s; h}
         css = build_css(tree, self, section_hash)
         html = build_html(tree,  section_hash)
