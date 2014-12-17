@@ -36,7 +36,7 @@ gem 'coffee-rails', '~> 4.0.0'
 
 gem 'ruby-hmac' #http://ryanbigg.com/2009/07/no-such-file-to-load-hmac-sha1/
 
-gem 'spree', :github => "spree/spree", :branch => "2-4-stable"
+gem 'spree', '~>2.4'
 
 # bundle config --local local.spree_simple_dash ../spree_simple_dash, using local for development 
 # :path => '../spree_simple_dash' 
