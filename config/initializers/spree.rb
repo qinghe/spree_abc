@@ -17,16 +17,17 @@ Spree.config do |config|
   #config.currency = 'CNY'
 end
 Spree.user_class = "Spree::User"
+
+Spree::Api::Config.requires_authentication = false
 #SpreeTheme.site_class = "Spree::Site"
 #SpreeTheme.taxon_class = "Spree::Taxon"
 #SpreeTheme.post_class = "Spree::Post"
-#TODO uncomment it after complete the db/sample
-#SpreeMultiSite::Config.tap do |config|
-#end
+
 SpreeAbc::Application.configure do
   config.spree_multi_site.site_scope_required_classes_with_image_from_other_gems.merge!( { cover: Spree::Post })
   config.spree_multi_site.preferences.seed_dir= File.join(SpreeAbc::Application.root,'db')
 end
+
 SpreeEditor::Config.tap do |config|
   config.ids = "product_description taxon_description template_text_body  post_body"
   config.current_editor = "CKEditor"
