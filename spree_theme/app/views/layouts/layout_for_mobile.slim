@@ -28,3 +28,5 @@ html ng-app="Sprangular" ng-controller="GlobalCtrl"
     = render 'sprangular/shared/analytics'
 
     script Sprangular.constant('Env', #{ js_environment.to_json.html_safe })
+    script Spree.api_key = #{ try_spree_current_user.try(:spree_api_key).to_s.to_json.html_safe };
+ 
