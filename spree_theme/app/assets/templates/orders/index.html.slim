@@ -1,0 +1,27 @@
+h2 Order History
+
+#order-history
+  .not-found(ng-if='user.orders.length == 0')
+    p No orders on file
+
+  .order(ng-repeat="order in user.orders")
+    dl
+      dt Number
+      dd
+        | {{order.number}}
+
+      dt Ordered on
+      dd
+        | {{order.completed_at | date}}
+
+      dt Amount
+      dd
+        | {{order.total | currency}}
+
+      dt Shipment Status
+      dd
+        | {{order.shipment_state}}
+
+    a.btn.btn-primary.btn-small ng-click="showOrderDetails(order)" See details
+
+    hr

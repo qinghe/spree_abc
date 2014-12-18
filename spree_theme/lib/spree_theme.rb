@@ -5,6 +5,19 @@ require 'spree_theme/system'
 require 'spree_theme/site_helper'
 require 'spree_theme/section_piece_param_helper'
 require 'spree_theme/permitted_attributes_for_theme'
+# support mobile
+require 'slim'
+require 'angularjs-rails'
+# require assets
+require 'rails-assets-bootstrap-sass-official'
+require 'rails-assets-underscore'
+require 'rails-assets-underscore.string'
+require 'rails-assets-angular-bootstrap'
+require 'rails-assets-angular-strap'
+require 'rails-assets-angular-motion'
+require 'rails-assets-bootstrap-additions'
+require 'rails-assets-ngInfiniteScroll'
+require 'rails-assets-angularytics'
 
 module SpreeTheme
   

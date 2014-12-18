@@ -15,12 +15,14 @@ module SpreeTheme::System
   # override spree's
   # only cart|account using layout while rendering, product list|detail page render without layout.
   def get_layout_if_use
+    
     if request.xhr?
       return false
     end
     # keep it before check "designer", page for admin login never need design
     return @special_layout if @special_layout.present?
 
+    return 'layout_for_mobile' if mobile?
     #for designer
     return 'layout_for_design' if @is_designer
 
@@ -59,6 +61,9 @@ module SpreeTheme::System
     if cookies[:_dalianshops_designer]=='0'
       @is_designer = false
     end     
+    
+    @is_designer = false if mobile?
+    
     # user could select theme to view in design shop. 
     if website.design?
       #get template from query string
@@ -180,4 +185,19 @@ module SpreeTheme::System
     # layout of imported theme is in design site home folder 
     append_view_path SpreeTheme.site_class.designsite.document_path
   end
+
+  #https://ruby-china.org/topics/22165  
+  #https://github.com/ruby-china/ruby-china/blob/13662590b382c7bbc2438d79679df68efe2684a1/app/helpers/application_helper.rb
+  MOBILE_USER_AGENTS =  'palm|blackberry|nokia|phone|midp|mobi|symbian|chtml|ericsson|minimo|' +
+                        'audiovox|motorola|samsung|telit|upg1|windows ce|ucweb|astel|plucker|' +
+                        'x320|x240|j2me|sgh|portable|sprint|docomo|kddi|softbank|android|mmp|' +
+                        'pdxgw|netfront|xiino|vodafone|portalmmm|sagem|mot-|sie-|ipod|up\\.b|' +
+                        'webos|amoi|novarra|cdm|alcatel|pocket|iphone|mobileexplorer|mobile'
+  def mobile?
+    agent_str = request.user_agent.to_s.downcase
+    return false if agent_str =~ /ipad/
+    agent_str =~ Regexp.new(MOBILE_USER_AGENTS)
+    true
+  end
+  
 end
