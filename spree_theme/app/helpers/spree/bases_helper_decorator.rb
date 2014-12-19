@@ -184,7 +184,7 @@ module Spree
         end
       ]
 
-      {env: Rails.env,
+      { env: Rails.env,
         config: {
           site_name: store.seo_title || store.name,
           logo:      asset_path(config.logo),
