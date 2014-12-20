@@ -3,7 +3,6 @@ module SpreeTheme
     isolate_namespace Spree
     engine_name 'spree_theme'
 
-    config.cached_paths = %w(layout directives products home cart promos)
     config.autoload_paths += %W(#{config.root}/lib)
     # use rspec for tests
     config.generators do |g|

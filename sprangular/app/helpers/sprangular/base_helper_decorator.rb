@@ -1,5 +1,5 @@
-module Sprangular
-  module ApplicationHelper
+module Spree
+  module BaseHelper
     def payment_methods
       hash = {}
       methods = (Spree::PaymentMethod.available(:front_end) + Spree::PaymentMethod.available(:both)).uniq
