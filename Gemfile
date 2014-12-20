@@ -76,6 +76,8 @@ gem 'spree_flexi_variants',   :path => './spree_flexi_variants'
 # copy from https://github.com/spree-contrib/spree_comments/tree/2-0-stable
 gem 'spree_comments',   :path => './spree_comments'
 
+gem 'sprangular',   :path => './sprangular'
+
 group :test, :development do
   gem 'mail_view'  #, :git => 'https://github.com/37signals/mail_view.git'
 end

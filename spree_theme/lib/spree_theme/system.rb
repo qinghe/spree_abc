@@ -22,7 +22,7 @@ module SpreeTheme::System
     # keep it before check "designer", page for admin login never need design
     return @special_layout if @special_layout.present?
 
-    return 'layout_for_mobile' if mobile?
+    return 'sprangular/application' if mobile?
     #for designer
     return 'layout_for_design' if @is_designer
 

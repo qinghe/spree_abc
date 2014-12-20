@@ -37,6 +37,33 @@ GIT
       tinymce-rails (~> 4.0.16)
 
 PATH
+  remote: ./sprangular
+  specs:
+    sprangular (0.0.1)
+      angularjs-rails
+      coffee-rails
+      font-awesome-rails (~> 4.2)
+      geocoder
+      jquery-rails
+      rack-rewrite
+      rails
+      rails-assets-angular-bootstrap
+      rails-assets-angular-motion
+      rails-assets-angular-strap
+      rails-assets-angularytics
+      rails-assets-bootstrap-additions
+      rails-assets-bootstrap-sass-official
+      rails-assets-jasmine-sinon
+      rails-assets-ngInfiniteScroll
+      rails-assets-sinon
+      rails-assets-underscore
+      rails-assets-underscore.string
+      sass-rails
+      slim-rails
+      spree_api (>= 2.4)
+      spree_core (>= 2.4)
+
+PATH
   remote: ./spree_china_checkout
   specs:
     spree_china_checkout (2.4.0)
@@ -76,27 +103,7 @@ PATH
   remote: ./spree_theme
   specs:
     spree_theme (2.4.0)
-      angularjs-rails
-      coffee-rails
-      font-awesome-rails (~> 4.2)
       friendly_id
-      geocoder
-      jquery-rails
-      rack-rewrite
-      rails-assets-angular-bootstrap
-      rails-assets-angular-motion
-      rails-assets-angular-strap
-      rails-assets-angularytics
-      rails-assets-bootstrap-additions
-      rails-assets-bootstrap-sass-official
-      rails-assets-jasmine-sinon
-      rails-assets-ngInfiniteScroll
-      rails-assets-sinon
-      rails-assets-underscore
-      rails-assets-underscore.string
-      sass-rails
-      slim-rails
-      spree_api (~> 2.4)
       spree_core (~> 2.4)
 
 GEM
@@ -518,6 +525,7 @@ DEPENDENCIES
   rspec-rails
   ruby-hmac
   sass-rails (~> 4.0.2)
+  sprangular!
   spree (~> 2.4)
   spree_alipay!
   spree_auth_devise!
