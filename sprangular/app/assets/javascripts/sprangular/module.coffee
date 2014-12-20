@@ -3,7 +3,7 @@ window.Sprangular = angular.module "Sprangular", ['ui.bootstrap', 'ngRoute', 'ng
   .run (Env) ->
     paymentMethods = Env.config.payment_methods
 
-    if !paymentMethods.gateway
+    if _.isEmpty(paymentMethods)
       alert 'Gateway is not configured in Spree...'
 
 Sprangular.extend = (instance, type) ->
