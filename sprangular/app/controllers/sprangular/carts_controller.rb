@@ -12,7 +12,7 @@ class Sprangular::CartsController < Sprangular::BaseController
   # Adds a new item to the order (creating a new order if none already exists)
   def add_variant
     populator = Spree::OrderPopulator.new(current_order(create_order_if_necessary: true), current_currency)
-    if populator.populate(params[:variant_id], params[:quantity])
+    if populator.populate(variants: { params[:variant_id]=> params[:quantity]}, ad_hoc_option_value_ids: [],product_customizations: [] )
       current_order.ensure_updated_shipments
       @order = current_order
       render 'spree/api/orders/show'
