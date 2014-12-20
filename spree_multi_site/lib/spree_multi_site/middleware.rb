@@ -7,7 +7,9 @@ module SpreeMultiSite
 
     def call(env)
       request = Rack::Request.new(env)
-      unless request.path.include?('.') # ignore .css, .js, .img
+      resource_extension = request.path[/\.[\w]+/]
+      # ignore .css, .js, .img, except .json
+      if resource_extension.nil? || resource_extension=='.json' 
         site = get_site_from_request(request)
         Spree::Site.current = ( site || Spree::Site.first)
       end
