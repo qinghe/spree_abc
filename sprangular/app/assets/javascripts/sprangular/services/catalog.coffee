@@ -11,7 +11,7 @@ Sprangular.service 'Catalog', ($http, $q, _, Status) ->
       @getPaged(page, taxon: path)
 
     taxonomies: ->
-      $http.get("/api/taxonomies")
+      $http.get("/api/taxonomies0")
         .then (response) ->
           response.data
 

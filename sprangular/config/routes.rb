@@ -7,7 +7,7 @@ Sprangular::Engine.routes.draw do
     scope '/api', defaults: {format: :json} do
       post 'facebook/fetch'
 
-   #   resources :taxonomies, only: :index
+      resources :taxonomies0, only: :index, controller: :taxonomies
    #   get 'taxons/*permalink', to: 'taxons#show'
    #   resources :products, only: [:index, :show]
       resource :cart do
