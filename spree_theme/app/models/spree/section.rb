@@ -17,9 +17,10 @@ module Spree
       #create record in table sections
       created_section = nil
       self.transaction do      
-        created_section = create(:section_piece_id=> section_piece.id) do |section|
+        created_section = create!(:section_piece_id=> section_piece.id) do |section|
           section.section_piece_instance = 1
           section.attributes= attrs unless attrs.empty?
+          section.slug = nil
           section.for_mobile = section_piece.for_mobile?
         end
         #copy the section piece param  to section param table
