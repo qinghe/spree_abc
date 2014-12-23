@@ -1,6 +1,6 @@
 #  
 # rake RAILS_ENV=test db:seed
-
+include SpreeTheme::SeedHelper
 # plese load section_pieces first, seed sections.rb need it.
 
 seeds_path = File.join(File.dirname(__FILE__), 'seeds')

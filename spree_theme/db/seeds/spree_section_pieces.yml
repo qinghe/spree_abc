@@ -1609,3 +1609,27 @@ container_hover_effect:
     /* since ie 6-8 do not support :last_child, have first child hidden initially */
     .<%=@template.current_piece.section_selector%>_inner>:first-child { display:none; <%=@template.css(:position) %>}
   js: ''
+
+# mobile section pieces 
+root_for_mobile:
+  id: 200
+  title: root for mobile
+  slug: root-for-mobile
+  is_selectable: "1"
+  is_container: "1"
+  for_mobile: "1"
+  html: |
+    this is just test
+  css: "" 
+  js: ""
+container_for_mobile:
+  id: 201
+  title: container for mobile
+  slug: container-for-mobile
+  is_selectable: "1"
+  is_container: "1"
+  for_mobile: "1"
+  html: |
+    this is just test
+  css: "" 
+  js: ""

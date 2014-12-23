@@ -119,8 +119,7 @@ objs=[
 
 Spree::HtmlAttribute.delete_all              
 for ha in objs
-  obj = Spree::HtmlAttribute.new
-  obj.assign_attributes( ha,  :without_protection => true)
-  obj.save
+  ha[:slug] = nil # 5.0, it has to be nil to generate new
+  obj = Spree::HtmlAttribute.create!( ha )
 end
                 

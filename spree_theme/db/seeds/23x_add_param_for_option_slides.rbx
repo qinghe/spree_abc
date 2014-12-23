@@ -1,4 +1,3 @@
-include SpreeTheme::SectionPieceParamHelper
 
 # add param option type presentation margin, padding, border,   background
 section_piece = Spree::SectionPiece.find 'option-values-in-slide-style'

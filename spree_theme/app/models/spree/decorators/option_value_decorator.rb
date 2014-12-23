@@ -48,6 +48,20 @@ Spree::Product.class_eval do
     end
     @_variant_options_hash = hash
   end
+  
+  # fix slug
+  # Try building a slug based on the following fields in increasing order of specificity.
+  def slug_candidates
+    [
+      :name_to_url,
+      [:name_to_url, :sku]
+    ]
+  end
+  
+  def name_to_url
+    name.to_s.to_url  
+  end
+  
 end
 
 

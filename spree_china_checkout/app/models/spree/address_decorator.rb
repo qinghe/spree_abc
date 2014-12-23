@@ -6,7 +6,7 @@ Spree::Address.class_eval do
       country = Spree::Country.find(Spree::Config[:default_country_id]) rescue Spree::Country.first
       # add default state into default address
       state = country.states.first      
-      new({:country => country,:state=>state}, :without_protection => true)
+      new({:country => country,:state=>state})
     end
     
     

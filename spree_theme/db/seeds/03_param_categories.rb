@@ -56,7 +56,7 @@ objs=[
 Spree::ParamCategory.delete_all              
 for ha in objs
   obj = Spree::ParamCategory.new
-  obj.assign_attributes( ha,  :without_protection => true)
+  obj.assign_attributes( ha )
   obj.editor_id=0
   obj.save
 end

@@ -4,20 +4,20 @@ section_piece_hash= Spree::SectionPiece.all.inject({}){|h,sp| h[sp.slug] = sp; h
 
 
 Spree::Section.where(:title=>'dialog').each(&:destroy)
-dialog = Spree::Section.create_section(section_piece_hash['dialog'].id, {:title=>"dialog"})
-dialog.add_section_piece(section_piece_hash['container-title'].id)
+dialog = Spree::Section.create_section(section_piece_hash['dialog'], {:title=>"dialog"})
+dialog.add_section_piece(section_piece_hash['container-title'])
 
 
 #order list
 Spree::Section.where(:title=>'order list').each(&:destroy)
-order_address = Spree::Section.create_section(section_piece_hash['container'].id, {:title=>"order list"},
+order_address = Spree::Section.create_section(section_piece_hash['container'], {:title=>"order list"},
   {'block'=>{'disabled_ha_ids'=>'111'}, 'inner'=>{'15hidden'=>bool_true}})
-order_address.add_section_piece(section_piece_hash['container-title'].id)
-order_address.add_section_piece(section_piece_hash['order-list'].id)
+order_address.add_section_piece(section_piece_hash['container-title'])
+order_address.add_section_piece(section_piece_hash['order-list'])
 
 #profile
 Spree::Section.where(:title=>'profile').each(&:destroy)
-order_address = Spree::Section.create_section(section_piece_hash['container'].id, {:title=>"profile"},
+order_address = Spree::Section.create_section(section_piece_hash['container'], {:title=>"profile"},
   {'block'=>{'disabled_ha_ids'=>'111'}, 'inner'=>{'15hidden'=>bool_true}})
-order_address.add_section_piece(section_piece_hash['container-title'].id)
-order_address.add_section_piece(section_piece_hash['profile'].id)
+order_address.add_section_piece(section_piece_hash['container-title'])
+order_address.add_section_piece(section_piece_hash['profile'])

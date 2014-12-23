@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141216074457) do
+ActiveRecord::Schema.define(version: 20141223021927) do
 
   create_table "ckeditor_assets", force: true do |t|
     t.integer  "site_id",                      default: 0, null: false
@@ -936,6 +936,7 @@ ActiveRecord::Schema.define(version: 20141216074457) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "is_clickable",                default: false, null: false
+    t.boolean  "for_mobile",                  default: false, null: false
   end
 
   add_index "spree_section_pieces", ["slug"], name: "index_spree_section_pieces_on_slug", unique: true, using: :btree
@@ -948,19 +949,20 @@ ActiveRecord::Schema.define(version: 20141216074457) do
   end
 
   create_table "spree_sections", force: true do |t|
-    t.integer "site_id",                  limit: 3,   default: 0,    null: false
+    t.integer "site_id",                  limit: 3,   default: 0,     null: false
     t.integer "root_id",                  limit: 3
     t.integer "parent_id",                limit: 3
-    t.integer "lft",                      limit: 2,   default: 0,    null: false
-    t.integer "rgt",                      limit: 2,   default: 0,    null: false
-    t.string  "title",                    limit: 64,  default: "",   null: false
-    t.string  "slug",                     limit: 64,  default: "",   null: false
+    t.integer "lft",                      limit: 2,   default: 0,     null: false
+    t.integer "rgt",                      limit: 2,   default: 0,     null: false
+    t.string  "title",                    limit: 64,  default: "",    null: false
+    t.string  "slug",                     limit: 64,  default: "",    null: false
     t.integer "section_piece_id",         limit: 3,   default: 0
     t.integer "section_piece_instance",   limit: 2,   default: 0
-    t.boolean "is_enabled",                           default: true, null: false
-    t.string  "global_events",            limit: 200, default: "",   null: false
-    t.string  "subscribed_global_events", limit: 200, default: "",   null: false
-    t.integer "content_param",                        default: 0,    null: false
+    t.boolean "is_enabled",                           default: true,  null: false
+    t.string  "global_events",            limit: 200, default: "",    null: false
+    t.string  "subscribed_global_events", limit: 200, default: "",    null: false
+    t.integer "content_param",                        default: 0,     null: false
+    t.boolean "for_mobile",                           default: false, null: false
   end
 
   create_table "spree_shipments", force: true do |t|
@@ -1054,6 +1056,7 @@ ActiveRecord::Schema.define(version: 20141216074457) do
     t.integer  "theme_id",            default: 0
     t.integer  "template_release_id", default: 0
     t.integer  "foreign_theme_id",    default: 0,     null: false
+    t.boolean  "support_mobile",      default: false, null: false
   end
 
   create_table "spree_state_changes", force: true do |t|
@@ -1292,6 +1295,8 @@ ActiveRecord::Schema.define(version: 20141216074457) do
     t.datetime "created_at",                                         null: false
     t.datetime "updated_at",                                         null: false
     t.boolean  "is_public",                          default: false, null: false
+    t.boolean  "for_mobile",                         default: false, null: false
+    t.integer  "pc_theme_id",                        default: 0,     null: false
   end
 
   create_table "spree_tokenized_permissions", force: true do |t|

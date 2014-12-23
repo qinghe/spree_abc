@@ -13,38 +13,40 @@ module Spree
     
     # usage: attribute section_piece_id, title required
     # params: default_param_values,  is a hash,  class_name=>{htmal_attribute_id=>default_value,..}
-    def self.create_section(section_piece_id,attrs = {}, default_param_values={})
+    def self.create_section(section_piece,attrs = {}, default_param_values={})
       #create record in table sections
-      obj = nil
+      created_section = nil
       self.transaction do      
-        obj = create(:section_piece_id=> section_piece_id) do |sp|
-          sp.section_piece_instance = 1
-          sp.attributes= attrs unless attrs.empty?
+        created_section = create(:section_piece_id=> section_piece.id) do |section|
+          section.section_piece_instance = 1
+          section.attributes= attrs unless attrs.empty?
+          section.for_mobile = section_piece.for_mobile?
         end
         #copy the section piece param  to section param table
-        obj.add_section_piece_param(default_param_values)
+        created_section.add_section_piece_param(default_param_values)
         #set root_id, css need root_piece_instance_id as selector
-        obj.update_attribute("root_id", obj.id)
+        created_section.update_attribute("root_id", created_section.id)
       end
-      obj
+      created_section
     end  
     
-    # return created section
-    def add_section_piece(section_piece_id, default_param_values={})
-      section_piece = SectionPiece.find(section_piece_id)
+    # add section_piece into section, return created section
+    def add_section_piece(section_piece, default_param_values={})
+      raise "section_piece is nil" if section_piece.blank?
+      # section_piece = SectionPiece.find(section_piece_id)
       tree = self.root.self_and_descendants
-      section_piece_instance = tree.select{|xnode| xnode.section_piece_id==section_piece_id}.size.succ
-      atts = { :section_piece_id=>section_piece_id}
-      obj = nil
+      section_piece_instance = tree.select{|xnode| xnode.section_piece_id==section_piece.id}.size.succ
+      atts = { :section_piece_id=>section_piece.id}
+      section = nil
       self.class.transaction do      
-        obj = self.class.create!(atts)do|obj|
+        section = self.class.create!(atts)do|obj|
           obj.root_id= self.root_id
           obj.section_piece_instance=section_piece_instance       
         end
-        obj.move_to_child_of(self)
-        obj.add_section_piece_param(default_param_values)
+        section.move_to_child_of(self)
+        section.add_section_piece_param(default_param_values)
       end
-      obj
+      section
     end
     
     def build_html

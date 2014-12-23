@@ -58,7 +58,7 @@ def create_admin_user
   else
     admin = Spree.user_class.create(attributes,:without_protection => true)
     # create an admin role and and assign the admin user to that role
-    role = Spree::Role.find_or_create_by_name 'admin'
+    role = Spree::Role.find_by! name: 'admin'
     admin.spree_roles << role
     admin.save
   end

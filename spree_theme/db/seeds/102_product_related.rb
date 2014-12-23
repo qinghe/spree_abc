@@ -5,12 +5,12 @@ section_piece_hash= sps.inject({}){|h,sp| h[sp.slug] = sp; h}
 
 #add product_quantity
 Spree::Section.where(:title=>'product quantity').each(&:destroy)
-product_properties = Spree::Section.create_section(section_piece_hash['container'].id, {:title=>"product quantity"},
+product_properties = Spree::Section.create_section(section_piece_hash['container'], {:title=>"product quantity"},
   {'block'=>{'disabled_ha_ids'=>'111'}, 'inner'=>{'15hidden'=>bool_true}})
-product_properties.add_section_piece(section_piece_hash['product_quantity'].id)
+product_properties.add_section_piece(section_piece_hash['product_quantity'])
 
 #add product_atc
 Spree::Section.where(:title=>'product atc').each(&:destroy)
-product_properties = Spree::Section.create_section(section_piece_hash['container'].id, {:title=>"product atc"},
+product_properties = Spree::Section.create_section(section_piece_hash['container'], {:title=>"product atc"},
   {'block'=>{'disabled_ha_ids'=>'111'}, 'inner'=>{'15hidden'=>bool_true}})
-product_properties.add_section_piece(section_piece_hash['product_atc'].id)
+product_properties.add_section_piece(section_piece_hash['product_atc'])

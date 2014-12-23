@@ -173,6 +173,7 @@ namespace :spree_theme do
     file_path = File.join(SpreeTheme::Engine.root,'db','seeds',args.seed_name)
     if File.exists? file_path
       Spree::TemplateTheme.connection.transaction do
+        include SpreeTheme::SeedHelper
         load file_path
         puts "loaded file #{file_path}"
       end

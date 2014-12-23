@@ -1,7 +1,7 @@
-include SpreeTheme::SectionPieceParamHelper
+
 
 #table title cell, border,padding
-section_piece = Spree::SectionPiece.find 'container-link'
+section_piece = find_section_piece 'container-link'
 
 a =  { "editor_id"=>2,  "class_name"=>"s_a", "pclass"=>"css", "param_category_id"=>11,  "html_attribute_ids"=>"31,32,7,8,6"}
 create_section_piece_param( section_piece, a)
@@ -20,7 +20,7 @@ create_section_piece_param( section_piece, a_h)
 
 
 #table title cell, border,padding
-section_piece = Spree::SectionPiece.find 'container-table'
+section_piece = find_section_piece 'container-table'
   
 table = {"editor_id"=>2, "class_name"=>"s_table", "pclass"=>"css", "param_category_id"=>78,  "html_attribute_ids"=>"31,7,8,6"}
 cell = {"editor_id"=>2, "class_name"=>"s_cell", "pclass"=>"css", "param_category_id"=>80,  "html_attribute_ids"=>"32,7,8,6"}
@@ -43,7 +43,7 @@ create_section_piece_param( section_piece, th)
 create_section_piece_param( section_piece, td)
 
 # form label error input
-section_piece = Spree::SectionPiece.find 'container-form'
+section_piece = find_section_piece 'container-form'
 
 form = {"editor_id"=>2, "class_name"=>"s_form", "pclass"=>"css", "param_category_id"=>39,  "html_attribute_ids"=>"31,7,8,6"}
 label = {"editor_id"=>2, "class_name"=>"s_label", "pclass"=>"css", "param_category_id"=>42,  "html_attribute_ids"=>"31,32,7,8,6"}

@@ -16,7 +16,7 @@ if Spree::User.find_by_email(email)
 else
   admin = Spree::User.create(attributes)
   # create an admin role and and assign the admin user to that role
-  role = Spree::Role.find_or_create_by_name 'admin'
+  role = Spree::Role.find_or_create_by(name: 'admin')
   admin.spree_roles << role
   admin.save
 end

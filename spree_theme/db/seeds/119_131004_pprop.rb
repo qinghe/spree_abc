@@ -1,7 +1,7 @@
-include SpreeTheme::SectionPieceParamHelper
+
 
 #table cell, border,padding
-section_piece = Spree::SectionPiece.find 'product_properties'
+section_piece = find_section_piece 'product_properties'
 cell = {"editor_id"=>2, "class_name"=>"cell", "pclass"=>"css", "param_category_id"=>80,  "html_attribute_ids"=>"32,7,8,6"}
 
 create_section_piece_param( section_piece, cell)

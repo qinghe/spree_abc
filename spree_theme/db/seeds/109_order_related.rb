@@ -1,6 +1,6 @@
-include SpreeTheme::SectionPieceParamHelper
+
 #table title cell, border,padding
-section_piece = Spree::SectionPiece.find 'container-title'
+section_piece = find_section_piece 'container-title'
 title =  { "editor_id"=>2, "class_name"=>"s_h6", "pclass"=>"css", "param_category_id"=>6,  "html_attribute_ids"=>"31,32,7,8,6"}
 create_section_piece_param( section_piece, title)
 title =  { "editor_id"=>3, "class_name"=>"s_h6", "pclass"=>"css", "param_category_id"=>6,  "html_attribute_ids"=>"2,3,4,5"}
@@ -16,23 +16,23 @@ section_piece_hash= sps.inject({}){|h,sp| h[sp.slug] = sp; h}
 
 #order_address
 Spree::Section.where(:title=>'order address').each(&:destroy)
-order_address = Spree::Section.create_section(section_piece_hash['container'].id, {:title=>"order address"},
+order_address = Spree::Section.create_section(section_piece_hash['container'], {:title=>"order address"},
   {'block'=>{'disabled_ha_ids'=>'111'}, 'inner'=>{'15hidden'=>bool_true}})
-order_address.add_section_piece(section_piece_hash['container-title'].id)
-order_address.add_section_piece(section_piece_hash['order-address'].id)
+order_address.add_section_piece(section_piece_hash['container-title'])
+order_address.add_section_piece(section_piece_hash['order-address'])
 
 
 #order_payment
 Spree::Section.where(:title=>'order payment').each(&:destroy)
-order_payment = Spree::Section.create_section(section_piece_hash['container'].id, {:title=>"order payment"},
+order_payment = Spree::Section.create_section(section_piece_hash['container'], {:title=>"order payment"},
   {'block'=>{'disabled_ha_ids'=>'111'}, 'inner'=>{'15hidden'=>bool_true}})
-order_payment.add_section_piece(section_piece_hash['container-title'].id)
-order_payment.add_section_piece(section_piece_hash['order-payment'].id)
+order_payment.add_section_piece(section_piece_hash['container-title'])
+order_payment.add_section_piece(section_piece_hash['order-payment'])
 
 
 #order_items
 Spree::Section.where(:title=>'order items').each(&:destroy)
-order_items = Spree::Section.create_section(section_piece_hash['container'].id, {:title=>"order items"},
+order_items = Spree::Section.create_section(section_piece_hash['container'], {:title=>"order items"},
   {'block'=>{'disabled_ha_ids'=>'111'}, 'inner'=>{'15hidden'=>bool_true}})
-order_items.add_section_piece(section_piece_hash['container-title'].id)
-order_items.add_section_piece(section_piece_hash['order-items'].id)
+order_items.add_section_piece(section_piece_hash['container-title'])
+order_items.add_section_piece(section_piece_hash['order-items'])

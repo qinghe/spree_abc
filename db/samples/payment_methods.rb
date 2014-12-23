@@ -1,4 +1,4 @@
-Spree::BillingIntegration::Alipay.create!(
+Spree::BillingIntegration::AlipayDualfun.create!(
   {
     :name => "Alipay",
     :description => "Alipay (direct pay by user) for development.",

@@ -1,10 +1,10 @@
 
-include SpreeTheme::SectionPieceParamHelper
+
 bool_false = Spree::HtmlAttribute::BOOL_FALSE
 bool_true =  Spree::HtmlAttribute::BOOL_TRUE
 
 #dialog width, height, 
-section_piece = Spree::SectionPiece.find 'dialog-title'
+section_piece = find_section_piece 'dialog-title'
 unless section_piece.section_piece_params.exists?( :class_name=>'title' )
   title =  { "editor_id"=>2,  "class_name"=>"title", "pclass"=>"css", "param_category_id"=>4,  "html_attribute_ids"=>"31,32,7,8,6"}
   create_section_piece_param( section_piece, title)
@@ -30,7 +30,7 @@ section_piece.section_piece_params.where(['editor_id=? and class_name=?',3,'titl
 }
 
     
-section_piece = Spree::SectionPiece.find 'dialog-content'
+section_piece = find_section_piece 'dialog-content'
 unless section_piece.section_piece_params.exists?( :class_name=>'inner' )
   content =  { "editor_id"=>2,  "class_name"=>"inner", "pclass"=>"css", "param_category_id"=>5,  "html_attribute_ids"=>"31,32"}
   create_section_piece_param( section_piece, content)
