@@ -78,6 +78,8 @@ gem 'spree_comments',   :path => './spree_comments'
 
 gem 'sprangular',   :path => './sprangular'
 
+gem 'activerecord-session_store'
+
 group :test, :development do
   gem 'mail_view'  #, :git => 'https://github.com/37signals/mail_view.git'
 end

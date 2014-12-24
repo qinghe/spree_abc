@@ -141,6 +141,10 @@ GEM
       activemodel (= 4.1.8)
       activesupport (= 4.1.8)
       arel (~> 5.0.0)
+    activerecord-session_store (0.1.0)
+      actionpack (>= 4.0.0, < 5)
+      activerecord (>= 4.0.0, < 5)
+      railties (>= 4.0.0, < 5)
     activesupport (4.1.8)
       i18n (~> 0.6, >= 0.6.9)
       json (~> 1.7, >= 1.7.7)
@@ -508,6 +512,7 @@ PLATFORMS
 
 DEPENDENCIES
   activemerchant_patch_for_china!
+  activerecord-session_store
   capistrano
   capistrano-rails (~> 1.1.0)
   capistrano-rvm (~> 0.1.0)
