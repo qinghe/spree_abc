@@ -3,6 +3,7 @@
 Spree::Asset.class_eval do
   include Spree::MultiSiteSystem
 end
+
 Spree::Configuration.class_eval do
   belongs_to :site
   default_scope  { where(:site_id =>  Spree::Site.current.id) }
@@ -15,6 +16,10 @@ end
 Spree::OptionType.class_eval do
   belongs_to :site
   default_scope  { where(:site_id =>  Spree::Site.current.id) }
+  clear_validators!
+  # Add new validates_uniqueness_of with correct scope
+  validates :name, :uniqueness => { :scope => [:site_id] }
+
 end    
 
 Spree::Order.class_eval do
@@ -23,11 +28,6 @@ end
 
 # we should never call LineItem.find or LineItem.new
 # use @order.line_items, @order.add_variant instead
-Spree::LineItem.class_eval do
-  #this cause ActiveRecord::ReadOnlyRecord, while modify lineitem
-  #default_scope :joins => :order 
-  #default_scope {where("spree_orders.site_id=?", Spree::Site.current.id)}
-end
 
 Spree::Prototype.class_eval do
   belongs_to :site
@@ -92,7 +92,7 @@ Spree::TaxCategory.class_eval do
 
   clear_validators!
   # Add new validates_uniqueness_of with correct scope
-  validates :name, :uniqueness => { :scope => [:site_id,:deleted_at] }
+  validates :name, :uniqueness => { scope: [:site_id,:deleted_at], allow_blank: true }
 
 end
 
@@ -117,6 +117,18 @@ Spree.user_class.class_eval do
   default_scope  { where(:site_id =>  Spree::Site.current.id) }
 end
 
+Spree::Variant.class_eval do
+  clear_validators!
+  # copy original validates
+  #validate :check_price
+
+  validates :cost_price, numericality: { greater_than_or_equal_to: 0, allow_nil: true }
+  validates :price,      numericality: { greater_than_or_equal_to: 0, allow_nil: true }
+  # disable uniqueness_of :sku
+  validates_uniqueness_of :sku, allow_blank: true, conditions: -> { joins(:product).where( spree_variants: { deleted_at: nil}, spree_products: {site_id: Spree::Site.current.id } ) }
+
+end
+
 Spree::Zone.class_eval do
   belongs_to :site
   default_scope  { where(:site_id =>  Spree::Site.current.id) }
@@ -125,6 +137,7 @@ Spree::Zone.class_eval do
   # Add new validates_uniqueness_of with correct scope
   validates :name, :presence => true, :uniqueness => { :scope => [:site_id] }
 end    
+
 
 Rails.application.config.spree_multi_site.site_scope_required_classes_from_other_gems.each do |extra_class|
   extra_class.class_eval do

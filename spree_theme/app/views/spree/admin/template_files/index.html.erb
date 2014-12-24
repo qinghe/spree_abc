@@ -1,6 +1,6 @@
 <%= render :partial => 'sub_menu' %>
 <% content_for :page_actions do %>  
-  <li><%= button_link_to Spree.t("template_file.new"), new_object_url, :icon => 'icon-plus' %></li>
+  <li><%= button_link_to Spree.t("template_file.new"), new_object_url, :icon => 'plus' %></li>
 <% end %>
 
 <%= render :partial=>'tabs',:locals=>{:current=>"TemplateFile"}%>

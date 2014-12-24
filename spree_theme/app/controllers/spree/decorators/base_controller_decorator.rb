@@ -17,15 +17,24 @@ module Spree
       #    end
       #end
       #override spree_core/controller_helper/auth#unauthorized
-        def unauthorized
-          url = new_admin_session_path
-          if try_spree_current_user
-            flash[:error] = Spree.t(:authorization_failure)
-            redirect_to new_admin_session_path
-          else
-            store_location
-            redirect_to new_admin_session_path
-          end
-        end  
+      #  def unauthorized
+      #    url = new_admin_session_path
+      #    if try_spree_current_user
+      #      flash[:error] = Spree.t(:authorization_failure)
+      #      redirect_to new_admin_session_path
+      #    else
+      #      store_location
+      #      redirect_to new_admin_session_path
+      #    end
+      #  end  
     end
+      
+end
+
+module Spree::Admin
+  BaseController.class_eval do
+    rescue_from CanCan::AccessDenied do |exception|
+      redirect_to  new_admin_session_path
+    end
+  end
 end

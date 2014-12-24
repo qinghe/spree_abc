@@ -12,9 +12,9 @@
           <%= select_tag "section_data_source", options , include_blank: true,class: 'select2' %>      
         </div>        
         <div class="form-buttons filter-actions actions" data-hook="buttons">
-          <%= button Spree.t('actions.update'), 'icon-refresh' %>
+          <%= button Spree.t('actions.update'), 'refresh' %>
           <span class="or"><%= Spree.t(:or) %></span>
-          <%= button_link_to Spree.t('actions.cancel'), '', :icon => 'icon-remove', :onclick=>"$('#page_layout_container').hide();return false;" %>
+          <%= button_link_to Spree.t('actions.cancel'), '', :icon => 'remove', :onclick=>"$('#page_layout_container').hide();return false;" %>
         </div>
       <%end%>
   <% else %>

@@ -5,7 +5,7 @@
 
 <% if SpreeTheme.site_class.current.design?  %>
   <% content_for :page_actions do %>  
-    <li><%= button_link_to Spree.t("template_theme.new"), new_object_url, :icon => 'icon-plus',:remote=>:true, :id=>'admin_new_template_theme' %></li>
+    <li><%= button_link_to Spree.t("template_theme.new"), new_object_url, :icon => 'plus',:remote=>:true, :id=>'admin_new_template_theme' %></li>
   <% end %>
 <% end %>
 
@@ -48,13 +48,13 @@
       </td>
     <% end %>
     <td class="actions">
-    <%= link_to_with_icon 'icon-cogs', Spree.t(:theme_config), config_resource_admin_template_theme_path(theme), {:method=>:get,:no_text => true} %>
+    <%= link_to_with_icon 'cogs', Spree.t(:theme_config), config_resource_admin_template_theme_path(theme), {:method=>:get,:no_text => true} %>
     <% if theme.has_native_layout? %>    
-      <%= link_to_with_icon 'icon-eye', Spree.t(:preview_theme), preview_template_theme_path(theme), {:target=>'_blank',:no_text => true} %>
+      <%= link_to_with_icon 'eye', Spree.t(:preview_theme), preview_template_theme_path(theme), {:target=>'_blank',:no_text => true} %>
       <% if SpreeTheme.site_class.current.design? %>    
-      <%= link_to_with_icon 'icon-copy', Spree.t(:theme_copy), copy_admin_template_theme_path(theme), {:method=>:post,:no_text => true} %>
+      <%= link_to_with_icon 'copy', Spree.t(:theme_copy), copy_admin_template_theme_path(theme), {:method=>:post,:no_text => true} %>
       <% end %>
-      <%= link_to_with_icon 'icon-print', Spree.t(:theme_release), release_admin_template_theme_path(theme), {:method=>:post,:no_text => true} %>
+      <%= link_to_with_icon 'print', Spree.t(:theme_release), release_admin_template_theme_path(theme), {:method=>:post,:no_text => true} %>
     <% end %>
     <%= link_to_delete theme, :no_text => true if can?(:delete, theme)  %>
     </td>

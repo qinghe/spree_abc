@@ -197,7 +197,7 @@ module SpreeTheme::System
     agent_str = request.user_agent.to_s.downcase
     return false if agent_str =~ /ipad/
     agent_str =~ Regexp.new(MOBILE_USER_AGENTS)
-    true
+    #true
   end
   
 end
