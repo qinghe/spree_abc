@@ -54,7 +54,7 @@ module Spree
         end
         # copy_from_root_id means we have copied all decendants from that tree. 
         if new_parent.root?
-          update_all(["copy_from_root_id=?",original_parent.id],['root_id=?',new_parent.id])
+          where( root_id: new_parent.id ).update_all(["copy_from_root_id=?",original_parent.id])
         end
       end
        

@@ -368,20 +368,19 @@ module Spree
           end
 
           if replace_exisit
-            connection.insert_fixture(original_template_attributes, self.table_name)          
+            create!(original_template_attributes)          
           else
-            connection.insert_fixture(original_template_attributes.except('id'), self.table_name)
+            create!(original_template_attributes.except('id'))
           end
           new_template = self.where( original_template_attributes.slice('created_at','title','page_layout_root_id') ).first
           # we need new template id
           # template = self.find_by_title template.title
           serialized_data['param_values'].each do |record|
-            table_name = ParamValue.table_name
             attributes = get_attributes_serialized_data(record).except('id') 
             #for unknown reason param_value.created_at/updated_at may be nil
             attributes['created_at']=created_at
             attributes['updated_at']=attributes['created_at'] if attributes['updated_at'].blank?
-            connection.insert_fixture(attributes, table_name)          
+            ParamValue.create!(attributes)          
           end
           original_nodes = serialized_data['page_layouts']          
           original_nodes = original_nodes.collect{|node| build_model_from_serialized_data( PageLayout, node)}
@@ -394,17 +393,15 @@ module Spree
           new_template_files = [] 
           original_template_files = []
           serialized_data['template_files'].each_with_index do |record, i|
-            table_name = TemplateFile.table_name
             original_template_file_attributes = get_attributes_serialized_data(record)
             attributes = original_template_file_attributes.except('id').merge!('created_at'=>created_at,'theme_id'=>new_template.id)
-            connection.insert_fixture(attributes, table_name)  
+            TemplateFile.create!(attributes)  
             new_template_files << TemplateFile.where( attributes.slice('created_at','theme_id') ).first
             original_template_files << original_template_file_attributes         
           end 
           serialized_data['template_releases'].each do |record|
-            table_name = TemplateRelease.table_name
             attributes = get_attributes_serialized_data(record).except('id').merge!('created_at'=>created_at,'theme_id'=>new_template.id)
-            connection.insert_fixture(attributes, table_name)          
+            TemplateRelease.create!(attributes)          
           end
           fix_related_data_for_copied_theme(new_template, new_nodes, new_template_files, original_template_attributes,  original_nodes, original_template_files, created_at)
         end
