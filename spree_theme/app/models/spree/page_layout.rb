@@ -17,7 +17,7 @@ module Spree
     before_destroy :remove_section
     before_save :fix_data_source_param
     
-    scope :full_html_roots, where(:is_full_html=>true,:parent_id=>nil)
+    scope :full_html_roots, ->{ where(:is_full_html=>true,:parent_id=>nil) }
     #attr_accessible :section_id,:title
     attr_accessor :current_contexts, :inherited_contexts
   

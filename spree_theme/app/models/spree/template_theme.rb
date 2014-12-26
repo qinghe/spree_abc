@@ -57,6 +57,8 @@ module Spree
     scope :within_site, ->(site){ where(:site_id=> site.id) }
     scope :released, ->{ where("release_id>0") }
     scope :published, -> { released.where(:is_public=>true) }
+    scope :mobile, ->{ where( for_mobile: true) }
+    scope :master, ->{ where.not( for_mobile: true) }
     
     before_validation :fix_special_attributes
     before_destroy :remove_relative_data
@@ -78,11 +80,11 @@ module Spree
       end
       
       def native
-        self.within_site(SpreeTheme.site_class.current )
+        self.master.within_site(SpreeTheme.site_class.current )
       end
       
       def foreign
-        self.within_site(SpreeTheme.site_class.designsite ).published
+        self.master.within_site(SpreeTheme.site_class.designsite ).published
       end        
       
       # original_theme may be attributes in hash

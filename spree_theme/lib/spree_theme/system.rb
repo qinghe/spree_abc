@@ -176,7 +176,7 @@ module SpreeTheme::System
       @page_layout||= theme.page_layout
       @sections = Spree::Section.where(:is_enabled=>true).order("title").roots
       #template selection
-      @template_themes = Spree::TemplateTheme.where(:site_id=>SpreeTheme.site_class.current.id)
+      @template_themes = Spree::TemplateTheme.native
   end
   
   def add_view_path
