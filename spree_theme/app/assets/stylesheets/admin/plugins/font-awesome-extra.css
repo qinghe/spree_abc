@@ -4,3 +4,9 @@
 .fa-check-circle:before {
   content: "\f058";
 }
+.fa-mobile-phone:before{
+  content: "\f10b";
+}
+.fa-desktop:before{
+  content: "\f108";
+}

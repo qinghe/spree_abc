@@ -40,6 +40,7 @@ module Spree
   class TemplateTheme < ActiveRecord::Base
     include AssignedResource::IdsHandler
     #extend FriendlyId
+    TerminalEnum = Struct.new( :desktop, :mobile, :pad, :tv )[0,1,2,3]
     belongs_to :website, :class_name => SpreeTheme.site_class.to_s, :foreign_key => "site_id"
   
     #belongs_to :website #move it into template_theme_decorator
@@ -50,6 +51,8 @@ module Spree
     has_many :template_releases, :foreign_key=>"theme_id", :dependent => :delete_all
     # template_release may be in current or design site
     belongs_to :current_template_release, :class_name=>"TemplateRelease", :foreign_key=>"release_id"
+    has_one :mobile, foreign_key: "master_id", dependent: :destroy, class_name: self.name
+    belongs_to :desktop, foreign_key: "master_id", class_name: self.name
     
     scope :by_layout,  ->(layout_id) { where(:page_layout_root_id => layout_id) }
     #use string as key instead of integer page_layout.id, exported theme in json, after restore, key is always string
@@ -57,8 +60,7 @@ module Spree
     scope :within_site, ->(site){ where(:site_id=> site.id) }
     scope :released, ->{ where("release_id>0") }
     scope :published, -> { released.where(:is_public=>true) }
-    scope :mobile, ->{ where( for_mobile: true) }
-    scope :master, ->{ where.not( for_mobile: true) }
+    scope :master, ->{ where( for_terminal: TerminalEnum.desktop) }
     
     before_validation :fix_special_attributes
     before_destroy :remove_relative_data
@@ -539,6 +541,16 @@ module Spree
       taxon_id      
     end
     
+    # methods for mobile feature
+       
+    def for_desktop?
+      for_terminal == TerminalEnum.desktop
+    end
+    
+    def for_mobile?
+      for_terminal == TerminalEnum.mobile
+    end
+    
     private
     def fix_special_attributes
       if site_id == 0
@@ -556,7 +568,7 @@ module Spree
       if section_root_id.present?
         root_section = Section.roots.find(section_root_id)
         page_layout_root = add_section( root_section ) 
-        self.update_attributes( page_layout_root_id: page_layout_root.id, for_mobile: root_section.for_mobile )
+        self.update_attributes( page_layout_root_id: page_layout_root.id, for_terminal: root_section.for_terminal )
       end      
     end
     

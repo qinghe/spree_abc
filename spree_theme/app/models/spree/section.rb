@@ -21,7 +21,7 @@ module Spree
           section.section_piece_instance = 1
           section.attributes= attrs unless attrs.empty?
           section.slug = nil
-          section.for_mobile = section_piece.for_mobile?
+          section.for_terminal = section_piece.for_terminal
         end
         #copy the section piece param  to section param table
         created_section.add_section_piece_param(default_param_values)
