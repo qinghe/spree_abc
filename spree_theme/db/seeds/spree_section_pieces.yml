@@ -1617,6 +1617,7 @@ root_for_mobile:
   slug: root-for-mobile
   is_selectable: "1"
   is_container: "1"
+  is_root: true
   for_mobile: "1"
   html: |
     this is just test

@@ -40,6 +40,7 @@ gem 'ruby-hmac' #http://ryanbigg.com/2009/07/no-such-file-to-load-hmac-sha1/
 
 gem 'spree', '~>2.4'
 
+gem 'sprangular',   :path => './sprangular'
 # bundle config --local local.spree_simple_dash ../spree_simple_dash, using local for development 
 # :path => '../spree_simple_dash' 
 # replace Spree Analytics
@@ -76,7 +77,6 @@ gem 'spree_flexi_variants',   :path => './spree_flexi_variants'
 # copy from https://github.com/spree-contrib/spree_comments/tree/2-0-stable
 gem 'spree_comments',   :path => './spree_comments'
 
-gem 'sprangular',   :path => './sprangular'
 
 gem 'activerecord-session_store'
 

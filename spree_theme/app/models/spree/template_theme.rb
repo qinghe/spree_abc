@@ -556,7 +556,7 @@ module Spree
       if section_root_id.present?
         root_section = Section.roots.find(section_root_id)
         page_layout_root = add_section( root_section ) 
-        self.update_attribute("page_layout_root_id",page_layout_root.id)
+        self.update_attributes( page_layout_root_id: page_layout_root.id, for_mobile: root_section.for_mobile )
       end      
     end
     
