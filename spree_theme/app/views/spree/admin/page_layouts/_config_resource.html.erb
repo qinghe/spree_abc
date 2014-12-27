@@ -2,7 +2,7 @@
 <fieldset id="page_layout_container" class="">
   <% if @page_layout.present? %>  
       <% page_layout = @page_layout
-         page_layout_with_resource = Spree::PageLayout.includes(:section_pieces).where(["spree_page_layouts.id=? and spree_section_pieces.resources!=?", page_layout.id,'']).first %>
+         page_layout_with_resource = Spree::PageLayout.eager_load(:section_pieces).where( id: page_layout.id ).where.not( spree_section_pieces: { resources: ''} ).first %>
       <legend align="center"><%= page_layout.title %></legend>
       <%= form_for :page_layout, url: update_resource_admin_template_theme_page_layout_path(@template_theme,page_layout),remote: true do |f|%>
         <div class="field">
