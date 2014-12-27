@@ -1,6 +1,6 @@
 module Spree
   module Admin
-    class PageLayoutController< ResourceController
+    class PageLayoutsController< ResourceController
         respond_to :html, :json, :js #update title required json
 
         def update_resource          
