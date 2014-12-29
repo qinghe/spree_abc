@@ -122,15 +122,20 @@ module SpreeTheme::System
     end  
     
     # site has a released theme    
-    if @theme.present?  
+    if @theme.present?
       unless request.xhr?
-        if @is_designer      
+        if @is_designer
            prepare_params_for_editors(@theme)
            # layout_editor_panel has to be in views/application, 
            # or could not find for spree_auth_devise/controllers
            @editor_panel = render_to_string :partial=>'layout_editor_panel'
         end
       end
+      
+      if mobile?
+        @mobile_theme = @theme.mobile
+      end
+      
       # we have initialize PageTag::PageGenerator here, page like login  do not go to template_thems_controller/page
       if @is_designer
         @lg = PageTag::PageGenerator.previewer( @menu, @theme, {:resource=>@resource, :controller=>self, :page=>params[:page]})                  

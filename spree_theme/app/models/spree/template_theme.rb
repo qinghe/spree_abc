@@ -54,9 +54,10 @@ module Spree
     has_one :mobile, foreign_key: "master_id", dependent: :destroy, class_name: self.name
     belongs_to :desktop, foreign_key: "master_id", class_name: self.name
     
-    scope :by_layout,  ->(layout_id) { where(:page_layout_root_id => layout_id) }
     #use string as key instead of integer page_layout.id, exported theme in json, after restore, key is always string
     serialize :assigned_resource_ids, Hash
+  
+    scope :by_layout, ->(layout_id){ where(:page_layout_root_id => layout_id) }
     scope :within_site, ->(site){ where(:site_id=> site.id) }
     scope :released, ->{ where("release_id>0") }
     scope :published, -> { released.where(:is_public=>true) }
@@ -439,18 +440,19 @@ module Spree
     begin 'assigned resource'
       
       # get resources order by taxon/image/text,  
-      # return array of resources, no nil contained
-      def assigned_resources_by_page_layout( page_layout )
+      # return array of resources, nil may be contained
+      def assigned_resources_by_page_layout( selected_page_layout = nil )
         template_resources.select{|template_resource|
-          template_resource.page_layout_id==page_layout.id 
+          template_resource.page_layout_id==selected_page_layout.id 
         }.collect(&:source)
       end
       
       # all resources used by this theme
-      # return menu roots/ images /texts,  if none assgined, return [nil] or []
-      def assigned_resources( resource_class, page_layout )
+      # return taxon roots/ images /texts,  if none assgined, return [nil] or []
+      def assigned_resources( resource_class, selected_page_layout = nil )
+        selected_page_layout ||= self.page_layout
         template_resources.select{|template_resource|
-          template_resource.source_class ==  resource_class && template_resource.page_layout_id==page_layout.id 
+          template_resource.source_class ==  resource_class && template_resource.page_layout_id==selected_page_layout.id 
         }.collect(&:source)
       end
       
@@ -458,20 +460,20 @@ module Spree
       # params:
       #   resource_position: get first( position 0 ) of assigned resources by default
       #     logged_and_unlogged_menu required this feature
-      def assigned_resource_id( resource_class, page_layout, resource_position=0 )
+      def assigned_resource_id( resource_class, selected_page_layout = nil, resource_position=0 )
         template_resources.select{|template_resource|
-          template_resource.source_class ==  resource_class && template_resource.page_layout_id==page_layout.id && template_resource.position == resource_position
+          template_resource.source_class ==  resource_class && template_resource.page_layout_id==selected_page_layout.id && template_resource.position == resource_position
         }.first.to_i
       end
     
       # assign resource to page_layout node
-      def assign_resource( resource, page_layout, resource_position=0 )
-        create_template_resource( page_layout, resource, resource_position ) 
+      def assign_resource( resource, selected_page_layout = nil, resource_position = 0 )
+        create_template_resource( selected_page_layout, resource, resource_position ) 
       end
       # unassign resource from page_layout node
-      def unassign_resource( resource_class, page_layout, resource_position=0 )
+      def unassign_resource( resource_class, selected_page_layout, resource_position = 0 )
         template_resources.select{|template_resource|
-          template_resource.source_class ==  resource_class && template_resource.page_layout_id==page_layout.id && template_resource.position == resource_position
+          template_resource.source_class ==  resource_class && template_resource.page_layout_id==selected_page_layout.id && template_resource.position == resource_position
         }.each(&:destroy!)
          
       end
@@ -488,10 +490,10 @@ module Spree
     # called in current_page_tag
     # is page_layout valid to taxon, taxon is current page
     # return true if taxon is decendant of specific_taxons
-    def valid_context?(page_layout, taxon)
-      specific_taxons  = assigned_resources( Spree::SpecificTaxon, page_layout).compact
+    def valid_context?(selected_page_layout, taxon)
+      specific_taxons  = assigned_resources( Spree::SpecificTaxon, selected_page_layout).compact
       specific_taxon_ids = specific_taxons.collect(&:id)
-      is_valid = (page_layout.valid_context?(taxon.current_context)) 
+      is_valid = (selected_page_layout.valid_context?(taxon.current_context)) 
       if is_valid && specific_taxon_ids.present?
         is_valid = specific_taxon_ids.include?(taxon.id)
         unless is_valid
@@ -541,8 +543,7 @@ module Spree
       taxon_id      
     end
     
-    # methods for mobile feature
-       
+    # methods for mobile feature       
     def for_desktop?
       for_terminal == TerminalEnum.desktop
     end
