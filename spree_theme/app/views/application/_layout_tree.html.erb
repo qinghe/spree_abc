@@ -58,7 +58,7 @@ selected_id= (options[:selected_id]||layout_root.id )
       $("#layout_tree_form .click_editable").each(function(index,element){
       var jquery_element = $(element);
       jquery_element.editable(function(value, settings) { 
-            var url = Spree.routes.admin_template_themes+'/'+jquery_element.data('tid')+'/page_layout/'+jquery_element.data('lid');
+            var url = Spree.routes.admin_page_layouts( jquery_element.data('tid') )+'/'+jquery_element.data('lid');
             var submitdata = {};
             submitdata[settings.name] = value;
             //submitdata[settings.id] = self.id;

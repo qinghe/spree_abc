@@ -54,6 +54,8 @@ zh-CN:
   spree:
     actions:
       import: 购买
+      config_desktop_theme: 配置电脑模板
+      config_mobile_theme: 配置手机模板
     admin:
       tab:
         taxonomies: 分类

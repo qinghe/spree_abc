@@ -1,4 +1,4 @@
-//= require jquery
+//= require jquery/jquery
 //= require jquery_ujs
 //= require jquery.form
 //= require jquery.layout

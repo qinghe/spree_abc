@@ -31,15 +31,15 @@ module Spree
       default_scope {
         # admin_site_product, create or update global taxon.
         if self == Spree::Taxon  && multi_site_context=='admin_site_product'
-          scoped 
+          where(nil) 
         # first site list template themes 
         elsif self == Spree::Product  && multi_site_context=='site1_themes'
-          scoped 
+          where(nil) 
         # first site list product images  
         elsif self == Spree::Image && multi_site_context=='site_product_images'
-          scoped           
+          where(nil) 
         elsif multi_site_context=='admin_migration'
-          scoped           
+          where(nil) 
         else  
           where(:site_id =>  Spree::Site.current.id)
         end      

@@ -8,7 +8,7 @@ Sprangular::Engine.routes.draw do
       post 'facebook/fetch'
 
       resources :taxonomies0, only: :index, controller: :taxonomies
-   #   get 'taxons/*permalink', to: 'taxons#show'
+      get 'taxons/*permalink', to: 'taxons#show'
    #   resources :products, only: [:index, :show]
       resource :cart do
         post :add_variant

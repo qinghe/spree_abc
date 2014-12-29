@@ -67,23 +67,6 @@ module Spree
           @themes = TemplateTheme.native          
           render :action=>'native' 
         end
-        
-      
-        def create
-          invoke_callbacks(:create, :before)
-          @object.attributes = params[object_name]
-          if @object.save
-            invoke_callbacks(:create, :after)
-            flash[:success] = flash_message_for(@object, :successfully_created)
-            respond_with(@object) do |format|
-              format.html { redirect_to location_after_save }
-              format.js   { render :layout => false }
-            end
-          else
-            invoke_callbacks(:create, :fails)
-            respond_with(@object)
-          end
-        end
 
       end
       

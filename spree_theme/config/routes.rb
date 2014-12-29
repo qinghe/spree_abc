@@ -63,7 +63,7 @@ Spree::Core::Engine.routes.draw do
         put :apply        
       end
       
-      resources :page_layout do
+      resources :page_layouts do
         member do
           get :config_resource
           get :config_context

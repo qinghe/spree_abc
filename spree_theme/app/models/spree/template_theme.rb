@@ -40,6 +40,7 @@ module Spree
   class TemplateTheme < ActiveRecord::Base
     include AssignedResource::IdsHandler
     #extend FriendlyId
+    TerminalEnum = Struct.new( :desktop, :mobile, :pad, :tv )[0,1,2,3]
     belongs_to :website, :class_name => SpreeTheme.site_class.to_s, :foreign_key => "site_id"
   
     #belongs_to :website #move it into template_theme_decorator
@@ -50,6 +51,8 @@ module Spree
     has_many :template_releases, :foreign_key=>"theme_id", :dependent => :delete_all
     # template_release may be in current or design site
     belongs_to :current_template_release, :class_name=>"TemplateRelease", :foreign_key=>"release_id"
+    has_one :mobile, foreign_key: "master_id", dependent: :destroy, class_name: self.name
+    belongs_to :desktop, foreign_key: "master_id", class_name: self.name
     
     scope :by_layout,  ->(layout_id) { where(:page_layout_root_id => layout_id) }
     #use string as key instead of integer page_layout.id, exported theme in json, after restore, key is always string
@@ -57,6 +60,7 @@ module Spree
     scope :within_site, ->(site){ where(:site_id=> site.id) }
     scope :released, ->{ where("release_id>0") }
     scope :published, -> { released.where(:is_public=>true) }
+    scope :master, ->{ where( for_terminal: TerminalEnum.desktop) }
     
     before_validation :fix_special_attributes
     before_destroy :remove_relative_data
@@ -78,11 +82,11 @@ module Spree
       end
       
       def native
-        self.within_site(SpreeTheme.site_class.current )
+        self.master.within_site(SpreeTheme.site_class.current )
       end
       
       def foreign
-        self.within_site(SpreeTheme.site_class.designsite ).published
+        self.master.within_site(SpreeTheme.site_class.designsite ).published
       end        
       
       # original_theme may be attributes in hash
@@ -368,20 +372,19 @@ module Spree
           end
 
           if replace_exisit
-            connection.insert_fixture(original_template_attributes, self.table_name)          
+            create!(original_template_attributes)          
           else
-            connection.insert_fixture(original_template_attributes.except('id'), self.table_name)
+            create!(original_template_attributes.except('id'))
           end
           new_template = self.where( original_template_attributes.slice('created_at','title','page_layout_root_id') ).first
           # we need new template id
           # template = self.find_by_title template.title
           serialized_data['param_values'].each do |record|
-            table_name = ParamValue.table_name
             attributes = get_attributes_serialized_data(record).except('id') 
             #for unknown reason param_value.created_at/updated_at may be nil
             attributes['created_at']=created_at
             attributes['updated_at']=attributes['created_at'] if attributes['updated_at'].blank?
-            connection.insert_fixture(attributes, table_name)          
+            ParamValue.create!(attributes)          
           end
           original_nodes = serialized_data['page_layouts']          
           original_nodes = original_nodes.collect{|node| build_model_from_serialized_data( PageLayout, node)}
@@ -394,17 +397,15 @@ module Spree
           new_template_files = [] 
           original_template_files = []
           serialized_data['template_files'].each_with_index do |record, i|
-            table_name = TemplateFile.table_name
             original_template_file_attributes = get_attributes_serialized_data(record)
             attributes = original_template_file_attributes.except('id').merge!('created_at'=>created_at,'theme_id'=>new_template.id)
-            connection.insert_fixture(attributes, table_name)  
+            TemplateFile.create!(attributes)  
             new_template_files << TemplateFile.where( attributes.slice('created_at','theme_id') ).first
             original_template_files << original_template_file_attributes         
           end 
           serialized_data['template_releases'].each do |record|
-            table_name = TemplateRelease.table_name
             attributes = get_attributes_serialized_data(record).except('id').merge!('created_at'=>created_at,'theme_id'=>new_template.id)
-            connection.insert_fixture(attributes, table_name)          
+            TemplateRelease.create!(attributes)          
           end
           fix_related_data_for_copied_theme(new_template, new_nodes, new_template_files, original_template_attributes,  original_nodes, original_template_files, created_at)
         end
@@ -540,6 +541,16 @@ module Spree
       taxon_id      
     end
     
+    # methods for mobile feature
+       
+    def for_desktop?
+      for_terminal == TerminalEnum.desktop
+    end
+    
+    def for_mobile?
+      for_terminal == TerminalEnum.mobile
+    end
+    
     private
     def fix_special_attributes
       if site_id == 0
@@ -557,7 +568,7 @@ module Spree
       if section_root_id.present?
         root_section = Section.roots.find(section_root_id)
         page_layout_root = add_section( root_section ) 
-        self.update_attribute("page_layout_root_id",page_layout_root.id)
+        self.update_attributes( page_layout_root_id: page_layout_root.id, for_terminal: root_section.for_terminal )
       end      
     end
     

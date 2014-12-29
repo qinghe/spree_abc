@@ -55,12 +55,7 @@ module SpreeTheme::System
     end
     
     #login, forget_password page only available fore unlogged user. we need this flag to show editor even user have not log in.
-    if cookies[:_dalianshops_designer]=='1'
-      @is_designer = true
-    end     
-    if cookies[:_dalianshops_designer]=='0'
-      @is_designer = false
-    end     
+    @is_designer = ( cookies[:_dalianshops_designer]=='1')  if cookies[:_dalianshops_designer].present?
     
     @is_designer = false if mobile?
     
@@ -176,7 +171,7 @@ module SpreeTheme::System
       @page_layout||= theme.page_layout
       @sections = Spree::Section.where(:is_enabled=>true).order("title").roots
       #template selection
-      @template_themes = Spree::TemplateTheme.where(:site_id=>SpreeTheme.site_class.current.id)
+      @template_themes = Spree::TemplateTheme.native
   end
   
   def add_view_path
@@ -194,10 +189,11 @@ module SpreeTheme::System
                         'pdxgw|netfront|xiino|vodafone|portalmmm|sagem|mot-|sie-|ipod|up\\.b|' +
                         'webos|amoi|novarra|cdm|alcatel|pocket|iphone|mobileexplorer|mobile'
   def mobile?
+    return true if cookies[:_dalianshops_terminal]=='1'
+    
     agent_str = request.user_agent.to_s.downcase
     return false if agent_str =~ /ipad/
     agent_str =~ Regexp.new(MOBILE_USER_AGENTS)
-    #true
   end
   
 end

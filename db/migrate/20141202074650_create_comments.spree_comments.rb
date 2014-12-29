@@ -3,7 +3,7 @@ class CreateComments < ActiveRecord::Migration
   def self.up
     create_table :spree_comments do |t|
       t.string :title, :limit => 50, :default => "" 
-      t.text :comment, :default => "" 
+      t.text :comment 
       t.references :commentable, :polymorphic => true
       t.references :user
       t.string :email, :limit => 50, :default => "" 
