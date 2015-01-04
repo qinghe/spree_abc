@@ -132,8 +132,8 @@ module SpreeTheme::System
         end
       end
       
-      if mobile?
-        @mobile_theme = @theme.mobile
+      if mobile? && @theme.mobile
+        @theme = @theme.mobile
       end
       
       # we have initialize PageTag::PageGenerator here, page like login  do not go to template_thems_controller/page
