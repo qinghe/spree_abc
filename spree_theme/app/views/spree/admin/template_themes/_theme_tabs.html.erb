@@ -10,7 +10,7 @@
   <nav class="menu">
     <ul data-hook="admin_theme_tabs">
       <%= content_tag :li, :class => ('active' if current == 'ConfigResource') do %>
-        <%= link_to_with_icon 'picture', Spree.t('template_theme.assign_resource'), config_resource_admin_template_theme_url(@template_theme) %>
+        <%= link_to_with_icon 'picture-o', Spree.t('template_theme.assign_resource'), config_resource_admin_template_theme_url(@template_theme) %>
       <% end if can?(:admin, Spree::TemplateTheme) %>
       <%if @template_theme.has_native_layout? %>
         <%= content_tag :li, :class => ('active' if current == 'ConfigContext') do %>

@@ -1,10 +1,10 @@
   <% if @template_theme.for_desktop? && @template_theme.mobile.present? %>
     <li id="config_mobile_template_themelink">
-      <%= button_link_to Spree.t('actions.config_mobile_theme'), config_context_admin_template_theme_url( @template_theme.mobile ), :icon => 'mobile-phone' %>
+      <%= button_link_to Spree.t('actions.config_mobile_theme'), config_resource_admin_template_theme_url( @template_theme.mobile ), :icon => 'mobile-phone' %>
     </li>
   <% elsif @template_theme.for_mobile? %>
     <li id="config_pc_template_theme_link">
-      <%= button_link_to Spree.t('actions.config_desktop_theme'), config_context_admin_template_theme_url( @template_theme.desktop ), :icon => 'desktop' %>
+      <%= button_link_to Spree.t('actions.config_desktop_theme'), config_resource_admin_template_theme_url( @template_theme.desktop ), :icon => 'desktop' %>
     </li>    
   <% end %>
   
