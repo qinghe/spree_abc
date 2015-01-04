@@ -39,7 +39,7 @@
   <script>
   $(document).ready(function () {
     <% if page_layout_with_resource.blank? %>
-    <%= render :partial=>'spree/admin/shared/select2_taxon', :locals=>{:dom_id=>"assigned_resource_ids_",:multiple=>false, :search_url=>"Spree.routes.taxons_search"} %>
+    set_resource_taxon_select('assigned_resource_ids_', false, Spree.routes.taxons_search);
     <% end %>
     $('.select2-container').css({width: '40em'});
   });    

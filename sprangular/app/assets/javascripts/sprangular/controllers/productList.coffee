@@ -7,6 +7,7 @@ Sprangular.controller 'ProductListCtrl', ($scope, $routeParams, Status, taxon, p
   Status.pageTitle = $scope.pageTitle
 
   $scope.products = products
+  $scope.taxon = taxon
   $scope.page = 1
   $scope.loadingComplete = false
   $scope.fetching = false

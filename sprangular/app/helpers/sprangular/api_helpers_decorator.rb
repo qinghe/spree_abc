@@ -4,9 +4,9 @@ module Spree
       def taxon_attributes
         extra_attributes = [:description]
         if @@taxon_attributes.include?( extra_attributes.first )
-          @@variant_attributes
+          @@taxon_attributes
         else
-          @@variant_attributes + extra_attributes
+          @@taxon_attributes + extra_attributes
         end
       end
     end
