@@ -29,8 +29,9 @@ SpreeAbc::Application.configure do
   config.assets.debug = true
   
   config.after_initialize do
-    Spree::Site.loading_fake_order_with_sample = true  
-  end  
+    Spree::Site.loading_fake_order_with_sample = true
+  end
+  #config.spree_multi_site.preferences.domain = 'www.david.com'  
   
   config.eager_load  = false
 end
