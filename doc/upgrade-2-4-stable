@@ -1,0 +1,11 @@
+# update table 
+rake db:migrate RAILS_ENV=staging
+
+# update section_piece
+rake spree_theme:reload_section_piece RAILS_ENV=local_staging
+
+# release template theme 1,2,12,16
+rake spree_theme:release_theme[1] RAILS_ENV=staging
+
+# relocate the images
+rake spree:assets:relocate_images RAILS_ENV=local_staging

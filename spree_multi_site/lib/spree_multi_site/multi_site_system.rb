@@ -28,7 +28,7 @@ module Spree
       # <Spree::Taxon id: 30, name: "name", taxonomy_id: 0, site_id: nil,  depth: 0, page_context: 0, html_attributes: nil, replaced_by: 0> 
       before_create {|record| record.site_id||= Spree::Site.current.id }   
       
-      default_scope {
+      default_scope {        
         # admin_site_product, create or update global taxon.
         if self == Spree::Taxon  && multi_site_context=='admin_site_product'
           where(nil) 
@@ -36,11 +36,11 @@ module Spree
         elsif self == Spree::Product  && multi_site_context=='site1_themes'
           where(nil) 
         # first site list product images  
-        elsif self == Spree::Image && multi_site_context=='site_product_images'
+        elsif multi_site_context=='site_product_images'
           where(nil) 
         elsif multi_site_context=='admin_migration'
           where(nil) 
-        else  
+        else
           where(:site_id =>  Spree::Site.current.id)
         end      
       }
