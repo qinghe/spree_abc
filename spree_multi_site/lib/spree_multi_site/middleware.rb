@@ -19,15 +19,16 @@ module SpreeMultiSite
     
     def get_site_from_request( request )
       site = nil      
-      # test.david.com => www.david.com/?n=test.david.com
+      # test.david.com => localhost:8080/?n=test.david.com
       # our domain is www.dalianshops.com 
-      if request.params['n'].try(:split,'.') # support short_name.dalianshops.com
+      if (request.params['n'].is_a? String) && (request.params['n'].end_with? SpreeMultiSite::Config.domain ) # support short_name.dalianshops.com 
         short_name = request.params['n'].split('.').first
-        site = Spree::Site.find_by_short_name(short_name)
+        site = Spree::Site.find_by_short_name(short_name)        
       end
 
       if site.blank?  
         # support domain, ex. www.david.com
+        # apache rewrite test.david.com => localhost:8080/?n=test.david.com, request.host is 'test.david.com'
         # TODO should use public_suffix_service handle example.com.cn
         site = Spree::Site.find_by_domain(request.host) 
       end

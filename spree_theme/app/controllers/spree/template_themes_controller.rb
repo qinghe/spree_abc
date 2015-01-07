@@ -13,7 +13,7 @@ module Spree
     def under_construction  
       #logger.debug "request.env[/devise/]= #{request.env['devise.mapping']},#{warden.inspect}"   
       #require spree_auth_devise
-      render "under_construction", layout:"under_construction"            
+      render "under_construction", layout: "under_construction"            
     end
     
     # @theme is required for xhr

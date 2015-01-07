@@ -6,7 +6,9 @@ module Spree
   class MultiSiteConfiguration < Preferences::Configuration
     #description start with global means it is for whole application, not just one site 
     preference :seed_dir, :string, :default => File.join(SpreeMultiSite::Engine.root,'db')
-    #main site's domain, set it to first site when initialize seed. 
-    #preference :domain, :string, :default => 'www.dalianshops.com'
+    # main site's domain, set it to first site when initialize seed.
+    # it is required, in middleware, we compare it with request.host, 
+    # it tell us to initialize site by short_name or domain.
+    preference :domain, :string, :default => 'dalianshops.com'
   end
 end
