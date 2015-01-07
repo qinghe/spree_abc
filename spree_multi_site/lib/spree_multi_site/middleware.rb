@@ -35,11 +35,15 @@ module SpreeMultiSite
       
       if(( Rails.env !~ /prduction/ ) && ( site.blank? ) )  
         # for development or test, enable get site from cookie
-        #Rails.logger.debug "request.cookie_jar=#{request.cookie_jar.inspect},#{request.cookie_jar[:abc_development_domain]},#{request.cookie_jar['abc_development_domain']}"
-        #string and symbol both OK.  cookie.domain should be exactly same as host, www.domain.com != domain.com
-        cookie_domain = request.cookies['_dalianshops_domain'] 
+        # string and symbol both OK.  cookie.domain should be exactly same as host, www.domain.com != domain.com
+        # disable domain, some site have no domain, short_name always exists. 
+        #cookie_domain = request.cookies['_dalianshops_domain'] 
+        #if cookie_domain.present?
+        #  site = Spree::Site.find_by_domain( cookie_domain )
+        #end        
+        cookie_domain = request.cookies['_dalianshops_short_name'] 
         if cookie_domain.present?
-          site = Spree::Site.find_by_domain( cookie_domain )
+          site = Spree::Site.find_by_short_name( cookie_domain )
         end        
       end
       site
