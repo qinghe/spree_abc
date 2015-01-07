@@ -1,3 +1,6 @@
+#update gmes
+bundle install
+
 # update table 
 rake db:migrate RAILS_ENV=staging
 
@@ -9,3 +12,6 @@ rake spree_theme:release_theme[1] RAILS_ENV=staging
 
 # relocate the images
 rake spree:assets:relocate_images RAILS_ENV=local_staging
+
+# fix payment_class 
+Spree::BillingIntegration::Alipay => Spree::BillingIntegration::AlipayDualfun

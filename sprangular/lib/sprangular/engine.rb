@@ -8,7 +8,7 @@ module Sprangular
       assets.register_mime_type 'text/html', '.html'
       assets.register_engine '.slim', Slim::Template
 
-      Rails.application.config.assets.precompile += %w( bootstrap/* )
+      Rails.application.config.assets.precompile += %w( sprangular bootstrap/* )
     end
 
     initializer "sprangular.add_middleware" do |app|
