@@ -70,6 +70,10 @@ Spree::ShippingMethod.class_eval do
   default_scope  { where(:site_id =>  Spree::Site.current.id) }
 end
 
+Spree::Store.class_eval do
+  belongs_to :site
+end
+
 Spree::Taxonomy.class_eval do
   belongs_to :site
   default_scope  { where(:site_id =>  Spree::Site.current.id) }

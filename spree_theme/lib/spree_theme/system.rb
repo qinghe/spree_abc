@@ -116,7 +116,7 @@ module SpreeTheme::System
       when /^\/create_admin_session/,/^\/new_admin_session/
         @special_layout = 'layout_for_login'
         return
-      when /^\/comments/ # it need layout when development, in fact it is always ajax.
+      when /^\/comments/,/^\/new_site/,/^\/create_site/ # it need layout when development, in fact it is always ajax.
         @special_layout = 'under_construction'
         return        
     end  

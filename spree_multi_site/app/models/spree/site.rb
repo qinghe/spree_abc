@@ -16,8 +16,11 @@ class Spree::Site < ActiveRecord::Base
   has_many :payment_methods,:dependent=>:destroy
   has_many :assets,:dependent=>:destroy
   has_many :zones,:dependent=>:destroy
-  has_many :state_changes,:dependent=>:destroy  
+  has_many :state_changes,:dependent=>:destroy
+  
+  has_many :stores, :dependent=>:destroy  
   #acts_as_nested_set
+  accepts_nested_attributes_for :stores
   accepts_nested_attributes_for :users
   
   #app_configuration require site_id

@@ -7,19 +7,22 @@
         <p>
           <%= f.text_field :name, :class => 'fullwidth title', :placeholder => Spree.t(:name_store), :minlength=>4, :maxlength=>24, :required=>""  %>
         </p>
-        <p>
-          <%= email_field :user, :email, :placeholder => Spree.t(:email)%>
-        </p>
-        <p>
-          <%= password_field :user,:password, :placeholder=>Spree.t(:password), :minlength=>6, :maxlength=>24, :required=>"" %>
-        </p>
+        <%= f.fields_for :users do |user_fields| %>
+          <p>
+            <%= user_fields.email_field :email, :placeholder => Spree.t(:email)%>
+          </p>
+          <p>
+            <%= user_fields.password_field :password, :placeholder=>Spree.t(:password), :minlength=>6, :maxlength=>24, :required=>"" %>
+          </p>
+        <% end %>
+          
         <p><%= f.button Spree.t(:new_site), :class => 'button primary' %></p>
     </div>
 <% end %>
 <script>
 $("#site_form").validate({
   rules: {
-    'user[email]': {
+    'site[user[email]': {
       required: true,
       email: true,
       remote: {

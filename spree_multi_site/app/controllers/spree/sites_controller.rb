@@ -7,8 +7,9 @@ module Spree
         if params[:template_theme_id].present?
           @template_theme = Spree::TemplateTheme.foreign.find params[:template_theme_id]  
         end
-        @site =  Site.new
+        @site = Site.new
         @user = @site.users.build
+        @store = @site.stores.build
       end
       
       # called from dalianshops home page
@@ -63,7 +64,14 @@ module Spree
         end  
         site
       end
-           
+      
+      def permitted_resource_params
+        params[object_name].present? ? params.require(object_name).permit! : ActionController::Parameters.new
+      end
+      
+      def object_name
+        'site'
+      end     
     end
   
 end

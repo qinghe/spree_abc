@@ -1227,7 +1227,7 @@ site_form:
   is_selectable: "1"
   is_container: "0"
   html: |    
-    <%= render :partial => 'spree/sites/form_for_spree_theme' %>
+    <%= render :partial => 'themes/sites/quick_lunch' %>
   css: |
     .<%=@template.current_piece.section_selector%> p{ 
       float:left;

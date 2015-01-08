@@ -12,8 +12,21 @@
         <span id="dalianshops">.dalianshops.com</span> 
       </p>
    
-      <% if @site.new_record? %>        
-        <%= render :partial => 'spree/sites/user', :locals => { :user => @user } %>            
+      <%= f.fields_for :users do |user_fields| %>
+        <p>
+          <%= user_fields.label  :email  %><br />
+          <%= user_fields.email_field :email %>
+        </p>
+      
+        <p>
+          <%= user_fields.label :password, Spree.t(:password) %><br />
+          <%= user_fields.password_field :password, :minlength=>6, :maxlength=>30, :required=>"" %>
+        </p>
+      
+        <p>
+          <%= user_fields.label :password_confirmation, Spree.t(:confirm_password) %><br />
+          <%= user_fields.password_field :password_confirmation, :minlength=>6, :maxlength=>30, :required=>"" %>
+        </p>
       <% end %>
 
       <% if @template_theme.present? %>
