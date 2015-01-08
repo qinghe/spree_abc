@@ -19,7 +19,7 @@
   <% unless Rails.env.test? %>
   <script>
   $(document).ready(function () {
-    <%= render :partial=>'spree/admin/shared/select2_taxon', :locals=>{:dom_id=>"product_global_taxon_ids",:multiple=>true, :search_url=>"Spree.routes.global_taxons_search"} %>
+    set_resource_taxon_select("product_global_taxon_ids", true, Spree.routes.global_taxons_search);
   });    
   </script>
   <% end %>
