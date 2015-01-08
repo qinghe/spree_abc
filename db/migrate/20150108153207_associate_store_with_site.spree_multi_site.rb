@@ -1,3 +1,4 @@
+# This migration comes from spree_multi_site (originally 20150108135747)
 class AssociateStoreWithSite < ActiveRecord::Migration
   def change
     add_column :spree_stores, :site_id, :integer, :default=>0
