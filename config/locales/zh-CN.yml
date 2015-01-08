@@ -108,6 +108,13 @@ zh-CN:
       spree/state:
         abbr: 缩写
         name: 名称
+      spree/store:
+        url: 网站域名
+        meta_description: SEO描述
+        meta_keywords: SEO关键字
+        seo_title: SEO标题
+        name: 网站名称
+        mail_from_address: 邮件发件地址
       spree/tax_category:
         description: 描述
         name: 名称
@@ -193,6 +200,9 @@ zh-CN:
       spree/promotion:
         one: 促销
         other: 促销
+      spree/promotion_category:
+        one: 促销分类
+        other: 促销分类
       spree/property:
         one: 属性
         other: 属性
@@ -308,11 +318,13 @@ zh-CN:
         overview: 概览
         products: 产品
         promotions: 促销
+        promotion_categories: 促销分类 
         reports: 报表
         users: 用户
         option_types: 选项类型
         properties: 属性
         prototypes: 原型
+        taxons: 产品与分类
     administration: 管理
     agree_to_privacy_policy: 同意隐私政策
     agree_to_terms_of_service: 同意服务条款
@@ -427,6 +439,7 @@ zh-CN:
     check_for_spree_alerts: 查收Spree的通知
     checkout: 结账
     choose_a_customer: 选择用户
+    choose_a_taxon_to_sort_products_for: 请选择一个分类查看所属产品
     choose_currency: 选择货币
     choose_dashboard_locale: 选择控制面板语言
     cheque: 支票
@@ -435,6 +448,8 @@ zh-CN:
       phone: 手机
       state: 地区
     city: 城市
+    clear_cache: 清除缓存
+    clear_cache_warning: 当前操作将清除系统缓存,请慎重！
     clone: 复制
     close: 关闭
     close_all_adjustments: 禁用所有价格调整
@@ -612,6 +627,7 @@ zh-CN:
     final_confirmation: 最终确认
     finalize: 完成
     finalized_payments: 已付款项目
+    find_a_taxon: 请选择分类
     first_item: 首件产品价格??
     first_name: 名
     first_name_begins_with: 名的开始
