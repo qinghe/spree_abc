@@ -36,6 +36,7 @@ class Spree::Site < ActiveRecord::Base
   #attr_accessible :name, :domain, :short_name, :has_sample
   #generate short name fro name
   before_validation :set_short_name
+  after_create :add_default_data
   
   class << self
     def dalianshops
@@ -56,7 +57,7 @@ class Spree::Site < ActiveRecord::Base
       original_current = self.current
       begin
         self.current = new_site
-        yield
+        yield( new_site )
       ensure
         self.current = original_current  
       end
@@ -182,6 +183,18 @@ class Spree::Site < ActiveRecord::Base
   end
   
   private
+  
+  def add_default_data
+    #current site is first
+    self.class.with_site( self ) do| site |
+      site.users.first.spree_roles << Spree::Role.find_by_name('admin')
+      site.shipping_categories.create!( name: Spree.t(:default) )
+      site.stores.create!( name: site.name )do |store|
+        store.code = site.short_name
+      end
+    end
+  end
+  
   def load_sample_products
     file = Pathname.new(File.join(SpreeMultiSite::Config.seed_dir, 'samples', "seed.rb"))
     load file

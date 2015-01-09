@@ -5,5 +5,6 @@ module Spree
     mattr_reader *ATTRIBUTES_FOR_SITE
 
     @@site_attributes = [:name, :domain, :short_name, :has_sample, :index_page,:theme_id,:foreign_theme_id]
+    @@store_attributes << [:short_name]
   end
 end

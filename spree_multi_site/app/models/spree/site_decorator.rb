@@ -71,7 +71,9 @@ Spree::ShippingMethod.class_eval do
 end
 
 Spree::Store.class_eval do
-  belongs_to :site
+  include Spree::MultiSiteSystem
+
+  clear_validators!
 end
 
 Spree::Taxonomy.class_eval do

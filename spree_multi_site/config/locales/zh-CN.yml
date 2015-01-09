@@ -17,6 +17,10 @@ zh-CN:
         domain: 网店域名
         created_at: 创建时间
         foreign_theme_id: 模板
+      spree/site/users:
+        email: 电子邮箱
+        password: 密码
+        password_confirmation: 密码
   spree:
     admin_store: 管理商店
     errors:

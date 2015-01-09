@@ -29,7 +29,7 @@ module Spree
       end
       
       def create
-        @site = create_site( params[:site], params[:user] )
+        @site = create_site(  permitted_resource_params )
         if @site.persisted?
           flash[:success] = Spree.t(:site_successfully_opened, :site_name => @site.name)
           #redirect_to @site.admin_url, format: 'js', status: 303
@@ -45,13 +45,9 @@ module Spree
       end
             
       # options 
-      def create_site( site_params, user_params, options= {})
-        site = Site.new(site_params)
-        user = Spree.user_class.new(user_params)
-        site.users << user
+      def create_site( permitted_site_params)
+        site = Site.new(permitted_site_params)
         if site.save
-          site.users.first.spree_roles << Spree::Role.find_by_name('admin')
-          shipping_category = site.shipping_categories.create!( :name=>Spree.t(:default))
           # should not add  @site.name as suffix of role.name, User.admin require :name="admin"
           if site.has_sample?
             site.load_sample

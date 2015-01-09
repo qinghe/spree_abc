@@ -11,7 +11,7 @@
 <script>
 $("#new_site").validate({
   rules: {
-    'user[email]': {
+    'site[users][email]': {
       required: true,
       email: true,
       remote: {
@@ -19,13 +19,13 @@ $("#new_site").validate({
         type: "post"
       }
     },    
-    'user[password_confirmation]':{
+    'site[users][password_confirmation]':{
       equalTo:'#user_password'  
     }
     
   },
   messages:{
-    'user[email]': {
+    'site[users][email]': {
       remote: <%== Spree.t('errors.messages.email_existing').to_json %>
     }
   },
