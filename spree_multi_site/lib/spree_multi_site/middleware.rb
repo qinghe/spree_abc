@@ -35,7 +35,7 @@ module SpreeMultiSite
         # disable domain, some site have no domain, short_name always exists.      
         short_name = request.cookies['_dalianshops_short_name'] 
         if short_name.present?
-          store = Spree::Store.unscoped.find_by_short_name( short_name )
+          store = Spree::Store.unscoped.find_by_code( short_name )
         end        
       end
       store

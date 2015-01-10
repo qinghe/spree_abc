@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141224091658) do
+ActiveRecord::Schema.define(version: 20150108153207) do
 
   create_table "ckeditor_assets", force: true do |t|
     t.integer  "site_id",                      default: 0, null: false
@@ -1171,6 +1171,7 @@ ActiveRecord::Schema.define(version: 20141224091658) do
     t.boolean  "default",           default: false, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "site_id",           default: 0
   end
 
   add_index "spree_stores", ["code"], name: "index_spree_stores_on_code", using: :btree
@@ -1306,7 +1307,7 @@ ActiveRecord::Schema.define(version: 20141224091658) do
     t.datetime "updated_at"
     t.boolean  "is_public",                          default: false, null: false
     t.integer  "for_terminal",          limit: 1,    default: 0,     null: false
-    t.integer  "master_id",                        default: 0,     null: false
+    t.integer  "master_id",                          default: 0,     null: false
   end
 
   create_table "spree_tokenized_permissions", force: true do |t|
