@@ -58,5 +58,10 @@ SpreeAbc::Application.configure do
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
   
+  config.after_initialize do
+    Spree::Site.system_top_domain = 'david.com'  
+  end
+
+  
   config.eager_load  = false
 end
