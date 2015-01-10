@@ -21,3 +21,4 @@ db/full_sql
 rdoc
 .settings
 .project
+db/schema.rb
