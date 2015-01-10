@@ -16,7 +16,7 @@ Spree::Store.class_eval do
     current_store = if domain.is_a? String
       if domain.end_with? Spree::Site.system_top_domain
         short_name = domain.split('.').first
-        self.unscoped.find_by_short_name(short_name)                  
+        self.unscoped.find_by_code(short_name)                  
       else 
         self.unscoped.by_url(domain).first
       end
