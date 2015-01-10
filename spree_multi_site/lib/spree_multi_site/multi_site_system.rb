@@ -2,13 +2,6 @@
 # Spree::UserSessionsController derive from Devise::SessionsController, it included Spree::Core::ControllerHelpers
 require 'spree/core/controller_helpers/common'
 class<< Spree::Core::ControllerHelpers::Common
-  #def included_with_site_support(receiver)
-  #  receiver.send :include, Spree::MultiSiteSystem
-  #  included_without_site_support(receiver)
-  #  #receiver.prepend_before_filter :get_site #initialize site before authorize user in Spree::UserSessionsController.create
-  #end
-  #alias_method_chain :included, :site_support
-  
   #Spree::Api::BaseController would include  MultiSiteSystem, get_layout should not in it.
   #override original methods 
   def get_layout

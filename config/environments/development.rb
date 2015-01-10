@@ -30,7 +30,7 @@ SpreeAbc::Application.configure do
   
   config.after_initialize do
     Spree::Site.loading_fake_order_with_sample = true
-    SpreeMultiSite::Config.domain = 'david.com'  
+    Spree::Site.system_top_domain = 'david.com'  
   end
   
   config.eager_load  = false

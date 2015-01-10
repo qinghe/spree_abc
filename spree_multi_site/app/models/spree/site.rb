@@ -1,6 +1,9 @@
 #encoding: utf-8
 class Spree::Site < ActiveRecord::Base
-  cattr_accessor :unknown,:subdomain_regexp, :loading_fake_order_with_sample
+  cattr_accessor :unknown,:subdomain_regexp, :loading_fake_order_with_sample, :system_top_domain
+  # system_top_domain is required, in middleware, we compare it with request.host, 
+  # it tell us to initialize site by short_name or domain.
+
   has_many :taxonomies,:inverse_of =>:site,:dependent=>:destroy
   has_many :products,:inverse_of =>:site,:dependent=>:destroy
   has_many :orders,:inverse_of =>:site,:dependent=>:destroy
@@ -25,6 +28,7 @@ class Spree::Site < ActiveRecord::Base
   
   #app_configuration require site_id
   self.unknown = Struct.new(:id).new(0)
+  self.system_top_domain = 'dalianshops.com'
   # it is load before create site table. self.new would trigger error "Table spree_sites' doesn't exist"
   # db/migrate/some_migration is using Spree::Product, it has default_scope using Site.current.id
   # so it require a default value.
@@ -45,13 +49,14 @@ class Spree::Site < ActiveRecord::Base
     end
     
     def current
-      ::Thread.current[:spree_site] || self.unknown 
+      Spree::Store.current.site 
     end
     
-    def current=(some_site)
-      ::Thread.current[:spree_site] = some_site      
+    def current=(some_site)      
+      Spree::Store.current = Spree::Store.unscoped.where( site_id: some_site.id ).first
+      some_site      
     end
-    
+
     # execute block with given site
     def with_site(new_site)
       original_current = self.current
@@ -62,6 +67,7 @@ class Spree::Site < ActiveRecord::Base
         self.current = original_current  
       end
     end
+        
   end
   
   def dalianshops?
@@ -175,7 +181,7 @@ class Spree::Site < ActiveRecord::Base
   
   # current site'subdomain => short_name.dalianshops.com
   def subdomain
-    short_name + '.' + SpreeMultiSite::Config.domain
+    short_name + '.' + system_top_domain
   end
   
   def admin_url
@@ -185,13 +191,15 @@ class Spree::Site < ActiveRecord::Base
   private
   
   def add_default_data
-    #current site is first
+    #current site is first, self is another.
+    store = self.stores.create!( name: site.name )do |store|
+      store.code = site.short_name
+      store.site_id = self.id 
+    end
+
     self.class.with_site( self ) do| site |
       site.users.first.spree_roles << Spree::Role.find_by_name('admin')
       site.shipping_categories.create!( name: Spree.t(:default) )
-      site.stores.create!( name: site.name )do |store|
-        store.code = site.short_name
-      end
     end
   end
   
