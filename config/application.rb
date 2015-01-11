@@ -49,7 +49,7 @@ module SpreeAbc
 
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}')]
     
-    config.i18n.default_locale = :"zh-CN"
+    config.i18n.default_locale = :zh
 
     I18n.enforce_available_locales = false
     # Configure the default encoding used in templates for Ruby 1.9.
