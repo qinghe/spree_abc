@@ -2,7 +2,7 @@
 module Spree
   CheckoutController.class_eval do
     # Updates the order and advances to the next state (when possible.)
-    def update
+    def update_unused
       if @order.update_attributes(object_params)
         fire_event('spree.checkout.update')
 

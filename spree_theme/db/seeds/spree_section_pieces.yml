@@ -726,29 +726,7 @@ checkout:
   is_selectable: "0"
   is_container: "0"
   html: |   
-    <div id="checkout" class="<%=g_piece_selector%>">  
-      <%= render :partial => 'spree/shared/error_messages', :locals => { :target => @order } %>
-        <div class="columns <%= if @order.state != 'confirm' then 'alpha twelve' else 'alpha omega sixteen' end %>" data-hook="checkout_form_wrapper">
-          <%= form_for @order, :url => update_checkout_path(@order.state), :html => { :id => "checkout_form", :class=>'form' } do |form| %>
-            <% unless @order.email? %>
-              <p class="field" style='clear: both'>
-                <%= form.label :email %><br />
-                <%= form.text_field :email %>
-              </p>
-            <% end %>
-            <%= yield %>~~content~~
-            <div class="form-buttons" data-hook="buttons">
-              <%= button_tag :class => 'continue button primary', :type => 'submit' do %>
-                <%= Spree.t(:save_and_continue) %>
-              <% end %>
-              <script>Spree.disableSaveOnClick();</script>
-            </div>            
-          <% end %>
-        </div>
-    </div>    
-    <% if I18n.locale != :en %>
-      <script src='/assets/jquery.validate/localization/messages_<%= I18n.locale %>.js'></script>
-    <% end %>
+     <%= yield %>~~content~~            
   created_at: 2011-09-20 19:40:07
   updated_at: 2011-09-20 19:40:07
   css: 
@@ -856,34 +834,7 @@ payment_form:
   slug: payment-form
   is_selectable: "1"
   is_container: "0"
-  html: |    
-    <div id="checkout_form_payment" >
-      <h3 class="header3"><%= Spree.t(:payment_information) %></h3>
-      <% @order.available_payment_methods.each do |method| %>
-      <p>
-        <label>
-          <%= radio_button_tag "order[payments_attributes][][payment_method_id]", method.id, method == @order.available_payment_methods.first %>
-          <%= Spree.t(method.name, :scope => :payment_methods, :default => method.name) %>
-        </label>
-      </p>
-      <% end %>  
-      <ul id="payment-methods" >
-        <% @order.available_payment_methods.each do |method| %>
-          <li id="payment_method_<%= method.id %>" class="<%= 'last' if method == @order.available_payment_methods.last %>" data-hook>
-            <fieldset>
-              <%= render :partial => "spree/checkout/payment/#{method.method_type}", :locals => { :payment_method => method } %>
-            </fieldset>
-          </li>
-        <% end %>
-      </ul>
-      <div style="clear:both;"></div>
-      <% if Spree::Promotion.with_code.count > 0 %>
-        <p class='field' data-hook='coupon_code'>
-          <%= form.label :coupon_code %><br />
-          <%= form.text_field :coupon_code %>
-        </p>
-      <% end %>
-    </div>
+  html: ""
   css: |-
     #checkout_form_payment ul{ margin: 0; padding: 0;}
     #checkout_form_payment li{ list-style-type:none; }
@@ -895,16 +846,7 @@ ship_form:
   slug: ship-form
   is_selectable: "1"
   is_container: "0"
-  html: |    
-    <div id="checkout_form_address" data-hook="billing_fieldset_wrapper">
-      <%= form.fields_for :bill_address do |bill_form| %>
-        <h3 class="header3"><%= Spree.t(:shipping_address) %></h3>
-        <%= render :partial => 'spree/address/form', :locals => { :form => bill_form, :address_type => 'billing', :address => @order.bill_address } %>
-      <% end %>
-      <%= form.fields_for :ship_address do |ship_form| %>
-          <%= hidden_field_tag 'order[use_billing]', '1' %>
-      <% end %>
-    </div>
+  html: ""    
   css: |
     #baddress1 input{ width:480px; }
   js: ""

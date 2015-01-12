@@ -3,6 +3,7 @@
  *= require jquery.layout
  *= require normalize
  *= require interface
+ *= require interface
 */
 
 #editor_panel
@@ -108,3 +109,7 @@ ul.tabs{list-style:none; margin:0;padding:0;}
   font-weight: bold;
 }
 
+/************************************/
+.disabled-step { display: none; }
+
+.form-wrapper { position: relative }
