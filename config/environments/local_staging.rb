@@ -40,7 +40,6 @@ SpreeAbc::Application.configure do
   # config.cache_store = :mem_cache_store
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server
-  # config.action_controller.asset_host = "http://assets.example.com"
 
   # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
   config.assets.precompile += %w( tinymce-jquery.js )
@@ -60,6 +59,9 @@ SpreeAbc::Application.configure do
   
   config.after_initialize do
     Spree::Site.system_top_domain = 'david.com'  
+    # work around https://github.com/spree-contrib/spree_editor/commit/6813ec0ace000f6ef6b28219ff6e5a101056531b
+    # only asset with full url could be substitude with digest
+    config.action_controller.asset_host = Spree::Site.system_top_domain
   end
 
   

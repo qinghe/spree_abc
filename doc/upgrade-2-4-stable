@@ -15,3 +15,6 @@ rake spree:assets:relocate_images RAILS_ENV=local_staging
 
 # fix payment_class 
 Spree::BillingIntegration::Alipay => Spree::BillingIntegration::AlipayDualfun
+
+# fix missing ckeditor icons 
+update environments/staging.rb, add asset_host
