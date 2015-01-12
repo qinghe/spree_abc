@@ -15,6 +15,7 @@ SpreeAbc::Application.configure do
   config.assets.compress = true
 
   # Don't fallback to assets pipeline if a precompiled asset is missed
+  # fix https://github.com/galetahub/ckeditor/issues/307
   config.assets.compile = true
 
   # Generate digests for assets URLs
