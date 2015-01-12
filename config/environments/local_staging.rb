@@ -15,7 +15,7 @@ SpreeAbc::Application.configure do
   config.assets.compress = true
 
   # Don't fallback to assets pipeline if a precompiled asset is missed
-  config.assets.compile = false
+  config.assets.compile = true
 
   # Generate digests for assets URLs
   config.assets.digest = true
@@ -42,7 +42,7 @@ SpreeAbc::Application.configure do
   # Enable serving of images, stylesheets, and JavaScripts from an asset server
 
   # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
-  config.assets.precompile += %w( tinymce-jquery.js )
+  # config.assets.precompile += %w( tinymce-jquery.js )
 
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
@@ -61,7 +61,7 @@ SpreeAbc::Application.configure do
     Spree::Site.system_top_domain = 'david.com'  
     # work around https://github.com/spree-contrib/spree_editor/commit/6813ec0ace000f6ef6b28219ff6e5a101056531b
     # only asset with full url could be substitude with digest
-    Rails.application.config.action_controller.asset_host = Spree::Site.system_top_domain
+    #Rails.application.config.action_controller.asset_host = Spree::Site.system_top_domain
   end
 
   
