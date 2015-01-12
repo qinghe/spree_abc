@@ -63,6 +63,7 @@ gem "friendly_id" # spree_theme require it.
 gem 'spree_theme',   :path => './spree_theme'
 
 #only specify it here, then could use ActiveMerchant::Billing::Integrations::Alipay::Helper directly
+gem 'alipay'
 gem 'offsite_payments'
 gem 'activemerchant_patch_for_china', github:'RuanShan/activemerchant_patch_for_china', branch:'for_offsite_payments'
 gem 'spree_alipay',   :github => "RuanShan/spree_alipay", :branch=>"master"
