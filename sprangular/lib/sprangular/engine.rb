@@ -17,7 +17,8 @@ module Sprangular
         r301 %r{^/products/(.+)$}, '/#!/products/$1'
         r301 %r{^/t/(.+)$},        '/#!/t/$1'
         r301 '/sign_in',           '/#!/sign-in'
-        r301 '/cart',              '/#!/cart'
+        #spree_theme is using /cart
+        #r301 '/cart',              '/#!/cart'
         r301 '/account',           '/#!/account'
         r301 '/spree/login',       '/#!/sign-in?redirect=y'
       end
