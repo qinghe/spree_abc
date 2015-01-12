@@ -61,7 +61,7 @@ SpreeAbc::Application.configure do
     Spree::Site.system_top_domain = 'david.com'  
     # work around https://github.com/spree-contrib/spree_editor/commit/6813ec0ace000f6ef6b28219ff6e5a101056531b
     # only asset with full url could be substitude with digest
-    config.action_controller.asset_host = Spree::Site.system_top_domain
+    Rails.application.config.action_controller.asset_host = Spree::Site.system_top_domain
   end
 
   
