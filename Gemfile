@@ -50,7 +50,7 @@ gem 'sprangular',   :path => './sprangular'
 gem 'spree_auth_devise', :github => "spree/spree_auth_devise", :branch => "2-4-stable"
 #support rich_editor 
 gem 'spree_editor',  :github => "spree/spree_editor", :branch=>"2-4-stable"
-gem 'tinymce-rails-langs'
+#gem 'tinymce-rails-langs'
 #gem 'daemons'
 #gem 'delayed_job_active_record'
 #'bundle update spree_multi_site' to update gem

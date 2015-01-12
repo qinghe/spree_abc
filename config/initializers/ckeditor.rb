@@ -16,4 +16,6 @@ Ckeditor.setup do |config|
 
   # Setup authorization to be run as a before filter
   # config.authorize_with :cancan
+  config.assets_languages = ['zh-cn']
 end
+Rails.application.config.assets.precompile += %w( ckeditor/* )
