@@ -1,0 +1,38 @@
+<% #override original file in spree_editor, fix missing skins/moono/icons.png %>
+<script>
+	window['CKEDITOR_BASEPATH'] = "/assets/ckeditor/";
+
+	window.CKEDITOR_ASSETS_MAPPING = {
+	<% Rails.application.assets.each_logical_path(->(path){ path =~ /ckeditor/ && path != 'ckeditor/override.js' }) do |asset| %>
+	  "<%= asset %>": "<%= asset_path(asset) %>",
+	<% end %>
+	}
+
+	window.CKEDITOR_GETURL = function( resource ) {
+	  var asset = 'ckeditor/'+resource
+	  // If this is not a full or absolute path.
+	  if ( resource.indexOf( ':/' ) == -1 && resource.indexOf( '/' ) !== 0 )
+	    resource = this.basePath + resource;
+
+	  // Add the timestamp, except for directories.
+	  if ( resource.charAt( resource.length - 1 ) != '/'  ){
+	    var url = resource.match( /^(.*?:\/\/[^\/]*)\/assets\/(.+)/ );
+	    if(url) { resource = (CKEDITOR_ASSETS_MAPPING[url[2]] || '/assets/' + url[2]); 
+	    }else{ if(CKEDITOR_ASSETS_MAPPING[asset]){ resource = CKEDITOR_ASSETS_MAPPING[asset]; }   }
+	  }
+
+	  return resource;
+	}
+</script>
+<%= javascript_include_tag 'ckeditor/init' %>
+
+<script>
+  $(function() {
+    var ids = [<%= raw ids.map{|id| "'#{id}'"}.join(', ') %>];
+    for (var key in ids) {
+      if ($('#' + ids[key]).length > 0) {
+        CKEDITOR.replace(ids[key]);
+      }
+    }
+  });
+</script>
