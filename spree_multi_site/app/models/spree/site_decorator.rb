@@ -51,6 +51,16 @@ Spree::Product.class_eval do
   has_many :global_classifications, dependent: :delete_all
   has_many :global_taxons, through: :global_classifications, source: :taxon
 
+
+  # Try building a slug based on the following fields in increasing order of specificity.
+  def slug_candidates
+    [
+      :name,
+      [:name, :sku],
+      [:name, :sku, :site_id]
+    ]
+  end
+
 end
 
 Spree::Property.class_eval do
