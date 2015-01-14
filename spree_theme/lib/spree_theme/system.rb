@@ -1,11 +1,17 @@
 require 'spree/core/controller_helpers/common'
-class << Spree::Core::ControllerHelpers::Common  
+# spree/api/base>action_base, spree/base>application
+# both included controller_helper/store
+class << Spree::Core::ControllerHelpers::Common
   def included_with_theme_support(receiver)
     included_without_theme_support(receiver)
     receiver.send :include, SpreeTheme::System
-    receiver.send :layout, :get_layout_if_use
+    # template holds data for page render, we have to initialize it even for api
     receiver.send :before_filter, :initialize_template
-    receiver.send :before_filter, :add_view_path #spree_devise_auth, and spree_core require it.
+    # receiver could be Spree::Api::BaseController or  Spree::BaseController
+    #if receiver == Spree::BaseController 
+      receiver.send :before_filter, :add_view_path #spree_devise_auth, and spree_core require it.
+      receiver.send :layout, :get_layout_if_use # never allow it to api controller. 
+    
   end
   alias_method_chain :included, :theme_support   
 end
@@ -90,19 +96,14 @@ module SpreeTheme::System
       end
       if params[:c] && params[:c].to_i>0 
         @menu = SpreeTheme.taxon_class.find_by_id(params[:c])
-      elsif(( index_page = @theme.try(:index_page)) && index_page > 0 )
-        @menu = SpreeTheme.taxon_class.find_by_id(index_page)
-      elsif(( index_page = website.index_page) > 0 )
-        @menu = SpreeTheme.taxon_class.find_by_id(index_page)
+      end
+      # get default_taxon from root, or it has no root, inherited_page_context cause error      
+      @menu ||= ( @theme.home_page || website.home_page || DefaultTaxonRoot.instance(request_fullpath).children.first )
       #elsif SpreeTheme.taxon_class.home.present? 
       # #it is discarded, it is conflict with feature theme has own index page. it would show product assigned index page of other theme   
       # #now each theme has own index page. website has own index page. 
       # #just set home page in taxon is ok as well       
       #  @menu = SpreeTheme.taxon_class.home
-      else
-        # get default_taxon from root, or it has no root, inherited_page_context cause error
-        @menu = DefaultTaxonRoot.instance(request_fullpath).children.first
-      end
     end
     #menu should be same instance pass to PageTag::PageGenerator, it require  request_fullpath
     @menu.request_fullpath = request_fullpath

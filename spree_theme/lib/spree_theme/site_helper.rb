@@ -7,6 +7,7 @@ module SpreeTheme
       has_many :template_themes, :foreign_key=>"site_id", :dependent=>:destroy
       # customer could select a theme when creating site.
       belongs_to :foreign_template_theme, :foreign_key=>'foreign_theme_id', :class_name=>'TemplateTheme'
+      belongs_to :home_page, :foreign_key=>'index_page', :class_name=>'Taxon'
       
       after_create :initialize_first_theme_if_selected # site_id is required for it
     end
