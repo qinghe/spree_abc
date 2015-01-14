@@ -2,15 +2,18 @@ Spree::Api::ProductsController.class_eval do
   
   #copy from sprangular
   def index
-    @products = Spree::Product.active.includes(:option_types, :taxons, master: [:images, :option_values, :prices], product_properties: [:property], variants: [:images, :option_values, :prices])
-    
+    if params[:ids]
+      @products = product_scope.where(:id => params[:ids].split(","))
+    else
+      @products = product_scope.ransack(params[:q]).result
+    end    
     # get products assigned to default home page
     home_page = Spree::Site.current.try(:template_theme).try(:mobile).try(:home_page)
-    @products = @products.in_taxon(home_page) unless home_page.blank?
+    @products = @products.joins(:taxons).where(Spree::Taxon.table_name => { :id => home_page.id }) if home_page
     
-    @products = @products.ransack(params[:q]).result if params[:q]
     @products = @products.distinct.page(params[:page]).per(params[:per_page])
-
+    expires_in 15.minutes, :public => true
+    headers['Surrogate-Control'] = "max-age=#{15.minutes}"
     respond_with(@products)
   end
 
