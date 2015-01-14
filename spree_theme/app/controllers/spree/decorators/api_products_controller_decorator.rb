@@ -5,7 +5,7 @@ Spree::Api::ProductsController.class_eval do
     @products = Spree::Product.active.includes(:option_types, :taxons, master: [:images, :option_values, :prices], product_properties: [:property], variants: [:images, :option_values, :prices])
     
     # get products assigned to default home page
-    home_page = Spree::Site.current.try(:template_theme).try(:home_page)
+    home_page = Spree::Site.current.try(:template_theme).try(:mobile).try(:home_page)
     @products.in_taxon(home_page) if home_page
     
     @products = @products.ransack(params[:q]).result if params[:q]
