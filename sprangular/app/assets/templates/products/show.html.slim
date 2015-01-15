@@ -8,7 +8,7 @@
       section.details
         h1(ng-bind="product.name")
 
-        p.desc(ng-bind="product.description")
+        p.desc(ng-bind-html="product.description")
 
       section.options(ng-show='product.hasVariants')
         variant-selection(product="product" variant="selected.variant" class="{'btn-group-lg': true}")
