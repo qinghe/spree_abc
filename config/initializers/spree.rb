@@ -24,7 +24,7 @@ Spree::Api::Config.requires_authentication = false
 #SpreeTheme.post_class = "Spree::Post"
 
 SpreeAbc::Application.configure do
-  config.spree_multi_site.site_scope_required_classes_with_image_from_other_gems.merge!( { cover: Spree::Post })
+  #config.spree_multi_site.site_scope_required_classes_with_image_from_other_gems.merge!( { cover: Spree::Post })
   config.spree_multi_site.preferences.seed_dir= File.join(SpreeAbc::Application.root,'db')
 end
 
