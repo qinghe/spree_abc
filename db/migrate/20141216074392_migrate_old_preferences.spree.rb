@@ -12,7 +12,7 @@ class MigrateOldPreferences < ActiveRecord::Migration
   private
   def migrate_preferences klass
     klass.reset_column_information
-    klass.unscoped.find_each do |record|
+    #klass.unscoped.find_each do |record|
       #fix it after migration
       #store = Spree::Preferences::ScopedStore.new(record.class.name.underscore, record.id)
       #record.defined_preferences.each do |key|
@@ -20,6 +20,6 @@ class MigrateOldPreferences < ActiveRecord::Migration
       #  record.preferences[key] = value unless value.nil?
       #end
       #record.save!
-    end
+    #end
   end
 end
