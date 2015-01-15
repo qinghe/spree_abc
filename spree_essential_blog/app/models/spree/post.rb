@@ -20,12 +20,12 @@ module Spree
     validates :body,  :presence => true
     validates :posted_at, :datetime => true
 
-    has_attached_file :cover,
-      styles: { small: '180x120>', normal: '280x190>', big: '670x370>'},
-      default_style: :normal,
-      url: '/spree/posts/:id/:style/:basename.:extension',
-      path: ':rails_root/public/spree/posts/:id/:style/:basename.:extension',
-      default_url: '/assets/default_post.png'
+    #has_attached_file :cover,
+    #  styles: { small: '180x120>', normal: '280x190>', big: '670x370>'},
+    #  default_style: :normal,
+    #  url: '/spree/posts/:id/:style/:basename.:extension',
+    #  path: ':rails_root/public/spree/posts/:id/:style/:basename.:extension',
+    #  default_url: '/assets/default_post.png'
   
     scope :ordered, -> { order("posted_at DESC") }
     scope :future, -> { where("posted_at > ?", Time.now).order("posted_at ASC") }
