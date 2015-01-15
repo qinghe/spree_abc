@@ -6,7 +6,7 @@ class Spree::Blog < ActiveRecord::Base
   has_many :categories, :through => :posts, :source => :post_categories
   
   validates :name, :presence => true
-  validates :permalink, :uniqueness => true, :format => { :with => /^[a-z0-9\-\_\/]+$/i }, :length => { :within => 3..40 }
+  validates :permalink, :uniqueness => true, :format => { :with => /\A[a-z0-9\-\_\/]+\z/i }, :length => { :within => 3..40 }
   
   before_validation :normalize_permalink
   
