@@ -46,28 +46,28 @@ $(document).ready(function() {
     // add, remove, move section
     $('.add_section_button').click(function(){
         var page_layout_id = $(this).data('id');
-        $('#layout_id').val(page_layout.id);
+        $('#layout_id').val(page_layout_id);
         $('#section_select_dialog').modal({ minHeight:300,  minWidth: 600 });
     })
     $('.remove_section_button').click(function(){
         var page_layout_id = $(this).data('id');
-        if (confirm('Really?')) submit_layout_tree_form('del_self', page_layout.id )
+        if (confirm('Really?')) submit_layout_tree_form('del_self', page_layout_id )
     })
     $('.move_section_to_left_button').click(function(){
         var page_layout_id = $(this).data('id');
-        submit_layout_tree_form('move_left',page_layout.id )
+        submit_layout_tree_form('move_left',page_layout_id )
     })
     $('.move_section_to_right_button').click(function(){
         var page_layout_id = $(this).data('id');
-        submit_layout_tree_form('move_right',page_layout.id )
+        submit_layout_tree_form('move_right',page_layout_id )
     })
     $('.promote_section_button').click(function(){
         var page_layout_id = $(this).data('id');
-        submit_layout_tree_form('promote',page_layout.id )
+        submit_layout_tree_form('promote',page_layout_id )
     })
     $('.demote_section_button').click(function(){
         var page_layout_id = $(this).data('id');
-        submit_layout_tree_form('demote',page_layout.id )
+        submit_layout_tree_form('demote',page_layout_id )
     })
   }  
 })
