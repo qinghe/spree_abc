@@ -1,4 +1,4 @@
-//= require jquery/jquery
+//= require jquery
 //= require jquery_ujs
 //= require jquery.form
 //= require jquery.layout
@@ -40,42 +40,37 @@ $(document).ready(function() {
       $.modal.close();
     })
     $("#section_select_dialog .dialog_ok_button").click(function(){
-      submit_layout_tree_form( 'add_child',null, $('#section_select_dialog [name="selected_section_id"]').val());
+       $('#selected_section_id').val($('#section_select_dialog [name="selected_section_id"]').val());
+
+      submit_layout_tree_form( this );
       $.modal.close();
     })
     // add, remove, move section
-    $('.add_section_button').click(function(){
-        var page_layout_id = $(this).data('id');
-        $('#layout_id').val(page_layout_id);
-        $('#section_select_dialog').modal({ minHeight:300,  minWidth: 600 });
-    })
-    $('.remove_section_button').click(function(){
-        var page_layout_id = $(this).data('id');
-        if (confirm('Really?')) submit_layout_tree_form('del_self', page_layout_id )
-    })
-    $('.move_section_to_left_button').click(function(){
-        var page_layout_id = $(this).data('id');
-        submit_layout_tree_form('move_left',page_layout_id )
-    })
-    $('.move_section_to_right_button').click(function(){
-        var page_layout_id = $(this).data('id');
-        submit_layout_tree_form('move_right',page_layout_id )
-    })
-    $('.promote_section_button').click(function(){
-        var page_layout_id = $(this).data('id');
-        submit_layout_tree_form('promote',page_layout_id )
-    })
-    $('.demote_section_button').click(function(){
-        var page_layout_id = $(this).data('id');
-        submit_layout_tree_form('demote',page_layout_id )
-    })
+
+    //$('.remove_section_button').click(function(){
+    //   var page_layout_id = $(this).data('id');
+    //   if (confirm('Really?')) submit_layout_tree_form('del_self', page_layout_id )
+    //})
+    
   }  
 })
-function submit_layout_tree_form (op, layout_id, selected_section_id) {
+function submit_layout_tree_form ( currentTarget ) {
+  var target = $(currentTarget);
+  var page_layout_id = target.data('id');
+
+  var op = target.data('op');
+  if(op=='list_section'){
+    $('#layout_id').val(page_layout_id);
+    $('#section_select_dialog').modal({ minHeight:300,  minWidth: 600,
+          overlayCss:{ 'background-color': 'gray' },
+          containerCss: {'background-color': 'white', 'overflow' :'auto' }
+    });
+    return;
+  }
+  
   $('#op').val(op);
   // layout_id, selected_section_id could be null.
-  if (layout_id) $('#layout_id').val(layout_id);
-  if (selected_section_id) $('#selected_section_id').val(selected_section_id);
+  if (page_layout_id) $('#layout_id').val(page_layout_id);
   $('#layout_tree_form').trigger('submit');
 }
 

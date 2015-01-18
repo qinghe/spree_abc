@@ -39,12 +39,12 @@ selected_id= (options[:selected_id]||layout_root.id )
     <% end %>
     <% if options[:editable] %>
       <div class="fr">
-      <%= link_to "+","#", {data: {id:page_layout.id}, class: :add_section_button  } %>
-      <%= link_to "-","#", {data: {id:page_layout.id}, class: :remove_section_button } %>
-      <%= link_to "u","#", {data: {id:page_layout.id}, class: :move_section_to_left_button } %>
-      <%= link_to "d","#", {data: {id:page_layout.id}, class: :move_section_to_right_button } %>
-      <%= link_to "<","#", {data: {id:page_layout.id}, class: :promote_section_button } %>
-      <%= link_to ">","#", {data: {id:page_layout.id}, class: :demote_section_button } %>
+      <%= link_to "+","#", {data: {id:page_layout.id, op:'list_section'}, onclick: 'submit_layout_tree_form(this);'  } %>
+      <%= link_to "-","#", {data: {id:page_layout.id, op:'del_self'}, onclick: "if(confirm('Really?')) submit_layout_tree_form(this);" } %>
+      <%= link_to "u","#", {data: {id:page_layout.id, op:'move_left'}, onclick: 'submit_layout_tree_form(this);' } %>
+      <%= link_to "d","#", {data: {id:page_layout.id, op:'move_right'}, onclick: 'submit_layout_tree_form(this);' } %>
+      <%= link_to "<","#", {data: {id:page_layout.id, op:'promote'}, onclick: 'submit_layout_tree_form(this);' } %>
+      <%= link_to ">","#", {data: {id:page_layout.id, op:'demote'}, onclick: 'submit_layout_tree_form(this);' } %>
       </div>
     <% end %>
   </div>
