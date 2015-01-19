@@ -331,32 +331,7 @@ menuitem:
   title: menuitem
   slug: menuitem
   html: |
-    <% lambda_item = lambda{ |page| 
-        if page.clickable? 
-           if page.current?
-             link_to page.name, page.path, page.extra_html_attributes.merge( {:id=>"pi#{g_piece_selector}_page.id", :class=>"selected depth#{page.depth}"} )
-           else
-             link_to page.name, page.path, page.extra_html_attributes.merge( {:id=>"pi#{g_piece_selector}_page.id", :class=>"depth#{page.depth}"} )
-           end 
-        else
-          link_to page.name, page.path, page.extra_html_attributes.merge( {:id=>"pi#{g_piece_selector}_page.id", :class=>"noclick depth#{page.depth}", :href=>'javascript:void(0)'} )
-        end
-      }
-    %>
-    <li class="<%=g_piece_selector%>">
-      <%= lambda_item.call(page) %>
-      <% unless page.leaf? %>
-      <ul><% page.children.each{|page| %>
-           <li>  <%= lambda_item.call(page) %> 
-           <% unless page.leaf? %>
-             <ul> <% page.children.each{|page| %>
-               <li>  <%= lambda_item.call(page) %> </li>
-             <% } %> </ul>
-           <% end %>    
-           </li>
-      <% } %> </ul>
-      <% end %>      
-    </li>
+    <%= menu_item_atom( @template.current_piece, page )  %>
     
   css: |-
       .<%=g_piece_selector%> {
@@ -1551,6 +1526,32 @@ container_hover_effect:
     /* since ie 6-8 do not support :last_child, have first child hidden initially */
     .<%=@template.current_piece.section_selector%>_inner>:first-child { display:none; <%=@template.css(:position) %>}
   js: ''
+
+hmenu_with_tile_effect:
+  id: 71
+  is_selectable: "0"
+  is_container: "1"
+  resources: m/m
+  html: |-
+    <ul class="<%=g_piece_selector%>" >
+    <% if @template.menu.present? && @template.menu2.present? %>
+    <% @template.menu.children.each{|page| %>
+       ~~content~~
+    <% } %>
+    <% end %>
+    </ul>
+  css: |-
+    .<%=g_piece_selector%>, .<%=g_piece_selector%> ul{ margin: 0; padding: 0;}
+    .<%=g_piece_selector%> li{ 
+      list-style-type:none;
+      display:inline;}
+    .<%=g_piece_selector%> a{ 
+     display:inline-block;
+     float:left;
+     margin:0; /* non-editable */}
+  title: hmenu with tile effect
+  slug: hmenu-with-tile-effect
+
 
 # mobile section pieces 
 root_for_mobile:

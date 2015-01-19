@@ -31,7 +31,10 @@ class DefaultTaxon < SpreeTheme.taxon_class
     def root?
       false
     end
-  
+    
+    def leaf? 
+      true
+    end
      
   def name
     case current_context       

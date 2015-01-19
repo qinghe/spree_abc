@@ -117,7 +117,7 @@ module Spree
       # * params
       #   * key - clickable, taxon_name, render as <a> or <span>?
       #         - image-size,  main product image size, [small|product|large|original]
-      #
+      #         - menu effect, tide_effect - bit3,  
       def get_content_param_by_key(key)
         case key
         when :clickable
@@ -134,6 +134,9 @@ module Spree
         when :zoomable
           #bit 8
           content_param&128>0
+        
+        when :tide_effect #bit 3
+          content_param&4 >0
         else 
           nil
         end 

@@ -36,6 +36,40 @@ module Spree
     def product_path( product )
       "/0/#{product.id}"
     end
+    
+    
+    def menu_item_atom( current_piece, page )
+      leaves_content = ""
+      
+      unless page.leaf? 
+        leaves_content = content_tag(:ul, raw( page.children.map{|page| menu_item_atom( current_piece, page )}.join ) )
+      end
+      
+      piece_selector = current_piece.piece_selector
+      page_on_hover =  get_page_on_hover( current_piece, page)
+      item_content = content_tag(:span, page.name )
+      item_content << content_tag(:span, page_on_hover.name ) if page_on_hover.present?
+            
+      item_content=  if page.clickable? 
+           if page.current?
+             link_to item_content, page.path, page.extra_html_attributes.merge( {:id=>"pi#{piece_selector}_page.id", :class=>"selected depth#{page.depth}"} )
+           else
+             link_to item_content, page.path, page.extra_html_attributes.merge( {:id=>"pi#{piece_selector}_page.id", :class=>"depth#{page.depth}"} )
+           end 
+        else
+          link_to item_content, page.path, page.extra_html_attributes.merge( {:id=>"pi#{piece_selector}_page.id", :class=>"noclick depth#{page.depth}", :href=>'javascript:void(0)'} )
+        end
+        
+      content_tag(:li,  raw( item_content+ leaves_content ) ) 
+    end
+    
+    def get_page_on_hover( current_piece, page)
+      if current_piece.get_content_param_by_key(:tide_effect)
+        if current_piece.menu2.present?   
+          current_piece.menu2.descendants.fetch current_piece.menu.descendants.index(page)
+        end
+      end
+    end
             
     #==================================================================================================
     # Editor methods

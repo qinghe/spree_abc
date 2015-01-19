@@ -11,6 +11,8 @@ module PageTag
       attr_accessor :section_id, :page_layout
       delegate *self.accessable_attributes, :to => :page_layout
       
+      alias_attribute :template, :collection_tag
+      
       def initialize(collection_tag, page_layout, section_id)
         self.collection_tag = collection_tag
         self.page_layout = page_layout      
