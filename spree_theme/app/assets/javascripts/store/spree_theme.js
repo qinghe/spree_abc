@@ -6,6 +6,7 @@
 //= require jssor.slider.one
 //= require spree/frontend
 //= require store/spree_theme.client
+//= require store/spree_theme.routes
 //= require interface.js
 //= require jquery.jeditable.js
 //= require bootstrap-sprockets
