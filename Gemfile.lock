@@ -133,9 +133,13 @@ GEM
     addressable (2.3.6)
     alipay (0.3.0)
     arel (5.0.1.20140414130214)
+    autoprefixer-rails (5.0.0.1)
+      execjs
     awesome_nested_set (3.0.2)
       activerecord (>= 4.0.0, < 5)
     bcrypt (3.1.9)
+    bootstrap-sass (3.3.1.0)
+      sass (~> 3.2)
     builder (3.2.2)
     camertron-eprun (1.1.0)
     cancan (1.6.10)
@@ -444,6 +448,8 @@ DEPENDENCIES
   activemerchant_patch_for_china!
   activerecord-session_store
   alipay
+  autoprefixer-rails
+  bootstrap-sass (~> 3.3.1)
   capistrano
   capistrano-rails (~> 1.1.0)
   capistrano-rvm (~> 0.1.0)
