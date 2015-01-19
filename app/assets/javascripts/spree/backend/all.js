@@ -4,7 +4,7 @@
 // It's not advisable to add code directly here, but if you do, it'll appear at the bottom of the
 // the compiled file.
 // jqeruy-rails and rails-assets-jquery have 'jquery' both, this would cause problem. use rails-assets-jquery/assets/jquery/jquery directly  
-//= require jquery/jquery
+//= require jquery
 //= require jquery_ujs
 
 //= require spree/backend
