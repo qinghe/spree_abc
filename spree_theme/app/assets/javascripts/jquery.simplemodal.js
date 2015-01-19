@@ -327,8 +327,8 @@
 				.css($.extend(s.o.overlayCss, {
 					display: 'none',
 					opacity: s.o.opacity / 100,
-					height: s.o.simplemodal ? d[0] : 0,
-					width: s.o.simplemodal ? d[1] : 0,
+					height: s.o.modal ? d[0] : 0,
+					width: s.o.modal ? d[1] : 0,
 					position: 'fixed',
 					left: 0,
 					top: 0,

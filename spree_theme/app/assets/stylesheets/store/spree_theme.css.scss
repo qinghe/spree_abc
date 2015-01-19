@@ -68,6 +68,10 @@ ul.tabs{list-style:none; margin:0;padding:0;}
   display:inline-block;
   width:120px;    
 }
+#editors [type="checkbox"]{
+  vertical-align: bottom;
+}
+
 #section_select_dialog ul
 {
   list-style:none; margin: 0; padding: 0;
