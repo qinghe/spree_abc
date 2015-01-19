@@ -43,8 +43,8 @@ root:
     </html>
   css: |
     body
-    { font-size: 100%;
-      /*line-height: 1em;*/ 
+    { /*font-size: 100%;  #use font-size define in bootstrap
+      line-height: 1em;*/ 
       margin: 0;
       padding: 0;
       <%= @template.css :body %>

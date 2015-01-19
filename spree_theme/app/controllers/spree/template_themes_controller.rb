@@ -134,7 +134,7 @@ module Spree
       param_value_keys = params.keys.select{|k| k=~/pv[\d]+/}
       
         param_value_params = params["pv#{editing_param_value_id}"]
-        source_param_value = ParamValue.find(editing_param_value_id, :include=>[:section_param, :section])
+        source_param_value = ParamValue.includes(:section_param, :section).find(editing_param_value_id)
         updated_html_attribute_values = do_update_param_value(source_param_value, param_value_params, param_value_event, editing_html_attribute_id)
   
       #  param_value = ParamValue.find(editing_param_value_id)
@@ -184,7 +184,7 @@ module Spree
       @dialog_content="upload_dialog_content"
       @param_value_id = params[:param_value_id]
       @html_attribute_id = params[:html_attribute_id].to_i
-      @param_value = ParamValue.find(@param_value_id, :include=>[:section_param=>:section_piece_param])
+      @param_value = ParamValue.includes(:section_param=>:section_piece_param).find(@param_value_id)
       #@editor = @param_value.section_param.section_piece_param.editor
       if request.post?        
         #TODO replace same name of template file 

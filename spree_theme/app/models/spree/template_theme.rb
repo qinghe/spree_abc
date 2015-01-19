@@ -327,7 +327,8 @@ module Spree
       
       # ex. get dialog section
       def find_section_by_usage( usage )
-        PageLayout.includes(:section=>:section_piece).where(["#{PageLayout.table_name}.root_id=? and #{SectionPiece.table_name}.usage=?",self.page_layout_root_id, usage]).first
+        # ["#{PageLayout.table_name}.root_id=? and #{SectionPiece.table_name}.usage=?",self.page_layout_root_id, usage]
+        PageLayout.includes(:section=>:section_piece).where( spree_section_pieces:{usage: usage}, root_id: self.page_layout_root_id ).first
       end
       
       def dialog_content_container_selector
@@ -341,7 +342,7 @@ module Spree
       # export to yaml, include page_layouts, param_values, template_files
       # it is a hash with keys :template, :param_values, :page_layouts
       def serializable_data
-        template = self.class.find(self.id,:include=>[:param_values,:page_layout])
+        template = self.class.includes(:param_values,:page_layout).find(self.id)
         # template.page_layout.self_and_descendants would cause error
         # https://github.com/rails/rails/issues/5303
         # serializable_data.to_yaml, it only get error in rake task.

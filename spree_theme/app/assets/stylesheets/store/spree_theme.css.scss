@@ -1,10 +1,10 @@
-/*
- *= require spree_theme_base
- *= require jquery.layout
- *= require normalize
- *= require interface
- *= require interface
-*/
+@import "bootstrap-sprockets";
+@import "bootstrap";
+@import "normalize";
+@import "spree_theme_base";
+@import "jquery.layout";
+@import "interface";
+
 
 #editor_panel
 {height:260px;

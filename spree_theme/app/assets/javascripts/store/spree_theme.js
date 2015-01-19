@@ -8,7 +8,7 @@
 //= require store/spree_theme.client
 //= require interface.js
 //= require jquery.jeditable.js
-//= require jquery.floatBar.js
+//= require bootstrap-sprockets
 
 $(document).ready(function() {
   if (typeof(g_is_preview) != 'undefined' && g_is_preview==true)
@@ -34,17 +34,17 @@ $(document).ready(function() {
       $(this).addClass('selected'); 
       $(this).parent().next().children().removeClass('selected');
       $(this).parent().next().children().eq($(this).index()).addClass('selected');
-      $(this).parent().siblings('input').val($(this).attr('data-section-id'))
+      $(this).parent().siblings('input').val($(this).attr('data-section-id'));
     });
     $("#section_select_dialog .dialog_close_button").click(function(){
       $.modal.close();
-    })
+    });
     $("#section_select_dialog .dialog_ok_button").click(function(){
        $('#selected_section_id').val($('#section_select_dialog [name="selected_section_id"]').val());
 
       submit_layout_tree_form( this );
       $.modal.close();
-    })
+    });
     // add, remove, move section
 
     //$('.remove_section_button').click(function(){
@@ -53,7 +53,7 @@ $(document).ready(function() {
     //})
     
   }  
-})
+});
 function submit_layout_tree_form ( currentTarget ) {
   var target = $(currentTarget);
   var page_layout_id = target.data('id');
