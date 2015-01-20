@@ -9,7 +9,6 @@
 //= require store/spree_theme.routes
 //= require interface.js
 //= require jquery.jeditable.js
-//= require bootstrap-sprockets
 
 $(document).ready(function() {
   if (typeof(g_is_preview) != 'undefined' && g_is_preview==true)

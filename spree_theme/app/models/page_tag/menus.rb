@@ -55,7 +55,7 @@ module PageTag
       
       def partial_path
         # menu.id would be nil if it is class DefaultTaxon    
-        if model.persisted?    
+        if( model.persisted? && !model.page_home? )    
           path
         else
           # in case default home page show all products,

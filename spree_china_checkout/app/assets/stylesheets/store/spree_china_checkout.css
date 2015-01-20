@@ -1,4 +1,3 @@
-/*
- *= require store/spree_core
- *= require single_page_checkout/index
-*/
+
+.disabled-step .form-wrapper{ position: relative; display: none; }
+

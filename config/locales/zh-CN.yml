@@ -447,6 +447,9 @@ zh-CN:
     choose_a_taxon_to_sort_products_for: 请选择一个分类查看所属产品
     choose_currency: 选择货币
     choose_dashboard_locale: 选择控制面板语言
+    checkout_steps:
+      previous: 上一步
+      next: 下一步
     cheque: 支票
     china_address:
       firstname: 姓名

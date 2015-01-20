@@ -1,9 +1,8 @@
-@import "bootstrap-sprockets";
-@import "bootstrap";
 @import "normalize";
 @import "spree_theme_base";
 @import "jquery.layout";
 @import "interface";
+@import "store/spree_theme.client";
 
 
 #editor_panel
@@ -113,7 +112,4 @@ ul.tabs{list-style:none; margin:0;padding:0;}
   font-weight: bold;
 }
 
-/************************************/
-.disabled-step { display: none; }
 
-.form-wrapper { position: relative }

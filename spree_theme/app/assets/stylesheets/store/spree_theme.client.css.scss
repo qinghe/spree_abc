@@ -1,6 +1,7 @@
-/*
- *= require normalize
-*/
+
+@import 'normalize';
+@import 'store/spree_china_checkout';
+
 #embeded_content_wrapper{
   position: absolute;
   top:0;

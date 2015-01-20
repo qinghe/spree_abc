@@ -1,13 +1,16 @@
-<div class=" <%= wrapper_class( state ) %>" data-hook="checkout_form_wrapper">
-
-  <%= render :partial => 'spree/shared/error_messages', :locals => { :target => order } %>
-  <% # override default form class :edit_order with :single_page_edit_order, disableSaveOnClick cause button disabled even form validation failure %>
-  <%= form_for order, :url => update_checkout_path(state), :remote => (state != 'confirm'), :html => { :id => "checkout_form_#{state}", :class=>"single_page_edit_order" } do |form| %>
-    <%= render state, :form => form %>
-  <% end %>
-</div>
-<% if state != 'confirm' %>
-  <div id="checkout-summary" data-hook="checkout_summary_box" class="columns omega four">
-    <%= render :partial => 'summary', :locals => { :order => order } %>
+<h2 class="header2"> <%= Spree.t("order_state.#{state}") %> </h2>  
+<div class="form-wrapper clear-block" data-hook="checkout_form_wrapper">
+  <div class="fl">
+      <%= render :partial => 'spree/shared/error_messages', :locals => { :target => order } %>
+      <% # override default form class :edit_order with :single_page_edit_order, disableSaveOnClick cause button disabled even form validation failure %>
+      <%= form_for order, :url => update_checkout_path(state), :remote => (state != 'confirm'), :html => { :id => "checkout_form_#{state}", :class=>"single_page_edit_order" } do |form| %>
+        <%= render state, :form => form %>
+      <% end %>
   </div>
-<% end %>
+    <% if state != 'confirm' %>
+      <div id="checkout-summary" data-hook="checkout_summary_box" class="fr">
+        <%= render :partial => 'summary', :locals => { :order => order } %>
+      </div>
+    <% end %>
+</div>
+

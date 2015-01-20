@@ -5,3 +5,5 @@ error = "<%= flash[:error] %>"
 stepHandler = new SinglePageCheckout.StepHandler $step, partial, error
 stepHandler.replaceCheckoutStep()
 
+$step.find('button.previous').click (event)->   
+  SinglePageCheckout.StepHandler.enableStep $step.prev()
