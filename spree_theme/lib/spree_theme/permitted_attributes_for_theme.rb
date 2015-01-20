@@ -12,6 +12,6 @@ module Spree
     @@template_text_attributes = [ :name, :body ]
     @@template_theme_attributes = [ :is_public, :site_id,:page_layout_root_id,:title, :section_root_id, :assigned_resource_ids, :for_terminal ]
     @@product_attributes += [:global_taxon_ids, :global_taxons, :theme_id]
-    @@taxon_attributes += [:page_context, :replaced_by, :is_clickable]
+    @@taxon_attributes += [:page_context, :replaced_by, :is_clickable, :tooltips]
   end
 end

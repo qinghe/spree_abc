@@ -283,7 +283,7 @@ hmenu:
   is_container: "1"
   resources: m
   html: |-
-    <ul class="<%=g_piece_selector%>" >
+    <ul class="<%=g_piece_selector%> <%= @template.current_piece.effects.join(' ')%>" >
     <% if @template.menu.present? %>
     <% @template.menu.children.each{|page| %>
        ~~content~~
@@ -296,9 +296,9 @@ hmenu:
       list-style-type:none;
       display:inline;}
     .<%=g_piece_selector%> a{ 
-     display:inline-block;
-     float:left;
-     margin:0; /* non-editable */}
+       display:inline-block;
+       float:left;
+       margin:0; /* non-editable */}
   title: hmenu
   slug: hmenu
 vmenu:
@@ -336,8 +336,10 @@ menuitem:
       .<%=g_piece_selector%> {
        <%= @template.css :shell %>
       } 
-      /*override parent container .selector a */     
+      /* override parent container .selector a */     
       .<%=g_piece_selector%> a{
+       /* tide_effect: width,height is required, inner span is absolute  */
+       position:relative;overflow: hidden;
        <%= @template.css :a %>  
       }
       .<%=g_piece_selector%> a:hover{  
@@ -352,6 +354,12 @@ menuitem:
       .<%=g_piece_selector%> a.depth2{ <%= @template.css :depth2 %>  }
       .<%=g_piece_selector%> a.depth3{ <%= @template.css :depth3 %>  }
       .<%=g_piece_selector%> a.depth4{ <%= @template.css :depth4 %>  }
+      <% if @template.current_piece.get_content_param_by_key(:tide_effect) %>
+      .<%=g_piece_selector%> a span{ position:absolute; display:block; }
+      <% end %>
+      .<%=g_piece_selector%> span.name{ height:100%; }
+      .<%=g_piece_selector%> span.tooltips{  height:0;  }
+
   js: ""
 image:
   id: 7
@@ -1527,32 +1535,6 @@ container_hover_effect:
     /* since ie 6-8 do not support :last_child, have first child hidden initially */
     .<%=@template.current_piece.section_selector%>_inner>:first-child { display:none; <%=@template.css(:position) %>}
   js: ''
-
-hmenu_with_tile_effect:
-  id: 71
-  is_selectable: "0"
-  is_container: "1"
-  resources: m/m
-  html: |-
-    <ul class="<%=g_piece_selector%>" >
-    <% if @template.menu.present? && @template.menu2.present? %>
-    <% @template.menu.children.each{|page| %>
-       ~~content~~
-    <% } %>
-    <% end %>
-    </ul>
-  css: |-
-    .<%=g_piece_selector%>, .<%=g_piece_selector%> ul{ margin: 0; padding: 0;}
-    .<%=g_piece_selector%> li{ 
-      list-style-type:none;
-      display:inline;}
-    .<%=g_piece_selector%> a{ 
-     display:inline-block;
-     float:left;
-     margin:0; /* non-editable */}
-  title: hmenu with tile effect
-  slug: hmenu-with-tile-effect
-
 
 # mobile section pieces 
 root_for_mobile:

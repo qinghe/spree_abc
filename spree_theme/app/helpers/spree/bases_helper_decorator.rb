@@ -46,9 +46,10 @@ module Spree
       end
       
       piece_selector = current_piece.piece_selector
-      page_on_hover =  get_page_on_hover( current_piece, page)
-      item_content = content_tag(:span, page.name )
-      item_content << content_tag(:span, page_on_hover.name ) if page_on_hover.present?
+      item_content = content_tag(:span, page.name, class: 'name' )
+      if current_piece.get_content_param_by_key(:tide_effect)
+        item_content << content_tag(:span, page.tooltips, class: 'tooltips' ) if page.tooltips.present?
+      end
             
       item_content=  if page.clickable? 
            if page.current?
@@ -60,16 +61,16 @@ module Spree
           link_to item_content, page.path, page.extra_html_attributes.merge( {:id=>"pi#{piece_selector}_page.id", :class=>"noclick depth#{page.depth}", :href=>'javascript:void(0)'} )
         end
         
-      content_tag(:li,  raw( item_content+ leaves_content ) ) 
+      content_tag(:li,  raw( item_content+ leaves_content ), class: piece_selector ) 
     end
     
-    def get_page_on_hover( current_piece, page)
-      if current_piece.get_content_param_by_key(:tide_effect)
-        if current_piece.menu2.present?   
-          current_piece.menu2.descendants.fetch current_piece.menu.descendants.index(page)
-        end
-      end
-    end
+    #def get_page_on_hover( current_piece, page)
+    #  if current_piece.get_content_param_by_key(:tide_effect)
+    #    if current_piece.menu2.present?   
+    #      current_piece.menu2.descendants.fetch current_piece.menu.descendants.index(page)
+    #    end
+    #  end
+    #end
             
     #==================================================================================================
     # Editor methods

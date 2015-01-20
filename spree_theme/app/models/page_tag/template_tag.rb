@@ -52,6 +52,13 @@ module PageTag
       def to_key
         "#{page_layout.id}_#{section_id}"
       end
+      
+      # use as css class, later js select elements by those class
+      def effects
+        effect_js_required =[]
+        effect_js_required << 'tide_effect' if get_content_param_by_key(:tide_effect)        
+        effect_js_required
+      end
        
       def assigned_menu_id( resource_position=0 )
         assigned_id =  self.collection_tag.theme.assigned_resource_id(SpreeTheme.taxon_class, page_layout, resource_position)
