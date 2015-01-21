@@ -328,7 +328,6 @@ menuitem:
       } 
       /* override parent container .selector a */     
       .<%=g_piece_selector%> a{
-       /* tide_effect: width,height is required, inner span is absolute  */
        position:relative;overflow: hidden;
        <%= @template.css :a %>  
       }
@@ -344,11 +343,6 @@ menuitem:
       .<%=g_piece_selector%> a.depth2{ <%= @template.css :depth2 %>  }
       .<%=g_piece_selector%> a.depth3{ <%= @template.css :depth3 %>  }
       .<%=g_piece_selector%> a.depth4{ <%= @template.css :depth4 %>  }
-      <% if @template.current_piece.get_content_param_by_key(:tide_effect) %>
-      .<%=g_piece_selector%> a span{ position:absolute; display:block; }
-      .<%=g_piece_selector%> span.name{ height:100%; }
-      .<%=g_piece_selector%> span.tooltips{  height:0;  }
-      <% end %>
 
   js: ""
 image:
@@ -1512,20 +1506,35 @@ container_fixed:
   css: |
     .<%=@template.current_piece.section_selector%> { position: fixed; right:0; top:250px; <%=@template.css(:position) %>}
   js: ''
-container_hover_effect:
+container_hover_effect_tide:
   id: 70
-  title: container hover effect
-  slug: container-hover-effect
+  title: container hover effect tide
+  slug: container-hover-effect-tide
   is_selectable: "0"
   is_container: "1"
   html: |
     ~~content~~    
-    <input type="hidden" class="hover_effect_container" value=".<%=@template.current_piece.section_selector%>">
   css: |
-    /* since ie 6-8 do not support :last_child, have first child hidden initially */
-    .<%=@template.current_piece.section_selector%>_inner>:first-child { display:none; <%=@template.css(:position) %>}
+      /* tide_effect: width,height is required, children are absolute  */
+      /* override original position,display */
+      .<%= @template.current_piece.section_selector %> .child_1{  position:absolute; display:block;height:100%; }
+      .<%= @template.current_piece.section_selector %> .child_2{  position:absolute; display:block;height:0;  }
   js: ''
 
+taxon_tooltips:
+  id: 71
+  title: taxon tooltips
+  slug: taxon-tooltips
+  is_selectable: "1"
+  is_container: "0"
+  html: |
+    <% (defined?(page) ? page : @current_page).tap{|page| %>
+        <%= page.tooltips %>
+    <% }%>
+  created_at: 2011-09-20 19:40:07
+  updated_at: 2011-09-20 19:40:07
+  css: |
+  js: ""
 # mobile section pieces 
 root_for_mobile:
   id: 200

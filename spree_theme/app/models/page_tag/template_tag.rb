@@ -7,8 +7,9 @@ module PageTag
 # template is collection of page_layout. each page_layout is section instance 
   class TemplateTag < Base
     class WrappedPageLayout < WrappedModel
-      self.accessable_attributes=[:id,:title,:current_data_source,:wrapped_data_source_param, :data_filter,:current_contexts, :context_either?, :view_as_clickable?, :view_column_count, :get_content_param_by_key, :is_container?]
-      attr_accessor :section_id, :page_layout
+      self.accessable_attributes=[:id,:title,:current_data_source,:wrapped_data_source_param, :data_filter,:current_contexts, :context_either?, 
+        :view_as_clickable?, :view_column_count, :get_content_param_by_key, :is_container?, :effect?, :effects]
+      attr_accessor :section_id, :page_layout, :parent
       
       delegate *self.accessable_attributes, to: :page_layout
       alias_attribute :template, :collection_tag
@@ -52,14 +53,7 @@ module PageTag
       def to_key
         "#{page_layout.id}_#{section_id}"
       end
-      
-      # use as css class, later js select elements by those class
-      def effects
-        effect_js_required =[]
-        effect_js_required << 'tide_effect' if get_content_param_by_key(:tide_effect)        
-        effect_js_required
-      end
-       
+                   
       def assigned_menu_id( resource_position=0 )
         assigned_id =  self.collection_tag.theme.assigned_resource_id(SpreeTheme.taxon_class, page_layout, resource_position)
         if assigned_id==0
@@ -75,6 +69,10 @@ module PageTag
       def assigned_text_id
         self.collection_tag.theme.assigned_resource_id(Spree::TemplateText, page_layout)
       end
+      # start from 1      
+      def nth_of_siblings
+        self.collection_tag.page_layout_tree.select{|pl| pl.parent_id == page_layout.parent_id && pl != page_layout && pl.lft < page_layout.lft }.size + 1
+      end
     end
     
     attr_accessor :page_layout_tree
@@ -86,7 +84,7 @@ module PageTag
     delegate :theme, :to => :page_generator
     attr_accessor :current_piece
     #we have to store it in template, or missing after select another page_layout.
-    attr_accessor :running_data_sources, :running_data_items, :running_data_source_sction_pieces
+    attr_accessor :running_data_sources, :running_data_items, :running_data_source_sction_pieces, :section_pieces
 
     def initialize(page_generator_instance)
       super(page_generator_instance)
@@ -98,6 +96,7 @@ module PageTag
       self.running_data_sources = []
       self.running_data_source_sction_pieces = [] # data_source belongs to section_piece 
       self.running_data_items = []
+      self.section_pieces = []
     end
     
     #def id
@@ -110,10 +109,17 @@ module PageTag
     #        section_id, it is id of table section, represent a section_piece instance, could be 0. only select page_layout
     #                    
     def select(page_layout_id, section_id=0)
+      self.current_piece  = section_pieces.select{|section_piece| section_piece.page_layout.id== page_layout_id && section_piece.section_id== section_id }.first
       #current selected section instance, page_layout record
-      page_layout = page_layout_tree.select{|node| node.id == page_layout_id}.first
-      #Rails.logger.debug "select #{page_layout.title}, section_id=#{section_id}"      
-      self.current_piece = WrappedPageLayout.new(self, page_layout, section_id)
+      if self.current_piece.nil? 
+        page_layout = page_layout_tree.select{|node| node.id == page_layout_id}.first      
+        #Rails.logger.debug "select #{page_layout.title}, section_id=#{section_id}"      
+        self.current_piece = WrappedPageLayout.new(self, page_layout, section_id)
+        unless page_layout.root?
+          self.current_piece.parent = section_pieces.select{|section_piece| section_piece.page_layout.id== page_layout.parent_id && section_piece.section_id == 0 }.first
+        end 
+        self.section_pieces << self.current_piece 
+      end
     end
     
     def products( wrapped_taxon )
@@ -188,7 +194,6 @@ module PageTag
     end
     
     def running_data_item_index
-Rails.logger.debug " running_data_source=#{running_data_source}, running_data_item=#{running_data_item}"      
       running_data_source.index running_data_item
     end
     

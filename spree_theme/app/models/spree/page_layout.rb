@@ -118,11 +118,27 @@ module Spree
         is_container? ?  get_content_param_by_key( :columns ) : 0
       end
       
+      # use as css class, later js select elements by those class
+      def effects
+        effect_classes =[]
+        effect_classes << 'hover_effect_tide' if effect?(:hover_effect_tide)        
+        effect_classes
+      end
+      
+      #         - tide_effect, menu tide_effect - bit3,
+      def effect?( an_effect )
+        case an_effect
+        when :hover_effect_tide #bit 3
+          content_param&4 >0
+        else
+          false
+        end
+      end
+      
       # * description - content_param is integer, each bit has own mean for each section.
       # * params
       #   * key - clickable, taxon_name, render as <a> or <span>?
       #         - image-size,  main product image size, [small|product|large|original]
-      #         - tide_effect, menu tide_effect - bit3,
       #         - columns, eliminate margin-right of last column - bit3,
         
       def get_content_param_by_key(key)
@@ -141,8 +157,6 @@ module Spree
         when :zoomable
           #bit 8
           content_param&128>0        
-        when :tide_effect #bit 3
-          content_param&4 >0
         when :columns #bit 1,2,3,4
           content_param&15
         else 

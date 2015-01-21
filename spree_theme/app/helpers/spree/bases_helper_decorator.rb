@@ -47,9 +47,6 @@ module Spree
       
       piece_selector = current_piece.piece_selector
       item_content = content_tag(:span, page.name, class: 'name' )
-      if current_piece.get_content_param_by_key(:tide_effect)
-        item_content << content_tag(:span, page.tooltips, class: 'tooltips' ) if page.tooltips.present?
-      end
             
       item_content=  if page.clickable? 
            if page.current?
@@ -67,29 +64,28 @@ module Spree
     
     # a container could has
     def get_container_class( current_piece )
-      css_classes = current_piece.piece_selector + ' ' + current_piece.as_child_selector
+      css_classes = current_piece.piece_selector + ' ' + current_piece.as_child_selector + ' ' + current_piece.effects.join(' ')
       # how many columns are there?
-      # in data iteration， variable defined in template.
-      Rails.logger.debug "current_piece=#{current_piece.id},#{current_piece.title}, current_piece.is_container?=#{current_piece.is_container?}, current_piece.template.running_data_sources.present?=#{current_piece.template.running_data_sources.present?}"
-      if current_piece.is_container? && current_piece.template.running_data_sources.present?
-        column_count = current_piece.template.running_data_source_sction_piece.view_column_count        
-        i = current_piece.template.running_data_item_index
-        Rails.logger.debug "i=#{i}, column_count=#{column_count}, current_piece.template.running_data_source_sction_piece=#{current_piece.template.running_data_source_sction_piece.id}" 
-        css_classes << ' column_first' if column_count>0 && i==0
-        css_classes << ' column_last'  if column_count>0 && ((i+1)%column_count==0)                  
+      # handling data iteration?
+      # Rails.logger.debug "current_piece=#{current_piece.id},#{current_piece.title}, current_piece.is_container?=#{current_piece.is_container?}, current_piece.template.running_data_sources.present?=#{current_piece.template.running_data_sources.present?}"
+      if current_piece.is_container?
+        if current_piece.template.running_data_sources.present?
+          column_count = current_piece.template.running_data_source_sction_piece.view_column_count        
+          i = current_piece.template.running_data_item_index
+          #Rails.logger.debug "i=#{i}, column_count=#{column_count}, current_piece.template.running_data_source_sction_piece=#{current_piece.template.running_data_source_sction_piece.id}" 
+          css_classes << ' data_first' if column_count>0 && i==0
+          css_classes << ' data_last'  if column_count>0 && ((i+1)%column_count==0)
+          css_classes << " data_#{i+1}"
+        end                  
       end
+      if current_piece.parent.effect?( :hover_effect_tide)
+        css_classes << " child_#{current_piece.nth_of_siblings}"
+      end
+      
       css_classes      
     end
     
-    
-    #def get_page_on_hover( current_piece, page)
-    #  if current_piece.get_content_param_by_key(:tide_effect)
-    #    if current_piece.menu2.present?   
-    #      current_piece.menu2.descendants.fetch current_piece.menu.descendants.index(page)
-    #    end
-    #  end
-    #end
-            
+                
     #==================================================================================================
     # Editor methods
     #==================================================================================================

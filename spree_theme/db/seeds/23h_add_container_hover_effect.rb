@@ -8,4 +8,4 @@ Spree::Section.where(:title=>'hover effect container').each(&:destroy)
 fixed_container = Spree::Section.create_section( section_piece_hash['container'], {:title=>"hover effect container"},
 { 'content_layout'=>{'86'=>bool_true,'86unset'=>bool_false}, 'block'=>{'101'=>"float:left",'101unset'=>bool_false}, 'inner'=>{'15hidden'=>bool_true}}
 )
-fixed_container.add_section_piece(section_piece_hash['container-hover-effect'])
+fixed_container.add_section_piece(section_piece_hash['container-hover-effect-tide'])

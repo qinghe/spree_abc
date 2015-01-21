@@ -18,36 +18,22 @@ $(document).ready(function() {
     //$($("input.fixed_container").val()).floatBar({
     //    bodyWidth:980, vertical:"top",  moveOnOff:false, focusOnOff:false
     //  });
-    $("input.hover_effect_container").each(function(index, element){
-      var children = $(element).siblings('div');
-      if( children.length == 2){
-        var child1 = $(children[0]); var child2 = $(children[1]);   
-        child2.on('mouseenter',function(){ child1.show();child2.hide(); });  
-        child1.on('mouseout', function(){child2.show();child1.hide();});
-      };
-    });     
-
     //menu tide_effect
-    $("ul.tide_effect").each(function(index, element){
+    $(".hover_effect_tide").each(function(index, element){
                   //nav sliding   
-            var height = ''+ $('a',element).height()+'px'
+            var height = ''+ $('.child_1',element).height()+'px'
             var offset = '-'+ height ;
-            $('.name',element).css({ height: height});
-            $('.tooltips',element).css({ bottom:offset, height: height});
+            //$('.name',element).css({ height: height});
+            $('.child_2',element).css({ bottom:offset, height: height});
             //nav sliding            
-            $('a',element).hover(function(){
-                $(".name",this).stop().animate({top:offset,left:'0px'},{queue:false,duration:300});
+            $(element).hover(function(){
+                $(".child_1",this).stop().animate({top:offset,left:'0px'},{queue:false,duration:300});
+                $(".child_2",this).stop().animate({bottom:'0px',left:'0px'},{queue:false,duration:300});
             },function(){
-                $(".name",this).stop().animate({top:'0px',left:'0px'},{queue:false,duration:300});
+                $(".child_1",this).stop().animate({top:'0px',left:'0px'},{queue:false,duration:300});
+                $(".child_2",this).stop().animate({bottom:offset,left:'0px'},{queue:false,duration:300});
                  
                 }); 
-                    
-            $('a',element).hover(function(){   
-                $(".tooltips",this).stop().animate({bottom:'0px',left:'0px'},{queue:false,duration:300});
-            },function(){
-                $(".tooltips",this).stop().animate({bottom:offset,left:'0px'},{queue:false,duration:300});
-                }); 
-
     });     
 
 });
