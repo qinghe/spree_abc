@@ -42,7 +42,7 @@ module Spree
       leaves_content = ""
       
       unless page.leaf? 
-        leaves_content = content_tag(:ul, raw( page.children.map{|page| menu_item_atom( current_piece, page )}.join ) )
+        leaves_content = content_tag(:ul, raw( page.children.map{|child| menu_item_atom( current_piece, child )}.join ) )
       end
       
       piece_selector = current_piece.piece_selector
@@ -63,6 +63,24 @@ module Spree
         
       content_tag(:li,  raw( item_content+ leaves_content ), class: piece_selector ) 
     end
+    
+    
+    # a container could has
+    def get_container_class( current_piece )
+      css_classes = current_piece.piece_selector + ' ' + current_piece.as_child_selector
+      # how many columns are there?
+      # in data iteration， variable defined in template.
+      Rails.logger.debug "current_piece=#{current_piece.id},#{current_piece.title}, current_piece.is_container?=#{current_piece.is_container?}, current_piece.template.running_data_sources.present?=#{current_piece.template.running_data_sources.present?}"
+      if current_piece.is_container? && current_piece.template.running_data_sources.present?
+        column_count = current_piece.template.running_data_source_sction_piece.view_column_count        
+        i = current_piece.template.running_data_item_index
+        Rails.logger.debug "i=#{i}, column_count=#{column_count}, current_piece.template.running_data_source_sction_piece=#{current_piece.template.running_data_source_sction_piece.id}" 
+        css_classes << ' column_first' if column_count>0 && i==0
+        css_classes << ' column_last'  if column_count>0 && ((i+1)%column_count==0)                  
+      end
+      css_classes      
+    end
+    
     
     #def get_page_on_hover( current_piece, page)
     #  if current_piece.get_content_param_by_key(:tide_effect)

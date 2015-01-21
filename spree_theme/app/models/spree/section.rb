@@ -166,6 +166,11 @@ module Spree
       end 
       
     end
+    
+    # add new column later.
+    def is_container?
+      root_id == 2
+    end
   end
 
 end

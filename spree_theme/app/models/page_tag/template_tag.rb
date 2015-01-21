@@ -7,12 +7,12 @@ module PageTag
 # template is collection of page_layout. each page_layout is section instance 
   class TemplateTag < Base
     class WrappedPageLayout < WrappedModel
-      self.accessable_attributes=[:id,:title,:current_data_source,:wrapped_data_source_param, :data_filter,:current_contexts, :context_either?, :view_as_clickable?, :get_content_param_by_key]
+      self.accessable_attributes=[:id,:title,:current_data_source,:wrapped_data_source_param, :data_filter,:current_contexts, :context_either?, :view_as_clickable?, :view_column_count, :get_content_param_by_key, :is_container?]
       attr_accessor :section_id, :page_layout
-      delegate *self.accessable_attributes, :to => :page_layout
       
+      delegate *self.accessable_attributes, to: :page_layout
       alias_attribute :template, :collection_tag
-      
+            
       def initialize(collection_tag, page_layout, section_id)
         self.collection_tag = collection_tag
         self.page_layout = page_layout      
@@ -85,6 +85,8 @@ module PageTag
     delegate :text, :to => :text_tag
     delegate :theme, :to => :page_generator
     attr_accessor :current_piece
+    #we have to store it in template, or missing after select another page_layout.
+    attr_accessor :running_data_sources, :running_data_items, :running_data_source_sction_pieces
 
     def initialize(page_generator_instance)
       super(page_generator_instance)
@@ -92,7 +94,10 @@ module PageTag
       self.menus_tag = ::PageTag::Menus.new(self)
       self.image_tag = ::PageTag::TemplateImage.new(self)
       self.text_tag = ::PageTag::TemplateText.new(self)
-      self.page_layout_tree = theme.page_layout.self_and_descendants()
+      self.page_layout_tree = theme.page_layout.self_and_descendants().includes(:section)
+      self.running_data_sources = []
+      self.running_data_source_sction_pieces = [] # data_source belongs to section_piece 
+      self.running_data_items = []
     end
     
     #def id
@@ -168,6 +173,31 @@ module PageTag
       end
       objs      
     end
+        
 
+    def running_data_source
+      running_data_sources.last
+    end
+
+    def running_data_source_sction_piece
+      running_data_source_sction_pieces[ running_data_sources.size - 1 ]
+    end
+    
+    def running_data_item
+      running_data_items[ running_data_sources.size - 1 ] 
+    end
+    
+    def running_data_item_index
+Rails.logger.debug " running_data_source=#{running_data_source}, running_data_item=#{running_data_item}"      
+      running_data_source.index running_data_item
+    end
+    
+    def running_data_source=( data_source )
+      running_data_sources.push data_source
+      running_data_source_sction_pieces[ running_data_sources.size - 1 ] = current_piece
+    end
+    def running_data_item=( data_item )
+      running_data_items[ running_data_sources.size - 1 ] = data_item
+    end
   end
 end

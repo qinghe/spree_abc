@@ -225,16 +225,9 @@ container:
   is_container: "1"
   html: |-
     <!-- container  -->
-    <div class="<%=g_piece_selector%> <%=@template.current_piece.as_child_selector%> content_layout" >
+    <div class="content_layout <%= get_container_class(@template.current_piece) %>" >
           <div class="<%=g_piece_selector%>_inner clear-block">          
-          ~~content~~
-          <% if @template.current_piece.current_data_source.present? 
-              if @var_collection.present? && @var_collection.try( :has_pages? ) %>
-              <%= paginate @var_collection %>
-              <% #set it to nil, or render pagination more times 
-                @var_collection = nil 
-              end 
-             end %>
+          ~~content~~          
           </div>          
     </div> 
   css: |-
@@ -266,14 +259,11 @@ container:
     .<%=g_piece_selector%> .pagination .current{
       <%=@template.css(:pagination_current)%> 
     }    
-    /* !unused, css for first/last child, feature center content */
-    <% if @template.current_piece.current_data_source.present? %>
-    .<%=@template.current_piece.child_selector%>:first-child{
-    } 
-    .<%=@template.current_piece.child_selector%>:last-child{
-    }     
-    <% end %> 
-   
+    <% if @template.current_piece.view_column_count >0 %>    
+    /* css for last column in row, feature center content */
+    .<%=@template.current_piece.child_selector%>.column_last>div{ margin-right:0; padding-right:0; } 
+    <% end %>
+    
   title: container
   slug: container
   
@@ -356,9 +346,9 @@ menuitem:
       .<%=g_piece_selector%> a.depth4{ <%= @template.css :depth4 %>  }
       <% if @template.current_piece.get_content_param_by_key(:tide_effect) %>
       .<%=g_piece_selector%> a span{ position:absolute; display:block; }
-      <% end %>
       .<%=g_piece_selector%> span.name{ height:100%; }
       .<%=g_piece_selector%> span.tooltips{  height:0;  }
+      <% end %>
 
   js: ""
 image:

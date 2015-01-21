@@ -23,7 +23,8 @@ module PageTag
     end  
            
     def wrapped_models
-      models.collect{|model|  WrappedProduct.new(self, model) }
+      return @wrapped_models if @wrapped_models
+      @wrapped_models = models.collect{|model|  WrappedProduct.new(self, model) }
     end
 
     # means the current select blog post in erubis context.

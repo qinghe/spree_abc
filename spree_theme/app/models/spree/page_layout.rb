@@ -1,3 +1,5 @@
+# section param effect on content, we use data_source_param, such as pagination
+# section param effect on css, we use content_param, such as clickable, image size
 module Spree
   class PageLayout < ActiveRecord::Base
     #extend FriendlyId
@@ -17,10 +19,12 @@ module Spree
     before_destroy :remove_section
     before_save :fix_data_source_param
     
+    delegate :is_html_root?, :is_container?, to: :section
+
     scope :full_html_roots, ->{ where(:is_full_html=>true,:parent_id=>nil) }
     #attr_accessible :section_id,:title
     attr_accessor :current_contexts, :inherited_contexts
-  
+    
     class << self
       # create component, it is partial layout, no html body, composite of some sections. 
       #notice: attribute section_id, title required
@@ -99,9 +103,6 @@ module Spree
     begin ' page_layout content'
       # a page_layout tree could be whole html or partial html, it depend's on self.section.section_piece.is_root?,  
       # it is only for root.
-      def is_html_root?
-        self.section.section_piece.is_root? 
-      end
       
       # view content image_style ex. taxon_name, render as <a> or <span>? 
       def view_as_clickable?        
@@ -112,12 +113,18 @@ module Spree
           true
         end 
       end
+      # view content as grid.
+      def view_column_count
+        is_container? ?  get_content_param_by_key( :columns ) : 0
+      end
       
       # * description - content_param is integer, each bit has own mean for each section.
       # * params
       #   * key - clickable, taxon_name, render as <a> or <span>?
       #         - image-size,  main product image size, [small|product|large|original]
-      #         - menu effect, tide_effect - bit3,  
+      #         - tide_effect, menu tide_effect - bit3,
+      #         - columns, eliminate margin-right of last column - bit3,
+        
       def get_content_param_by_key(key)
         case key
         when :clickable
@@ -133,10 +140,11 @@ module Spree
           [:mini, :large, :medium, :small, :original].fetch( idx, :mini )
         when :zoomable
           #bit 8
-          content_param&128>0
-        
+          content_param&128>0        
         when :tide_effect #bit 3
           content_param&4 >0
+        when :columns #bit 1,2,3,4
+          content_param&15
         else 
           nil
         end 
@@ -519,27 +527,38 @@ module Spree
       if(pos = (piece=~/~~content~~/))
         if node.data_source.present? #node.data_source.singularize
           case node.current_data_source
+            # var_collection has to vary in name, may be nested. 
+            # data_source, data_item is for column index computing.
             when DataSourceEnum.gpvs, DataSourceEnum.this_product, DataSourceEnum.gpvs_theme
               # for this_product, we have to wrapped with form, or option_value radio would not work.
               subpieces = <<-EOS1 
-              <% @var_collection = @template.products( (defined?(page) ? page : @current_page) ).each{|product| %>
+              <% @template.running_data_source= @template.products( (defined?(page) ? page : @current_page) ) %>
+              <% @template.running_data_source.each(){|product| @template.running_data_item = product %>
                   <%= form_for :order, :url => populate_orders_path do |f| %>
                   #{subpieces}
                   <% end %>
               <% } %>
+              #{get_pagination}
+              <% @template.running_data_sources.pop %>
               EOS1
+              #set var_collection  to nil, or render pagination more times
             when DataSourceEnum.blog, DataSourceEnum.post
               subpieces = <<-EOS1 
-              <% @var_collection = @template.posts( (defined?(page) ? page : @current_page) ).each{|post| %>
+              <% @template.running_data_source= @template.posts( (defined?(page) ? page : @current_page) ) %>
+              <% @template.running_data_source.each{|post| @template.running_data_item = post %>
                   #{subpieces}
               <% } %>
+              #{get_pagination}
+              <% @template.running_data_sources.pop %>
               EOS1
             when DataSourceEnum.taxon
               #assigned menu could be root or node
               subpieces = <<-EOS3 
               <% if @template.menu.present? %>
                 <% if @template.menu.root? %>
-                  <% @template.menu.children.each{|page|%> #{subpieces} <%}%>
+                  <% @template.running_data_source= @template.menu.children %>
+                  <% @template.running_data_source.each{|page| @template.running_data_item = page %> #{subpieces} <%}%>
+                  <% @template.running_data_sources.pop %>
                 <% else %>  
                   <% @template.menu.tap{|page| %> #{subpieces} <%}%>
                 <% end %>              
@@ -580,6 +599,10 @@ module Spree
     # proc available in template
     def get_page_script()
       "<% proc_page=Proc.new{ defined?(page) ? page : @current_page } %> #{$/}"
+    end
+    
+    def get_pagination(  )
+      "<%= paginate( @template.running_data_source ) if @template.running_data_source.try( :has_pages? ) %> " 
     end
         
     # Do not support add_layout_tree now. Page layout should be full html, Keep it simple. 
