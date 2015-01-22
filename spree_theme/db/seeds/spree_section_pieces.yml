@@ -378,7 +378,7 @@ product_image:
   is_container: "0"
   html: |  
     <% if defined? product %>      
-     <% if @template.current_piece.view_as_clickable? %>
+     <% if @template.current_piece.clickable? %>
       <%= link_to product_main_image( @template.current_piece, product ), product.path %>
      <% else %>
       <%= product_main_image( @template.current_piece, product ) %>
@@ -411,7 +411,7 @@ product_name:
   html: |    
     <% if defined? product %>
      <%# span only for selector  .g_piece_selector a %>
-     <% if @template.current_piece.view_as_clickable? %>
+     <% if @template.current_piece.clickable? %>
        <a href="<%= product.path %>"> <%=product.name %> </a>
      <% else %>
        <%=product.name %>
@@ -717,11 +717,7 @@ taxon_name:
   is_container: "0"
   html: |
     <% (defined?(page) ? page : @current_page).tap{|page| %>
-      <% if @template.current_piece.view_as_clickable? %>
-        <%= link_to page.name, page.path, page.extra_html_attributes %>    
-      <% else %>
-        <%= page.name %>
-      <% end %>
+      <%= page_attribute( current_piece, page, :name ) %>
     <% }%>
   created_at: 2011-09-20 19:40:07
   updated_at: 2011-09-20 19:40:07
@@ -1259,7 +1255,7 @@ post_title:
   is_container: "0"
   html: |    
     <% if defined? post %>     
-     <% if @template.current_piece.view_as_clickable? %>
+     <% if @template.current_piece.clickable? %>
        <a href="<%= post.path %>"> <%=post.title %> </a>
      <% else %>
        <%=post.title %>
@@ -1524,7 +1520,7 @@ taxon_tooltips:
   is_selectable: "1"
   is_container: "0"
   html: |
-    <% if @template.current_piece.view_as_clickable? %>
+    <% if @template.current_piece.clickable? %>
       <%= link_to page.tooltips, page.path, page.extra_html_attributes %>    
     <% else %>
       <%= page.tooltips %>
@@ -1558,6 +1554,20 @@ hover_effect_expansion_container:
       .<%= @template.current_piece.section_selector %> .child_2{  display:none;  }
   js: ''
   
+with_more_link_container:
+  id: 74
+  title: with more link container
+  slug: with-more-link-container
+  is_selectable: "0"
+  is_container: "1"
+  html: |   
+      ~~content~~
+      <%= page_attribute( current_piece, page, :name, {:} ) %>
+  css: |
+    .<%=@template.current_piece.section_selector%> a.more{
+      <%= @template.css :button %> 
+    }
+  js: ''
   
 # mobile section pieces 
 root_for_mobile:

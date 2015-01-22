@@ -96,7 +96,17 @@ module Spree
         current_piece.template.menu.try(:children) || []  
       end      
     end
-                    
+    
+    # in container 'with more button', customer want to customize link text.
+    def page_attribute( current_piece, page, attribue_name )
+      attribute_value = page.send attribue_name
+      
+      if current_piece.clickable? 
+        link_to attribute_value, page.path, page.extra_html_attributes    
+      else
+        attribute_value
+      end    
+    end
     #==================================================================================================
     # Editor methods
     #==================================================================================================
