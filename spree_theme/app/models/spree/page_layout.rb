@@ -120,16 +120,24 @@ module Spree
       
       # use as css class, later js select elements by those class
       def effects
-        effect_classes =[]
-        effect_classes << 'hover_effect_tide' if effect?(:hover_effect_tide)        
-        effect_classes
+        if @effect_classes.nil?
+          @effect_classes =[]
+          @effect_classes << 'hover_effect_slide' if effect?(:hover_effect_slide)        
+          @effect_classes << 'hover_effect_show' if effect?(:hover_effect_show)        
+          @effect_classes << 'hover_effect_expansion' if effect?(:hover_effect_expansion)
+        end        
+        @effect_classes
       end
       
-      #         - tide_effect, menu tide_effect - bit3,
+      # effect_slide, menu effect - bit3,
       def effect?( an_effect )
         case an_effect
-        when :hover_effect_tide #bit 3
-          content_param&4 >0
+          when :hover_effect_slide #bit 3
+            content_param&4 >0
+          when :hover_effect_show  #bit 4
+            content_param&8 >0
+          when :hover_effect_expansion  #bit 5
+            content_param&16 >0
         else
           false
         end
@@ -553,7 +561,7 @@ module Spree
                   <% end %>
               <% } %>
               #{get_pagination}
-              <% @template.running_data_sources.pop %>
+              <% @template.running_data_source = nil %>
               EOS1
               #set var_collection  to nil, or render pagination more times
             when DataSourceEnum.blog, DataSourceEnum.post
@@ -563,7 +571,7 @@ module Spree
                   #{subpieces}
               <% } %>
               #{get_pagination}
-              <% @template.running_data_sources.pop %>
+              <% @template.running_data_source = nil %>
               EOS1
             when DataSourceEnum.taxon
               #assigned menu could be root or node
@@ -572,7 +580,7 @@ module Spree
                 <% if @template.menu.root? %>
                   <% @template.running_data_source= @template.menu.children %>
                   <% @template.running_data_source.each{|page| @template.running_data_item = page %> #{subpieces} <%}%>
-                  <% @template.running_data_sources.pop %>
+                  <% @template.running_data_source = nil %>
                 <% else %>  
                   <% @template.menu.tap{|page| %> #{subpieces} <%}%>
                 <% end %>              

@@ -76,3 +76,20 @@
 13. 在网页设计中，我们需要知道，产品列表中，一行显示多少个产品，对于一行中的最后一个margin-right=0;
    实现：当输出container的数据时，根据数据的索引和container一行的列数计算出当前数据是在第一列或是最后一列，输出相应的CSS selector到数据所在DIV，            
 
+14. 需要一种菜单特效, 当鼠标放到‘职业装系列’， 其子菜单逐渐滑出，同时如果‘销售类’子菜单打开，逐渐闭合。
+    - 职业装系列
+      |- 男西装
+      |- 女西装
+      |- 女套装
+    - 销售类
+      |- 楼盘销售
+      |- 汽车销售
+      |- 商场销售
+   实现方式：
+      1. 创建hover_expansion特效， 
+      2. 创建子菜单模块, 用来显示当前分类的下级分类。
+        div.data
+          div.hover_expansion_contaioner
+            div.child_1 taxon_name
+            div.child_2 submenu
+      

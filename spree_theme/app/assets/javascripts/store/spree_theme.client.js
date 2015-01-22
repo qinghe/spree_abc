@@ -1,7 +1,7 @@
 //= require jquery
 //= require jquery.validate/localization/messages_zh-CN.js
 //= require jquery.simplemodal.js
-
+//= require store/section_effect
 $(document).ready(function() {
   // template theme selection for designer shop
   $( "#embeded_content_wrapper" ).hover(
@@ -12,30 +12,6 @@ $(document).ready(function() {
     function() { $( "#embeded_content_wrapper" ).show(); }
   );
   
-});
-$(document).ready(function() {
-  // initialize sections    
-    //$($("input.fixed_container").val()).floatBar({
-    //    bodyWidth:980, vertical:"top",  moveOnOff:false, focusOnOff:false
-    //  });
-    //menu tide_effect
-    $(".hover_effect_tide").each(function(index, element){
-                  //nav sliding   
-            var height = ''+ $('.child_1',element).height()+'px'
-            var offset = '-'+ height ;
-            //$('.name',element).css({ height: height});
-            $('.child_2',element).css({ bottom:offset, height: height});
-            //nav sliding            
-            $(element).hover(function(){
-                $(".child_1",this).stop().animate({top:offset,left:'0px'},{queue:false,duration:300});
-                $(".child_2",this).stop().animate({bottom:'0px',left:'0px'},{queue:false,duration:300});
-            },function(){
-                $(".child_1",this).stop().animate({top:'0px',left:'0px'},{queue:false,duration:300});
-                $(".child_2",this).stop().animate({bottom:offset,left:'0px'},{queue:false,duration:300});
-                 
-                }); 
-    });     
-
 });
 
 // copy from project https://github.com/citrus/spree_variant_options

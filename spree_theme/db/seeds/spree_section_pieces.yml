@@ -273,12 +273,10 @@ hmenu:
   is_container: "1"
   resources: m
   html: |-
-    <ul class="<%=g_piece_selector%> <%= @template.current_piece.effects.join(' ')%>" >
-    <% if @template.menu.present? %>
-    <% @template.menu.children.each{|page| %>
+    <ul class="<%=g_piece_selector%>" >
+    <% get_menu_items(@template.current_piece).each{|page| %>
        ~~content~~
     <% } %>
-    <% end %>
     </ul>
   css: |-
     .<%=g_piece_selector%>, .<%=g_piece_selector%> ul{ margin: 0; padding: 0;}
@@ -300,11 +298,9 @@ vmenu:
   slug: vmenu
   html: |-
     <ul class="<%=g_piece_selector%>">
-    <% if @template.menu.present? %>
-    <% @template.menu.children.each{|page| %>
+    <% get_menu_items(@template.current_piece).each{|page| %>
        ~~content~~
     <% } %>
-    <% end %>
     </ul>
   css: |-
     .<%=g_piece_selector%>,.<%=g_piece_selector%> ul{ margin: 0; padding: 0;}
@@ -1506,16 +1502,16 @@ container_fixed:
   css: |
     .<%=@template.current_piece.section_selector%> { position: fixed; right:0; top:250px; <%=@template.css(:position) %>}
   js: ''
-container_hover_effect_tide:
+hover_effect_slide_container:
   id: 70
-  title: container hover effect tide
-  slug: container-hover-effect-tide
+  title: hover effect slide container
+  slug: hover-effect-slide-container
   is_selectable: "0"
   is_container: "1"
   html: |
     ~~content~~    
   css: |
-      /* tide_effect: width,height is required, children are absolute  */
+      /* slide_effect: width,height is required, children are absolute  */
       /* override original position,display */
       .<%= @template.current_piece.section_selector %> .child_1{  position:absolute; display:block;height:100%; }
       .<%= @template.current_piece.section_selector %> .child_2{  position:absolute; display:block;height:0;  }
@@ -1528,13 +1524,41 @@ taxon_tooltips:
   is_selectable: "1"
   is_container: "0"
   html: |
-    <% (defined?(page) ? page : @current_page).tap{|page| %>
-        <%= page.tooltips %>
-    <% }%>
+    <% if @template.current_piece.view_as_clickable? %>
+      <%= link_to page.tooltips, page.path, page.extra_html_attributes %>    
+    <% else %>
+      <%= page.tooltips %>
+    <% end %>
   created_at: 2011-09-20 19:40:07
   updated_at: 2011-09-20 19:40:07
   css: |
   js: ""
+hover_effect_show_container:
+  id: 72
+  title: hover effect show container
+  slug: hover-effect-show-container
+  is_selectable: "0"
+  is_container: "1"
+  html: |
+    ~~content~~    
+  css: |
+      .<%= @template.current_piece.section_selector %> .child_1{   }
+      .<%= @template.current_piece.section_selector %> .child_2{  position:absolute; display:none;bottom:0;  }
+  js: ''
+hover_effect_expansion_container:
+  id: 73
+  title: hover effect expansion container
+  slug: hover-effect-expansion-container
+  is_selectable: "0"
+  is_container: "1"
+  html: |
+    ~~content~~    
+  css: |
+      .<%= @template.current_piece.section_selector %> .child_1{   }
+      .<%= @template.current_piece.section_selector %> .child_2{  display:none;  }
+  js: ''
+  
+  
 # mobile section pieces 
 root_for_mobile:
   id: 200

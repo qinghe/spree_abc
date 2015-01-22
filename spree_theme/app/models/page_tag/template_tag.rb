@@ -198,8 +198,14 @@ module PageTag
     end
     
     def running_data_source=( data_source )
-      running_data_sources.push data_source
-      running_data_source_sction_pieces[ running_data_sources.size - 1 ] = current_piece
+      if data_source.nil?
+        running_data_sources.pop
+        running_data_source_sction_pieces.pop
+        running_data_items.pop
+      else
+        running_data_sources.push data_source
+        running_data_source_sction_pieces[ running_data_sources.size - 1 ] = current_piece
+      end
     end
     def running_data_item=( data_item )
       running_data_items[ running_data_sources.size - 1 ] = data_item

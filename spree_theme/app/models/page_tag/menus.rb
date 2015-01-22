@@ -75,9 +75,12 @@ module PageTag
     end
 
     # get menu root assigned to section instance 
-    # 1. containerA(menu) - taxonomy_name
-    #                     - hmenu
-    # 2. containerB- hmenu(menu)
+    # 1. containerA(taxon_root) - taxonomy_name
+    #                           - hmenu
+    # 2. containerB- hmenu( taxon_root )
+    # 3. containerC- taxon_name( taxon )
+    #              - container( taxon.products )
+    #                - product_name       
     # for menu assignment easy, method 1 is not support any more   
     def get( wrapped_page_layout, resource_position=0  )
       key = wrapped_page_layout.to_key 
@@ -85,7 +88,7 @@ module PageTag
       unless menus_cache.key? key
         #wrapped_page_layout.assigned_menu_id may not exist for some reason.        
         assigned_menu_id = wrapped_page_layout.assigned_menu_id(resource_position)
-        if assigned_menu_id>0 and SpreeTheme.taxon_class.exists?( assigned_menu_id )
+        if assigned_menu_id>0 && SpreeTheme.taxon_class.exists?( assigned_menu_id )
           menu_tree = SpreeTheme.taxon_class.find( assigned_menu_id ).self_and_descendants
         end
         menus_cache[key] = menu_tree     

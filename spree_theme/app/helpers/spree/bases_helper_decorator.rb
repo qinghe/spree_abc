@@ -1,5 +1,6 @@
 module Spree
   module BaseHelper
+    #include SpreeTheme::TemplateBaseHelper
     #==================================================================================================
     # template methods, using by template
     #==================================================================================================
@@ -78,14 +79,24 @@ module Spree
           css_classes << " data_#{i+1}"
         end                  
       end
-      if current_piece.parent.effect?( :hover_effect_tide)
+      if current_piece.parent.effects.present?
         css_classes << " child_#{current_piece.nth_of_siblings}"
       end
       
       css_classes      
     end
     
-                
+    def get_menu_items( current_piece )      
+      # for feature hmenu show descendants of current page
+      # we should check :page first.
+      running_data_item = current_piece.template.running_data_item
+      if running_data_item.is_a? PageTag::Menus::WrappedMenu
+        running_data_item.children
+      else
+        current_piece.template.menu.try(:children) || []  
+      end      
+    end
+                    
     #==================================================================================================
     # Editor methods
     #==================================================================================================
