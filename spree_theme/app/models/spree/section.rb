@@ -169,7 +169,7 @@ module Spree
     
     # add new column later.
     def is_container?
-      root_id == 2
+      title =~/container/
     end
   end
 

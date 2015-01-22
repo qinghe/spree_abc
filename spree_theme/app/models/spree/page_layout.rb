@@ -104,20 +104,6 @@ module Spree
       # a page_layout tree could be whole html or partial html, it depend's on self.section.section_piece.is_root?,  
       # it is only for root.
       
-      # view content image_style ex. taxon_name, render as <a> or <span>? 
-      def view_as_clickable?        
-        # first bit is clickable
-        if respond_to? :content_param
-          get_content_param_by_key(:clickable)
-        else
-          true
-        end 
-      end
-      # view content as grid.
-      def view_column_count
-        is_container? ?  get_content_param_by_key( :columns ) : 0
-      end
-      
       # use as css class, later js select elements by those class
       def effects
         if @effect_classes.nil?

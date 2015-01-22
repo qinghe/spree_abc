@@ -36,7 +36,10 @@ module SpreeMultiSite
         short_name = request.cookies['_dalianshops_short_name'] 
         if short_name.present?
           store = Spree::Store.unscoped.find_by_code( short_name )
-        end        
+        end
+        #support request.host for development
+        store ||= Spree::Store.by_domain( request.host )
+        
       end
       store
     end

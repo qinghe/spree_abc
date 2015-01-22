@@ -259,9 +259,9 @@ container:
     .<%=g_piece_selector%> .pagination .current{
       <%=@template.css(:pagination_current)%> 
     }    
-    <% if @template.current_piece.view_column_count >0 %>    
+    <% if @template.current_piece.column_count >0 %>    
     /* css for last column in row, feature center content */
-    .<%=@template.current_piece.child_selector%>.column_last>div{ margin-right:0; padding-right:0; } 
+    .<%=@template.current_piece.child_selector%>.data_last>div{ margin-right:0; padding-right:0; } 
     <% end %>
     
   title: container
@@ -717,7 +717,7 @@ taxon_name:
   is_container: "0"
   html: |
     <% (defined?(page) ? page : @current_page).tap{|page| %>
-      <%= page_attribute( current_piece, page, :name ) %>
+      <%= page_attribute( @template.current_piece, page, :name ) %>
     <% }%>
   created_at: 2011-09-20 19:40:07
   updated_at: 2011-09-20 19:40:07
@@ -1562,9 +1562,9 @@ with_more_link_container:
   is_container: "1"
   html: |   
       ~~content~~
-      <%= page_attribute( current_piece, page, :name, {:} ) %>
+      <%= page_attribute( @template.current_piece, page, :name ) %>
   css: |
-    .<%=@template.current_piece.section_selector%> a.more{
+    .<%= @template.current_piece.section_selector%> a.more{
       <%= @template.css :button %> 
     }
   js: ''

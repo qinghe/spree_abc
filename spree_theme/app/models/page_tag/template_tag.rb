@@ -8,7 +8,7 @@ module PageTag
   class TemplateTag < Base
     class WrappedPageLayout < WrappedModel
       self.accessable_attributes=[:id,:title,:current_data_source,:wrapped_data_source_param, :data_filter,:current_contexts, :context_either?, 
-        :view_as_clickable?, :view_column_count, :get_content_param_by_key, :is_container?, :effect?, :effects]
+        :view_as_clickable?, :get_content_param_by_key, :is_container?, :effect?, :effects]
       attr_accessor :section_id, :page_layout, :parent
       
       delegate *self.accessable_attributes, to: :page_layout
@@ -73,6 +73,18 @@ module PageTag
       def nth_of_siblings
         self.collection_tag.page_layout_tree.select{|pl| pl.parent_id == page_layout.parent_id && pl != page_layout && pl.lft < page_layout.lft }.size + 1
       end
+      
+      # view content image_style ex. taxon_name, render as <a> or <span>? 
+      def clickable?        
+        # first bit is clickable
+        get_content_param_by_key(:clickable)
+      end
+            
+      # view content as grid.
+      def column_count
+        is_container? ?  get_content_param_by_key( :columns ) : 0
+      end
+      
     end
     
     attr_accessor :page_layout_tree
