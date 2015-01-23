@@ -147,13 +147,13 @@ namespace :spree_theme do
       end
     end 
     
-    if ENV['FIX'].present?
+    if ENV['SPREE_FIX'].present?
       incomplete_page_layouts.uniq.each{| pl |
         pl.replace_with( Spree::Section.find( pl.section_id ))
       }
     end
     
-    pvs = theme.param_values.all(:include=>{:section_param=>{:section_piece_param=>:param_category}})
+    pvs = theme.param_values.includes(:section_param=>{:section_piece_param=>:param_category})
     for pv in pvs
       if pv.section_param.blank?
         puts "error:pv=#{pv.id} has no section_param"  

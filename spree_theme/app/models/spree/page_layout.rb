@@ -4,7 +4,6 @@ module Spree
   class PageLayout < ActiveRecord::Base
     #extend FriendlyId
     include Spree::Context::Base
-
     acts_as_nested_set :scope=>"root_id" # scope is for :copy, no need to modify parent_id, lft, rgt.
     belongs_to :section  
     has_many :themes, :class_name => "TemplateTheme",:primary_key=>:root_id,:foreign_key=>:page_layout_root_id
@@ -108,25 +107,13 @@ module Spree
       def effects
         if @effect_classes.nil?
           @effect_classes =[]
-          @effect_classes << 'hover_effect_slide' if effect?(:hover_effect_slide)        
-          @effect_classes << 'hover_effect_show' if effect?(:hover_effect_show)        
-          @effect_classes << 'hover_effect_expansion' if effect?(:hover_effect_expansion)
+          Section::HoverEffect.each_pair{|effect,val|
+            #   00001000 
+            # & 00001111  => val            
+            @effect_classes << "hover_effect_#{effect}" if( (get_content_param & Section::HoverEffectMask) == val)
+          }  
         end        
         @effect_classes
-      end
-      
-      # effect_slide, menu effect - bit3,
-      def effect?( an_effect )
-        case an_effect
-          when :hover_effect_slide #bit 3
-            content_param&4 >0
-          when :hover_effect_show  #bit 4
-            content_param&8 >0
-          when :hover_effect_expansion  #bit 5
-            content_param&16 >0
-        else
-          false
-        end
       end
       
       # * description - content_param is integer, each bit has own mean for each section.
@@ -134,25 +121,24 @@ module Spree
       #   * key - clickable, taxon_name, render as <a> or <span>?
       #         - image-size,  main product image size, [small|product|large|original]
       #         - columns, eliminate margin-right of last column - bit3,
-        
       def get_content_param_by_key(key)
         case key
         when :clickable
-          content_param&1 >0
+          get_content_param&1 >0
         when :main_image_style
           #bit 2,3,4
-          idx = (content_param&14)>>1
+          idx = (get_content_param&14)>>1
           #default is medium
           [:medium, :large, :product, :small, :original ].fetch( idx, :medium )
         when :thumbnail_style
           #bit 5,6,7
-          idx = (content_param&112)>>4
+          idx = (get_content_param&112)>>4
           [:mini, :large, :medium, :small, :original].fetch( idx, :mini )
         when :zoomable
           #bit 8
-          content_param&128>0        
+          get_content_param&128>0        
         when :columns #bit 1,2,3,4
-          content_param&15
+          get_content_param&15
         else 
           nil
         end 
@@ -165,6 +151,14 @@ module Spree
         }        
         save!          
       end
+      
+      # we want to inherit content_param form section, page_layout could override it.
+      # ex. section have hover effect, page_layout should have hover effect by default. 
+      # get content from section, if self.content_param==0.
+      def get_content_param
+        self.content_param == 0 ? section.content_param : self.content_param        
+      end
+      
     end
     
     def has_child?

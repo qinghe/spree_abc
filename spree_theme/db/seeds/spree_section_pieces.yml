@@ -1554,21 +1554,37 @@ hover_effect_expansion_container:
       .<%= @template.current_piece.section_selector %> .child_2{  display:none;  }
   js: ''
   
-with_more_link_container:
+hover_effect_overlay_container:
   id: 74
-  title: with more link container
-  slug: with-more-link-container
+  title: hover effect overlay container
+  slug: hover-effect-overlay-container
   is_selectable: "0"
   is_container: "1"
-  html: |   
-      ~~content~~
-      <%= page_attribute( @template.current_piece, page, :name ) %>
+  html: |
+    ~~content~~    
   css: |
-    .<%= @template.current_piece.section_selector%> a.more{
-      <%= @template.css :button %> 
-    }
+      /* overlay_effect: width,height is required, children are absolute  */
+      /* override original position,display */
+      /* child_1.z-index < child_2.z-index, child_2 is on top of child_1 initially, slideUp on hovering */
+      .<%= @template.current_piece.section_selector %> .child_1{   }
+      .<%= @template.current_piece.section_selector %> .child_2{  position:absolute; }
   js: ''
-  
+hover_effect_popup_container:
+  id: 75
+  title: hover effect popup container
+  slug: hover-effect-popup-container
+  is_selectable: "0"
+  is_container: "1"
+  html: |
+    ~~content~~    
+  css: |
+      /* popup_effect: width,height is required, children are absolute  */
+      /* override original position,display */
+      /* child_1.z-index < child_2.z-index, child_2 is on top of child_1 initially, slideUp on hovering */
+      .<%= @template.current_piece.section_selector %> .child_1{ z-index:10;  }
+      .<%= @template.current_piece.section_selector %> .child_2{ position:absolute; display:none; z-index:20; }
+  js: ''
+
 # mobile section pieces 
 root_for_mobile:
   id: 200
