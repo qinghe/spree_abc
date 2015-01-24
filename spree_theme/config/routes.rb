@@ -60,7 +60,7 @@ Spree::Core::Engine.routes.draw do
         post :copy
         post :release
         post :import
-        put :apply        
+        patch :apply        
       end
       
       resources :page_layouts do
