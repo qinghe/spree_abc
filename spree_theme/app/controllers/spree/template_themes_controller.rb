@@ -9,7 +9,7 @@ module Spree
       #  redirect_to new_site_path      
       #end
     end  
-    
+        
     def under_construction  
       #logger.debug "request.env[/devise/]= #{request.env['devise.mapping']},#{warden.inspect}"   
       #require spree_auth_devise

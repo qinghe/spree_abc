@@ -11,7 +11,10 @@ $(document).ready(function() {
   $( "#embeded_content_wrapper_icon" ).hover(
     function() { $( "#embeded_content_wrapper" ).show(); }
   );
-  
+
+  if($("#map").is('*')){
+    initMap();    
+  }  
 });
 
 // copy from project https://github.com/citrus/spree_variant_options

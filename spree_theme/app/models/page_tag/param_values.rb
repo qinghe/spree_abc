@@ -23,7 +23,9 @@ module PageTag
   
     #usage
     # key, template_tag.current_piece.to_key, look for css in current section piece
-    # options: :source=>[computed|normal], get pvalue from 'pvalue' or 'computed_pvalue'  
+    # options: source=>[computed|normal], get pvalue from 'pvalue' or 'computed_pvalue'
+    #          html_attribute_ids=>[],get pvalue only in html_attribute_id in :html_attribute_ids
+    #          ex.  css(:inner, {:html_attribute_ids=>[15,21]})    
     def css( class_name, options={})
       class_name = class_name.to_s
       key = self.template_tag.current_piece.to_key

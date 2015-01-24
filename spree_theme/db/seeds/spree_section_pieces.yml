@@ -1585,6 +1585,17 @@ hover_effect_popup_container:
       .<%= @template.current_piece.section_selector %> .child_2{ position:absolute; display:none; z-index:20; }
   js: ''
 
+baidu_map:
+  id: 76
+  title: baidu map
+  slug: baidu-map
+  is_selectable: "0"
+  is_container: "0"
+  html: |
+    <%= render 'map' %>
+  css: '/* width,height are required for map */'    
+  js: ''
+
 # mobile section pieces 
 root_for_mobile:
   id: 200
