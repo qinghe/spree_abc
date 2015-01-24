@@ -97,8 +97,9 @@ module SpreeTheme::System
       if params[:c] && params[:c].to_i>0 
         @menu = SpreeTheme.taxon_class.find_by_id(params[:c])
       end
-      # get default_taxon from root, or it has no root, inherited_page_context cause error      
-      @menu ||= ( @theme.home_page || website.home_page || DefaultTaxonRoot.instance(request_fullpath).children.first )
+      # get default_taxon from root, or it has no root, inherited_page_context cause error
+      # @theme could be nil at present.      
+      @menu ||= ( @theme.try(:home_page) || website.home_page || DefaultTaxonRoot.instance(request_fullpath).children.first )
       #elsif SpreeTheme.taxon_class.home.present? 
       # #it is discarded, it is conflict with feature theme has own index page. it would show product assigned index page of other theme   
       # #now each theme has own index page. website has own index page. 
