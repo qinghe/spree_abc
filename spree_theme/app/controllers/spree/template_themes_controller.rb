@@ -18,7 +18,7 @@ module Spree
     
     # @theme is required for xhr
     def new_admin_session
-      @user = Spree::User.new
+      #@user = Spree::User.new
     end
     
     # @theme is required for xhr
