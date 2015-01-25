@@ -77,7 +77,7 @@ module PageEvent
         computed_inner['unset'] = Spree::HtmlAttribute::BOOL_FALSE
         self.updated_html_attribute_values.push(computed_inner)
       else
-        computed_inner = partial_html.html_attribute_values('inner_#{html_attribute_name}')
+        computed_inner = partial_html.html_attribute_values("inner_#{html_attribute_name}")
         computed_inner['unset'] = Spree::HtmlAttribute::BOOL_TRUE
         self.updated_html_attribute_values.push(computed_inner)
       end
