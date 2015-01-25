@@ -242,6 +242,7 @@ container:
     { overflow: hidden;/* keep border visible*/
       min-height:1px;min-width:1px;  /* it is required as placeholder */
       <%=@template.css(:inner)%>
+      _zoom: 1;
     }
     .<%=@template.current_piece.child_selector%> 
     {
