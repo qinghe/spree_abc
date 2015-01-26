@@ -15,18 +15,12 @@ module Spree
       @template_theme = TemplateTheme.find( params[:template_theme_id] )
       @page_layout = PageLayout.find( params[:id] )
       
-      if @page_layout.update_attributes(permitted_resource_params)
-        flash[:success] = flash_message_for(@object, :successfully_updated)
-        respond_with(@object) do |format|
-          format.html { redirect_to location_after_save }
+      if @page_layout.update_attributes( permitted_resource_attributes )
+        respond_with(@page_layout) do |format|
           format.js   { render :layout => false }
         end
       else
-        respond_with(@object) do |format|
-          format.html do
-            flash.now[:error] = @object.errors.full_messages.join(", ")
-            render action: 'edit'
-          end
+        respond_with(@page_layout) do |format|
           format.js { render layout: false }
         end
       end
@@ -74,6 +68,10 @@ module Spree
       layout = PageLayout.find(layout_id)
       se = PageEvent::SectionEvent.new("disable_section", layout )
       se.notify
+    end
+    
+    def permitted_resource_attributes
+      params.require('page_layout').permit( permitted_attributes.page_layout_attributes )
     end
     
   end
