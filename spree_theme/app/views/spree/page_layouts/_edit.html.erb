@@ -1,2 +1,10 @@
-<% #edit page_layout in editor 
+<% #edit page_layout in editor, 
+   # title, columns, data_resource, 
 %>
+<%=form_for  @page_layout, url: template_theme_page_layout_path(@template_theme, @page_layout), remote: true do |f| %>
+<div>
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+</div>
+
+<% end %>
