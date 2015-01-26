@@ -11,7 +11,7 @@ module Spree
     # this table is used by other site, should not use scope here
     # we want title to support multi-language, so disable friendly_id
     #friendly_id :title, :use => :slugged
-    #has_many :full_set_nodes, :class_name =>'PageLayout', :foreign_key=>:root_id, :primary_key=>:root_id
+    #has_many :full_set_nodes, -> { order 'lft' }, :class_name =>'PageLayout', :foreign_key=>:root_id, :primary_key=>:root_id
     has_many :sections, :class_name =>'Section', :foreign_key=>:root_id, :primary_key=>:section_id
     has_many :section_pieces, :through=>:sections
     # remove section relatives after page_layout destroyed.
@@ -164,13 +164,7 @@ module Spree
     def has_child?
       return (rgt-lft)>1
     end
-    
-    #get whole tree and select ancestors, rails would cache whole tree, this would save time than get ancestors for each node
-    def cached_level
-      tree = self.root.self_and_descendants
-      tree.select{|node| node.lft<lft and node.rgt>rgt}.count
-    end
-    
+        
     # get applicable resources for self
     def applicable_reources
       self.section.self_and_descendants(:include=>:section_piece).select{|node|
@@ -279,7 +273,7 @@ module Spree
     
     begin 'section content, html, css, js'
       def build_content()
-        tree = self.self_and_descendants.includes(:section=>:section_piece)
+        tree = self.self_and_descendants.includes(:section=>[:section_piece, :full_set_nodes])
         # have to Section.all, we do not know how many section_pieces each section contained.
         sections = Section.includes(:section_piece)
         section_hash = sections.inject({}){|h, s| h[s.id] = s; h}
@@ -297,7 +291,7 @@ module Spree
       end
       
       def build_css(tree, node, section_hash, theme_id=0)
-        css = section_hash[node.section_id].build_css
+        css = node.section.build_css
         css.insert(0, get_section_script(node))    
         unless node.leaf?              
           children = tree.select{|n| n.parent_id==node.id}

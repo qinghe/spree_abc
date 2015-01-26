@@ -21,7 +21,7 @@ gem "awesome_nested_set"
 
 # spree already contain
 #gem 'jquery-rails'
-#gem 'jquery-ui-rails'
+gem 'useragent'
 gem "friendly_id"
 
 group :assets do

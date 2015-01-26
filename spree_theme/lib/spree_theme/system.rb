@@ -44,7 +44,6 @@ module SpreeTheme::System
     # in case  tld/create_admin_session, should show system layout, theme may have no login section. ex www.dalianshops.com
     @special_layout = nil
     #dalianshops use template now.
-    #return if SpreeTheme.site_class.current.dalianshops?
     #Rails.logger.debug "request_fullpath=#{request_fullpath}"
     # fullpath may contain ?n=www.domain.com    
     case request_fullpath

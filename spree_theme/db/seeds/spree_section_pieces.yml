@@ -6,8 +6,8 @@ root:
   is_container: true
   is_root: true
   html: |-
-    <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-    <html xmlns="http://www.w3.org/1999/xhtml">
+    <!DOCTYPE html>
+    <html>
       <head>
       <title><%= @current_page.title%></title>
       <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
@@ -24,7 +24,7 @@ root:
     <%= csrf_meta_tags %>
     <%= render "spree/shared/analytics" %>
       </head>
-      <body class="clear-block">
+      <body class="clear-block <%= @current_page.agent_selector(request.user_agent) %>">
       <% if @current_page.site_design? %>
         <%= render "spree/shared/theme_selection_for_nondesigner" %>      
       <% end %>
@@ -231,6 +231,9 @@ container:
           </div>          
     </div> 
   css: |-
+    body.ie-6 .<%=g_piece_selector%>_inner{
+      _zoom: 1;    
+    }
     /* width,height, skinnables */
     .<%=g_piece_selector%>
     { float:left; overflow:hidden;  padding:0;  margin:0 auto; 
@@ -238,11 +241,10 @@ container:
       <%=@template.css(:block)%>
     }
     /* background, margin, border, padding */
-    .<%=g_piece_selector%> .<%=g_piece_selector%>_inner
+    .<%=g_piece_selector%>_inner
     { overflow: hidden;/* keep border visible*/
       min-height:1px;min-width:1px;  /* it is required as placeholder */
       <%=@template.css(:inner)%>
-      _zoom: 1;
     }
     .<%=@template.current_piece.child_selector%> 
     {
@@ -1582,8 +1584,8 @@ hover_effect_popup_container:
       /* popup_effect: width,height is required, children are absolute  */
       /* override original position,display */
       /* child_1.z-index < child_2.z-index, child_2 is on top of child_1 initially, slideUp on hovering */
-      .<%= @template.current_piece.section_selector %> .child_1{ z-index:10;  }
-      .<%= @template.current_piece.section_selector %> .child_2{ position:absolute; display:none; z-index:20; }
+      .<%= @template.current_piece.section_selector %> .child_1{   }
+      .<%= @template.current_piece.section_selector %> .child_2{ position:absolute; display:none;  }
   js: ''
 
 baidu_map:

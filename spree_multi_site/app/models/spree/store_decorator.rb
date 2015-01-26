@@ -26,4 +26,10 @@ Spree::Store.class_eval do
     current_store    
   end
   
+  # we can not easily modify cookies except firefox, we'll add default_site for debug page on other browser.
+  # we could set default site for missing site as well.           
+  def self.default
+    unscoped.where( default: true ).first
+  end  
+    
 end

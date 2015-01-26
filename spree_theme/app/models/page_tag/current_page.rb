@@ -57,6 +57,12 @@ module PageTag
     def reyield
       '<%=yield %>'
     end
+    
+    def agent_selector( request_user_agent )
+      user_agent = UserAgent.parse request_user_agent   
+      Rails.logger.debug "request_user_agent=#{request_user_agent}, user_agent=#{user_agent.to_s}"       
+      "#{( user_agent.browser=='Internet Explorer' ? 'ie' : user_agent.browser )} #{user_agent.version.to_s.to_i}".to_url   
+    end
   end
   
 end

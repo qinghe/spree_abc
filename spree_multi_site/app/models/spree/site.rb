@@ -45,7 +45,7 @@ class Spree::Site < ActiveRecord::Base
   class << self
     def dalianshops
       #in development, we may change site domain
-      find_by_short_name('first')#find_by_domain 
+      find_by_short_name('first')#find_by_domain
     end
     
     def current
@@ -67,7 +67,7 @@ class Spree::Site < ActiveRecord::Base
         self.current = original_current  
       end
     end
-        
+  
   end
   
   def dalianshops?
@@ -192,7 +192,7 @@ class Spree::Site < ActiveRecord::Base
   
   def add_default_data
     #current site is first, self is another.
-    store = self.stores.create!( name: site.name )do |store|
+    new_store = self.stores.create!( name: site.name )do |store|
       store.code = site.short_name
       store.site_id = self.id 
     end

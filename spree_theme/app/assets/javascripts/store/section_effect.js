@@ -48,12 +48,12 @@ $(document).ready(function() {
     
     $(".hover_effect_popup").mouseover(function(e){
         var self = $(this); var modal = $(".child_2",this);
-        var p = self.parent().width()/2 - self.position().left;
+        var p = self.parent().width()/2 - self.position().left - self.width();
         var offset = self.offset();
         // get silbings, get parent.width, get current 
         // get currentTarge.pageX, 
         var position = []; // top, left
-        if ( p>0 ){ // pop up on right side of self
+        if ( p>=0 ){ // pop up on right side of self
           position[0] = offset.top - ( modal.height() - self.height() )/2;
           position[1] = offset.left + self.width();
         }else{ // pop up on left side of self

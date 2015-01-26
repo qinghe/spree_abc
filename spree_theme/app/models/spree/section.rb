@@ -2,7 +2,8 @@ module Spree
   class Section < ActiveRecord::Base
     extend FriendlyId
     acts_as_nested_set :dependent=>:destroy #:scope=>"root_id"
-    #has_many :full_set_nodes, :class_name =>'Section', :foreign_key=>:root_id, :primary_key=>:root_id
+    # add includes(:full_set_nodes). it is same set as self_and_descendants,
+    has_many :full_set_nodes, -> { order 'lft' }, :class_name =>'Section', :foreign_key=>:root_id, :primary_key=>:root_id
     belongs_to :section_piece  
     has_many :section_params, :dependent=>:destroy #remove related param_value
     has_many :page_layouts
@@ -55,15 +56,15 @@ module Spree
     end
     
     def build_html
-       section_piece_hash = SectionPiece.all().inject({}){|h, s| h[s.id] = s; h}
-       tree = self.self_and_descendants
-       build_html_piece(tree, self, section_piece_hash)
+      #use full_set_nodes instead of self_and_descendants,  full_set_nodes is included.
+       tree = self.full_set_nodes
+       build_html_piece(tree, self, self.section_piece_in_hash)
     end
   
     def build_css
-       section_piece_hash = SectionPiece.all().inject({}){|h, s| h[s.id] = s; h}
-       tree = self.self_and_descendants
-       build_css_piece(tree, self, section_piece_hash)
+      #use full_set_nodes instead of self_and_descendants
+       tree = self.full_set_nodes
+       build_css_piece(tree, self, self.section_piece_in_hash)
     end
     
   
@@ -107,7 +108,7 @@ module Spree
     begin 'build html, css, js for section'  
       def build_html_piece(tree, node, section_piece_hash)
         # .dup, do not alter the model, or affect other method. it may be in cache. 
-         piece = node.section_piece.html.dup
+         piece = section_piece_hash[node.section_piece_id].html.dup
          piece.insert(0,get_section_script(node))
          unless node.leaf?              
            children = tree.select{|n| n.parent_id==node.id}
@@ -133,7 +134,7 @@ module Spree
       
       def build_css_piece(tree, node, section_piece_hash)
         #duplicate the css, then modify it.
-         piece = section_piece_hash[node.section_piece_id].css.dup
+        piece = section_piece_hash[node.section_piece_id].css.dup
          piece.insert(0,get_section_script(node))
          unless node.leaf?              
            children = tree.select{|n| n.parent_id==node.id}
@@ -168,6 +169,13 @@ module Spree
               %> 
            EOS
       end 
+      
+      def section_piece_in_hash
+        if @section_piece_in_hash.nil?
+          @section_piece_in_hash = SectionPiece.all().inject({}){|h, s| h[s.id] = s; h}
+        end
+        @section_piece_in_hash
+      end
       
     end
     

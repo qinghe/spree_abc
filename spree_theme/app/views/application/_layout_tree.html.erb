@@ -13,7 +13,7 @@ selected_id= (options[:selected_id]||layout_root.id )
     %>
   <div class="clear-block">
     <div class="fl">
-    <%=raw("&nbsp;&nbsp;"*page_layout.cached_level)%>
+    <%=raw("&nbsp;&nbsp;"*page_layout.depth)%>
     <% # do not call form.submit. 
       page_layout_class = 'click_editable'
       page_layout_class << ' selected' if page_layout.id==selected_id 
