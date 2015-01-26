@@ -4,10 +4,32 @@ module Spree
     def edit
       @template_theme = TemplateTheme.find( params[:template_theme_id] )
       @page_layout = PageLayout.find( params[:id] )
-      model_dialog('edit page_layout', 'edit')
+      
+      respond_to do |format|
+        format.js{ render "application/dialog_for_editor"}
+      end
+      
     end
     
     def update
+      @template_theme = TemplateTheme.find( params[:template_theme_id] )
+      @page_layout = PageLayout.find( params[:id] )
+      
+      if @page_layout.update_attributes(permitted_resource_params)
+        flash[:success] = flash_message_for(@object, :successfully_updated)
+        respond_with(@object) do |format|
+          format.html { redirect_to location_after_save }
+          format.js   { render :layout => false }
+        end
+      else
+        respond_with(@object) do |format|
+          format.html do
+            flash.now[:error] = @object.errors.full_messages.join(", ")
+            render action: 'edit'
+          end
+          format.js { render layout: false }
+        end
+      end
     end
                      
     # params
@@ -52,16 +74,6 @@ module Spree
       layout = PageLayout.find(layout_id)
       se = PageEvent::SectionEvent.new("disable_section", layout )
       se.notify
-    end
-    
-       
-    private
-    def model_dialog(dialog_title, dialog_content)
-      @dialog_title = dialog_title
-      @content_string = render_to_string :partial => dialog_content
-      respond_to do |format|
-        format.js{ render "application/model_dialog"}
-      end
     end
     
   end

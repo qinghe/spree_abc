@@ -186,7 +186,7 @@ module Spree
       #@editor = @param_value.section_param.section_piece_param.editor
       if request.post?        
         #TODO replace same name of template file 
-        uploaded_image = TemplateFile.new( params[:template_file] )
+        uploaded_image = TemplateFile.new(  params.require(:template_file).permit! )
         if uploaded_image.valid?
           uploaded_image['theme_id']=@param_value.theme_id              
           if uploaded_image.save
@@ -204,7 +204,8 @@ module Spree
         end
       else
         @theme = TemplateTheme.find(@param_value.theme_id)
-        model_dialog("File upload dialog",@dialog_content)    
+        render "application/dialog_for_editor"
+            
       end
     end
    
