@@ -124,6 +124,11 @@ module SpreeTheme::System
     
     # site has a released theme    
     if @theme.present?
+
+      if mobile? && @theme.mobile
+        @theme = @theme.mobile
+      end
+      
       unless request.xhr?
         if @is_designer
            prepare_params_for_editors(@theme)
@@ -133,20 +138,18 @@ module SpreeTheme::System
         end
       end
       
-      if mobile? && @theme.mobile
-        @theme = @theme.mobile
+      unless request.xhr?
+        # we have initialize PageTag::PageGenerator here, page like login  do not go to template_thems_controller/page
+        if @is_designer && 
+          @lg = PageTag::PageGenerator.previewer( @menu, @theme, {:resource=>@resource, :controller=>self, :page=>params[:page]})                  
+        else
+          @lg = PageTag::PageGenerator.generator( @menu, @theme, {:resource=>@resource, :controller=>self, :page=>params[:page]})          
+        end      
+        @lg.context.each_pair{|key,val|
+          # expose variable to view
+          instance_variable_set( "@#{key}", val)
+        }      
       end
-      
-      # we have initialize PageTag::PageGenerator here, page like login  do not go to template_thems_controller/page
-      if @is_designer
-        @lg = PageTag::PageGenerator.previewer( @menu, @theme, {:resource=>@resource, :controller=>self, :page=>params[:page]})                  
-      else
-        @lg = PageTag::PageGenerator.generator( @menu, @theme, {:resource=>@resource, :controller=>self, :page=>params[:page]})          
-      end      
-      @lg.context.each_pair{|key,val|
-        # expose variable to view
-        instance_variable_set( "@#{key}", val)
-      }      
     else
       redirect_to :under_construction
     end

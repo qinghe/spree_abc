@@ -15,6 +15,11 @@ Spree::Core::Engine.routes.draw do
        get 'upload_file_dialog'
        post 'upload_file_dialog'
      end
+     
+     resources :page_layouts, only: [:edit,:update] do
+       
+     end
+     
   end
   
   resources :comments, :only=>[:create] do

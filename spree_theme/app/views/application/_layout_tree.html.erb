@@ -45,6 +45,7 @@ selected_id= (options[:selected_id]||layout_root.id )
       <%= link_to "d","#", {data: {id:page_layout.id, op:'move_right'}, onclick: 'submit_layout_tree_form(this);' } %>
       <%= link_to "<","#", {data: {id:page_layout.id, op:'promote'}, onclick: 'submit_layout_tree_form(this);' } %>
       <%= link_to ">","#", {data: {id:page_layout.id, op:'demote'}, onclick: 'submit_layout_tree_form(this);' } %>
+      <%= link_to "e",edit_template_theme_page_layout_path( theme, page_layout), remote: true %>
       </div>
     <% end %>
   </div>
