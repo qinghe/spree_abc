@@ -53,11 +53,12 @@ $(document).ready(function() {
         // get silbings, get parent.width, get current 
         // get currentTarge.pageX, 
         var position = []; // top, left
+        var scroll_top = $(window).scrollTop();
         if ( p>=0 ){ // pop up on right side of self
-          position[0] = offset.top - ( modal.height() - self.height() )/2;
+          position[0] = offset.top - ( modal.height() - self.height() )/2 - scroll_top;
           position[1] = offset.left + self.width();
         }else{ // pop up on left side of self
-          position[0] = offset.top - ( modal.height() - self.height() )/2;            
+          position[0] = offset.top - ( modal.height() - self.height() )/2 - scroll_top;            
           position[1] =  offset.left - modal.width();
         }
         $(".child_2",this).simplemodal({modal:false, position: position});
