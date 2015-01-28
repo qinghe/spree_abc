@@ -8,6 +8,7 @@
 //= require jquery_ujs
 
 //= require spree/backend
+//= require ckeditor/override
 //= require spree/backend/spree_editor
 //= require admin/spree_theme
 //= require admin/spree_essential_blog
