@@ -5,6 +5,7 @@
 
 <%= render :partial=>'tabs',:locals=>{:current=>"TemplateText"}%>
 
+<% if @template_texts.any? %>
 <table class="index">
   <colgroup>
     <col style="width: 70%" />
@@ -31,3 +32,10 @@
     <% end %>
   </tbody>
 </table>
+
+<% else %>
+  <div class="alpha twelve columns no-objects-found">
+    <%= Spree.t(:no_resource_found, resource: I18n.t(:other, scope: 'activerecord.models.spree/template_text')) %>,
+    <%= link_to Spree.t(:add_one), spree.new_admin_template_text_path %>!
+  </div>
+<% end %>

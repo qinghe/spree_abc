@@ -5,6 +5,7 @@
 
 <%= render :partial=>'tabs',:locals=>{:current=>"TemplateFile"}%>
 
+<% if @template_files.any? %>
 
 <table class="index">
   <colgroup>
@@ -42,3 +43,10 @@
     <% end %>
   </tbody>
 </table>
+
+<% else %>
+  <div class="alpha twelve columns no-objects-found">
+    <%= Spree.t(:no_resource_found, resource: I18n.t(:other, scope: 'activerecord.models.spree/template_file')) %>,
+    <%= link_to Spree.t(:add_one), spree.new_admin_template_file_path %>!
+  </div>
+<% end %>

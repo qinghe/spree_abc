@@ -14,7 +14,7 @@
       <% end if can?(:admin, Spree::TemplateText) %>
 
       <%= content_tag :li, :class => ('active' if current == 'TemplateFile') do %>
-        <%= link_to_with_icon 'picture', Spree.t("template_file.index"), admin_template_files_url() %>
+        <%= link_to_with_icon 'picture-o', Spree.t("template_file.index"), admin_template_files_url() %>
       <% end if can?(:admin, Spree::TemplateFile) %>
     </ul>
   </nav>

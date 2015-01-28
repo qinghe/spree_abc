@@ -40,8 +40,10 @@ zh-CN:
         other: 模块
       spree/template_file:
         one: 模板图片
+        other: 模板图片
       spree/template_text:
         one: 模板素材
+        other: 模板素材
       spree/template_theme:
         one: 模板
         other: 模板
