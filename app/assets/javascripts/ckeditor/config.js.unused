@@ -1,3 +1,5 @@
+# it caused tool item icon massed up in staging env. 
+
 CKEDITOR.editorConfig = function( config ) {
     // copied from original config.js ckeditor 4.0.11  
     
