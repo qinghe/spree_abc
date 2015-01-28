@@ -16,8 +16,8 @@ zh-CN:
       spree/product:
         theme_id: 销售模板
       spree/taxon:
-        page_context: 页面显示内容分类
-        replaced_by: 页面显示内容置换
+        page_context: 页面内容类型
+        replaced_by: 页面内容替换
       spree/template_file: 
         attachment_file_name: 文件名字
         attachment_content_type: 类型

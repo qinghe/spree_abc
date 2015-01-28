@@ -77,6 +77,8 @@ zh-CN:
         on_hand: 库存
         shipping_category: 物流分类
         tax_category: 缴税分类
+        slug: 静态URL
+        summary: 广告词
         other: 产品
       product_group: 
         name: 名称
@@ -125,7 +127,7 @@ zh-CN:
         show_rate_in_label: 在标签中显示比率
       spree/taxon:
         name: 名称
-        permalink: 永久链接
+        permalink: 静态URL
         position: 位置
       spree/taxonomy:
         name: 名称
@@ -961,7 +963,7 @@ zh-CN:
     payments: 支付
     percent: 百分比
     percent_per_item: Percent Per Item
-    permalink: 永久链接
+    permalink: 静态URL
     phone: 电话
     place_order: 下单
     please_create_user: 请创建一个用户帐号
@@ -1298,6 +1300,7 @@ zh-CN:
     site_name: 站点名称
     site_url: 站点URL
     sku: 条形码
+    slug: 静态URL
     smtp: SMTP
     smtp_authentication_type: SMTP认证类型
     smtp_domain: SMTP域名

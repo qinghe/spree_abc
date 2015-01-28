@@ -18,8 +18,8 @@ $(document).ready(function() {
       g_selector_gadget.setMode('interactive');
     }
 
-    $('body').layout({ applyDefaultStyles: true//, south:{size:200}
-      //stateManagement__enabled: true  //enable stateManagement - automatic cookie load & save enabled by default  
+    $('body').layout({ applyDefaultStyles: true,
+      stateManagement__enabled: true  //enable stateManagement - automatic cookie load & save enabled by default  
     });
     
     //$("#section_select_dialog").dialog({ autoOpen: false,

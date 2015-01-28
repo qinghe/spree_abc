@@ -1,0 +1,9 @@
+<!-- insert_before '[data-hook="admin_taxon_form_description"]' -->
+
+<div data-hook="admin_taxon_form_tooltips">
+  <div id="taxon_tooltips_field" class="field">
+    <%= f.label :tooltips %>
+    <%= f.text_field :tooltips %>
+  </div>    
+</div>
+   

@@ -3,13 +3,25 @@
 %>
 <%= render :partial => 'spree/shared/error_messages', :locals => { :target => @page_layout } %>
 <%=form_for  @page_layout, url: template_theme_page_layout_path(@template_theme, @page_layout), remote: true do |f| %>
-<div>
-    <%= f.label :title %>
-    <%= f.text_field :title %>
-</div>
-<div>
-  <%= f.submit Spree.t('update') %> <%= f.button Spree.t('cancel'), type: :button, class: 'cancel'%>
-  
-</div>
+    <div>
+        <%= f.label :title %>
+        <%= f.text_field :title %>
+    </div>
+    <div>
+        <%= f.label :content_param %>
+        <%= f.number_field :content_param %> columns=n/clickable=1
+    </div>
+    
+    <div class="field">
+      <%= f.label :data_source %> 
+      <% current_data_source = @page_layout.current_data_source
+         options = options_for_select((Spree::PageLayout::DataSourceEnum.members).collect{|section_data_source| [Spree.t("section_data_source.#{ section_data_source }"), section_data_source] }, current_data_source )          
+      %>
+      <%= f.select "data_source", options , include_blank: true, class: 'select2' %>      
+    </div>        
+       
+    <div>
+      <%= f.submit Spree.t('update') %> <%= f.button Spree.t('cancel'), type: :button, class: 'cancel'%>      
+    </div>
 
 <% end %>

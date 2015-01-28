@@ -1,3 +1,3 @@
-//= require jquery-ui/core
-//= require jquery-ui/effect
-//= require jquery-ui/dialog
+//= require jquery-ui/core  
+// jquery.layout require jquery-ui/core
+// spree_backend require jquery-ui/datepicker
