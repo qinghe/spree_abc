@@ -129,6 +129,7 @@ module Spree
           #bit 2,3,4
           idx = (get_content_param&14)>>1
           #default is medium
+          #   000x , 001x,  010x,    011x,    100x
           [:medium, :large, :product, :small, :original ].fetch( idx, :medium )
         when :thumbnail_style
           #bit 5,6,7
