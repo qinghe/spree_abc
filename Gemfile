@@ -35,16 +35,15 @@ gem 'coffee-rails', '~> 4.0.0'
 #  gem "rspec-rails", "~> 2.0"
 #  gem "capybara"
 #end
+gem 'turbolinks'
+
+gem 'jquery-turbolinks'
 
 gem 'ruby-hmac' #http://ryanbigg.com/2009/07/no-such-file-to-load-hmac-sha1/
 
 gem 'spree', '~>2.4'
 
 # gem 'sprangular',   :path => './sprangular'
-# bundle config --local local.spree_simple_dash ../spree_simple_dash, using local for development 
-# :path => '../spree_simple_dash' 
-# replace Spree Analytics
-# gem 'spree_simple_dash', :github=>"RuanShan/spree_simple_dash", :branch=>"1-2-stable"
 
 # referer to https://github.com/spree/spree/issues/2013
 gem 'spree_auth_devise', :github => "spree/spree_auth_devise", :branch => "2-4-stable"

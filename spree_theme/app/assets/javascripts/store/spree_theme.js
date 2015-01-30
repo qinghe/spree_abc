@@ -1,4 +1,5 @@
 //= require jquery
+//= require jquery.turbolinks
 //= require jquery_ujs
 //= require jquery.form
 //= require jquery.layout
@@ -9,6 +10,7 @@
 //= require store/spree_theme.routes
 //= require interface.js
 //= require jquery.jeditable.js
+//= require turbolinks
 
 $(document).ready(function() {
   if (typeof(g_is_preview) != 'undefined' && g_is_preview==true)
@@ -73,4 +75,3 @@ function submit_layout_tree_form ( currentTarget ) {
   if (page_layout_id) $('#layout_id').val(page_layout_id);
   $('#layout_tree_form').trigger('submit');
 }
-

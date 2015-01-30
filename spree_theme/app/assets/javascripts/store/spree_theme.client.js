@@ -1,7 +1,10 @@
 //= require jquery
+//= require jquery.turbolinks
 //= require jquery.validate/localization/messages_zh-CN.js
 //= require jquery.simplemodal.js
 //= require store/section_effect
+//= require turbolinks
+
 $(document).ready(function() {
   // template theme selection for designer shop
   $( "#embeded_content_wrapper" ).hover(
