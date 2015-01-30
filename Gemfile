@@ -35,8 +35,8 @@ gem 'coffee-rails', '~> 4.0.0'
 #  gem "rspec-rails", "~> 2.0"
 #  gem "capybara"
 #end
-#gem 'turbolinks'
-#gem 'jquery-turbolinks'
+gem 'turbolinks'
+gem 'jquery-turbolinks'
 
 gem 'ruby-hmac' #http://ryanbigg.com/2009/07/no-such-file-to-load-hmac-sha1/
 
