@@ -16,7 +16,7 @@ root:
       <%# it is in main app/assets/ include spree_theme, spree_china_checkout, store/product, store/cart, store/checkout ... %>      
       <%= javascript_include_tag 'spree/frontend/all', "data-turbolinks-track" => true %>      
     <% if @current_page.is_preview %>
-      <%= stylesheet_link_tag 'store/spree_theme',  %>
+      <%= stylesheet_link_tag 'store/spree_theme'  %>
     <% else%>
       <%= stylesheet_link_tag 'store/spree_theme.client', "data-turbolinks-track" => true %>
       <link rel="stylesheet" href="<%=@website.public_path('css')%>" type="text/css" data-turbolinks-track />
