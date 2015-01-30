@@ -1,4 +1,10 @@
 $(document).ready(function() {
+
+    if($("#map").is('*')){
+      // initialize baid map.
+      initMap();    
+    }  
+    
     // dom
     // div.hover_effect_xxx
     //   .child_1

@@ -13,6 +13,7 @@
 //= require turbolinks
 
 $(document).ready(function() {
+  
   if (typeof(g_is_preview) != 'undefined' && g_is_preview==true)
   {
     if (typeof(g_selector_gadget) == 'undefined' || g_selector_gadget == null) {

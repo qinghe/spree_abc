@@ -2,6 +2,11 @@
 @import 'normalize';
 @import 'store/spree_china_checkout';
 
+html.turbolinks-progress-bar::before {
+  background-color: red !important;
+  height: 2px !important;
+}
+
 #embeded_content_wrapper{
   position: absolute;
   top:0;

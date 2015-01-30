@@ -3,6 +3,8 @@
 //= require store/section_effect
 
 $(document).ready(function() {
+  Turbolinks.enableProgressBar();
+
   // template theme selection for designer shop
   $( "#embeded_content_wrapper" ).hover(
     function() { $(this).show(); $( "#embeded_content_wrapper_icon" ).hide();},
@@ -12,9 +14,6 @@ $(document).ready(function() {
     function() { $( "#embeded_content_wrapper" ).show(); }
   );
 
-  if($("#map").is('*')){
-    initMap();    
-  }  
 });
 
 // copy from project https://github.com/citrus/spree_variant_options
