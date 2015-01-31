@@ -53,20 +53,20 @@ $(document).ready(function() {
     });
     
     $(".hover_effect_popup").mouseover(function(e){
-        var self = $(this); var modal = $(".child_2",this);
+        var self = $(this); var child1 = $(".child_1",this); var child2 = $(".child_2",this);
         var p = self.parent().width()/2 - self.position().left - self.width();
-        var offset = self.offset();
+        var offset = child1.offset();
         // get silbings, get parent.width, get current 
         // get currentTarge.pageX, 
         var position = []; // top, left
         var scroll_top = $(window).scrollTop();
         var scroll_left = $(window).scrollLeft();
-        if ( p>=0 ){ // pop up on right side of self
-          position[0] = offset.top - ( modal.height() - self.height() )/2 - scroll_top;
+        if ( p>=0 ){ // pop up on right side of child2
+          position[0] = offset.top - ( child2.height() - self.height() )/2 - scroll_top;
           position[1] = offset.left + self.width() - scroll_left;
         }else{ // pop up on left side of self
-          position[0] = offset.top - ( modal.height() - self.height() )/2 - scroll_top;            
-          position[1] =  offset.left - modal.width() - scroll_left;
+          position[0] = offset.top - ( child2.height() - self.height() )/2 - scroll_top;            
+          position[1] =  offset.left - child2.width() - scroll_left;
         }
         $(".child_2",this).simplemodal({modal:false,focus:false, position: position});
     }).mouseout(function(){ $.simplemodal.close(); });
