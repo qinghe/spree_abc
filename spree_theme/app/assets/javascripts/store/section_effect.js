@@ -41,8 +41,9 @@ $(document).ready(function() {
     //slides the element with class "menu_body" when mouse is over the paragraph
     $(".hover_effect_expansion .child_1").mouseover(function()
     {
-         $(this).next(".child_2").slideDown(500);
-         $(this).parents('.hover_effect_expansion').siblings().find('.child_2').slideUp("slow");         
+      $(this).parents('.hover_effect_expansion').addClass('hovered').siblings().removeClass('hovered');
+      $(this).next(".child_2").slideDown(500);
+      $(this).parents('.hover_effect_expansion').siblings().find('.child_2').slideUp("slow");         
     });
 
     $(".hover_effect_overlay").hover(function(){

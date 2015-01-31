@@ -286,7 +286,7 @@ module Spree
             "#page"
           when 'content_layout','first_child','last_child'
             ".c_#{self.param_value.page_layout_id}"  
-          when /(label|input|img|button)/ # product_atc, product_quantity
+          when /(label|input|img|button|block)/ # product_atc, product_quantity, block_hover
             ".s_#{self.param_value.page_layout_id}_#{self.param_value.section_param.section_root_id}"                      
           when 'as_h','a_h','a','th','td','li' 
             ".s_#{self.param_value.page_layout_id}_#{self.param_value.section_param.section_id}"
@@ -296,8 +296,10 @@ module Spree
         
         # it has to apply to inner, for root, outer is body, it include editor panel, some css would affect it. 
         selector = case target
-          when /content_layout/,/block/,/cell/,'page'
+          when /content_layout/,'block','block_h',/cell/,'page'
             ""          
+          when /block_/ #block_hovered
+            ".#{target}"  
           when /inner/
             "_#{target}"
           when 'as_h','a_sel' #selected:hover, selected

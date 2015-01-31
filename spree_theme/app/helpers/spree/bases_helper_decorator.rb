@@ -70,13 +70,26 @@ module Spree
       # handling data iteration?
       # Rails.logger.debug "current_piece=#{current_piece.id},#{current_piece.title}, current_piece.is_container?=#{current_piece.is_container?}, current_piece.template.running_data_sources.present?=#{current_piece.template.running_data_sources.present?}"
       if current_piece.is_container?
-        if current_piece.template.running_data_sources.present?
+        running_data_item = current_piece.template.running_data_item
+        
+      
+        if running_data_item.present?
+          current_page = current_piece.template.page_generator.current_page_tag
           column_count = current_piece.template.running_data_source_sction_piece.column_count        
           i = current_piece.template.running_data_item_index
           #Rails.logger.debug "i=#{i}, column_count=#{column_count}, current_piece.template.running_data_source_sction_piece=#{current_piece.template.running_data_source_sction_piece.id}" 
           css_classes << ' data_first' if column_count>0 && i==0
           css_classes << ' data_last'  if column_count>0 && ((i+1)%column_count==0)
           css_classes << " data_#{i+1}"
+          
+          case running_data_item.model
+          when Spree::Taxon
+            css_classes << ' data_current' if running_data_item.current?
+            css_classes << ' data_current_ancestor' if current_page.ancestor_ids.include?(running_data_item.id)
+          when Spree::Product            
+          when Spree::Post            
+          end
+          
         end                  
       end
       if current_piece.parent.effects.present?

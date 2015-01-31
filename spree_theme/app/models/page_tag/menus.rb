@@ -16,6 +16,13 @@ module PageTag
       def ancestors
         self.model.ancestors.collect{|item| PageTag::Menus::WrappedMenu.new(self.collection_tag, item)}        
       end
+      
+      def ancestor_ids
+        if @ancestor_ids.nil?
+          @ancestor_ids = self.model.ancestors.map(&:id)
+        end
+        @ancestor_ids
+      end
           
       # url link to the menu itme's page(each menu itme link to a page).
       def current?

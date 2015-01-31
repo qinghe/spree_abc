@@ -1553,8 +1553,12 @@ hover_effect_expansion_container:
   html: |
     ~~content~~    
   css: |
-      .<%= @template.current_piece.section_selector %> .child_1{   }
-      .<%= @template.current_piece.section_selector %> .child_2{  display:none;  }
+    .<%= @template.current_piece.section_selector %> .child_1{   }
+    .<%= @template.current_piece.section_selector %> .child_2{  display:none;  }
+    .<%= @template.current_piece.section_selector %>.hovered, .<%= @template.current_piece.section_selector %>.data_current_ancestor { 
+      <%= @template.css :block_hovered %> }
+    .<%= @template.current_piece.section_selector %>.data_current_ancestor .child_2,
+    .<%= @template.current_piece.section_selector %>.data_current .child_2 { display:block;}
   js: ''
   
 hover_effect_overlay_container:

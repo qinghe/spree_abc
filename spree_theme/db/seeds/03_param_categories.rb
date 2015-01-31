@@ -51,6 +51,8 @@ objs=[
   #{"id"=>84, "position"=>84, "is_enabled"=>true, "editor_id"=>4, "slug"=>"td_text" },
   {"id"=>91, "position"=>91, "is_enabled"=>true, "editor_id"=>0, "slug"=>"first_child" },
   {"id"=>92, "position"=>92, "is_enabled"=>true, "editor_id"=>0, "slug"=>"last_child" },
+  # hovered on hover-effect-expansion-container
+  {"id"=>101, "position"=>101, "is_enabled"=>true, "editor_id"=>0, "slug"=>"hovered" },
   ]
 
 Spree::ParamCategory.delete_all              
