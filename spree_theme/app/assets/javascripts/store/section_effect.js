@@ -63,7 +63,7 @@ $(document).ready(function() {
         var scroll_left = $(window).scrollLeft();
         if ( p>=0 ){ // pop up on right side of child2
           position[0] = offset.top - ( child2.height() - self.height() )/2 - scroll_top;
-          position[1] = offset.left + self.width() - scroll_left;
+          position[1] = offset.left + child1.width() - scroll_left;
         }else{ // pop up on left side of self
           position[0] = offset.top - ( child2.height() - self.height() )/2 - scroll_top;            
           position[1] =  offset.left - child2.width() - scroll_left;
