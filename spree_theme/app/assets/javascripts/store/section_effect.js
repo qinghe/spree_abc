@@ -53,22 +53,23 @@ $(document).ready(function() {
         $(".child_2",this).stop().animate({top:'0px',left:'0px'},{queue:false,duration:400});
     });
     
-    $(".hover_effect_popup").mouseover(function(e){
+    $(".hover_effect_popup").hover(function(e){
         var self = $(this); var child1 = $(".child_1",this); var child2 = $(".child_2",this);
         var p = self.parent().width()/2 - self.position().left - self.width();
         var offset = child1.offset();
         // get silbings, get parent.width, get current 
         // get currentTarge.pageX, 
         var position = []; // top, left
-        var scroll_top = $(window).scrollTop();
-        var scroll_left = $(window).scrollLeft();
+        var scroll_top = $('#page-wrapper').scrollTop();
+        var scroll_left = $('#page-wrapper').scrollLeft();
         if ( p>=0 ){ // pop up on right side of child2
-          position[0] = offset.top - ( child2.height() - self.height() )/2 - scroll_top;
-          position[1] = offset.left + child1.width() - scroll_left;
+          position[0] = offset.top - ( child2.height() - child1.height() )/2 + scroll_top;
+          position[1] = offset.left + child1.width() + scroll_left;
         }else{ // pop up on left side of self
-          position[0] = offset.top - ( child2.height() - self.height() )/2 - scroll_top;            
-          position[1] =  offset.left - child2.width() - scroll_left;
+          position[0] = offset.top - ( child2.height() - child1.height() )/2 + scroll_top;            
+          position[1] =  offset.left - child2.width() + scroll_left;
         }
-        $(".child_2",this).simplemodal({modal:false,focus:false, position: position});
-    }).mouseout(function(){ $.simplemodal.close(); });
+        //console.log( "pos y=%d, x=%d", position[0], position[1] );
+        $(".child_2",this).simplemodal({modal:false,focus:false, position: position, fixed:false, appendTo:'#page-wrapper' });
+    },function(){ $.simplemodal.close();  });
 });
