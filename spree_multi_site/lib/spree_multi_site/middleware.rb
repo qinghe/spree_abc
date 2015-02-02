@@ -22,7 +22,7 @@ module SpreeMultiSite
       
       store = nil
       if request.params['n'].is_a? String
-        store = Spree::Store.by_domain( request.params['n'] )
+        store = Spree::Store.by_domain( request.host )
       end
       
       # support domain, ex. www.david.com
@@ -40,7 +40,7 @@ module SpreeMultiSite
           store = Spree::Store.unscoped.find_by_code( short_name )
         end
         #support request.host for development
-        store ||= ( Spree::Store.by_domain( request.host ) || Spree::Store.default  )
+        store ||= Spree::Store.default 
         
       end
       store
