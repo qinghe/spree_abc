@@ -60,8 +60,9 @@ $(document).ready(function() {
         // get silbings, get parent.width, get current 
         // get currentTarge.pageX, 
         var position = []; // top, left
-        var scroll_top = $('#page-wrapper').scrollTop();
-        var scroll_left = $('#page-wrapper').scrollLeft();
+        var block_with_scrollbar = ( g_is_preview ?  $('#page-wrapper') : $(window) );
+        var scroll_top = block_with_scrollbar.scrollTop();
+        var scroll_left = block_with_scrollbar.scrollLeft();
         if ( p>=0 ){ // pop up on right side of child2
           position[0] = offset.top - ( child2.height() - child1.height() )/2 + scroll_top;
           position[1] = offset.left + child1.width() + scroll_left;
