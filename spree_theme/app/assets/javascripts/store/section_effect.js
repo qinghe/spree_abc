@@ -60,7 +60,8 @@ $(document).ready(function() {
         // get silbings, get parent.width, get current 
         // get currentTarge.pageX, 
         var position = []; // top, left
-        var block_with_scrollbar = ( g_is_preview ?  $('#page-wrapper') : $(window) );
+        var append_to = ( g_is_preview ? '#page-wrapper' : 'body' );
+        var block = ( append_to=='body' ? $(window) : $('#page-wrapper')  );
         var scroll_top = block_with_scrollbar.scrollTop();
         var scroll_left = block_with_scrollbar.scrollLeft();
         if ( p>=0 ){ // pop up on right side of child2
@@ -71,6 +72,6 @@ $(document).ready(function() {
           position[1] =  offset.left - child2.width() + scroll_left;
         }
         //console.log( "pos y=%d, x=%d", position[0], position[1] );
-        $(".child_2",this).simplemodal({modal:false,focus:false, position: position, fixed:false, appendTo:'#page-wrapper' });
+        $(".child_2",this).simplemodal({modal:false,focus:false, position: position, fixed:false, appendTo:append_to });
     },function(){ $.simplemodal.close();  });
 });
