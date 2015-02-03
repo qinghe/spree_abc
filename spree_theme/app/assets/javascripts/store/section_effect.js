@@ -60,18 +60,18 @@ $(document).ready(function() {
         // get silbings, get parent.width, get current 
         // get currentTarge.pageX, 
         var position = []; // top, left
-        var append_to = ( g_is_preview ? '#page-wrapper' : 'body' );
-        var block = ( append_to=='body' ? $(window) : $('#page-wrapper')  );
+        var block =  $(window);
         var scroll_top = block.scrollTop();
         var scroll_left = block.scrollLeft();
         if ( p>=0 ){ // pop up on right side of child2
-          position[0] = offset.top - ( child2.height() - child1.height() )/2 + scroll_top;
-          position[1] = offset.left + child1.width() + scroll_left;
+          position[0] = offset.top - ( child2.height() - child1.height() )/2 - scroll_top;
+          position[1] = offset.left + child1.width() ;
         }else{ // pop up on left side of self
-          position[0] = offset.top - ( child2.height() - child1.height() )/2 + scroll_top;            
-          position[1] =  offset.left - child2.width() + scroll_left;
+          position[0] = offset.top - ( child2.height() - child1.height() )/2 - scroll_top;            
+          position[1] =  offset.left - child2.width() ;
         }
         //console.log( "pos y=%d, x=%d", position[0], position[1] );
-        $(".child_2",this).simplemodal({modal:false,focus:false, position: position, fixed:false, appendTo:append_to });
-    },function(){ $.simplemodal.close();  });
+        $(".child_2",this).simplemodal({modal:false,focus:false, position: position, fixed:false });
+    },function(){ $.simplemodal.close();  
+      });
 });

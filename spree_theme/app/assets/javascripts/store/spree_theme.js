@@ -20,10 +20,16 @@ $(document).ready(function() {
       g_selector_gadget = new SelectorGadget();
       g_selector_gadget.setMode('interactive');
     }
-
-    $('body').layout({ applyDefaultStyles: true,
-      stateManagement__enabled: true  //enable stateManagement - automatic cookie load & save enabled by default  
-    });
+    $( "#editor_panel a.close" ).click(      
+      function() { $(this).parent().hide(); $( "#editor_panel_icon" ).show();}
+    );
+    $( "#editor_panel_icon" ).click(
+      function() { $( "#editor_panel" ).show(); }
+    );
+  
+    //$('body').layout({ applyDefaultStyles: true,
+    //  stateManagement__enabled: true  //enable stateManagement - automatic cookie load & save enabled by default  
+    //});
     
     //$("#section_select_dialog").dialog({ autoOpen: false,
     //                                     buttons: { "Cancel": function() { $(this).dialog("close"); },
