@@ -62,8 +62,8 @@ $(document).ready(function() {
         var position = []; // top, left
         var append_to = ( g_is_preview ? '#page-wrapper' : 'body' );
         var block = ( append_to=='body' ? $(window) : $('#page-wrapper')  );
-        var scroll_top = block_with_scrollbar.scrollTop();
-        var scroll_left = block_with_scrollbar.scrollLeft();
+        var scroll_top = block.scrollTop();
+        var scroll_left = block.scrollLeft();
         if ( p>=0 ){ // pop up on right side of child2
           position[0] = offset.top - ( child2.height() - child1.height() )/2 + scroll_top;
           position[1] = offset.left + child1.width() + scroll_left;
