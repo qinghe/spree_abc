@@ -20,10 +20,7 @@ module SpreeMultiSite
       # test.david.com => localhost:8080/?n=test.david.com
       # our domain is www.dalianshops.com 
       
-      store = nil
-      if request.params['n'].is_a? String
-        store = Spree::Store.by_domain( request.host )
-      end
+      store = Spree::Store.by_domain( request.host )
       
       # support domain, ex. www.david.com
       # apache rewrite test.david.com => localhost:8080/?n=test.david.com, request.host is 'test.david.com'
