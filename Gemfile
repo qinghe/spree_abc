@@ -77,8 +77,8 @@ gem 'spree_flexi_variants',   :path => './spree_flexi_variants'
 # copy from https://github.com/spree-contrib/spree_comments/tree/2-0-stable
 gem 'spree_comments',   :path => './spree_comments'
 
-gem 'bootstrap-sass', '~> 3.3.1'
-gem 'autoprefixer-rails'
+#gem 'bootstrap-sass', '~> 3.3.1'
+#gem 'autoprefixer-rails'
 
 gem 'activerecord-session_store'
 
@@ -94,8 +94,8 @@ group :test do
   gem 'capybara-accessible'  
   gem 'webmock'
 end
-#execjs need js runtime
-gem 'therubyracer' 
+#execjs need js runtime, use nodejs of system instead.
+#gem 'therubyracer' 
 
 group :development do
   gem 'capistrano'
