@@ -61,7 +61,17 @@ SpreeAbc::Application.configure do
   config.after_initialize do
     Spree::Site.system_top_domain = 'david.com'  
   end
-
   
   config.eager_load  = false
+  
+  config.middleware.delete 'Rack::Cache'   # 整页缓存，用不上
+  config.middleware.delete 'Rack::Lock'    # 多线程加锁，多进程模式下无意义
+  config.middleware.delete 'Rack::Runtime' # 记录X-Runtime（方便客户端查看执行时间）
+  config.middleware.delete 'ActionDispatch::RequestId' # 记录X-Request-Id（方便查看请求在群集中的哪台执行）
+  config.middleware.delete 'ActionDispatch::RemoteIp'  # IP SpoofAttack
+  config.middleware.delete 'ActionDispatch::Callbacks' # 在请求前后设置callback
+  config.middleware.delete 'ActionDispatch::Head'      # 如果是HEAD请求，按照GET请求执行，但是不返回body
+  config.middleware.delete 'Rack::ConditionalGet'      # HTTP客户端缓存才会使用
+  config.middleware.delete 'Rack::ETag'    # HTTP客户端缓存才会使用
+  
 end
