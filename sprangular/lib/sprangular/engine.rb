@@ -11,18 +11,18 @@ module Sprangular
       Rails.application.config.assets.precompile += %w( sprangular.js sprangular.css bootstrap/* )
     end
 
-    initializer "sprangular.add_middleware" do |app|
-      app.middleware.insert_before(Rack::Runtime, Rack::Rewrite) do
-        r301 '/products',          '/#!/products'
-        r301 %r{^/products/(.+)$}, '/#!/products/$1'
-        r301 %r{^/t/(.+)$},        '/#!/t/$1'
-        r301 '/sign_in',           '/#!/sign-in'
-        #spree_theme is using /cart
-        #r301 '/cart',              '/#!/cart'
-        r301 '/account',           '/#!/account'
-        r301 '/spree/login',       '/#!/sign-in?redirect=y'
-      end
-    end
+    #initializer "sprangular.add_middleware" do |app|
+    #  app.middleware.insert_before(Rack::Runtime, Rack::Rewrite) do
+    #    r301 '/products',          '/#!/products'
+    #    r301 %r{^/products/(.+)$}, '/#!/products/$1'
+    #    r301 %r{^/t/(.+)$},        '/#!/t/$1'
+    #    r301 '/sign_in',           '/#!/sign-in'
+    #    #spree_theme is using /cart
+    #    #r301 '/cart',              '/#!/cart'
+    #    r301 '/account',           '/#!/account'
+    #    r301 '/spree/login',       '/#!/sign-in?redirect=y'
+    #  end
+    #end
 
     def self.activate
       Dir.glob(File.join(File.dirname(__FILE__), "../../app/**/*_decorator*.rb")) do |c|
