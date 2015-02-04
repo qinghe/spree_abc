@@ -19,3 +19,22 @@
     RewriteLog logs/david-rewrite.log
     RewriteLogLevel 3
   </VirtualHost>
+  
+<VirtualHost *:80>
+  ServerName david.com
+  DocumentRoot /var/www/deployed_apps/spree_abc/current/public
+  <Directory /var/www/deployed_apps/spree_abc/current/public>
+    Allow from all
+    Options -MultiViews
+  </Directory>
+   # Rails finger-printed assets, make them cached forever.
+   # Try only match if the asset actually has a fingerprint in it.
+  <LocationMatch "^/assets/.*-[0-9a-f]{32}.*$">
+    # Use of ETag is discouraged when Last-Modified is present
+    Header unset ETag
+    FileETag None
+    # RFC says only cache for 1 year
+    ExpiresActive On
+    ExpiresDefault "access plus 1 year"
+  </LocationMatch>
+</VirtualHost>

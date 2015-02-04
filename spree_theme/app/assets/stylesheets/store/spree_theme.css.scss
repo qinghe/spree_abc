@@ -6,8 +6,35 @@
 
 
 #editor_panel
-{height:260px;
+{ position: fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  height:260px;
+  border-bottom: solid 1px #EBEBEB;
+  background-color: #F8F8F8;
+  z-index: 100;
+  display: none;
 }
+#editor_panel a.close{
+  position: absolute;
+  top:0;
+  right:0;
+  display: inline-block;
+  padding:5px;
+}
+#editor_panel_icon{
+  position: fixed;
+  bottom:0;
+  right:0;
+  height:30px;
+  width:30px;
+  border: solid 1px #EBEBEB;
+  background-color: #F8F8F8;
+  z-index: 99;
+  font-size: 0.7em;
+}
+
 #page_layout_tree_inner
 {
   height:200px;

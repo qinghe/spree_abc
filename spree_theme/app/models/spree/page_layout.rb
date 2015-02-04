@@ -123,7 +123,8 @@ module Spree
       #         - columns, eliminate margin-right of last column - bit3,
       def get_content_param_by_key(key)
         case key
-        when :clickable
+        when :clickable 
+          #bit 1, product:name,image, taxon:name,icon
           get_content_param&1 >0
         when :main_image_style
           #bit 2,3,4
@@ -138,7 +139,12 @@ module Spree
         when :zoomable
           #bit 8
           get_content_param&128>0        
+        when :main_image_position
+          #bit 9,   10,  product-image
+          #   256 + 512 = 768
+          (get_content_param&768)>>8                
         when :columns #bit 1,2,3,4
+          #container
           get_content_param&15
         else 
           nil
