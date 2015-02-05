@@ -596,7 +596,7 @@ module Spree
     end
   
     def get_section_script(node)
-      "<% g_page_layout_id=#{node.id}; @template.select(g_page_layout_id); %>#{$/}"
+      "<% g_page_layout_id=#{node.id};  %>#{$/}" # do not call @template.select(g_page_layout_id); we should always select(page_layou,section) together.
     end
     
     # proc available in template

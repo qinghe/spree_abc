@@ -1,9 +1,36 @@
 $(document).ready(function() {
 
+    $(".effect_slider").each(function(index, element){
+      var self = $(element);
+      var parent = self.parent();
+      var options = { $FillMode: 2,  $AutoPlay: true ,
+        $BulletNavigatorOptions: { $Class: $JssorBulletNavigator$, $ChanceToShow: 2,  $AutoCenter:1  }
+      };
+      self.css( { height: parent.css( 'height' ), width: parent.css( 'width' )} );
+      self.children("[u='slides']").css( { height: parent.css( 'height' ), width: parent.css( 'width' )} );
+      var jssor_slider1 = new $JssorSlider$(self.attr('id'), options);
+      //responsive code begin
+      //you can remove responsive code if you don't want the slider scales while window resizes
+        function ScaleSlider() {
+            var parentWidth = jssor_slider1.$Elmt.parentNode.clientWidth;
+            if (parentWidth)
+                jssor_slider1.$SetScaleWidth(parentWidth);
+            else
+                window.setTimeout(ScaleSlider, 30);
+        }
+      //Scale slider immediately
+      ScaleSlider();
+      //if (!navigator.userAgent.match(/(iPhone|iPod|iPad|BlackBerry|IEMobile)/)) {
+      //    $(window).bind('resize', ScaleSlider);
+      //}
+      //responsive code end
+        
+    });
+    
     if($("#map").is('*')){
       // initialize baid map.
       initMap();    
-    }  
+    };
     
     // dom
     // div.hover_effect_xxx

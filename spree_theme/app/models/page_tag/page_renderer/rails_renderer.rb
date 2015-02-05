@@ -12,8 +12,9 @@ module PageTag::PageRenderer
     
     def generate
       prepare_instance_variables
-#Rails.logger.debug "ehtml=#{ehtml}"      
-      self.html = renderer.render_to_string(:inline =>ehtml)
+      benchmark 'Benchmark html process.....' do     
+        self.html = renderer.render_to_string(:inline =>ehtml)
+      end
       return self.html
     end
   

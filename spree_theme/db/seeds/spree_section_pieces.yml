@@ -105,38 +105,6 @@ root:
     #page form[id] p {       
       margin: 0; padding: 0;
     }
-          
-    <% if @template.css :use_bbtl %>
-    div#bbtl
-    { position:absolute;
-      top:0;
-      left:0;
-      <%= @template.css :bbtl %>
-    }
-    <% end %>
-    <% if @template.css :use_bbtr %>
-    div#bbtr
-    { position:absolute;
-      top:0;
-      right:0;
-      <%= @template.css :bbtr %>
-    }
-    <% end %>
-    <% if @template.css :use_pbbl %>
-    div#pbbl
-    { position:absolute;
-      bottom:0;
-      left:0;
-      <%= @template.css :pbbl %>
-    }
-    <% end %>
-    <% if @template.css :use_pbbr %>
-    div#pbbr
-    { position:absolute;
-      bottom:0;
-      right:0;
-      <%= @template.css :pbbr %>
-    }
     <% end %>
       #page
       {
@@ -1145,8 +1113,8 @@ slider:
   resources: m
   is_selectable: "1"
   is_container: "0"
-  html: |    
-    <div id="<%=g_piece_selector%>" style="<%=@template.css(:slides)%>">
+  html: |-
+    <div id="<%=g_piece_selector%>" class="effect_slider" >
     <% if @template.menu.present? %>
       <!-- Loading Screen -->
       <div u="loading" style="position: absolute; top: 0px; left: 0px;width: 100%;height:100%;">
@@ -1154,47 +1122,18 @@ slider:
         <div style="position: absolute; display: block; background: url(/shops/shared/images/jssor/loading.gif) no-repeat center center; top: 0px; left: 0px;width: 100%;height:100%;"> </div>
       </div>
       <% # jssor require with,height in element style. %>
-      <div u="slides" style="position: absolute;overflow:hidden;<%=@template.css(:slides)%>">
+      <div u="slides" style="position: absolute;overflow:hidden;" >
       <% @template.menu.children.each{|page| %>
-      <div><%= image_tag page.icon.url(:original), :u=>'image', :alt=>page.name %></div>
+        <div><%= image_tag page.icon.url(:original), :u=>'image', :alt=>page.name %></div>
       <% } %>
       </div>
-      <!-- bullet navigator container -->
         <!-- Bullet Navigator Skin Begin -->
         <div u="navigator" class= "jssorb03" style="position: absolute;">
             <!-- bullet navigator item prototype -->
             <div u="prototype" style="position: absolute; width: 19px; height: 19px;"></div>
         </div>
-      <!-- Bullet Navigator Skin End -->
     <% end %>
-    </div>
-    <script>
-    jQuery(document).ready(function ($) {
-      //$('#<%=g_piece_selector%>').css(
-      //  { height: $('.<%=@template.current_piece.section_selector%>_inner').css( 'height' ),
-      //    width: $('.<%=@template.current_piece.section_selector%>_inner').css( 'width' )}
-      //);
-      var options = { $FillMode: 2,  $AutoPlay: true ,
-        $BulletNavigatorOptions: { $Class: $JssorBulletNavigator$, $ChanceToShow: 2,  $AutoCenter:1  }
-        };
-      var jssor_slider1 = new $JssorSlider$('<%=g_piece_selector%>', options);
-      //responsive code begin
-      //you can remove responsive code if you don't want the slider scales while window resizes
-      function ScaleSlider() {
-          var parentWidth = jssor_slider1.$Elmt.parentNode.clientWidth;
-          if (parentWidth)
-              jssor_slider1.$SetScaleWidth(parentWidth);
-          else
-              window.setTimeout(ScaleSlider, 30);
-      }
-      //Scale slider immediately
-      ScaleSlider();
-      //if (!navigator.userAgent.match(/(iPhone|iPod|iPad|BlackBerry|IEMobile)/)) {
-      //    $(window).bind('resize', ScaleSlider);
-      //}
-      //responsive code end
-    });
-    </script>
+    </div>    
   css: |-
     #<%=g_piece_selector%> { position:relative; }
     #<%=g_piece_selector%> [u='slides']{ 

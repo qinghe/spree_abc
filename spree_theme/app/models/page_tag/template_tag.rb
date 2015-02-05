@@ -71,7 +71,7 @@ module PageTag
       end
       # start from 1      
       def nth_of_siblings
-        self.collection_tag.page_layout_tree.select{|pl| pl.parent_id == page_layout.parent_id && pl != page_layout && pl.lft < page_layout.lft }.size + 1
+        self.collection_tag.cached_page_layouts.values.select{|pl| pl.parent_id == page_layout.parent_id && pl != page_layout && pl.lft < page_layout.lft }.size + 1
       end
       
       # view content image_style ex. taxon_name, render as <a> or <span>? 
@@ -87,7 +87,6 @@ module PageTag
       
     end
     
-    attr_accessor :page_layout_tree
     attr_accessor :param_values_tag, :menus_tag, :image_tag, :text_tag, :blog_posts_tag
     delegate :css, :to => :param_values_tag 
     delegate :menu,:menu2, :to => :menus_tag
@@ -96,7 +95,7 @@ module PageTag
     delegate :theme, :to => :page_generator
     attr_accessor :current_piece
     #we have to store it in template, or missing after select another page_layout.
-    attr_accessor :running_data_sources, :running_data_items, :running_data_source_sction_pieces, :section_pieces
+    attr_accessor :running_data_sources, :running_data_items, :running_data_source_sction_pieces, :cached_section_pieces
 
     def initialize(page_generator_instance)
       super(page_generator_instance)
@@ -104,11 +103,10 @@ module PageTag
       self.menus_tag = ::PageTag::Menus.new(self)
       self.image_tag = ::PageTag::TemplateImage.new(self)
       self.text_tag = ::PageTag::TemplateText.new(self)
-      self.page_layout_tree = theme.page_layout.self_and_descendants().includes(:section)
       self.running_data_sources = []
       self.running_data_source_sction_pieces = [] # data_source belongs to section_piece 
       self.running_data_items = []
-      self.section_pieces = []
+      self.cached_section_pieces = {}
     end
     
     #def id
@@ -121,16 +119,19 @@ module PageTag
     #        section_id, it is id of table section, represent a section_piece instance, could be 0. only select page_layout
     #                    
     def select(page_layout_id, section_id=0)
-      self.current_piece  = section_pieces.select{|section_piece| section_piece.page_layout.id== page_layout_id && section_piece.section_id== section_id }.first
+      key = "#{page_layout_id}_#{section_id}"
+      self.current_piece  = cached_section_pieces[key]
       #current selected section instance, page_layout record
       if self.current_piece.nil? 
-        page_layout = page_layout_tree.select{|node| node.id == page_layout_id}.first      
-        #Rails.logger.debug "select #{page_layout.title}, section_id=#{section_id}"      
+        page_layout = cached_page_layouts[page_layout_id]
         self.current_piece = WrappedPageLayout.new(self, page_layout, section_id)
         unless page_layout.root?
-          self.current_piece.parent = section_pieces.select{|section_piece| section_piece.page_layout.id== page_layout.parent_id && section_piece.section_id == 0 }.first
+          parent_page_layout = cached_page_layouts[page_layout.parent_id]
+          parent_key = "#{parent_page_layout.id}_#{parent_page_layout.section_id}"
+          self.current_piece.parent = cached_section_pieces[parent_key]
         end 
-        self.section_pieces << self.current_piece 
+        #Rails.logger.debug "select #{page_layout.title}, section_id=#{section_id}, parent=#{self.current_piece.parent.try(:page_layout).try(:title)}"      
+        self.cached_section_pieces[key] = self.current_piece 
       end
     end
     
@@ -192,7 +193,13 @@ module PageTag
       objs      
     end
         
-
+    def cached_page_layouts
+      if @cached_page_layouts.nil?
+        @cached_page_layouts = theme.page_layout.self_and_descendants().includes(:section).inject({}){ |hash,pl| hash[pl.id]=pl; hash }
+      end
+      @cached_page_layouts
+    end
+    
     def running_data_source
       running_data_sources.last
     end

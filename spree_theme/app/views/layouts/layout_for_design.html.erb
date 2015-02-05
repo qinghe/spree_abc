@@ -1,3 +1,4 @@
+<% benchmark 'Benchmark html process.....' do %>     
 <%
   #@lg = PageTag::PageGenerator.previewer( @menu, @theme, {:resource=>(@resource.nil? ? nil:@resource),:controller=>controller})
   ehtml = @lg.ehtml
@@ -9,7 +10,8 @@
   ehtml.insert(ehtml.index("</head>"),style)
   ehtml.insert(ehtml.index("</head>"),script)
   ehtml.insert(ehtml.index("</body>"),@editor_panel)
-
 %>
 
 <%= render :inline => ehtml%>
+
+<% end %>

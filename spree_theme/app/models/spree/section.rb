@@ -159,14 +159,11 @@ module Spree
         piece
       end
       
-      def get_section_script(node)
-        
+      def get_section_script(node)        
         #only set @param_values, @menus for root piece.
+        # keep it in one line, quicker parsing
         header= <<-EOS
-           <% g_section_id=#{node.id};
-              @template.select(g_page_layout_id, g_section_id);
-              g_piece_selector = @template.current_piece.piece_selector;
-              %> 
+           <% g_section_id=#{node.id}; @template.select(g_page_layout_id, g_section_id); g_piece_selector = @template.current_piece.piece_selector; %> 
            EOS
       end 
       
