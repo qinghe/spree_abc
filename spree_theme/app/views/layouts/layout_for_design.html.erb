@@ -9,7 +9,6 @@
   #editor_panel require @theme, @editors, @editor ...
   ehtml.insert(ehtml.index("</head>"),style)
   ehtml.insert(ehtml.index("</head>"),script)
-  ehtml.insert(ehtml.index("</body>"),@editor_panel)
 %>
 
 <%= render :inline => ehtml%>

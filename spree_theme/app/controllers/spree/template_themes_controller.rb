@@ -16,7 +16,7 @@ Rails.logger.debug "yes in action page #{Time.now}..............................
         #editor_panel require @theme, @editors, @editor ...
         ehtml.insert(ehtml.index("</head>"),style)
         ehtml.insert(ehtml.index("</head>"),script)
-        ehtml.insert(ehtml.index("</body>"),@editor_panel)      
+        #ehtml.insert(ehtml.index("</body>"),@editor_panel)      
         render :inline => ehtml, :layout=>false      
        end
     end  
@@ -60,19 +60,7 @@ Rails.logger.debug "yes in action page #{Time.now}..............................
     #    d: domain of website
     #    c: menu_id
     def preview
-     
-    #  @lg = PageTag::PageGenerator.previewer( @menu, @theme, {:resource=>(@resource.nil? ? nil:@resource),:controller=>self})
-    #  html = @lg.generate
-    #  css,js  = @lg.generate_assets        
-      #insert css to html
-    #  style = %Q!<style type="text/css">#{css}</style>!
-      #editor_panel require @theme, @editors, @editor ...
-    #  html.insert(html.index("</head>"),style)
-    #  html.insert(html.index("</body>"),@editor_panel)
-    #  respond_to do |format|
-    #    format.html {render :text => html}
-    #  end
-          
+               
     end
                      
     # params

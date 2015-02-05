@@ -134,13 +134,14 @@ module SpreeTheme::System
            prepare_params_for_editors(@theme)
            # layout_editor_panel has to be in views/application, 
            # or could not find for spree_auth_devise/controllers
-           @editor_panel = render_to_string :partial=>'layout_editor_panel'
+           # do not use render_to_string... it is time consuming.
+           #@editor_panel = render_to_string :partial=>'layout_editor_panel'
         end
       end
       
       unless request.xhr?
         # we have initialize PageTag::PageGenerator here, page like login  do not go to template_thems_controller/page
-        if @is_designer && 
+        if @is_designer 
           @lg = PageTag::PageGenerator.previewer( @menu, @theme, {:resource=>@resource, :controller=>self, :page=>params[:page]})                  
         else
           @lg = PageTag::PageGenerator.generator( @menu, @theme, {:resource=>@resource, :controller=>self, :page=>params[:page]})          

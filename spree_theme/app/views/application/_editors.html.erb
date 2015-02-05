@@ -20,7 +20,7 @@
 <% @editors.each_index{ |idx|%>
   <div style="<%= 'display:none' if @editors[idx]!=@editor %>">    
   <%# render :partial=>"editor", :locals => {:editor=>@editors[idx], :param_values=>@param_values_for_editors[idx]}%>
-  <% concat partial_editor( @editors[idx], @param_values_for_editors[idx]) %>
+  <%=raw partial_editor( @editors[idx], @param_values_for_editors[idx]) %>
   </div>
 <%}%>
  </div>
