@@ -1,8 +1,8 @@
-<% benchmark 'Benchmark html process.....' do %>     
 <%
   #@lg = PageTag::PageGenerator.previewer( @menu, @theme, {:resource=>(@resource.nil? ? nil:@resource),:controller=>controller})
+  ehtml, css, js = nil 
   ehtml = @lg.ehtml
-  css,js  = @lg.generate_assets        
+  css,js  = @lg.generate_assets
   #insert css to html
   style = %Q! <style type="text/css">#{css}</style> !
   script = %Q@ <script type="text/javascript"> #{js}</script> @
@@ -10,7 +10,4 @@
   ehtml.insert(ehtml.index("</head>"),style)
   ehtml.insert(ehtml.index("</head>"),script)
 %>
-
 <%= render :inline => ehtml%>
-
-<% end %>
