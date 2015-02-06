@@ -130,7 +130,8 @@ module PageTag
         self.current_piece = WrappedPageLayout.new(self, page_layout, section_id)
         unless page_layout.root?
           parent_page_layout = cached_page_layouts[page_layout.parent_id]
-          parent_key = "#{parent_page_layout.id}_#{parent_page_layout.section_id}"
+          parent_key = "#{parent_page_layout.id}_0"
+          #cached_section_pieces[parent_key] may be nil, we do not select 
           self.current_piece.parent = cached_section_pieces[parent_key]
         end 
         #Rails.logger.debug "select #{page_layout.title}, section_id=#{section_id}, parent=#{self.current_piece.parent.try(:page_layout).try(:title)}"      
