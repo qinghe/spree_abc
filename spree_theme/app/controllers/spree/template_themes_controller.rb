@@ -5,18 +5,6 @@ module Spree
     delegate :taxon_class,:site_class, :to=>:"SpreeTheme"
 
     def page
-       benchmark 'Benchmark html process.....' do              
-        ehtml = @lg.ehtml
-        css,js  = @lg.generate_assets        
-        #insert css to html
-        style = %Q! <style type="text/css">#{css}</style> !
-        script = %Q@ <script type="text/javascript"> #{js}</script> @
-        #editor_panel require @theme, @editors, @editor ...
-        ehtml.insert(ehtml.index("</head>"),style)
-        ehtml.insert(ehtml.index("</head>"),script)
-        #ehtml.insert(ehtml.index("</body>"),@editor_panel)              
-        render :inline => ehtml, :layout=>false      
-       end
     end  
         
     def under_construction  
