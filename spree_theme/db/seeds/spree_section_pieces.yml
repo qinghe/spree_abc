@@ -29,14 +29,14 @@ root:
         <%= render "spree/shared/theme_selection_for_nondesigner" %>      
       <% end %>
       <%= flash_messages %>
-      <div id="page-wrapper" class="<%='ui-layout-center' if @current_page.is_preview %>">
-      <div id="page" class='<%=g_piece_selector%>'><div id="page-inner" class="<%=g_piece_selector%>_inner clear-block">
+      <div id="page-wrapper" class="">
+      <div id="page" class=''><div id="page-inner" class="clear-block">
         ~~content~~
       </div><!-- /#page-inner -->
       </div><!-- /#page -->
       </div><!-- /#jquery.layout require it -->
       <%= javascript_tag  do -%>
-        g_is_preview = <%=raw @current_page.is_preview.to_json %>  
+        g_is_preview = <%== @current_page.is_preview.to_json %>  
       <% end -%>
       <% if @current_page.is_preview %>
          <%= render 'layout_editor_panel' %>
@@ -181,24 +181,18 @@ container:
   is_selectable: "1"
   is_container: "1"
   html: |-
-    <!-- container  -->
-    <div class="content_layout <%= get_container_class(@template.current_piece) %>" >
-          <div class="<%=g_piece_selector%>_inner clear-block">          
-          ~~content~~          
-          </div>          
+    <div class="content_layout ~~selector~~" >
+       <div class="inner clear-block">~~content~~</div>          
     </div> 
   css: |-
-    body.ie-6 .<%=g_piece_selector%>_inner{
-      _zoom: 1;    
-    }
     /* width,height, skinnables */
-    .<%=g_piece_selector%>
+    .<%=@template.section_selector%>
     { float:left; overflow:hidden;  padding:0;  margin:0 auto; 
       position:relative;
       <%=@template.css(:block)%>
     }
     /* background, margin, border, padding */
-    .<%=g_piece_selector%>_inner
+    .<%=@template.section_selector%> > .inner
     { overflow: hidden;/* keep border visible*/
       min-height:1px;min-width:1px;  /* it is required as placeholder */
       <%=@template.css(:inner)%>
@@ -212,18 +206,17 @@ container:
       <%end%>
     }
     /* #copy from spree_backend/assets/stylesheets/admin/components/pagination */    
-    .<%=g_piece_selector%> .pagination { float:left; clear:both; } /* add clear */
-    .<%=g_piece_selector%> .pagination .page{ display: inline-block; text-align: center;
+    .<%=@template.section_selector%> .pagination { float:left; clear:both; } /* add clear */
+    .<%=@template.section_selector%> .pagination .page{ display: inline-block; text-align: center;
       <%=@template.css(:pagination_page)%> 
     }
-    .<%=g_piece_selector%> .pagination .current{
+    .<%=@template.section_selector%> .pagination .current{
       <%=@template.css(:pagination_current)%> 
     }    
     <% if @template.current_piece.column_count >0 %>    
     /* css for last column in row, feature center content */
     .<%=@template.current_piece.child_selector%>.data_last>div{ margin-right:0; padding-right:0; } 
-    <% end %>
-    
+    <% end %>    
   title: container
   slug: container
   
@@ -233,17 +226,16 @@ hmenu:
   is_container: "1"
   resources: m
   html: |-
-    <ul class="<%=g_piece_selector%>" >
-    <% get_menu_items(@template.current_piece).each{|page| %>
-       ~~content~~
-    <% } %>
+    <ul > <% get_menu_items(@template.current_piece).each{|page| %>
+             ~~content~~
+          <% } %>
     </ul>
   css: |-
-    .<%=g_piece_selector%>, .<%=g_piece_selector%> ul{ margin: 0; padding: 0;}
-    .<%=g_piece_selector%> li{ 
+    .<%=@template.section_selector%> ul{ margin: 0; padding: 0;}
+    .<%=@template.section_selector%> li{ 
       list-style-type:none;
       display:inline;}
-    .<%=g_piece_selector%> a{ 
+    .<%=@template.section_selector%> a{ 
        display:inline-block;
        float:left;
        margin:0; /* non-editable */}
@@ -257,16 +249,14 @@ vmenu:
   title: vmenu
   slug: vmenu
   html: |-
-    <ul class="<%=g_piece_selector%>">
-    <% get_menu_items(@template.current_piece).each{|page| %>
-       ~~content~~
-    <% } %>
+    <ul > <% get_menu_items(@template.current_piece).each{|page| %>
+             ~~content~~
+          <% } %>
     </ul>
   css: |-
-    .<%=g_piece_selector%>,.<%=g_piece_selector%> ul{ margin: 0; padding: 0;}
-    .<%=g_piece_selector%> li{ list-style-type:none; }
-    .<%=g_piece_selector%> a{ float: left;  clear: left;  text-align: left;  margin: 0px;  border: 0px;  }
-
+    .<%=@template.section_selector %> ul{ margin: 0; padding: 0;}
+    .<%=@template.section_selector %> li{ list-style-type:none; }
+    .<%=@template.section_selector %> a{ float: left;  clear: left;  text-align: left;  margin: 0px;  border: 0px;  }
   js: ""
    
 menuitem:
@@ -276,29 +266,28 @@ menuitem:
   title: menuitem
   slug: menuitem
   html: |
-    <%= menu_item_atom( @template.current_piece, page )  %>
-    
+    <%= menu_item_atom( @template.current_piece, page )  %>    
   css: |-
-      .<%=g_piece_selector%> {
+      .<%=@template.section_selector %> {
        <%= @template.css :shell %>
       } 
       /* override parent container .selector a */     
-      .<%=g_piece_selector%> a{
+      .<%=@template.section_selector %> a{
        position:relative;overflow: hidden;
        <%= @template.css :a %>  
       }
-      .<%=g_piece_selector%> a:hover{  
+      .<%=@template.section_selector %> a:hover{  
         <%= @template.css :a_h %> 
       }
-      .<%=g_piece_selector%> .selected{ 
+      .<%=@template.section_selector %> .selected{ 
         <%= @template.css :selected %> 
       }
-      .<%=g_piece_selector%> a.selected:hover{  <%= @template.css :as_h %> }
-      .<%=g_piece_selector%> .noclick{ cursor:default; <%= @template.css :noclick %> }
-      .<%=g_piece_selector%> a.depth1{ <%= @template.css :depth1 %>  }
-      .<%=g_piece_selector%> a.depth2{ <%= @template.css :depth2 %>  }
-      .<%=g_piece_selector%> a.depth3{ <%= @template.css :depth3 %>  }
-      .<%=g_piece_selector%> a.depth4{ <%= @template.css :depth4 %>  }
+      .<%=@template.section_selector %> a.selected:hover{  <%= @template.css :as_h %> }
+      .<%=@template.section_selector %> .noclick{ cursor:default; <%= @template.css :noclick %> }
+      .<%=@template.section_selector %> a.depth1{ <%= @template.css :depth1 %>  }
+      .<%=@template.section_selector %> a.depth2{ <%= @template.css :depth2 %>  }
+      .<%=@template.section_selector %> a.depth3{ <%= @template.css :depth3 %>  }
+      .<%=@template.section_selector %> a.depth4{ <%= @template.css :depth4 %>  }
 
   js: ""
 image:
@@ -325,7 +314,7 @@ text:
   is_selectable: "0"
   is_container: "0"
   resources: t
-  html: <%= raw @template.text %>
+  html: <%== @template.text %>
   created_at: 2011-09-20 19:40:07
   updated_at: 2011-09-20 19:40:07
   css: ""
@@ -356,7 +345,7 @@ product_description:
   is_container: "0"
   html: |      
     <% if defined? product %>
-       <%=raw product.description %>
+       <%== product.description %>
     <% end %>
   created_at: 2011-09-20 19:40:07
   updated_at: 2011-09-20 19:40:07
@@ -370,7 +359,6 @@ product_name:
   is_container: "0"
   html: |    
     <% if defined? product %>
-     <%# span only for selector  .g_piece_selector a %>
      <% if @template.current_piece.clickable? %>
        <a href="<%= product.path %>"> <%=product.name %> </a>
      <% else %>
@@ -380,10 +368,10 @@ product_name:
   created_at: 2011-09-20 19:40:07
   updated_at: 2011-09-20 19:40:07
   css: |
-    .<%=@template.current_piece.section_selector%>  a{
+    .<%=@template.section_selector%>  a{
       <%= @template.css :a %> 
     }
-    .<%=@template.current_piece.section_selector%>  a:hover{
+    .<%=@template.section_selector%>  a:hover{
       <%= @template.css :a_h %> 
     }
   js: ""
@@ -394,8 +382,8 @@ product_thumbnails:
   is_selectable: "0"
   is_container: "0"
   html: |   
-    <%# no need for thumbnails unless there is more than one image %>
-    <div id="product-images" data-hook="product_images" class="<%=g_piece_selector%>">
+    <!-- no need for thumbnails unless there is more than one image -->
+    <div id="product-images" data-hook="product_images" >
     <% if (product.images + product.variant_images).uniq.size > 1 %>
       <ul id="product-thumbnails" class="thumbnails inline" data-hook>
       <% product.images.each do |i| %><li class='tmb-all tmb-<%= i.viewable.id %>'>
@@ -416,9 +404,9 @@ product_thumbnails:
   created_at: 2011-09-20 19:40:07
   updated_at: 2011-09-20 19:40:07
   css: |-
-    .<%=g_piece_selector%> ul{ margin: 0; padding: 0;}
-    .<%=g_piece_selector%> li{ list-style-type:none; }
-    .<%=g_piece_selector%> ul.inline  li {
+    .<%=@template.section_selector%> ul{ margin: 0; padding: 0;}
+    .<%=@template.section_selector%> li{ list-style-type:none; }
+    .<%=@template.section_selector%> ul.inline  li {
     /*
      * it is inline-block, we should remove space between li.
      * http://stackoverflow.com/questions/16234440/space-between-li
@@ -426,7 +414,7 @@ product_thumbnails:
       display: inline;
       float:left;
     }
-    .<%=g_piece_selector%> img {
+    .<%=@template.section_selector%> .thumbnails img {
       <%= @template.css :img %> 
     }
   js: ""
@@ -437,13 +425,13 @@ product_main_image:
   is_selectable: "0"
   is_container: "0"
   html: |   
-    <div id="main-image"  class="<%=g_piece_selector%>">       
+    <div id="main-image" >       
       <%= product_main_image( @template.current_piece, product ) %>
     </div>
   created_at: 2011-09-20 19:40:07
   updated_at: 2011-09-20 19:40:07
   css: |
-    .<%=g_piece_selector%> img{
+    #main-image img{
       <%= @template.css :img %> 
     }
   js: ""
@@ -455,7 +443,7 @@ product_properties:
   is_container: "0"
   html: |   
     <% unless product.product_properties.empty? %>  
-      <table class="<%=g_piece_selector%>" >
+      <table >
         <tbody>
           <% product.product_properties.each do |product_property| %>
             <% css_class = cycle('even', 'odd', :name => "properties") %>
@@ -471,16 +459,16 @@ product_properties:
   created_at: 2011-09-20 19:40:07
   updated_at: 2011-09-20 19:40:07
   css: |
-    .<%=g_piece_selector%> {
+    .<%=@template.section_selector%> table {
       width:100%; 
     }
-    .<%=g_piece_selector%> .cell{
+    .<%=@template.section_selector%> .cell{
       <%= @template.css :cell %> 
     }
-    .<%=g_piece_selector%> th{
+    .<%=@template.section_selector%> th{
       <%= @template.css :th %> 
     }
-    .<%=g_piece_selector%> td{
+    .<%=@template.section_selector%> td{
       <%= @template.css :td %> 
     }
 
@@ -521,15 +509,12 @@ product_quantity:
   is_selectable: "0"
   is_container: "0"
   html: |       
-    <% # products[product_id]&quantity for product contained options or just variants[id]=>quantity, more detail in Spree::OrderPopulator %>
+    <%# products[product_id]&quantity for product contained options or just variants[id]=>quantity, more detail in Spree::OrderPopulator %>
     <%= number_field_tag (product.variants_and_option_values.any? ? :quantity : "variants[#{product.master.id}]"), 1, :class => 'title', :min => 1 %> 
-
   created_at: 2011-09-20 19:40:07
   updated_at: 2011-09-20 19:40:07
   css: |
-    .<%=@template.current_piece.section_selector%>  input{
-      <%= @template.css :input %> 
-    }
+    .<%=@template.section_selector%>  input{ <%= @template.css :input %>   }
   js: ""
 product_atc:
   id: 19
@@ -544,9 +529,7 @@ product_atc:
   created_at: 2011-09-20 19:40:07
   updated_at: 2011-09-20 19:40:07
   css: |
-    .<%=@template.current_piece.section_selector%> button{
-      <%= @template.css :button %> 
-    }
+    .<%=@template.section_selector%> button{ <%= @template.css :button %>  }
   js: ""
 cart:
   id: 20
@@ -556,11 +539,11 @@ cart:
   is_container: "1"
   html: |
     <% if @order.line_items.empty? %>    
-      <div class="<%=g_piece_selector%>" data-hook="empty_cart">
+      <div data-hook="empty_cart">
         <p><%= Spree.t(:your_cart_is_empty) %></p>
       </div>    
     <% else %>
-      <div class="<%=g_piece_selector%>"  data-hook="outside_cart_form">
+      <div data-hook="outside_cart_form">
         <%= form_for @order, :url => update_cart_path, :html => {:id => 'update-cart'} do |order_form| %>
           <div data-hook="inside_cart_form">
             <% #place holder for action /cart %>
@@ -581,11 +564,11 @@ cart:
   created_at: 2011-09-20 19:40:07
   updated_at: 2011-09-20 19:40:07
   css: |
-    .<%=g_piece_selector%> .cart_buttons{ clear:both; }
-    .<%=g_piece_selector%> button{
+    .<%=@template.section_selector%> .cart_buttons{ clear:both; }
+    .<%=@template.section_selector%> button{
       <%= @template.css :button %>
     }
-    .<%=g_piece_selector%> .line_item_quantity{ width:60px; }
+    .<%=@template.section_selector%> .line_item_quantity{ width:60px; }
   js: ""
 account:
   id: 21
@@ -652,10 +635,10 @@ checkout:
   created_at: 2011-09-20 19:40:07
   updated_at: 2011-09-20 19:40:07
   css: |
-    .<%=@template.current_piece.section_selector%> .form-buttons{ clear:both; }
-    .<%=@template.current_piece.section_selector%> ul{ margin: 0; padding: 0;}
-    .<%=@template.current_piece.section_selector%> li{ list-style-type:none; }
-    .<%=@template.current_piece.section_selector%> .stock-shipping-method-title {margin:0;}
+    .<%=@template.section_selector%> .form-buttons{ clear:both; }
+    .<%=@template.section_selector%> ul{ margin: 0; padding: 0;}
+    .<%=@template.section_selector%> li{ list-style-type:none; }
+    .<%=@template.section_selector%> .stock-shipping-method-title {margin:0;}
   js: ""
 thanks:
   id: 26
@@ -692,7 +675,7 @@ container_title:
   html: ~~content~~    
   css: |
     .header3 { margin: 0; padding: 0; font-size: 100%;line-height:1em; }
-    .<%=@template.current_piece.section_selector%> .header3{       
+    .<%=@template.section_selector%> .header3{       
       <%= @template.css :s_header3 %> 
     }
   js: ""
@@ -870,13 +853,13 @@ dialog:
   is_container: "0"
   usage: "dialog"
   html: |    
-    <div id="dialog" class="<%=g_piece_selector%> content_layout" >
-          <div class="<%=g_piece_selector%>_inner clear-block">
+    <div id="dialog" class="content_layout" >
+          <div class="clear-block">
           ~~content~~
           </div>
     </div> 
   css: |
-    div.<%=g_piece_selector%>
+    #dialog
     { 
       display:none;
       ~~PageParams.get:outer~~
@@ -891,10 +874,10 @@ container_link:
   is_container: "1"
   html: ~~content~~    
   css: |
-    .<%=@template.current_piece.section_selector%> a{ display: inline-block; <%=@template.css(:s_a) %> }
-    .<%=@template.current_piece.section_selector%> a:hover{ <%=@template.css(:s_a_h) %> }  
-    .<%=@template.current_piece.section_selector%> a.selected{ <%=@template.css(:s_a_sel) %> }
-    .<%=@template.current_piece.section_selector%> a.unavailable{ <%=@template.css(:s_a_una) %> }
+    .<%=@template.section_selector%> a{ display: inline-block; <%=@template.css(:s_a) %> }
+    .<%=@template.section_selector%> a:hover{ <%=@template.css(:s_a_h) %> }  
+    .<%=@template.section_selector%> a.selected{ <%=@template.css(:s_a_sel) %> }
+    .<%=@template.section_selector%> a.unavailable{ <%=@template.css(:s_a_una) %> }
   js: ""
 container_table:
   id: 43
@@ -904,10 +887,10 @@ container_table:
   is_container: "1"
   html: ~~content~~    
   css: |
-    .<%=@template.current_piece.section_selector%> table{ <%= @template.css :s_table %>  }
-    .<%=@template.current_piece.section_selector%> th, .<%=@template.current_piece.section_selector%> td{ <%= @template.css :s_cell %> }
-    .<%=@template.current_piece.section_selector%> th{ <%= @template.css :s_th %>  }
-    .<%=@template.current_piece.section_selector%> td{ <%= @template.css :s_td %>  }
+    .<%=@template.section_selector%> table{ <%= @template.css :s_table %>  }
+    .<%=@template.section_selector%> th, .<%=@template.section_selector%> td{ <%= @template.css :s_cell %> }
+    .<%=@template.section_selector%> th{ <%= @template.css :s_th %>  }
+    .<%=@template.section_selector%> td{ <%= @template.css :s_td %>  }
   js: ""
 container_form:
   id: 44
@@ -917,11 +900,11 @@ container_form:
   is_container: "1"
   html: ~~content~~    
   css: |
-    .<%=@template.current_piece.section_selector%> label.error{ <%=@template.css(:s_error) %> }
-    .<%=@template.current_piece.section_selector%> label{ <%=@template.css(:s_label) %> }
-    .<%=@template.current_piece.section_selector%> input{ <%=@template.css(:s_input) %> }
-    .<%=@template.current_piece.section_selector%> button{ <%=@template.css(:s_button) %> } 
-    .<%=@template.current_piece.section_selector%> button:hover{ <%=@template.css(:s_button_h) %> } 
+    .<%=@template.section_selector%> label.error{ <%=@template.css(:s_error) %> }
+    .<%=@template.section_selector%> label{ <%=@template.css(:s_label) %> }
+    .<%=@template.section_selector%> input{ <%=@template.css(:s_input) %> }
+    .<%=@template.section_selector%> button{ <%=@template.css(:s_button) %> } 
+    .<%=@template.section_selector%> button:hover{ <%=@template.css(:s_button_h) %> } 
 
   js: ""
 dialog_title:
@@ -931,12 +914,10 @@ dialog_title:
   is_selectable: "0"
   is_container: "0"
   html: |
-    <div class="<%=g_piece_selector%>">
       <div class="title"> <%= Spree.t(:dialog_title) %> <a class="cancel">X</a> </div>
-    </div>    
   css: | 
-    .<%=g_piece_selector%> .title{ <%=@template.css(:title) %> }
-    .<%=g_piece_selector%> a.cancel{      
+    #dialog .title{ <%=@template.css(:title) %> }
+    #dialog a.cancel{      
       border:0;  padding:0;  margin:0; background: transparent none; text-decoration: none;/*reset it, prevent root's default */
       float:right; cursor:pointer; 
       <%=@template.css(:cancel) %> 
@@ -951,20 +932,10 @@ dialog_content:
   is_container: "1"
   usage: "dial-cont"
   html: |
-    <!-- container  -->
-    <div class="<%=g_piece_selector%> content_layout" >
-          <div class="<%=g_piece_selector%>_inner clear-block">
-          ~~content~~
-          </div>          
-    </div> 
-  css: | 
-    .<%=g_piece_selector%>
-    { 
-      position:relative;
-      <%=@template.css(:block)%>
-    }
+    <div class="dialog_content" >   ~~content~~   </div> 
+  css: |
     /* background, margin, border, padding */
-    .<%=g_piece_selector%> .<%=g_piece_selector%>_inner
+    #dialog .dialog_content
     {
       <%=@template.css(:inner)%>
     }
@@ -1017,18 +988,18 @@ logged_and_unlogged_menu:
   html: |
     <% menu = (spree_current_user ? @template.menu : @template.menu2) %>
     <% if menu.present? %>
-    <ul class="<%=g_piece_selector%>" >
+    <ul >
       <% menu.children.each{|page| %>
          ~~content~~
       <% } %>
     </ul>
     <% end %>
   css: |-
-    ul.<%=g_piece_selector%> { margin: 0; padding: 0;}
-    .<%=g_piece_selector%> li{ 
+    .<%=@template.section_selector%> ul { margin: 0; padding: 0;}
+    .<%=@template.section_selector%> li{ 
       list-style-type:none;
       display:inline;float: left;}
-    .<%=g_piece_selector%> a{ 
+    .<%=@template.section_selector%> a{ 
      display:inline-block;
      float:left;
      margin:0; /* non-editable */}
@@ -1050,7 +1021,7 @@ product_option_values:
   is_container: "0"
   html: |    
     <% if product.variants_and_option_values(current_currency).any? %>
-      <div id="product-variants" class="<%=g_piece_selector%>">
+      <div id="product-variants" >
         <ul>
           <% product.variants_and_option_values(current_currency).each_with_index do |variant, index| %>
             <li>
@@ -1069,8 +1040,8 @@ product_option_values:
       </div>
     <% end%>
   css: |-
-    .<%=g_piece_selector%> ul{ margin: 0; padding: 0;}
-    .<%=g_piece_selector%> li{ list-style-type:none; }
+    .<%=@template.section_selector%> ul{ margin: 0; padding: 0;}
+    .<%=@template.section_selector%> li{ list-style-type:none; }
   js: ""
 taxon_description:
   id: 52
@@ -1079,7 +1050,7 @@ taxon_description:
   is_selectable: "1"
   is_container: "0"
   html: |    
-    <%=raw (defined?(page) ? page : @current_page).description %>
+    <%== (defined?(page) ? page : @current_page).description %>
   css: ""
   js: ""  
 site_form:
@@ -1091,7 +1062,7 @@ site_form:
   html: |    
     <%= render :partial => 'themes/sites/quick_lunch' %>
   css: |
-    .<%=@template.current_piece.section_selector%> p{ 
+    .<%=@template.section_selector%> p{ 
       float:left;
     }
   js: ""
@@ -1103,14 +1074,14 @@ slider:
   is_selectable: "1"
   is_container: "0"
   html: |-
-    <div id="<%=g_piece_selector%>" class="effect_slider" >
+    <div class="effect_slider" >
     <% if @template.menu.present? %>
       <!-- Loading Screen -->
       <div u="loading" style="position: absolute; top: 0px; left: 0px;width: 100%;height:100%;">
         <div style="filter: alpha(opacity=70); opacity:0.7; position: absolute; display: block; background-color: #000000; top: 0px; left: 0px;width: 100%;height:100%;"></div>
         <div style="position: absolute; display: block; background: url(/shops/shared/images/jssor/loading.gif) no-repeat center center; top: 0px; left: 0px;width: 100%;height:100%;"> </div>
       </div>
-      <% # jssor require with,height in element style. %>
+      <%# jssor require with,height in element style. %>
       <div u="slides" style="position: absolute;overflow:hidden;" >
       <% @template.menu.children.each{|page| %>
         <div><%= image_tag page.icon.url(:original), :u=>'image', :alt=>page.name %></div>
@@ -1124,11 +1095,11 @@ slider:
     <% end %>
     </div>    
   css: |-
-    #<%=g_piece_selector%> { position:relative; }
-    #<%=g_piece_selector%> [u='slides']{ 
+    .effect_slider { position:relative; }
+    .effect_slider [u='slides']{ 
       cursor: move; left: 0px; top: 0px;      
     }
-    #<%=g_piece_selector%> [u='navigator']{
+    .effect_slider [u='navigator']{
       position: absolute;
       bottom:0;
     } 
@@ -1153,8 +1124,8 @@ breadcrumbs:
   html: |    
     <%= breadcrumbs(@current_page) %>
   css: |
-    .<%=@template.current_piece.section_selector%> ul{ margin: 0; padding: 0;}
-    .<%=@template.current_piece.section_selector%> li{
+    .<%=@template.section_selector%> ul{ margin: 0; padding: 0;}
+    .<%=@template.section_selector%> li{
       list-style-type:none; 
       display: inline-block;
     }
@@ -1174,7 +1145,7 @@ taxon_icon:
   created_at: 2011-09-20 19:40:07
   updated_at: 2011-09-20 19:40:07
   css: |
-    .<%=@template.current_piece.section_selector%> {
+    .<%=@template.section_selector%> {
       margin: 0; padding: 0;
     }
   js: ""
@@ -1232,7 +1203,7 @@ post_body:
   is_container: "0"
   html: |    
     <% if defined? post %>     
-      <%=raw post.body %>
+      <%== post.body %>
     <% end %>
   created_at: 2011-09-20 19:40:07
   updated_at: 2011-09-20 19:40:07
@@ -1272,22 +1243,22 @@ grouped_option_values_selector:
     #product-details .price.unselected {
       color: #bbb;  
     }
-    .<%=g_piece_selector%> .option_type {
+    .<%=@template.section_selector%> .option_type {
        <%=@template.css(:option_type)%> 
     }
-    .<%=g_piece_selector%> .option_value {
+    .<%=@template.section_selector%> .option_value {
        <%=@template.css(:option_value)%> 
     }
-    .<%=g_piece_selector%> ul.option_values {
+    .<%=@template.section_selector%> ul.option_values {
       list-style-type: none;    
       margin: 0; padding: 0;
     }
-    .<%=g_piece_selector%> .option_values li {
+    .<%=@template.section_selector%> .option_values li {
       display: block;
       position: relative;
       float: left;
     }
-    .<%=g_piece_selector%> .option_values li a {
+    .<%=@template.section_selector%> .option_values li a {
       display: block;
       cursor: pointer;
       text-decoration: none;
@@ -1320,22 +1291,22 @@ option_values_in_slide_style:
   is_container: "0"
   html: |    
     <% if defined? product %>
-      <div class="<%=g_piece_selector%>">
+      <div class="">
         <%= render :partial => 'themes/product_options_in_slide_style', :locals=>{:product=>product,:g_piece_selector=>g_piece_selector} %>
       </div>  
     <% end%>
   created_at: 2011-09-20 19:40:07
   updated_at: 2011-09-20 19:40:07
   css: |
-    .<%=g_piece_selector%> .variant-option{
+    .<%=@template.section_selector%> .variant-option{
       display:none;
     }
-    .<%=g_piece_selector%> ul.option_values {
+    .<%=@template.section_selector%> ul.option_values {
       list-style-type: none;
       margin:0;
       padding:0;  
     }
-    .<%=g_piece_selector%> .option_values li {
+    .<%=@template.section_selector%> .option_values li {
       display: block;
       position: relative;
       float: left;
@@ -1346,9 +1317,9 @@ option_values_in_slide_style:
       border-color: #1072B9;
       color: #ffffff;
     }
-    .<%=g_piece_selector%> .option_type{ <%=@template.css(:option_type)%> }
-    .<%=g_piece_selector%> .large_image{ <%=@template.css(:large_image)%>  }
-    .<%=g_piece_selector%> .thumb_image{ <%=@template.css(:thumb_image)%>  }
+    .<%=@template.section_selector%> .option_type{ <%=@template.css(:option_type)%> }
+    .<%=@template.section_selector%> .large_image{ <%=@template.css(:large_image)%>  }
+    .<%=@template.section_selector%> .thumb_image{ <%=@template.css(:thumb_image)%>  }
   js: ""
 product_customization_options:
   id: 64
@@ -1372,7 +1343,7 @@ container_header0:
   is_container: "1"
   html: ~~content~~    
   css: |
-    .<%=@template.current_piece.section_selector%> .header0 {
+    .<%=@template.section_selector%> .header0 {
       margin: 0; padding: 0; font-size: 100%;line-height:1em;
       <%= @template.css :s_header0 %> 
     }
@@ -1385,9 +1356,9 @@ container_dl:
   is_container: "1"
   html: ~~content~~    
   css: |
-    .<%=@template.current_piece.section_selector%> dl,dd{ margin:0;padding:0; }
-    .<%=@template.current_piece.section_selector%> dt{ <%= @template.css :s_dt %>  }
-    .<%=@template.current_piece.section_selector%> dd{ <%= @template.css :s_dd %>  }
+    .<%=@template.section_selector%> dl,dd{ margin:0;padding:0; }
+    .<%=@template.section_selector%> dt{ <%= @template.css :s_dt %>  }
+    .<%=@template.section_selector%> dd{ <%= @template.css :s_dd %>  }
   js: ""
 preview_theme_button:
   id: 67
@@ -1425,9 +1396,9 @@ container_fixed:
   is_container: "1"
   html: |
     ~~content~~    
-    <input type="hidden" class="fixed_container" value=".<%=@template.current_piece.section_selector%>">
+    <input type="hidden" class="fixed_container" value=".<%=@template.section_selector%>">
   css: |
-    .<%=@template.current_piece.section_selector%> { position: fixed; right:0; top:250px; <%=@template.css(:position) %>}
+    .<%=@template.section_selector%> { position: fixed; right:0; top:250px; <%=@template.css(:position) %>}
   js: ''
 hover_effect_slide_container:
   id: 70
@@ -1440,8 +1411,8 @@ hover_effect_slide_container:
   css: |
       /* slide_effect: width,height is required, children are absolute  */
       /* override original position,display */
-      .<%= @template.current_piece.section_selector %> .child_1{  position:absolute; display:block;height:100%; }
-      .<%= @template.current_piece.section_selector %> .child_2{  position:absolute; display:block;height:0;  }
+      .<%= @template.section_selector %> .child_1{  position:absolute; display:block;height:100%; }
+      .<%= @template.section_selector %> .child_2{  position:absolute; display:block;height:0;  }
   js: ''
 
 taxon_tooltips:
@@ -1469,8 +1440,8 @@ hover_effect_show_container:
   html: |
     ~~content~~    
   css: |
-      .<%= @template.current_piece.section_selector %> .child_1{   }
-      .<%= @template.current_piece.section_selector %> .child_2{  position:absolute; display:none;bottom:0;  }
+      .<%= @template.section_selector %> .child_1{   }
+      .<%= @template.section_selector %> .child_2{  position:absolute; display:none;bottom:0;  }
   js: ''
 hover_effect_expansion_container:
   id: 73
@@ -1481,12 +1452,12 @@ hover_effect_expansion_container:
   html: |
     ~~content~~    
   css: |
-    .<%= @template.current_piece.section_selector %> .child_1{   }
-    .<%= @template.current_piece.section_selector %> .child_2{  display:none;  }
-    .<%= @template.current_piece.section_selector %>.hovered, .<%= @template.current_piece.section_selector %>.data_current_ancestor { 
+    .<%= @template.section_selector %> .child_1{   }
+    .<%= @template.section_selector %> .child_2{  display:none;  }
+    .<%= @template.section_selector %>.hovered, .<%= @template.section_selector %>.data_current_ancestor { 
       <%= @template.css :block_hovered %> }
-    .<%= @template.current_piece.section_selector %>.data_current_ancestor .child_2,
-    .<%= @template.current_piece.section_selector %>.data_current .child_2 { display:block;}
+    .<%= @template.section_selector %>.data_current_ancestor .child_2,
+    .<%= @template.section_selector %>.data_current .child_2 { display:block;}
   js: ''
   
 hover_effect_overlay_container:
@@ -1501,8 +1472,8 @@ hover_effect_overlay_container:
       /* overlay_effect: width,height is required, children are absolute  */
       /* override original position,display */
       /* child_1.z-index < child_2.z-index, child_2 is on top of child_1 initially, slideUp on hovering */
-      .<%= @template.current_piece.section_selector %> .child_1{   }
-      .<%= @template.current_piece.section_selector %> .child_2{  position:absolute; }
+      .<%= @template.section_selector %> .child_1{   }
+      .<%= @template.section_selector %> .child_2{  position:absolute; }
   js: ''
 hover_effect_popup_container:
   id: 75
@@ -1516,8 +1487,8 @@ hover_effect_popup_container:
       /* popup_effect: width,height is required, children are absolute  */
       /* override original position,display */
       /* child_1.z-index < child_2.z-index, child_2 is on top of child_1 initially, slideUp on hovering */
-      .<%= @template.current_piece.section_selector %> .child_1{   }
-      .<%= @template.current_piece.section_selector %> .child_2{ position:absolute; display:none;  }
+      .<%= @template.section_selector %> .child_1{   }
+      .<%= @template.section_selector %> .child_2{ position:absolute; display:none;  }
   js: ''
 
 baidu_map:

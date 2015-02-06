@@ -83,9 +83,9 @@ module SpreeTheme::System
     end
 #Rails.logger.debug "@theme=#{@theme.inspect}, @is_designer=#{@is_designer},website=#{website.inspect} request.xhr?=#{request.xhr?}"
     if params[:controller]=~/cart|checkout|order/
-      @menu = DefaultTaxon.instance
+      @menu = get_default_taxon
     elsif params[:controller]=~/user/
-      @menu = DefaultTaxon.instance
+      @menu = get_default_taxon
     else
       if params[:r]
         @resource = Spree::Product.find_by_id(params[:r])
@@ -98,7 +98,7 @@ module SpreeTheme::System
       end
       # get default_taxon from root, or it has no root, inherited_page_context cause error
       # @theme could be nil at present.      
-      @menu ||= ( @theme.try(:home_page) || website.home_page || DefaultTaxonRoot.instance(request_fullpath).children.first )
+      @menu ||= ( @theme.try(:home_page) || website.home_page || get_default_taxon)
       #elsif SpreeTheme.taxon_class.home.present? 
       # #it is discarded, it is conflict with feature theme has own index page. it would show product assigned index page of other theme   
       # #now each theme has own index page. website has own index page. 
@@ -204,6 +204,10 @@ module SpreeTheme::System
     agent_str = request.user_agent.to_s.downcase
     return false if agent_str =~ /ipad/
     agent_str =~ Regexp.new(MOBILE_USER_AGENTS)
+  end
+  
+  def get_default_taxon(  )
+    DefaultTaxonRoot.instance(request.fullpath).children.first 
   end
   
 end

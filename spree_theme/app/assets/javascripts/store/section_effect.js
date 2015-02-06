@@ -8,7 +8,7 @@ $(document).ready(function() {
       };
       self.css( { height: parent.css( 'height' ), width: parent.css( 'width' )} );
       self.children("[u='slides']").css( { height: parent.css( 'height' ), width: parent.css( 'width' )} );
-      var jssor_slider1 = new $JssorSlider$(self.attr('id'), options);
+      var jssor_slider1 = new $JssorSlider$(self.get(0), options);
       //responsive code begin
       //you can remove responsive code if you don't want the slider scales while window resizes
         function ScaleSlider() {

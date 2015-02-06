@@ -88,8 +88,8 @@ module Spree
       
       def self.verify_contexts( some_contexts, target_contexts )
         some_contexts = [some_contexts] unless some_contexts.kind_of?( Array )
-        #Rails.logger.debug "some_contexts=#{some_contexts.inspect}, target_contexts=#{target_contexts}, [ContextEnum.either]=#{[ContextEnum.either].inspect}"        
-        ( some_contexts==[ContextEnum.either] || target_contexts==[ContextEnum.either] || (target_contexts&some_contexts)==some_contexts )
+        #Rails.logger.debug "some_contexts=#{some_contexts.inspect}, target_contexts=#{target_contexts}, [ContextEnum.either]=#{[ContextEnum.either].inspect}, is_valid = #{ret}"        
+        ret = ( some_contexts==[ContextEnum.either] || target_contexts==[ContextEnum.either] || (target_contexts&some_contexts)==some_contexts )
         #|| (some_contexts==[ContextEnum.home]&&target_contexts.include?(ContextEnum.list)) 
       end
 
@@ -115,6 +115,12 @@ module Spree
         end        
         @effect_classes
       end
+
+      def has_extra_selector?
+        #child1,child2...              data1,data2...
+        self.effects.present? || parent.effects.present? || parent.data_source.present?
+      end
+      
       
       # * description - content_param is integer, each bit has own mean for each section.
       # * params
@@ -517,7 +523,13 @@ module Spree
         subnodes = tree.select{|n| n.parent_id==node.id}
         for child in subnodes
           next unless child.is_enabled?
-          subpiece = build_section_html(tree, child, section_hash)        
+          subpiece = build_section_html(tree, child, section_hash)
+          # replace ~~selectors~~ with ex. 's_112_2 c_111'
+          if child.has_extra_selector?
+            subpiece.sub!('~~selector~~', "s_#{child.id}_#{child.section_id} c_#{child.parent_id} <%=get_container_class(@template.current_piece) %>")             
+          else
+            subpiece.sub!('~~selector~~', "s_#{child.id}_#{child.section_id} c_#{child.parent_id}") 
+          end        
           subpieces.concat(subpiece)
         end
       end  
@@ -583,9 +595,9 @@ module Spree
         EOS2
       end  
       
-      if node.root? # html root
-        piece.insert(0, get_page_script )        
-      end
+      #if node.root? # html root
+      #  piece.insert(0, get_page_script )        
+      #end
         
       piece.insert(0, get_section_script(node))
       # remove ~~content~~ however, node could be a container.
@@ -596,13 +608,15 @@ module Spree
     end
   
     def get_section_script(node)
-      "<% g_page_layout_id=#{node.id};  %>#{$/}" # do not call @template.select(g_page_layout_id); we should always select(page_layou,section) together.
+      # we have to call @template.select(g_page_layout_id); 
+      # valid_context require current page_layout, we should not move valid_context? into section.
+      "<% @template.select(#{node.id}, 0); %>" 
     end
     
     # proc available in template
-    def get_page_script()
-      "<% proc_page=Proc.new{ defined?(page) ? page : @current_page } %> #{$/}"
-    end
+    #def get_page_script()
+    #  "<% proc_page=Proc.new{ defined?(page) ? page : @current_page } %> #{$/}"
+    #end
     
     def get_pagination(  )
       "<%= paginate( @template.running_data_source ) if @template.running_data_source.try( :has_pages? ) %> " 

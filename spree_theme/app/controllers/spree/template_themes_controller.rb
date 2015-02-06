@@ -5,9 +5,7 @@ module Spree
     delegate :taxon_class,:site_class, :to=>:"SpreeTheme"
 
     def page
-Rails.logger.debug "yes in action page #{Time.now}..............................."     
- 
-       benchmark 'Benchmark html process.....' do     
+       benchmark 'Benchmark html process.....' do              
         ehtml = @lg.ehtml
         css,js  = @lg.generate_assets        
         #insert css to html
@@ -16,7 +14,7 @@ Rails.logger.debug "yes in action page #{Time.now}..............................
         #editor_panel require @theme, @editors, @editor ...
         ehtml.insert(ehtml.index("</head>"),style)
         ehtml.insert(ehtml.index("</head>"),script)
-        #ehtml.insert(ehtml.index("</body>"),@editor_panel)      
+        #ehtml.insert(ehtml.index("</body>"),@editor_panel)              
         render :inline => ehtml, :layout=>false      
        end
     end  

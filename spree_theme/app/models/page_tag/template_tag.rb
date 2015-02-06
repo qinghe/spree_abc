@@ -93,6 +93,8 @@ module PageTag
     delegate :image, :to => :image_tag
     delegate :text, :to => :text_tag
     delegate :theme, :to => :page_generator
+    delegate :section_selector, :to =>:current_piece
+    
     attr_accessor :current_piece
     #we have to store it in template, or missing after select another page_layout.
     attr_accessor :running_data_sources, :running_data_items, :running_data_source_sction_pieces, :cached_section_pieces
@@ -119,6 +121,7 @@ module PageTag
     #        section_id, it is id of table section, represent a section_piece instance, could be 0. only select page_layout
     #                    
     def select(page_layout_id, section_id=0)
+      page_layout_id = self.current_piece.page_layout.id if page_layout_id==0
       key = "#{page_layout_id}_#{section_id}"
       self.current_piece  = cached_section_pieces[key]
       #current selected section instance, page_layout record
@@ -199,6 +202,19 @@ module PageTag
       end
       @cached_page_layouts
     end
+    
+    # * usage - in container 'with more button', customer want to customize link text.
+    # * params
+    #   * current_piece is requried.
+    #def page_attribute( attribue_name )
+    #  attribute_value = page.send attribue_name
+    #  if current_piece.clickable? 
+    #    link_to attribute_value, page.path, page.extra_html_attributes    
+    #  else
+    #    attribute_value
+    #  end    
+    #end
+    
     
     def running_data_source
       running_data_sources.last

@@ -286,12 +286,12 @@ module Spree
             "#page"
           when 'content_layout','first_child','last_child'
             ".c_#{self.param_value.page_layout_id}"  
-          when /(label|input|img|button|block)/ # product_atc, product_quantity, block_hover
-            ".s_#{self.param_value.page_layout_id}_#{self.param_value.section_param.section_root_id}"                      
-          when 'as_h','a_h','a','th','td','li' 
-            ".s_#{self.param_value.page_layout_id}_#{self.param_value.section_param.section_id}"
+          #when /(label|input|img|button|block)/ # product_atc, product_quantity, block_hover
+          #  ".s_#{self.param_value.page_layout_id}_#{self.param_value.section_param.section_root_id}"                      
+          #when 'as_h','a_h','a','th','td','li' 
+          #  ".s_#{self.param_value.page_layout_id}_#{self.param_value.section_param.section_root_id}"
           else
-            ".s_#{self.param_value.page_layout_id}_#{self.param_value.section_param.section_id}"
+            ".s_#{self.param_value.page_layout_id}_#{self.param_value.section_param.section_root_id}"
           end
         
         # it has to apply to inner, for root, outer is body, it include editor panel, some css would affect it. 
@@ -301,7 +301,7 @@ module Spree
           when /block_/ #block_hovered
             ".#{target}"  
           when /inner/
-            "_#{target}"
+            "> .inner"
           when 'as_h','a_sel' #selected:hover, selected
             " a.selected"
           when 'a_una' #  unavailable, unclickable

@@ -53,33 +53,30 @@ module Spree
         leaves_content = content_tag(:ul, raw( page.children.map{|child| menu_item_atom( current_piece, child )}.join ) )
       end
       
-      piece_selector = current_piece.piece_selector
       item_content = content_tag(:span, page.name, class: 'name' )
             
       item_content=  if page.clickable? 
            if page.current?
-             link_to item_content, page.path, page.extra_html_attributes.merge( {:id=>"pi#{piece_selector}_page.id", :class=>"selected depth#{page.depth}"} )
+             link_to item_content, page.path, page.extra_html_attributes.merge( { :class=>"selected depth#{page.depth}" } )
            else
-             link_to item_content, page.path, page.extra_html_attributes.merge( {:id=>"pi#{piece_selector}_page.id", :class=>"depth#{page.depth}"} )
+             link_to item_content, page.path, page.extra_html_attributes.merge( { :class=>"depth#{page.depth}" } )
            end 
         else
-          link_to item_content, page.path, page.extra_html_attributes.merge( {:id=>"pi#{piece_selector}_page.id", :class=>"noclick depth#{page.depth}", :href=>'javascript:void(0)'} )
+          link_to item_content, page.path, page.extra_html_attributes.merge( { :class=>"noclick depth#{page.depth}", :href=>'javascript:void(0)' } )
         end
         
-      content_tag(:li,  raw( item_content+ leaves_content ), class: piece_selector ) 
+      content_tag(:li,  raw( item_content+ leaves_content ) ) 
     end
     
     
     # a container could has
     def get_container_class( current_piece )
-      css_classes = current_piece.piece_selector + ' ' + current_piece.as_child_selector + ' ' + current_piece.effects.join(' ')
+      css_classes =  current_piece.effects.join(' ')  # current_piece.piece_selector + ' ' + current_piece.as_child_selector + ' ' +
       # how many columns are there?
       # handling data iteration?
       # Rails.logger.debug "current_piece=#{current_piece.id},#{current_piece.title}, current_piece.is_container?=#{current_piece.is_container?}, current_piece.template.running_data_sources.present?=#{current_piece.template.running_data_sources.present?}"
       if current_piece.is_container?
         running_data_item = current_piece.template.running_data_item
-        
-      
         if running_data_item.present?
           current_page = current_piece.template.page_generator.current_page_tag
           column_count = current_piece.template.running_data_source_sction_piece.column_count        
@@ -126,6 +123,10 @@ module Spree
       else
         attribute_value
       end    
+    end
+    
+    def product_attribute( template_tag, attribue_name )
+      
     end
     
     #==================================================================================================

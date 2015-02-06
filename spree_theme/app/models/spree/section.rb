@@ -109,7 +109,7 @@ module Spree
       def build_html_piece(tree, node, section_piece_hash)
         # .dup, do not alter the model, or affect other method. it may be in cache. 
          piece = section_piece_hash[node.section_piece_id].html.dup
-         piece.insert(0,get_section_script(node))
+         #piece.insert(0,get_section_script(node))
          unless node.leaf?              
            children = tree.select{|n| n.parent_id==node.id}
            for child in children
@@ -162,9 +162,7 @@ module Spree
       def get_section_script(node)        
         #only set @param_values, @menus for root piece.
         # keep it in one line, quicker parsing
-        header= <<-EOS
-           <% g_section_id=#{node.id}; @template.select(g_page_layout_id, g_section_id); g_piece_selector = @template.current_piece.piece_selector; %> 
-           EOS
+        "<% @template.select(0, #{node.id});  %>"
       end 
       
       def section_piece_in_hash
