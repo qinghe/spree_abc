@@ -610,7 +610,7 @@ module Spree
     def get_section_script(node)
       # we have to call @template.select(g_page_layout_id); 
       # valid_context require current page_layout, we should not move valid_context? into section.
-      "<% @template.select(#{node.id}, 0); %>" 
+      "<% @template.select(#{node.id}, 0) %>" 
     end
     
     # proc available in template
