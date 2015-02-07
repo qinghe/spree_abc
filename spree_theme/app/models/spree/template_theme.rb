@@ -151,7 +151,7 @@ module Spree
     
     begin 'for page generator'  
       # * params
-      #   * usage - may be [ehtml, css, js]
+      #   * usage - may be [ruby,ehtml, css, js]
       def file_name(usage)
         if usage.to_s == 'ehtml'
           "l#{page_layout_root_id}.html.erb"
@@ -184,7 +184,7 @@ module Spree
       end
       
       def layout_path
-        document_file_path( :ehtml )
+        document_file_path( :ruby )
       end      
       
       def document_file_path( target )
