@@ -1234,7 +1234,7 @@ grouped_option_values_selector:
   html: |    
     <% if defined? product %>
       <% if product.has_variants? %>
-       <%= render :partial => 'themes/grouped_option_values_selector', :locals=>{:product=>product,:g_piece_selector=>g_piece_selector} %>
+       <%= render :partial => 'themes/grouped_option_values_selector', :locals=>{:product=>product} %>
       <% end%>
     <% end%>
   created_at: 2011-09-20 19:40:07
@@ -1292,7 +1292,7 @@ option_values_in_slide_style:
   html: |    
     <% if defined? product %>
       <div class="">
-        <%= render :partial => 'themes/product_options_in_slide_style', :locals=>{:product=>product,:g_piece_selector=>g_piece_selector} %>
+        <%= render :partial => 'themes/product_options_in_slide_style', :locals=>{:product=>product} %>
       </div>  
     <% end%>
   created_at: 2011-09-20 19:40:07
