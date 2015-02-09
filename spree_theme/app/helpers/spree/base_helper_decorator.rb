@@ -114,14 +114,15 @@ module Spree
       end      
     end
     
-    # in container 'with more button', customer want to customize link text.
-    def page_attribute( current_piece, page, attribue_name )
+    # in template_tag have no method link_to, content_tag, it have to be in base_helper
+    def page_attribute( template_tag, attribue_name )
+      page = template_tag.running_data_item_by_class( Menus::WrappedMenu ) || @current_page
       attribute_value = page.send attribue_name
       
       if current_piece.clickable? 
         link_to attribute_value, page.path, page.extra_html_attributes    
       else
-        attribute_value
+         content_tag :span, attribute_value, {:id=>"p_#{template_tag.current_piece.id}_#{page.id}"}
       end    
     end
     

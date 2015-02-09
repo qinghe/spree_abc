@@ -582,7 +582,6 @@ module Spree
           end
         end    
         # we recovery template.select after ~~content~~
-        subpieces << get_section_script( node )        
         piece.insert(pos,subpieces)        
       end
        
@@ -595,11 +594,8 @@ module Spree
         EOS2
       end  
       
-      #if node.root? # html root
-      #  piece.insert(0, get_page_script )        
-      #end
-        
-      piece.insert(0, get_section_script(node))
+      piece = "#{get_section_script(node)}  #{piece}  #{get_section_script( node )}"
+
       # remove ~~content~~ however, node could be a container.
       # in section.build_html, ~~content~~ have not removed. 
       # there could be more than one ~~content~~, use gsub!
@@ -678,5 +674,5 @@ module Spree
       end
     end     
   end
-
+  
 end

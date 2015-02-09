@@ -8,7 +8,7 @@ module PageTag
   class TemplateTag < Base
     class WrappedPageLayout < WrappedModel
       self.accessable_attributes=[:id,:title,:current_data_source,:wrapped_data_source_param, :data_filter,:current_contexts, :context_either?, 
-         :get_content_param_by_key, :is_container?, :effects]
+         :get_content_param_by_key, :is_container?, :effects,:section_pieces]
       attr_accessor :section_id, :page_layout, :parent
       
       delegate *self.accessable_attributes, to: :page_layout
@@ -92,7 +92,7 @@ module PageTag
     delegate :menu,:menu2, :to => :menus_tag
     delegate :image, :to => :image_tag
     delegate :text, :to => :text_tag
-    delegate :theme, :to => :page_generator
+    delegate :theme, :current_page_tag,  :to => :page_generator
     delegate :section_selector, :to =>:current_piece
     
     attr_accessor :current_piece
@@ -203,20 +203,7 @@ module PageTag
       end
       @cached_page_layouts
     end
-    
-    # * usage - in container 'with more button', customer want to customize link text.
-    # * params
-    #   * current_piece is requried.
-    #def page_attribute( attribue_name )
-    #  attribute_value = page.send attribue_name
-    #  if current_piece.clickable? 
-    #    link_to attribute_value, page.path, page.extra_html_attributes    
-    #  else
-    #    attribute_value
-    #  end    
-    #end
-    
-    
+        
     def running_data_source
       running_data_sources.last
     end
@@ -245,6 +232,10 @@ module PageTag
     end
     def running_data_item=( data_item )
       running_data_items[ running_data_sources.size - 1 ] = data_item
+    end
+    
+    def running_data_item_by_class( klass )
+      running_data_items.select{|itme| item.is_a? klass }.last
     end
   end
 end
