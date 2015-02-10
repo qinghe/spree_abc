@@ -235,7 +235,7 @@ module PageTag
     end
     
     def running_data_item_by_class( klass )
-      running_data_items.select{|itme| item.is_a? klass }.last
+      running_data_items.select{|item| item.is_a? klass }.last
     end
   end
 end

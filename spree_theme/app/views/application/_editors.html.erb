@@ -38,12 +38,4 @@
 
 <% end%>
 
-<script type="text/javascript" charset="utf-8">
-  $("#editors .tabs li").hover(function(){
-    $(this).parent().find('a').removeClass('selected');
-    $(this).find('a').addClass('selected'); 
-    $(this).parent().next().children().hide();
-    $(this).parent().next().children().eq($(this).index()).show();
-    $("#selected_editor_id").val($(this).attr('data-id'))
-  });  
-</script>
+

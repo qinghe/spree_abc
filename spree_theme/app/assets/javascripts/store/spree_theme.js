@@ -56,11 +56,43 @@ $(document).ready(function() {
     });
     // add, remove, move section
 
-    //$('.remove_section_button').click(function(){
-    //   var page_layout_id = $(this).data('id');
-    //   if (confirm('Really?')) submit_layout_tree_form('del_self', page_layout_id )
-    //})
+    // event is erase when layout tree updated. 
+    $("#layout_tree_form .click_editable").editable(function(value, settings) { 
+        var url = Spree.routes.admin_page_layouts( jquery_element.data('tid') )+'/'+jquery_element.data('lid');
+        var submitdata = {};
+        submitdata[settings.name] = value;
+        //submitdata[settings.id] = self.id;
+        $.ajax({ dataType: 'json', url: url, type: 'put',  data : submitdata,
+            success: function(data){
+              // data is null, "nocontent" returned
+              // jquery_element.html(data.page_layout.title);
+            }
+        });             
+        return(value);
+      },        
+      { //since dblclick would trigger click, for a link, we should not click,dblclick together
+        event     : "click_editable",
+        name      : "page_layout[title]",
+        style  : "inherit" });
     
+    $(document).on( 'click',"#layout_tree_form .click_editable",function(){
+        self = $(this); 
+        if($('#page_layout_editable').is(':checked')){
+          self.trigger('click_editable');
+        }else{
+          $('#selected_page_layout_id').val(self.data('lid'));
+          $('#layout_editor_form').trigger('submit');
+        }          
+    }); 
+    
+    $(document).on('mouseover',"#editors .tabs li", function(){
+      $(this).parent().find('a').removeClass('selected');
+      $(this).find('a').addClass('selected'); 
+      $(this).parent().next().children().hide();
+      $(this).parent().next().children().eq($(this).index()).show();
+      $("#selected_editor_id").val($(this).attr('data-id'));
+    });  
+  
   }  
 });
 function submit_layout_tree_form ( currentTarget ) {

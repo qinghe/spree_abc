@@ -54,36 +54,5 @@ selected_id= (options[:selected_id]||layout_root.id )
 <%=hidden_field_tag "selected_section_id" %>
 <%=hidden_field_tag "op" %>
 <%=hidden_field_tag "layout_id" %>
-<script>
-<% #keep js in this file, update_layout_tree would update page layout tree, js should be reset as well %>
-      $("#layout_tree_form .click_editable").each(function(index,element){
-      var jquery_element = $(element);
-      jquery_element.editable(function(value, settings) { 
-            var url = Spree.routes.admin_page_layouts( jquery_element.data('tid') )+'/'+jquery_element.data('lid');
-            var submitdata = {};
-            submitdata[settings.name] = value;
-            //submitdata[settings.id] = self.id;
-            $.ajax({ dataType: 'json', url: url, type: 'put',  data : submitdata,
-                success: function(data){
-                  // data is null, "nocontent" returned
-                  // jquery_element.html(data.page_layout.title);
-                }
-            });             
-            return(value);
-          },        
-          { //since dblclick would trigger click, for a link, we should not click,dblclick together
-            event     : "click_editable",
-            name      : "page_layout[title]",
-            style  : "inherit" });
-      jquery_element.click(function(){
-        if($('#page_layout_editable').is(':checked')){
-          jquery_element.trigger('click_editable')
-        }else{
-          $('#selected_page_layout_id').val(jquery_element.data('lid'));
-          $('#layout_editor_form').trigger('submit')
-        }          
-      })        
-    })
-</script>
 
 <%end%>
