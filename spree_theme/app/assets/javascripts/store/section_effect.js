@@ -1,5 +1,14 @@
 $(document).ready(function() {
 
+    $('.effect_scroll').each(function(){
+      $self= $(this)
+      $body= (window.opera)?(document.compatMode=="CSS1Compat"?$('html'):$('body')):$('html,body');
+      $(this).click(function(){
+        $body.animate({scrollTop:($($self.attr('href')).offset().top-100)},500);
+        return false; 
+      });
+    });
+
     $(".effect_slider").each(function(index, element){
       var self = $(element);
       var parent = self.parent();

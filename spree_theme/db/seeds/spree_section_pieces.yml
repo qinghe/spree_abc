@@ -659,7 +659,7 @@ taxon_name:
   is_selectable: "1"
   is_container: "0"
   html: |    
-    <%= page_attribute(@template, :name ) %>    
+    <%= @template.page_attribute( :name ) %>
   created_at: 2011-09-20 19:40:07
   updated_at: 2011-09-20 19:40:07
   css: |
@@ -1048,7 +1048,7 @@ taxon_description:
   is_selectable: "1"
   is_container: "0"
   html: |    
-    <%== (defined?(page) ? page : @current_page).description %>
+    <%== @template.page_attribute(:description) %>
   css: ""
   js: ""  
 site_form:
@@ -1134,12 +1134,8 @@ taxon_icon:
   slug: taxon-icon
   is_selectable: "1"
   is_container: "0"
-  html: |    
-    <% if defined? page %>
-      <% if page.icon.present? %>
-        <%= link_to image_tag(page.icon.url(:original), :u=>'image', :alt=>page.name), page.path %>
-      <% end %>
-    <% end %>
+  html: |        
+    <%= @template.page_attribute(:icon) %>    
   created_at: 2011-09-20 19:40:07
   updated_at: 2011-09-20 19:40:07
   css: |
@@ -1420,11 +1416,7 @@ taxon_tooltips:
   is_selectable: "1"
   is_container: "0"
   html: |
-    <% if @template.current_piece.clickable? %>
-      <%= link_to page.tooltips, page.path, page.extra_html_attributes %>    
-    <% else %>
-      <%= page.tooltips %>
-    <% end %>
+    <%= @template.page_attribute( :tooltips ) %>
   created_at: 2011-09-20 19:40:07
   updated_at: 2011-09-20 19:40:07
   css: |

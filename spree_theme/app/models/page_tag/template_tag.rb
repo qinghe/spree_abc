@@ -1,3 +1,4 @@
+require 'action_view/helpers/tag_helper'
 module PageTag
 #                 template -> param_values
 #                          -> menus
@@ -6,6 +7,8 @@ module PageTag
 #                          # those tags required current section_instance
 # template is collection of page_layout. each page_layout is section instance 
   class TemplateTag < Base
+    include ActionView::Helpers::TagHelper #add method content_tag
+    
     class WrappedPageLayout < WrappedModel
       self.accessable_attributes=[:id,:title,:current_data_source,:wrapped_data_source_param, :data_filter,:current_contexts, :context_either?, 
          :get_content_param_by_key, :is_container?, :effects,:section_pieces]
@@ -110,11 +113,7 @@ module PageTag
       self.running_data_items = []
       self.cached_section_pieces = {}
     end
-    
-    #def id
-    #  page_generator.theme.id
-    #end
-        
+           
     #Usage: call this in template to initialize current section and section_piece
     #        should call this before call any method.
     #Params: page_layout_id, in fact, it is record of table page_layout. represent a section instance
@@ -196,6 +195,30 @@ module PageTag
       end
       objs      
     end
+        
+    # in template_tag have no method link_to, content_tag, it have to be in base_helper
+    def page_attribute(  attribute_name )
+      page = self.running_data_item_by_class( Menus::WrappedMenu ) || self.current_page_tag
+      attribute_value = ''
+      if attribute_name==:icon
+        if page.icon.present?
+          attribute_value = tag('img', :src=>page.icon.url(:original), :u=>'image', :alt=>page.name)
+        end
+      else 
+        attribute_value = page.send attribute_name
+      end
+      if self.current_piece.clickable? 
+        html_options = page.extra_html_attributes 
+        html_options[:href] ||= page.path
+        content_tag(:a, attribute_value, html_options)
+      
+      elsif attribute_name==:name
+        # make it as link anchor 
+        content_tag :span, attribute_value, {:id=>"p_#{self.current_piece.id}_#{page.id}"}
+      else
+        attribute_value
+      end    
+    end        
         
     def cached_page_layouts
       if @cached_page_layouts.nil?
