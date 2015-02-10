@@ -77,8 +77,9 @@ gem 'spree_flexi_variants',   :path => './spree_flexi_variants'
 # copy from https://github.com/spree-contrib/spree_comments/tree/2-0-stable
 gem 'spree_comments',   :path => './spree_comments'
 
-#gem 'bootstrap-sass', '~> 3.3.1'
-#gem 'autoprefixer-rails'
+#
+gem 'bootstrap-sass', '~> 3.3.1'
+gem 'autoprefixer-rails'
 
 gem 'activerecord-session_store'
 

@@ -7,9 +7,10 @@ root:
   is_root: true
   html: |-
     <!DOCTYPE html>
-    <html>
+    <html lang="zh-CN">
       <head>
       <title><%= @current_page.title%></title>
+      <meta http-equiv="X-UA-Compatible" content="IE=Edge">
       <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
       <%== meta_data_tags %>
       <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"/>
@@ -25,7 +26,7 @@ root:
     <%= render "spree/shared/analytics" %>
       </head>
       <body class="clear-block <%= @current_page.agent_selector(request.user_agent) %>">
-      <% if @current_page.site_design? %>
+      <% if @current_page.site_design? && !@current_page.is_preview %>
         <%= render "spree/shared/theme_selection_for_nondesigner" %>      
       <% end %>
       <%= flash_messages %>
@@ -1502,7 +1503,43 @@ root_for_mobile:
   is_root: true
   for_terminal: "1"
   html: |
-    this is just test
+    <!DOCTYPE html>
+    <html lang="zh-CN">
+      <head>
+      <title><%= @current_page.title%></title>
+      <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+      <%== meta_data_tags %>
+      <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"/>
+      <%# it is in main app/assets/ include spree_theme, spree_china_checkout, store/product, store/cart, store/checkout ... %>      
+      <%= javascript_include_tag 'spree/frontend/all', "data-turbolinks-track" => true %>      
+    <% if @current_page.is_preview %>
+      <%= stylesheet_link_tag 'store/spree_theme'  %>
+    <% else%>
+      <%= stylesheet_link_tag 'store/spree_theme.client', "data-turbolinks-track" => true %>
+      <link rel="stylesheet" href="<%=@website.public_path('css')%>" type="text/css" data-turbolinks-track />
+    <% end %>    
+    <%= csrf_meta_tags %>
+    <%= render "spree/shared/analytics" %>
+      </head>
+      <body class="clear-block <%= @current_page.agent_selector(request.user_agent) %>">
+      <% if @current_page.site_design? %>
+        <%= render "spree/shared/theme_selection_for_nondesigner" %>      
+      <% end %>
+      <%= flash_messages %>
+      <div id="page" class=''><div id="page-inner" class="clear-block">
+        ~~content~~
+      </div><!-- /#page-inner -->
+      </div><!-- /#page -->
+      <%= javascript_tag  do -%>
+        g_is_preview = <%== @current_page.is_preview.to_json %>  
+      <% end -%>
+      <% if @current_page.is_preview %>
+         <%= render 'layout_editor_panel' %>
+      <% end %>      
+      </body>
+    </html>
   css: "" 
   js: ""
 container_for_mobile:
