@@ -1,9 +1,15 @@
   <div class="fl" style="width:35%">
-    <div id="page_layout_tree" class="block">
-    <%= render :partial=>"theme_selection", :locals=>{:template_themes=>@template_themes, :selected=>@theme} %>
-    <div class="fr" style="padding:2px 5px;">
-      <%= check_box_tag 'page_layout_editable','1',false,:style=>"vertical-align: middle;" %> <span>title editable</span>
-    </div>
+
+    
+    <div class="block">
+      <div class="block_header">
+        <%= render :partial=>"theme_selection", :locals=>{:template_themes=>@template_themes, :selected=>@theme} %>
+        <div class="fr" style="padding:2px 5px;">
+          <%= check_box_tag 'page_layout_editable','1',false,:style=>"vertical-align: middle;" %> <span>title editable</span>
+        </div>  
+      </div>      
+      
+      
     <%= render :partial=>"layout_tree", :locals=>{:theme =>@theme, :options =>{:editable=>true}} %>
     <% #do not put it in file layout_tree, or update_layout_tree ajax add section_selection_dialog again and again.
     %>

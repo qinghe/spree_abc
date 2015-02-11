@@ -7,7 +7,7 @@
 %>
 <%= form_tag(get_param_values_template_theme_path(@theme), { :remote=>true, :method=>'post', 'data-type'=>'script', :id=>"layout_editor_form",:name=>"layout_editor_form"}) do %>
 
-    <ul class="tabs clear-block">
+    <ul class="tabs block_header clear-block">
     <% for tab in @editors%>
       <li data-id="<%=tab.id%>">
 <%=  link_to(tab.slug,"#", {"class"=>(tab.id==@editor.id ? "selected":"")})%>

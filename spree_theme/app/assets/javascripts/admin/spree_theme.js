@@ -19,8 +19,7 @@ jQuery(function ($) {
       core : {  multiple: false,  animation: 0  }
     }      
   ); 
-  //$('#page_layout_tree_inner select.select22').select2();
-  
+ 
   
   $('#listing_template_themes .editable').editable(function(value, settings) {
 	  var jquery_element = $(this)

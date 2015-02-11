@@ -180,8 +180,8 @@ module SpreeTheme::System
       @page_layout = page_layout #current selected page_layout, the node of the layout tree.
       @page_layout||= theme.page_layout
       @sections = Spree::Section.where(:is_enabled=>true).order("title").roots
-      #template selection
-      @template_themes = Spree::TemplateTheme.native
+      #template selection, include mobile
+      @template_themes = Spree::TemplateTheme.within_site(SpreeTheme.site_class.current )
   end
   
   def add_view_path
