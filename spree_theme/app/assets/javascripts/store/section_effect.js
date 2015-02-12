@@ -1,12 +1,13 @@
 $(document).ready(function() {
 
-    $('.effect_scroll').each(function(){
-      $self= $(this)
-      $body= (window.opera)?(document.compatMode=="CSS1Compat"?$('html'):$('body')):$('html,body');
-      $(this).click(function(){
+    $('.effect_scroll').click(function(){      
+      var $body= (window.opera)?(document.compatMode=="CSS1Compat"?$('html'):$('body')):$('html,body');
+      var $self= $(this)
+      var $target = $($self.attr('href'));
+      if($target.is('*')){
         $body.animate({scrollTop:($($self.attr('href')).offset().top-100)},500);
-        return false; 
-      });
+        return false;           
+      }
     });
 
     $(".effect_slider").each(function(index, element){
