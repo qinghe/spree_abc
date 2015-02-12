@@ -198,7 +198,7 @@ module PageTag
         
     # in template_tag have no method link_to, content_tag, it have to be in base_helper
     def page_attribute(  attribute_name )
-      page = self.running_data_item_by_class( Menus::WrappedMenu ) || self.current_page_tag
+      page = (self.running_data_item_by_class( Menus::WrappedMenu ) || self.current_page_tag)
       attribute_value = ''
       if attribute_name==:icon
         if page.icon.present?
