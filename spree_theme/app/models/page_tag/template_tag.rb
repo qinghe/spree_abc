@@ -240,8 +240,13 @@ module PageTag
     end
     
     def running_data_item_index
-      #running_data_source could be array or resource 
-      running_data_source.is_a?(ModelCollection) ? running_data_source.index( running_data_item) : 0
+      #running_data_source could be array or resource
+      case running_data_source
+      when ModelCollection, Array #page.products,menu.children
+        running_data_source.index( running_data_item)  
+      else # a page, a product 
+        0
+      end
     end
     
     def running_data_source=( data_source )
