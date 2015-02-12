@@ -1556,7 +1556,7 @@ bootstrap_container_for_mobile:
   css: "" 
   js: ""
 bootstrap_column_for_mobile:
-  id: 201
+  id: 202
   title: bootstrap column for mobile
   slug: bootstrap-column-for-mobile
   is_selectable: "1"
