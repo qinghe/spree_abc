@@ -241,7 +241,7 @@ module PageTag
     
     def running_data_item_index
       #running_data_source could be array or resource 
-      running_data_source.is_a?(Array) ? running_data_source.index( running_data_item) : 0
+      running_data_source.is_a?(ModelCollection) ? running_data_source.index( running_data_item) : 0
     end
     
     def running_data_source=( data_source )
