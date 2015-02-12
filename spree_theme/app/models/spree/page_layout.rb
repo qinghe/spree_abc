@@ -575,7 +575,9 @@ module Spree
                   <% @template.running_data_source.each{|page| @template.running_data_item = page %> #{subpieces} <%}%>
                   <% @template.running_data_source = nil %>
                 <% else %>  
-                  <% @template.menu.tap{|page| %> #{subpieces} <%}%>
+                  <% @template.running_data_source= @template.menu %>  
+                  <% @template.running_data_source.tap{|page| @template.running_data_item = page %> #{subpieces} <%}%>
+                  <% @template.running_data_source = nil %>
                 <% end %>              
               <% end %>              
               EOS3
