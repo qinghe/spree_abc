@@ -5,7 +5,7 @@ $(document).ready(function() {
       var $self= $(this)
       var $target = $($self.attr('href'));
       if($target.is('*')){
-        $body.animate({scrollTop:($($self.attr('href')).offset().top-100)},500);
+        $body.animate({scrollTop:($target.offset().top-120)},500);
         return false;           
       }
     });
