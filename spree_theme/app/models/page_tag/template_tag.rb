@@ -220,6 +220,22 @@ module PageTag
       end    
     end        
         
+    def product_attribute(  attribute_name )
+      product = (self.running_data_item_by_class( Products::WrappedProduct ) )
+      if product        
+        attribute_value = product.send attribute_name        
+        if self.current_piece.clickable? 
+          html_options[:href] = product.path
+          content_tag(:a, attribute_value, html_options)        
+        elsif attribute_name==:name
+          # make it as link anchor 
+          content_tag :span, attribute_value, {:id=>"p_#{self.current_piece.id}_#{page.id}"}
+        else
+          attribute_value
+        end    
+      end
+    end        
+        
     def cached_page_layouts
       if @cached_page_layouts.nil?
         @cached_page_layouts = theme.page_layout.self_and_descendants().includes(:section).inject({}){ |hash,pl| hash[pl.id]=pl; hash }

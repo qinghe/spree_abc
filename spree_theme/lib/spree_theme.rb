@@ -7,6 +7,7 @@ require 'spree_theme/seed_helper'
 require 'spree_theme/permitted_attributes_for_theme'
 require 'spree_theme/simple_permalink'
 require 'spree_theme/template_base_helper'
+require 'spree_theme/client_info'
 
 module SpreeTheme
   

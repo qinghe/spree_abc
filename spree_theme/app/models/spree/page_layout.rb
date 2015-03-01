@@ -525,10 +525,11 @@ module Spree
           next unless child.is_enabled?
           subpiece = build_section_html(tree, child, section_hash)
           # replace ~~selectors~~ with ex. 's_112_2 c_111'
+          offline_css = "s_#{child.id}_#{child.section_id} c_#{child.parent_id} #{child.css_class}"
           if child.has_extra_selector?
-            subpiece.sub!('~~selector~~', "s_#{child.id}_#{child.section_id} c_#{child.parent_id} <%=get_container_class(@template.current_piece) %>")             
+            subpiece.sub!('~~selector~~', "#{offline_css} <%=get_container_class(@template.current_piece) %>")             
           else
-            subpiece.sub!('~~selector~~', "s_#{child.id}_#{child.section_id} c_#{child.parent_id}") 
+            subpiece.sub!('~~selector~~', offline_css) 
           end        
           subpieces.concat(subpiece)
         end

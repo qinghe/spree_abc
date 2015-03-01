@@ -1,8 +1,8 @@
 
 @import 'store/spree_china_checkout';
-
-html.turbolinks-progress-bar::before {
+ 
+ html.turbolinks-progress-bar::before {
   background-color: red !important;
   height: 2px !important;
-}
-
+ }
+ 

@@ -14,7 +14,7 @@
 
 $(document).ready(function() {
   
-  if (typeof(g_is_preview) != 'undefined' && g_is_preview==true)
+  if (typeof(g_client_info) != 'undefined' && g_client_info.is_preview==true)
   {
     if (typeof(g_selector_gadget) == 'undefined' || g_selector_gadget == null) {
       g_selector_gadget = new SelectorGadget();
