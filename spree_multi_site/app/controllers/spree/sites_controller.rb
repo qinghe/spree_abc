@@ -14,8 +14,9 @@ module Spree
       
       # called from dalianshops home page
       def quick_lunch
-        params[:user][:password_confirmation] = params[:user][:password] 
-        @site = create_site( params[:site], params[:user] )
+        
+        params[:site][:users][:password_confirmation] = params[:site][:users][:password] 
+        @site = create_site( permitted_resource_params )
         if @site.persisted?
           redirect_to @site.admin_url
         else
