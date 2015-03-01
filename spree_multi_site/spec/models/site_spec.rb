@@ -48,6 +48,17 @@ describe Spree::Site do
     @site.users.first.email.should eq(user_attributes['email'])
   end
   
+  it "should create site and admin user" do
+    site_params={"name"=>"mingzi",
+          "users"=>{"email"=>"mingzi@qq.com",
+                    "password"=>"123456",
+                    "password_confirmation"=>"123456"}
+                    }
+    site = Site.new(site_params)
+    site.save
+    site.should_not be_new_record
+  end
+  
   it "shold load samples" do
     @site.save!
     @site.load_sample
