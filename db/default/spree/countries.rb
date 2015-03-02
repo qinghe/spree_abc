@@ -1,7 +1,7 @@
 #encoding: utf-8
 Spree::Country.create!({"name"=>"中国", "iso3"=>"CHN", "iso"=>"CN", "iso_name"=>"CHINA", "numcode"=>"156"})
 country =  Spree::Country.find_by_iso("CN")
-Spree::Config[:default_country_id] = country.id
+#Spree::Config[:default_country_id] = country.id
 # load states.yml, cities.yml
 
 states = YAML::load(File.read( File.join(File.dirname(__FILE__),'states.yml')))

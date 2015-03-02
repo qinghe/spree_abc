@@ -17,7 +17,7 @@ module SpreeMultiSite
 
       # preferences contains two kind of records
       # 1. override AppConfiguration's default value.
-      #     a. some preferences in AppConfiguration are for whole application, so override record site_id=0, like seed_dir
+      #     a. some preferences in AppConfiguration are for whole application, so override record site_id=0
       #        this kind preference's description start with 'global'
       #     b. some preferences are for one site, so override record site_id>0, like :default_seo_title 
       #    
@@ -28,7 +28,7 @@ module SpreeMultiSite
         #replace original :preference_cache_key, add current_site.id as part of key
         #fix error Duplicate entry 'spree/app_configuration/site_url/1' 
         def preference_cache_key(name)
-          global_preferences = ["seed_dir"]
+          global_preferences = []
           some_key = nil
           if global_preferences.include? name#preference_description( name ).to_s.start_with? "global_"
             some_key =[self.class.name, name, 0].join('::').underscore

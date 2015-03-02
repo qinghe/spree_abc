@@ -15,6 +15,7 @@ ENV['RAILS_ENV'] = 'test'
 require File.expand_path('../dummy/config/environment.rb',  __FILE__)
 
 require 'rspec/rails'
+require 'database_cleaner'
 require 'ffaker'
 
 # Requires supporting ruby files with custom matchers and macros, etc,
@@ -27,6 +28,9 @@ require 'spree/testing_support/capybara_ext'
 require 'spree/testing_support/controller_requests'
 require 'spree/testing_support/factories'
 require 'spree/testing_support/url_helpers'
+
+# Requires factories defined in lib/spree_multi_site/factories.rb
+# require 'lib/spree_multi_site/factories'
 
 RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
@@ -63,7 +67,7 @@ RSpec.configure do |config|
   # Ensure Suite is set to use transactions for speed.
   config.before :suite do
     DatabaseCleaner.strategy = :transaction
-    DatabaseCleaner.clean_with :truncation
+    #DatabaseCleaner.clean_with :truncation
   end
 
   # Before each spec check if it is a Javascript test and switch between using database transactions or not where necessary.

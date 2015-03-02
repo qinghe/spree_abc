@@ -1,6 +1,6 @@
 #encoding: utf-8
 class Spree::Site < ActiveRecord::Base
-  cattr_accessor :unknown,:subdomain_regexp, :loading_fake_order_with_sample, :system_top_domain
+  cattr_accessor :subdomain_regexp, :loading_fake_order_with_sample, :system_top_domain
   # system_top_domain is required, in middleware, we compare it with request.host, 
   # it tell us to initialize site by short_name or domain.
 
@@ -26,14 +26,16 @@ class Spree::Site < ActiveRecord::Base
   accepts_nested_attributes_for :stores
   accepts_nested_attributes_for :users
   
-  #app_configuration require site_id
-  self.unknown = Struct.new(:id).new(0)
   self.system_top_domain = 'dalianshops.com'
   # it is load before create site table. self.new would trigger error "Table spree_sites' doesn't exist"
   # db/migrate/some_migration is using Spree::Product, it has default_scope using Site.current.id
   # so it require a default value.
   self.subdomain_regexp = /\A([a-z0-9\-])*\Z/
   self.loading_fake_order_with_sample = false
+
+  #these attr is only used when create site, it is unavailabe in other case.
+  attr_accessor :admin_email, :admin_password
+
   validates :name, length: 4..32 #"中国".length=> 2
   validates :short_name, uniqueness: true, presence: true, length: 4..32, format: {with: subdomain_regexp} #, unless: "domain.blank?"
   validates_uniqueness_of :domain, :allow_blank=>true 
@@ -77,11 +79,7 @@ class Spree::Site < ActiveRecord::Base
   def current?
     self == self.class.current
   end
-  
-  def unknown?
-    !(self.id>0)
-  end
-  
+    
   def load_sample(  )
     require 'ffaker'
     # global tables
@@ -192,24 +190,22 @@ class Spree::Site < ActiveRecord::Base
   
   def add_default_data
     #current site is first, self is another.
-    new_store = self.stores.create!( name: site.name )do |store|
-      store.code = site.short_name
-      store.site_id = self.id 
-    end
-
     self.class.with_site( self ) do| site |
-      site.users.first.spree_roles << Spree::Role.find_by_name('admin')
+      site.stores.create!( name: site.name, code: site.short_name )  
+      user_attributes = { email: site.admin_email, password: site.admin_password }
+      user = site.users.create!(user_attributes)
+      user.spree_roles << Spree::Role.find_by_name('admin')      
       site.shipping_categories.create!( name: Spree.t(:default) )
     end
   end
   
   def load_sample_products
-    file = Pathname.new(File.join(SpreeMultiSite::Config.seed_dir, 'samples', "seed.rb"))
+    file = File.join( Rails.application.root, 'db', 'samples', "seed.rb")
     load file
   end
   
   def load_sample_orders
-    file = Pathname.new(File.join(SpreeMultiSite::Config.seed_dir, 'fake_order', "seed.rb"))
+    file = File.join( Rails.application.root, 'db', 'fake_order', "seed.rb")
     load file
   end
    

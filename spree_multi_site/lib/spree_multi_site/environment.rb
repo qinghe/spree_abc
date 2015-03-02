@@ -4,7 +4,7 @@ require 'spree/core/environment_extension'
       include Spree::Core::EnvironmentExtension
 
       attr_accessor :site_scope_required_classes_from_other_gems, :site_scope_required_classes_with_image_from_other_gems, :preferences
-
+      
       def initialize
         @preferences = Spree::MultiSiteConfiguration.new
         @site_scope_required_classes_from_other_gems = []

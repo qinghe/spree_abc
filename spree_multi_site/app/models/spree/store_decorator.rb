@@ -5,7 +5,8 @@ Spree::Store.class_eval do
   
   #override original current
   def self.current(domain = nil)
-    ::Thread.current[:spree_store]
+    #UnknownStore.instance is for test only
+    ::Thread.current[:spree_store] || UnknownStore.instance
   end
   
   def self.current=(some_store)
@@ -32,4 +33,16 @@ Spree::Store.class_eval do
     unscoped.where( default: true ).first
   end  
     
+  #app_configuration require site_id  
+  class UnknownStore
+    include Singleton
+    def id
+      0
+    end
+    
+    def site
+      #app_configuration require site_id
+      Struct.new(:id).new(0)
+    end
+  end
 end

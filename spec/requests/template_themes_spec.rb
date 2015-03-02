@@ -7,7 +7,6 @@ describe "home page", :type => :request do
 #  before do
 #    Spree::Site.stub(:current => Spree::Site.first)
 #    controller.stub(:spree_current_user => user)
-#    SpreeMultiSite::Config.seed_dir= File.join(SpreeAbc::Application.root,'db') 
 #  end
 
   it "should go dalianshops.com" do
