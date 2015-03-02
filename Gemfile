@@ -88,12 +88,20 @@ group :test, :development do
 end
 
 group :test do
-  gem 'rspec-rails'
-  gem 'database_cleaner'
-  gem 'factory_girl'
-  gem 'capybara'
-  gem 'capybara-accessible'  
-  gem 'webmock'
+  gem 'capybara', '~> 2.4'
+  gem 'database_cleaner', '~> 1.3'
+  gem 'email_spec'
+  gem 'factory_girl_rails', '~> 4.5.0'
+  gem 'launchy'
+  gem 'rspec-activemodel-mocks'
+  gem 'rspec-collection_matchers'
+  gem 'rspec-its'
+  gem 'rspec-rails', '~> 3.1.0'
+  gem 'simplecov'
+  gem 'webmock', '1.8.11'
+  gem 'poltergeist', '1.5.0'
+  gem 'timecop'
+  gem 'with_model'
 end
 #execjs need js runtime, use nodejs of system instead.
 #gem 'therubyracer' 
@@ -102,7 +110,7 @@ group :development do
   gem 'capistrano'
   gem 'capistrano-rails', '~> 1.1.0'
   gem 'capistrano-rvm', '~> 0.1.0'
-  gem "rails-erd"
+  #gem "rails-erd"
 end
 
 

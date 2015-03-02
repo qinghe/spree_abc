@@ -5,7 +5,8 @@ describe Spree::SitesController do
   let(:role) { create(:role) }
 
   before do
-    Spree::Site.stub(:current => Spree::Site.first)
+    #request.stub(:host => Spree::Site.first.subdomain)
+    Spree::Site.current = Spree::Site.first
     controller.stub(:spree_current_user => user)
   end
   #Delete this example and add some real ones
@@ -14,10 +15,18 @@ describe Spree::SitesController do
   end
 #{"utf8"=>"✓", "authenticity_token"=>"Klllros8vRbKw1rGMzq33yHRXJ2ioTyaXV0Uy2YlsUw=", "site"=>{"name"=>"test", "short_name"=>"test", "has_sample"=>"1"}, "user"=>{"email"=>"test@gmail.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"创建"}
   it "should create a site successfully" do
-    spree_post :new, { "site"=>{"name"=>"test", "short_name"=>"test", "has_sample"=>"1"},
-                 "user"=>{"email"=>"test@gmail.com", "password"=>"123456", "password_confirmation"=>"123456"} }
+    request.stub(:fullpath => '/new_site')
+    spree_post :new, { "site"=>{"name"=>"test", "short_name"=>"test", "has_sample"=>"1", "admin_email"=>"test@gmail.com", "admin_password"=>"123456", "admin_password_confirmation"=>"123456"} }
     expect(assigns(:site)).to be_kind_of Spree::Site
     expect(response).to redirect_to(spree.site_path(assigns(:site)))
   end
 
+  it "should quick lunch a site successfully" do
+    spree_post :quick_lunch, { "site"=>{"name"=>"test", "short_name"=>"test", "has_sample"=>"1",
+    "admin_email"=>"test@gmail.com", "admin_password"=>"123456"}}
+    expect(assigns(:site)).to be_kind_of Spree::Site
+    expect(response).to redirect_to(spree.site_path(assigns(:site)))
+  end
+
+  
 end

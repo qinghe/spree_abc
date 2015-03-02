@@ -34,7 +34,7 @@ class Spree::Site < ActiveRecord::Base
   self.loading_fake_order_with_sample = false
 
   #these attr is only used when create site, it is unavailabe in other case.
-  attr_accessor :admin_email, :admin_password
+  attr_accessor :admin_email, :admin_password, :admin_password_confirmation
 
   validates :name, length: 4..32 #"中国".length=> 2
   validates :short_name, uniqueness: true, presence: true, length: 4..32, format: {with: subdomain_regexp} #, unless: "domain.blank?"
@@ -168,8 +168,6 @@ class Spree::Site < ActiveRecord::Base
         #shipping_method, calculator, creditcard, inventory_units, state_change,tokenized_permission
         #TODO remove image files
         self.assets.clear
-        #FIXME seems it do not work 
-        self.clear_preferences #remove preferences
         #TODO clear those tables
         # creditcarts,preferences
         self.state_changes.clear 
@@ -192,7 +190,7 @@ class Spree::Site < ActiveRecord::Base
     #current site is first, self is another.
     self.class.with_site( self ) do| site |
       site.stores.create!( name: site.name, code: site.short_name )  
-      user_attributes = { email: site.admin_email, password: site.admin_password }
+      user_attributes = { email: site.admin_email, password: site.admin_password, password_confirmation: admin_password_confirmation }
       user = site.users.create!(user_attributes)
       user.spree_roles << Spree::Role.find_by_name('admin')      
       site.shipping_categories.create!( name: Spree.t(:default) )

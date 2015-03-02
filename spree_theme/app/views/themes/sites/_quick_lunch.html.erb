@@ -7,14 +7,12 @@
         <p>
           <%= f.text_field :name, :class => 'fullwidth title', :placeholder => Spree.t(:name_store), :minlength=>4, :maxlength=>24, :required=>""  %>
         </p>
-        <%= f.fields_for :users do |user_fields| %>
           <p>
-            <%= user_fields.email_field :email, :placeholder => Spree.t(:email)%>
+            <%= f.email_field :admin_email, :placeholder => Spree.t(:email)%>
           </p>
           <p>
-            <%= user_fields.password_field :password, :placeholder=>Spree.t(:password), :minlength=>6, :maxlength=>24, :required=>"" %>
+            <%= f.password_field :admin_password, :placeholder=>Spree.t(:password), :minlength=>6, :maxlength=>24, :required=>"" %>
           </p>
-        <% end %>
           
         <p><%= f.button Spree.t(:new_site), :class => 'button primary' %></p>
     </div>
@@ -22,7 +20,7 @@
 <script>
 $("#site_form").validate({
   rules: {
-    'site[user[email]': {
+    'site[admin_email]': {
       required: true,
       email: true,
       remote: {
@@ -32,7 +30,7 @@ $("#site_form").validate({
     }
   },
   messages:{
-    'user[email]': {
+    'site[admin_email]': {
       remote: <%=raw Spree.t('errors.messages.email_existing').to_json %>
     }
   }
