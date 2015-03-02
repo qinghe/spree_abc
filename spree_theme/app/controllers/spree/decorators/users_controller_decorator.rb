@@ -22,7 +22,7 @@ module Spree
     end
     
     def check_email
-      @user = Spree::User.new(params[:user] )
+      @user = Spree::User.new(params[:site] )
       @user.valid?
       result = ((!!@user.errors.include?(:email))== false)
       render :text=> result.to_json

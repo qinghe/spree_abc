@@ -2,8 +2,8 @@ attributes = {
     :name =>  "Dalian shops",
     :domain => "www.dalianshops.com",
     :short_name => "first",
-    :admin_email => "first@dalianshops.com",
-    :admin_password =>'spree123'
+    :email => "first@dalianshops.com",
+    :password =>'spree123'
   }
 site = Spree::Site.create!(attributes)    
 Spree::Site.current = site

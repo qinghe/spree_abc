@@ -13,18 +13,18 @@
       </p>
    
         <p>
-          <%= f.label  :admin_email, Spree.t(:email)  %><br />
-          <%= f.email_field :admin_email %>
+          <%= f.label  :email, Spree.t(:email)  %><br />
+          <%= f.email_field :email %>
         </p>
       
         <p>
-          <%= f.label :admin_password, Spree.t(:password) %><br />
-          <%= f.password_field :admin_password, :minlength=>6, :maxlength=>30, :required=>"" %>
+          <%= f.label :password, Spree.t(:password) %><br />
+          <%= f.password_field :password, :minlength=>6, :maxlength=>30, :required=>"" %>
         </p>
       
         <p>
-          <%= f.label :admin_password_confirmation, Spree.t(:confirm_password) %><br />
-          <%= f.password_field :admin_password_confirmation, :minlength=>6, :maxlength=>30, :required=>"" %>
+          <%= f.label :password_confirmation, Spree.t(:confirm_password) %><br />
+          <%= f.password_field :password_confirmation, :minlength=>6, :maxlength=>30, :required=>"" %>
         </p>
 
       <% if @template_theme.present? %>
