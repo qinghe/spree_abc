@@ -334,7 +334,7 @@ module Spree
       def dialog_content_container_selector
         dialog = find_section_by_usage( 'dialog' )
         dialog_content_container = dialog.section.descendants.includes(:section_piece).select{|section| section.section_piece.usage=='dial-cont'}.first
-        dialog.css_selector(dialog_content_container)+"_inner"
+        dialog.css_selector(dialog_content_container) + " > .inner"
       end
                 
     end
