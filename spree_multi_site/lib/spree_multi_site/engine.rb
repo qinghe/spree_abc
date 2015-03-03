@@ -11,8 +11,8 @@ module SpreeMultiSite
 
     initializer "spree.multisite.environment", :before => "spree.environment" do |app|
       app.config.spree_multi_site = SpreeMultiSite::Environment.new
-      SpreeMultiSite::Config  = app.config.spree_multi_site.preferences #legacy access
-      app.config.spree_multi_site.site_scope_required_classes_from_other_gems = []
+      #SpreeMultiSite::Config  = app.config.spree_multi_site.preferences #legacy access
+      #app.config.spree_multi_site.site_scope_required_classes_from_other_gems = []
 
 
       # preferences contains two kind of records

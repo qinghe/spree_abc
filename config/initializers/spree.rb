@@ -27,3 +27,5 @@ SpreeEditor::Config.tap do |config|
   config.ids = "product_description taxon_description template_text_body  post_body"
   config.current_editor = "CKEditor"
 end
+
+Rails.application.config.spree_multi_site.site_scope_required_classes_from_other_gems << 'Spree::Post'
