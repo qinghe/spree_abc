@@ -5,7 +5,7 @@ module Spree
      # since redirect_to work in ajax, do not need rewrite 'update'
      
     def update
-      if @user.update_attributes(params[:user])
+      if @user.update_attributes(user_params)
         if params[:user][:password].present?
           # this logic needed b/c devise wants to log us out after password changes
           user = Spree::User.reset_password_by_token(params[:user])
@@ -22,10 +22,16 @@ module Spree
     end
     
     def check_email
-      @user = Spree::User.new(params[:user] )
+      @user = Spree::User.new( user_params_for_site_startup )
       @user.valid?
       result = ((!!@user.errors.include?(:email))== false)
       render :text=> result.to_json
     end
+    
+    
+    def user_params_for_site_startup
+      params.require(:site).permit(Spree::PermittedAttributes.user_attributes)
+    end
+
   end
 end

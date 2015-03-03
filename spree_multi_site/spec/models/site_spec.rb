@@ -2,7 +2,7 @@
 require 'spec_helper'
 describe Spree::Site do
   before(:each) do    
-    @site = Spree::Site.new(:name=>'ABCD',:domain=>'www.abc.net', :admin_email=>'test@dalianshops.com', :admin_password=>'123456')
+    @site = Spree::Site.new(:name=>'ABCD',:domain=>'www.abc.net', :email=>'test@dalianshops.com', :password=>'123456')
   end
 
   it "should be valid" do
@@ -21,7 +21,7 @@ describe Spree::Site do
     site2.short_name = nil
     site2.domain = nil
     site2.should be_valid
-    site2.admin_email= 'somenew@dalianshops.com'
+    site2.email= 'somenew@dalianshops.com'
     site2.save.should be_truthy
     site2.short_name.should start_with( @site.short_name)
     site2.short_name.should_not == @site.short_name
@@ -82,8 +82,8 @@ describe Spree::Site do
   end
   
   it "shold create two site and load samples for them" do
-    #@site1 = Spree::Site.create!(:name=>'Site1',:domain=>'www.site1.net',:short_name=>'site1', :admin_email=>'site1@dalianshops.com', :admin_password=>'123456')
-    #@site2 = Spree::Site.create!(:name=>'Site1',:domain=>'www.site2.net',:short_name=>'site2', :admin_email=>'site2@dalianshops.com', :admin_password=>'123456')
+    #@site1 = Spree::Site.create!(:name=>'Site1',:domain=>'www.site1.net',:short_name=>'site1', :email=>'site1@dalianshops.com', :password=>'123456')
+    #@site2 = Spree::Site.create!(:name=>'Site1',:domain=>'www.site2.net',:short_name=>'site2', :email=>'site2@dalianshops.com', :password=>'123456')
     #@site1.load_sample
     #@site2.load_sample
     #product image copied and in right folder.
