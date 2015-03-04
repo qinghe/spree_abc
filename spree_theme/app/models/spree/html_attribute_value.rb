@@ -343,31 +343,5 @@ module Spree
       self.param_value.update_html_attribute_value(self.html_attribute, self.properties, 'system')
     end
     
-  
-  
-    # possible selected values are website related, ex. menus.  
-=begin  
-    def possible_selected_values
-      if @possible_selected_values.nil?      
-        if html_attribute.is_special? :db        
-          @possible_selected_values = html_attribute.possible_selected_values
-        else
-          @possible_selected_values = html_attribute.possible_selected_values
-        end
-      end
-      @possible_selected_values
-    end
-    def possible_selected_values_descriptions
-      if @possible_selected_values_descriptions.nil?      
-        if html_attribute.is_special? :db      
-          @possible_selected_values_descriptions = html_attribute.possible_selected_values_descriptions        
-          #@possible_selected_values_descriptions+=(Menu.roots.collect{|menu| menu.title})
-        else
-          @possible_selected_values_descriptions = html_attribute.possible_selected_values_descriptions
-        end
-      end
-      @possible_selected_values_descriptions
-    end    
-=end
   end
 end
