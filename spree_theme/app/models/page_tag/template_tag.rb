@@ -85,7 +85,7 @@ module PageTag
             
       # view content as grid.
       def column_count
-        is_container? ?  get_content_param_by_key( :columns ) : 0
+        is_container? ?  get_content_param_by_key( :model_count_in_row ) : 0
       end
       
     end

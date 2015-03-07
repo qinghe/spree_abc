@@ -149,8 +149,8 @@ module Spree
           #bit 9,   10,  product-image
           #   256 + 512 = 768
           (get_content_param&768)>>8                
-        when :columns #bit 1,2,3,4
-          #container
+        when :model_count_in_row #bit 1,2,3,4
+          #how many model this container
           get_content_param&15
         else 
           nil
