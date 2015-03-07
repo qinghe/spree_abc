@@ -48,7 +48,7 @@
       </td>
     <% end %>
     <td class="actions">
-    <%= link_to_with_icon 'cogs', Spree.t(:theme_config), config_resource_admin_template_theme_path(theme), {:method=>:get,:no_text => true} %>
+    <%= link_to_with_icon 'cogs', Spree.t(:theme_config), config_resource_admin_template_theme_path(theme), {:no_text => true} %>
     <% if theme.has_native_layout? %>    
       <%= link_to_with_icon 'eye', Spree.t(:preview_theme), preview_template_theme_path(theme), {:target=>'_blank',:no_text => true} %>
       <% if SpreeTheme.site_class.current.design? %>    
