@@ -97,6 +97,7 @@ zh-CN:
     global_taxons: 全局分类
     notice_messages:
       theme_imported: 模板已经购买成功
+      theme_released: 模板已经发布成功
       theme_not_imported: 模板无法导入        
     page_layout:
       data_source: 数据源 
