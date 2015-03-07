@@ -1543,10 +1543,10 @@ root_for_mobile:
     </html>
   css: "" 
   js: ""
-bootstrap_container_for_mobile:
+bootstrap_container:
   id: 201
-  title: bootstrap container for mobile
-  slug: bootstrap-container-for-mobile
+  title: bootstrap container
+  slug: bootstrap-container
   is_selectable: "1"
   is_container: "1"
   for_terminal: "1"
@@ -1554,12 +1554,23 @@ bootstrap_container_for_mobile:
     <div class="container ~~selector~~">
       <div class="row inner"> ~~content~~ </div>
     </div>
-  css: "" 
+  css: |
+    /* width,height, skinnables */
+    .<%=@template.section_selector%>
+    { padding:0;  margin:0 auto;       
+      <%=@template.css(:block)%>
+    }
+    /* background, margin, border, padding */
+    .<%=@template.section_selector%> > .inner
+    { overflow: hidden;/* keep border visible*/
+      min-height:1px;min-width:1px;  /* it is required as placeholder */
+      <%=@template.css(:inner)%>
+    } 
   js: ""
-bootstrap_column_for_mobile:
+bootstrap_column:
   id: 202
-  title: bootstrap column for mobile
-  slug: bootstrap-column-for-mobile
+  title: bootstrap column
+  slug: bootstrap-column
   is_selectable: "1"
   is_container: "1"
   for_terminal: "1"
