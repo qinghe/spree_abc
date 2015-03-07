@@ -64,6 +64,10 @@ module Spree
           if @template_theme.has_native_layout?     
             @template_theme.release
           end
+          if @template_theme.mobile.present?    
+            @template_theme.mobile.release
+          end
+          flash[:success] = Spree.t('notice_messages.theme_released')
           @themes = TemplateTheme.native          
           render :action=>'native' 
         end
