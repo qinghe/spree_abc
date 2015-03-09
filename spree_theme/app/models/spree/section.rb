@@ -15,6 +15,7 @@ module Spree
     HoverEffectMask= 16+32+64+128
     HoverEffect = Struct.new(:slide, :show, :expansion, :overlay, :popup)[16,32,64,48,80]
     
+    scope :enabled, ->{ where( is_enabled: true ) }
     
     # usage: attribute section_piece_id, title required
     # params: default_param_values,  is a hash,  class_name=>{htmal_attribute_id=>default_value,..}
@@ -176,7 +177,15 @@ module Spree
     
     # add new column later.
     def is_container?
-      title =~/container/
+      usage =='container'
+    end
+    
+    def is_zoomable_image?
+      usage =='image-with-thumbnails' 
+    end
+    
+    def is_html_root?
+      usage =='root'      
     end
   end
 

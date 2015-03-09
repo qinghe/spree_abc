@@ -18,7 +18,7 @@ module Spree
     before_destroy :remove_section
     before_save :fix_data_source_param
     
-    delegate :is_html_root?, :is_container?, to: :section
+    delegate :is_html_root?, :is_container?, :is_zoomable_image?, to: :section
 
     scope :full_html_roots, ->{ where(:is_full_html=>true,:parent_id=>nil) }
     #attr_accessible :section_id,:title
@@ -117,8 +117,8 @@ module Spree
       end
 
       def has_extra_selector?
-        #child1,child2...              data1,data2...
-        self.effects.present? || parent.effects.present? || parent.data_source.present?
+        #child1,child2...              data1,data2...                                          zoomable
+        self.effects.present? || parent.effects.present? || parent.data_source.present? || self.get_content_param > 0
       end
       
       
@@ -144,7 +144,7 @@ module Spree
           [:mini, :large, :medium, :small, :original].fetch( idx, :mini )
         when :zoomable
           #bit 8
-          get_content_param&128>0        
+          get_content_param&128 > 0        
         when :main_image_position
           #bit 9,   10,  product-image
           #   256 + 512 = 768
@@ -527,7 +527,7 @@ module Spree
           # replace ~~selectors~~ with ex. 's_112_2 c_111'
           offline_css = "s_#{child.id}_#{child.section_id} c_#{child.parent_id} #{child.css_class}"
           if child.has_extra_selector?
-            subpiece.sub!('~~selector~~', "#{offline_css} <%=get_container_class(@template.current_piece) %>")             
+            subpiece.sub!('~~selector~~', "#{offline_css} <%=@template.get_css_classes %>")             
           else
             subpiece.sub!('~~selector~~', offline_css) 
           end        

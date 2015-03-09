@@ -327,17 +327,11 @@ product_image:
   is_selectable: "0"
   is_container: "0"
   html: |  
-    <% if defined? product %>      
-     <% if @template.current_piece.clickable? %>
-      <%= link_to product_main_image( @template.current_piece, product ), product.path %>
-     <% else %>
-      <%= product_main_image( @template.current_piece, product ) %>
-     <% end %> 
-    <% end %>
+    <%= @template.product_attribute( :image ) %>
   created_at: 2011-09-20 19:40:07
   updated_at: 2011-09-20 19:40:07
   css: |
-    .<%=@template.section_selector %> img { width:100%; } 
+    .<%= @template.section_selector %> img { width:100%; } 
   js: ""
 product_description:
   id: 12
@@ -346,9 +340,7 @@ product_description:
   is_selectable: "0"
   is_container: "0"
   html: |      
-    <% if defined? product %>
-       <%== product.description %>
-    <% end %>
+    <%== @template.product_attribute( :description )  %>
   created_at: 2011-09-20 19:40:07
   updated_at: 2011-09-20 19:40:07
   css: ""
@@ -360,13 +352,7 @@ product_name:
   is_selectable: "0"
   is_container: "0"
   html: |    
-    <% if defined? product %>
-     <% if @template.current_piece.clickable? %>
-       <a href="<%= product.path %>"> <%=product.name %> </a>
-     <% else %>
-       <%=product.name %>
-     <% end %>
-    <% end %>
+    <%= @template.product_attribute( :name )  %>
   created_at: 2011-09-20 19:40:07
   updated_at: 2011-09-20 19:40:07
   css: |
@@ -389,14 +375,14 @@ product_thumbnails:
     <% if (product.images + product.variant_images).uniq.size > 1 %>
       <ul id="product-thumbnails" class="thumbnails inline" data-hook>
       <% product.images.each do |i| %><li class='tmb-all tmb-<%= i.viewable.id %>'>
-          <%= link_to_product_thumbnail( @template.current_piece, i ) %>
+          <%= @template.product_attribute( :thumbnail, image: i ) %>
         </li>
         <% end %>
         <% if product.has_variants? %>
         <% product.variant_images.each do |i| %>
           <% next if product.images.include?(i) %>
           <li class='vtmb tmb-<%= i.viewable.id %>'>
-            <%= link_to_product_thumbnail( @template.current_piece, i ) %>
+            <%= @template.product_attribute( :thumbnail, image: i ) %>
           </li>
         <% end %>
       <% end %>
@@ -427,13 +413,14 @@ product_main_image:
   is_selectable: "0"
   is_container: "0"
   html: |   
-    <div id="main-image" >       
-      <%= product_main_image( @template.current_piece, product ) %>
+    <div id="main-image" class="main_image_wrapper">
+      <%= @template.product_attribute( :image  ) %>
     </div>
   created_at: 2011-09-20 19:40:07
   updated_at: 2011-09-20 19:40:07
   css: |
-    #main-image img{
+    /* do not apply css padding,margin on image, image-zoom required. use wrapper instead */
+    .<%=@template.section_selector%> img{
       <%= @template.css :img %> 
     }
   js: ""

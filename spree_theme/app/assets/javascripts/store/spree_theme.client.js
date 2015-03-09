@@ -1,5 +1,5 @@
-//= require jquery.validate/localization/messages_zh-CN.js
-//= require jquery.simplemodal.js
+//= require jquery.validate/localization/messages_zh-CN
+//= require jquery.simplemodal
 //= require store/section_effect
 
 $(document).ready(function() {

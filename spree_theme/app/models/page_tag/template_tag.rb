@@ -1,4 +1,5 @@
 require 'action_view/helpers/tag_helper'
+require 'action_view/helpers/asset_tag_helper.rb'
 module PageTag
 #                 template -> param_values
 #                          -> menus
@@ -7,11 +8,12 @@ module PageTag
 #                          # those tags required current section_instance
 # template is collection of page_layout. each page_layout is section instance 
   class TemplateTag < Base
-    include ActionView::Helpers::TagHelper #add method content_tag
+    #include ActionView::Helpers::TagHelper #add method content_tag
+    include ActionView::Helpers::AssetTagHelper 
     
     class WrappedPageLayout < WrappedModel
       self.accessable_attributes=[:id,:title,:current_data_source,:wrapped_data_source_param, :data_filter,:current_contexts, :context_either?, 
-         :get_content_param_by_key, :is_container?, :effects,:section_pieces]
+         :get_content_param_by_key, :is_container?, :is_zoomable_image?, :effects,:section_pieces]
       attr_accessor :section_id, :page_layout, :parent
       
       delegate *self.accessable_attributes, to: :page_layout
@@ -82,6 +84,10 @@ module PageTag
         # first bit is clickable
         get_content_param_by_key(:clickable)
       end
+      
+      def zoomable?
+        is_zoomable_image? && get_content_param_by_key(:zoomable)
+      end
             
       # view content as grid.
       def column_count
@@ -90,10 +96,10 @@ module PageTag
       
     end
     
-    attr_accessor :param_values_tag, :menus_tag, :image_tag, :text_tag, :blog_posts_tag
+    attr_accessor :param_values_tag, :menus_tag, :images_tag, :text_tag, :blog_posts_tag
     delegate :css, :to => :param_values_tag 
     delegate :menu,:menu2, :to => :menus_tag
-    delegate :image, :to => :image_tag
+    delegate :image, :to => :images_tag
     delegate :text, :to => :text_tag
     delegate :theme, :current_page_tag,  :to => :page_generator
     delegate :section_selector, :to =>:current_piece
@@ -106,7 +112,7 @@ module PageTag
       super(page_generator_instance)
       self.param_values_tag = ::PageTag::ParamValues.new(self)
       self.menus_tag = ::PageTag::Menus.new(self)
-      self.image_tag = ::PageTag::TemplateImage.new(self)
+      self.images_tag = ::PageTag::TemplateImage.new(self)
       self.text_tag = ::PageTag::TemplateText.new(self)
       self.running_data_sources = []
       self.running_data_source_sction_pieces = [] # data_source belongs to section_piece 
@@ -220,22 +226,73 @@ module PageTag
       end    
     end        
         
-    def product_attribute(  attribute_name )
-      product = (self.running_data_item_by_class( Products::WrappedProduct ) )
-      if product        
-        attribute_value = product.send attribute_name        
-        if self.current_piece.clickable? 
-          html_options[:href] = product.path
-          content_tag(:a, attribute_value, html_options)        
-        elsif attribute_name==:name
-          # make it as link anchor 
-          content_tag :span, attribute_value, {:id=>"p_#{self.current_piece.id}_#{page.id}"}
+    # * params
+    #   * attribute_name - symbol :name, :image, :thumbnail
+    def product_attribute( attribute_name, options = { } )
+      wrapped_product = (self.running_data_item_by_class( Products::WrappedProduct ) )
+      if wrapped_product     
+        attribute_value = case attribute_name
+          when :name
+            # make it as link anchor 
+            content_tag :span, wrapped_product.name, {:id=>"p_#{self.current_piece.id}_#{wrapped_product.id}"}            
+          when :image
+            product_image( wrapped_product )
+          when :thumbnail
+            i = options[:image]
+            content_tag(:a, create_product_image_tag( i, wrapped_product, {}, current_piece.get_content_param_by_key(:thumbnail_style)),
+            #image_tag(i.attachment.url( current_piece.get_content_param_by_key(:thumbnail_style))), 
+                         { href: i.attachment.url( current_piece.get_content_param_by_key(:main_image_style)) }
+                         ) 
+          else
+            wrapped_product.send attribute_name
+          end 
+        if attribute_name== :image && self.current_piece.is_zoomable_image?
+          # main image 
+          # wrap with a, image-zoom required
+          # content_tag(:a, attribute_value, { class: 'image-zoom' })
+          attribute_value         
+        elsif self.current_piece.clickable? 
+          content_tag(:a, attribute_value, { href: wrapped_product.path })        
         else
           attribute_value
         end    
       end
     end        
-        
+    
+    def get_css_classes
+      css_classes =  current_piece.effects.join(' ')  # current_piece.piece_selector + ' ' + current_piece.as_child_selector + ' ' +
+      # handling data iteration?
+      Rails.logger.debug "current_piece=#{current_piece.id},#{current_piece.title}, current_piece.is_container?=#{current_piece.is_container?}, self.running_data_sources.present?=#{self.running_data_sources.present?}, current_piece.zoomable? =#{current_piece.zoomable?}"
+      if current_piece.is_container?
+        if running_data_item.present?
+          current_page = self.page_generator.current_page_tag
+          column_count = self.running_data_source_sction_piece.column_count        
+          i = self.running_data_item_index
+          #Rails.logger.debug "i=#{i}, column_count=#{column_count}, self.running_data_source_sction_piece=#{self.running_data_source_sction_piece.id}" 
+          css_classes << ' data_first' if column_count>0 && i==0
+          css_classes << ' data_last'  if column_count>0 && ((i+1)%column_count==0)
+          css_classes << " data_#{i+1}"
+          
+          case running_data_item
+          when Menus::WrappedMenu
+            css_classes << ' data_current' if running_data_item.current?
+            css_classes << ' data_current_ancestor' if current_page.ancestor_ids.include?(running_data_item.id)
+          when Products::WrappedProduct          
+          end
+          
+        end                  
+      end
+      if current_piece.parent.effects.present?
+        css_classes << " child_#{current_piece.nth_of_siblings}"
+      end
+      if current_piece.zoomable?
+        css_classes << " zoomable"
+      end
+      css_classes      
+
+    end
+
+    
     def cached_page_layouts
       if @cached_page_layouts.nil?
         @cached_page_layouts = theme.page_layout.self_and_descendants().includes(:section).inject({}){ |hash,pl| hash[pl.id]=pl; hash }
@@ -282,5 +339,47 @@ module PageTag
     def running_data_item_by_class( klass )
       running_data_items.select{|item| item.is_a? klass }.last
     end
+    
+    private
+    def create_product_image_tag( image, product, options, style)
+      #Rails.logger.debug " image = #{image} product = #{product}, options= #{options}, style=#{style}"      
+      options.reverse_merge! alt: image.alt.blank? ? product.name : image.alt
+      # data-big-image for jqzoom, large=600x600
+      options.merge!  'data' => { 'big-image'=> image.attachment.url(:large) }
+      image_tag( image.attachment.url(style), options )
+    end
+    # copy from BaseHelper#define_image_method
+    def product_image_by_spree(product, style, options = {})
+        if product.images.empty?
+          if !product.is_a?(Spree::Variant) && !product.variant_images.empty?
+            create_product_image_tag(product.variant_images.first, product, options, style)
+          else
+            if product.is_a?(Variant) && !product.product.variant_images.empty?
+              create_product_image_tag(product.product.variant_images.first, product, options, style)
+            else
+              image_tag "noimage/#{style}.png", options            
+            end
+          end
+        else
+          create_product_image_tag(product.images.first, product, options, style)
+        end
+    end
+        
+    def product_image(wrapped_product, options = {})
+      product = wrapped_product.model
+      Spree::MultiSiteSystem.with_context_site_product_images{
+        main_image_style = current_piece.get_content_param_by_key(:main_image_style)
+        main_image_position = current_piece.get_content_param_by_key(:main_image_position)
+        if main_image_position>0
+          if product.images[main_image_position].present?
+            create_product_image_tag(product.images[main_image_position], product, {:itemprop => "image"}, main_image_style)
+          end
+        else
+          product_image_by_spree( product, main_image_style, {:itemprop => "image"})
+        end
+      }      
+    end    
+
+    
   end
 end

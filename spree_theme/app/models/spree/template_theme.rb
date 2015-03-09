@@ -328,7 +328,7 @@ module Spree
       # ex. get dialog section
       def find_section_by_usage( usage )
         # ["#{PageLayout.table_name}.root_id=? and #{SectionPiece.table_name}.usage=?",self.page_layout_root_id, usage]
-        PageLayout.includes(:section=>:section_piece).where( spree_section_pieces:{usage: usage}, root_id: self.page_layout_root_id ).first
+        PageLayout.includes(:section).where( spree_sections:{usage: usage}, root_id: self.page_layout_root_id ).first
       end
       
       def dialog_content_container_selector
