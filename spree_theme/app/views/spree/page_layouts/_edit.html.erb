@@ -23,6 +23,10 @@
       %>
       <%= f.select "data_source", options , include_blank: true, class: 'select2' %>      
     </div>        
+    <div>
+        <%= f.label :data_source_param %>
+        <%= f.text_field :data_source_param %> per_page
+    </div>
        
     <div>
       <%= f.submit Spree.t('update') %> <%= f.button Spree.t('cancel'), type: :button, class: 'cancel'%>      

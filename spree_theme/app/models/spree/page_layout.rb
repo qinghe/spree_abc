@@ -117,8 +117,8 @@ module Spree
       end
 
       def has_extra_selector?
-        #child1,child2...              data1,data2...                                          zoomable
-        self.effects.present? || parent.effects.present? || parent.data_source.present? || self.get_content_param > 0
+        #child1,child2...              data1,data2...                                          zoomable                  columns>0, data_first,data_last 
+        self.effects.present? || parent.effects.present? || parent.data_source.present? || self.get_content_param > 0 || parent.get_content_param > 0 
       end
       
       

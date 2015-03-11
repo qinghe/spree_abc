@@ -11,8 +11,12 @@ zh-CN:
   activerecord:
     attributes:
       spree/page_layout:
+        title: 名称
+        content_param: 内容参数
+        css_class: CSS
         section_context: section context
-        data_source: data source 
+        data_source: 数据源 
+        data_source_param: 数据源参数
       spree/product:
         theme_id: 销售模板
       spree/taxon:

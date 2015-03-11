@@ -182,7 +182,7 @@ container:
   is_selectable: "1"
   is_container: "1"
   html: |-
-    <div class="content_layout ~~selector~~" >
+    <div class="container content_layout ~~selector~~" >
        <div class="inner clear-block">~~content~~</div>          
     </div> 
   css: |-
@@ -216,7 +216,7 @@ container:
     }    
     <% if @template.current_piece.column_count >0 %>    
     /* css for last column in row, feature center content */
-    .<%=@template.current_piece.child_selector%>.data_last>div{ margin-right:0; padding-right:0; } 
+    .<%=@template.current_piece.child_selector%>.data_last>div{ margin-right:0; padding-right:0; border-right:0; } 
     <% end %>    
   title: container
   slug: container
@@ -1544,7 +1544,7 @@ bootstrap_container:
   css: |
     /* width,height, skinnables */
     .<%=@template.section_selector%>
-    { padding:0;  margin:0 auto;       
+    { 
       <%=@template.css(:block)%>
     }
     /* background, margin, border, padding */
@@ -1553,6 +1553,11 @@ bootstrap_container:
       min-height:1px;min-width:1px;  /* it is required as placeholder */
       <%=@template.css(:inner)%>
     } 
+    <% if @template.current_piece.column_count >0 %>    
+    /* css for last column in row, feature center content */
+    .<%=@template.current_piece.child_selector%>.data_last { margin-right:0; padding-right:0; border-right:0; } 
+    <% end %>    
+    
   js: ""
 bootstrap_column:
   id: 202
@@ -1563,5 +1568,9 @@ bootstrap_column:
   for_terminal: "1"
   html: |
     <div class="~~selector~~"> ~~content~~ </div>
-  css: "" 
+  css: |
+    .<%=@template.section_selector%>
+      { padding:0;  margin:0 auto;       
+        <%=@template.css(:block)%>
+      }
   js: ""
