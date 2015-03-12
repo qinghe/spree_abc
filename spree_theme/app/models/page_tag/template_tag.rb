@@ -98,6 +98,10 @@ module PageTag
         is_container? ?  get_data_source_param_by_key( :per_page ).to_i : 0        
       end
       
+      def truncate_at
+        get_content_param_by_key(:truncate_at)
+      end
+      
     end
     
     attr_accessor :param_values_tag, :menus_tag, :images_tag, :text_tag, :blog_posts_tag
@@ -212,7 +216,7 @@ module PageTag
       attribute_value = ''
       if attribute_name==:icon
         if page.icon.present?
-          attribute_value = tag('img', :src=>page.icon.url(:original), :u=>'image', :alt=>page.name)
+          attribute_value = tag('img', :src=>page.icon.url(:original), :u=>'image', :alt=>page.name, :class=>"img-responsive" )
         end
       else 
         attribute_value = page.send attribute_name
@@ -265,17 +269,16 @@ module PageTag
     
     def post_attribute(  attribute_name )
       wrapped_post = (self.running_data_item_by_class( Posts::WrappedPost ))
-      attribute_value = ''
       if wrapped_post
-        case attribute_name
+        attribute_value = case attribute_name
           when :cover
             if wrapped_post.cover.present?
-              attribute_value = tag('img', :src=>wrapped_post.cover.url(current_piece.get_content_param_by_key(:main_image_style)), :u=>'image', :alt=>'post image')        
+              tag('img', :src=>wrapped_post.cover.url(current_piece.get_content_param_by_key(:main_image_style)), :u=>'image', :alt=>'post image', :class=>"img-responsive" )        
             end
           when :summary
-            
+            wrapped_post.send attribute_name, self.current_piece.truncate_at
           else 
-            attribute_value = wrapped_post.send attribute_name
+            wrapped_post.send attribute_name
         end
         if self.current_piece.clickable? 
           html_options = { href: post.path }

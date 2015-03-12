@@ -1,6 +1,5 @@
 module Spree
   class Post < ActiveRecord::Base
-    include ActionView::Helper::SanitizeHelper
     #attr_accessible :title, :cover, :teaser, :body, :posted_at, :author, :live, :tag_list, :taxon_ids, :product_ids_string
     
     acts_as_taggable
@@ -80,8 +79,9 @@ module Spree
     
     alias_method :blog, :taxon
     
-    def summary
-      sanitize( body ).truncate_at( 270 )
+    def summary( truncate_at=100)
+      #copy from Action View Sanitize Helpers
+      HTML::FullSanitizer.new.sanitize( body ).truncate( truncate_at )
     end
     	
   	def rendered_preview

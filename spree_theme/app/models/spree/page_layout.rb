@@ -152,6 +152,10 @@ module Spree
         when :model_count_in_row #bit 1,2,3,4
           #how many model this container
           get_content_param&15
+        when :truncate_at
+          #bit 2,3,4,5,6,7,8,9  
+          #    2+4+8+16+32+64+128 = 254
+          get_content_param&254
         else 
           nil
         end 

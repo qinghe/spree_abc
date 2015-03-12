@@ -183,7 +183,7 @@ container:
   is_selectable: "1"
   is_container: "1"
   html: |-
-    <div class="container content_layout ~~selector~~" >
+    <div class="content_layout ~~selector~~" >
        <div class="inner clear-block">~~content~~</div>          
     </div> 
   css: |-
@@ -1134,6 +1134,7 @@ taxon_icon:
     .<%=@template.section_selector%> {
       margin: 0; padding: 0;
     }
+    .<%= @template.section_selector %> img { width:100%; } 
   js: ""
 post_title:
   id: 57
@@ -1193,7 +1194,7 @@ post_cover:
     <%= @template.post_attribute(:cover) %>
   created_at: 2011-09-20 19:40:07
   updated_at: 2011-09-20 19:40:07
-  css: ''
+  css: .<%= @template.section_selector %> img { width:100%; } 
   js: ""
 grouped_option_values_selector:
   id: 62
@@ -1494,7 +1495,7 @@ post_summary:
   is_selectable: "0"
   is_container: "0"
   html: |
-    <%= render 'map' %>
+    <%= @template.post_attribute(:summary) %>
   css: '/* width,height are required for map */'    
   js: ''
 
