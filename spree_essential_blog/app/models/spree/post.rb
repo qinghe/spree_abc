@@ -1,6 +1,6 @@
 module Spree
   class Post < ActiveRecord::Base
-    
+    include ActionView::Helper::SanitizeHelper
     #attr_accessible :title, :cover, :teaser, :body, :posted_at, :author, :live, :tag_list, :taxon_ids, :product_ids_string
     
     acts_as_taggable
@@ -79,6 +79,10 @@ module Spree
     end
     
     alias_method :blog, :taxon
+    
+    def summary
+      sanitize( body ).truncate_at( 270 )
+    end
     	
   	def rendered_preview
       preview = body.split("<!-- more -->")[0]

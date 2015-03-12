@@ -267,12 +267,15 @@ module PageTag
       wrapped_post = (self.running_data_item_by_class( Posts::WrappedPost ))
       attribute_value = ''
       if wrapped_post
-        if attribute_name==:cover
-          if wrapped_post.cover.present?
-            attribute_value = tag('img', :src=>wrapped_post.cover.url(current_piece.get_content_param_by_key(:main_image_style)), :u=>'image', :alt=>'post image')        
-          end
-        else 
-          attribute_value = wrapped_post.send attribute_name
+        case attribute_name
+          when :cover
+            if wrapped_post.cover.present?
+              attribute_value = tag('img', :src=>wrapped_post.cover.url(current_piece.get_content_param_by_key(:main_image_style)), :u=>'image', :alt=>'post image')        
+            end
+          when :summary
+            
+          else 
+            attribute_value = wrapped_post.send attribute_name
         end
         if self.current_piece.clickable? 
           html_options = { href: post.path }
