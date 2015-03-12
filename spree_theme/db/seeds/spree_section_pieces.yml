@@ -17,13 +17,13 @@ root:
       <%# it is in main app/assets/ include spree_theme, spree_china_checkout, store/product, store/cart, store/checkout ... %>      
       <%= javascript_include_tag 'spree/frontend/all', "data-turbolinks-track" => true %>      
       <%= stylesheet_link_tag 'store/spree_theme.desktop', "data-turbolinks-track" => true %>
-    <% if @current_page.is_preview %>
-      <%= stylesheet_link_tag 'store/spree_theme'  %>
-    <% else%>
-      <link rel="stylesheet" href="<%=@website.public_path('css')%>" type="text/css" data-turbolinks-track />
-    <% end %>    
-    <%= csrf_meta_tags %>
-    <%= render "spree/shared/analytics" %>
+      <% if @current_page.is_preview %>
+        <%= stylesheet_link_tag 'store/spree_theme'  %>
+      <% else%>
+        <link rel="stylesheet" href="<%=@website.public_path('css')%>" type="text/css" data-turbolinks-track />
+      <% end %>    
+      <%= csrf_meta_tags %>
+      <%= render "spree/shared/sync_analytics" %>      
       </head>
       <body class="clear-block <%= @current_page.agent_selector(request.user_agent) %>">
       <% if @current_page.site_design? && !@current_page.is_preview %>
@@ -42,6 +42,7 @@ root:
       <% if @current_page.is_preview %>
          <%= render 'layout_editor_panel' %>
       <% end %>      
+      <%= render "spree/shared/analytics" %>
       </body>
     </html>
   css: |
@@ -206,6 +207,7 @@ container:
         clear:both;
       <%end%>
     }
+    <% if @template.current_piece.per_page >0 %>    
     /* #copy from spree_backend/assets/stylesheets/admin/components/pagination */    
     .<%=@template.section_selector%> .pagination { float:left; clear:both; } /* add clear */
     .<%=@template.section_selector%> .pagination .page{ display: inline-block; text-align: center;
@@ -214,6 +216,7 @@ container:
     .<%=@template.section_selector%> .pagination .current{
       <%=@template.css(:pagination_current)%> 
     }    
+    <% end %>
     <% if @template.current_piece.column_count >0 %>    
     /* css for last column in row, feature center content */
     .<%=@template.current_piece.child_selector%>.data_last>div{ margin-right:0; padding-right:0; border-right:0; } 
@@ -1139,13 +1142,7 @@ post_title:
   is_selectable: "0"
   is_container: "0"
   html: |    
-    <% if defined? post %>     
-     <% if @template.current_piece.clickable? %>
-       <a href="<%= post.path %>"> <%=post.title %> </a>
-     <% else %>
-       <%=post.title %>
-     <% end %>
-    <% end %>
+     <%= @template.post_attribute(:title)  %>    
   created_at: 2011-09-20 19:40:07
   updated_at: 2011-09-20 19:40:07
   css: ""
@@ -1157,9 +1154,7 @@ post_author:
   is_selectable: "0"
   is_container: "0"
   html: |    
-    <% if defined? post %>     
-      <%=post.author %>
-    <% end %>
+    <%= @template.post_attribute(:author)  %>
   created_at: 2011-09-20 19:40:07
   updated_at: 2011-09-20 19:40:07
   css: ""
@@ -1171,9 +1166,7 @@ post_time:
   is_selectable: "0"
   is_container: "0"
   html: |    
-    <% if defined? post %>     
-      <%= pretty_time post.posted_at %>
-    <% end %>
+    <%= pretty_time @template.post_attribute(:posted_at)  %>
   created_at: 2011-09-20 19:40:07
   updated_at: 2011-09-20 19:40:07
   css: ""
@@ -1185,9 +1178,7 @@ post_body:
   is_selectable: "0"
   is_container: "0"
   html: |    
-    <% if defined? post %>     
-      <%== post.body %>
-    <% end %>
+    <%== @template.post_attribute(:body) %>
   created_at: 2011-09-20 19:40:07
   updated_at: 2011-09-20 19:40:07
   css: ""
@@ -1199,11 +1190,7 @@ post_cover:
   is_selectable: "1"
   is_container: "0"
   html: |    
-    <% if defined? post %>
-      <% if post.cover.present? %>
-        <%= link_to image_tag(post.cover.url(:original), :u=>'image', :alt=>post.title), post.path %>
-      <% end %>
-    <% end %>
+    <%= @template.post_attribute(:cover) %>
   created_at: 2011-09-20 19:40:07
   updated_at: 2011-09-20 19:40:07
   css: ''
@@ -1481,6 +1468,36 @@ baidu_map:
   css: '/* width,height are required for map */'    
   js: ''
 
+container_pagination:
+  id: 77
+  title: container pagination
+  slug: container-pagination
+  is_selectable: "0"
+  is_container: "1"
+  html: ~~content~~    
+  css: |
+    <% if @template.current_piece.per_page >0 %>    
+    /* #copy from spree_backend/assets/stylesheets/admin/components/pagination */    
+    .<%=@template.section_selector%> .pagination { float:left; clear:both; } /* add clear */
+    .<%=@template.section_selector%> .pagination .page{ display: inline-block; text-align: center;
+      <%=@template.css(:pagination_page)%> 
+    }
+    .<%=@template.section_selector%> .pagination .current{
+      <%=@template.css(:pagination_current)%> 
+    }    
+    <% end %>    
+  js: ""
+post_summary:
+  id: 78
+  title: post summary
+  slug: post-summary
+  is_selectable: "0"
+  is_container: "0"
+  html: |
+    <%= render 'map' %>
+  css: '/* width,height are required for map */'    
+  js: ''
+
 # mobile section pieces 
 root_for_mobile:
   id: 200
@@ -1509,7 +1526,7 @@ root_for_mobile:
         <link rel="stylesheet" href="<%=@website.public_path('css')%>" type="text/css" data-turbolinks-track />
       <% end %>    
       <%= csrf_meta_tags %>
-      <%= render "spree/shared/analytics" %>      
+      <%= render "spree/shared/sync_analytics" %>      
       </head>
       <body class="clear-block <%= @current_page.agent_selector(request.user_agent) %>">
       <% if @current_page.site_design? && !@current_page.is_preview %>
@@ -1526,6 +1543,7 @@ root_for_mobile:
       <% if @current_page.is_preview %>
          <%= render 'layout_editor_panel' %>
       <% end %>      
+      <%= render "spree/shared/analytics" %>      
       </body>
     </html>
   css: "" 

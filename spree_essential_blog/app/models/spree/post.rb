@@ -14,6 +14,7 @@ module Spree
     #belongs_to :blog, :class_name => "Spree::Taxon"
     #has_many :taxons, :dependent => :destroy
     has_many :products, :through => :post_products
+    has_many :images, :as => :viewable, :class_name => "Spree::PostImage", :dependent => :destroy
     
     #validates :blog_id, :title, :presence => true
     validates :permalink,  :presence => true, :uniqueness =>{ :scope=>:site_id }, :if => proc{ |record| !record.title.blank? }
@@ -26,7 +27,16 @@ module Spree
     #  url: '/spree/posts/:id/:style/:basename.:extension',
     #  path: ':rails_root/public/spree/posts/:id/:style/:basename.:extension',
     #  default_url: '/assets/default_post.png'
-  
+    has_attached_file :cover,
+      styles: { :mini => '60x60>', small: '180x120>', medium: '280x190>', large: '670x370>'},
+      default_style: :mini,
+      url: '/shops/:rails_env/:site/posts/:id/:basename_:style.:extension',
+      path: ':rails_root/public/shops/:rails_env/:site/posts/:id/:basename_:style.:extension',
+      default_url: '/assets/default_post.png'
+
+    validates_attachment :cover,
+      content_type: { content_type: ["image/jpg", "image/jpeg", "image/png", "image/gif"] }
+
     scope :ordered, -> { order("posted_at DESC") }
     scope :future, -> { where("posted_at > ?", Time.now).order("posted_at ASC") }
     scope :past, -> { where("posted_at <= ?", Time.now).ordered }

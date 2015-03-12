@@ -13,7 +13,7 @@ module PageTag
     
     class WrappedPageLayout < WrappedModel
       self.accessable_attributes=[:id,:title,:current_data_source,:wrapped_data_source_param, :data_filter,:current_contexts, :context_either?, 
-         :get_content_param_by_key, :is_container?, :is_zoomable_image?, :effects,:section_pieces]
+         :get_content_param_by_key, :get_data_source_param_by_key, :is_container?, :is_zoomable_image?, :effects,:section_pieces]
       attr_accessor :section_id, :page_layout, :parent
       
       delegate *self.accessable_attributes, to: :page_layout
@@ -92,6 +92,10 @@ module PageTag
       # view content as grid.
       def column_count
         is_container? ?  get_content_param_by_key( :model_count_in_row ) : 0
+      end
+      
+      def per_page
+        is_container? ?  get_data_source_param_by_key( :per_page ).to_i : 0        
       end
       
     end
@@ -258,6 +262,31 @@ module PageTag
         end    
       end
     end        
+    
+    def post_attribute(  attribute_name )
+      wrapped_post = (self.running_data_item_by_class( Posts::WrappedPost ))
+      attribute_value = ''
+      if wrapped_post
+        if attribute_name==:cover
+          if wrapped_post.cover.present?
+            attribute_value = tag('img', :src=>wrapped_post.cover.url(current_piece.get_content_param_by_key(:main_image_style)), :u=>'image', :alt=>'post image')        
+          end
+        else 
+          attribute_value = wrapped_post.send attribute_name
+        end
+        if self.current_piece.clickable? 
+          html_options = { href: post.path }
+          content_tag(:a, attribute_value, html_options)
+        
+        elsif attribute_name==:title
+          # make it as link anchor 
+          content_tag :span, attribute_value, {:id=>"p_#{self.current_piece.id}_#{wrapped_post.id}"}
+        else
+          attribute_value
+        end    
+      end
+    end 
+    
     
     def get_css_classes
       css_classes =  current_piece.effects.join(' ')  # current_piece.piece_selector + ' ' + current_piece.as_child_selector + ' ' +

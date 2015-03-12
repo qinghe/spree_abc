@@ -41,14 +41,15 @@
 
 <table class="index">
     <colgroup>
-       <col style="width: 50%;">
-       <col style="width: 18%;">
-       <col style="width: 10%;">
-       <col style="width: 14%;">
+       <col style="width: 8%;">
+       <col style="width: 52%;">
+       <col style="width: 16%;">
+       <col style="width: 8%;">
+       <col style="width: 12%;">
     </colgroup>    
   <thead>
 	<tr>
-    	<th><%= sort_link @search, :title, t("activerecord.attributes.post.title") %></th>
+    	<th colspan="2"><%= sort_link @search, :title, t("activerecord.attributes.post.title") %></th>
     	<th><%= sort_link @search, :posted_at, t("activerecord.attributes.post.posted_at") %></th>
     	<th><%= sort_link @search, :live, t("activerecord.attributes.post.live") %></th>
     	<th class="actions"></th>
@@ -57,6 +58,7 @@
   <tbody>
     <%- @collection.each do |post|%>
     <tr id="<%= spree_dom_id post %>" class="<%= cycle('odd', 'even') %>">
+      <td class="align-center"><%= mini_cover(post) %></td>
       <td ><%=  post.title %></td>
       <td class="align-center"><%= pretty_time post.posted_at %></td>
       <td class="align-center"><%= post.live ? Spree.t('say_yes') : Spree.t('not') %></td>

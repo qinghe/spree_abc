@@ -494,7 +494,11 @@ module Spree
           end
         end
         params
-      end   
+      end
+      
+      def get_data_source_param_by_key( key )
+        wrapped_data_source_param[key]
+      end
     end
     
     
@@ -612,13 +616,11 @@ module Spree
       "<% @template.select(#{node.id}, 0) %>" 
     end
     
-    # proc available in template
-    #def get_page_script()
-    #  "<% proc_page=Proc.new{ defined?(page) ? page : @current_page } %> #{$/}"
-    #end
-    
+    # show pagination when section is configured, data_source_param > 0
+    # ex. in home page, we have product list, we do not want to show pagination even products.count > Spree::Config[products_per_page]
     def get_pagination(  )
-      "<%= paginate( @template.running_data_source ) if @template.running_data_source.try( :has_pages? ) %> " 
+      # section is configured and datasource have pages
+      "<%= paginate( @template.running_data_source ) if @template.current_piece.per_page>0 && @template.running_data_source.try( :has_pages? ) %> " 
     end
         
     # Do not support add_layout_tree now. Page layout should be full html, Keep it simple. 

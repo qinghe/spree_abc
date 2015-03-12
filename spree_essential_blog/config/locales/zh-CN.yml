@@ -12,6 +12,7 @@ zh-CN:
         title: 标题
         posted_at: 发布时间
         body: 正文
+        cover: 图片
         live: 是否发布
         tags: 标签
       post_category:

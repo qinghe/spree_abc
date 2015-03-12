@@ -1,3 +1,4 @@
+# a post could have several attachments
 class Spree::PostImage < Spree::Asset
 
   #attr_accessible :alt, :attachment
