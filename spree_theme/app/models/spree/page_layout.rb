@@ -532,17 +532,19 @@ module Spree
         for child in subnodes
           next unless child.is_enabled?
           subpiece = build_section_html(tree, child, section_hash)
-          # replace ~~selectors~~ with ex. 's_112_2 c_111'
-          offline_css = "s_#{child.id}_#{child.section_id} c_#{child.parent_id} #{child.css_class}"
-          if child.has_extra_selector?
-            subpiece.sub!('~~selector~~', "#{offline_css} <%=@template.get_css_classes %>")             
-          else
-            subpiece.sub!('~~selector~~', offline_css) 
-          end        
           subpieces.concat(subpiece)
         end
       end  
       piece = node.section.build_html       
+      # replace ~~selectors~~ with ex. 's_112_2 c_111'
+      unless node.root?
+        offline_css = "s_#{node.id}_#{node.section_id} c_#{node.parent_id} #{node.css_class}"
+        if node.has_extra_selector?
+          piece.sub!('~~selector~~', "#{offline_css} <%=@template.get_css_classes %>")             
+        else
+          piece.sub!('~~selector~~', offline_css) 
+        end        
+      end
       # if node.root?
       #   piece.insert(0,init_vars)  
       # end

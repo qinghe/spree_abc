@@ -293,6 +293,25 @@ module PageTag
       end
     end 
     
+    def website_attribute( attribute_name )
+      website = current_page_tag.website
+      attribute_value = ''
+      if attribute_name==:favicon
+        if website.favicon.present?
+          attribute_value = tag('img', :src=>website.favicon.url(:original), :u=>'image' )
+        end
+      else 
+        attribute_value = website.send attribute_name
+      end
+      if self.current_piece.clickable? 
+        content_tag(:a, attribute_value, {href: '/'})      
+      elsif attribute_name==:name
+        # make it as link anchor 
+        content_tag :span, attribute_value, {:id=>"p_#{self.current_piece.id}_#{website.id}"}
+      else
+        attribute_value
+      end    
+    end
     
     def get_css_classes
       css_classes =  current_piece.effects.join(' ')  # current_piece.piece_selector + ' ' + current_piece.as_child_selector + ' ' +

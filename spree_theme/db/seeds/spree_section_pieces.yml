@@ -1498,6 +1498,16 @@ post_summary:
     <%= @template.post_attribute(:summary) %>
   css: '/* width,height are required for map */'    
   js: ''
+site_name:
+  id: 79
+  title: site name
+  slug: site-name
+  is_selectable: "0"
+  is_container: "0"
+  html: |
+    <%= @website.attribute(:name) %>
+  css: ''
+  js: ''
 
 # mobile section pieces 
 root_for_mobile:
@@ -1592,4 +1602,15 @@ bootstrap_column:
       { padding:0;  margin:0 auto;       
         <%=@template.css(:block)%>
       }
+  js: ""
+bootstrap_glyphicon:
+  id: 203
+  title: bootstrap glyphicon
+  slug: bootstrap-glyphicon
+  is_selectable: "1"
+  is_container: "0"
+  for_terminal: "1"
+  html: |
+    <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+  css: ''
   js: ""
