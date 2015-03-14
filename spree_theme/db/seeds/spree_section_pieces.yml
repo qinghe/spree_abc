@@ -1611,6 +1611,6 @@ bootstrap_glyphicon:
   is_container: "0"
   for_terminal: "1"
   html: |
-    <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+    <span class="glyphicon content_css_class_place_holder" aria-hidden="true"></span>
   css: ''
   js: ""
