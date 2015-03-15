@@ -152,10 +152,15 @@ module Spree
         when :model_count_in_row #bit 1,2,3,4
           #how many model this container
           get_content_param&15
-        when :truncate_at
+        when :truncate_at # post summary
           #bit 2,3,4,5,6,7,8,9  
           #    2+4+8+16+32+64+128 = 254
           get_content_param&254
+        when :page_context # bootstrap_glyphicon could link to home/cart...
+          #bit 2,3,4,5,6  max is 31
+          #000010       000100   000110       001000     001010      001100    001110        010000    010010
+          #2:home       4:cart   6:checkout   8:thanks   10:signup   12:login  14:account   16:blog    18:list
+          (get_content_param&62)>>1 
         else 
           nil
         end 
@@ -543,7 +548,11 @@ module Spree
           piece.sub!('~~selector~~', "#{offline_css} <%=@template.get_css_classes %>")             
         else
           piece.sub!('~~selector~~', offline_css) 
-        end        
+        end  
+        
+        if node.content_css_class.present?
+          piece.sub!(/\bcontent_css_class_placeholder/, node.content_css_class)
+        end      
       end
       # if node.root?
       #   piece.insert(0,init_vars)  
