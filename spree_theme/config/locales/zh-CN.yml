@@ -14,6 +14,7 @@ zh-CN:
         title: 名称
         content_param: 内容参数
         css_class: CSS
+        content_css_class: 内容 CSS
         section_context: section context
         data_source: 数据源 
         data_source_param: 数据源参数

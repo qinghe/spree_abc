@@ -1611,6 +1611,7 @@ bootstrap_glyphicon:
   is_container: "0"
   for_terminal: "1"
   html: |
-    <span class="glyphicon content_css_class_placeholder" aria-hidden="true"></span>
+    <% s = '<span class="glyphicon content_css_class_placeholder" aria-hidden="true"></span>' %>
+    <%== s %>
   css: ''
   js: ""
