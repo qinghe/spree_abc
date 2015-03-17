@@ -24,6 +24,10 @@ module Spree
         def self.home
           homes.first
         end
+        
+        def self.get_route_by_context( some_context )
+          context_routes[ some_context ] || context_routes[ ContextEnum.either ]
+        end
           
         def path
           # menu.id would be nil if it is class DefaultTaxon

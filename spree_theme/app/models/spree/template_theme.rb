@@ -42,8 +42,8 @@ module Spree
     #extend FriendlyId
     TerminalEnum = Struct.new( :desktop, :mobile, :pad, :tv )[0,1,2,3]
     belongs_to :website, :class_name => SpreeTheme.site_class.to_s, :foreign_key => "site_id"
+    belongs_to :store, :foreign_key => "store_id"
   
-    #belongs_to :website #move it into template_theme_decorator
     # for now template_theme and page_layout are one to one
     belongs_to :page_layout, :foreign_key=>"page_layout_root_id" #, :dependent=>:destroy  #imported theme refer to page_layout of original theme
     has_many :param_values, :foreign_key=>"theme_id", :dependent => :delete_all

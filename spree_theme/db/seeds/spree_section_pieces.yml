@@ -1498,14 +1498,14 @@ post_summary:
     <%= @template.post_attribute(:summary) %>
   css: '/* width,height are required for map */'    
   js: ''
-site_name:
+site_title:
   id: 79
-  title: site name
-  slug: site-name
+  title: site title
+  slug: site-title
   is_selectable: "0"
   is_container: "0"
   html: |
-    <%= @website.attribute(:name) %>
+    <%= @template.site_attribute(:name) %>
   css: ''
   js: ''
 
@@ -1529,7 +1529,7 @@ root_for_mobile:
       <%== meta_data_tags %>
       <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"/>
       <%# it is in main app/assets/ include spree_theme, spree_china_checkout, store/product, store/cart, store/checkout ... %>      
-      <%= javascript_include_tag 'spree/frontend/all', "data-turbolinks-track" => true %>      
+      <%= javascript_include_tag 'spree/frontend/all.mobile', "data-turbolinks-track" => true %>      
       <%= stylesheet_link_tag 'store/spree_theme.mobile', "data-turbolinks-track" => true %>
       <% if @current_page.is_preview %>
         <%= stylesheet_link_tag 'store/spree_theme'  %>
@@ -1613,5 +1613,16 @@ bootstrap_glyphicon:
   html: |
     <% s = '<span class="glyphicon content_css_class_placeholder" aria-hidden="true"></span>' %>
     <%== s %>
+  css: ''
+  js: ""
+bootstrap_font_awesome:
+  id: 204
+  title: bootstrap font awesome
+  slug: bootstrap-font-awesome
+  is_selectable: "1"
+  is_container: "0"
+  for_terminal: "1"
+  html: |
+    <%=@template.font_awesome %>
   css: ''
   js: ""

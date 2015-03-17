@@ -61,7 +61,7 @@ objs=[
   {"id"=>61, "title"=>"src", "pvalues"=>"0i", "pvalues_desc"=>"Src", "punits"=>"", "neg_ok"=>false, "default_value"=>0, "pvspecial"=>"", "css_name"=>"src"},
   {"id"=>62, "title"=>"alt", "pvalues"=>"0t", "pvalues_desc"=>"Alt", "punits"=>"", "neg_ok"=>false, "default_value"=>0, "pvspecial"=>"", "css_name"=>"alt"},
   {"id"=>63, "title"=>"href", "pvalues"=>"0u", "pvalues_desc"=>"Href", "punits"=>"", "neg_ok"=>false, "default_value"=>-1, "pvspecial"=>"", "css_name"=>"href"},
-  {"id"=>64, "title"=>"layout db", "pvalues"=>"", "pvalues_desc"=>"", "punits"=>"", "neg_ok"=>false, "default_value"=>-1, "pvspecial"=>"", "css_name"=>"layout db"},
+  {"id"=>64, "title"=>"border-radius", "pvalues"=>"l1", "pvalues_desc"=>"L1", "punits"=>"l,%", "neg_ok"=>false, "default_value"=>0, "pvspecial"=>"trbl", "css_name"=>"border-radius"},
   {"id"=>65, "title"=>"layout string", "pvalues"=>"0t", "pvalues_desc"=>"0t", "punits"=>"", "neg_ok"=>false, "default_value"=>-1, "pvspecial"=>"", "css_name"=>"layout string"},
   {"id"=>66, "title"=>"layout themeimg", "pvalues"=>"0i", "pvalues_desc"=>"0i", "punits"=>"", "neg_ok"=>false, "default_value"=>-1, "pvspecial"=>"", "css_name"=>"layout themeimg"},
   {"id"=>67, "title"=>"layout bool", "pvalues"=>"0b", "pvalues_desc"=>"0b", "punits"=>"", "neg_ok"=>false, "default_value"=>-1, "pvspecial"=>"", "css_name"=>"layout bool"},

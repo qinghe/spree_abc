@@ -115,7 +115,15 @@ module Spree
         end        
         @effect_classes
       end
-
+      
+      # a section could link to ....  ex. font-awesome  could link to home  
+      def href
+        if get_content_param_by_key( :clickable  )
+          some_context = get_content_param_by_key( :context )
+          SpreeTheme.taxon_class.get_route_by_context( some_context )
+        end
+      end
+      
       def has_extra_selector?
         #child1,child2...              data1,data2...                                          zoomable                  columns>0, data_first,data_last 
         self.effects.present? || parent.effects.present? || parent.data_source.present? || self.get_content_param > 0 || parent.get_content_param > 0 
@@ -156,10 +164,11 @@ module Spree
           #bit 2,3,4,5,6,7,8,9  
           #    2+4+8+16+32+64+128 = 254
           get_content_param&254
-        when :page_context # bootstrap_glyphicon could link to home/cart...
+        when :context # bootstrap_glyphicon could link to home/cart...
           #bit 2,3,4,5,6  max is 31
           #000010       000100   000110       001000     001010      001100    001110        010000    010010
           #2:home       4:cart   6:checkout   8:thanks   10:signup   12:login  14:account   16:blog    18:list
+          #1            2        3            4          5           6         7            8          9   # keep it same as 
           (get_content_param&62)>>1 
         else 
           nil
@@ -548,11 +557,10 @@ module Spree
           piece.sub!('~~selector~~', "#{offline_css} <%=@template.get_css_classes %>")             
         else
           piece.sub!('~~selector~~', offline_css) 
-        end  
-        
-        if node.content_css_class.present?
-          piece.sub!(/\bcontent_css_class_placeholder/, node.content_css_class)
-        end      
+        end          
+        #if node.content_css_class.present?
+        #  piece.sub!(/\bcontent_css_class_placeholder/, node.content_css_class)
+        #end      
       end
       # if node.root?
       #   piece.insert(0,init_vars)  

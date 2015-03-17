@@ -13,7 +13,7 @@ module PageTag
     
     class WrappedPageLayout < WrappedModel
       self.accessable_attributes=[:id,:title,:current_data_source,:wrapped_data_source_param, :data_filter,:current_contexts, :context_either?, 
-         :get_content_param_by_key, :get_data_source_param_by_key, :is_container?, :is_zoomable_image?, :effects,:section_pieces]
+         :get_content_param_by_key, :get_data_source_param_by_key, :is_container?, :is_zoomable_image?, :effects, :href, :section_pieces, :content_css_class]
       attr_accessor :section_id, :page_layout, :parent
       
       delegate *self.accessable_attributes, to: :page_layout
@@ -101,7 +101,7 @@ module PageTag
       def truncate_at
         get_content_param_by_key(:truncate_at)
       end
-      
+     
     end
     
     attr_accessor :param_values_tag, :menus_tag, :images_tag, :text_tag, :blog_posts_tag
@@ -293,12 +293,12 @@ module PageTag
       end
     end 
     
-    def website_attribute( attribute_name )
+    def site_attribute( attribute_name )
       website = current_page_tag.website
       attribute_value = ''
       if attribute_name==:favicon
         if website.favicon.present?
-          attribute_value = tag('img', :src=>website.favicon.url(:original), :u=>'image' )
+          attribute_value = tag('link', href: website.favicon.url(:original), type: "image/x-icon", rel: "shortcut icon" )
         end
       else 
         attribute_value = website.send attribute_name
@@ -307,10 +307,21 @@ module PageTag
         content_tag(:a, attribute_value, {href: '/'})      
       elsif attribute_name==:name
         # make it as link anchor 
-        content_tag :span, attribute_value, {:id=>"p_#{self.current_piece.id}_#{website.id}"}
+        content_tag :span, attribute_value, {:id=>"p_#{self.current_piece.id}_#{website.site_id}"}
       else
         attribute_value
       end    
+    end
+    
+    def font_awesome
+      if current_piece.content_css_class.present?
+        attribute_value = content_tag :i, "", { :class=>"fa "+current_piece.content_css_class }
+        if self.current_piece.clickable?
+          attribute_value = content_tag( :a, attribute_value, { href: self.current_piece.href } )
+        end 
+        attribute_value
+      end
+      
     end
     
     def get_css_classes
