@@ -12,6 +12,11 @@ SpreeTheme.taxon_class.class_eval do
 
     alias_attribute :extra_html_attributes, :html_attributes
     
+    def summary( truncate_at=100)
+      #copy from Action View Sanitize Helpers
+      HTML::FullSanitizer.new.sanitize( description ).truncate( truncate_at )
+    end
+    
     def remove_from_theme
       Spree::TemplateTheme.native.each{|theme|
         theme.unassign_resource_from_theme! self 

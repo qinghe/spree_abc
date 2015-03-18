@@ -1496,7 +1496,7 @@ post_summary:
   is_container: "0"
   html: |
     <%= @template.post_attribute(:summary) %>
-  css: '/* width,height are required for map */'    
+  css: ''    
   js: ''
 site_title:
   id: 79
@@ -1508,7 +1508,16 @@ site_title:
     <%= @template.site_attribute(:name) %>
   css: ''
   js: ''
-
+taxon_summary:
+  id: 80
+  title: taxon summary
+  slug: taxon-summary
+  is_selectable: "0"
+  is_container: "0"
+  html: |
+    <%= @template.taxon_attribute(:summary) %>
+  css: ''    
+  js: ''
 # mobile section pieces 
 root_for_mobile:
   id: 200
@@ -1611,14 +1620,13 @@ bootstrap_glyphicon:
   is_container: "0"
   for_terminal: "1"
   html: |
-    <% s = '<span class="glyphicon content_css_class_placeholder" aria-hidden="true"></span>' %>
-    <%== s %>
+    <span class="glyphicon content_css_class_placeholder" aria-hidden="true"></span>
   css: ''
   js: ""
-bootstrap_font_awesome:
+font_awesome:
   id: 204
-  title: bootstrap font awesome
-  slug: bootstrap-font-awesome
+  title: font awesome
+  slug: font-awesome
   is_selectable: "1"
   is_container: "0"
   for_terminal: "1"
