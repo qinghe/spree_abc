@@ -136,6 +136,8 @@ module Spree
       #         - image-size,  main product image size, [small|product|large|original]
       #         - columns, eliminate margin-right of last column - bit3,
       def get_content_param_by_key(key)
+        default_truncate_at = 100;
+        
         case key
         when :clickable 
           #bit 1, product:name,image, taxon:name,icon
@@ -163,7 +165,8 @@ module Spree
         when :truncate_at # post summary
           #bit 2,3,4,5,6,7,8,9  
           #    2+4+8+16+32+64+128 = 254
-          get_content_param&254
+          val = get_content_param&254
+          val>0 ? val : default_truncate_at
         when :context # bootstrap_glyphicon could link to home/cart...
           #bit 2,3,4,5,6  max is 31
           #000010       000100   000110       001000     001010      001100    001110        010000    010010

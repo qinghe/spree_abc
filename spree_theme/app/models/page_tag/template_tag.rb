@@ -213,18 +213,28 @@ module PageTag
     # in template_tag have no method link_to, content_tag, it have to be in base_helper
     def page_attribute(  attribute_name )
       page = (self.running_data_item_by_class( Menus::WrappedMenu ) || self.current_page_tag)
-      attribute_value = ''
-      if attribute_name==:icon
-        if page.icon.present?
-          attribute_value = tag('img', :src=>page.icon.url(:original), :u=>'image', :alt=>page.name, :class=>"img-responsive" )
-        end
-      else 
-        attribute_value = page.send attribute_name
+      attribute_value = case attribute_name 
+        when :icon
+          if page.icon.present?
+            tag('img', :src=>page.icon.url(:original), :u=>'image', :alt=>page.name, :class=>"img-responsive" )
+          else
+            ''
+          end
+        when :summary
+          page.send attribute_name, self.current_piece.truncate_at            
+        when :more # it is same as clickable page name
+          Spree.t('more')
+        else 
+          page.send attribute_name
       end
-      if self.current_piece.clickable? 
+      if self.current_piece.clickable? || attribute_name==:more
         html_options = page.extra_html_attributes 
         html_options[:href] ||= page.path
-        content_tag(:a, attribute_value, html_options)
+        if attribute_name == :summary
+          attribute_value << content_tag(:a, "[#{Spree.t(:detail)}]", html_options) 
+        else
+          content_tag(:a, attribute_value, html_options)
+        end
       
       elsif attribute_name==:name
         # make it as link anchor 
@@ -276,14 +286,18 @@ module PageTag
               tag('img', :src=>wrapped_post.cover.url(current_piece.get_content_param_by_key(:main_image_style)), :u=>'image', :alt=>'post image', :class=>"img-responsive" )        
             end
           when :summary
-            wrapped_post.send attribute_name, self.current_piece.truncate_at
+            wrapped_post.send attribute_name, self.current_piece.truncate_at            
           else 
             wrapped_post.send attribute_name
-        end
-        if self.current_piece.clickable? 
-          html_options = { href: post.path }
-          content_tag(:a, attribute_value, html_options)
+          end
         
+        if self.current_piece.clickable?
+          html_options = { href: wrapped_post.path }
+          if attribute_name == :summary
+            attribute_value + content_tag(:a, "[#{Spree.t(:detail)}]", html_options) 
+          else
+            content_tag(:a, attribute_value, html_options)            
+          end
         elsif attribute_name==:title
           # make it as link anchor 
           content_tag :span, attribute_value, {:id=>"p_#{self.current_piece.id}_#{wrapped_post.id}"}

@@ -1495,7 +1495,7 @@ post_summary:
   is_selectable: "0"
   is_container: "0"
   html: |
-    <%= @template.post_attribute(:summary) %>
+    <%== @template.post_attribute(:summary) %>
   css: ''    
   js: ''
 site_title:
@@ -1515,7 +1515,17 @@ taxon_summary:
   is_selectable: "0"
   is_container: "0"
   html: |
-    <%= @template.taxon_attribute(:summary) %>
+    <%== @template.taxon_attribute(:summary) %>
+  css: ''    
+  js: ''
+taxon_more:
+  id: 81
+  title: taxon more
+  slug: taxon-more
+  is_selectable: "0"
+  is_container: "0"
+  html: |
+    <%= @template.page_attribute(:more) %>
   css: ''    
   js: ''
 # mobile section pieces 
