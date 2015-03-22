@@ -61,7 +61,7 @@ module Spree
     scope :within_site, ->(site){ where(:site_id=> site.id) }
     scope :released, ->{ where("release_id>0") }
     scope :published, -> { released.where(:is_public=>true) }
-    scope :master, ->{ where( for_terminal: TerminalEnum.desktop) }
+    scope :for_desktop, ->{ where( for_terminal: TerminalEnum.desktop) }
     
     before_validation :fix_special_attributes
     before_destroy :remove_relative_data
@@ -83,11 +83,11 @@ module Spree
       end
       
       def native
-        self.master.within_site(SpreeTheme.site_class.current )
+        self.within_site(SpreeTheme.site_class.current )
       end
       
       def foreign
-        self.master.within_site(SpreeTheme.site_class.designsite ).published
+        self.within_site(SpreeTheme.site_class.designsite ).published
       end        
       
       # original_theme may be attributes in hash

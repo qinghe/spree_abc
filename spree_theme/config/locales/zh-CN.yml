@@ -27,6 +27,7 @@ zh-CN:
         attachment_file_name: 文件名字
         attachment_content_type: 类型
         attachment_file_size: 文件大小
+        theme_id: 所属模板
         template_theme: 所属模板
         created_at: 上传时间
       spree/template_text:
