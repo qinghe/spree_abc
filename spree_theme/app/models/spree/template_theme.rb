@@ -62,6 +62,7 @@ module Spree
     scope :released, ->{ where("release_id>0") }
     scope :published, -> { released.where(:is_public=>true) }
     scope :for_desktop, ->{ where( for_terminal: TerminalEnum.desktop) }
+    scope :for_mobile, ->{ where( for_terminal: TerminalEnum.mobile) }
     
     before_validation :fix_special_attributes
     before_destroy :remove_relative_data
