@@ -1,6 +1,23 @@
 //= require image-zoom
 
 $(document).ready(function() {
+  //return to top
+  $('.return_top').click(function(){
+    //var $element =$(this); 
+    //$("#return_top").hide();
+    //$(window).scroll(function(){
+    //  if ($(window).scrollTop()>100){
+    //      $("#return_top").fadeIn(500);
+    //      }
+    //  else{
+    //  $("#return_top").fadeOut(1500);
+    //      }
+    //});
+    $("body,html").animate({scrollTop:0},1000);
+    return false;    
+  });
+
+  
   $('.zoomable').each(function(index, element){
     var $element =$(element); 
     var $main_image_wrapper = $element.find('.main_image_wrapper')

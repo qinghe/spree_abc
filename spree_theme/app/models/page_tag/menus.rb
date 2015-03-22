@@ -102,7 +102,7 @@ module PageTag
       end
       
       if menus_cache[key].blank?
-        # get default menu
+        # get default menu, with_resources may return []
           wrapped_resource = wrapped_page_layout.section_pieces.with_resources.first.wrapped_resources[resource_position]
           if wrapped_resource.present?
             menus_cache[key] = DefaultTaxonRoot.instance_by_context( wrapped_resource.context ).self_and_descendants
