@@ -511,7 +511,9 @@ module Spree
         params = {}
         if data_source_param.present?
           if current_data_source == DataSourceEnum.gpvs || current_data_source == DataSourceEnum.blog
-            params[:per_page]= data_source_param.to_i
+            splited_params = data_source_param.split(',')
+            params[:per_page]= splited_params[0].to_i
+            params[:pagination_enable] = ( splited_params[1].nil? ? true : (splited_params[1]=='1') )
           end
         end
         params
@@ -568,6 +570,8 @@ module Spree
       # if node.root?
       #   piece.insert(0,init_vars)  
       # end
+      # select current page_layout at end of subpieces,  pagination required, data_souce_param is on current page_layout   
+      subpieces << get_section_script(node) if subpieces.present?
        
       #piece may contain several ~~content~~, the deepest one is first.           
       if(pos = (piece=~/~~content~~/))
@@ -627,7 +631,7 @@ module Spree
         EOS2
       end  
       
-      piece = "#{get_section_script(node)}  #{piece}  #{get_section_script( node )}"
+      piece = "#{get_section_script(node)}  #{piece} "
 
       # remove ~~content~~ however, node could be a container.
       # in section.build_html, ~~content~~ have not removed. 
@@ -646,7 +650,8 @@ module Spree
     # ex. in home page, we have product list, we do not want to show pagination even products.count > Spree::Config[products_per_page]
     def get_pagination(  )
       # section is configured and datasource have pages
-      "<%= paginate( @template.running_data_source ) if @template.current_piece.per_page>0 && @template.running_data_source.try( :has_pages? ) %> " 
+      # notice: current piece is data iterator parent at present.  ex. product_list(current_piece)->one_product
+      "<%= paginate( @template.running_data_source ) if @template.current_piece.per_page>0 && @template.current_piece.pagination_enable? && @template.running_data_source.try( :has_pages? ) %> " 
     end
         
     # Do not support add_layout_tree now. Page layout should be full html, Keep it simple. 

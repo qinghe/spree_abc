@@ -95,7 +95,14 @@ module PageTag
       end
       
       def per_page
+        return 0 if current_data_source.blank?
         is_container? ?  get_data_source_param_by_key( :per_page ).to_i : 0        
+      end
+      
+      def pagination_enable?
+        
+        get_data_source_param_by_key( :pagination_enable )
+
       end
       
       def truncate_at
