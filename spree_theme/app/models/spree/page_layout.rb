@@ -159,6 +159,13 @@ module Spree
           #bit 9,   10,  product-image
           #   256 + 512 = 768
           (get_content_param&768)>>8                
+        when :form_disabled 
+          # in some case, we want to disable wrapped form of product attributes, 
+          # ex. show product image only.
+          # http://jssor.com/development/define-slides-html-code.html 
+          # in slider_scrolling, jssor require <div>, not <form>
+          #bit 11
+          get_content_param&1024 > 0        
         when :model_count_in_row #bit 1,2,3,4
           #how many model this container
           get_content_param&15
@@ -581,12 +588,15 @@ module Spree
             # data_source, data_item is for column index computing.
             when DataSourceEnum.gpvs, DataSourceEnum.this_product, DataSourceEnum.gpvs_theme
               # for this_product, we have to wrapped with form, or option_value radio would not work.
+              form_disabled = node.get_content_param_by_key( :form_disabled )
+              form_start = "<%= form_for :order, :url => populate_orders_path do |f| %>" unless form_disabled
+              form_end =   "<% end %>" unless form_disabled
               subpieces = <<-EOS1 
               <% @template.running_data_source= @template.products( (defined?(page) ? page : @current_page) ) %>
               <% @template.running_data_source.each(){|product| @template.running_data_item = product %>
-                  <%= form_for :order, :url => populate_orders_path do |f| %>
+                  #{form_start}
                   #{subpieces}
-                  <% end %>
+                  #{form_end}
               <% } %>
               #{get_pagination}
               <% @template.running_data_source = nil %>

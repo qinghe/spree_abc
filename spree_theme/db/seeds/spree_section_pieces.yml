@@ -1085,6 +1085,7 @@ slider:
     <% end %>
     </div>    
   css: |-
+    .<%=@template.section_selector%> > .inner { min-height:1px;min-width:1px; /* hight, width are required*/} 
     .effect_slider { position:relative; }
     .effect_slider [u='slides']{ 
       cursor: move; left: 0px; top: 0px;      
@@ -1528,6 +1529,32 @@ taxon_more:
     <%= @template.page_attribute(:more) %>
   css: ''    
   js: ''
+slider_scrolling:
+  id: 82
+  title: slider scrolling
+  slug: slider-scrolling
+  resources: m
+  is_selectable: "1"
+  is_container: "0"
+  html: |-
+    <div class="effect_slider scrolling" >
+      <!-- Loading Screen -->
+      <div u="loading" style="position: absolute; top: 0px; left: 0px;width: 100%;height:100%;">
+        <div style="filter: alpha(opacity=70); opacity:0.7; position: absolute; display: block; background-color: #000000; top: 0px; left: 0px;width: 100%;height:100%;"></div>
+        <div style="position: absolute; display: block; background: url(/shops/shared/images/jssor/loading.gif) no-repeat center center; top: 0px; left: 0px;width: 100%;height:100%;"> </div>
+      </div>
+      <%# jssor require with,height in element style. %>
+      <div u="slides" style="position: absolute;overflow:hidden;" >
+        ~~content~~
+      </div>        
+    </div>    
+  css: |-
+    .<%=@template.section_selector%> > .inner { min-height:1px;min-width:1px; /* hight, width are required*/} 
+    .effect_slider { position:relative; }
+    .effect_slider [u='slides']{ 
+      cursor: move; left: 0px; top: 0px;      
+    }
+
 # mobile section pieces 
 root_for_mobile:
   id: 200

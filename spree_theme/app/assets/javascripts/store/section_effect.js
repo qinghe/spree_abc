@@ -20,7 +20,7 @@ $(document).ready(function() {
   
   $('.zoomable').each(function(index, element){
     var $element =$(element); 
-    var $main_image_wrapper = $element.find('.main_image_wrapper')
+    var $main_image_wrapper = $element.find('.main_image_wrapper');
     $element.find('.thumbnails a').click(function(){
       var $this = $(this);
       $main_image_wrapper.find('img').data('big-image', $this.find('img').data('big-image'));
@@ -41,11 +41,12 @@ $(document).ready(function() {
               containerSelector: '.main_image_wrapper'
             }
         });
-  })
+  });
   
+  // scroll to target
   $('.effect_scroll').click(function() {
     var $body = (window.opera) ? (document.compatMode == "CSS1Compat" ? $('html') : $('body')) : $('html,body');
-    var $self = $(this)
+    var $self = $(this);
     var $target = $($self.attr('href'));
     if($target.is('*')) {
       $body.animate({
@@ -54,46 +55,74 @@ $(document).ready(function() {
       return false;
     }
   });
-
-  $(".effect_slider").each(function(index, element) {
-    var self = $(element);
-    var parent = self.parent();
-    var options = {
-      $FillMode : 2,
-      $AutoPlay : true,
-      $BulletNavigatorOptions : {
-        $Class : $JssorBulletNavigator$,
-        $ChanceToShow : 2,
-        $AutoCenter : 1
-      }
-    };
-    self.css({
-      height : parent.css('height'),
-      width : parent.css('width')
-    });
-    self.children("[u='slides']").css({
-      height : parent.css('height'),
-      width : parent.css('width')
-    });
-    var jssor_slider1 = new $JssorSlider$(self.get(0), options);
-    //responsive code begin
-    //you can remove responsive code if you don't want the slider scales while window resizes
-    function ScaleSlider() {
-      var parentWidth = jssor_slider1.$Elmt.parentNode.clientWidth;
+  
+  function ScaleSlider(jssor_slider) {
+      var parentWidth = jssor_slider.$Elmt.parentNode.clientWidth;
       if(parentWidth)
-        jssor_slider1.$SetScaleWidth(parentWidth);
+        jssor_slider.$SetScaleWidth(parentWidth);
       else
         window.setTimeout(ScaleSlider, 30);
-    }
+  }
 
+  
+  $(".effect_slider").each(function(index, element) {
+    var $self = $(element);
+    var $parent = $self.parent();
+    $self.css({
+        height : $parent.css('height'),
+        width : $parent.css('width')
+      });
+    $self.children("[u='slides']").css({
+        height : $parent.css('height'),
+        width : $parent.css('width')
+      });
+    var options = null;
+    if( $self.hasClass("scrolling")){
+        var slide_width = $self.find("[u='slides']>div").width();
+        var display_piece = Math.ceil( $parent.width() / slide_width );
+        // get width of a slide
+        options = {
+                $AutoPlay: true,                                    //[Optional] Whether to auto play, to enable slideshow, this option must be set to true, default value is false
+                $AutoPlaySteps: 1,                                  //[Optional] Steps to go for each navigation request (this options applys only when slideshow disabled), the default value is 1
+                $AutoPlayInterval: 0,                               //[Optional] Interval (in milliseconds) to go for next slide since the previous stopped if the slider is auto playing, default value is 3000
+                $PauseOnHover: 4,                                   //[Optional] Whether to pause when mouse over if a slider is auto playing, 0 no pause, 1 pause for desktop, 2 pause for touch device, 3 pause for desktop and touch device, 4 freeze for desktop, 8 freeze for touch device, 12 freeze for desktop and touch device, default value is 1
+
+                $ArrowKeyNavigation: true,                          //[Optional] Allows keyboard (arrow key) navigation or not, default value is false
+                $SlideEasing: $JssorEasing$.$EaseLinear,            //[Optional] Specifies easing for right to left animation, default value is $JssorEasing$.$EaseOutQuad
+                $SlideDuration: 1600,                               //[Optional] Specifies default duration (swipe) for slide in milliseconds, default value is 500
+                $MinDragOffsetToSlide: 20,                          //[Optional] Minimum drag offset to trigger slide , default value is 20
+                $SlideWidth: slide_width,     //it is requried         //[Optional] Width of every slide in pixels, default value is width of 'slides' container
+                //$SlideHeight: 100,                                //[Optional] Height of every slide in pixels, default value is height of 'slides' container
+                $SlideSpacing: 0,                                   //[Optional] Space between each slide in pixels, default value is 0
+                $DisplayPieces: display_piece, //it is required         //[Optional] Number of pieces to display (the slideshow would be disabled if the value is set to greater than 1), the default value is 1
+                $ParkingPosition: 0,                                //[Optional] The offset position to park slide (this options applys only when slideshow disabled), default value is 0.
+                $UISearchMode: 1,                                   //[Optional] The way (0 parellel, 1 recursive, default value is 1) to search UI components (slides container, loading screen, navigator container, arrow navigator container, thumbnail navigator container etc).
+                $PlayOrientation: 1,                                //[Optional] Orientation to play slide (for auto play, navigation), 1 horizental, 2 vertical, 5 horizental reverse, 6 vertical reverse, default value is 1
+                $DragOrientation: 1                                 //[Optional] Orientation to drag slide, 0 no drag, 1 horizental, 2 vertical, 3 either, default value is 1 (Note that the $DragOrientation should be the same as $PlayOrientation when $DisplayPieces is greater than 1, or parking position is not 0)
+            };
+        
+    } else{
+        options = {
+                $FillMode : 2,
+                $AutoPlay : true,
+                $BulletNavigatorOptions : {
+                  $Class : $JssorBulletNavigator$,
+                  $ChanceToShow : 2,
+                  $AutoCenter : 1
+                }
+              };
+    } 
+    var jssor_slider1 = new $JssorSlider$($self.get(0), options);
+    //responsive code begin
+    //you can remove responsive code if you don't want the slider scales while window resizes
     //Scale slider immediately
-    ScaleSlider();
+    ScaleSlider(jssor_slider1);
     //if (!navigator.userAgent.match(/(iPhone|iPod|iPad|BlackBerry|IEMobile)/)) {
     //    $(window).bind('resize', ScaleSlider);
     //}
     //responsive code end
-
   });
+
   if($("#map").is('*')) {
     // initialize baid map.
     initMap();
@@ -148,7 +177,6 @@ $(document).ready(function() {
         queue : false,
         duration : 300
       });
-
     });
   });
   //
@@ -184,10 +212,10 @@ $(document).ready(function() {
   });
 
   $(".hover_effect_popup").hover(function(e) {
-    var self = $(this);
+    var $self = $(this);
     var child1 = $(".child_1", this);
     var child2 = $(".child_2", this);
-    var p = self.parent().width() / 2 - self.position().left - self.width();
+    var p = $self.parent().width() / 2 - $self.position().left - $self.width();
     var offset = child1.offset();
     // get silbings, get parent.width, get current
     // get currentTarge.pageX,
@@ -199,7 +227,7 @@ $(document).ready(function() {
     if(p >= 0) {// pop up on right side of child2
       position[0] = offset.top - (child2.height() - child1.height() ) / 2 - scroll_top;
       position[1] = offset.left + child1.width();
-    } else {// pop up on left side of self
+    } else {// pop up on left side of $self
       position[0] = offset.top - (child2.height() - child1.height() ) / 2 - scroll_top;
       position[1] = offset.left - child2.width();
     }

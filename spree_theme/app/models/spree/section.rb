@@ -81,9 +81,10 @@ module Spree
             sp.section_root_id=section_root_id
             sp.section_id = self.id
             sp.section_piece_param_id = spp.id
-            #sp.is_enabled =
+            #sp.is_enabled =            
             if default_param_values.key?(spp[:class_name])
               dpvs = default_param_values.fetch spp[:class_name]
+Rails.logger.debug " dpvs =#{dpvs.inspect } , dpvs.slice(*spp.param_keys)= #{dpvs.slice(*spp.param_keys)}"                
               sp.default_value = dpvs.slice(*spp.param_keys)
               sp.disabled_ha_ids = dpvs['disabled_ha_ids'].to_s
             end
