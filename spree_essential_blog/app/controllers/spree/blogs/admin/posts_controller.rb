@@ -2,6 +2,11 @@ class Spree::Blogs::Admin::PostsController < Spree::Admin::ResourceController
 
   update.before :set_category_ids
   
+  def index
+    session[:return_to] = request.url
+    respond_with(@collection)
+  end
+  
   def new
     @post = Spree::Post.new
     @post.posted_at ||= Time.now
@@ -16,9 +21,8 @@ private
   end
   
   def location_after_save
-    # user should click 'return post list' to back list, in this way keep current page. 
-    edit_admin_post_url(@post)
-    #admin_posts_url
+    #in this way keep current page of posts after save.     
+    session[:return_to] || admin_posts_url
   end 
   
   def find_resource

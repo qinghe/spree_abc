@@ -20,7 +20,7 @@
         <div data-hook="admin_posts_index_search">
           <div class="alpha nine columns">
             <div class="field">
-            <%= f.label :title_cont, t("activerecord.attributes.post.title") %><br />
+            <%= f.label :title_cont, Spree.t("title") %><br />
             <%= f.text_field :title_cont, :size => 25 %>
             </div>
           </div>
@@ -49,9 +49,9 @@
     </colgroup>    
   <thead>
 	<tr>
-    	<th colspan="2"><%= sort_link @search, :title, t("activerecord.attributes.post.title") %></th>
-    	<th><%= sort_link @search, :posted_at, t("activerecord.attributes.post.posted_at") %></th>
-    	<th><%= sort_link @search, :live, t("activerecord.attributes.post.live") %></th>
+    	<th colspan="2"><%= sort_link @search, :title, Spree.t("title") %></th>
+    	<th><%= sort_link @search, :posted_at, t("activerecord.attributes.spree/post.posted_at") %></th>
+    	<th><%= sort_link @search, :live, t("activerecord.attributes.spree/post.live") %></th>
     	<th class="actions"></th>
 	</tr>
   </thead>

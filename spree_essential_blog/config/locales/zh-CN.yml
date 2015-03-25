@@ -95,6 +95,7 @@ zh-CN:
         post_categories: Categories
     subnav:
       posts: Blog Posts
+    title: 标题
 
   time:
     formats:
