@@ -7,7 +7,7 @@ zh-CN:
         model_name: Blog
         name: Name
         permalink: Permalink
-      post:
+      spree/post:
         model_name: 文章
         title: 标题
         posted_at: 发布时间

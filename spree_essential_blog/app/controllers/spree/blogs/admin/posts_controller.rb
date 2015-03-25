@@ -16,7 +16,9 @@ private
   end
   
   def location_after_save
-    admin_posts_url
+    # user should click 'return post list' to back list, in this way keep current page. 
+    edit_admin_post_url(@post)
+    #admin_posts_url
   end 
   
   def find_resource
