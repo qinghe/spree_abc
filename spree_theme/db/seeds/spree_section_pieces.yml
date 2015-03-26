@@ -1555,6 +1555,22 @@ slider_scrolling:
       cursor: move; left: 0px; top: 0px;      
     }
 
+hover_effect_popup_menu_container:
+  id: 83
+  title: hover effect popup menu container
+  slug: hover-effect-popup-menu-container
+  is_selectable: "0"
+  is_container: "1"
+  html: |
+    ~~content~~    
+  css: |
+      /* popup_effect: width,height is required, children are absolute  */
+      /* override original position,display */
+      /* child_1.z-index < child_2.z-index, child_2 is on top of child_1 initially, slideUp on hovering */
+      .<%= @template.section_selector %> .child_1{   }
+      .<%= @template.section_selector %> .child_2{ position:absolute; display:none;  }
+  js: ''
+
 # mobile section pieces 
 root_for_mobile:
   id: 200

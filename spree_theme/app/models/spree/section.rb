@@ -10,10 +10,10 @@ module Spree
     
     friendly_id :title, :use => :slugged
     #attr_accessible :section_piece_id, :title, :global_events, :subscribed_global_events,:is_enabled
-    # it is using content_param bit 5,6,7
-    #                    bit   5,     6,     7,         3&4,       3&5           
+    # it is using content_param bit 5,6,7,8
+    #                    bit   5,     6,     7,    8     5&6,       5&7  , 5&8         
     HoverEffectMask= 16+32+64+128
-    HoverEffect = Struct.new(:slide, :show, :expansion, :overlay, :popup)[16,32,64,48,80]
+    HoverEffect = Struct.new(:slide, :show, :expansion, :overlay, :popup, :popup_menu)[16,32,64,48,80,144]
     
     scope :enabled, ->{ where( is_enabled: true ) }
     
@@ -84,7 +84,7 @@ module Spree
             #sp.is_enabled =            
             if default_param_values.key?(spp[:class_name])
               dpvs = default_param_values.fetch spp[:class_name]
-Rails.logger.debug " dpvs =#{dpvs.inspect } , dpvs.slice(*spp.param_keys)= #{dpvs.slice(*spp.param_keys)}"                
+#Rails.logger.debug " dpvs =#{dpvs.inspect } , dpvs.slice(*spp.param_keys)= #{dpvs.slice(*spp.param_keys)}"                
               sp.default_value = dpvs.slice(*spp.param_keys)
               sp.disabled_ha_ids = dpvs['disabled_ha_ids'].to_s
             end

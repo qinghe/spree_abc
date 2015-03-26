@@ -1,4 +1,5 @@
 //= require image-zoom
+//= require jquery.menuhover
 
 $(document).ready(function() {
   //return to top
@@ -210,35 +211,92 @@ $(document).ready(function() {
       duration : 400
     });
   });
-
-  $(".hover_effect_popup").hover(function(e) {
-    var $self = $(this);
-    var child1 = $(".child_1", this);
-    var child2 = $(".child_2", this);
-    var p = $self.parent().width() / 2 - $self.position().left - $self.width();
-    var offset = child1.offset();
-    // get silbings, get parent.width, get current
-    // get currentTarge.pageX,
-    var position = [];
-    // top, left
-    var block = $(window);
-    var scroll_top = block.scrollTop();
-    var scroll_left = block.scrollLeft();
-    if(p >= 0) {// pop up on right side of child2
-      position[0] = offset.top - (child2.height() - child1.height() ) / 2 - scroll_top;
-      position[1] = offset.left + child1.width();
-    } else {// pop up on left side of $self
-      position[0] = offset.top - (child2.height() - child1.height() ) / 2 - scroll_top;
-      position[1] = offset.left - child2.width();
-    }
-    //console.log( "pos y=%d, x=%d", position[0], position[1] );
-    $(".child_2", this).simplemodal({
-      modal : false,
-      focus : false,
-      position : position,
-      fixed : false
+  
+  //  usage: compute child_2 display position of window for effect popup 
+  //    html <div id='container'> 
+  //           <div class='child_1'></div> <div class='child_2'></div>
+  //         </div>
+  //  params: direction- there are five option values  t,r,b,l,rl,
+  //
+  function compute_popup_position( container, direction ){
+      var $self = $(container);
+      var child1 = $(".child_1", $self);
+      var child2 = $(".child_2", $self);
+      var offset = child1.offset();
+      // get silbings, get parent.width, get current
+      // get currentTarge.pageX,
+      var position = [0,0];
+      // top, left
+      var block = $(window);
+      var scroll_top = block.scrollTop();
+      var scroll_left = block.scrollLeft();
+      if ( direction == 'rl' ){
+          var p = $self.parent().width() / 2 - $self.position().left - $self.width();
+          if(p >= 0) {// pop up on right side of child2
+            position[0] = offset.top - (child2.height() - child1.height() ) / 2 - scroll_top;
+            position[1] = offset.left + child1.width();
+          } else {// pop up on left side of $self
+            position[0] = offset.top - (child2.height() - child1.height() ) / 2 - scroll_top;
+            position[1] = offset.left - child2.width();
+          }            
+      }else if ( direction == 'b' ){
+          position[0] = offset.top  +   child1.height() - scroll_top;;
+          position[1] = offset.left - (child2.width() - child1.width() ) / 2 - scroll_left;
+      }else if ( direction == 't' ){
+          position[0] = offset.top  -   child2.height() - scroll_top;;
+          position[1] = offset.left - (child2.width() - child1.width() ) / 2 - scroll_left;
+      }else if ( direction == 'l' ){
+          position[0] = offset.top - (child2.height() - child1.height() ) / 2 - scroll_top;
+          position[1] = offset.left - child2.width();
+      }else if ( direction == 'bl' ){
+          position[0] = offset.top - (child2.height() - child1.height() )  - scroll_top;
+          position[1] = offset.left - child2.width();
+      }
+      return position;
+  }
+  
+  $(".hover_effect_popup").hover(function(e) {      
+      var position = compute_popup_position( this, 'rl' );
+      //console.log( "pos y=%d, x=%d", position[0], position[1] );
+      $(".child_2", this).simplemodal({
+        modal : false,
+        focus : false,
+        position : position,
+        fixed : false
+      });
+    }, function() {
+      $.simplemodal.close();
     });
-  }, function() {
-    $.simplemodal.close();
+
+  // popup menu, enable mouse hover on popup div, user could click menu on it.
+  $(".hover_effect_popup_menu").each(function(i, element){
+      var direction = 'b';
+      function activate_element(  ){
+          var $self = $(this.self);
+          var position = compute_popup_position( this.self, direction );
+          //console.log( "pos y=%d, x=%d", position[0], position[1] );
+          $(".child_2", $self).simplemodal({
+            modal : false,
+            focus : false,
+            position : position,
+            fixed : false
+          });
+      }
+      function deactivate_element(  ){
+          $.simplemodal.close();
+      }      
+      var child1 = $(".child_1", this);
+      var child2 = $(".child_2", this);
+      
+      $(element).menuhover({
+          self: this,
+          activate: activate_element,
+          deactivate: deactivate_element,
+          submenuDirection: direction,
+          $hover: child2
+      });
+      
   });
+
+  
 });
