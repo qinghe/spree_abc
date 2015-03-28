@@ -58,7 +58,7 @@ $(document).ready(function() {
   });
   
   function ScaleSlider(jssor_slider) {
-      var parentWidth = jssor_slider.$Elmt.parentNode.clientWidth;
+      var parentWidth = jssor_slider.$Elmt.parentNode.width();
       if(parentWidth)
         jssor_slider.$SetScaleWidth(parentWidth);
       else
