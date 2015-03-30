@@ -6,7 +6,7 @@ class AddStoreIndexPage < ActiveRecord::Migration
     add_column :spree_stores, :template_release_id, :integer,     :null => false, :default => 0
 
     Spree::Site.all.each{|site|
-      site.stores.first.update_attributes( index_page: site.index_page, theme_id: site.theme_id, template_release_id: site.template_release_id )      
+      site.stores.first.update_attributes( index_page_id: site.index_page, theme_id: site.theme_id, template_release_id: site.template_release_id )      
     }     
   end
 end
