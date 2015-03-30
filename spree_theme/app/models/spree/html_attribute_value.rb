@@ -121,16 +121,16 @@ module Spree
         # for css: format is css_name:url(file_url); 
         pvalue_string = html_attribute.css_name+':'+ ( html_attribute.manual_entry?(pvalue_properties["psvalue0"]) ? "#{pvalue_properties["pvalue0"]}" : pvalue_properties["psvalue0"] ) 
       else
-        pvalue_string = html_attribute.css_name+':'+ build_css_property_value( html_attribute, pvalue_properties )
+        pvalue_string = html_attribute.css_name+':'+ build_css_property_value(  html_attribute, pvalue_properties, param_value )
       end
       pvalue_string
     end
     
-    def self.build_css_property_value( html_attribute, pvalue_properties )
+    def self.build_css_property_value( html_attribute, pvalue_properties, param_value )
       val = ''
       if html_attribute.is_special?(:image)
         if html_attribute.manual_entry?(pvalue_properties["psvalue0"])
-          file = TemplateFile.find_by_attachment_file_name( pvalue_properties["pvalue0"] )
+          file = TemplateFile.find_by( theme_id: param_value.theme_id, attachment_file_name: pvalue_properties["pvalue0"] )
           if file.present?
             val = "url(#{file.attachment.url})"
           end
@@ -333,7 +333,7 @@ module Spree
       end
       def attribute_value
         target_properties = unset? ? default_properties : properties        
-        self.class.build_css_property_value( self.html_attribute, target_properties )        
+        self.class.build_css_property_value( self.html_attribute, target_properties, self.param_value )        
       end
     end
     
