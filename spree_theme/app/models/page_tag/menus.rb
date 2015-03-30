@@ -102,11 +102,12 @@ module PageTag
       end
       
       if menus_cache[key].blank?
-        # get default menu, with_resources may return []
-          wrapped_resource = wrapped_page_layout.section_pieces.with_resources.first.wrapped_resources[resource_position]
-          if wrapped_resource.present?
-            menus_cache[key] = DefaultTaxonRoot.instance_by_context( wrapped_resource.context ).self_and_descendants
-          end
+        # get default menu, with_resources may return [] since support assign resource to container.
+        section_with_resources = wrapped_page_layout.section_pieces.with_resources.first
+        if section_with_resources && section_with_resources.wrapped_resources[resource_position]
+          wrapped_resource  = section_with_resources.wrapped_resources[resource_position]
+          menus_cache[key] = DefaultTaxonRoot.instance_by_context( wrapped_resource.context ).self_and_descendants
+        end
       end
 #Rails.logger.debug "wrapped_page_layout=#{key}, menu_tree=#{menu_tree}"      
       if menus_cache[key].present?

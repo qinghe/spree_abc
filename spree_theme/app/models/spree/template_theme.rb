@@ -260,6 +260,8 @@ module Spree
         new_layout = original_layout.copy_to_new
         #create theme record
         new_theme = self.dup
+        new_theme.site_id = Spree::Store.current.site_id
+        new_theme.store_id = Spree::Store.current.id
         new_theme.release_id = 0 # new copied theme should have no release
         new_theme.page_layout_root_id = new_layout.id
         new_theme.save!
