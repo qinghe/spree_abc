@@ -7,6 +7,7 @@
   <head data-hook="inside_head">
     <%= render :partial => 'spree/shared/head' %>
     <%= stylesheet_link_tag :admin_login %>
+    <%= javascript_include_tag :admin_login %>
   </head>
   <body class="<%= body_class %>" id="<%= @body_id || 'default' %>" data-hook="body">
 
@@ -21,7 +22,7 @@
 
       </div>
     </div>
-    <%= render :partial => 'spree/shared/google_analytics' %>
+    <%= render :partial => 'spree/shared/sync_analytics' %>
     <script>
       Spree.api_key = <%= raw(try_spree_current_user.try(:spree_api_key).to_s.inspect) %>;
     </script>
