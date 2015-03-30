@@ -13,7 +13,7 @@ root:
       <meta http-equiv="X-UA-Compatible" content="IE=Edge">
       <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
       <%== meta_data_tags %>
-      <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"/>
+      <%= favicon_link_tag 'favicon.ico' %>
       <%# it is in main app/assets/ include spree_theme, spree_china_checkout, store/product, store/cart, store/checkout ... %>      
       <%= javascript_include_tag 'spree/frontend/all', "data-turbolinks-track" => true %>      
       <%= stylesheet_link_tag 'store/spree_theme.desktop', "data-turbolinks-track" => true %>

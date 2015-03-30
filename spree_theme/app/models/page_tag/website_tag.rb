@@ -2,7 +2,7 @@ module PageTag
   class WebsiteTag < Base
     class_attribute :accessable_attributes_from_store,  :accessable_attributes_from_site
     self.accessable_attributes_from_store = [:site, :name, :site_id]
-    self.accessable_attributes_from_site = [:design?]  
+    self.accessable_attributes_from_site = []  
     delegate *self.accessable_attributes_from_store, to: :store
     delegate *self.accessable_attributes_from_site, to: :site
     
@@ -10,6 +10,9 @@ module PageTag
       page_generator.theme.store
     end
     
+    def design?
+      store.designable?
+    end
     #def get(function_name)
     #  self.site.send function_name
     #end

@@ -63,7 +63,7 @@ module Spree
     scope :published, -> { released.where(:is_public=>true) }
     scope :for_desktop, ->{ where( for_terminal: TerminalEnum.desktop) }
     scope :for_mobile, ->{ where( for_terminal: TerminalEnum.mobile) }
-    
+      
     before_validation :fix_special_attributes
     before_destroy :remove_relative_data
     after_create :initialize_page_layout_for_plain_theme
@@ -88,7 +88,7 @@ module Spree
       end
       
       def foreign
-        self.within_site(SpreeTheme.site_class.designsite ).published
+        where(:store_id=> Spree::Store.designable).published
       end        
       
       # original_theme may be attributes in hash

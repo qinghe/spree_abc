@@ -9,8 +9,8 @@ class << Spree::Core::ControllerHelpers::Common
     receiver.send :before_filter, :initialize_template
     # receiver could be Spree::Api::BaseController or  Spree::BaseController
     #if receiver == Spree::BaseController 
-      receiver.send :before_filter, :add_view_path #spree_devise_auth, and spree_core require it.
-      receiver.send :layout, :get_layout_if_use # never allow it to api controller. 
+    receiver.send :before_filter, :add_view_path #spree_devise_auth, and spree_core require it.
+    receiver.send :layout, :get_layout_if_use # never allow it to api controller. 
     
   end
   alias_method_chain :included, :theme_support   
@@ -53,12 +53,12 @@ module SpreeTheme
           return
       end  
         
-      website = SpreeTheme.site_class.current
+      website = Spree::Store.current
       # get theme first, then look for page for selected theme. design shop require index page for each template
       @is_designer = false
-      if website.design?
+      if website.designable?
         #add website condition, design can edit template_theme 
-        @is_designer = ( Spree::TemplateTheme.accessible_by( current_ability, :edit).where(:site_id=>website.id).count >0 )
+        @is_designer = ( Spree::TemplateTheme.accessible_by( current_ability, :edit).where(:site_id=>website.site_id).count >0 )
       end
       
       #login, forget_password page only available fore unlogged user. we need this flag to show editor even user have not log in.
@@ -69,7 +69,7 @@ module SpreeTheme
       @client_info = ClientInfo.new( :is_mobile => mobile?, :is_preview=>@is_designer)
       
       # user could select theme to view in design shop. 
-      if website.design?
+      if website.designable?
         #get template from query string
         if params[:action]=='preview' && params[:id].present?
           @theme = Spree::TemplateTheme.find( params[:id] )
@@ -189,10 +189,13 @@ module SpreeTheme
     end
     
     def add_view_path
-      #!!is it a place cause memory overflow?
-      append_view_path SpreeTheme.site_class.current.document_path
-      # layout of imported theme is in design site home folder 
-      append_view_path SpreeTheme.site_class.designsite.document_path
+      #unless view_paths.include? SpreeTheme.site_class.current.document_path
+      #  append_view_path SpreeTheme.site_class.current.document_path
+      #end
+      ## layout of imported theme is in design site home folder       
+      #unless view_paths.include? SpreeTheme.site_class.designsite.document_path
+      #  append_view_path SpreeTheme.site_class.designsite.document_path
+      #end
     end
   
     #https://ruby-china.org/topics/22165  
