@@ -69,11 +69,12 @@ $(document).ready(function() {
   $(".effect_slider").each(function(index, element) {
     var $self = $(element);
     var $parent = $self.parent();
+    var $slide_container = $self.children("[u='slides']");
     $self.css({
         height : $parent.css('height'),
         width : $parent.css('width')
       });
-    $self.children("[u='slides']").css({
+    $slide_container.css({
         height : $parent.css('height'),
         width : $parent.css('width')
       });
@@ -113,15 +114,17 @@ $(document).ready(function() {
                 }
               };
     } 
-    var jssor_slider1 = new $JssorSlider$($self.get(0), options);
-    //responsive code begin
-    //you can remove responsive code if you don't want the slider scales while window resizes
-    //Scale slider immediately
-    ScaleSlider(jssor_slider1);
-    //if (!navigator.userAgent.match(/(iPhone|iPod|iPad|BlackBerry|IEMobile)/)) {
-    //    $(window).bind('resize', ScaleSlider);
-    //}
-    //responsive code end
+    if( $slide_container.children().length>0){        
+        var jssor_slider1 = new $JssorSlider$($self.get(0), options);
+        //responsive code begin
+        //you can remove responsive code if you don't want the slider scales while window resizes
+        //Scale slider immediately
+        ScaleSlider(jssor_slider1);
+        //if (!navigator.userAgent.match(/(iPhone|iPod|iPad|BlackBerry|IEMobile)/)) {
+        //    $(window).bind('resize', ScaleSlider);
+        //}
+        //responsive code end
+    }
   });
 
   if($("#map").is('*')) {
