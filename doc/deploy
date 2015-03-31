@@ -59,6 +59,8 @@ tar -zxvf spree_abc20141204.tar.gz
 mv /webroot/spree_abc /webroot/spree_abc.bak
 mv webroot/spree_abc /webroot/
 
+tar -czvf spree_abc20150330.tar.gz spree_abc
+
 feature upgrade
 ---------------------------------------------------------------
 1. rake db:migrate RAILS_ENV=staging
