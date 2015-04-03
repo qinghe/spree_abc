@@ -1,3 +1,12 @@
+1. selinux
+http://www.electrictoolbox.com/switch-off-selinux-centos-5/
+setenforce 0, or mod_passenger.so: cannot open shared object file: Permission denied
+
+2. iptables
+ iptables -A INPUT -p tcp --dport 80 -j ACCEPT
+ service iptables save 
+
+
 app server 
 --------------------------------------------------------
 echo export TMOUT=1000000 >> /root/.bash_profile
@@ -20,6 +29,17 @@ bundle exec rake railties:install:migrations RAILS_ENV=local_staging
 chown apache.apache  public -R
 
 https://help.github.com/articles/deploying-with-capistrano
+
+
+
+
+php install
+------------------------------------------------------------
+yum install gd
+
+
+
+
 
 db server
 -----------------------------------------------------------
@@ -68,3 +88,12 @@ feature upgrade
 3. rake spree_theme:load_seed[xxx.rb]
 4. rake assets:precomile
 5. rake spree_theme:release_theme[1]  #1,2,12,16,28
+
+
+useful command
+---------------------------------------------------------------
+ CREATE USER ylyy@'localhost' IDENTIFIED BY 'huojinfeng';
+ GRANT ALL PRIVILEGES ON ylyy.* TO ylyy;
+ 
+ http://blog.chinaunix.net/uid-24250828-id-3239100.html
+  time dd if=/dev/zero of=test.dbf bs=8k count=300000
