@@ -1,5 +1,5 @@
 <!-- insert_before '[data-hook="admin_product_form_meta"]' -->
-<% if Spree::Site.current.design? %>
+<% if Spree::Store.current.designable? %>
   <% template_themes = Spree::TemplateTheme.native %>
   <div class="twelve columns alpha omega" >
     <div data-hook="admin_product_form_template_themes">
