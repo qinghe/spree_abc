@@ -17,7 +17,11 @@ $(document).ready(function() {
     $("body,html").animate({scrollTop:0},1000);
     return false;    
   });
-
+  $('.hoverable').hover(function(){
+      $('.inner',this).addClass( 'hover' );
+  }, function(){
+      $('.inner',this).removeClass( 'hover' );      
+  });
   
   $('.zoomable').each(function(index, element){
     var $element =$(element); 

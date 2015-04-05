@@ -84,6 +84,11 @@ module PageTag
         # first bit is clickable
         get_content_param_by_key(:clickable)
       end
+
+      def hoverable?        
+        # first bit is clickable
+        get_content_param_by_key(:hoverable)
+      end
       
       def zoomable?
         is_zoomable_image? && get_content_param_by_key(:zoomable)
@@ -373,6 +378,9 @@ module PageTag
       end
       if current_piece.zoomable?
         css_classes << " zoomable"
+      end
+      if current_piece.hoverable?
+        css_classes << " hoverable"
       end
       css_classes      
 

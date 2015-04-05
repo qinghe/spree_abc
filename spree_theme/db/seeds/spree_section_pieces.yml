@@ -199,6 +199,10 @@ container:
       /* min-height:1px;min-width:1px;   it is required as placeholder,cause problem when image width 100% */
       <%=@template.css(:inner)%>
     }
+    .<%=@template.section_selector%> > .inner.hover
+    {       
+      <%=@template.css(:hover)%>
+    }
     .<%=@template.current_piece.child_selector%> 
     {
       <%if @template.css(:content_layout).present? %>

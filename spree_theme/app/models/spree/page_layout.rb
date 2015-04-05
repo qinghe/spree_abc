@@ -139,12 +139,18 @@ module Spree
       #         - columns, eliminate margin-right of last column - bit3,
       def get_content_param_by_key(key)
         default_truncate_at = 100;
-        
+        # content_param int(11) 4bytes 4*8=32bits
         case key
-        when :clickable 
+        when :clickable                                   # apply to taxon/product/post attributes 
           #bit 1, product:name,image, taxon:name,icon
           get_content_param&1 >0
-        when :main_image_style
+        when :hoverable                                   # apply to container/taxon/product/post attributes 
+          #bit 12
+          get_content_param&2048 >0
+        when :model_count_in_row #bit 1,2,3,4             # apply to container
+          #how many model this container
+          get_content_param&15
+        when :main_image_style                            # section product_image_with_thumbnail
           #bit 2,3,4
           idx = (get_content_param&14)>>1
           #default is medium
@@ -157,26 +163,23 @@ module Spree
         when :zoomable
           #bit 8
           get_content_param&128 > 0        
-        when :main_image_position
+        when :main_image_position                         # section product image
           #bit 9,   10,  product-image
           #   256 + 512 = 768
           (get_content_param&768)>>8                
-        when :form_disabled 
+        when :form_disabled                               # 
           # in some case, we want to disable wrapped form of product attributes, 
           # ex. show product image only.
           # http://jssor.com/development/define-slides-html-code.html 
           # in slider_scrolling, jssor require <div>, not <form>
           #bit 11
           get_content_param&1024 > 0        
-        when :model_count_in_row #bit 1,2,3,4
-          #how many model this container
-          get_content_param&15
-        when :truncate_at # post summary
+        when :truncate_at                                 # post summary
           #bit 2,3,4,5,6,7,8,9  
           #    2+4+8+16+32+64+128 = 254
           val = get_content_param&254
           val>0 ? val : default_truncate_at
-        when :context # bootstrap_glyphicon could link to home/cart...
+        when :context                                     # bootstrap_glyphicon could link to home/cart...
           #bit 2,3,4,5,6  max is 31
           #000010       000100   000110       001000     001010      001100    001110        010000    010010
           #2:home       4:cart   6:checkout   8:thanks   10:signup   12:login  14:account   16:blog    18:list
