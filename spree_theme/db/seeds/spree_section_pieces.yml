@@ -1537,7 +1537,7 @@ slider_scrolling:
   id: 82
   title: slider scrolling
   slug: slider-scrolling
-  resources: m
+  resources: ''
   is_selectable: "1"
   is_container: "0"
   html: |-
