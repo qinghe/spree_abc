@@ -451,7 +451,9 @@ module PageTag
             if product.is_a?(Spree::Variant) && !product.product.variant_images.empty?
               create_product_image_tag(product.product.variant_images.first, product, options, style)
             else
-              image_tag "noimage/#{style}.png", options            
+              #seems assets digest do not support template .ruby
+              #image_tag "noimage/#{style}.png", options            
+              image_tag "/shops/shared/images/noimage/#{style}.png", options            
             end
           end
         else
