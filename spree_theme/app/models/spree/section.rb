@@ -11,9 +11,9 @@ module Spree
     friendly_id :title, :use => :slugged
     #attr_accessible :section_piece_id, :title, :global_events, :subscribed_global_events,:is_enabled
     # it is using content_param bit 5,6,7,8
-    #                    bit   5,     6,     7,    8     5&6,       5&7  , 5&8         
+    #                    bit   5,     6,     7,    8     5&6,       5&7  , 5&8,        6&8         
     HoverEffectMask= 16+32+64+128
-    HoverEffect = Struct.new(:slide, :show, :expansion, :overlay, :popup, :popup_menu)[16,32,64,48,80,144]
+    HoverEffect = Struct.new(:slide, :show, :expansion, :overlay, :popup, :popup_menu, :popup_menu_l)[16,32,64,48,80,144,160]
     
     scope :enabled, ->{ where( is_enabled: true ) }
     

@@ -1,6 +1,6 @@
 # last updated seed for each env 
 staging:
-  version: 23z
+  version: 245
 local_staging:
   version: 23z
 development:

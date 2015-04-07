@@ -17,12 +17,15 @@ $(document).ready(function() {
     $("body,html").animate({scrollTop:0},1000);
     return false;    
   });
+  
+  // change bg,border when hovering
   $('.hoverable').hover(function(){
       $('.inner',this).addClass( 'hover' );
   }, function(){
       $('.inner',this).removeClass( 'hover' );      
   });
   
+  // like taobao, show big image when hovering product image.
   $('.zoomable').each(function(index, element){
     var $element =$(element); 
     var $main_image_wrapper = $element.find('.main_image_wrapper');
@@ -276,8 +279,12 @@ $(document).ready(function() {
     });
 
   // popup menu, enable mouse hover on popup div, user could click menu on it.
-  $(".hover_effect_popup_menu").each(function(i, element){
+  $(".hover_effect_popup_menu_l,.hover_effect_popup_menu").each(function(i, element){
+      var $self = $(element);
       var direction = 'b';
+      if ($self.hasClass('hover_effect_popup_menu_l')){
+          direction = 'l';
+      }
       function activate_element(  ){
           var $self = $(this.self);
           var position = compute_popup_position( this.self, direction );
