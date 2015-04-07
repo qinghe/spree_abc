@@ -105,9 +105,12 @@ module PageTag
       end
       
       def pagination_enable?
-        
-        get_data_source_param_by_key( :pagination_enable )
-
+        # only container could have pagination        
+        is_container? && get_data_source_param_by_key( :pagination_enable )
+      end
+      
+      def attribute_name
+        get_data_source_param_by_key( :attribute_name ) || 'name'
       end
       
       def truncate_at
@@ -223,8 +226,19 @@ module PageTag
     end
         
     # in template_tag have no method link_to, content_tag, it have to be in base_helper
-    def page_attribute(  attribute_name )
-      page = (self.running_data_item_by_class( Menus::WrappedMenu ) || self.current_page_tag)
+    def page_attribute(  attribute_name = nil )
+      attribute_name ||=  self.current_piece.attribute_name.to_sym
+      
+      if attribute_name.to_s =~/root\_/
+        # in this case, taxonomy have no running_data_item at this time.
+        #   <container with resource menu>
+        #     <taxonomy>
+        #     <vertical menus> 
+        #   </container>
+        page = self.menu
+      else  
+        page = (self.running_data_item_by_class( Menus::WrappedMenu ) || self.current_page_tag)
+      end
       attribute_value = case attribute_name 
         when :icon
           if page.icon.present?
@@ -236,6 +250,8 @@ module PageTag
           page.send attribute_name, self.current_piece.truncate_at            
         when :more # it is same as clickable page name
           Spree.t('more')
+        when :root_name
+          page.name
         else 
           page.send attribute_name
       end
@@ -246,10 +262,9 @@ module PageTag
           attribute_value << content_tag(:a, "[#{Spree.t(:detail)}]", html_options) 
         else
           content_tag(:a, attribute_value, html_options)
-        end
-      
-      elsif attribute_name==:name
-        # make it as link anchor 
+        end      
+      elsif attribute_name==:name 
+        # make it as link anchor,  wrapped with span, css text-* applicable 
         content_tag :span, attribute_value, {:id=>"p_#{self.current_piece.id}_#{page.id}"}
       else
         attribute_value

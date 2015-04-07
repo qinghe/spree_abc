@@ -522,10 +522,13 @@ module Spree
       def wrapped_data_source_param
         params = {}
         if data_source_param.present?
+          splited_params = data_source_param.split(',')
           if current_data_source == DataSourceEnum.gpvs || current_data_source == DataSourceEnum.blog
-            splited_params = data_source_param.split(',')
             params[:per_page]= splited_params[0].to_i
             params[:pagination_enable] = ( splited_params[1].nil? ? true : (splited_params[1]=='1') )
+          else
+            # section :page_attribute, :product_attribute, :post_attribute
+            params[:attribute_name] = splited_params[0]
           end
         end
         params
@@ -720,9 +723,11 @@ module Spree
     
     # empty data_source_param when data_source is empty
     def fix_data_source_param
-      if self.data_source.blank? && self.data_source_param.present?
-        self.data_source_param = ''
-      end
+      #page_attribute no need data_source.
+      
+      #if self.data_source.blank? && self.data_source_param.present?
+      #  self.data_source_param = ''
+      #end
     end     
   end
   
