@@ -269,6 +269,7 @@ $(document).ready(function() {
       var position = compute_popup_position( this, 'rl' );
       //console.log( "pos y=%d, x=%d", position[0], position[1] );
       $(".child_2", this).simplemodal({
+        appendTo: '#page-inner',
         modal : false,
         focus : false,
         position : position,
@@ -290,6 +291,7 @@ $(document).ready(function() {
           var position = compute_popup_position( this.self, direction );
           //console.log( "pos y=%d, x=%d", position[0], position[1] );
           $(".child_2", $self).simplemodal({
+            appendTo: '#page-inner',
             modal : false,
             focus : false,
             position : position,
