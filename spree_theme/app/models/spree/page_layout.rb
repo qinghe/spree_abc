@@ -138,6 +138,8 @@ module Spree
       #         - image-size,  main product image size, [small|product|large|original]
       #         - columns, eliminate margin-right of last column - bit3,
       def get_content_param_by_key(key)
+        #bit 1, 2,3,4,5,6,7,8,9  
+        #    2+4+8+16+32+64+128 = 254
         default_truncate_at = 100;
         # content_param int(11) 4bytes 4*8=32bits
         case key
