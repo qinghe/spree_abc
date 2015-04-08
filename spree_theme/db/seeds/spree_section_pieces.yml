@@ -99,15 +99,16 @@ root:
     table {
       width:100%; 
     }
+    /* all global setting apply to page_wrapper, simplemodal append to it. */
     /* set padding margin to label */
-    #page form[id] label {
+    #page-wrapper form[id] label {
       display: inline-block;
     }
     /* 
      * product description should escape css reset 
      * checkout_form, login_form, site_form... 
      */
-    #page form[id] p {       
+    #page-wrapper form[id] p {       
       margin: 0; padding: 0;
     }
       #page

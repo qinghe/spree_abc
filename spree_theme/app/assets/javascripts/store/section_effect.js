@@ -228,8 +228,8 @@ $(document).ready(function() {
   //         </div>
   //  params: direction- there are five option values  t,r,b,l,rl,
   //
-  function compute_popup_position( container, direction ){
-      var $self = $(container);
+  function compute_popup_position( $container, direction ){
+      var $self = $container;
       var child1 = $(".child_1", $self);
       var child2 = $(".child_2", $self);
       var offset = child1.offset();
@@ -269,7 +269,7 @@ $(document).ready(function() {
       var position = compute_popup_position( this, 'rl' );
       //console.log( "pos y=%d, x=%d", position[0], position[1] );
       $(".child_2", this).simplemodal({
-        appendTo: '#page-inner',
+        appendTo: '#page-wrapper',
         modal : false,
         focus : false,
         position : position,
@@ -287,11 +287,11 @@ $(document).ready(function() {
           direction = 'l';
       }
       function activate_element(  ){
-          var $self = $(this.self);
-          var position = compute_popup_position( this.self, direction );
+          var $hover_effect_container = this.$hover_effect_container;
+          var position = compute_popup_position( $hover_effect_container, direction );
           //console.log( "pos y=%d, x=%d", position[0], position[1] );
-          $(".child_2", $self).simplemodal({
-            appendTo: '#page-inner',
+          $(".child_2", $hover_effect_container).simplemodal({
+            appendTo: '#page-wrapper',
             modal : false,
             focus : false,
             position : position,
@@ -305,7 +305,6 @@ $(document).ready(function() {
       var child2 = $(".child_2", this);
       
       $(element).menuhover({
-          self: this,
           activate: activate_element,
           deactivate: deactivate_element,
           submenuDirection: direction,

@@ -19,7 +19,8 @@
                 submenuDirection: "below",
                 activate: $.noop,
                 deactivate: $.noop,
-                $hover:null
+                $hover:null,
+                $hover_effect_container: $menuhover
             },opts),
             $hover = options.$hover;
 
