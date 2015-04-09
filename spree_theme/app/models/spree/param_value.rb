@@ -188,7 +188,7 @@ module Spree
       # we also collect all updated_html_attribute_values which caused by GlobalParamValueEvent or ParamValueEvent events.
       def trigger_events
         extra_html_attribute_values = []
-        #@param_value_events may be nil, ex. load seed.   
+        #@param_value_events may be nil, ex. load seed.
         if @param_value_events.present?
           param_value_events = @param_value_events
           @param_value_events = nil # in case update self.pvalue, trigger again.

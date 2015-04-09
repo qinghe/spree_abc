@@ -11,7 +11,7 @@ logo.add_section_piece(section_piece_hash['baidu-map'])
 # add param inner_width
 # add width pv changed event
 block_param = Spree::SectionPieceParam.where(:section_piece_id=>2, :class_name=>"block", :editor_id=>2).first
-block_param.param_conditions[21]=["pv_changed"]
+block_param.param_conditions[21]=["pv_changed","unset_changed"]
 block_param.save!
 #inner
 inner_param = Spree::SectionPieceParam.where(:section_piece_id=>2, :class_name=>"inner", :editor_id=>2).first

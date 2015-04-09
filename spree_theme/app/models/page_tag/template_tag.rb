@@ -369,7 +369,7 @@ module PageTag
       
       css_classes = ''
       # handling data iteration?
-       Rails.logger.debug "current_piece=#{current_piece.id},#{current_piece.title}, current_piece.is_container?=#{current_piece.is_container?}, self.running_data_sources.present?=#{self.running_data_sources.present?}"
+      # Rails.logger.debug "current_piece=#{current_piece.id},#{current_piece.title}, current_piece.is_container?=#{current_piece.is_container?}, self.running_data_sources.present?=#{self.running_data_sources.present?}"
       if current_piece.is_container?
         # page_layout.effects only apply to container, or bit conflict.
         css_classes << current_piece.effects.join(' ')

@@ -52,15 +52,20 @@ module PageEvent
       #  self.updated_html_attribute_values.push(computed_inner_height)
       #end
     end
+    
+    
     def width_pv_changed_handler(partial_html)
       dimension_changed_handler(partial_html, 'width')
     end
+    
     # compute inner dimension is required by baidu map
     #html_attribute_name could be width, height
     def dimension_changed_handler(partial_html, html_attribute_name)
       trbl = (html_attribute_name == 'width' ? [1,3] : [0,2]) 
       val = partial_html.send(  html_attribute_name )
-      if val>0
+      hav = partial_html.html_attribute_values("block_#{html_attribute_name}")
+      
+      if val>0 && !hav.unset?
         margin, border, padding = partial_html.margin, partial_html.border, partial_html.padding
         
         computed_inner = partial_html.html_attribute_values("inner_#{html_attribute_name}")
@@ -70,7 +75,6 @@ module PageEvent
           inner_value-= border[i]  
           inner_value-= padding[i]  
             } 
-        hav = partial_html.html_attribute_values("block_#{html_attribute_name}")         
         computed_inner['psvalue'] = hav['psvalue']
         computed_inner['pvalue'] = inner_value
         computed_inner['unit'] = hav['unit']
@@ -99,6 +103,7 @@ module PageEvent
     alias_method :border_unset_changed_handler, :height_pv_changed_handler
     alias_method :margin_unset_changed_handler, :height_pv_changed_handler
     alias_method :padding_unset_changed_handler, :height_pv_changed_handler
+    alias_method :width_unset_changed_handler, :width_pv_changed_handler
     
     # here are two tipical layouts,    
     #   Layout Example                                 fluid --> fixed                         fixed --> fluid
