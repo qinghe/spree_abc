@@ -366,10 +366,13 @@ module PageTag
     end
     
     def get_css_classes
-      css_classes =  current_piece.effects.join(' ')  # current_piece.piece_selector + ' ' + current_piece.as_child_selector + ' ' +
+      
+      css_classes = ''
       # handling data iteration?
-      # Rails.logger.debug "current_piece=#{current_piece.id},#{current_piece.title}, current_piece.is_container?=#{current_piece.is_container?}, self.running_data_sources.present?=#{self.running_data_sources.present?}"
+       Rails.logger.debug "current_piece=#{current_piece.id},#{current_piece.title}, current_piece.is_container?=#{current_piece.is_container?}, self.running_data_sources.present?=#{self.running_data_sources.present?}"
       if current_piece.is_container?
+        # page_layout.effects only apply to container, or bit conflict.
+        css_classes << current_piece.effects.join(' ')
         if running_data_item.present?
           current_page = self.page_generator.current_page_tag
           column_count = self.running_data_source_sction_piece.column_count        
