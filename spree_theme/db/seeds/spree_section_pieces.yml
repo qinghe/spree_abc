@@ -30,7 +30,7 @@ root:
         <%= render "spree/shared/theme_selection_for_nondesigner" %>      
       <% end %>
       <%= flash_messages %>
-      <div id="page-wrapper" class="">
+      <div id="page-wrapper" class="<%=@template.section_selector%>">
       <div id="page" class=''><div id="page-inner" class="clear-block">
         ~~content~~
       </div><!-- /#page-inner -->
@@ -1617,7 +1617,7 @@ root_for_mobile:
         <%= render "spree/shared/theme_selection_for_nondesigner" %>      
       <% end %>
       <%= flash_messages %>
-      <div id="page" class='container'><div id="page-inner" class="row clear-block">
+      <div id="page" class='container <%=@template.section_selector%>'><div id="page-inner" class="row clear-block">
         ~~content~~
       </div><!-- /#page-inner -->
       </div><!-- /#page -->
