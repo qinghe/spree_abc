@@ -61,10 +61,9 @@ module SpreeTheme
         @is_designer = ( Spree::TemplateTheme.accessible_by( current_ability, :edit).where(:site_id=>website.site_id).count >0 )
       end
       
-      #login, forget_password page only available fore unlogged user. we need this flag to show editor even user have not log in.
-      @is_designer = ( cookies[:_dalianshops_designer]=='1')  if cookies[:_dalianshops_designer].present?
-      
       @is_designer = false if mobile?
+      #login, forget_password page only available fore unlogged user. we need this flag to show editor even user have not log in.
+      @is_designer = ( cookies[:_dalianshops_designer]=='1')  if cookies[:_dalianshops_designer].present?      
       
       @client_info = ClientInfo.new( :is_mobile => mobile?, :is_preview=>@is_designer)
       
