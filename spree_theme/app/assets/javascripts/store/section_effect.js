@@ -270,6 +270,7 @@ $(document).ready(function() {
       //console.log( "pos y=%d, x=%d", position[0], position[1] );
       $(".child_2", this).simplemodal({
         appendTo: '#page-wrapper',
+        closeHTML:'',  // remove a.close, or get incorrect container demension
         modal : false,
         focus : false,
         position : position,
@@ -292,6 +293,7 @@ $(document).ready(function() {
           //console.log( "pos y=%d, x=%d", position[0], position[1] );
           $(".child_2", $hover_effect_container).simplemodal({
             appendTo: '#page-wrapper',
+            closeHTML:'', // remove a.close, or get incorrect container demension
             modal : false,
             focus : false,
             position : position,
