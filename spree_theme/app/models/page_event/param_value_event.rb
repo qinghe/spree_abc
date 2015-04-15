@@ -64,8 +64,8 @@ module PageEvent
       trbl = (html_attribute_name == 'width' ? [1,3] : [0,2]) 
       val = partial_html.send(  html_attribute_name )
       hav = partial_html.html_attribute_values("block_#{html_attribute_name}")
-      
-      if val>0 && !hav.unset?
+      # width/height is 100%, unset inner width/height
+      if val>0 && !hav.unset? &&  hav['unit']!='%'
         margin, border, padding = partial_html.margin, partial_html.border, partial_html.padding
         
         computed_inner = partial_html.html_attribute_values("inner_#{html_attribute_name}")

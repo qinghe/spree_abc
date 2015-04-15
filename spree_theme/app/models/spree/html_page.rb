@@ -102,7 +102,7 @@ module Spree
         return html_attribute_values("page_width")['pvalue'] if self.root? 
     
         # self width unset, parent content layout is vertical.
-        if self.html_attribute_values("block_width").unset? and self.parent.content_layout_vertical?
+        if self.html_attribute_values("block_width").unset? && self.parent.content_layout_vertical?
           #TODO consider the computed margin, computed_padding caused by 'border image'
           margin, border, padding = html_attribute_values("inner_margin"), html_attribute_values("inner_border-width"), html_attribute_values("inner_padding")
           computed_width = self.parent_width      
@@ -168,12 +168,13 @@ module Spree
       
       def container?
         # has html_attribute_value: content_layout_horizontal
-        ! html_attribute_values("content_layout_clear").nil?
+        html_attribute_values("content_layout_clear").present?
       end
       
       #FIXME
       def content_layout_vertical?
-        not html_attribute_values("content_layout_clear").bool_true?
+        # bootstrap column have no param :content_layout_clear
+        container? && !html_attribute_values("content_layout_clear").bool_true?
       end
       
       def section_slug

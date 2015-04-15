@@ -6,7 +6,7 @@
     <% end %>
     <%= f.field_container :page_context do %>
       <%= f.label :page_context %><br />
-      <%= f.select(:page_context, options_for_select(page_contexts_for_options),
+      <%= f.select(:page_context, options_for_select(page_contexts_for_options, @taxon.page_context),
         { :include_blank => Spree.t('default') }, { :class => 'select2 fullwidth' }) %>
       <%= f.error_message_on :page_context %>
     <% end %>
