@@ -314,7 +314,7 @@ image:
     <% end %>
   created_at: 2011-09-20 19:40:07
   updated_at: 2011-09-20 19:40:07
-  css: ""
+  css: .<%= @template.section_selector %> img { width:100%; } 
   js: ""
 text:
   id: 8
@@ -1600,7 +1600,7 @@ root_for_mobile:
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
       <%== meta_data_tags %>
-      <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"/>
+      <%= favicon_link_tag 'favicon.ico' %>
       <%# it is in main app/assets/ include spree_theme, spree_china_checkout, store/product, store/cart, store/checkout ... %>      
       <%= javascript_include_tag 'spree/frontend/all.mobile', "data-turbolinks-track" => true %>      
       <%= stylesheet_link_tag 'store/spree_theme.mobile', "data-turbolinks-track" => true %>
