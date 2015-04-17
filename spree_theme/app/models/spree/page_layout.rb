@@ -120,10 +120,8 @@ module Spree
       
       # a section could link to ....  ex. font-awesome  could link to home  
       def href
-        if get_content_param_by_key( :clickable  )
           some_context = get_content_param_by_key( :context )
-          SpreeTheme.taxon_class.get_route_by_context( some_context )
-        end
+          SpreeTheme.taxon_class.get_route_by_page_context( some_context )
       end
       
       def has_extra_selector?

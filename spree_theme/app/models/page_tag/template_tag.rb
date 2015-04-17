@@ -13,7 +13,7 @@ module PageTag
     
     class WrappedPageLayout < WrappedModel
       self.accessable_attributes=[:id,:title,:current_data_source,:wrapped_data_source_param, :data_filter,:current_contexts, :context_either?, 
-         :get_content_param_by_key, :get_data_source_param_by_key, :is_container?, :is_zoomable_image?, :effects, :href, :section_pieces, :content_css_class]
+         :get_content_param_by_key, :get_data_source_param_by_key, :is_container?, :is_zoomable_image?, :effects, :section_pieces, :content_css_class]
       attr_accessor :section_id, :page_layout, :parent
       
       delegate *self.accessable_attributes, to: :page_layout
@@ -117,6 +117,14 @@ module PageTag
         get_content_param_by_key(:truncate_at)
       end
      
+      # get href from 
+      #   content_param > current_data_item > default(home) 
+      def href
+        if clickable?
+           return page_layout.href if get_content_param_by_key( :context ) > 0 
+           return self.collection_tag.running_data_item.path if self.collection_tag.running_data_item.present?           
+        end
+      end
     end
     
     attr_accessor :param_values_tag, :menus_tag, :images_tag, :text_tag, :blog_posts_tag
