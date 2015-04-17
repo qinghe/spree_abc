@@ -6,7 +6,8 @@ class << Spree::Core::ControllerHelpers::Common
     included_without_theme_support(receiver)
     receiver.send :include, SpreeTheme::System
     # template holds data for page render, we have to initialize it even for api
-    receiver.send :before_filter, :initialize_template
+    #receiver.send :before_filter, :initialize_template
+    receiver.send :prepend_before_action, :initialize_template
     # receiver could be Spree::Api::BaseController or  Spree::BaseController
     #if receiver == Spree::BaseController 
     receiver.send :before_filter, :add_view_path #spree_devise_auth, and spree_core require it.
@@ -41,6 +42,7 @@ module SpreeTheme
     end
   
     def initialize_template( request_fullpath = nil )
+      
       request_fullpath ||= request.fullpath
       
       # in case  tld/create_admin_session, should show system layout, theme may have no login section. ex www.dalianshops.com
