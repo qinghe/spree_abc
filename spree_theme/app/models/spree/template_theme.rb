@@ -533,11 +533,12 @@ module Spree
     
     # taxon_id which is assigned to template_theme and its context is index 
     def home_page
-      taxon = nil
-      taxons = template_resources.select{|template_resource|
+      taxon = nil      
+      taxon_ids= template_resources.select{|template_resource|
           template_resource.source_class ==  SpreeTheme.taxon_class 
-      }.collect(&:source).compact # compact is required, source may be nil.      
-      if taxons.present? #
+      }.collect(&:source_id)
+      if taxon_ids.present?
+        taxons = SpreeTheme.taxon_class.where( id: taxon_ids )      
         taxon = SpreeTheme.taxon_class.homes.where(["taxonomy_id in (?)", taxons.map(&:taxonomy_id ) ]).first
       end
       taxon     
