@@ -536,8 +536,8 @@ module Spree
       taxon = nil
       taxons = template_resources.select{|template_resource|
           template_resource.source_class ==  SpreeTheme.taxon_class 
-      }.collect(&:source)      
-      if taxons.present?
+      }.collect(&:source).compact # compact is required, source may be nil.      
+      if taxons.present? #
         taxon = SpreeTheme.taxon_class.homes.where(["taxonomy_id in (?)", taxons.map(&:taxonomy_id ) ]).first
       end
       taxon     
