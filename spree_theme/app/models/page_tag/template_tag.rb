@@ -479,6 +479,7 @@ module PageTag
             else
               #seems assets digest do not support template .ruby
               #image_tag "noimage/#{style}.png", options            
+              options.merge!  'data' => { 'big-image'=> "/shops/shared/images/noimage/large.png" } #zoomable required
               image_tag "/shops/shared/images/noimage/#{style}.png", options            
             end
           end
