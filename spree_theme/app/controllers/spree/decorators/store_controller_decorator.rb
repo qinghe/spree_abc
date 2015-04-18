@@ -11,7 +11,8 @@ module Spree
       end
       
       def config_locale       
-        return @theme.locale if @theme.locale.present?
+        # under_construction,unauthorized @theme is nil
+        return @theme.locale if @theme && @theme.locale.present?
         Spree::Frontend::Config[:locale]
       end
         
