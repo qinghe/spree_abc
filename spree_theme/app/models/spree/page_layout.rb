@@ -175,9 +175,9 @@ module Spree
           #bit 11
           get_content_param&1024 > 0        
         when :truncate_at                                 # post summary
-          #bit 2,3,4,5,6,7,8,9  
-          #    2+4+8+16+32+64+128 = 254
-          val = get_content_param&254
+          #bit 2, 3, 4, 5,  6,  7,  8,  9,   
+          #    2+ 4+ 8+ 16 +32+ 64+ 128+ 256 = 510
+          val = get_content_param&510
           val>0 ? val : default_truncate_at
         when :context                                     # bootstrap_glyphicon could link to home/cart...
           #bit 2,3,4,5,6  max is 31
