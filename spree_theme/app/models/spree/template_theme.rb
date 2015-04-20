@@ -211,7 +211,8 @@ module Spree
         new_theme.title = "Imported "+ new_theme.title
         new_theme.attributes = new_attributes
         new_theme.assigned_resource_ids = {}
-        new_theme.site_id = SpreeTheme.site_class.current.id
+        new_theme.site_id = Spree::Store.current.site_id
+        new_theme.store_id = Spree::Store.current.id
         new_theme.save!
         new_theme
       end
