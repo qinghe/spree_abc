@@ -6,7 +6,6 @@
 // jqeruy-rails and rails-assets-jquery have 'jquery' both, this would cause problem. use rails-assets-jquery/assets/jquery/jquery directly  
 //= require jquery
 //= require jquery_ujs
-//= require html5shiv
 //= require ckeditor/override
 //= require spree/backend
 //= require spree/backend/spree_editor
