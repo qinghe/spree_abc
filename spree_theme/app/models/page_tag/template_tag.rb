@@ -333,9 +333,17 @@ module PageTag
           else
             content_tag(:a, attribute_value, html_options)            
           end
-        elsif attribute_name==:title
+        elsif attribute_name == :title
           # make it as link anchor 
           content_tag :span, attribute_value, {:id=>"p_#{self.current_piece.id}_#{wrapped_post.id}"}
+        elsif attribute_name == :posted_at
+          case self.current_piece.datetime_style
+            when :date
+              pretty_date attribute_value
+            else
+              pretty_datetime attribute_value
+          end
+          
         else
           attribute_value
         end    
@@ -503,6 +511,11 @@ module PageTag
       }      
     end    
 
-    
+    def pretty_datetime(time)
+      [I18n.l(time.to_date, format: :long), time.strftime("%l:%M %p")].join(" ")
+    end
+    def pretty_date(time)
+      I18n.l(time.to_date, format: :long)
+    end
   end
 end

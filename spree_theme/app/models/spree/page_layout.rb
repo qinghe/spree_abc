@@ -150,6 +150,12 @@ module Spree
         when :model_count_in_row #bit 1,2,3,4             # apply to container
           #how many model this container
           get_content_param&15
+        when :datetime_style
+          #bit 2,3,4
+          idx = (get_content_param&14)>>1
+          #   000x , 001x,  010x,    011x,    100x
+          [:datetime, :date, :time ].fetch( idx, :datetime )
+          
         when :main_image_style                            # section product_image_with_thumbnail
           #bit 2,3,4
           idx = (get_content_param&14)>>1
