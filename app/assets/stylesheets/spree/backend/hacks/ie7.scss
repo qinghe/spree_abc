@@ -7,14 +7,15 @@ html.ie7 {
   body {
     font-style: normal;
   }
-
+  
+  // Fix display inline-block
+  ul.inline-menu li {
+    _zoom:1;*display:inline;
+  }
+  
   // Fix white border around filter-actions 
   .filter-actions {
     margin-bottom: -45px;
-
-    button, .button, input[type="submit"], input[type="button"], span.or {
-      border: 15px solid $color-1;
-    }
     span.or {
       border-width: 5px;
       margin-left: -10px;
