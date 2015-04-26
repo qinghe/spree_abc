@@ -117,6 +117,9 @@ module PageTag
         get_content_param_by_key(:truncate_at)
       end
      
+      def datetime_style
+        get_content_param_by_key(:datetime_style)
+      end
       # get href from 
       #   content_param > current_data_item > default(home) 
       def href
