@@ -2,6 +2,7 @@
 module Spree
   class PostClassification < ActiveRecord::Base
     self.table_name = 'spree_posts_taxons'
+    acts_as_list scope: :taxon
     belongs_to :post, class_name: "Spree::Post"
     belongs_to :taxon, class_name: "Spree::Taxon"
 
