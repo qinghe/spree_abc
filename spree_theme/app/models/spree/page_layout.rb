@@ -625,6 +625,14 @@ module Spree
               #{get_pagination}
               <% @template.running_data_source = nil %>
               EOS1
+            when DataSourceEnum.next_post, DataSourceEnum.previous_post
+              subpieces = <<-EOS1 
+              <% @template.running_data_source= @template.related_posts( (defined?(page) ? page : @current_page) ) %>
+              <% @template.running_data_source.each{|post| @template.running_data_item = post %>
+                  #{subpieces}
+              <% } %>
+              <% @template.running_data_source = nil %>
+              EOS1
             when DataSourceEnum.taxon
               #assigned menu could be root or node
               subpieces = <<-EOS3 

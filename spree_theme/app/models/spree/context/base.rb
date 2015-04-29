@@ -15,10 +15,11 @@ module Spree
         #:gpv_product=>[:product_images,:product_options], 
         #:gpv_group=>[:group_products,:group_images],    
         #:group_products=>[:product_images,:product_options],
-        :this_product=>[]
+        :this_product=>[],
+        :post=>[]
         #keys should inclde all data_sources, test required.
         }
-      DataSourceEnum  = Struct.new(:gpvs, :this_product, :taxon, :blog, :post, :gpvs_theme )[:gpvs, :this_product, :taxon, :blog, :post, :gpvs_theme]
+      DataSourceEnum  = Struct.new(:gpvs, :this_product, :taxon, :blog, :post,:previous_post,:next_post, :gpvs_theme )[:gpvs, :this_product, :taxon, :blog, :post,:previous_post, :next_post, :gpvs_theme]
       DataSourceEmpty = :""
       
       def context_either?

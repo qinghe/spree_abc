@@ -235,6 +235,27 @@ module PageTag
       end
       objs      
     end
+    
+    # feature next_post, previous_post
+    def related_posts( wrapped_taxon )
+      objs = []
+      case self.current_piece.current_data_source
+        when Spree::PageLayout::DataSourceEnum.next_post
+          if self.page_generator.resource.kind_of? Spree::Post
+            item = Spree::PostClassification.where( taxon_id: wrapped_taxon.id, post_id: self.page_generator.resource.id ).first.try(:lower_item).try(:post)
+            objs << item if item.present?
+          end
+        when Spree::PageLayout::DataSourceEnum.previous_post
+          if self.page_generator.resource.kind_of? Spree::Post
+            item = Spree::PostClassification.where( taxon_id: wrapped_taxon.id, post_id: self.page_generator.resource.id ).first.try(:higher_item).try(:post) 
+            objs << item if item.present?            
+          end         
+      end
+      if objs.present?
+        objs = Posts.new( self.page_generator, objs, wrapped_taxon)
+      end
+      objs 
+    end
         
     # in template_tag have no method link_to, content_tag, it have to be in base_helper
     def page_attribute(  attribute_name = nil )

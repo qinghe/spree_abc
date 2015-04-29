@@ -135,6 +135,8 @@ zh-CN:
       blog: 文章集合
       post: 当前选择文章
       gpvs_theme: 模板集合
+      previous_post: 当前选择文章-前一篇
+      next_post: 当前选择文章-下一篇
     template_file:
       index: 图片素材
       new: 新建图片素材
