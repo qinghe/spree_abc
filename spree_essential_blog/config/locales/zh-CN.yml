@@ -15,6 +15,7 @@ zh-CN:
         cover: 图片
         live: 是否发布
         tags: 标签
+        author: 作者
       post_category:
         model_name: Category
         name: Name

@@ -4,12 +4,23 @@
   <%= error_message_on :post, :title %>
 <% end %>
 
-<%= form.field_container :posted_at do %>
-  <%= form.label :posted_at %><br />
-  <%= form.text_field :posted_at, :class => 'datetime fullwidth' %>
-  
-  <%= error_message_on :post, :posted_at %>
-<% end %>
+<div class="clearfix" >
+    <div class="eight columns alpha">
+    <%= form.field_container :author do %>
+      <%= form.label :author %><br />
+      <%= form.text_field :author, :class => 'datetime fullwidth' %>      
+      <%= error_message_on :post, :author %>
+    <% end %>
+    </div>
+    
+    <div class="eight columns omega">
+    <%= form.field_container :posted_at do %>
+      <%= form.label :posted_at %><br />
+      <%= form.text_field :posted_at, :class => 'datetime fullwidth' %>      
+      <%= error_message_on :post, :posted_at %>
+    <% end %>
+    </div>
+</div>
 
 <%= form.field_container :cover do %>
   <%= form.label :cover, Spree.t(:icon) %><br />
