@@ -182,9 +182,8 @@ module PageTag
       objs = []
       case self.current_piece.current_data_source
         when Spree::PageLayout::DataSourceEnum.gpvs
-          #objs = menu.products
           #copy from taxons_controller#show
-          searcher_params = {:taxon => wrapped_taxon.id}.merge(self.current_piece.wrapped_data_source_param ).merge(self.page_generator.resource_options)
+          searcher_params = { taxon: wrapped_taxon.resource_taxon_id }.merge(self.current_piece.wrapped_data_source_param ).merge(self.page_generator.resource_options)
           searcher = Spree::Config.searcher_class.new(searcher_params)
           #@searcher.current_user = try_spree_current_user
           #@searcher.current_currency = current_currency
@@ -220,7 +219,7 @@ module PageTag
       case self.current_piece.current_data_source
         when Spree::PageLayout::DataSourceEnum.blog
           #copy from taxons_controller#show
-          searcher_params = {:taxon => wrapped_taxon.id}.merge(self.current_piece.wrapped_data_source_param ).merge(self.page_generator.resource_options)
+          searcher_params = {taxon: wrapped_taxon.resource_taxon_id}.merge(self.current_piece.wrapped_data_source_param ).merge(self.page_generator.resource_options)
           searcher = SpreeTheme.post_class.searcher_class.new(searcher_params)
           #@searcher.current_user = try_spree_current_user
           #@searcher.current_currency = current_currency

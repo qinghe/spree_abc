@@ -1,7 +1,7 @@
 module PageTag
   class Menus < Base
     class WrappedMenu < WrappedModel
-      self.accessable_attributes=[:id,:name,:icon, :summary, :path, :permalink,:tooltips, :is_clickable?, :page_home?,:depth, :leaf?,:root?,:persisted?, :extra_html_attributes, :description]
+      self.accessable_attributes=[:id, :name, :icon, :summary, :path, :permalink, :tooltips, :is_clickable?, :page_home?,:depth, :leaf?,:root?,:persisted?, :extra_html_attributes, :description, :replaced_by ]
       delegate *self.accessable_attributes, :to => :model
       delegate :taxonomy, :root, :to => :model
       
@@ -70,6 +70,11 @@ module PageTag
           "/#{self.model.id.to_i}"
         end
       end
+      
+      def resource_taxon_id
+        replaced_by > 0 ? replaced_by : id
+      end
+      
     end
     attr_accessor :menus_cache #store all menus of template, key is page_layout_id, value is menu tree
     attr_accessor :template_tag, :page_generator
