@@ -32,7 +32,13 @@ module Spree
         #warden.authenticate?
         # host is required, current_user.site may not be current site, we allow user login from dalianshops.com
         respond_with  do |format|
-          format.html{ redirect_to admin_url(:host=> current_spree_user.site.subdomain ) }          
+          #  site_custom_domain/admin conficlt with site.dalianshops.com/admin
+          #  current host maybe dalianshops.com or custom domain
+          if is_from_system_domain? 
+            format.html{ redirect_to admin_url(:host=> current_spree_user.site.subdomain ) }
+          else
+            format.html{ redirect_to admin_url }
+          end          
         end
       else
         flash.now[:error] = t('devise.failure.invalid')        
@@ -226,7 +232,11 @@ module Spree
           format.js{ render "message_box", :locals=>{:message=>message}}
       end
     end
-
+    
+    def is_from_system_domain?
+      #consider localhost?      
+      request.host.end_with?  Spree::Site.system_top_domain      
+    end
   end
 
 end
