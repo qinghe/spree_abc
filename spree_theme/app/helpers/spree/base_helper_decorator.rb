@@ -6,6 +6,28 @@ module Spree
     #==================================================================================================
     #these methos has to be in BaseHelpler, controller may be TemplateThemes Cart Checkout User Order..
     #override original in BaseHelper
+    def meta_data
+      #object = instance_variable_get('@'+controller_name.singularize)
+      object = instance_variable_get('@resource')
+      meta = {}
+
+      if object.kind_of? ActiveRecord::Base
+        meta[:keywords] = object.meta_keywords if object[:meta_keywords].present?
+        meta[:description] = object.meta_description if object[:meta_description].present?
+      end
+
+      if meta[:description].blank? && object.kind_of?(Spree::Product)
+        meta[:description] = strip_tags(truncate(object.description, length: 160, separator: ' '))
+      end
+
+      meta.reverse_merge!({
+        keywords: current_store.meta_keywords,
+        description: current_store.meta_description,
+      }) if meta[:keywords].blank? or meta[:description].blank?
+      meta
+    end
+
+    
     def breadcrumbs(current_page_tag, separator="&nbsp;&raquo;&nbsp;")
       # current_page_tag is nil in page /unauthorized
       return "" if current_page?("/") || current_page_tag.nil? ||current_page_tag.page_home?
