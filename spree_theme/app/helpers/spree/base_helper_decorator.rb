@@ -16,9 +16,9 @@ module Spree
         meta[:description] = object.meta_description if object[:meta_description].present?
       end
 
-      if meta[:description].blank? && object.kind_of?(Spree::Product)
-        meta[:description] = strip_tags(truncate(object.description, length: 160, separator: ' '))
-      end
+      #if meta[:description].blank? && object.kind_of?(Spree::Product)
+      #  meta[:description] = strip_tags(truncate(object.description, length: 160, separator: ' '))
+      #end
 
       meta.reverse_merge!({
         keywords: current_store.meta_keywords,
