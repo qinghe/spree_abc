@@ -45,7 +45,20 @@
   <%= form.hidden_field :taxon_ids, :value => @post.taxon_ids.join(','), :class => 'text fullwidth'  %>
 <% end %>
 
+<div data-hook="admin_post_form_meta_keywords">
+  <%= form.field_container :meta_keywords do %>
+    <%= form.label :meta_keywords, Spree.t(:meta_keywords) %>
+    <%= form.text_field :meta_keywords, :class => 'fullwidth' %>
+  <% end %>
+</div>
 
+<div data-hook="admin_post_form_meta_description">
+  <%= form.field_container :meta_description do %>
+    <%= form.label :meta_description, Spree.t(:meta_description) %>
+    <%= form.text_field :meta_description, :class => 'fullwidth' %>
+  <% end %>
+</div>
+    
 <%= form.field_container :live do %>
   <%= form.check_box :live  %> <%= form.label :live %><br />
 <% end %>

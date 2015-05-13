@@ -111,6 +111,11 @@ root:
     #page-wrapper form[id] p {       
       margin: 0; padding: 0;
     }
+    /* keep input width same with container */
+    #page-wrapper form.fullwidth input[type="text"], #page-wrapper form.fullwidth input[type="password"], #page-wrapper form.fullwidth input[type="phone"], #page-wrapper form.fullwidth input[type="email"], #page-wrapper form.fullwidth input[type="number"], #page-wrapper form.fullwidth input[type="url"]{
+      box-sizing: border-box;
+      width: 100%;
+    }
       #page
       {
         <% if @template.css(:font_size)== 10%>
