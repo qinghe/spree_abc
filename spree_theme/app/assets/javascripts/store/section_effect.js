@@ -26,7 +26,7 @@ $(document).ready(function() {
   });
   
   // like taobao, show big image when hovering product image.
-  $('.zoomable').each(function(index, element){
+  $('.zoomable').each(function(i, element){
     var $element =$(element); 
     var $main_image_wrapper = $element.find('.main_image_wrapper');
     $element.find('.thumbnails a').click(function(){
@@ -49,6 +49,31 @@ $(document).ready(function() {
               containerSelector: '.main_image_wrapper'
             }
         });
+  });
+  
+  
+  $('.lightboxable').each( function(i, element){
+    
+    var $element =$(element);       
+    var $main_image = $element.find('.main_image_wrapper img');
+    var jsonData =[];
+    var thumbnails = $element.find('.thumbnails img');
+    if( thumbnails.is('*') ){
+        thumbnails.each(function(j,img){
+            jsonData.push({ url:$(img).data('big-image'), title: img.alt });
+        });
+    }else{
+        jsonData.push({ url:$main_image.data('big-image'), title: $main_image.attr('alt') });  
+    }
+    
+    $main_image.lightbox({
+        fitToScreen: true,
+        jsonData: jsonData,
+        loopImages: true,
+        imageClickClose: false,
+        disableNavbarLinks: true
+    });
+    
   });
   
   // scroll to target

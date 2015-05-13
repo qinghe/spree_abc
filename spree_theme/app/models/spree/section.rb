@@ -10,10 +10,11 @@ module Spree
     
     friendly_id :title, :use => :slugged
     #attr_accessible :section_piece_id, :title, :global_events, :subscribed_global_events,:is_enabled
-    # it is using content_param bit 5,6,7,8
+    # it is using content_param bit 5,6,7,8,
     #                    bit   5,     6,     7,    8     5&6,       5&7  , 5&8,        6&8         
-    HoverEffectMask= 16+32+64+128
-    HoverEffect = Struct.new(:slide, :show, :expansion, :overlay, :popup, :popup_menu, :popup_menu_l)[16,32,64,48,80,144,160]
+    MouseEffectMask= 16+32+64+128
+    # this effect apply to container only
+    MouseEffect = Struct.new(:slide, :show, :expansion, :overlay, :popup, :popup_menu, :popup_menu_l)[16,32,64,48,80,144,160]
     
     scope :enabled, ->{ where( is_enabled: true ) }
     
@@ -183,6 +184,10 @@ module Spree
     
     def is_zoomable_image?
       usage =='image-with-thumbnails' 
+    end
+    
+    def is_image?
+      usage =~ /image/
     end
     
     def is_html_root?

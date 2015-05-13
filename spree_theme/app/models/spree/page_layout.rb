@@ -18,7 +18,7 @@ module Spree
     before_destroy :remove_section
     before_save :fix_data_source_param
     
-    delegate :is_html_root?, :is_container?, :is_zoomable_image?, to: :section
+    delegate :is_html_root?, :is_container?, :is_image?, :is_zoomable_image?, to: :section
 
     scope :full_html_roots, ->{ where(:is_full_html=>true,:parent_id=>nil) }
     #attr_accessible :section_id,:title
@@ -109,10 +109,10 @@ module Spree
       def effects
         if @effect_classes.nil?
           @effect_classes =[]
-          Section::HoverEffect.each_pair{|effect,val|
+          Section::MouseEffect.each_pair{|effect,val|
             #   00001000 
             # & 00001111  => val            
-            @effect_classes << "hover_effect_#{effect}" if( (get_content_param & Section::HoverEffectMask) == val)
+            @effect_classes << "hover_effect_#{effect}" if( (get_content_param & Section::MouseEffectMask) == val)
           }  
         end        
         @effect_classes
@@ -142,11 +142,16 @@ module Spree
         # content_param int(11) 4bytes 4*8=32bits
         case key
         when :clickable                                   # apply to taxon/product/post attributes 
+          # generate <a>
           #bit 1, product:name,image, taxon:name,icon
           get_content_param&1 >0
         when :hoverable                                   # apply to container/taxon/product/post attributes 
+          # apply hover css
           #bit 12
           get_content_param&2048 >0
+        when :lightboxable                                # all image?
+          #bit 13
+          get_content_param&4096 >0          
         when :model_count_in_row #bit 1,2,3,4             # apply to container
           #how many model this container
           get_content_param&15

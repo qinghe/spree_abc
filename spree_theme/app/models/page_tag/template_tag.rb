@@ -13,7 +13,7 @@ module PageTag
     
     class WrappedPageLayout < WrappedModel
       self.accessable_attributes=[:id,:title,:current_data_source,:wrapped_data_source_param, :data_filter,:current_contexts, :context_either?, 
-         :get_content_param_by_key, :get_data_source_param_by_key, :is_container?, :is_zoomable_image?, :effects, :section_pieces, :content_css_class]
+         :get_content_param_by_key, :get_data_source_param_by_key, :is_container?, :is_image?, :is_zoomable_image?, :effects, :section_pieces, :content_css_class]
       attr_accessor :section_id, :page_layout, :parent
       
       delegate *self.accessable_attributes, to: :page_layout
@@ -94,6 +94,9 @@ module PageTag
         is_zoomable_image? && get_content_param_by_key(:zoomable)
       end
             
+      def lightboxable?
+        is_image? && get_content_param_by_key(:lightboxable)
+      end
       # view content as grid.
       def column_count
         is_container? ?  get_content_param_by_key( :model_count_in_row ) : 0
@@ -433,12 +436,10 @@ module PageTag
       if current_piece.parent.effects.present?
         css_classes << " child_#{current_piece.nth_of_siblings}"
       end
-      if current_piece.zoomable?
-        css_classes << " zoomable"
-      end
-      if current_piece.hoverable?
-        css_classes << " hoverable"
-      end
+      css_classes << " zoomable" if current_piece.zoomable?
+      css_classes << " hoverable" if current_piece.hoverable?
+      css_classes << " lightboxable" if current_piece.lightboxable?
+      
       css_classes      
 
     end
