@@ -3,12 +3,6 @@ after theme release, if we modify page_layout tree, this would cause theme gener
 
 
 #todos
-0. go through whole process, create new template -> edit it-> release it-> other shop apply it
-
-*1. export template
-*2. editor dock.
-*2.1 promote section, demote section   
-*2.2 highlight counter part of preview page when hovering on section
 2.3 _update_param_value.js.erb, update <a> hover,selected param_value, client should be updated by ajax. 
 3.  ajax update section, no need refresh when add section into template.
 
@@ -28,7 +22,6 @@ https://github.com/spree/spree_fancy
 
 
 # new features
-link add margin
-link add hover param,  same as link
-container add hover param 
 disable taxon/post link
+
+click effect
