@@ -7,7 +7,7 @@ GIT
 
 GIT
   remote: git://github.com/RuanShan/spree_alipay.git
-  revision: ace1da0655dfdc61cd5daae3421996c18fa879af
+  revision: 67b206bc30418f3581bee40e12cb34a5c13309a5
   branch: master
   specs:
     spree_alipay (2.4.0)
@@ -82,7 +82,6 @@ PATH
 
 GEM
   remote: http://ruby.taobao.org/
-  remote: https://rails-assets.org/
   specs:
     actionmailer (4.1.8)
       actionpack (= 4.1.8)

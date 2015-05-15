@@ -1,6 +1,6 @@
 source 'http://ruby.taobao.org/'
 #source 'https://rubygems.org'
-source "https://rails-assets.org"
+#source "https://rails-assets.org"
 
 # Bundle edge Rails instead:
 ruby '1.9.3'
