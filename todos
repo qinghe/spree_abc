@@ -123,7 +123,10 @@ developer todo
 3. use current site mail server before send mail.
 4. body:background
 5. search, advance search
-
+6. fix add order from backend. error caused by spree_flexi_variants. 
+   it overrides method OrderContent.add which is called by /api/orders/R413483534/line_items  
+7. 
+   
 sales todo
 ===============================================================================================
 1. 市场调查
