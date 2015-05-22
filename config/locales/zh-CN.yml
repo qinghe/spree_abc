@@ -893,7 +893,7 @@ zh-CN:
         thanks: 谢谢您的购买。
         total: 总计：%{total}
     order_not_found: 我们无法找到您的订单。请重新尝试。
-    order_number: "订单号 %{number}"
+    order_number: "订单号"
     order_populator:
       out_of_stock: ! '%{item} 库存不足'
       please_enter_reasonable_quantity: 请输入一个合理的数量
