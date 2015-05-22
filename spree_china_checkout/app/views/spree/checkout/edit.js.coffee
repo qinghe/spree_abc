@@ -7,3 +7,6 @@ stepHandler.replaceCheckoutStep()
 
 $step.find('button.previous').click (event)->   
   SinglePageCheckout.StepHandler.enableStep $step.prev()
+
+# if order.complete? redirect_to thankyou page,  ex. pay by check
+# if payment is alipay, spree_alipay should support ajax?
