@@ -7,7 +7,9 @@ module Spree
     # for flash messages    
     alias_attribute :name, :title
     
-    has_and_belongs_to_many :taxons, :join_table => "spree_posts_taxons", :class_name => "Spree::Taxon"
+    has_many :post_classifications, dependent: :delete_all, inverse_of: :post
+    has_many :taxons, through: :post_classifications
+    #has_and_belongs_to_many :taxons, :join_table => "spree_posts_taxons", :class_name => "Spree::Taxon"
     alias_attribute :categories, :taxons
     
     #belongs_to :blog, :class_name => "Spree::Taxon"
