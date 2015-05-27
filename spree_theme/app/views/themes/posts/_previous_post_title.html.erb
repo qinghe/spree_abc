@@ -1,0 +1,10 @@
+<% wrapped_post = @template.related_posts( @current_page, data_source: Spree::PageLayout::DataSourceEnum.previous_post ).first  %>
+<dl><dt><%= Spree.t('post.previous')%></dt>
+    <dd><% if wrapped_post.present? %>  
+          <%= content_tag(:a, wrapped_post.title, { href: wrapped_post.path })  %>
+        <% else %>
+          <%= Spree.t('post.no_previous')%>  
+        <% end %>        
+    </dd>
+</dl>
+

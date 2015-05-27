@@ -102,10 +102,15 @@ zh-CN:
     detail: 详细
     dialog_title: 对话框
     global_taxons: 全局分类
+    post:
+      next: 下一篇
+      previous: 上一篇
+      no_previous: 没有了
+      no_next: 没有了     
     notice_messages:
       theme_imported: 模板已经购买成功
       theme_released: 模板已经发布成功
-      theme_not_imported: 模板无法导入        
+      theme_not_imported: 模板无法导入   
     page_layout:
       data_source: 数据源 
       please_select_to_config: 请选择需要配置的模块

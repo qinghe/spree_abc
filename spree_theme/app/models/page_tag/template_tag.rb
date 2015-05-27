@@ -239,9 +239,10 @@ module PageTag
     end
     
     # feature next_post, previous_post
-    def related_posts( wrapped_taxon )
+    def related_posts( wrapped_taxon, options = {} )
+      data_source = ( options[:data_source] || self.current_piece.current_data_source )
       objs = []
-      case self.current_piece.current_data_source
+      case data_source
         when Spree::PageLayout::DataSourceEnum.next_post
           if self.page_generator.resource.kind_of? Spree::Post
             item = Spree::PostClassification.where( taxon_id: wrapped_taxon.id, post_id: self.page_generator.resource.id ).first.try(:lower_item).try(:post)

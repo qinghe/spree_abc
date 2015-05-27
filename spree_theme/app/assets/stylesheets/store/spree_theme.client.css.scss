@@ -1,3 +1,4 @@
+@import 'store/spree_theme_variables';
 @import 'image-zoom';
 @import 'jquery.lightbox';
 @import 'store/spree_china_checkout';
@@ -38,3 +39,25 @@ html.turbolinks-progress-bar::before {
 .hidden {
   display: none;
 }
+
+/*--------------------------------------*/
+/* Flash notices & errors
+/*--------------------------------------*/
+/*
+.flash {
+  padding: 10px;
+  color: $layout_background_color;
+  font-weight: bold;
+  margin-bottom: 10px;
+
+  &.notice {
+    background-color: $link_text_color;
+  }
+  &.success {
+    background-color: $c_green;
+  }
+  &.error {
+    background-color: $c_red;
+  }
+}
+*/

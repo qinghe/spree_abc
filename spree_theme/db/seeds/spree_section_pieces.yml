@@ -1334,8 +1334,8 @@ container_dl:
   html: ~~content~~    
   css: |
     .<%=@template.section_selector%> dl,dd{ margin:0;padding:0; }
-    .<%=@template.section_selector%> dt{ <%= @template.css :s_dt %>  }
-    .<%=@template.section_selector%> dd{ <%= @template.css :s_dd %>  }
+    .<%=@template.section_selector%> dt{ float:left; <%= @template.css :s_dt %>  }
+    .<%=@template.section_selector%> dd{ float:left; <%= @template.css :s_dd %>  }
   js: ""
 preview_theme_button:
   id: 67
@@ -1504,6 +1504,7 @@ post_summary:
     <%== @template.post_attribute(:summary) %>
   css: ''    
   js: ''
+
 site_title:
   id: 79
   title: site title
@@ -1586,7 +1587,27 @@ page_attribute:
     <%= @template.page_attribute() %>
   css: ''    
   js: ''
-  
+next_post_title:
+  id: 85
+  title: next post title
+  slug: next-post-title
+  is_selectable: "0"
+  is_container: "0"
+  html: |
+    <%= render "themes/posts/next_post_title" %>
+  css: ''    
+  js: ''
+previous_post_title:
+  id: 86
+  title: previous post title
+  slug: previous-post-title
+  is_selectable: "0"
+  is_container: "0"
+  html: |
+    <%= render "themes/posts/previous_post_title" %>
+  css: ''    
+  js: ''
+    
 # mobile section pieces 
 root_for_mobile:
   id: 200
