@@ -1,3 +1,4 @@
 
 .disabled-step .form-wrapper{ position: relative; display: none; }
 
+#checkout .wait-for-payment { display:none; }

@@ -912,7 +912,7 @@ dialog_title:
       <div class="title"> <%= Spree.t(:dialog_title) %> <a class="cancel">X</a> </div>
   css: | 
     #dialog .title{ <%=@template.css(:title) %> }
-    #dialog a.cancel{      
+    #dialog .title a.cancel{      
       border:0;  padding:0;  margin:0; background: transparent none; text-decoration: none;/*reset it, prevent root's default */
       float:right; cursor:pointer; 
       <%=@template.css(:cancel) %> 

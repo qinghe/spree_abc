@@ -18,6 +18,11 @@ $(document).ready(function() {
     function() { $( "#embeded_content_wrapper" ).show(); }
   );
 
+  
+  // code for theme, should move to template_themes.js
+  $("#dialog").delegate(  "a.cancel,button.cancel", "click",function(){
+      $.simplemodal.close();
+  });
 });
 
 // copy from project https://github.com/citrus/spree_variant_options

@@ -4,6 +4,9 @@
       <%= render :partial => 'form_wrapper', :locals => { :order => @order, :state => state } %>
     </div>
   <% end %>
+  
+  <%= render partial: 'wait_for_payment' %>
+  
 </div>
 
 <script>
