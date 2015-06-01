@@ -435,6 +435,7 @@ zh-CN:
     card_number: 卡号
     card_type_is: 卡的类型是
     cart: 购物车
+    cart_subtotal: 商品小计
     categories: 分类
     category: 分类
     change: 修改
@@ -1269,7 +1270,7 @@ zh-CN:
       shipped: 已经发货
     shipments: 配送
     shipped: 已发货
-    shipping: 配送中
+    shipping: 配送
     shipping_address: 收货人信息
     shipping_categories: 配送分类
     shipping_categories_description: 管理配送分类以决定哪些产品可以通过哪些方式进行配送
