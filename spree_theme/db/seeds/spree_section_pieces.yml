@@ -613,7 +613,7 @@ order_total_price:
   is_selectable: "1"
   is_container: "0"
   html: |    
-    <%= Spree.t(:subtotal) %>: <span class="g-order-total"><%= @order.display_total.to_html %></span>
+    <%= Spree.t(:total) %>: <span class="g-order-total"><%= @order.display_total.to_html %></span>
   created_at: 2011-09-20 19:40:07
   updated_at: 2011-09-20 19:40:07
   css: |
