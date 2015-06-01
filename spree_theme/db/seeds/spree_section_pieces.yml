@@ -723,7 +723,7 @@ order_items:
   is_selectable: "1"
   is_container: "0"
   html: |    
-    <%= render :partial => 'order_items' %>
+    <%= render partial: 'order_items', locals: {order: @order} %>
   css: ""
   js: ""
 payment_form:
