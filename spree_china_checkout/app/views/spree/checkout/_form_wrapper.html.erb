@@ -5,7 +5,10 @@
 %>
 
 
-<h2 class="header2"> <%= Spree.t("order_state.#{state}") %> </h2>  
+<h3 class="header2"> <%= Spree.t("order_state.#{state}") %>
+  <%= link_to Spree.t(:edit), update_checkout_path(state) %>
+
+</h3>  
 <div class="form-wrapper clear-block" data-hook="checkout_form_wrapper">
   <div class="fl">
       <%= render :partial => 'spree/shared/error_messages', :locals => { :target => order } %>
