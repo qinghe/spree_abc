@@ -1,7 +1,7 @@
 <% # do not support confirm anymore
 
   form_html_options = { :id => "checkout_form_#{state}", :class=>"single_page_edit_order" }  
-  form_html_options[:target] = '_blank' if order.payment?
+  form_html_options[:target] = '_blank' if state == 'payment'
 %>
 
 
@@ -14,7 +14,7 @@
   <div class="fl">
       <%= render :partial => 'spree/shared/error_messages', :locals => { :target => order } %>
       <% # override default form class :edit_order with :single_page_edit_order, disableSaveOnClick cause button disabled even form validation failure %>
-      <%= form_for order, :url => update_checkout_path(state), :remote => !order.payment?, :html => form_html_options do |form| %>
+      <%= form_for order, :url => update_checkout_path(state), :remote => (state != 'payment'), :html => form_html_options do |form| %>
         <%= render state, :form => form %>
       <% end %>
   </div>
