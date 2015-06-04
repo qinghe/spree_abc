@@ -1,9 +1,9 @@
 #add feature, show address/delivery summary 
 
 previous_partials = {}
-previous_partials.delivery = "<%=j( render :partial => 'form_wrapper', :format => :html, :locals => { :state => 'delivery', :order => @order } ) if @order.passed_checkout_step? 'delivery' %>"
-previous_partials.address = "<%=j render :partial => 'form_wrapper', :format => :html, :locals => { :state => 'address', :order => @order } if @order.passed_checkout_step? 'address' %>"
-
+<% @order.checkout_steps.each{|step|  if @order.passed_checkout_step? step %>
+<%= "previous_partials.#{step}="%> "<%=j( render :partial => 'form_wrapper', :format => :html, :locals => { :state => step, :order => @order } ) %>"
+<%  end  } %>
 partial = "<%=j render :partial => 'form_wrapper', :format => :html, :locals => { :state => @order.state, :order => @order } %>"
 $step = ($ '#checkout_<%= @order.state %>')
 error = "<%= flash[:error] %>"

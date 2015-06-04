@@ -7,7 +7,7 @@
 
 <h3 class="header2"> <%= Spree.t("order_state.#{state}") %>
   <% if order.passed_checkout_step? state %>
-  <%= link_to Spree.t(:edit), checkout_state_path(state) %>
+  <%= link_to Spree.t(:edit), checkout_state_path(state), class: 'previous' %>
   <% end %>
 </h3>  
 <div class="form-wrapper clear-block" data-hook="checkout_form_wrapper">
@@ -25,5 +25,8 @@
     <% end %>
 </div>
 <div id="checkout-summary-<%= state%>" class="summary-wrapper">
+  <% if order.passed_checkout_step? state %>
+  <%= render :partial => "#{state}_summary", :locals => { :order => order } %>
+  <% end %>
 </div>
 
