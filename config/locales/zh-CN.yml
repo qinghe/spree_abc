@@ -43,7 +43,7 @@ zh-CN:
         item_total: 小记
         number: 订单号
         payment_state: 支付状态
-        shipment_state: 物流状态
+        shipment_state: 配送状态
         special_instructions: 特别说明
         state: 状态
         total: 总计
@@ -75,7 +75,7 @@ zh-CN:
         master_price: 默认价格
         name: 名称
         on_hand: 库存
-        shipping_category: 物流分类
+        shipping_category: 配送分类
         tax_category: 缴税分类
         slug: 静态URL
         summary: 广告词
@@ -396,8 +396,8 @@ zh-CN:
     back_to_properties_list: 回到产品列表
     back_to_prototypes_list: 回到原型列表
     back_to_reports_list: 回到报告列表
-    back_to_shipping_categories_list: 回到物流分类列表
-    back_to_shipping_methods_list: 回到邮寄方式列表
+    back_to_shipping_categories_list: 回到配送分类列表
+    back_to_shipping_methods_list: 回到配送方式列表
     back_to_states_list: 回到省份列表
     back_to_stock_locations_list: 回到仓库地址列表
     back_to_stock_movements_list: 回到商品采购列表
@@ -643,7 +643,7 @@ zh-CN:
     first_item: 首件产品价格??
     first_name: 名
     first_name_begins_with: 名的开始
-    flat_percent: 固定费率
+    flat_percent: 固定费率 (百分比)
     flat_rate_amount: 金额
     flat_rate_per_item: 固定费率 (每商品)
     flat_rate_per_order: 固定费率 (每订单)
@@ -1275,8 +1275,8 @@ zh-CN:
     shipping_categories: 配送分类
     shipping_categories_description: 管理配送分类以决定哪些产品可以通过哪些方式进行配送
     shipping_category: 配送分类
-    shipping_flat_rate_per_item: 以单项计固定费率
-    shipping_flat_rate_per_order: 固定费率
+    shipping_flat_rate_per_item: 固定费率 (每商品)
+    shipping_flat_rate_per_order: 固定费率 (每订单)
     shipping_flexible_rate: 以每项计弹性价格
     shipping_instructions: 配送指南
     shipping_method: 配送方式
