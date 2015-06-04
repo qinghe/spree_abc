@@ -18,11 +18,7 @@
         <%= render state, :form => form %>
       <% end %>
   </div>
-    <% if state != 'confirm' %>
-      <div id="checkout-summary" data-hook="checkout_summary_box" class="fr">
-        <%= render :partial => 'summary', :locals => { :order => order } %>
-      </div>
-    <% end %>
+    
 </div>
 <div id="checkout-summary-<%= state%>" class="summary-wrapper">
   <% if order.passed_checkout_step? state %>
