@@ -6,9 +6,7 @@
 
 
 <h2 class="header2"> <%= Spree.t("order_state.#{state}") %>
-  <% if order.passed_checkout_step? state %>
   <%= link_to Spree.t(:edit), checkout_state_path(state), class: 'previous' %>
-  <% end %>
 </h2>  
 <div class="form-wrapper clear-block" data-hook="checkout_form_wrapper">
   <div class="">
