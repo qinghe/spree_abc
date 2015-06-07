@@ -22,7 +22,7 @@ class SinglePageCheckout.StepHandler
     Spree.onAddress() if $element.data('step') is 'address'
     Spree.onPayment() if $element.data('step') is 'payment'
      
-    $element.find('.summary-wrapper').hide();     
+    #$element.find('.summary-wrapper').hide();     
     $element.find('.form-wrapper').slideDown(300);
     
     $element.siblings('.disabled-step, .enabled-step').find('.form-wrapper').slideUp(300);
@@ -38,7 +38,7 @@ class SinglePageCheckout.StepHandler
     @$step.html @partial
     # support summary for step address/delivery
     for own step, partial of @previous_partials
-      $('#checkout_'+step).html( partial ).show();
+      $('#checkout-summary-'+step).html( partial );
 
 
   replaceCheckoutStep: ->

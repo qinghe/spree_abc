@@ -2,8 +2,10 @@
   <p class="info">请您在新打开的页面上完成付款。</p>
   <p class="notice">付款完成前请不要关闭此窗口。<br>完成付款后请根据您的情况点击下面的按钮：</p>
   <p class="act">
-      <input type="submit" class="btn success" value="已完成付款">
+    <%= form_for @order, url: update_checkout_path('complete'), method: :patch do |form| %>
+      <%=  form.button  "已完成付款" %>
       <input type="submit" class="btn fail" value="付款遇到问题">
+    <% end %>
   </p>
   <p class="retry" ><a href="javascript:void(0)" id="order-pay-dialog-back" class="back cancel" >返回选择其他支付方式</a></p>
 </div>

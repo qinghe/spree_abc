@@ -17,5 +17,6 @@
 .checkout-content.enabled-step .summary-wrapper{ display: block; }
 .checkout-content.enabled-step h2 a { display: inline-block; }
 .checkout-content.disabled-step .form-wrapper{ position: relative; display: none; }
+.checkout-content.disabled-step .summary-wrapper{ position: relative; display: none; }
 
 #checkout .wait-for-payment { display:none; }

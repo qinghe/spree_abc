@@ -4,7 +4,7 @@ previous_partials = {}
 <% checkout_step_index = @order.checkout_step_index(@order.state) %>
 <% if checkout_step_index >0  %>
     <% last_step = @order.checkout_steps[checkout_step_index-1] %>
-previous_partials.<%= last_step%> = "<%=j( render :partial => 'form_wrapper', :format => :html, :locals => { :state => last_step, :order => @order } ) %>"
+previous_partials.<%= last_step%> = "<%=j( render :partial => "#{last_step}_summary", :format => :html, :locals => { :state => last_step, :order => @order } ) %>"
 <% end %>  
 partial = "<%=j render :partial => 'form_wrapper', :format => :html, :locals => { :state => @order.state, :order => @order } %>"
 $step = ($ '#checkout_<%= @order.state %>')
