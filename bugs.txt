@@ -47,4 +47,9 @@ Toggle env dump
 Response
 Headers:
 None
-
+NameError (uninitialized constant ActiveMerchant::Billing::Integrations::Alipay::Sign::KEY):
+  vendor/bundle/ruby/1.9.1/bundler/gems/activemerchant_patch_for_china-ead71ea3bb7f/lib/active_merchant/billing/integrations/alipay/sign.rb:20:in `verify_sign'
+  vendor/bundle/ruby/1.9.1/bundler/gems/activemerchant_patch_for_china-ead71ea3bb7f/lib/active_merchant/billing/integrations/alipay/notification.rb:24:in `acknowledge'
+  vendor/bundle/ruby/1.9.1/bundler/gems/spree_alipay-67b206bc3041/app/controllers/spree/alipay_status_controller.rb:35:in `alipay_notify'
+  vendor/bundle/ruby/1.9.1/gems/actionpack-4.1.8/lib/action_controller/metal/implicit_render.rb:4:in `send_action'
+ 
