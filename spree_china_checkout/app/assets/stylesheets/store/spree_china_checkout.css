@@ -1,4 +1,22 @@
 
-.disabled-step .form-wrapper{ position: relative; display: none; }
+.checkout-content{
+	border: 1px solid #e5e5e5;
+	margin: 0 0 10px 0;
+}
+.checkout-content h2{
+	background-color: #f7f7f7; 
+	margin: 0;
+	padding: 2px 10px;
+		}
+.checkout-content	.form-wrapper{
+	padding:10px;
+	}
+
+.checkout-content h2 a { display: none; }
+.checkout-content .summary-wrapper { padding:10px; display: none; }
+.checkout-content.enabled-step .summary-wrapper{ display: block; }
+.checkout-content.enabled-step h2 a { display: inline-block; }
+.checkout-content.disabled-step .form-wrapper{ position: relative; display: none; }
+.checkout-content.disabled-step .summary-wrapper{ position: relative; display: none; }
 
 #checkout .wait-for-payment { display:none; }

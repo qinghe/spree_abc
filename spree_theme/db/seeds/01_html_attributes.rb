@@ -22,7 +22,7 @@ objs=[
   {"id"=>21, "title"=>"width", "pvalues"=>"auto,l1", "pvalues_desc"=>"Auto,L1", "punits"=>"l,%", "neg_ok"=>false, "default_value"=>0, "pvspecial"=>"", "css_name"=>"width"},
   {"id"=>22, "title"=>"font", "pvalues"=>"caption,icon,menu,message-box,small-caption,status-bar", "pvalues_desc"=>"Caption,Icon,Menu,Message-box,Small-caption,Status-bar", "punits"=>"", "neg_ok"=>false, "default_value"=>0, "pvspecial"=>"inherit", "css_name"=>"font"},
   {"id"=>23, "title"=>"font-family", "pvalues"=>"serif,sans-serif", "pvalues_desc"=>"Serif,Sans-serif", "punits"=>"", "neg_ok"=>false, "default_value"=>0, "pvspecial"=>"inherit", "css_name"=>"font-family"},
-  {"id"=>24, "title"=>"font-size", "pvalues"=>"l1", "pvalues_desc"=>"L1", "punits"=>"%,em", "neg_ok"=>false, "default_value"=>0, "pvspecial"=>"inherit", "css_name"=>"font-size"},
+  {"id"=>24, "title"=>"font-size", "pvalues"=>"l1", "pvalues_desc"=>"L1", "punits"=>"%,em,px", "neg_ok"=>false, "default_value"=>0, "pvspecial"=>"inherit", "css_name"=>"font-size"},
   {"id"=>25, "title"=>"font-style", "pvalues"=>"normal,italic,oblique", "pvalues_desc"=>"Normal,Italic,Oblique", "punits"=>"", "neg_ok"=>false, "default_value"=>0, "pvspecial"=>"inherit", "css_name"=>"font-style"},
   {"id"=>26, "title"=>"font-variant", "pvalues"=>"normal,small-caps", "pvalues_desc"=>"Normal,Small-caps", "punits"=>"", "neg_ok"=>false, "default_value"=>0, "pvspecial"=>"inherit", "css_name"=>"font-variant"},
   {"id"=>27, "title"=>"font-weight", "pvalues"=>"normal,bold,bolder,lighter,100,200,300,400,500,600,700,800,900", "pvalues_desc"=>"Normal,Bold,Bolder,Lighter,100,200,300,400,500,600,700,800,900", "punits"=>"", "neg_ok"=>false, "default_value"=>0, "pvspecial"=>"inherit", "css_name"=>"font-weight"},

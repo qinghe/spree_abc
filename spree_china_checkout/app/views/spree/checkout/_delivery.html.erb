@@ -11,23 +11,26 @@
           <table class="stock-contents" data-hook="stock-contents">
             <colgroup>
               <col style="width: 10%;" />
-              <col style="width: 60%;" />
+              <col style="width: 64%;" />
+              <col style="width: 8%;" />
+              <col style="width: 8%;" />
               <col style="width: 10%;" />
-              <col style="width: 20%;" />
             </colgroup>
             <thead>
               <th></th>
               <th align='left'><%= Spree.t(:item) %></th>
-              <th><%= Spree.t(:qty) %></th>
               <th><%= Spree.t(:price) %></th>
+              <th><%= Spree.t(:qty) %></th>
+              <th><%= Spree.t(:total) %></th>
             </thead>
             <tbody>
               <% ship_form.object.manifest.each do |item| %>
                 <tr class="stock-item">
                   <td class="item-image"><%= mini_image(item.variant) %></td>
                   <td class="item-name"><%= item.variant.name %></td>
-                  <td class="item-qty"><%= item.quantity %></td>
                   <td class="item-price"><%= display_price(item.variant) %></td>
+                  <td class="item-qty"><%= item.quantity %></td>
+                  <td class="total"><span><%= item.line_item.display_amount.to_html %></span></td>
                 </tr>
               <% end %>
             </tbody>
@@ -91,6 +94,5 @@
   </div>
 
 <div class="form-buttons" data-hook="buttons">
-  <%= submit_tag Spree.t(:save_and_continue), :class => 'continue button primary' %>
-  <%= button_tag Spree.t('checkout_steps.previous'), :class => 'button previous',:type=>'button' %>
+  <%= form.button Spree.t(:save_and_continue), :class => 'continue button primary' %>
 </div>
