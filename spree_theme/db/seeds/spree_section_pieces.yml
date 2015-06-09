@@ -1375,7 +1375,7 @@ container_fixed:
     ~~content~~    
     <input type="hidden" class="fixed_container" value=".<%=@template.section_selector%>">
   css: |
-    .<%=@template.section_selector%> { position: fixed;  <%=@template.css(:fixed_position) %>}
+    .<%=@template.section_selector%> {z-index:1; position:fixed;  <%=@template.css(:fixed_position) %>}
   js: ''
 hover_effect_slide_container:
   id: 70
