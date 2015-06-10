@@ -7,12 +7,12 @@ GIT
 
 GIT
   remote: git://github.com/RuanShan/spree_alipay.git
-  revision: 67b206bc30418f3581bee40e12cb34a5c13309a5
-  branch: master
+  revision: 21519e9388f8fc877d01e98ab2b0abaa59933a4c
+  branch: 2-4-stable
   specs:
     spree_alipay (2.4.0)
       alipay (~> 0.3.0)
-      spree_core (~> 2.4.0)
+      spree_core (~> 2.4.2)
 
 GIT
   remote: git://github.com/spree/spree_auth_devise.git
