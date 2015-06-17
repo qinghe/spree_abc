@@ -499,6 +499,9 @@ module PageTag
       options.reverse_merge! alt: image.alt.blank? ? product.name : image.alt
       # data-big-image for jqzoom, large=600x600
       options.merge!  'data' => { 'big-image'=> image.attachment.url(:large) }
+      if current_piece.lightboxable?
+        options.merge! title: Spree.t( "template.proudct_image.lightboxable" ) 
+      end
       image_tag( image.attachment.url(style), options )
     end
     # copy from BaseHelper#define_image_method

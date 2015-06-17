@@ -434,6 +434,9 @@ product_main_image:
   css: |
     /* do not apply css padding,margin on image, image-zoom required. use wrapper instead */
     .<%=@template.section_selector%> img{
+      <% if @template.current_piece.lightboxable? %>
+      cursor: pointer;
+      <% end %>
       <%= @template.css :img %> 
     }
   js: ""
