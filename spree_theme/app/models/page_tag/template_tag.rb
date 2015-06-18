@@ -499,9 +499,6 @@ module PageTag
       options.reverse_merge! alt: image.alt.blank? ? product.name : image.alt
       # data-big-image for jqzoom, large=600x600
       options.merge!  'data' => { 'big-image'=> image.attachment.url(:large) }
-      if current_piece.lightboxable?
-        options.merge! title: Spree.t( "template.proudct_image.lightboxable" ) 
-      end
       image_tag( image.attachment.url(style), options )
     end
     # copy from BaseHelper#define_image_method
@@ -529,12 +526,17 @@ module PageTag
       Spree::MultiSiteSystem.with_context_site_product_images{
         main_image_style = current_piece.get_content_param_by_key(:main_image_style)
         main_image_position = current_piece.get_content_param_by_key(:main_image_position)
+        options.merge! itemprop: "image"
+        # only main image have title 'click to get lightbox' 
+        if current_piece.lightboxable?
+          options.merge!  title: I18n.t( "theme.product_image.lightboxable")  
+        end
         if main_image_position>0
           if product.images[main_image_position].present?
-            create_product_image_tag(product.images[main_image_position], product, {:itemprop => "image"}, main_image_style)
+            create_product_image_tag(product.images[main_image_position], product, options, main_image_style)
           end
         else
-          product_image_by_spree( product, main_image_style, {:itemprop => "image"})
+          product_image_by_spree( product, main_image_style, options)
         end
       }      
     end    
