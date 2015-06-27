@@ -18,8 +18,7 @@ set font-size:0, unset it does not work.
 set input font-color:red, unset it does not work.
 category 'brand' do not work.
 
-https://github.com/spree/spree_fancy
-
+user logged in, click copy template until timeout, user is redirected to login form, after login again, redirect to get:template_theme/copy, this would cause error, there is only post:template_theme/copy
 
 # new features
 disable taxon/post link

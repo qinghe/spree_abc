@@ -11,7 +11,7 @@ namespace :spree_theme do
     load File.join(SpreeTheme::Engine.root,'db/seeds/00_section_pieces.rb')
     Spree::TemplateTheme.all.each{|theme|
       Rake::Task['spree_theme:release_theme'].invoke(theme.id)  
-    }    
+    }
   end
   
   desc "export theme. params: :site_id,:theme_id,:format, :seed_path

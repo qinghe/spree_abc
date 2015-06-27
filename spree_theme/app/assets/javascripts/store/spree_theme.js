@@ -58,6 +58,7 @@ $(document).ready(function() {
 
     // event is erase when layout tree updated. 
     $("#layout_tree_form .click_editable").editable(function(value, settings) { 
+    	  var jquery_element = $(this);
         var url = Spree.routes.admin_page_layouts( jquery_element.data('tid') )+'/'+jquery_element.data('lid');
         var submitdata = {};
         submitdata[settings.name] = value;
