@@ -227,8 +227,8 @@ container:
     }    
     <% end %>
     <% if @template.current_piece.column_count >0 %>    
-    /* css for last column in row, feature center content */
-    .<%=@template.current_piece.child_selector%>.data_last>div{ margin-right:0; padding-right:0; border-right:0; } 
+    /* css for last column in row, feature center content, for mobile column, no inner div */
+    .<%=@template.current_piece.child_selector%>.data_last, .<%=@template.current_piece.child_selector%>.data_last>div{ margin-right:0; padding-right:0; border-right:0; } 
     <% end %>    
   title: container
   slug: container
