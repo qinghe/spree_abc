@@ -603,7 +603,7 @@ cart_items:
   is_selectable: "1"
   is_container: "0"
   html: |
-    <%= render :partial => 'form', :locals => { :order_form => order_form } %>
+    <%= render :partial => 'spree/orders/form', :locals => { :order_form => order_form } %>
   created_at: 2011-09-20 19:40:07
   updated_at: 2011-09-20 19:40:07
   css: ""
