@@ -99,7 +99,11 @@ module Spree
     def site
       SpreeTheme.site_class.find( self.site_id )
     end
-
+    # get section css selector, then replace html with new rendered content
+    # it is same as TemplateTag/WrappedPageLayout, consider merge them.
+    def section_selector
+      "s_#{self.id}_#{self.section_id}"
+    end
 
     begin ' page_layout content'
       # a page_layout tree could be whole html or partial html, it depend's on self.section.section_piece.is_root?,
@@ -351,7 +355,7 @@ module Spree
       # Usage: build html, js, css for a layout
       # Params: theme_id,
       #         if passed, build css for that theme, or build css for default theme
-      def build_html(tree, section_hash)
+      def build_html(tree = [], section_hash = {})
         build_section_html(tree, self, section_hash)
       end
 
@@ -558,6 +562,7 @@ module Spree
       end
     end
 
+    private
     # a page_layout build itself.
     def build_section_html(tree, node, section_hash)
       return '' unless node.is_enabled?
@@ -677,7 +682,6 @@ module Spree
       piece
     end
 
-    private
     # section_context could be more than one.
     def inherited_contexts
       #ancestors order by lft
