@@ -38,7 +38,7 @@
 .param_value_editor
 {
   height:200px;
-  overflow: auto;  
+  overflow: auto;
 }
 .editor-header
 {
@@ -72,23 +72,23 @@ ul.tabs{list-style:none; margin:0;padding:0;}
 
 #editors div.pv{
     padding:2px;
-    
+
 }
 #editors span.pv-name
 {
   display:inline-block;
-  width:150px;    
+  width:150px;
 }
 
 #editors input.pv-psv, select.pv-psv
 {
   display:inline-block;
-  width:120px;    
+  width:120px;
 }
 #editors input.pv-pv
 {
   display:inline-block;
-  width:120px;    
+  width:120px;
 }
 #editors [type="checkbox"]{
   vertical-align: bottom;
@@ -142,3 +142,4 @@ ul.tabs{list-style:none; margin:0;padding:0;}
 }
 
 .simplemodal-overlay{ background-color:black; }
+form.editable input { color: black; }
