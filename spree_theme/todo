@@ -8,9 +8,15 @@ after theme release, if we modify page_layout tree, this would cause theme gener
 
 4.  add section cart and try add to cart.
  
+5. 编辑器z-index 小于highlight cover, 导致无法选择section
 
-           
-
+6. container 缺省 width:100%, 手机模板需要           
+7. product  缺省 width:100%, text-align:center;
+8. product images in slide
+9. minicart for mobile
+10. 滑动窗口
+11. rename login_form to sign_in_form
+12. section font awesome1 support link
 
 #bugs
 get_css 12,13,'block', it is not right in generated css. 

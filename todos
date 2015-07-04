@@ -125,7 +125,6 @@ developer todo
 5. search, advance search
 6. fix add order from backend. error caused by spree_flexi_variants. 
    it overrides method OrderContent.add which is called by /api/orders/R413483534/line_items  
-7. 
    
 sales todo
 ===============================================================================================
