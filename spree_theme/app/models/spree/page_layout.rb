@@ -165,7 +165,7 @@ module Spree
           #   000x , 001x,  010x,    011x,    100x
           [:datetime, :date, :time ].fetch( idx, :datetime )
 
-        when :main_image_style                            # section product_image_with_thumbnail
+        when :main_image_style                            # section slider, product_image_with_thumbnail
           # bit 2,3,4
           idx = (get_content_param&14)>>1
           # default is medium
@@ -182,7 +182,8 @@ module Spree
           # bit 9,   10,  product-image
           #   256 + 512 = 768
           (get_content_param&768)>>8
-        when :form_enabled  # wrap section with form, ex. product quantity, product options, add_to_cart
+        when :form_enabled
+          # wrap section with form, ex. product quantity, product options, add_to_cart
           # by default there is no form any more, add_to_cart button require form,
           # bit 10
           get_content_param&512 > 0

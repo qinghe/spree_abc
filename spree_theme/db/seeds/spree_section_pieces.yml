@@ -226,17 +226,10 @@ container:
       <%=@template.css(:pagination_current)%>
     }
     <% end %>
-<<<<<<< HEAD
-    <% if @template.current_piece.column_count >0 %>    
-    /* css for last column in row, feature center content, for mobile column, no inner div */
-    .<%=@template.current_piece.child_selector%>.data_last, .<%=@template.current_piece.child_selector%>.data_last>div{ margin-right:0; padding-right:0; border-right:0; } 
-    <% end %>    
-=======
     <% if @template.current_piece.column_count >0 %>
-    /* css for last column in row, feature center content */
-    .<%=@template.current_piece.child_selector%>.data_last>div{ margin-right:0; padding-right:0; border-right:0; }
+    /* css for last column in row, feature center content, for mobile column, no inner div */
+    .<%=@template.current_piece.child_selector%>.data_last, .<%=@template.current_piece.child_selector%>.data_last>div{ margin-right:0; padding-right:0; border-right:0; }
     <% end %>
->>>>>>> origin/mobile
   title: container
   slug: container
 
@@ -1076,9 +1069,9 @@ slider:
       </div>
       <%# jssor require with,height in element style. %>
       <div u="slides" style="position: absolute;overflow:hidden;" >
-      <% @template.menu.children.each{|page| %>
-        <div><%= image_tag page.icon.url(:original), :u=>'image', :alt=>page.name %></div>
-      <% } %>
+        <% @template.menu.children.each{|page| %>
+          <div><%= image_tag page.icon.url(:original), :u=>'image', :alt=>page.name %></div>
+        <% } %>
       </div>
         <!-- Bullet Navigator Skin Begin -->
         <div u="navigator" class= "jssorb03" style="position: absolute;">
@@ -1603,5 +1596,77 @@ previous_post_title:
   is_container: "0"
   html: |
     <%= render "themes/posts/previous_post_title" %>
+  css: ''
+  js: ''
+slider_core:
+  id: 87
+  title: slider core
+  slug: slider-core
+  is_selectable: "1"
+  is_container: "1"
+  html: |-
+    <div class="effect_slider" >
+      <!-- Loading Screen -->
+      <div u="loading" style="position: absolute; top: 0px; left: 0px;width: 100%;height:100%;">
+        <div style="filter: alpha(opacity=70); opacity:0.7; position: absolute; display: block; background-color: #000000; top: 0px; left: 0px;width: 100%;height:100%;"></div>
+        <div style="position: absolute; display: block; background: url(/shops/shared/images/jssor/loading.gif) no-repeat center center; top: 0px; left: 0px;width: 100%;height:100%;"> </div>
+      </div>
+        ~~content~~
+        <!-- Bullet Navigator Skin Begin -->
+        <div u="navigator" class= "jssorb03" style="position: absolute;">
+            <!-- bullet navigator item prototype -->
+            <div u="prototype" style="position: absolute; width: 19px; height: 19px;"></div>
+        </div>
+    </div>
+  css: |-
+    .<%=@template.section_selector%> > .inner { min-height:1px;min-width:1px; /* hight, width are required*/}
+    .effect_slider { position:relative; }
+    .effect_slider [u='slides']{
+      cursor: move; left: 0px; top: 0px;
+    }
+    .effect_slider [u='navigator']{
+      position: absolute;
+      bottom:0;
+    }
+    .jssorb03 div, .jssorb03 div:hover, .jssorb03 .av
+    {
+        background: url('/shops/shared/images/jssor/n21.png') no-repeat;
+        overflow:hidden;
+        cursor: pointer;
+    }
+    .jssorb03 div { background-position: -5px -5px; }
+    .jssorb03 div:hover, .jssorb03 .av:hover { background-position: -35px -5px; }
+    .jssorb03 .av { background-position: -65px -5px; }
+    .jssorb03 .dn, .jssorb03 .dn:hover { background-position: -95px -5px; }
+
+slider_data_taxons:
+  id: 88
+  title: slider data taxons
+  slug: slider-data-taxons
+  is_selectable: "0"
+  is_container: "0"
+  html: |-
+      <%# jssor require with,height in element style. %>
+      <div u="slides" style="position: absolute;overflow:hidden;" >
+      <% if @template.menu.present? %>
+        <% @template.menu.children.each{|page| %>
+          <div><%= image_tag page.icon.url(:original), :u=>'image', :alt=>page.name %></div>
+        <% } %>
+      <% end %>
+      </div>
+  css: ''
+  js: ''
+slider_data_product_images:
+  id: 89
+  title: slider data product images
+  slug: slider-data-product-images
+  is_selectable: "0"
+  is_container: "0"
+  html: |-
+      <div u="slides" style="position: absolute;overflow:hidden;" data-auto_play="0">
+         <% (@template.running_data_item.try(:whole_images)).each{|image| %>
+          <div><%= @template.product_attribute( :image, image: image ) %></div>
+         <% } %>
+      </div>
   css: ''
   js: ''
