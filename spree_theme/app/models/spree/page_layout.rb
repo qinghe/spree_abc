@@ -101,9 +101,9 @@ module Spree
     end
     # get section css selector, then replace html with new rendered content
     # it is same as TemplateTag/WrappedPageLayout, consider merge them.
-    def section_selector
-      "s_#{self.id}_#{self.section_id}"
-    end
+    #def section_selector
+    #  "s_#{self.id}_#{self.section_id}"
+    #end
 
     begin ' page_layout content'
       # a page_layout tree could be whole html or partial html, it depend's on self.section.section_piece.is_root?,

@@ -1,4 +1,4 @@
 <% minicart = @theme.find_section_by_usage Spree::Section::UsageEnum.minicart %>
 <% if minicart.present? %>
-  $('.<%=minicart.section_selector %>').html("<%= j( render inline: minicart.build_html ) %>");
+  $('<%=minicart.css_selector %>').html("<%= j( render inline: minicart.build_html ) %>");
 <% end %>
