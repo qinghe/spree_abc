@@ -1,0 +1,4 @@
+﻿bugs
+20150603a: unset font-size,  ajax return font-size:0px.
+20150603b: add section for flash[:error],flash[:notice]...   ex. after login, show login successfully.
+
