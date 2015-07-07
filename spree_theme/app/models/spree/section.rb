@@ -10,11 +10,13 @@ module Spree
 
     friendly_id :title, :use => :slugged
     #attr_accessible :section_piece_id, :title, :global_events, :subscribed_global_events,:is_enabled
-    # it is using content_param bit 5,6,7,8,
-    #                    bit   5,     6,     7,    8     5&6,       5&7  , 5&8,        6&8
+
+    # it is using content_param bit 5,6,7,8,9
+    #                    bit   5,     6,     7,    8     5&6,       5&7  , 5&8,        6&8,          7&8,          9
     MouseEffectMask= 16+32+64+128
     # this effect apply to container only
-    MouseEffect = Struct.new(:slide, :show, :expansion, :overlay, :popup, :popup_menu, :popup_menu_l)[16,32,64,48,80,144,160]
+    MouseEffect = Struct.new(:slide, :show, :expansion, :overlay, :popup, :popup_menu, :popup_menu_l, :sider)[16,32,64,48,80,144,160,192]
+    # sider: click a button, a container slide out, mainly for mobile, # http://www.berriart.com/sidr
     UsageEnum = Struct.new(:root, :container, :logo, :minicart, :dialog, :image, :image_with_thumbnails)['root','container','logo','minicart','dialog','image','image_with_thumbnails']
 
     scope :enabled, ->{ where( is_enabled: true ) }

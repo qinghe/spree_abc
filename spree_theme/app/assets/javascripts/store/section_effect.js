@@ -1,5 +1,6 @@
 //= require image-zoom
 //= require jquery.menuhover
+//= require jquery.sidr
 
 $(document).ready(function() {
   //return to top
@@ -338,8 +339,13 @@ $(document).ready(function() {
           submenuDirection: direction,
           $hover: child2
       });
-
   });
+  $(".click_effect_sider").each(function(i, element){
+    var class_names = $(".child_2", element).attr('class').replace(/(^\s+)|(\s+$)/g,"").replace(/\s+/,'.');
 
+    $(".child_1", element).sidr({
+      source: "."+class_names 
+    });
+  });
 
 });

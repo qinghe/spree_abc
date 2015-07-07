@@ -112,11 +112,15 @@ module Spree
       # use as css class, later js select elements by those class
       def effects
         if @effect_classes.nil?
+          clickable = get_content_param_by_key( :clickable )
+          param_value = get_content_param()
           @effect_classes =[]
           Section::MouseEffect.each_pair{|effect,val|
             #   00001000
             # & 00001111  => val
-            @effect_classes << "hover_effect_#{effect}" if( (get_content_param & Section::MouseEffectMask) == val)
+            if( (param_value & Section::MouseEffectMask) == val)
+              @effect_classes << ( clickable ? "click_effect_#{effect}" : "hover_effect_#{effect}" )
+            end
           }
         end
         @effect_classes
@@ -145,7 +149,7 @@ module Spree
         default_truncate_at = 100;
         # content_param int(11) 4bytes 4*8=32bits
         case key
-        when :clickable                                   # apply to taxon/product/post attributes
+        when :clickable                                   # apply to container/taxon/product/post attributes
           # generate <a>
           # bit 1, product:name,image, taxon:name,icon
           get_content_param&1 >0
@@ -153,13 +157,13 @@ module Spree
           # apply hover css
           # bit 12
           get_content_param&2048 >0
-        when :lightboxable                                # all image?
+        when :lightboxable                                # product image
           # bit 13
           get_content_param&4096 >0
         when :model_count_in_row #bit 1,2,3,4             # apply to container
           #how many model this container
           get_content_param&15
-        when :datetime_style
+        when :datetime_style                              # post time
           # bit 2,3,4
           idx = (get_content_param&14)>>1
           #   000x , 001x,  010x,    011x,    100x
@@ -182,7 +186,7 @@ module Spree
           # bit 9,   10,  product-image
           #   256 + 512 = 768
           (get_content_param&768)>>8
-        when :form_enabled
+        when :form_enabled                                # container
           # wrap section with form, ex. product quantity, product options, add_to_cart
           # by default there is no form any more, add_to_cart button require form,
           # bit 10

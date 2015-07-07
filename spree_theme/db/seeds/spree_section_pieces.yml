@@ -1670,3 +1670,25 @@ slider_data_product_images:
       </div>
   css: ''
   js: ''
+click_effect_sider:
+  id: 90
+  title: click effect sider
+  slug: click-effect-sider
+  is_selectable: "0"
+  is_container: "1"
+  html: |
+    ~~content~~
+  css: |
+      /* slide_effect:   */
+      .<%= @template.section_selector %> .child_1{   }
+      .<%= @template.section_selector %> .child_2{  z-index:1;
+        /* Default Settings */
+        display: none;
+        position: absolute;
+        position: fixed;
+        top: 0;
+        height: 100%;
+        width: 260px;
+        overflow-x: none;
+        overflow-y: auto; }
+  js: ''
