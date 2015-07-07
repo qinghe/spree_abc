@@ -1663,7 +1663,7 @@ slider_data_product_images:
   is_selectable: "0"
   is_container: "0"
   html: |-
-      <div u="slides" style="position: absolute;overflow:hidden;" data-auto_play="0">
+      <div u="slides" style="position: absolute;overflow:hidden;" data-auto_play="false">
          <% (@template.running_data_item.try(:whole_images)).each{|image| %>
           <div><%= @template.product_attribute( :image, image: image ) %></div>
          <% } %>

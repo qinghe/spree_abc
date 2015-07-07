@@ -4,7 +4,7 @@
 $(document).ready(function() {
   //return to top
   $('.return_top').click(function(){
-    //var $element =$(this); 
+    //var $element =$(this);
     //$("#return_top").hide();
     //$(window).scroll(function(){
     //  if ($(window).scrollTop()>100){
@@ -15,19 +15,19 @@ $(document).ready(function() {
     //      }
     //});
     $("body,html").animate({scrollTop:0},1000);
-    return false;    
+    return false;
   });
-  
+
   // change bg,border when hovering
   $('.hoverable').hover(function(){
       $('.inner',this).addClass( 'hover' );
   }, function(){
-      $('.inner',this).removeClass( 'hover' );      
+      $('.inner',this).removeClass( 'hover' );
   });
-  
+
   // like taobao, show big image when hovering product image.
   $('.zoomable').each(function(i, element){
-    var $element =$(element); 
+    var $element =$(element);
     var $main_image_wrapper = $element.find('.main_image_wrapper');
     $element.find('.thumbnails a').click(function(){
       var $this = $(this);
@@ -50,11 +50,11 @@ $(document).ready(function() {
             }
         });
   });
-  
-  
+
+
   $('.lightboxable').each( function(i, element){
-    
-    var $element =$(element);       
+
+    var $element =$(element);
     var $main_image = $element.find('.main_image_wrapper img');
     var jsonData =[];
     var thumbnails = $element.find('.thumbnails img');
@@ -63,9 +63,9 @@ $(document).ready(function() {
             jsonData.push({ url:$(img).data('big-image'), title: img.alt });
         });
     }else{
-        jsonData.push({ url:$main_image.data('big-image'), title: $main_image.attr('alt') });  
+        jsonData.push({ url:$main_image.data('big-image'), title: $main_image.attr('alt') });
     }
-    
+
     $main_image.lightbox({
         fitToScreen: true,
         jsonData: jsonData,
@@ -73,9 +73,9 @@ $(document).ready(function() {
         imageClickClose: false,
         disableNavbarLinks: true
     });
-    
+
   });
-  
+
   // scroll to target
   $('.effect_scroll').click(function() {
     var $body = (window.opera) ? (document.compatMode == "CSS1Compat" ? $('html') : $('body')) : $('html,body');
@@ -88,7 +88,7 @@ $(document).ready(function() {
       return false;
     }
   });
-  
+
   function ScaleSlider(jssor_slider) {
       var parentWidth = $(jssor_slider.$Elmt.parentNode).width();
       if(parentWidth)
@@ -97,7 +97,7 @@ $(document).ready(function() {
         window.setTimeout(ScaleSlider, 30);
   }
 
-  
+
   $(".effect_slider").each(function(index, element) {
     var $self = $(element);
     var $parent = $self.parent();
@@ -111,12 +111,13 @@ $(document).ready(function() {
         width : $parent.css('width')
       });
     var options = null;
+    var auto_play = ( $slide_container.data('auto_play') == null ?  true : $slide_container.data('auto_play') );
     if( $self.hasClass("scrolling")){
         var slide_width = $self.find("[u='slides']>div").width();
         var display_piece = Math.ceil( $parent.width() / slide_width );
         // get width of a slide
         options = {
-                $AutoPlay: true,                                    //[Optional] Whether to auto play, to enable slideshow, this option must be set to true, default value is false
+                $AutoPlay: auto_play,                                    //[Optional] Whether to auto play, to enable slideshow, this option must be set to true, default value is false
                 $AutoPlaySteps: 1,                                  //[Optional] Steps to go for each navigation request (this options applys only when slideshow disabled), the default value is 1
                 $AutoPlayInterval: 0,                               //[Optional] Interval (in milliseconds) to go for next slide since the previous stopped if the slider is auto playing, default value is 3000
                 $PauseOnHover: 4,                                   //[Optional] Whether to pause when mouse over if a slider is auto playing, 0 no pause, 1 pause for desktop, 2 pause for touch device, 3 pause for desktop and touch device, 4 freeze for desktop, 8 freeze for touch device, 12 freeze for desktop and touch device, default value is 1
@@ -134,19 +135,19 @@ $(document).ready(function() {
                 $PlayOrientation: 1,                                //[Optional] Orientation to play slide (for auto play, navigation), 1 horizental, 2 vertical, 5 horizental reverse, 6 vertical reverse, default value is 1
                 $DragOrientation: 1                                 //[Optional] Orientation to drag slide, 0 no drag, 1 horizental, 2 vertical, 3 either, default value is 1 (Note that the $DragOrientation should be the same as $PlayOrientation when $DisplayPieces is greater than 1, or parking position is not 0)
             };
-        
+
     } else{
         options = {
+                $AutoPlay : auto_play,
                 $FillMode : 2,
-                $AutoPlay : true,
                 $BulletNavigatorOptions : {
                   $Class : $JssorBulletNavigator$,
                   $ChanceToShow : 2,
                   $AutoCenter : 1
                 }
               };
-    } 
-    if( $slide_container.children().length>0){        
+    }
+    if( $slide_container.children().length>0){
         var jssor_slider1 = new $JssorSlider$($self.get(0), options);
         //responsive code begin
         //you can remove responsive code if you don't want the slider scales while window resizes
@@ -246,9 +247,9 @@ $(document).ready(function() {
       duration : 400
     });
   });
-  
-  //  usage: compute child_2 display position of window for effect popup 
-  //    html <div id='container'> 
+
+  //  usage: compute child_2 display position of window for effect popup
+  //    html <div id='container'>
   //           <div class='child_1'></div> <div class='child_2'></div>
   //         </div>
   //  params: direction- there are five option values  t,r,b,l,rl,
@@ -273,7 +274,7 @@ $(document).ready(function() {
           } else {// pop up on left side of $self
             position[0] = offset.top - (child2.height() - child1.height() ) / 2 - scroll_top;
             position[1] = offset.left - child2.width();
-          }            
+          }
       }else if ( direction == 'b' ){
           position[0] = offset.top  +   child1.height() - scroll_top;;
           position[1] = offset.left - (child2.width() - child1.width() ) / 2 - scroll_left;
@@ -289,8 +290,8 @@ $(document).ready(function() {
       }
       return position;
   }
-  
-  $(".hover_effect_popup").hover(function(e) {      
+
+  $(".hover_effect_popup").hover(function(e) {
       var position = compute_popup_position( $(this), 'rl' );
       //console.log( "pos y=%d, x=%d", position[0], position[1] );
       $(".child_2", this).simplemodal({
@@ -327,18 +328,18 @@ $(document).ready(function() {
       }
       function deactivate_element(  ){
           $.simplemodal.close();
-      }      
+      }
       var child1 = $(".child_1", this);
       var child2 = $(".child_2", this);
-      
+
       $(element).menuhover({
           activate: activate_element,
           deactivate: deactivate_element,
           submenuDirection: direction,
           $hover: child2
       });
-      
+
   });
 
-  
+
 });
