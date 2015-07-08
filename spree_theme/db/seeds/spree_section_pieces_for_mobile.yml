@@ -1,4 +1,4 @@
-# mobile section pieces 
+# mobile section pieces
 root_for_mobile:
   id: 200
   title: root for mobile
@@ -17,20 +17,20 @@ root_for_mobile:
       <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
       <%== meta_data_tags %>
       <%= favicon_link_tag 'favicon.ico' %>
-      <%# it is in main app/assets/ include spree_theme, spree_china_checkout, store/product, store/cart, store/checkout ... %>      
-      <%= javascript_include_tag 'spree/frontend/all.mobile', "data-turbolinks-track" => true %>      
+      <%# it is in main app/assets/ include spree_theme, spree_china_checkout, store/product, store/cart, store/checkout ... %>
+      <%= javascript_include_tag 'spree/frontend/all.mobile', "data-turbolinks-track" => true %>
       <%= stylesheet_link_tag 'store/spree_theme.mobile', "data-turbolinks-track" => true %>
       <% if @current_page.is_preview %>
         <%= stylesheet_link_tag 'store/spree_theme'  %>
       <% else%>
         <link rel="stylesheet" href="<%=@website.public_path('css')%>" type="text/css" data-turbolinks-track />
-      <% end %>    
+      <% end %>
       <%= csrf_meta_tags %>
-      <%= render "spree/shared/sync_analytics" %>      
+      <%= render "spree/shared/sync_analytics" %>
       </head>
       <body class="clear-block <%= @current_page.agent_selector(request.user_agent) %>">
       <% if @current_page.site_design? && !@current_page.is_preview %>
-        <%= render "spree/shared/theme_selection_for_nondesigner" %>      
+        <%= render "spree/shared/theme_selection_for_nondesigner" %>
       <% end %>
       <%= flash_messages %>
       <div id="page" class='container <%=@template.section_selector%>'><div id="page-inner" class="row clear-block">
@@ -38,15 +38,15 @@ root_for_mobile:
       </div><!-- /#page-inner -->
       </div><!-- /#page -->
       <%= javascript_tag  do -%>
-        g_client_info = <%== @client_info.to_json %>  
+        g_client_info = <%== @client_info.to_json %>
       <% end -%>
       <% if @current_page.is_preview %>
          <%= render 'layout_editor_panel' %>
-      <% end %>      
-      <%= render "spree/shared/analytics" %>      
+      <% end %>
+      <%= render "spree/shared/analytics" %>
       </body>
     </html>
-  css: "" 
+  css: ""
   js: ""
 bootstrap_container:
   id: 201
@@ -62,7 +62,7 @@ bootstrap_container:
   css: |
     /* width,height, skinnables */
     .<%=@template.section_selector%>
-    { 
+    {
       <%=@template.css(:block)%>
     }
     /* background, margin, border, padding */
@@ -70,12 +70,12 @@ bootstrap_container:
     { overflow: hidden;/* keep border visible*/
       min-height:1px;min-width:1px;  /* it is required as placeholder */
       <%=@template.css(:inner)%>
-    } 
-    <% if @template.current_piece.column_count >0 %>    
+    }
+    <% if @template.current_piece.column_count >0 %>
     /* css for last column in row, feature center content */
-    .<%=@template.current_piece.child_selector%>.data_last { margin-right:0; padding-right:0; border-right:0; } 
-    <% end %>    
-    
+    .<%=@template.current_piece.child_selector%>.data_last { margin-right:0; padding-right:0; border-right:0; }
+    <% end %>
+
   js: ""
 bootstrap_column:
   id: 202
@@ -88,7 +88,7 @@ bootstrap_column:
     <div class="~~selector~~"> ~~content~~ </div>
   css: |
     .<%=@template.section_selector%>
-      { padding:0;  margin:0 auto;       
+      { padding:0;  margin:0 auto;
         <%=@template.css(:block)%>
       }
   js: ""
@@ -122,14 +122,14 @@ product_name_with_ellipsis:
   is_selectable: "0"
   is_container: "0"
   for_terminal: "1"
-  html: |    
+  html: |
     <%= @template.product_attribute( :name )  %>
   css: |
     .<%=@template.section_selector%>  a{
-      <%= @template.css :a %> 
+      <%= @template.css :a %>
     }
     .<%=@template.section_selector%>  a:hover{
-      <%= @template.css :a_h %> 
+      <%= @template.css :a_h %>
     }
     .<%=@template.section_selector%> > .inner {
       text-overflow:ellipsis;
@@ -137,4 +137,15 @@ product_name_with_ellipsis:
     .<%=@template.section_selector%>  span {
       white-space:nowrap;
     }
+  js: ""
+minicart_badge:
+  id: 206
+  title: minicart badge
+  slug: minicart-badge
+  is_selectable: "0"
+  is_container: "0"
+  for_terminal: "1"
+  html: |
+    <%=  link_to_cart_badge %>
+  css: ""
   js: ""

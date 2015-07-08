@@ -1,25 +1,23 @@
 #flaws
-after theme release, if we modify page_layout tree, this would cause theme generating error. 
+after theme release, if we modify page_layout tree, this would cause theme generating error.
 
 
 #todos
-2.3 _update_param_value.js.erb, update <a> hover,selected param_value, client should be updated by ajax. 
+2.3 _update_param_value.js.erb, update <a> hover,selected param_value, client should be updated by ajax.
 3.  ajax update section, no need refresh when add section into template.
 
 4.  add section cart and try add to cart.
- 
-5. ±à¼­Æ÷z-index Ð¡ÓÚhighlight cover, µ¼ÖÂÎÞ·¨Ñ¡Ôñsection
 
-6. container È±Ê¡ width:100%, ÊÖ»úÄ£°åÐèÒª           
+5. ï¿½à¼­ï¿½ï¿½z-index Ð¡ï¿½ï¿½highlight cover, ï¿½ï¿½ï¿½ï¿½ï¿½Þ·ï¿½Ñ¡ï¿½ï¿½section
+
+6. container È±Ê¡ width:100%, ï¿½Ö»ï¿½Ä£ï¿½ï¿½ï¿½ï¿½Òª
 7. product  È±Ê¡ width:100%, text-align:center;
 8. product images in slide
 9. minicart for mobile
-10. »¬¶¯´°¿Ú
-11. rename login_form to sign_in_form
-12. section font awesome1 support link
+10. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 #bugs
-get_css 12,13,'block', it is not right in generated css. 
+get_css 12,13,'block', it is not right in generated css.
 set font-size:0, unset it does not work.
 set input font-color:red, unset it does not work.
 category 'brand' do not work.

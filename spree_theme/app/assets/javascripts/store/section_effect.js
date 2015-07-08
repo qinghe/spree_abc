@@ -341,11 +341,14 @@ $(document).ready(function() {
       });
   });
   $(".click_effect_sider").each(function(i, element){
-    var class_names = $(".child_2", element).attr('class').replace(/(^\s+)|(\s+$)/g,"").replace(/\s+/,'.');
-
-    $(".child_1", element).sidr({
-      source: "."+class_names 
-    });
+    var child2 = $(".child_2", element);
+    //var class_names = $(".child_2", element).attr('class').replace(/(^\s+)|(\s+$)/g,"").replace(/\s+/g,'.');
+      $(".child_1", element).sidr({
+        renaming: false,
+        source: function(){
+          return ( child2.is("*") ? child2[0].outerHTML : "no content");
+          }
+      });
   });
 
 });

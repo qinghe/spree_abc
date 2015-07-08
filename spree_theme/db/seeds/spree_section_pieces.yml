@@ -1681,14 +1681,21 @@ click_effect_sider:
   css: |
       /* slide_effect:   */
       .<%= @template.section_selector %> .child_1{   }
-      .<%= @template.section_selector %> .child_2{  z-index:1;
+      .<%= @template.section_selector %> .child_2{ display: none; }
+      .sidr {
         /* Default Settings */
         display: none;
         position: absolute;
         position: fixed;
         top: 0;
         height: 100%;
+        z-index: 2;
         width: 260px;
         overflow-x: none;
-        overflow-y: auto; }
+        overflow-y: auto;
+        /* Theme Settings */
+        -webkit-box-shadow: inset 0 0 5px 5px #ebebeb;
+        -moz-box-shadow: inset 0 0 5px 5px #ebebeb;
+        box-shadow: inset 0 0 5px 5px #ebebeb;
+      }
   js: ''
