@@ -11,7 +11,7 @@
   <% end %>
 </h3>  
 <div class="form-wrapper clear-block" data-hook="checkout_form_wrapper">
-  <div class="fl">
+  <div class="">
       <%= render :partial => 'spree/shared/error_messages', :locals => { :target => order } %>
       <% # override default form class :edit_order with :single_page_edit_order, disableSaveOnClick cause button disabled even form validation failure %>
       <%= form_for order, :url => update_checkout_path(state), :remote => (state != 'payment'), :html => form_html_options do |form| %>
