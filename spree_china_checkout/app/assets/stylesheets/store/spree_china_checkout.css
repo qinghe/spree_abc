@@ -1,8 +1,8 @@
 
 .disabled-step .form-wrapper{ position: relative; display: none; }
-.checkout-content h3 a { visibility: hidden;}
-.checkout-content .summary-wrapper { visibility: hidden;}
-.checkout-content.enabled-step .summary-wrapper{ visibility: visible; }
-.checkout-content.enabled-step h3 a { visibility: visible;}
+.checkout-content h3 a { display: none; }
+.checkout-content .summary-wrapper { display: none; }
+.checkout-content.enabled-step .summary-wrapper{ display: block; }
+.checkout-content.enabled-step h3 a { display: inline-block; }
 
 #checkout .wait-for-payment { display:none; }
