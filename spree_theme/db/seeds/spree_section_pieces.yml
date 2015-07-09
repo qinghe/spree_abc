@@ -1006,25 +1006,9 @@ product_option_values:
   is_selectable: "1"
   is_container: "0"
   html: |
-    <% if product.variants_and_option_values(current_currency).any? %>
-      <div id="product-variants" >
-        <ul>
-          <% product.variants_and_option_values(current_currency).each_with_index do |variant, index| %>
-            <li>
-              <%= radio_button_tag "products[#{product.id}]", variant.id, index == 0, 'data-price' => display_price(variant).to_s %>
-              <label for="<%= ['products', product.id, variant.id].join('_') %>">
-                <span class="variant-description">
-                  <%= variant_options variant %>
-                </span>
-                <% if variant_price variant %>
-                  <span class="price diff"><%= variant_price variant %></span>
-                <% end %>
-              </label>
-            </li>
-          <% end%>
-        </ul>
-      </div>
-    <% end%>
+    <% if defined? product %>
+        <%= render :partial => 'themes/variants_and_option_values', :locals=>{:product=>product}  %>
+    <% end %>
   css: |-
     .<%=@template.section_selector%> ul{ margin: 0; padding: 0;}
     .<%=@template.section_selector%> li{ list-style-type:none; }

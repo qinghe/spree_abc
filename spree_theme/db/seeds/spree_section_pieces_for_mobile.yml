@@ -149,3 +149,38 @@ minicart_badge:
     <%=  link_to_cart_badge %>
   css: ""
   js: ""
+option_values_for_mobile:
+  id: 63
+  title: option values for mobile
+  slug: option-values-for-mobile
+  is_selectable: "1"
+  is_container: "0"
+  for_terminal: "1"
+  html: |
+    <% if defined? product %>
+        <%= render :partial => 'themes/product_options_for_mobile', :locals=>{:product=>product} %>
+    <% end%>
+  css: |
+    .<%=@template.section_selector%> .variant-option{
+      display:none;
+    }
+    .<%=@template.section_selector%> ul.option_values {
+      list-style-type: none;
+      margin:0;
+      padding:0;
+    }
+    .<%=@template.section_selector%> .option_values li {
+      display: block;
+      position: relative;
+      float: left;
+    }
+    .option-value.selected,
+    .option-value.in-stock:hover {
+      background-color: #1491EB;
+      border-color: #1072B9;
+      color: #ffffff;
+    }
+    .<%=@template.section_selector%> .option_type{ <%=@template.css(:option_type)%> }
+    .<%=@template.section_selector%> .large_image{ <%=@template.css(:large_image)%>  }
+    .<%=@template.section_selector%> .thumb_image{ <%=@template.css(:thumb_image)%>  }
+  js: ""

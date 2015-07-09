@@ -1,6 +1,5 @@
-        <div class="<%=@template.section_selector%>">
-          <% index = 0 %>
-          <% product.grouped_option_values.each do |type, values| %>
+
+          <% product.grouped_option_values.each_with_index do |type, values, index| %>
             <div id="<%= dom_id(type) %>" class="variant-option index-<%= index %>">
               <div class="option_type header0"><%= type.presentation %></div>
               <ul class="option_values clear-block">
@@ -13,7 +12,6 @@
               <% end %>
               </ul>
             </div>
-            <% index += 1 %>
           <% end %>
           <%= hidden_field_tag "products[#{product.id}]", "", :class => "hidden variant_id" %>
           <script type="text/javascript">
@@ -28,4 +26,3 @@
             });
           //]]>
           </script>
-        </div>
