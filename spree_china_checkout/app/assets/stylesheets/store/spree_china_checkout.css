@@ -1,4 +1,7 @@
 
 .disabled-step .form-wrapper{ position: relative; display: none; }
+.checkout-content h3 a { visibility: hidden;}
+.checkout-content .summary-wrapper { visibility: hidden;}
+.enabled-step .summary-wrapper{ visibility: visible; }
 
 #checkout .wait-for-payment { display:none; }
