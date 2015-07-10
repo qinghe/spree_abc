@@ -150,7 +150,7 @@ minicart_badge:
   css: ""
   js: ""
 option_values_for_mobile:
-  id: 63
+  id: 207
   title: option values for mobile
   slug: option-values-for-mobile
   is_selectable: "1"

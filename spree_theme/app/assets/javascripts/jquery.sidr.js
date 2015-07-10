@@ -59,7 +59,8 @@
       var $menu = $('#' + name),
           $body = $($menu.data('body')),
           $html = $('html'),
-          menuWidth = $menu.outerWidth(true),
+          menuWidth = $menu.outerWidth(true) ,
+          menuHeight = $menu.outerHeight(true) ,
           speed = $menu.data('speed'),
           side = $menu.data('side'),
           displace = $menu.data('displace'),
@@ -90,7 +91,11 @@
         sidrMoving = true;
 
         // Left or right?
-        if(side === 'left') {
+        if(side === 'top') {
+          menuAnimation = {top: '0px'};
+        }else if(side === 'bottom') {
+          menuAnimation = {bottom: '0px'};
+        }else if(side === 'left') {
           bodyAnimation = {left: menuWidth + 'px'};
           menuAnimation = {left: '0px'};
         }
@@ -143,7 +148,11 @@
         sidrMoving = true;
 
         // Right or left menu?
-        if(side === 'left') {
+        if(side === 'top') {
+          menuAnimation = {top: '-' + menuWidth + 'px'};
+        }else if(side === 'bottom') {
+          menuAnimation = {bottom: '-' + menuWidth + 'px'};
+        }else if(side === 'left') {
           bodyAnimation = {left: 0};
           menuAnimation = {left: '-' + menuWidth + 'px'};
         }
@@ -213,7 +222,7 @@
     var settings = $.extend( {
       name          : 'sidr',         // Name for the 'sidr'
       speed         : 200,            // Accepts standard jQuery effects speeds (i.e. fast, normal or milliseconds)
-      side          : 'left',         // Accepts 'left' or 'right'
+      side          : 'left',         // Accepts 'left' or 'right'  'top', 'bottom'
       source        : null,           // Override the source of the content.
       renaming      : true,           // The ids and classes will be prepended with a prefix when loading existent content
       body          : 'body',         // Page container selector,

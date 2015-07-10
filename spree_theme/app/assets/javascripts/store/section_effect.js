@@ -344,6 +344,8 @@ $(document).ready(function() {
     var child2 = $(".child_2", element);
     //var class_names = $(".child_2", element).attr('class').replace(/(^\s+)|(\s+$)/g,"").replace(/\s+/g,'.');
       $(".child_1", element).sidr({
+        body: '#page-inner', // append into page innner, apply page css.
+        displace: false,
         renaming: false,
         source: function(){
           return ( child2.is("*") ? child2[0].outerHTML : "no content");
