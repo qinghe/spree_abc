@@ -184,3 +184,38 @@ option_values_for_mobile:
     .<%=@template.section_selector%> .large_image{ <%=@template.css(:large_image)%>  }
     .<%=@template.section_selector%> .thumb_image{ <%=@template.css(:thumb_image)%>  }
   js: ""
+bootstrap_carousel:
+  id: 208
+  title: bootstrap carousel
+  slug: bootstrap-carousel
+  is_selectable: "1"
+  is_container: "0"
+  for_terminal: "1"
+  html: |-
+    <%# http://v3.bootcss.com/javascript/#carousel %>
+      <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+          <% (@template.running_data_item.try(:whole_images)).each_with_index{|image,i| %>
+            <%= tag :li, class: ( i==0 ? 'active' : '' ), data: { target: "#carousel-example-generic", slide_to: i } %>
+          <% } %>
+        </ol>
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner" role="listbox">
+             <% (@template.running_data_item.try(:whole_images)).each_with_index{|image,i| %>
+               <%=content_tag :div, class: ( i==0 ? 'item active' : 'item' ) do -%>
+                 <%= @template.product_attribute( :image, image: image ) %>
+               <% end %>
+             <% } %>
+        </div>
+        <!-- Controls -->
+        <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+          <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+          <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+      </div>
+  css: ''

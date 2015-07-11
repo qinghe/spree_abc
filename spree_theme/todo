@@ -15,6 +15,7 @@ after theme release, if we modify page_layout tree, this would cause theme gener
 8. product images in slide
 9. minicart for mobile
 10. ��������
+11. mobile root,  padding, border, margin, background
 
 #bugs
 get_css 12,13,'block', it is not right in generated css.

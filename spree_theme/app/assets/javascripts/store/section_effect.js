@@ -98,7 +98,13 @@ $(document).ready(function() {
         window.setTimeout(ScaleSlider, 30);
   }
 
-
+  // dom structure
+  //   <div class="container">  <div class="inner">
+  //      <div class='effect_slider'> <div u='slides'>
+  //         <div> slide1 </div>
+  //         <div> slide2 </div> 
+  //      </div> </div>
+  //   </div> </div>
   $(".effect_slider").each(function(index, element) {
     var $self = $(element);
     var $parent = $self.parent();
