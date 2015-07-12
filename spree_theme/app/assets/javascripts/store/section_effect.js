@@ -102,7 +102,7 @@ $(document).ready(function() {
   //   <div class="container">  <div class="inner">
   //      <div class='effect_slider'> <div u='slides'>
   //         <div> slide1 </div>
-  //         <div> slide2 </div> 
+  //         <div> slide2 </div>
   //      </div> </div>
   //   </div> </div>
   $(".effect_slider").each(function(index, element) {
@@ -118,8 +118,9 @@ $(document).ready(function() {
         width : $parent.css('width')
       });
     var options = null;
-    var auto_play = ( $slide_container.data('auto_play') == null ?  true : $slide_container.data('auto_play') );
-    if( $self.hasClass("scrolling")){
+    var auto_play = ( $slide_container.data('auto-play') == null ?  true : $slide_container.data('auto-play') );
+    var display_pieces = $slide_container.data('display-pieces');
+    if( display_pieces ){
         var slide_width = $self.find("[u='slides']>div").width();
         var display_piece = Math.ceil( $parent.width() / slide_width );
         // get width of a slide
