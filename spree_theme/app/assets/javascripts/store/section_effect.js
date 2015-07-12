@@ -100,7 +100,8 @@ $(document).ready(function() {
 
   // dom structure
   //   <div class="container">  <div class="inner">
-  //      <div class='effect_slider'> <div u='slides'>
+  //      <!-- div.effect_slider is required, jssor manipulate it. -->
+  //      <div class='effect_slider'> <div u='slides' data-options..>
   //         <div> slide1 </div>
   //         <div> slide2 </div>
   //      </div> </div>
@@ -109,14 +110,15 @@ $(document).ready(function() {
     var $self = $(element);
     var $parent = $self.parent();
     var $slide_container = $self.children("[u='slides']");
-    $self.css({
-        height : $parent.css('height'),
-        width : $parent.css('width')
-      });
-    $slide_container.css({
-        height : $parent.css('height'),
-        width : $parent.css('width')
-      });
+    // if parent height is 1, use width. it is for product image slider on mobile
+    var height = $parent.height();
+    if (height > 1){
+      $self.css({ height : $parent.css('height'), width : $parent.css('width')  });
+      $slide_container.css({ height : $parent.css('height'), width : $parent.css('width') });
+    }else{
+      $self.css({ height : $parent.css('width'), width : $parent.css('width')  });
+      $slide_container.css({ height : $parent.css('width'), width : $parent.css('width') });      
+    }
     var options = null;
     var auto_play = ( $slide_container.data('auto-play') == null ?  true : $slide_container.data('auto-play') );
     var display_pieces = $slide_container.data('display-pieces');
