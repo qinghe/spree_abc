@@ -1,9 +1,6 @@
 require 'spec_helper'
 
 describe Spree::Site do
-  before do
-    SpreeMultiSite::Config.seed_dir= File.join(SpreeAbc::Application.root,'db') 
-  end
   
   before(:each) do
     @site = Spree::Site.new(:name=>'ABC',:domain=>'www.abc.net',:short_name=>'shop')

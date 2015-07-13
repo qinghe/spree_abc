@@ -11,6 +11,7 @@ module Spree
     self.attachment_definitions[:attachment][:url] = "/shops/:rails_env/:site/:class/:id/:basename_:style.:extension"
     self.attachment_definitions[:attachment][:path] = ":rails_root/public/shops/:rails_env/:site/:class/:id/:basename_:style.:extension"
     self.attachment_definitions[:attachment][:default_url] = "/images/:style/missing.png"
+    validates_attachment_content_type :attachment, :content_type => /\Aimage\/.*\Z/
   
     delegate :url, :to => :attachment    
     delegate :site_id, :to => :template_theme # required by Paperclip.interpolates :site

@@ -3,7 +3,7 @@ describe Spree::Product do
   
   it "should assign global taxon" do
     taxon_from_site1 = nil
-    Spree::Site.with_site(Spree::Site.first){
+    Spree::Store.with_store(Spree::Store.unscope.first){
       taxon_from_site1 = Spree::Taxon.first
     }
     

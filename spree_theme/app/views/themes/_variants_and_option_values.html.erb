@@ -1,0 +1,22 @@
+<% if product.variants_and_option_values(current_currency).any? %>
+  <div id="product-variants" >
+    <ul>
+      <% product.variants_and_option_values(current_currency).each_with_index do |variant, index| %>
+        <li>
+          <%= radio_button_tag "products[#{product.id}]", variant.id, index == 0, 'data-price' => variant.price_in(current_currency).money %>
+          <%= label_tag  ['products', product.id, variant.id].join('_') do %>
+            <span class="variant-description">
+              <%= variant_options variant %>
+            </span>
+            <% if variant_price variant %>
+              <span class="price diff"><%= variant_price variant %></span>
+            <% end %>
+            <% unless variant.can_supply? %>
+              <span class="out-of-stock"><%= Spree.t(:out_of_stock) %></span>
+            <% end %>
+          <% end %>
+        </li>
+      <% end%>
+    </ul>
+  </div>
+<% end%>

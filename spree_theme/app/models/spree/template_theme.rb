@@ -40,9 +40,10 @@ module Spree
   class TemplateTheme < ActiveRecord::Base
     include AssignedResource::IdsHandler
     #extend FriendlyId
+    TerminalEnum = Struct.new( :desktop, :mobile, :pad, :tv )[0,1,2,3]
     belongs_to :website, :class_name => SpreeTheme.site_class.to_s, :foreign_key => "site_id"
+    belongs_to :store, :foreign_key => "store_id"
   
-    #belongs_to :website #move it into template_theme_decorator
     # for now template_theme and page_layout are one to one
     belongs_to :page_layout, :foreign_key=>"page_layout_root_id" #, :dependent=>:destroy  #imported theme refer to page_layout of original theme
     has_many :param_values, :foreign_key=>"theme_id", :dependent => :delete_all
@@ -50,14 +51,19 @@ module Spree
     has_many :template_releases, :foreign_key=>"theme_id", :dependent => :delete_all
     # template_release may be in current or design site
     belongs_to :current_template_release, :class_name=>"TemplateRelease", :foreign_key=>"release_id"
+    has_one :mobile, foreign_key: "master_id", dependent: :destroy, class_name: self.name
+    belongs_to :desktop, foreign_key: "master_id", class_name: self.name
     
-    scope :by_layout,  ->(layout_id) { where(:page_layout_root_id => layout_id) }
     #use string as key instead of integer page_layout.id, exported theme in json, after restore, key is always string
     serialize :assigned_resource_ids, Hash
+  
+    scope :by_layout, ->(layout_id){ where(:page_layout_root_id => layout_id) }
     scope :within_site, ->(site){ where(:site_id=> site.id) }
     scope :released, ->{ where("release_id>0") }
     scope :published, -> { released.where(:is_public=>true) }
-    
+    scope :for_desktop, ->{ where( for_terminal: TerminalEnum.desktop) }
+    scope :for_mobile, ->{ where( for_terminal: TerminalEnum.mobile) }
+      
     before_validation :fix_special_attributes
     before_destroy :remove_relative_data
     after_create :initialize_page_layout_for_plain_theme
@@ -82,7 +88,7 @@ module Spree
       end
       
       def foreign
-        self.within_site(SpreeTheme.site_class.designsite ).published
+        where(:store_id=> Spree::Store.designable).published
       end        
       
       # original_theme may be attributes in hash
@@ -146,7 +152,7 @@ module Spree
     
     begin 'for page generator'  
       # * params
-      #   * usage - may be [ehtml, css, js]
+      #   * usage - may be [ruby,ehtml, css, js]
       def file_name(usage)
         if usage.to_s == 'ehtml'
           "l#{page_layout_root_id}.html.erb"
@@ -179,7 +185,7 @@ module Spree
       end
       
       def layout_path
-        document_file_path( :ehtml )
+        document_file_path( :ruby )
       end      
       
       def document_file_path( target )
@@ -205,7 +211,8 @@ module Spree
         new_theme.title = "Imported "+ new_theme.title
         new_theme.attributes = new_attributes
         new_theme.assigned_resource_ids = {}
-        new_theme.site_id = SpreeTheme.site_class.current.id
+        new_theme.site_id = Spree::Store.current.site_id
+        new_theme.store_id = Spree::Store.current.id
         new_theme.save!
         new_theme
       end
@@ -254,6 +261,8 @@ module Spree
         new_layout = original_layout.copy_to_new
         #create theme record
         new_theme = self.dup
+        new_theme.site_id = Spree::Store.current.site_id
+        new_theme.store_id = Spree::Store.current.id
         new_theme.release_id = 0 # new copied theme should have no release
         new_theme.page_layout_root_id = new_layout.id
         new_theme.save!
@@ -322,13 +331,14 @@ module Spree
       
       # ex. get dialog section
       def find_section_by_usage( usage )
-        PageLayout.includes(:section=>:section_piece).where(["#{PageLayout.table_name}.root_id=? and #{SectionPiece.table_name}.usage=?",self.page_layout_root_id, usage]).first
+        # ["#{PageLayout.table_name}.root_id=? and #{SectionPiece.table_name}.usage=?",self.page_layout_root_id, usage]
+        PageLayout.includes(:section).where( spree_sections:{usage: usage}, root_id: self.page_layout_root_id ).first
       end
       
       def dialog_content_container_selector
         dialog = find_section_by_usage( 'dialog' )
-        dialog_content_container = dialog.section.descendants.includes(:section_piece).select{|section| section.section_piece.usage=='dial-cont'}.first
-        dialog.css_selector(dialog_content_container)+"_inner"
+        #dialog_content_container = dialog.section.descendants.includes(:section_piece).select{|section| section.section_piece.usage=='dial-cont'}.first
+        dialog.css_selector + " .dialog_content"
       end
                 
     end
@@ -336,7 +346,7 @@ module Spree
       # export to yaml, include page_layouts, param_values, template_files
       # it is a hash with keys :template, :param_values, :page_layouts
       def serializable_data
-        template = self.class.find(self.id,:include=>[:param_values,:page_layout])
+        template = self.class.includes(:param_values,:page_layout).find(self.id)
         # template.page_layout.self_and_descendants would cause error
         # https://github.com/rails/rails/issues/5303
         # serializable_data.to_yaml, it only get error in rake task.
@@ -368,20 +378,19 @@ module Spree
           end
 
           if replace_exisit
-            connection.insert_fixture(original_template_attributes, self.table_name)          
+            create!(original_template_attributes)          
           else
-            connection.insert_fixture(original_template_attributes.except('id'), self.table_name)
+            create!(original_template_attributes.except('id'))
           end
           new_template = self.where( original_template_attributes.slice('created_at','title','page_layout_root_id') ).first
           # we need new template id
           # template = self.find_by_title template.title
           serialized_data['param_values'].each do |record|
-            table_name = ParamValue.table_name
             attributes = get_attributes_serialized_data(record).except('id') 
             #for unknown reason param_value.created_at/updated_at may be nil
             attributes['created_at']=created_at
             attributes['updated_at']=attributes['created_at'] if attributes['updated_at'].blank?
-            connection.insert_fixture(attributes, table_name)          
+            ParamValue.create!(attributes)          
           end
           original_nodes = serialized_data['page_layouts']          
           original_nodes = original_nodes.collect{|node| build_model_from_serialized_data( PageLayout, node)}
@@ -394,17 +403,15 @@ module Spree
           new_template_files = [] 
           original_template_files = []
           serialized_data['template_files'].each_with_index do |record, i|
-            table_name = TemplateFile.table_name
             original_template_file_attributes = get_attributes_serialized_data(record)
             attributes = original_template_file_attributes.except('id').merge!('created_at'=>created_at,'theme_id'=>new_template.id)
-            connection.insert_fixture(attributes, table_name)  
+            TemplateFile.create!(attributes)  
             new_template_files << TemplateFile.where( attributes.slice('created_at','theme_id') ).first
             original_template_files << original_template_file_attributes         
           end 
           serialized_data['template_releases'].each do |record|
-            table_name = TemplateRelease.table_name
             attributes = get_attributes_serialized_data(record).except('id').merge!('created_at'=>created_at,'theme_id'=>new_template.id)
-            connection.insert_fixture(attributes, table_name)          
+            TemplateRelease.create!(attributes)          
           end
           fix_related_data_for_copied_theme(new_template, new_nodes, new_template_files, original_template_attributes,  original_nodes, original_template_files, created_at)
         end
@@ -438,18 +445,19 @@ module Spree
     begin 'assigned resource'
       
       # get resources order by taxon/image/text,  
-      # return array of resources, no nil contained
-      def assigned_resources_by_page_layout( page_layout )
+      # return array of resources, nil may be contained
+      def assigned_resources_by_page_layout( selected_page_layout = nil )
         template_resources.select{|template_resource|
-          template_resource.page_layout_id==page_layout.id 
+          template_resource.page_layout_id==selected_page_layout.id 
         }.collect(&:source)
       end
       
       # all resources used by this theme
-      # return menu roots/ images /texts,  if none assgined, return [nil] or []
-      def assigned_resources( resource_class, page_layout )
+      # return taxon roots/ images /texts,  if none assgined, return [nil] or []
+      def assigned_resources( resource_class, selected_page_layout = nil )
+        selected_page_layout ||= self.page_layout
         template_resources.select{|template_resource|
-          template_resource.source_class ==  resource_class && template_resource.page_layout_id==page_layout.id 
+          template_resource.source_class ==  resource_class && template_resource.page_layout_id==selected_page_layout.id 
         }.collect(&:source)
       end
       
@@ -457,20 +465,20 @@ module Spree
       # params:
       #   resource_position: get first( position 0 ) of assigned resources by default
       #     logged_and_unlogged_menu required this feature
-      def assigned_resource_id( resource_class, page_layout, resource_position=0 )
+      def assigned_resource_id( resource_class, selected_page_layout = nil, resource_position=0 )
         template_resources.select{|template_resource|
-          template_resource.source_class ==  resource_class && template_resource.page_layout_id==page_layout.id && template_resource.position == resource_position
+          template_resource.source_class ==  resource_class && template_resource.page_layout_id==selected_page_layout.id && template_resource.position == resource_position
         }.first.to_i
       end
     
       # assign resource to page_layout node
-      def assign_resource( resource, page_layout, resource_position=0 )
-        create_template_resource( page_layout, resource, resource_position ) 
+      def assign_resource( resource, selected_page_layout = nil, resource_position = 0 )
+        create_template_resource( selected_page_layout, resource, resource_position ) 
       end
       # unassign resource from page_layout node
-      def unassign_resource( resource_class, page_layout, resource_position=0 )
+      def unassign_resource( resource_class, selected_page_layout, resource_position = 0 )
         template_resources.select{|template_resource|
-          template_resource.source_class ==  resource_class && template_resource.page_layout_id==page_layout.id && template_resource.position == resource_position
+          template_resource.source_class ==  resource_class && template_resource.page_layout_id==selected_page_layout.id && template_resource.position == resource_position
         }.each(&:destroy!)
          
       end
@@ -487,10 +495,10 @@ module Spree
     # called in current_page_tag
     # is page_layout valid to taxon, taxon is current page
     # return true if taxon is decendant of specific_taxons
-    def valid_context?(page_layout, taxon)
-      specific_taxons  = assigned_resources( Spree::SpecificTaxon, page_layout).compact
+    def valid_context?(selected_page_layout, taxon)
+      specific_taxons  = assigned_resources( Spree::SpecificTaxon, selected_page_layout).compact
       specific_taxon_ids = specific_taxons.collect(&:id)
-      is_valid = (page_layout.valid_context?(taxon.current_context)) 
+      is_valid = (selected_page_layout.valid_context?(taxon.current_context)) 
       if is_valid && specific_taxon_ids.present?
         is_valid = specific_taxon_ids.include?(taxon.id)
         unless is_valid
@@ -525,19 +533,25 @@ module Spree
     end  
     
     # taxon_id which is assigned to template_theme and its context is index 
-    def index_page
-      taxon_id = 0
-      
-      taxons = template_resources.select{|template_resource|
+    def home_page
+      taxon = nil      
+      taxon_ids= template_resources.select{|template_resource|
           template_resource.source_class ==  SpreeTheme.taxon_class 
-      }.collect(&:source)      
-      if taxons.present?
-        taxon_home = SpreeTheme.taxon_class.homes.where(["taxonomy_id in (?)", taxons.map(&:taxonomy_id ) ]).first
-        if taxon_home.present?
-          taxon_id = taxon_home.id
-        end
+      }.collect(&:source_id)
+      if taxon_ids.present?
+        taxons = SpreeTheme.taxon_class.where( id: taxon_ids )      
+        taxon = SpreeTheme.taxon_class.homes.where(["taxonomy_id in (?)", taxons.map(&:taxonomy_id ) ]).first
       end
-      taxon_id      
+      taxon     
+    end
+    
+    # methods for mobile feature       
+    def for_desktop?
+      for_terminal == TerminalEnum.desktop
+    end
+    
+    def for_mobile?
+      for_terminal == TerminalEnum.mobile
     end
     
     private
@@ -557,7 +571,7 @@ module Spree
       if section_root_id.present?
         root_section = Section.roots.find(section_root_id)
         page_layout_root = add_section( root_section ) 
-        self.update_attribute("page_layout_root_id",page_layout_root.id)
+        self.update_attributes( page_layout_root_id: page_layout_root.id, for_terminal: root_section.for_terminal )
       end      
     end
     

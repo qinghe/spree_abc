@@ -12,7 +12,7 @@
       <tr>
         <td><%=ot.name %></td>
         <td><%=ot.presentation %></td>
-        <td class="actions"><%= link_to_with_icon 'icon-plus', t("select"),
+        <td class="actions"><%= link_to_with_icon 'plus', t("select"),
           url_for(:controller => "admin/option_types",
                   :id => ot,
                   :product_id => @product.permalink,

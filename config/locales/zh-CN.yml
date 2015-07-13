@@ -35,6 +35,7 @@ zh-CN:
       spree/order:
         checkout_complete: 完成结账
         completed_at: 结账日期
+        considered_risky: 风险预警
         coupon_code: 优惠券号码
         created_at: 下单日期
         email: 电子邮箱
@@ -42,7 +43,7 @@ zh-CN:
         item_total: 小记
         number: 订单号
         payment_state: 支付状态
-        shipment_state: 物流状态
+        shipment_state: 配送状态
         special_instructions: 特别说明
         state: 状态
         total: 总计
@@ -74,8 +75,10 @@ zh-CN:
         master_price: 默认价格
         name: 名称
         on_hand: 库存
-        shipping_category: 物流分类
+        shipping_category: 配送分类
         tax_category: 缴税分类
+        slug: 静态URL
+        summary: 广告词
         other: 产品
       product_group: 
         name: 名称
@@ -108,6 +111,13 @@ zh-CN:
       spree/state:
         abbr: 缩写
         name: 名称
+      spree/store:
+        url: 网站域名
+        meta_description: SEO描述
+        meta_keywords: SEO关键字
+        seo_title: SEO标题
+        name: 网站名称
+        mail_from_address: 邮件发件地址
       spree/tax_category:
         description: 描述
         name: 名称
@@ -117,7 +127,7 @@ zh-CN:
         show_rate_in_label: 在标签中显示比率
       spree/taxon:
         name: 名称
-        permalink: 永久链接
+        permalink: 静态URL
         position: 位置
       spree/taxonomy:
         name: 名称
@@ -166,6 +176,9 @@ zh-CN:
       spree/creditcard_txn: 
         one: 信用卡交易
         other: 信用卡交易
+      spree/customer_return: 
+        one: 客户退货
+        other: 客户退货
       spree/inventory_unit:
         one: 库存单位
         other: 库存单位
@@ -193,6 +206,9 @@ zh-CN:
       spree/promotion:
         one: 促销
         other: 促销
+      spree/promotion_category:
+        one: 促销分类
+        other: 促销分类
       spree/property:
         one: 属性
         other: 属性
@@ -308,11 +324,14 @@ zh-CN:
         overview: 概览
         products: 产品
         promotions: 促销
+        promotion_categories: 促销分类 
         reports: 报表
         users: 用户
         option_types: 选项类型
         properties: 属性
         prototypes: 原型
+        taxons: 产品与分类
+    admin_login: 网站管理系统登录    
     administration: 管理
     agree_to_privacy_policy: 同意隐私政策
     agree_to_terms_of_service: 同意服务条款
@@ -377,8 +396,8 @@ zh-CN:
     back_to_properties_list: 回到产品列表
     back_to_prototypes_list: 回到原型列表
     back_to_reports_list: 回到报告列表
-    back_to_shipping_categories_list: 回到物流分类列表
-    back_to_shipping_methods_list: 回到邮寄方式列表
+    back_to_shipping_categories_list: 回到配送分类列表
+    back_to_shipping_methods_list: 回到配送方式列表
     back_to_states_list: 回到省份列表
     back_to_stock_locations_list: 回到仓库地址列表
     back_to_stock_movements_list: 回到商品采购列表
@@ -416,6 +435,7 @@ zh-CN:
     card_number: 卡号
     card_type_is: 卡的类型是
     cart: 购物车
+    cart_subtotal: 商品小计
     categories: 分类
     category: 分类
     change: 修改
@@ -427,14 +447,20 @@ zh-CN:
     check_for_spree_alerts: 查收Spree的通知
     checkout: 结账
     choose_a_customer: 选择用户
+    choose_a_taxon_to_sort_products_for: 请选择一个分类查看所属产品
     choose_currency: 选择货币
     choose_dashboard_locale: 选择控制面板语言
+    checkout_steps:
+      previous: 上一步
+      next: 下一步
     cheque: 支票
     china_address:
       firstname: 姓名
       phone: 手机
       state: 地区
     city: 城市
+    clear_cache: 清除缓存
+    clear_cache_warning: 当前操作将清除系统缓存,请慎重！
     clone: 复制
     close: 关闭
     close_all_adjustments: 禁用所有价格调整
@@ -498,6 +524,7 @@ zh-CN:
     customer: 顾客
     customer_details: 顾客详细信息
     customer_details_updated: 已更新客户的详细信息
+    customer_returns: 顾客退货
     customer_search: 顾客搜索
     cut: "剪切"
     dash:
@@ -612,10 +639,11 @@ zh-CN:
     final_confirmation: 最终确认
     finalize: 完成
     finalized_payments: 已付款项目
+    find_a_taxon: 请选择分类
     first_item: 首件产品价格??
     first_name: 名
     first_name_begins_with: 名的开始
-    flat_percent: 固定费率
+    flat_percent: 固定费率 (百分比)
     flat_rate_amount: 金额
     flat_rate_per_item: 固定费率 (每商品)
     flat_rate_per_order: 固定费率 (每订单)
@@ -765,6 +793,7 @@ zh-CN:
     new_billing_integration: 新建支付集成
     new_category: 新建目录
     new_customer: 新建帐号
+    new_customer_return: 新建客户退货
     new_group: New Group
     new_image: 新建图片
     new_mail_method: 新建邮件服务
@@ -865,7 +894,7 @@ zh-CN:
         thanks: 谢谢您的购买。
         total: 总计：%{total}
     order_not_found: 我们无法找到您的订单。请重新尝试。
-    order_number: "订单号 %{number}"
+    order_number: "订单号"
     order_populator:
       out_of_stock: ! '%{item} 库存不足'
       please_enter_reasonable_quantity: 请输入一个合理的数量
@@ -935,7 +964,7 @@ zh-CN:
     payments: 支付
     percent: 百分比
     percent_per_item: Percent Per Item
-    permalink: 永久链接
+    permalink: 静态URL
     phone: 电话
     place_order: 下单
     please_create_user: 请创建一个用户帐号
@@ -945,7 +974,8 @@ zh-CN:
     presentation: 显示
     preview: 预览
     previous: 上一页
-    price: 价格
+    promotionable: 促销
+    price: 单价
     price_range: 价格范围
     price_sack: Price Sack
     problem_authorizing_card: 验证信用卡时遇到问题
@@ -1240,13 +1270,13 @@ zh-CN:
       shipped: 已经发货
     shipments: 配送
     shipped: 已发货
-    shipping: 配送中
+    shipping: 配送
     shipping_address: 收货人信息
     shipping_categories: 配送分类
     shipping_categories_description: 管理配送分类以决定哪些产品可以通过哪些方式进行配送
     shipping_category: 配送分类
-    shipping_flat_rate_per_item: 以单项计固定费率
-    shipping_flat_rate_per_order: 固定费率
+    shipping_flat_rate_per_item: 固定费率 (每商品)
+    shipping_flat_rate_per_order: 固定费率 (每订单)
     shipping_flexible_rate: 以每项计弹性价格
     shipping_instructions: 配送指南
     shipping_method: 配送方式
@@ -1271,6 +1301,7 @@ zh-CN:
     site_name: 站点名称
     site_url: 站点URL
     sku: 条形码
+    slug: 静态URL
     smtp: SMTP
     smtp_authentication_type: SMTP认证类型
     smtp_domain: SMTP域名

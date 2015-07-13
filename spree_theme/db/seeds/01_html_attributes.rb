@@ -22,7 +22,7 @@ objs=[
   {"id"=>21, "title"=>"width", "pvalues"=>"auto,l1", "pvalues_desc"=>"Auto,L1", "punits"=>"l,%", "neg_ok"=>false, "default_value"=>0, "pvspecial"=>"", "css_name"=>"width"},
   {"id"=>22, "title"=>"font", "pvalues"=>"caption,icon,menu,message-box,small-caption,status-bar", "pvalues_desc"=>"Caption,Icon,Menu,Message-box,Small-caption,Status-bar", "punits"=>"", "neg_ok"=>false, "default_value"=>0, "pvspecial"=>"inherit", "css_name"=>"font"},
   {"id"=>23, "title"=>"font-family", "pvalues"=>"serif,sans-serif", "pvalues_desc"=>"Serif,Sans-serif", "punits"=>"", "neg_ok"=>false, "default_value"=>0, "pvspecial"=>"inherit", "css_name"=>"font-family"},
-  {"id"=>24, "title"=>"font-size", "pvalues"=>"l1", "pvalues_desc"=>"L1", "punits"=>"%,em", "neg_ok"=>false, "default_value"=>0, "pvspecial"=>"inherit", "css_name"=>"font-size"},
+  {"id"=>24, "title"=>"font-size", "pvalues"=>"l1", "pvalues_desc"=>"L1", "punits"=>"%,em,px", "neg_ok"=>false, "default_value"=>0, "pvspecial"=>"inherit", "css_name"=>"font-size"},
   {"id"=>25, "title"=>"font-style", "pvalues"=>"normal,italic,oblique", "pvalues_desc"=>"Normal,Italic,Oblique", "punits"=>"", "neg_ok"=>false, "default_value"=>0, "pvspecial"=>"inherit", "css_name"=>"font-style"},
   {"id"=>26, "title"=>"font-variant", "pvalues"=>"normal,small-caps", "pvalues_desc"=>"Normal,Small-caps", "punits"=>"", "neg_ok"=>false, "default_value"=>0, "pvspecial"=>"inherit", "css_name"=>"font-variant"},
   {"id"=>27, "title"=>"font-weight", "pvalues"=>"normal,bold,bolder,lighter,100,200,300,400,500,600,700,800,900", "pvalues_desc"=>"Normal,Bold,Bolder,Lighter,100,200,300,400,500,600,700,800,900", "punits"=>"", "neg_ok"=>false, "default_value"=>0, "pvspecial"=>"inherit", "css_name"=>"font-weight"},
@@ -61,7 +61,7 @@ objs=[
   {"id"=>61, "title"=>"src", "pvalues"=>"0i", "pvalues_desc"=>"Src", "punits"=>"", "neg_ok"=>false, "default_value"=>0, "pvspecial"=>"", "css_name"=>"src"},
   {"id"=>62, "title"=>"alt", "pvalues"=>"0t", "pvalues_desc"=>"Alt", "punits"=>"", "neg_ok"=>false, "default_value"=>0, "pvspecial"=>"", "css_name"=>"alt"},
   {"id"=>63, "title"=>"href", "pvalues"=>"0u", "pvalues_desc"=>"Href", "punits"=>"", "neg_ok"=>false, "default_value"=>-1, "pvspecial"=>"", "css_name"=>"href"},
-  {"id"=>64, "title"=>"layout db", "pvalues"=>"", "pvalues_desc"=>"", "punits"=>"", "neg_ok"=>false, "default_value"=>-1, "pvspecial"=>"", "css_name"=>"layout db"},
+  {"id"=>64, "title"=>"border-radius", "pvalues"=>"l1", "pvalues_desc"=>"L1", "punits"=>"l,%", "neg_ok"=>false, "default_value"=>0, "pvspecial"=>"trbl", "css_name"=>"border-radius"},
   {"id"=>65, "title"=>"layout string", "pvalues"=>"0t", "pvalues_desc"=>"0t", "punits"=>"", "neg_ok"=>false, "default_value"=>-1, "pvspecial"=>"", "css_name"=>"layout string"},
   {"id"=>66, "title"=>"layout themeimg", "pvalues"=>"0i", "pvalues_desc"=>"0i", "punits"=>"", "neg_ok"=>false, "default_value"=>-1, "pvspecial"=>"", "css_name"=>"layout themeimg"},
   {"id"=>67, "title"=>"layout bool", "pvalues"=>"0b", "pvalues_desc"=>"0b", "punits"=>"", "neg_ok"=>false, "default_value"=>-1, "pvspecial"=>"", "css_name"=>"layout bool"},
@@ -119,8 +119,7 @@ objs=[
 
 Spree::HtmlAttribute.delete_all              
 for ha in objs
-  obj = Spree::HtmlAttribute.new
-  obj.assign_attributes( ha,  :without_protection => true)
-  obj.save
+  ha[:slug] = nil # 5.0, it has to be nil to generate new
+  obj = Spree::HtmlAttribute.create!( ha )
 end
                 

@@ -1,6 +1,9 @@
 #encoding: utf-8
 class Spree::Site < ActiveRecord::Base
-  cattr_accessor :unknown,:subdomain_regexp, :loading_fake_order_with_sample
+  cattr_accessor :subdomain_regexp, :loading_fake_order_with_sample, :system_top_domain
+  # system_top_domain is required, in middleware, we compare it with request.host, 
+  # it tell us to initialize site by short_name or domain.
+
   has_many :taxonomies,:inverse_of =>:site,:dependent=>:destroy
   has_many :products,:inverse_of =>:site,:dependent=>:destroy
   has_many :orders,:inverse_of =>:site,:dependent=>:destroy
@@ -16,48 +19,59 @@ class Spree::Site < ActiveRecord::Base
   has_many :payment_methods,:dependent=>:destroy
   has_many :assets,:dependent=>:destroy
   has_many :zones,:dependent=>:destroy
-  has_many :state_changes,:dependent=>:destroy  
+  has_many :state_changes,:dependent=>:destroy
+  
+  has_many :stores, :dependent=>:destroy  
   #acts_as_nested_set
+  accepts_nested_attributes_for :stores
   accepts_nested_attributes_for :users
   
-  #app_configuration require site_id
-  self.unknown = Struct.new(:id).new(0)
+  self.system_top_domain = 'dalianshops.com'
   # it is load before create site table. self.new would trigger error "Table spree_sites' doesn't exist"
   # db/migrate/some_migration is using Spree::Product, it has default_scope using Site.current.id
   # so it require a default value.
   self.subdomain_regexp = /\A([a-z0-9\-])*\Z/
   self.loading_fake_order_with_sample = false
+
+  #these attr is only used when create site, it is unavailabe in other case.
+  attr_accessor :email, :password, :password_confirmation
+
   validates :name, length: 4..32 #"中国".length=> 2
   validates :short_name, uniqueness: true, presence: true, length: 4..32, format: {with: subdomain_regexp} #, unless: "domain.blank?"
   validates_uniqueness_of :domain, :allow_blank=>true 
   #attr_accessible :name, :domain, :short_name, :has_sample
   #generate short name fro name
   before_validation :set_short_name
+  after_create :add_default_data
+  # it do not work caused by stores.default_scope  site scope
+  #scope :designable, ->{ includes(:stores).where(spree_stores: {designable:true})}
   
   class << self
     def dalianshops
       #in development, we may change site domain
-      find_by_short_name('first')#find_by_domain 
+      find_by_short_name('www')#find_by_domain
     end
     
     def current
-      ::Thread.current[:spree_site] || self.unknown 
+      Spree::Store.current.site 
     end
     
-    def current=(some_site)
-      ::Thread.current[:spree_site] = some_site      
+    def current=(some_site)      
+      Spree::Store.current = Spree::Store.unscoped.where( site_id: some_site.id ).first
+      some_site      
     end
-    
+
     # execute block with given site
     def with_site(new_site)
       original_current = self.current
       begin
         self.current = new_site
-        yield
+        yield( new_site )
       ensure
         self.current = original_current  
       end
     end
+  
   end
   
   def dalianshops?
@@ -67,11 +81,7 @@ class Spree::Site < ActiveRecord::Base
   def current?
     self == self.class.current
   end
-  
-  def unknown?
-    !(self.id>0)
-  end
-  
+    
   def load_sample(  )
     require 'ffaker'
     # global tables
@@ -160,8 +170,6 @@ class Spree::Site < ActiveRecord::Base
         #shipping_method, calculator, creditcard, inventory_units, state_change,tokenized_permission
         #TODO remove image files
         self.assets.clear
-        #FIXME seems it do not work 
-        self.clear_preferences #remove preferences
         #TODO clear those tables
         # creditcarts,preferences
         self.state_changes.clear 
@@ -171,8 +179,7 @@ class Spree::Site < ActiveRecord::Base
   
   # current site'subdomain => short_name.dalianshops.com
   def subdomain
-    return self.domain if dalianshops? #fix: first.dalianshops.com
-    ([self.short_name] + self.class.dalianshops.domain.split('.')[1..-1]).join('.')
+    short_name + '.' + system_top_domain
   end
   
   def admin_url
@@ -180,13 +187,25 @@ class Spree::Site < ActiveRecord::Base
   end
   
   private
+  
+  def add_default_data
+    #current site is first, self is another.
+    self.class.with_site( self ) do| site |
+      site.stores.create!( name: site.name, code: site.short_name )  
+      user_attributes = { email: site.email, password: site.password, password_confirmation: password_confirmation }
+      user = site.users.create!(user_attributes)
+      user.spree_roles << Spree::Role.find_by_name('admin')      
+      site.shipping_categories.create!( name: Spree.t(:default) )
+    end
+  end
+  
   def load_sample_products
-    file = Pathname.new(File.join(SpreeMultiSite::Config.seed_dir, 'samples', "seed.rb"))
+    file = File.join( Rails.application.root, 'db', 'samples', "seed.rb")
     load file
   end
   
   def load_sample_orders
-    file = Pathname.new(File.join(SpreeMultiSite::Config.seed_dir, 'fake_order', "seed.rb"))
+    file = File.join( Rails.application.root, 'db', 'fake_order', "seed.rb")
     load file
   end
    

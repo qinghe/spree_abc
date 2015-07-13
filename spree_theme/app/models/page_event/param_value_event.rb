@@ -29,28 +29,65 @@ module PageEvent
     end
      
     def height_pv_changed_handler(partial_html)
-      height = partial_html.height 
-      if height>0
+      dimension_changed_handler(partial_html, 'height')
+      #height = partial_html.height 
+      #if height>0
+      #  margin, border, padding = partial_html.margin, partial_html.border, partial_html.padding
+      #  val = partial_html.html_attribute_values('inner_height')
+      #  inner_height_value = height
+      #  [0,2].each{|i|#0:top, 2: bottom
+      #    inner_height_value-= margin[i]  
+      #    inner_height_value-= border[i]  
+      #    inner_height_value-= padding[i]  
+      #      } 
+      #  hav = partial_html.html_attribute_values("block_height")         
+      #  computed_inner_height['psvalue'] = hav['psvalue']
+      #  computed_inner_height['pvalue'] = inner_height_value
+      #  computed_inner_height['unit'] = hav['unit']
+      #  computed_inner_height['unset'] = Spree::HtmlAttribute::BOOL_FALSE
+      #  self.updated_html_attribute_values.push(computed_inner_height)
+      #else
+      #  computed_inner_height = partial_html.html_attribute_values('inner_height')
+      #  computed_inner_height['unset'] = Spree::HtmlAttribute::BOOL_TRUE
+      #  self.updated_html_attribute_values.push(computed_inner_height)
+      #end
+    end
+    
+    
+    def width_pv_changed_handler(partial_html)
+      dimension_changed_handler(partial_html, 'width')
+    end
+    
+    # compute inner dimension is required by baidu map
+    #html_attribute_name could be width, height
+    def dimension_changed_handler(partial_html, html_attribute_name)
+      trbl = (html_attribute_name == 'width' ? [1,3] : [0,2]) 
+      val = partial_html.send(  html_attribute_name )
+      hav = partial_html.html_attribute_values("block_#{html_attribute_name}")
+      # width/height is 100%, unset inner width/height
+      if val>0 && !hav.unset? &&  hav['unit']!='%'
         margin, border, padding = partial_html.margin, partial_html.border, partial_html.padding
-        computed_inner_height = partial_html.html_attribute_values('inner_height')
-        inner_height_value = height
-        [0,2].each{|i|#0:top, 2: bottom
-          inner_height_value-= margin[i]  
-          inner_height_value-= border[i]  
-          inner_height_value-= padding[i]  
+        
+        computed_inner = partial_html.html_attribute_values("inner_#{html_attribute_name}")
+        inner_value = val
+        trbl.each{|i|#0:top, 2: bottom
+          inner_value-= margin[i]  
+          inner_value-= border[i]  
+          inner_value-= padding[i]  
             } 
-        hav = partial_html.html_attribute_values("block_height")         
-        computed_inner_height['psvalue'] = hav['psvalue']
-        computed_inner_height['pvalue'] = inner_height_value
-        computed_inner_height['unit'] = hav['unit']
-        computed_inner_height['unset'] = Spree::HtmlAttribute::BOOL_FALSE
-        self.updated_html_attribute_values.push(computed_inner_height)
+        computed_inner['psvalue'] = hav['psvalue']
+        computed_inner['pvalue'] = inner_value
+        computed_inner['unit'] = hav['unit']
+        computed_inner['unset'] = Spree::HtmlAttribute::BOOL_FALSE
+        self.updated_html_attribute_values.push(computed_inner)
       else
-        computed_inner_height = partial_html.html_attribute_values('inner_height')
-        computed_inner_height['unset'] = Spree::HtmlAttribute::BOOL_TRUE
-        self.updated_html_attribute_values.push(computed_inner_height)
+        computed_inner = partial_html.html_attribute_values("inner_#{html_attribute_name}")
+        computed_inner['unset'] = Spree::HtmlAttribute::BOOL_TRUE
+        self.updated_html_attribute_values.push(computed_inner)
       end
     end
+
+    
     # TODO width_pv_changed_handler, should not bigger than its parent's width.
     def border_pv_changed_handler(partial_html)
       height_pv_changed_handler( partial_html )
@@ -66,6 +103,7 @@ module PageEvent
     alias_method :border_unset_changed_handler, :height_pv_changed_handler
     alias_method :margin_unset_changed_handler, :height_pv_changed_handler
     alias_method :padding_unset_changed_handler, :height_pv_changed_handler
+    alias_method :width_unset_changed_handler, :width_pv_changed_handler
     
     # here are two tipical layouts,    
     #   Layout Example                                 fluid --> fixed                         fixed --> fluid

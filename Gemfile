@@ -1,7 +1,9 @@
-#source 'http://rubygems.org'
 source 'http://ruby.taobao.org/'
+#source 'https://rubygems.org'
+#source "https://rails-assets.org"
+
 # Bundle edge Rails instead:
-ruby '1.9.3'
+ruby '2.0.0'
 
 gem 'rails', '4.1.8'
 
@@ -33,21 +35,20 @@ gem 'coffee-rails', '~> 4.0.0'
 #  gem "rspec-rails", "~> 2.0"
 #  gem "capybara"
 #end
+gem 'turbolinks'
+gem 'jquery-turbolinks'
 
 gem 'ruby-hmac' #http://ryanbigg.com/2009/07/no-such-file-to-load-hmac-sha1/
 
 gem 'spree', '~>2.4'
 
-# bundle config --local local.spree_simple_dash ../spree_simple_dash, using local for development 
-# :path => '../spree_simple_dash' 
-# replace Spree Analytics
-# gem 'spree_simple_dash', :github=>"RuanShan/spree_simple_dash", :branch=>"1-2-stable"
+# gem 'sprangular',   :path => './sprangular'
 
 # referer to https://github.com/spree/spree/issues/2013
 gem 'spree_auth_devise', :github => "spree/spree_auth_devise", :branch => "2-4-stable"
 #support rich_editor 
 gem 'spree_editor',  :github => "spree/spree_editor", :branch=>"2-4-stable"
-gem 'tinymce-rails-langs'
+#gem 'tinymce-rails-langs'
 #gem 'daemons'
 #gem 'delayed_job_active_record'
 #'bundle update spree_multi_site' to update gem
@@ -57,12 +58,14 @@ gem 'tinymce-rails-langs'
 gem 'spree_multi_site',   :path => './spree_multi_site'
 
 gem "friendly_id" # spree_theme require it.
+gem 'useragent'
 gem 'spree_theme',   :path => './spree_theme'
 
 #only specify it here, then could use ActiveMerchant::Billing::Integrations::Alipay::Helper directly
+gem 'alipay'
 gem 'offsite_payments'
 gem 'activemerchant_patch_for_china', github:'RuanShan/activemerchant_patch_for_china', branch:'for_offsite_payments'
-gem 'spree_alipay',   :github => "RuanShan/spree_alipay", :branch=>"master"
+gem 'spree_alipay',   :github => "RuanShan/spree_alipay", :branch=>"2-4-stable"
 
 gem 'spree_china_checkout',   :path => './spree_china_checkout'
 
@@ -74,26 +77,40 @@ gem 'spree_flexi_variants',   :path => './spree_flexi_variants'
 # copy from https://github.com/spree-contrib/spree_comments/tree/2-0-stable
 gem 'spree_comments',   :path => './spree_comments'
 
+#
+gem 'bootstrap-sass', '~> 3.3.1'
+gem 'autoprefixer-rails'
+
+gem 'activerecord-session_store'
+
 group :test, :development do
   gem 'mail_view'  #, :git => 'https://github.com/37signals/mail_view.git'
 end
 
 group :test do
-  gem 'rspec-rails'
-  gem 'database_cleaner'
-  gem 'factory_girl'
-  gem 'capybara'
-  gem 'capybara-accessible'  
-  gem 'webmock'
+  gem 'capybara', '~> 2.4'
+  gem 'database_cleaner', '~> 1.3'
+  gem 'email_spec'
+  gem 'factory_girl_rails', '~> 4.5.0'
+  gem 'launchy'
+  gem 'rspec-activemodel-mocks'
+  gem 'rspec-collection_matchers'
+  gem 'rspec-its'
+  gem 'rspec-rails', '~> 3.1.0'
+  gem 'simplecov'
+  gem 'webmock', '1.8.11'
+  gem 'poltergeist', '1.5.0'
+  gem 'timecop'
+  gem 'with_model'
 end
-#execjs need js runtime
-gem 'therubyracer' 
+#execjs need js runtime, use nodejs of system instead.
+#gem 'therubyracer' 
 
 group :development do
   gem 'capistrano'
   gem 'capistrano-rails', '~> 1.1.0'
   gem 'capistrano-rvm', '~> 0.1.0'
-  gem "rails-erd"
+  #gem "rails-erd"
 end
 
 

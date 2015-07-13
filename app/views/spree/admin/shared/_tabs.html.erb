@@ -2,22 +2,29 @@
 %>
 
 <% if can? :admin, Spree::Order %>
-  <%= tab :orders, :payments, :creditcard_payments, :shipments, :credit_cards, :return_authorizations, :icon => 'icon-shopping-cart' %>
-<% end %>
-<% if can? :admin, Spree::Product %>
-  <%= tab :products, :option_types, :properties, :prototypes, :variants, :product_properties, :icon => 'icon-th-large' %>
+  <%= tab *Spree::BackendConfiguration::ORDER_TABS, icon: 'shopping-cart' %>
 <% end %>
 
-<%= tab(:posts, :route=>'admin_posts',:icon=>'icon-pencil',:match_path => '/post') %>
+<% if can? :admin, Spree::Product %>
+  <%= tab *Spree::BackendConfiguration::PRODUCT_TABS, icon: 'th-large' %>
+<% end %>
+
+<% if can? :admin, Spree::Post %>
+<%= tab :posts, icon: 'pencil' %>
+<% end %>
 
 <% if can? :admin, Spree::Admin::ReportsController %>
-  <%= tab :reports, :icon => 'icon-file'  %>
+  <%= tab *Spree::BackendConfiguration::REPORT_TABS, icon: 'file'  %>
 <% end %>
-<%= tab :configurations, :general_settings, :mail_methods, :image_settings, :tax_categories, :tax_rates, :tax_settings, :zones, :countries, :states, :payment_methods, :shipping_methods, :shipping_categories, :stock_transfers, :stock_locations, :trackers, :label => 'configuration', :icon => 'icon-wrench', :url => spree.edit_admin_general_settings_path %>
+
+<%= tab *Spree::BackendConfiguration::CONFIGURATION_TABS, label: 'configuration', icon: 'wrench', url: spree.edit_admin_general_settings_path %>
+
 <% if can? :admin, Spree::Promotion %>
-  <%= tab(:promotions, :url => spree.admin_promotions_path, :icon => 'icon-bullhorn') %>
+  <%= tab *Spree::BackendConfiguration::PROMOTION_TABS, url: spree.admin_promotions_path, icon: 'bullhorn' %>
 <% end %>
 
-<%= tab(:taxonomies, :route=>'admin_taxonomies',:icon=>'icon-sitemap',:match_path => '/taxonom') %>
+<% if Spree.user_class && can?(:admin, Spree.user_class) %>
+  <%= tab *Spree::BackendConfiguration::USER_TABS, url: spree.admin_users_path, icon: 'user' %>
+<% end %>
 
-<%= tab(:template_themes, :route=>'native_admin_template_themes',:icon=>'icon-puzzle-piece',:match_path => '/template') %>
+<%= tab :template_themes, url: spree.native_admin_template_themes_path, icon: 'puzzle-piece'  %>

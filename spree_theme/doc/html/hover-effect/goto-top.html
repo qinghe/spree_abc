@@ -1,0 +1,56 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+ <HEAD>
+  <TITLE> Goto Top test </TITLE>
+  <META NAME="Generator" CONTENT="EditPlus">
+  <META NAME="Author" CONTENT="">
+  <META NAME="Keywords" CONTENT="">
+  <META NAME="Description" CONTENT="">
+  <script type="text/javascript" language="javascript" src="js/jquery-1.8.1.min.js"></script>
+  <style type='text/css'>
+    .content{ height: 1900px; width:200px; margin:auto; background-color:silver;
+	}
+
+	#return_top{
+	  position:fixed;
+      right:20px;
+      bottom: 30px;
+	  display:block;
+	  background-color:red;
+	  width:40px;
+	  height:40px;
+	}
+  </style>
+ </HEAD>
+
+ <BODY>
+    <div class="content"> it long content. </div>
+
+    <a id="return_top" class="" href="#">Top</a>
+
+	<script type="text/javascript">
+	 
+	 //return to top
+	$(document).ready(function(){
+      $("#return_top").hide(); 
+	  
+        $(window).scroll(function(){
+            if ($(window).scrollTop()>100){
+              $("#return_top").fadeIn(500);
+            }else{
+              $("#return_top").fadeOut(1500);
+            }
+
+        });
+        $("#return_top").click(function(){
+          $("body,html").animate({scrollTop:0},1000);
+            return false;
+        });	
+      
+	});
+
+
+   </script>
+
+ </BODY>
+</HTML>

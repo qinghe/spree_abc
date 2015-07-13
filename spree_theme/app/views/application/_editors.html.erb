@@ -7,7 +7,7 @@
 %>
 <%= form_tag(get_param_values_template_theme_path(@theme), { :remote=>true, :method=>'post', 'data-type'=>'script', :id=>"layout_editor_form",:name=>"layout_editor_form"}) do %>
 
-    <ul class="tabs clear-block">
+    <ul class="tabs block_header clear-block">
     <% for tab in @editors%>
       <li data-id="<%=tab.id%>">
 <%=  link_to(tab.slug,"#", {"class"=>(tab.id==@editor.id ? "selected":"")})%>
@@ -20,7 +20,7 @@
 <% @editors.each_index{ |idx|%>
   <div style="<%= 'display:none' if @editors[idx]!=@editor %>">    
   <%# render :partial=>"editor", :locals => {:editor=>@editors[idx], :param_values=>@param_values_for_editors[idx]}%>
-  <%= raw partial_editor( @editors[idx], @param_values_for_editors[idx]) %>
+  <%=raw partial_editor( @editors[idx], @param_values_for_editors[idx]) %>
   </div>
 <%}%>
  </div>
@@ -38,12 +38,4 @@
 
 <% end%>
 
-<script type="text/javascript" charset="utf-8">
-  $("#editors .tabs li").hover(function(){
-    $(this).parent().find('a').removeClass('selected');
-    $(this).find('a').addClass('selected'); 
-    $(this).parent().next().children().hide();
-    $(this).parent().next().children().eq($(this).index()).show();
-    $("#selected_editor_id").val($(this).attr('data-id'))
-  });  
-</script>
+

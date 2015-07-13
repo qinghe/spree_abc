@@ -2,13 +2,6 @@
 # Spree::UserSessionsController derive from Devise::SessionsController, it included Spree::Core::ControllerHelpers
 require 'spree/core/controller_helpers/common'
 class<< Spree::Core::ControllerHelpers::Common
-  #def included_with_site_support(receiver)
-  #  receiver.send :include, Spree::MultiSiteSystem
-  #  included_without_site_support(receiver)
-  #  #receiver.prepend_before_filter :get_site #initialize site before authorize user in Spree::UserSessionsController.create
-  #end
-  #alias_method_chain :included, :site_support
-  
   #Spree::Api::BaseController would include  MultiSiteSystem, get_layout should not in it.
   #override original methods 
   def get_layout
@@ -28,19 +21,19 @@ module Spree
       # <Spree::Taxon id: 30, name: "name", taxonomy_id: 0, site_id: nil,  depth: 0, page_context: 0, html_attributes: nil, replaced_by: 0> 
       before_create {|record| record.site_id||= Spree::Site.current.id }   
       
-      default_scope {
+      default_scope {        
         # admin_site_product, create or update global taxon.
         if self == Spree::Taxon  && multi_site_context=='admin_site_product'
-          scoped 
+          where(nil) 
         # first site list template themes 
         elsif self == Spree::Product  && multi_site_context=='site1_themes'
-          scoped 
+          where(nil) 
         # first site list product images  
-        elsif self == Spree::Image && multi_site_context=='site_product_images'
-          scoped           
+        elsif multi_site_context=='site_product_images'
+          where(nil) 
         elsif multi_site_context=='admin_migration'
-          scoped           
-        else  
+          where(nil) 
+        else
           where(:site_id =>  Spree::Site.current.id)
         end      
       }

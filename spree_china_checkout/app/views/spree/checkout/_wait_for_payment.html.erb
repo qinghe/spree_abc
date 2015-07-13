@@ -1,0 +1,11 @@
+<div class="wait-for-payment" >
+  <p class="info">请您在新打开的页面上完成付款。</p>
+  <p class="notice">付款完成前请不要关闭此窗口。<br>完成付款后请根据您的情况点击下面的按钮：</p>
+  <p class="act">
+    <%= form_for @order, method: :get do |form| %>
+      <%=  form.button  "已完成付款" %>
+      <button type="submit" name="button">付款遇到问题</button>
+    <% end %>
+  </p>
+  <p class="retry" ><a href="javascript:void(0)" id="order-pay-dialog-back" class="back cancel" >返回选择其他支付方式</a></p>
+</div>

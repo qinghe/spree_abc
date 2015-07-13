@@ -1,113 +1,19 @@
-<% 
-   #copy from spree_core/app/view/spree/checkout/_address.html.erb
-   #override it for china address requirement.
-%>
+<h3 class="header3"> <%= Spree.t("shipping_address") %> </h3>
 
 <div class="" data-hook="billing_fieldset_wrapper">
-<fieldset id="billing" data-hook>
-  <%= form.fields_for :bill_address do |bill_form| %>
-    <legend><%= t(:shipping_address) %></legend>
-    <div class="inner" data-hook="billing_inner">
-      <p class="field" id="bfirstname">
-        <%= bill_form.label :firstname, t('china_address.firstname') %><span class="required">*</span><br />
-        <%= bill_form.text_field :firstname, :class => 'required' %>
-      </p>
-      <p class="field" id="blastname" style="display:none;">
-        <%= bill_form.label :lastname, t(:last_name) %><br />
-        <%= bill_form.text_field :lastname, :class => '', :value=>'unknown' %>
-      </p>
-      <p class="field" id="bphone">
-        <%= bill_form.label :phone, t('china_address.phone') %><span class="required">*</span><br />
-        <%= bill_form.phone_field :phone, :class => 'required' %>
-      </p>
-      <% if Spree::Config[:company] %>
-        <p class="field" id="bcompany">
-          <%= bill_form.label :company, t(:company) %><br />
-          <%= bill_form.text_field :company %>
-        </p>
-      <% end %>
+    <%= form.fields_for :bill_address do |bill_form| %>
+      <%= render :partial => 'spree/address/form', :locals => { :form => bill_form, :address_type => 'billing', :address => @order.bill_address } %>
+    <% end %>
 
-      <p class="field" id="bcountry" style="display:none;">
-        <%= bill_form.label :country_id, t(:country) %><span class="required">*</span><br />
-        <span id="bcountry">
-          <%= bill_form.collection_select :country_id, available_countries, :id, :name, {}, {:class => 'required'} %>
-        </span>
-      </p>
-      <p class="field">
-        <span id="bstate">
-          <% have_states = !@order.bill_address.country.states.empty? %>
-          <%= bill_form.label :state, t('china_address.state') %><span class="required">*</span><br />
-          <% state_elements = [
-             bill_form.collection_select(:state_id, @order.bill_address.country.states,
-                                :id, :name,
-                                {:class => have_states ? 'required' : 'hidden',
-                                :disabled => !have_states}) +
-             bill_form.text_field(:state_name,
-                                :class => !have_states ? 'required' : 'hidden',
-                                :disabled => have_states)
-             ].join.gsub('"', "'").gsub("\n", "")
-          %>
-          <%= javascript_tag do -%>
-            document.write("<%== state_elements %>");
-          <% end -%>
-        </span>
-          <noscript>
-            <%= bill_form.text_field :state_name, :class => 'required' %>
-          </noscript>
-        <span id="bcity">
-          <% have_cities = !@order.bill_address.state.cities.empty? %>
-          <% city_elements = [
-             bill_form.collection_select(:city_id, @order.bill_address.state.cities,
-                                :id, :name,
-                                {:class => have_cities ? 'required' : 'hidden',
-                                :disabled => !have_cities}) +
-             bill_form.text_field(:city_name,
-                                :class => !have_cities ? 'required' : 'hidden',
-                                :disabled => have_cities)
-             ].join.gsub('"', "'").gsub("\n", "")
-          %>
-          <%= javascript_tag do -%>
-            document.write("<%== city_elements %>");
-          <% end -%>
-        </span>
-          <noscript>
-            <%= bill_form.label :city, t(:city) %><span class="required">*</span><br />
-            <%= bill_form.text_field :city_name, :class => 'required' %>
-          </noscript>
-      </p>
-      <p class="field" id="baddress1">
-        <%= bill_form.label :address1, t(:street_address) %><span class="required">*</span><br />
-        <%= bill_form.text_field :address1, :class => 'required' %>
-      </p>
+    <%= hidden_field_tag 'order[use_billing]', '1' %>
+    <% if try_spree_current_user.respond_to?(:persist_order_address) %>
+      <%= hidden_field_tag 'save_user_address', '1' %>
+    <% end %>
 
-      <p class="field" id="bzipcode">
-        <%= bill_form.label :zipcode, t(:zip) %><span class="required">*</span><br />
-        <%= bill_form.text_field :zipcode, :class => 'required' %>
-      </p>
 
-      <% if Spree::Config[:alternative_billing_phone] %>
-        <p class="field" id="baltphone">
-          <%= bill_form.label :alternative_phone, t(:alternative_phone) %><br />
-          <%= bill_form.phone_field :alternative_phone %>
-        </p>
-      <% end %>
+    <div class="form-buttons" data-hook="buttons">
+      <%= form.button Spree.t(:save_and_continue), :class => 'continue button primary' %>    
     </div>
-  <% end %>
-</fieldset>
+
 </div>
 
-<div class="columns omega six" data-hook="shipping_fieldset_wrapper" style="display:none;">
-<fieldset id="shipping" data-hook>
-  <%= form.fields_for :ship_address do |ship_form| %>
-    <legend><%= t(:shipping_address) %></legend>
-    <p class="field checkbox" data-hook="use_billing">
-      <%= check_box_tag 'order[use_billing]', '1', true %> 
-      <%= label_tag :order_use_billing, t(:use_billing_address), :id => 'use_billing' %>
-    </p>
-  <% end %>
-</fieldset>
-</div>
-<hr class="clear" />
-<div class="form-buttons" data-hook="buttons">
-  <%= submit_tag t(:save_and_continue), :class => 'continue button primary' %>
-</div>

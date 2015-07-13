@@ -2,6 +2,8 @@ module Spree
   # assume html_attribute could has only one manual selected value, position always is last
   class HtmlAttribute < ActiveRecord::Base
     extend FriendlyId
+    friendly_id :title, :use => :slugged
+
     BOOL_TRUE='1'
     BOOL_FALSE='0'
     
@@ -10,9 +12,6 @@ module Spree
     #possible selected value for manual entry
     self.psv_for_manual_entry_enum =  {:href=>'0u', :bool=>'0b', :text=>'0t', :size=>'l1', :color=>'0c', :src=>'0i',:db=>'0d', :image=>'0i'}
     self.unit_collection = {:l=>['px','em']}
-    
-    friendly_id :title, :use => :slugged
-  
     
     @@html_attribute_hash = nil
     def self.all_to_hash

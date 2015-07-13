@@ -3,7 +3,7 @@ Spree::OptionValue.class_eval do
   accepts_nested_attributes_for :image
   # for unknown reason accepts_nested_attributes_for do not enable image_attributes
   #attr_accessible :image_attributes      
-  scope :for_product, lambda { |product| select("DISTINCT #{table_name}.*").where("spree_option_values_variants.variant_id IN (?)", product.variant_ids).joins(:variants)  }  
+  scope :for_product, ->(product) { select("DISTINCT #{table_name}.*").where("spree_option_values_variants.variant_id IN (?)", product.variant_ids).joins(:variants)  }  
   
   before_save :set_viewable
   
@@ -48,6 +48,20 @@ Spree::Product.class_eval do
     end
     @_variant_options_hash = hash
   end
+  
+  # fix slug
+  # Try building a slug based on the following fields in increasing order of specificity.
+  def slug_candidates
+    [
+      :name_to_url,
+      [:name_to_url, :sku]
+    ]
+  end
+  
+  def name_to_url
+    name.to_s.to_url  
+  end
+  
 end
 
 

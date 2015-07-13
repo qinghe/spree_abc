@@ -6,22 +6,28 @@
 <!--[if gt IE 9]><!--><html lang="<%= I18n.locale %>"><!--<![endif]-->
   <head data-hook="inside_head">
     <%= render :partial => 'spree/shared/head' %>
-    <%= stylesheet_link_tag :admin_login %>
+    <%= stylesheet_link_tag 'spree/backend/all' %>
+    <%= javascript_include_tag :admin_login %>
   </head>
-  <body class="<%= body_class %>" id="<%= @body_id || 'default' %>" data-hook="body">
+  <body class="<%= body_class %> admin-login-body" id="<%= @body_id || 'default' %>" data-hook="body">
 
-    <div class="container admin-container admin-box">
-    <h2 class="admin-container-title"> <%= Spree.t(:welcome_to_admin_login)%></h2>
-      <div id="wrapper" class="row" data-hook>
-
-        <div id="content" class="columns <%= !content_for?(:sidebar) ? "sixteen" : "twelve" %>" data-hook>
-          <%= flash_messages %>
-          <%= yield %>
+    <div class="container admin-container">
+        <div>
+            <%=image_tag 'logo/logo2c.png'%>
         </div>
-
+      <div class="login-container">
+          <h2 class="admin-container-title"> <%= Spree.t(:welcome_to_admin_login)%></h2>
+          <div data-hook>
+    
+            <div  class="" data-hook>
+              <%= flash_messages %>
+              <%= yield %>
+            </div>
+    
+          </div>
       </div>
     </div>
-    <%= render :partial => 'spree/shared/google_analytics' %>
+    <%= render :partial => 'spree/shared/sync_analytics' %>
     <script>
       Spree.api_key = <%= raw(try_spree_current_user.try(:spree_api_key).to_s.inspect) %>;
     </script>

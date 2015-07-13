@@ -15,26 +15,26 @@
  * SimpleModal.
  *
  * There are two ways to call SimpleModal:
- * 1) As a chained function on a jQuery object, like $('#myDiv').modal();.
+ * 1) As a chained function on a jQuery object, like $('#myDiv').simplemodal();.
  * This call would place the DOM object, #myDiv, inside a modal dialog.
  * Chaining requires a jQuery object. An optional options object can be
  * passed as a parameter.
  *
- * @example $('<div>my data</div>').modal({options});
- * @example $('#myDiv').modal({options});
- * @example jQueryObject.modal({options});
+ * @example $('<div>my data</div>').simplemodal({options});
+ * @example $('#myDiv').simplemodal({options});
+ * @example jQueryObject.simplemodal({options});
  *
- * 2) As a stand-alone function, like $.modal(data). The data parameter
+ * 2) As a stand-alone function, like $.simplemodal(data). The data parameter
  * is required and an optional options object can be passed as a second
  * parameter. This method provides more flexibility in the types of data
  * that are allowed. The data could be a DOM object, a jQuery object, HTML
  * or a string.
  *
- * @example $.modal('<div>my data</div>', {options});
- * @example $.modal('my data', {options});
- * @example $.modal($('#myDiv'), {options});
- * @example $.modal(jQueryObject, {options});
- * @example $.modal(document.getElementById('myDiv'), {options});
+ * @example $.simplemodal('<div>my data</div>', {options});
+ * @example $.simplemodal('my data', {options});
+ * @example $.simplemodal($('#myDiv'), {options});
+ * @example $.simplemodal(jQueryObject, {options});
+ * @example $.simplemodal(document.getElementById('myDiv'), {options});
  *
  * A SimpleModal call can contain multiple elements, but only one modal
  * dialog can be created at a time. Which means that all of the matched
@@ -92,39 +92,39 @@
 	 * @param {string, object} data A string, jQuery object or DOM object
 	 * @param {object} [options] An optional object containing options overrides
 	 */
-	$.modal = function (data, options) {
-		return $.modal.impl.init(data, options);
+	$.simplemodal = function (data, options) {
+		return $.simplemodal.impl.init(data, options);
 	};
 
 	/*
 	 * Close the modal dialog.
 	 */
-	$.modal.close = function () {
-		$.modal.impl.close();
+	$.simplemodal.close = function () {
+		$.simplemodal.impl.close();
 	};
 
 	/*
 	 * Set focus on first or last visible input in the modal dialog. To focus on the last
-	 * element, call $.modal.focus('last'). If no input elements are found, focus is placed
+	 * element, call $.simplemodal.focus('last'). If no input elements are found, focus is placed
 	 * on the data wrapper element.
 	 */
-	$.modal.focus = function (pos) {
-		$.modal.impl.focus(pos);
+	$.simplemodal.focus = function (pos) {
+		$.simplemodal.impl.focus(pos);
 	};
 
 	/*
 	 * Determine and set the dimensions of the modal dialog container.
 	 * setPosition() is called if the autoPosition option is true.
 	 */
-	$.modal.setContainerDimensions = function () {
-		$.modal.impl.setContainerDimensions();
+	$.simplemodal.setContainerDimensions = function () {
+		$.simplemodal.impl.setContainerDimensions();
 	};
 
 	/*
 	 * Re-position the modal dialog.
 	 */
-	$.modal.setPosition = function () {
-		$.modal.impl.setPosition();
+	$.simplemodal.setPosition = function () {
+		$.simplemodal.impl.setPosition();
 	};
 
 	/*
@@ -134,8 +134,8 @@
 	 * setContainerDimensions() is called, which in turn calls setPosition(), if enabled.
 	 * Lastly, focus() is called is the focus option is true.
 	 */
-	$.modal.update = function (height, width) {
-		$.modal.impl.update(height, width);
+	$.simplemodal.update = function (height, width) {
+		$.simplemodal.impl.update(height, width);
 	};
 
 	/*
@@ -143,8 +143,8 @@
 	 *
 	 * @param {object} [options] An optional object containing options overrides
 	 */
-	$.fn.modal = function (options) {
-		return $.modal.impl.init(this, options);
+	$.fn.simplemodal = function (options) {
+		return $.simplemodal.impl.init(this, options);
 	};
 
 	/*
@@ -186,7 +186,7 @@
 	 * onShow:			(Function:null) The callback function used after the modal dialog has opened
 	 * onClose:			(Function:null) The callback function used in place of SimpleModal's close
 	 */
-	$.modal.defaults = {
+	$.simplemodal.defaults = {
 		appendTo: 'body',
 		focus: true,
 		opacity: 50,
@@ -221,7 +221,7 @@
 	 * Main modal object
 	 * o = options
 	 */
-	$.modal.impl = {
+	$.simplemodal.impl = {
 		/*
 		 * Contains the modal dialog elements and is the object passed
 		 * back to the callback (onOpen, onShow, onClose) functions
@@ -241,7 +241,7 @@
 			browser.ieQuirks = browser.msie && !browser.boxModel;
 
 			// merge defaults and user options
-			s.o = $.extend({}, $.modal.defaults, options);
+			s.o = $.extend({}, $.simplemodal.defaults, options);
 
 			// keep track of z-index
 			s.zIndex = s.o.zIndex;
@@ -305,7 +305,7 @@
 			s.getDimensions();
 
 			// add an iframe to prevent select options from bleeding through
-			if (s.o.modal && browser.ie6) {
+			if (s.o.simplemodal && browser.ie6) {
 				s.d.iframe = $('<iframe src="javascript:false;"></iframe>')
 					.css($.extend(s.o.iframeCss, {
 						display: 'none',
@@ -388,7 +388,7 @@
 			});
 
 			// bind the overlay click to the close function, if enabled
-			if (s.o.modal && s.o.close && s.o.overlayClose) {
+			if (s.o.simplemodal && s.o.close && s.o.overlayClose) {
 				s.d.overlay.bind('click.simplemodal', function (e) {
 					e.preventDefault();
 					s.close();
@@ -397,7 +397,7 @@
 
 			// bind keydown events
 			doc.bind('keydown.simplemodal', function (e) {
-				if (s.o.modal && e.keyCode === 9) { // TAB
+				if (s.o.simplemodal && e.keyCode === 9) { // TAB
 					s.watchTab(e);
 				}
 				else if ((s.o.close && s.o.escClose) && e.keyCode === 27) { // ESC
@@ -417,7 +417,7 @@
 				if (browser.ie6 || browser.ieQuirks) {
 					s.fixIE();
 				}
-				else if (s.o.modal) {
+				else if (s.o.simplemodal) {
 					// update the iframe & overlay
 					s.d.iframe && s.d.iframe.css({height: w[0], width: w[1]});
 					s.d.overlay.css({height: d[0], width: d[1]});
@@ -440,7 +440,7 @@
 			var s = this, p = s.o.position;
 
 			// simulate fixed position - adapted from BlockUI
-			$.each([s.d.iframe || null, !s.o.modal ? null : s.d.overlay, s.d.container.css('position') === 'fixed' ? s.d.container : null], function (i, el) {
+			$.each([s.d.iframe || null, !s.o.simplemodal ? null : s.d.overlay, s.d.container.css('position') === 'fixed' ? s.d.container : null], function (i, el) {
 				if (el) {
 					var bch = 'document.body.clientHeight', bcw = 'document.body.clientWidth',
 						bsh = 'document.body.scrollHeight', bsl = 'document.body.scrollLeft',

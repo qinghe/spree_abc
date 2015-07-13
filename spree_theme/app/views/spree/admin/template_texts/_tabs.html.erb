@@ -10,11 +10,11 @@
   <nav class="menu">
     <ul data-hook="admin_theme_tabs">
       <%= content_tag :li, :class => ('active' if current == 'TemplateText') do %>
-        <%= link_to_with_icon 'icon-edit', Spree.t("template_text.index"), admin_template_texts_url() %>
+        <%= link_to_with_icon 'edit', Spree.t("template_text.index"), admin_template_texts_url() %>
       <% end if can?(:admin, Spree::TemplateText) %>
 
       <%= content_tag :li, :class => ('active' if current == 'TemplateFile') do %>
-        <%= link_to_with_icon 'icon-picture', Spree.t("template_file.index"), admin_template_files_url() %>
+        <%= link_to_with_icon 'picture-o', Spree.t("template_file.index"), admin_template_files_url() %>
       <% end if can?(:admin, Spree::TemplateFile) %>
     </ul>
   </nav>

@@ -7,21 +7,31 @@ zh-CN:
       next: 下一页 &raquo;
       previous: ! '&laquo; 上一页'
       truncate: ! '&hellip;'
+  theme:
+    product_image:
+      lightboxable: 点击放大图片
+        
 ########################################### end for template ###########################################    
   activerecord:
     attributes:
       spree/page_layout:
+        title: 名称
+        content_param: 内容参数
+        css_class: CSS
+        content_css_class: 内容 CSS
         section_context: section context
-        data_source: data source 
+        data_source: 数据源 
+        data_source_param: 数据源参数
       spree/product:
         theme_id: 销售模板
       spree/taxon:
-        page_context: 页面显示内容分类
-        replaced_by: 页面显示内容置换
+        page_context: 页面内容类型
+        replaced_by: 页面内容替换
       spree/template_file: 
         attachment_file_name: 文件名字
         attachment_content_type: 类型
         attachment_file_size: 文件大小
+        theme_id: 所属模板
         template_theme: 所属模板
         created_at: 上传时间
       spree/template_text:
@@ -40,8 +50,10 @@ zh-CN:
         other: 模块
       spree/template_file:
         one: 模板图片
+        other: 模板图片
       spree/template_text:
         one: 模板素材
+        other: 模板素材
       spree/template_theme:
         one: 模板
         other: 模板
@@ -54,6 +66,8 @@ zh-CN:
   spree:
     actions:
       import: 购买
+      config_desktop_theme: 配置电脑模板
+      config_mobile_theme: 配置手机模板
     admin:
       tab:
         taxonomies: 分类
@@ -89,11 +103,18 @@ zh-CN:
       taxonomy: 缺省菜单 
       blog: 文章列表
       post: 文章内容
+    detail: 详细
     dialog_title: 对话框
     global_taxons: 全局分类
+    post:
+      next: 下一篇
+      previous: 上一篇
+      no_previous: 没有了
+      no_next: 没有了     
     notice_messages:
       theme_imported: 模板已经购买成功
-      theme_not_imported: 模板无法导入        
+      theme_released: 模板已经发布成功
+      theme_not_imported: 模板无法导入   
     page_layout:
       data_source: 数据源 
       please_select_to_config: 请选择需要配置的模块
@@ -123,6 +144,8 @@ zh-CN:
       blog: 文章集合
       post: 当前选择文章
       gpvs_theme: 模板集合
+      previous_post: 当前选择文章-前一篇
+      next_post: 当前选择文章-下一篇
     template_file:
       index: 图片素材
       new: 新建图片素材
@@ -157,7 +180,7 @@ zh-CN:
     install_theme_with_site: 安装
     is_taxon_clickable: 分类是否可点击
     theme_release: 发布
-    welcome_to_admin_login: Dalianshops管理系统登录
+    welcome_to_admin_login: 管理系统登录
     welcome_to_under_construction: 网站建设中，请登录管理系统
       
                          

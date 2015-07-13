@@ -5,6 +5,7 @@ module SpreeTheme
       belongs_to :template_theme, :foreign_key=>"theme_id"
       has_many :template_texts, :foreign_key=>"site_id" #compatible with fack_websites
       has_many :template_themes, :foreign_key=>"site_id", :dependent=>:destroy
+      # customer could select a theme when creating site.
       belongs_to :foreign_template_theme, :foreign_key=>'foreign_theme_id', :class_name=>'TemplateTheme'
       
       after_create :initialize_first_theme_if_selected # site_id is required for it
@@ -15,10 +16,6 @@ module SpreeTheme
       def globalsite
         dalianshops
       end
-      
-      def designsite
-        find_by_short_name('design')
-      end     
       
       if Rails.env.test?    
         def current
@@ -58,10 +55,6 @@ module SpreeTheme
       self.template_theme.present? ? self.template_theme.layout_path : nil
     end
       
-    def design?
-      self == self.class.designsite
-    end 
-    
     # apply theme to site
     # params - theme_or_release, TemplateTheme or TemplateRelease
     def apply_theme( theme)

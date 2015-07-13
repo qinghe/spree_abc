@@ -7,13 +7,15 @@ zh-CN:
         model_name: Blog
         name: Name
         permalink: Permalink
-      post:
+      spree/post:
         model_name: 文章
         title: 标题
         posted_at: 发布时间
         body: 正文
+        cover: 图片
         live: 是否发布
         tags: 标签
+        author: 作者
       post_category:
         model_name: Category
         name: Name
@@ -94,6 +96,7 @@ zh-CN:
         post_categories: Categories
     subnav:
       posts: Blog Posts
+    title: 标题
 
   time:
     formats:

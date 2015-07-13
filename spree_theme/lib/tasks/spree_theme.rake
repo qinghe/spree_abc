@@ -11,7 +11,7 @@ namespace :spree_theme do
     load File.join(SpreeTheme::Engine.root,'db/seeds/00_section_pieces.rb')
     Spree::TemplateTheme.all.each{|theme|
       Rake::Task['spree_theme:release_theme'].invoke(theme.id)  
-    }    
+    }
   end
   
   desc "export theme. params: :site_id,:theme_id,:format, :seed_path
@@ -147,13 +147,13 @@ namespace :spree_theme do
       end
     end 
     
-    if ENV['FIX'].present?
+    if ENV['SPREE_FIX'].present?
       incomplete_page_layouts.uniq.each{| pl |
         pl.replace_with( Spree::Section.find( pl.section_id ))
       }
     end
     
-    pvs = theme.param_values.all(:include=>{:section_param=>{:section_piece_param=>:param_category}})
+    pvs = theme.param_values.includes(:section_param=>{:section_piece_param=>:param_category})
     for pv in pvs
       if pv.section_param.blank?
         puts "error:pv=#{pv.id} has no section_param"  
@@ -173,6 +173,7 @@ namespace :spree_theme do
     file_path = File.join(SpreeTheme::Engine.root,'db','seeds',args.seed_name)
     if File.exists? file_path
       Spree::TemplateTheme.connection.transaction do
+        include SpreeTheme::SeedHelper
         load file_path
         puts "loaded file #{file_path}"
       end

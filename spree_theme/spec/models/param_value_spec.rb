@@ -19,7 +19,7 @@ describe Spree::ParamValue do
   
   
   it "should trigger pv_change" do
-    html_attribute_height = Spree::HtmlAttribute.find('height')
+    html_attribute_height = Spree::HtmlAttribute.find(21)
     container = Spree::Section.find('container').page_layouts.first
     param_value = container.partial_html.html_attribute_values('block_width').param_value
     param_value.should be_present    
@@ -30,8 +30,8 @@ describe Spree::ParamValue do
   end
   
   it "height should trigger pv_change" do
-    html_attribute_height = Spree::HtmlAttribute.find('height')
-    html_attribute_margin = Spree::HtmlAttribute.find('margin')
+    html_attribute_height = Spree::HtmlAttribute.find(15)
+    html_attribute_margin = Spree::HtmlAttribute.find(31)
     container = Spree::Section.find('container').page_layouts.first
     # set margin
     param_value_margin = container.partial_html.html_attribute_values('inner_margin').param_value

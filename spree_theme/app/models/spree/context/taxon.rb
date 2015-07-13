@@ -24,7 +24,41 @@ module Spree
         def self.home
           homes.first
         end
-          
+        
+        # context is symbol
+        def self.get_route_by_context( some_context )
+          context_routes[ some_context ] || context_routes[ ContextEnum.either ]
+        end
+        
+        # page context is integer
+        def self.get_route_by_page_context( page_context )
+          #convert to symbol context first
+          get_route_by_context( get_context_by_page_context( page_context ) )          
+        end
+        
+        def self.get_context_by_page_context( target_page_context )
+            case target_page_context
+              when 1 #home
+                ContextEnum.home
+              when 2 #cart
+                ContextEnum.cart
+              when 3 #checkout
+                ContextEnum.checkout
+              when 4 #thanks
+                ContextEnum.thanks
+              when 5 #signup
+                ContextEnum.signup
+              when 6 #login
+                ContextEnum.login
+              when 7 #accout
+                ContextEnum.account
+              when 8 
+                ContextEnum.blog
+              else
+                ContextEnum.list  
+            end
+        end
+                  
         def path
           # menu.id would be nil if it is class DefaultTaxon
           context_routes[current_context] || "/#{self.id.to_i}-#{self.permalink.split('/').last}"     
@@ -44,7 +78,7 @@ module Spree
         
         if @context_context.nil?          
           target_page_context = ( self.page_context>0 ? self.page_context : inherited_page_context )
-          @context_context = get_context_by_page_context( target_page_context )
+          @context_context = self.class.get_context_by_page_context( target_page_context )
         end
         @context_context
       end
@@ -102,28 +136,7 @@ module Spree
       PageContextEnum = Struct.new(:list, :home, :cart, :account, :signup, :login, :blog)[0, 1, 2, 7, 5, 6, 8]
       PageContextForFirstSiteEnum = Struct.new(:new_site)[20]
 
-      def get_context_by_page_context( target_page_context )
-          case target_page_context
-            when 1 #home
-              ContextEnum.home
-            when 2 #cart
-              ContextEnum.cart
-            when 3 #checkout
-              ContextEnum.checkout
-            when 4 #thanks
-              ContextEnum.thanks
-            when 5 #signup
-              ContextEnum.signup
-            when 6 #login
-              ContextEnum.login
-            when 7 #accout
-              ContextEnum.account
-            when 8 
-              ContextEnum.blog
-            else
-              ContextEnum.list  
-          end
-      end
+
     end
   end
   

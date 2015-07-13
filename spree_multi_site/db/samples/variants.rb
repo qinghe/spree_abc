@@ -160,7 +160,7 @@ masters = {
 }
 
 variants.each do |variant_attrs|
-  Spree::Variant.create!(variant_attrs, :without_protection => true)
+  Spree::Variant.create!(variant_attrs)
 end
 
 masters.each do |product, variant_attrs|

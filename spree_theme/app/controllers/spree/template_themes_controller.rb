@@ -5,20 +5,17 @@ module Spree
     delegate :taxon_class,:site_class, :to=>:"SpreeTheme"
 
     def page
-      #if SpreeTheme.site_class.current.dalianshops?
-      #  redirect_to new_site_path      
-      #end
     end  
-    
+        
     def under_construction  
       #logger.debug "request.env[/devise/]= #{request.env['devise.mapping']},#{warden.inspect}"   
       #require spree_auth_devise
-      render "under_construction", layout:"under_construction"            
+      render "under_construction", layout: "under_construction"            
     end
     
     # @theme is required for xhr
     def new_admin_session
-      @user = Spree::User.new
+      #@user = Spree::User.new
     end
     
     # @theme is required for xhr
@@ -35,7 +32,13 @@ module Spree
         #warden.authenticate?
         # host is required, current_user.site may not be current site, we allow user login from dalianshops.com
         respond_with  do |format|
-          format.html{ redirect_to admin_url(:host=> current_spree_user.site.subdomain ) }          
+          #  site_custom_domain/admin conficlt with site.dalianshops.com/admin
+          #  current host maybe dalianshops.com or custom domain
+          if is_from_system_domain? 
+            format.html{ redirect_to admin_url(:host=> current_spree_user.site.subdomain ) }
+          else
+            format.html{ redirect_to admin_url }
+          end          
         end
       else
         flash.now[:error] = t('devise.failure.invalid')        
@@ -49,19 +52,7 @@ module Spree
     #    d: domain of website
     #    c: menu_id
     def preview
-     
-    #  @lg = PageTag::PageGenerator.previewer( @menu, @theme, {:resource=>(@resource.nil? ? nil:@resource),:controller=>self})
-    #  html = @lg.generate
-    #  css,js  = @lg.generate_assets        
-      #insert css to html
-    #  style = %Q!<style type="text/css">#{css}</style>!
-      #editor_panel require @theme, @editors, @editor ...
-    #  html.insert(html.index("</head>"),style)
-    #  html.insert(html.index("</body>"),@editor_panel)
-    #  respond_to do |format|
-    #    format.html {render :text => html}
-    #  end
-          
+               
     end
                      
     # params
@@ -134,7 +125,7 @@ module Spree
       param_value_keys = params.keys.select{|k| k=~/pv[\d]+/}
       
         param_value_params = params["pv#{editing_param_value_id}"]
-        source_param_value = ParamValue.find(editing_param_value_id, :include=>[:section_param, :section])
+        source_param_value = ParamValue.includes(:section_param, :section).find(editing_param_value_id)
         updated_html_attribute_values = do_update_param_value(source_param_value, param_value_params, param_value_event, editing_html_attribute_id)
   
       #  param_value = ParamValue.find(editing_param_value_id)
@@ -184,11 +175,11 @@ module Spree
       @dialog_content="upload_dialog_content"
       @param_value_id = params[:param_value_id]
       @html_attribute_id = params[:html_attribute_id].to_i
-      @param_value = ParamValue.find(@param_value_id, :include=>[:section_param=>:section_piece_param])
+      @param_value = ParamValue.includes(:section_param=>:section_piece_param).find(@param_value_id)
       #@editor = @param_value.section_param.section_piece_param.editor
       if request.post?        
         #TODO replace same name of template file 
-        uploaded_image = TemplateFile.new( params[:template_file] )
+        uploaded_image = TemplateFile.new(  params.require(:template_file).permit! )
         if uploaded_image.valid?
           uploaded_image['theme_id']=@param_value.theme_id              
           if uploaded_image.save
@@ -206,7 +197,8 @@ module Spree
         end
       else
         @theme = TemplateTheme.find(@param_value.theme_id)
-        model_dialog("File upload dialog",@dialog_content)    
+        render "application/dialog_for_editor"
+            
       end
     end
    
@@ -240,7 +232,11 @@ module Spree
           format.js{ render "message_box", :locals=>{:message=>message}}
       end
     end
-
+    
+    def is_from_system_domain?
+      #consider localhost?      
+      request.host.end_with?  Spree::Site.system_top_domain      
+    end
   end
 
 end

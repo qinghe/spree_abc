@@ -15,6 +15,11 @@ Spree::Core::Engine.routes.draw do
        get 'upload_file_dialog'
        post 'upload_file_dialog'
      end
+     
+     resources :page_layouts, only: [:edit,:update] do
+       
+     end
+     
   end
   
   resources :comments, :only=>[:create] do
@@ -60,10 +65,10 @@ Spree::Core::Engine.routes.draw do
         post :copy
         post :release
         post :import
-        put :apply        
+        patch :apply        
       end
       
-      resources :page_layout do
+      resources :page_layouts do
         member do
           get :config_resource
           get :config_context

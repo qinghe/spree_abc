@@ -11,10 +11,10 @@ module Spree
     before_update :collect_events # skip create 
     after_update :trigger_events
   
-    scope :within_section, lambda { |param_value|
+    scope :within_section, ->( param_value ){
         where(" theme_id=? and page_layout_id=? ", param_value.theme_id, param_value.page_layout_id)      
       }
-    scope :within_editor, lambda { |editor|
+    scope :within_editor, ->( editor ){
         scoped.includes(:section_param=>:section_piece_param).where("#{SectionPieceParam.table_name}.editor_id"=>editor.id)
       }
       
@@ -188,7 +188,7 @@ module Spree
       # we also collect all updated_html_attribute_values which caused by GlobalParamValueEvent or ParamValueEvent events.
       def trigger_events
         extra_html_attribute_values = []
-        #@param_value_events may be nil, ex. load seed.   
+        #@param_value_events may be nil, ex. load seed.
         if @param_value_events.present?
           param_value_events = @param_value_events
           @param_value_events = nil # in case update self.pvalue, trigger again.

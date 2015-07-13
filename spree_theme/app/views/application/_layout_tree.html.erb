@@ -13,7 +13,7 @@ selected_id= (options[:selected_id]||layout_root.id )
     %>
   <div class="clear-block">
     <div class="fl">
-    <%=raw("&nbsp;&nbsp;"*page_layout.cached_level)%>
+    <%=raw("&nbsp;&nbsp;"*page_layout.depth)%>
     <% # do not call form.submit. 
       page_layout_class = 'click_editable'
       page_layout_class << ' selected' if page_layout.id==selected_id 
@@ -39,12 +39,13 @@ selected_id= (options[:selected_id]||layout_root.id )
     <% end %>
     <% if options[:editable] %>
       <div class="fr">
-      <%= link_to "+","#", {data: {id:page_layout.id}, class: :add_section_button  } %>
-      <%= link_to "-","#", {data: {id:page_layout.id}, class: :remove_section_button } %>
-      <%= link_to "u","#", {data: {id:page_layout.id}, class: :move_section_to_left_button } %>
-      <%= link_to "d","#", {data: {id:page_layout.id}, class: :move_section_to_right_button } %>
-      <%= link_to "<","#", {data: {id:page_layout.id}, class: :promote_section_button } %>
-      <%= link_to ">","#", {data: {id:page_layout.id}, class: :demote_section_button } %>
+      <%= link_to "+","#", {data: {id:page_layout.id, op:'list_section'}, onclick: 'submit_layout_tree_form(this);'  } %>
+      <%= link_to "-","#", {data: {id:page_layout.id, op:'del_self'}, onclick: "if(confirm('Really?')) submit_layout_tree_form(this);" } %>
+      <%= link_to "u","#", {data: {id:page_layout.id, op:'move_left'}, onclick: 'submit_layout_tree_form(this);' } %>
+      <%= link_to "d","#", {data: {id:page_layout.id, op:'move_right'}, onclick: 'submit_layout_tree_form(this);' } %>
+      <%= link_to "<","#", {data: {id:page_layout.id, op:'promote'}, onclick: 'submit_layout_tree_form(this);' } %>
+      <%= link_to ">","#", {data: {id:page_layout.id, op:'demote'}, onclick: 'submit_layout_tree_form(this);' } %>
+      <%= link_to "e",edit_template_theme_page_layout_path( theme, page_layout), remote: true %>
       </div>
     <% end %>
   </div>
@@ -53,36 +54,5 @@ selected_id= (options[:selected_id]||layout_root.id )
 <%=hidden_field_tag "selected_section_id" %>
 <%=hidden_field_tag "op" %>
 <%=hidden_field_tag "layout_id" %>
-<script>
-<% #keep js in this file, update_layout_tree would update page layout tree, js should be reset as well %>
-      $("#layout_tree_form .click_editable").each(function(index,element){
-      var jquery_element = $(element);
-      jquery_element.editable(function(value, settings) { 
-            var url = Spree.routes.admin_template_themes+'/'+jquery_element.data('tid')+'/page_layout/'+jquery_element.data('lid');
-            var submitdata = {};
-            submitdata[settings.name] = value;
-            //submitdata[settings.id] = self.id;
-            $.ajax({ dataType: 'json', url: url, type: 'put',  data : submitdata,
-                success: function(data){
-                  // data is null, "nocontent" returned
-                  // jquery_element.html(data.page_layout.title);
-                }
-            });             
-            return(value);
-          },        
-          { //since dblclick would trigger click, for a link, we should not click,dblclick together
-            event     : "click_editable",
-            name      : "page_layout[title]",
-            style  : "inherit" });
-      jquery_element.click(function(){
-        if($('#page_layout_editable').is(':checked')){
-          jquery_element.trigger('click_editable')
-        }else{
-          $('#selected_page_layout_id').val(jquery_element.data('lid'));
-          $('#layout_editor_form').trigger('submit')
-        }          
-      })        
-    })
-</script>
 
 <%end%>

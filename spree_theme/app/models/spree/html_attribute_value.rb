@@ -121,16 +121,16 @@ module Spree
         # for css: format is css_name:url(file_url); 
         pvalue_string = html_attribute.css_name+':'+ ( html_attribute.manual_entry?(pvalue_properties["psvalue0"]) ? "#{pvalue_properties["pvalue0"]}" : pvalue_properties["psvalue0"] ) 
       else
-        pvalue_string = html_attribute.css_name+':'+ build_css_property_value( html_attribute, pvalue_properties )
+        pvalue_string = html_attribute.css_name+':'+ build_css_property_value(  html_attribute, pvalue_properties, param_value )
       end
       pvalue_string
     end
     
-    def self.build_css_property_value( html_attribute, pvalue_properties )
+    def self.build_css_property_value( html_attribute, pvalue_properties, param_value )
       val = ''
       if html_attribute.is_special?(:image)
         if html_attribute.manual_entry?(pvalue_properties["psvalue0"])
-          file = TemplateFile.find_by_attachment_file_name( pvalue_properties["pvalue0"] )
+          file = TemplateFile.find_by( theme_id: param_value.theme_id, attachment_file_name: pvalue_properties["pvalue0"] )
           if file.present?
             val = "url(#{file.attachment.url})"
           end
@@ -286,20 +286,22 @@ module Spree
             "#page"
           when 'content_layout','first_child','last_child'
             ".c_#{self.param_value.page_layout_id}"  
-          when /(label|input|img|button)/ # product_atc, product_quantity
-            ".s_#{self.param_value.page_layout_id}_#{self.param_value.section_param.section_root_id}"                      
-          when 'as_h','a_h','a','th','td','li' 
-            ".s_#{self.param_value.page_layout_id}_#{self.param_value.section_param.section_id}"
+          #when /(label|input|img|button|block)/ # product_atc, product_quantity, block_hover
+          #  ".s_#{self.param_value.page_layout_id}_#{self.param_value.section_param.section_root_id}"                      
+          #when 'as_h','a_h','a','th','td','li' 
+          #  ".s_#{self.param_value.page_layout_id}_#{self.param_value.section_param.section_root_id}"
           else
-            ".s_#{self.param_value.page_layout_id}_#{self.param_value.section_param.section_id}"
+            ".s_#{self.param_value.page_layout_id}_#{self.param_value.section_param.section_root_id}"
           end
         
         # it has to apply to inner, for root, outer is body, it include editor panel, some css would affect it. 
         selector = case target
-          when /content_layout/,/block/,/cell/,'page'
+          when /content_layout/,'block','block_h',/cell/,'page'
             ""          
+          when /block_/ #block_hovered
+            ".#{target}"  
           when /inner/
-            "_#{target}"
+            "> .inner"
           when 'as_h','a_sel' #selected:hover, selected
             " a.selected"
           when 'a_una' #  unavailable, unclickable
@@ -331,7 +333,7 @@ module Spree
       end
       def attribute_value
         target_properties = unset? ? default_properties : properties        
-        self.class.build_css_property_value( self.html_attribute, target_properties )        
+        self.class.build_css_property_value( self.html_attribute, target_properties, self.param_value )        
       end
     end
     
@@ -341,31 +343,5 @@ module Spree
       self.param_value.update_html_attribute_value(self.html_attribute, self.properties, 'system')
     end
     
-  
-  
-    # possible selected values are website related, ex. menus.  
-=begin  
-    def possible_selected_values
-      if @possible_selected_values.nil?      
-        if html_attribute.is_special? :db        
-          @possible_selected_values = html_attribute.possible_selected_values
-        else
-          @possible_selected_values = html_attribute.possible_selected_values
-        end
-      end
-      @possible_selected_values
-    end
-    def possible_selected_values_descriptions
-      if @possible_selected_values_descriptions.nil?      
-        if html_attribute.is_special? :db      
-          @possible_selected_values_descriptions = html_attribute.possible_selected_values_descriptions        
-          #@possible_selected_values_descriptions+=(Menu.roots.collect{|menu| menu.title})
-        else
-          @possible_selected_values_descriptions = html_attribute.possible_selected_values_descriptions
-        end
-      end
-      @possible_selected_values_descriptions
-    end    
-=end
   end
 end
