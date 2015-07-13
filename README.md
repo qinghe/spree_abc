@@ -4,7 +4,7 @@ Welcome to SpreeABC
 Introduction goes here.
   SpreeABC is e-commerce solution based on spree.
   Difference is that you could create many websites, it is more like shopify and for china user.
-  It is working in progress.
+  __It is working in progress__.
 
 Project structure
 =================
