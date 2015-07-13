@@ -10,18 +10,18 @@ Project structure
 =================
   external gems
   -------------
-    * spree - basic e-commerce solution
-    * spree_editor - rich text editor with file uploading in-place
-    * spree_alipay - payment method alipay
+  * spree - basic e-commerce solution
+  * spree_editor - rich text editor with file uploading in-place
+  * spree_alipay - payment method alipay
 
   internal gems
   -------------
-    * spree_essential_blog - support articles
-    * spree_flexi_variants - create product variants as-needed, option value has image.
-    * spree_comments - comments to product/article
-    * spree_multi_site  - support multiple separated website
-    * spree_theme - frontend template system
-    * spree_china_checkout - improve checkout flow for china user.
+  * spree_essential_blog - support articles
+  * spree_flexi_variants - create product variants as-needed, option value has image.
+  * spree_comments - comments to product/article
+  * spree_multi_site  - support multiple separated website
+  * spree_theme - frontend template system
+  * spree_china_checkout - improve checkout flow for china user.
 
 
 Development  
