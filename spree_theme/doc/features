@@ -67,6 +67,7 @@ index page
                    + no native layout, can not edit,
                       theme.release_id: release id of original theme, means imported that release
 
+a design/shopping site must have a released theme, or redirect to under_contruction.
 
   requirement
     admin.sometld/... is for user preview,   ex. admin.somtld/some_taxon

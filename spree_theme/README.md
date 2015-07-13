@@ -1,7 +1,7 @@
 #SpreeTheme
 
 New frontend of spree, user could easy modify theme or add new theme.
-__It is just for spree_abc, not common use, cause it override some cart/checkout views.__
+__It is just for spree_abc, not common use.__
 
 ####terms and conditions
 Each site want their own theme, site could have more than one themes.
@@ -12,7 +12,6 @@ Designer could design theme and release it.
 Shops
 * design shop: product is theme, designer produce theme on line.
 * other shop: use released theme as frentend, sell product on line.
-__a design/shopping site must have a released theme, or redirect to under_contruction.__
 
 Roles
 * user:  on line shop user, have full permission to manage shop.
