@@ -8,12 +8,11 @@ Introduction goes here.
 ##Project structure
 
 ####external gems
-
 * spree - basic e-commerce solution
-* spree_editor - rich text editor with file uploading in-place
+* spree_editor - rich text editor with file uploading inplace
 * spree_alipay - payment method alipay
-####internal gems
 
+####internal gems
 * spree_essential_blog - support articles
 * spree_flexi_variants - create product variants as-needed, option value has image.
 * spree_comments - comments to product/article
@@ -27,17 +26,14 @@ Introduction goes here.
     rake db:migrate
     rake db:seed
 
-
 ##Deployment
-
-     bundle install --deloyment
-     bundle exec rake db:reset RAILS_ENV=production
-     bundle exec rake assets:precompile RAILS_ENV=production
+    bundle install --deloyment
+    bundle exec rake db:reset RAILS_ENV=production
+    bundle exec rake assets:precompile RAILS_ENV=production
 ####Helpful links for deployment
 
 
 ####Helpful command for deployent
-
     bundle exec rake railties:install:migrations
     iptables -A INPUT -p tcp -s 127.0.0.1 --dport 8080 -j ACCEPT
     sestatus -b | grep httpd
