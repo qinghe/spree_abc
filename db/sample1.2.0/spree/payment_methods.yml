@@ -1,0 +1,12 @@
+alipay_dev:
+  name: Alipay
+  description: Alipay (direct pay by user) for development.
+  environment: development
+  active: true
+  type: Spree::BillingIntegration::Alipay
+check_method:
+  name: Check
+  description: Pay by check.
+  environment: development
+  active: true
+  type: Spree::PaymentMethod::Check  

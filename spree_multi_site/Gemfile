@@ -1,0 +1,13 @@
+source 'http://ruby.taobao.org'
+#source 'http://rubygems.org'
+
+
+group :development,:test do
+  gem 'mail_view'
+  # Provides basic authentication functionality for testing parts of your engine
+  gem 'spree', '~>2.4' # required to create dummy
+  #gem 'spree_auth_devise', github: 'spree/spree_auth_devise', branch: '2-0-stable'
+end
+
+gemspec
+

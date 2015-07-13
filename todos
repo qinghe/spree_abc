@@ -1,0 +1,158 @@
+1. 中文示例数据
+2. 商店创建发布流程。  guided tour
+3. 支持百度统计
+4. 查看注册网站信息
+5. 分析Rails日志, 查看错误请求。
+6. remove redundant option_values from server db.
+7. css(:image_style), css(:slides),  those situation is reading param_values in layout. try to remove it.
+8. 在seeds 中设置产品的配送类型。否则导致产品无法更新。
+9. replace 'canonical' tag in original spree.
+10. select variant in radio list. it is not working now.
+
+
+https://github.com/spree/spree/issues/1906
+https://github.com/spree/spree/commit/a398bc289bb6008c177452fd1d86b652ded96dbd
+
+1. override spree_multi_site, should not allow user add site.
+2. override spree_editor, should not allow user configure editor
+ 
+20140122
+*1. for design site, disable editor if logged in user is not admin
+1. new shop no need to add taxon for each context during import theme. 
+    a. taxon, section, page_layout has context
+    b. system has default taxon tree for each context, theme could use it if no taxon assigned. 
+    
+    remove page_layout.current_context, fix related method
+    rename taxon.mtype to page_context.
+    move taxon routes into one place
+    
+    http://demo.david.com:3000/  account menu default taxon is not right.
+    http://demo.david.com:3000/  context home should be special one of list, or home have no product  
+    section_pieces.resource length =20
+    
+1.1 improve spree_theme for first shop   
+2. prepare for import, how to handle logo image?  remove upload image for now.
+3. assign taxon to taxonomy name.
+4. complete theme 1
+5. deploy spree_abc on vps.
+ 
+bugs
+1. for unlogged customer, http://demo.david.com:3000/account would use layout 'abc_application'
+*2. logged user could not design page   http://design.david.com:3000/password/recover.
+*3. unset container height, should remove inner height.
+
+4. .s_1_75 .error, should be label.error,  input has class="error".
+
+5. fix rails r "load 'db/patch/20140329_fix_shipping_categories_site_id.rb'"
+Connecting to database specified by database.yml
+  Spree::Preference Load (4.4ms)  SELECT `spree_preferences`.* FROM `spree_preferences` WHERE `spree_preferences`.`key` = 'spree/app_configuration/show_raw_product_description/0' LIMIT 1
+   (0.1ms)  BEGIN
+   (0.3ms)  UPDATE `spree_preferences` SET `value` = 1, `value_type` = 'boolean', `updated_at` = '2014-03-30 13:59:05' WHERE `spree_preferences`.`id` = 14
+   (42.6ms)  COMMIT
+  Spree::Preference Load (0.3ms)  SELECT `spree_preferences`.* FROM `spree_preferences` WHERE `spree_preferences`.`key` = 'spree/multi_site_configuration/seed_dir' LIMIT 1
+   (0.1ms)  BEGIN
+   (0.3ms)  UPDATE `spree_preferences` SET `value_type` = 'string', `updated_at` = '2014-03-30 13:59:05' WHERE `spree_preferences`.`id` = 15
+   (45.0ms)  COMMIT
+  Spree::Preference Load (0.3ms)  SELECT `spree_preferences`.* FROM `spree_preferences` WHERE `spree_preferences`.`key` = 'spree/editor_configuration/ids' LIMIT 1
+   (0.1ms)  BEGIN
+   (0.2ms)  UPDATE `spree_preferences` SET `value_type` = 'string', `updated_at` = '2014-03-30 13:59:05' WHERE `spree_preferences`.`id` = 16
+6. upload background image 
+ActionView::MissingTemplate (Missing template base/model_dialog with {:locale=>[:"zh-CN"], :formats=>[:js, :html], :handlers=>[:erb, :builder, :coffee, :rabl], :versions=>[:v1]}. Searched in:
+  * "/var/www/workspace/spree_abc/app/views"
+  * "/home/david/.rvm/gems/ruby-1.9.3-p448@spree_abc/bundler/gems/spree_editor-4312b29cc270/app/views"
+  * "/home/david/.rvm/gems/ruby-1.9.3-p448@spree_abc/gems/ckeditor-4.0.6/app/views"
+  * "/var/www/workspace/spree_abc/spree_china_checkout/app/views"
+  * "/var/www/workspace/spree_alipay/app/views"
+  * "/var/www/workspace/spree_abc/spree_theme/app/views"
+  * "/var/www/workspace/spree_abc/spree_multi_site/app/views"
+  * "/home/david/.rvm/gems/ruby-1.9.3-p448@spree_abc/bundler/gems/spree_auth_devise-3224869cfda1/app/views"
+  * "/home/david/.rvm/gems/ruby-1.9.3-p448@spree_abc/gems/devise-2.2.8/app/views"
+  * "/home/david/.rvm/gems/ruby-1.9.3-p448@spree_abc/bundler/gems/spree-4d7ac0b2e06d/frontend/app/views"
+  * "/home/david/.rvm/gems/ruby-1.9.3-p448@spree_abc/bundler/gems/spree-4d7ac0b2e06d/backend/app/views"
+  * "/home/david/.rvm/gems/ruby-1.9.3-p448@spree_abc/bundler/gems/spree-4d7ac0b2e06d/api/app/views"
+  * "/home/david/.rvm/gems/ruby-1.9.3-p448@spree_abc/bundler/gems/spree-4d7ac0b2e06d/core/app/views"
+  * "/home/david/.rvm/gems/ruby-1.9.3-p448@spree_abc/gems/kaminari-0.15.1/app/views"
+  * "/var/www/workspace/spree_abc/public/shops/development/2"
+  * "/var/www/workspace/spree_abc/public/shops/development/2"
+  * "/var/www/workspace/spree_abc"
+  * "/"
+):
+
+new todo
+==============================================================================================
+1. add feature spree_editor.
+
+2. https://app.shopify.com/services/signup/setup 
+   https://shopabc-5.myshopify.com/admin/account_setup
+   
+3. export/import theme 2.
+
+4. show error message in checkout page. ex. can not ship.
+
+5. select shop currency.  use CNY
+
+6. add site_id into shipping_categories
+
+7. 生成page_tag API文档
+
+1. 修正 thankyou 页面 账单地址
+
+2. 上传一个原图，生成两个缩略图片
+
+3. 登录后安全警告。
+http://spreecommerce.com/blog/exploits-found-within-core-and-api
+http://spreecommerce.com/blog/spree-1-3-1-and-1-2-3-released
+
+designer todo
+==============================================================================================
+1. favicon 有锯齿
+2. noimages/product
+3. 模板选择页面
+4. 帮助中心
+5. 定制模板过程
+6. 重新设计首页
+
+developer todo
+==============================================================================================
+#1. 商店登录
+*1.1 user comments and advices.
+1.2 demo 网站
+1.3 使用协议
+1.4 定价
+2. user.email unique for each site.  
+3. use current site mail server before send mail.
+4. body:background
+5. search, advance search
+
+sales todo
+===============================================================================================
+1. 市场调查
+2.0 制定客户调查范围，流程
+2.1 执行客户电话调查
+
+
+When upgrading
+
+Re-run the migrations generator
+
+    rake acts_as_taggable_on_engine:install:migrations
+
+It will create any new migrations and skip existing ones
+
+
+##Breaking changes:
+
+  - ActsAsTaggableOn::Tag is not extend with ActsAsTaggableOn::Utils anymore.
+    Please use ActsAsTaggableOn::Utils instead
+Post-install message from capistrano-stats:
+    Capistrano will ask you the next time you run it if you would like to share
+    anonymous usage statistics with the maintainance team to help guide our
+    development efforts. We emplore you to opt-in, but we understand if your
+    privacy is important to you in this regard.
+Post-install message from capistrano:
+Capistrano 3.1 has some breaking changes. Please check the CHANGELOG: http://goo.gl/SxB0lr
+
+If you're upgrading Capistrano from 2.x, we recommend to read the upgrade guide: http://goo.gl/4536kB
+
+The `deploy:restart` hook for passenger applications is now in a separate gem called capistrano-passenger.  Just add it to your Gemfile and require it in your Capfile.
+

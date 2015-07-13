@@ -1,0 +1,9 @@
+<% if product.product_customization_types.present? %>
+    <% product.product_customization_types.each do |product_customization_type| %>
+        <% # render a custom partial based on the calculator name?
+          param_prefix = "product_customizations[#{product_customization_type.id}]" 
+          partial_name = "themes/customizations/calculator_type/#{calculator_name(product_customization_type)}"
+        %>
+        <%= render :partial => partial_name, :locals => {:product_customization_type=>product_customization_type, :param_prefix => param_prefix} %>
+    <% end %> 
+<% end %>

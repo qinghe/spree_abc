@@ -1,0 +1,52 @@
+1. recognize_path in console
+
+  Rails.appplication.routes.recognize_path
+  
+2. create directory recursively
+
+ path = "/tmp/a/b/c"
+ FileUtils.mkdir_p(path) unless File.exists?(path)
+ 
+3. reinstall all migration
+  remove dummy/db/migrate/*
+  rake spree:install:migrations
+  rake spree_auth:install:migrations
+  rake spree_theme:install:migrations
+  
+4. copy db structure to test
+  rake db:test:clone  Recreate the test database from the current environment’s database schema
+  rake db:test:clone_structure  Recreate the test database from the development structure
+  rake db:test:load Recreate the test database from the current schema.rb
+  rake db:test:prepare  Check for pending migrations and load the test schema
+  rake db:test:purge  Empty the test database.
+  
+5. add a section
+  rake spree_theme:reload_section_piece  
+  rails r "load SpreeTheme::Engine.root.to_s+'/db/seeds/10_sections.rb'"
+
+6. prepare for test
+  cd dummy
+  rake db:test:prepare
+  rake spree_theme:load_sample RAILS_ENV=test
+7. rebuild development env
+  rake db:migrate:reset
+  rake db:seed
+  rake spree_theme:load_sample
+  rake spree_theme:import_template
+8. load seed without extra_piece_params 
+  rake db:seed DISABLE_EXTRA_PARAMS=1
+9. load a extra_piece_param
+  rails r "load SpreeTheme::Engine.root.to_s+'/db/extra_piece_params/xxx.rb'"
+10. add more section piece params
+  @rebuild development env
+  add file in db/extra_piece_params
+  @load the extra_piece_param
+  @rebuild development env
+
+11. how to update spree
+
+  a. spree_theme/app/view/address/_form
+  a. spree_china_checkout/app/view/address/_form
+  b. spree_china_checkout/controllers/spree/cities_controller
+  c. spree_china_checkout/models/spree/address_decorator
+    

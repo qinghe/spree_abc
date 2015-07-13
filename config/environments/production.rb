@@ -43,7 +43,7 @@ SpreeAbc::Application.configure do
   # config.action_controller.asset_host = "http://assets.example.com"
 
   # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
-  # config.assets.precompile += %w( search.js )
+  config.assets.precompile += %w( tinymce-jquery.js admin_login.css )
 
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
@@ -57,4 +57,6 @@ SpreeAbc::Application.configure do
 
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
+  
+  config.eager_load = true
 end

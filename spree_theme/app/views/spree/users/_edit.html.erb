@@ -1,0 +1,11 @@
+<%= render :partial => 'spree/shared/error_messages', :locals => { :target => @user } %>
+
+<h3><%= Spree.t(:editing_user) %></h3>
+
+<%= form_for @user, :url => spree.user_path(@user), :method => :put, :remote=>true do |f| %>
+  <%= render :partial => 'spree/shared/user_form', :locals => { :f => f } %>
+  <p>
+    <%= f.button Spree.t(:update), :class => 'button primary' %>
+    <%= f.button Spree.t(:cancel), :class => 'cancel button primary',:type => 'button' %>
+  </p>
+<% end %>

@@ -1,0 +1,186 @@
+#  北京市（京） 天津市（津） 上海市（沪） 重庆市（渝） 
+#  河北省(冀)山西省(晋)内蒙古自治区(内蒙古) 
+#  辽宁省(辽)吉林省(吉)黑龙江省(黑) 
+#  江苏省(苏) 浙江省(浙)安徽省(皖)福建(闽)江西省(赣)山东省(鲁)
+#　河南省(豫)湖北省(鄂)湖南省(湘)广东省(粤)广西壮族自治区(桂)海南省(琼)
+#　四川省(川、蜀)贵州省(黔、贵)云南省(滇、云)西藏自治区(藏)
+#　陕西省(陕、秦)甘肃省(甘、陇)青海省(青)宁夏回族自治区(宁)新疆维吾尔自治区(新)
+#　香港特别行政区(港) 澳门特别行政区(澳) 台湾省(台)
+--- 
+states_001: 
+  name: "北京"
+  country_id: "41"
+  id: "1"
+  abbr: BJ
+states_002: 
+  name: "天津"
+  country_id: "41"
+  id: "2"
+  abbr: TJ
+states_003: 
+  name: "上海"
+  country_id: "41"
+  id: "3"
+  abbr: SH
+states_004: 
+  name: "重庆"
+  country_id: "41"
+  id: "4"
+  abbr: CQ  
+#  河北省(冀)山西省(晋)内蒙古自治区(内蒙古) 
+states_005: 
+  name: "河北"
+  country_id: "41"
+  id: "5"
+  abbr: HB
+states_006: 
+  name: "山西"
+  country_id: "41"
+  id: "6"
+  abbr: Jin
+states_007: 
+  name: "内蒙古"
+  country_id: "41"
+  id: "7"
+  abbr: NMG
+#  辽宁省(辽)吉林省(吉)黑龙江省(黑) 
+states_008: 
+  name: "辽宁"
+  country_id: "41"
+  id: "8"
+  abbr: LN
+states_009: 
+  name: "吉林"
+  country_id: "41"
+  id: "9"
+  abbr: JL
+states_010: 
+  name: "黑龙江"
+  country_id: "41"
+  id: "10"
+  abbr: HLJ
+#  江苏省(苏) 浙江省(浙)安徽省(皖)福建(闽)江西省(赣)山东省(鲁)
+states_011: 
+  name: "江苏"
+  country_id: "41"
+  id: "11"
+  abbr: JS
+states_012: 
+  name: "浙江"
+  country_id: "41"
+  id: "12"
+  abbr: ZJ
+states_013: 
+  name: "安徽"
+  country_id: "41"
+  id: "13"
+  abbr: AH
+states_014: 
+  name: "福建"
+  country_id: "41"
+  id: "14"
+  abbr: FJ
+states_015: 
+  name: "江西"
+  country_id: "41"
+  id: "15"
+  abbr: JX
+states_016: 
+  name: "山东"
+  country_id: "41"
+  id: "16"
+  abbr: SD
+#　河南省(豫)湖北省(鄂)湖南省(湘)广东省(粤)广西壮族自治区(桂)海南省(琼)
+states_017: 
+  name: "河南"
+  country_id: "41"
+  id: "17"
+  abbr: HeNan
+states_018: 
+  name: "湖北"
+  country_id: "41"
+  id: "18"
+  abbr: HuBei
+states_019: 
+  name: "湖南"
+  country_id: "41"
+  id: "19"
+  abbr: HN
+states_020: 
+  name: "广东"
+  country_id: "41"
+  id: "20"
+  abbr: GD
+states_021: 
+  name: "广西"
+  country_id: "41"
+  id: "21"
+  abbr: GX
+states_022: 
+  name: "海南"
+  country_id: "41"
+  id: "22"
+  abbr: HaiNan
+#　四川省(川、蜀)贵州省(黔、贵)云南省(滇、云)西藏自治区(藏)
+states_023: 
+  name: "四川"
+  country_id: "41"
+  id: "23"
+  abbr: SC
+states_024: 
+  name: "贵州"
+  country_id: "41"
+  id: "24"
+  abbr: GZ
+states_025: 
+  name: "云南"
+  country_id: "41"
+  id: "25"
+  abbr: YN
+states_026: 
+  name: "西藏"
+  country_id: "41"
+  id: "26"
+  abbr: XZ
+#　陕西省(陕、秦)甘肃省(甘、陇)青海省(青)宁夏回族自治区(宁)新疆维吾尔自治区(新)
+states_027: 
+  name: "陕西"
+  country_id: "41"
+  id: "27"
+  abbr: SX
+states_028: 
+  name: "甘肃"
+  country_id: "41"
+  id: "28"
+  abbr: GS
+states_029: 
+  name: "青海"
+  country_id: "41"
+  id: "29"
+  abbr: QH
+states_030: 
+  name: "宁夏"
+  country_id: "41"
+  id: "30"
+  abbr: NX
+states_031: 
+  name: "新疆"
+  country_id: "41"
+  id: "31"
+  abbr: XJ
+#　香港特别行政区(港) 澳门特别行政区(澳) 台湾省(台)
+states_032: 
+  name: "香港"
+  country_id: "41"
+  id: "32"
+  abbr: HK
+states_033: 
+  name: "澳门"
+  country_id: "41"
+  id: "33"
+  abbr: Macau
+states_034: 
+  name: "台湾"
+  country_id: "41"
+  id: "34"
+  abbr: TV

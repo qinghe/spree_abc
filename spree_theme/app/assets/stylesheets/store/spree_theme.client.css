@@ -1,0 +1,29 @@
+/*
+ *= require normalize
+*/
+#embeded_content_wrapper{
+  position: absolute;
+  top:0;
+  left:0;
+  right:0;
+  height:30px;
+  border-bottom: solid 1px #EBEBEB;
+  background-color: #F8F8F8;
+  z-index: 100;
+  display: none;
+}
+#embeded_content_wrapper .theme_selection_wrapper{
+  text-align:right;
+}
+
+#embeded_content_wrapper_icon{
+  position: absolute;
+  top:0;
+  right:0;
+  height:30px;
+  width:30px;
+  border: solid 1px #EBEBEB;
+  background-color: #F8F8F8;
+  z-index: 99;
+  font-size: 0.7em;
+}

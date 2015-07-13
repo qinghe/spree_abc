@@ -1,0 +1,21 @@
+
+<%= form_tag( assign_template_themes_path(),{:remote=>true,"data-type"=>"script"} ) do  %>
+<div id="publish">
+
+  <div >
+    <h3> assign website default pages</h3>
+    <div><%= render :partial=>"default_pages_setting" %>
+    </div>
+    
+    
+  </div>
+
+
+  <div >
+      <%= submit_tag  "Update&Preview"%>
+      <%= submit_tag  "Preview"%>
+      <%= submit_tag  "Publish"%>
+  </div>
+
+</div>
+<% end %>

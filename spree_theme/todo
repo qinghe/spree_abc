@@ -1,0 +1,34 @@
+#flaws
+after theme release, if we modify page_layout tree, this would cause theme generating error. 
+
+
+#todos
+0. go through whole process, create new template -> edit it-> release it-> other shop apply it
+
+*1. export template
+*2. editor dock.
+*2.1 promote section, demote section   
+*2.2 highlight counter part of preview page when hovering on section
+2.3 _update_param_value.js.erb, update <a> hover,selected param_value, client should be updated by ajax. 
+3.  ajax update section, no need refresh when add section into template.
+
+4.  add section cart and try add to cart.
+ 
+
+           
+
+
+#bugs
+get_css 12,13,'block', it is not right in generated css. 
+set font-size:0, unset it does not work.
+set input font-color:red, unset it does not work.
+category 'brand' do not work.
+
+https://github.com/spree/spree_fancy
+
+
+# new features
+link add margin
+link add hover param,  same as link
+container add hover param 
+disable taxon/post link

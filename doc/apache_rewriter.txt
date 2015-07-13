@@ -1,0 +1,21 @@
+  # apache rewrite configuation
+  
+  <VirtualHost *:8080>
+      ServerName localhost
+      DocumentRoot /var/www/workspace/spree_abc/public
+      <Directory /var/www/workspace/spree_abc/public>
+          Allow from all
+          Options -MultiViews
+      </Directory>
+  </VirtualHost>
+  
+  <VirtualHost *:80>
+    ServerName david.com
+    DocumentRoot /var/www/workspace/spree_abc/public # /assets/* go here
+    RewriteEngine   On
+    RewriteCond   %{REQUEST_URI} !^/assets/  
+    RewriteCond   %{HTTP_HOST}   !^david.com
+    RewriteRule   ^(.+)   http://localhost:8080%{REQUEST_URI}?n=%{HTTP_HOST} [QSA,P,L]
+    RewriteLog logs/david-rewrite.log
+    RewriteLogLevel 3
+  </VirtualHost>

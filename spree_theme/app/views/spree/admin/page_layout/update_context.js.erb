@@ -1,0 +1,12 @@
+<% if @page_layout.section_context.present? %>    
+      $('[data-lid=<%=@page_layout.id%>] > .config_context' ).html( <%= raw  @page_layout.current_contexts.map{|section_context| Spree.t("section_context.#{section_context}")}.join(',').to_json %> );      
+<% else %>    
+      $('[data-lid=<%=@page_layout.id%>] > .config_context' ).html( '' );      
+<% end %>
+
+<% if @specific_taxons.present? %>    
+      $('[data-lid=<%=@page_layout.id%>] > .specific_taxon' ).html( <%= raw @specific_taxons.map(&:name).to_json %> );      
+<% else %>    
+      $('[data-lid=<%=@page_layout.id%>] > .specific_taxon' ).html( '' );      
+<% end %>
+

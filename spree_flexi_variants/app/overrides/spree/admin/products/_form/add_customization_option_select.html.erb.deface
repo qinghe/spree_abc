@@ -1,0 +1,9 @@
+<!-- insert_after '[data-hook="admin_product_form_option_types"]' -->
+<% customization_types = Spree::ProductCustomizationType.all %>
+    <div data-hook="admin_product_form_product_customization_types">
+      <%= f.field_container :product_customization_types do %>
+        <%= f.label :product_customization_type_ids, Spree.t(:product_customization_types) %>
+        <%= f.collection_select :product_customization_type_ids, customization_types ,'id','presentation',  { }, { :name => 'product[product_customization_type_ids][]', :multiple=>true, :class => 'select2 fullwidth' } %>
+      <% end %>
+    </div>
+

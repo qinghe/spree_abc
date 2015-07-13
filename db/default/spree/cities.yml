@@ -1,0 +1,261 @@
+--- 
+#北京
+#东城区、西城区、崇文区、宣武区、朝阳区、海淀区、丰台区（部分）、石景山区、门头沟区、房山区、大兴区；外区县分别有房山区、大兴区、通州区、顺义区、昌平区、平谷区、怀柔区、密云县、延庆县。   
+cityies_100: 
+  name: "东城区"
+  state: "北京"
+  id: "100"
+  abbr: DongChengQu
+cityies_101: 
+  name: "西城区"
+  state: "北京"
+  id: "101"
+  abbr: XiChengQu
+cityies_102: 
+  name: "崇文区"
+  state: "北京"
+  id: "102"
+  abbr: ChongWenQu
+cityies_103: 
+  name: "宣武区"
+  state: "北京"
+  id: "103"
+  abbr: XuanWuQu
+cityies_104: 
+  name: "朝阳区"
+  state: "北京"
+  id: "104"
+  abbr: ChaoYangQu
+cityies_105: 
+  name: "海淀区"
+  state: "北京"
+  id: "105"
+  abbr: HaiDianQu
+cityies_106: 
+  name: "丰台区"
+  state: "北京"
+  id: "106"
+  abbr: FengTaiQu
+cityies_107: 
+  name: "石景山区"
+  state: "北京"
+  id: "107"
+  abbr: ShiJingShanQu
+cityies_108: 
+  name: "门头沟区"
+  state: "北京"
+  id: "108"
+  abbr: MenTouGouQu
+#外区县分别有房山区、大兴区、通州区、顺义区、昌平区、平谷区、怀柔区、密云县、延庆县。
+cityies_109: 
+  name: "房山区"
+  state: "北京"
+  id: "109"
+  abbr: FangShanQu
+cityies_110: 
+  name: "大兴区"
+  state: "北京"
+  id: "110"
+  abbr: DaXingQu
+cityies_111: 
+  name: "通州区"
+  state: "北京"
+  id: "111"
+  abbr: TongZhouQu
+cityies_112: 
+  name: "顺义区"
+  state: "北京"
+  id: "112"
+  abbr: ShunYiQu
+cityies_113: 
+  name: "昌平区"
+  state: "北京"
+  id: "113"
+  abbr: ChangPingQu
+cityies_114: 
+  name: "平谷区"
+  state: "北京"
+  id: "114"
+  abbr: PingGuQu
+cityies_115: 
+  name: "怀柔区"
+  state: "北京"
+  id: "115"
+  abbr: HuaiRouQu
+cityies_116: 
+  name: "密云县"
+  state: "北京"
+  id: "116"
+  abbr: MiYunXian
+cityies_117: 
+  name: "延庆县"
+  state: "北京"
+  id: "117"
+  abbr: YanQingXian
+#上海： 宝山区、c崇明县、长宁区、奉贤区、h虹口区、黄浦区、j静安区、嘉定区、金山区、l卢湾区、闵行区、n南汇区、p浦东新区、普陀区、q青浦区、s松江区、x徐汇区、杨浦区、z闸北区；
+cityies_300: 
+  name: "宝山区"
+  state: "上海"
+  id: "300"
+  abbr: BaoShanQu
+cityies_301: 
+  name: "崇明县"
+  state: "上海"
+  id: "301"
+  abbr: ChongMinXian
+cityies_302: 
+  name: "长宁区"
+  state: "上海"
+  id: "302"
+  abbr: ChangNingQu
+cityies_303: 
+  name: "奉贤区"
+  state: "上海"
+  id: "303"
+  abbr: FengXianQu
+cityies_304: 
+  name: "虹口区"
+  state: "上海"
+  id: "304"
+  abbr: HongKouQu
+cityies_305: 
+  name: "黄浦区"
+  state: "上海"
+  id: "305"
+  abbr: HuangPuQu
+cityies_306: 
+  name: "静安区"
+  state: "上海"
+  id: "306"
+  abbr: JingAnQu
+cityies_307: 
+  name: "嘉定区"
+  state: "上海"
+  id: "307"
+  abbr: JiaDingQu
+cityies_308: 
+  name: "金山区"
+  state: "上海"
+  id: "308"
+  abbr: JinShanQu
+cityies_309: 
+  name: "卢湾区"
+  state: "上海"
+  id: "309"
+  abbr: LuWanQu
+cityies_310: 
+  name: "闵行区"
+  state: "上海"
+  id: "310"
+  abbr: MinHangQu
+cityies_311: 
+  name: "南汇区"
+  state: "上海"
+  id: "311"
+  abbr: NanHuiQu
+cityies_312: 
+  name: "浦东新区"
+  state: "上海"
+  id: "312"
+  abbr: PuDongXinQu
+cityies_313: 
+  name: "普陀区"
+  state: "上海"
+  id: "313"
+  abbr: PuTuoQu
+cityies_314: 
+  name: "青浦区"
+  state: "上海"
+  id: "314"
+  abbr: QingPuQu
+cityies_315: 
+  name: "松江区"
+  state: "上海"
+  id: "315"
+  abbr: SongJiangQu
+cityies_316: 
+  name: "徐汇区"
+  state: "上海"
+  id: "316"
+  abbr: XuHuiQu
+cityies_317: 
+  name: "杨浦区"
+  state: "上海"
+  id: "317"
+  abbr: YangPuQu
+cityies_318: 
+  name: "闸北区"
+  state: "上海"
+  id: "318"
+  abbr: ZhaBeiQu
+#辽宁  
+cityies_800: 
+  name: "鞍山"
+  state: "辽宁"
+  id: "800"
+  abbr: AnShan
+cityies_801: 
+  name: "本溪"
+  state: "辽宁"
+  id: "801"
+  abbr: BenXi
+cityies_802: 
+  name: "朝阳"
+  state: "辽宁"
+  id: "802"
+  abbr: ChaoYang
+cityies_803: 
+  name: "大连"
+  state: "辽宁"
+  id: "803"
+  abbr: DaLian
+cityies_804: 
+  name: "丹东"
+  state: "辽宁"
+  id: "804"
+  abbr: DanDong
+cityies_805: 
+  name: "抚顺"
+  state: "辽宁"
+  id: "805"
+  abbr: FuShun
+cityies_806: 
+  name: "阜新"
+  state: "辽宁"
+  id: "806"
+  abbr: FuXin
+cityies_807: 
+  name: "葫芦岛"
+  state: "辽宁"
+  id: "807"
+  abbr: HuLuDao
+cityies_808: 
+  name: "锦州"
+  state: "辽宁"
+  id: "808"
+  abbr: JinZhou
+cityies_809: 
+  name: "辽阳"
+  state: "辽宁"
+  id: "809"
+  abbr: LiaoYang
+cityies_810: 
+  name: "盘锦"
+  state: "辽宁"
+  id: "810"
+  abbr: PanJin
+cityies_811: 
+  name: "沈阳"
+  state: "辽宁"
+  id: "811"
+  abbr: ShenYang
+cityies_812: 
+  name: "铁岭"
+  state: "辽宁"
+  id: "812"
+  abbr: TieLing
+cityies_813: 
+  name: "营口"
+  state: "辽宁"
+  id: "813"
+  abbr: YinKou

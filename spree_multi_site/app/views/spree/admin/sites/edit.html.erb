@@ -1,0 +1,8 @@
+<h1><%= t("editing_site") %></h1>
+<p id="ajax_error" class="errorExplanation" style="display:none;"></p>
+<%= form_for [:admin, @site] do |f| %>
+  <%= render :partial => "form", :locals => { :f => f } %>
+    <p class="form-buttons">
+      <%= button t(:update) %> <%= t(:or) %> <%= link_to t(:cancel), admin_sites_path %>
+    </p>
+<% end %>

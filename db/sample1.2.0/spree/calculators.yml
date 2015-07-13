@@ -1,0 +1,4 @@
+sf_ground:
+  calculable: sf_ground
+  calculable_type: Spree::ShippingMethod
+  type: Spree::Calculator::FlatRate

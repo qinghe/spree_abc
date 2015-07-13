@@ -1,0 +1,1 @@
+Spree::Site.current.load_sample

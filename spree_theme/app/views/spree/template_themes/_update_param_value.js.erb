@@ -1,0 +1,22 @@
+<% #local params: source_param_value, updated_html_attribute_values    
+%>
+<% for hav in updated_html_attribute_values
+        # go next if it is not belong to source section instance.
+        next unless (hav.param_value.page_layout_id== source_param_value.page_layout_id )
+        param_value = hav.param_value
+        html_attribute =hav.html_attribute              
+        div = "pv_#{param_value.id}_#{html_attribute.id}" #it should be same as html_attribute_value.html.erb.
+%>        
+        $("#<%=div%>").replaceWith(<%= raw ( render :partial => "html_attribute_value", :locals=>{:html_attribute=>html_attribute, :param_value=>param_value}).to_json %>)
+  <%if hav.param_value.section_param.section_piece_param.class_name=~/\_h$/ %>
+     $("<%=hav.css_selector%>").hover(
+       function () {
+        $(this).css('<%=hav.attribute_name%>','<%=hav.attribute_value%>')
+       },
+       function () {
+        $(this).css('<%=hav.attribute_name%>','')
+       })
+  <%else%>      
+     $("<%= raw hav.css_selector%>").css('<%=hav.attribute_name%>','<%=hav.attribute_value%>')
+  <%end%>        
+<% end %>

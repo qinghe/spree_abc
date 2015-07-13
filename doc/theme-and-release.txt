@@ -1,0 +1,48 @@
+user case
+=====================================================================================================
+  1. design site, user design theme,  release it. 
+
+  2. normal site, user select a released theme, configure it, apply it on site.
+
+  3. design site, user fix bug of released theme, release it again.
+    notice: 
+      # if we modify page_layout tree, we should release theme, or theme user meet error, can not found page_layout x(deleted). 
+    
+      # since rails cached layout in non-development env, we should restart server every time theme updated
+      rake spree_theme:release_theme[x] RAILS_ENV=staging
+      touch tmp/restart.txt
+    
+features
+======================================================================================================
+site
+  design site: design themes, release themes, 
+  normal site: sell products, use theme of design site 
+
+template_theme, user config theme with own resource(menu, image)
+  there are two kinds of template_themes
+    1. has native page_layout
+    2. has no native page_layout
+
+template_release: easy to improve theme, and notice user of it
+  only theme has native layout(ex. has page_layout&param_values) could be released.
+  only design shop could release template for now.
+  a theme could be released more than one time for improvment or bug fixing.
+  theme_id
+  
+ 
+implement
+========================================================================================================
+site
+  theme_id, current applied theme
+  template_release_id: 0 , no use
+
+template_theme, store theme configuration
+  release_id,  current using release, it is same for all theme include which has no native page_layout.
+  normal site imported theme from design shop, 
+
+template_release, store theme release information, 
+  theme_id,
+
+
+
+

@@ -1,0 +1,32 @@
+1. how to test multi-site for local deployment?
+  there are two sites in seeds:
+    www.dalianshops.com  design.dalianshops.com 
+    
+  add cookie key abc_development_domain, set value to one for play.
+
+2. reload default template for spree_theme/db/themes/design
+rake spree_theme:import_theme RAILS_ENV=local_staging SEED_PATH=1
+    
+3.How to inspect controller filter chains?
+  http://makandracards.com/makandra/10923-how-to-inspect-controller-filter-chains-in-specs
+  
+  ex. Spree::UsersController._process_action_callbacks.select { |c| c.kind == :before }.map(&:filter)
+
+4. how analyze rails log?
+  https://github.com/wvanbergen/request-log-analyzer
+  request-log-analyzer production.log --format rails3
+
+5. 导出整个数据库
+  mysqldump -u 用户名 -p 数据库名 > 导出的文件名    
+  mysqldump -u root -p spree_abc_production > abc.sql
+  
+6. setup test env
+   rake db:test:clone
+   
+7. How to generate rdoc
+  rdoc --op=./rdoc --include= app lib
+  rake doc:app #old style.
+
+8. get attachment styles
+ Spree::Image.attachment_definitions[:attachment][:styles]
+ 
