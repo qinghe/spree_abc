@@ -30,7 +30,7 @@ root:
       <% end %>
       <%= flash_messages %>
       <div id="page-wrapper" class="<%=@template.section_selector%>">
-      <div id="page" class=''><div id="page-inner" class="clear-block">
+      <div id="page" class=''><div id="page-inner" class="inner clear-block">
         ~~content~~
       </div><!-- /#page-inner -->
       </div><!-- /#page -->
