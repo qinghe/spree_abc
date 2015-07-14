@@ -219,3 +219,16 @@ bootstrap_carousel:
         </a>
       </div>
   css: ''
+cart_items_for_mobile:
+  id: 209
+  title: cart items for mobile
+  slug: cart-items-for-mobile
+  is_selectable: "1"
+  is_container: "0"
+  for_terminal: "1"
+  html: |
+    <%= render :partial => 'spree/orders/form_bootstrap', :locals => { :order_form => order_form } %>
+  created_at: 2011-09-20 19:40:07
+  updated_at: 2011-09-20 19:40:07
+  css: ""
+  js: ""
