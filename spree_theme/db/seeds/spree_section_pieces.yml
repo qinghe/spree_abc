@@ -138,7 +138,7 @@ root:
       }
         #page-inner
         { position:relative;
-        <% @template.css :inner %>
+        <%= @template.css :inner %>
         }
     .<%=@template.current_piece.child_selector%>
     {

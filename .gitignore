@@ -13,8 +13,8 @@ db/sample9
 config/deploy
 config/deploy/*
 Gemfile.lock
-Gemfile.lock
-public/shops/development
+public/shops/staging
+public/shops/development/**
 public/shops/test
 config/deploy/production.rb
 db/full_sql

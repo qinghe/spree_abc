@@ -46,7 +46,11 @@ root_for_mobile:
       <%= render "spree/shared/analytics" %>
       </body>
     </html>
-  css: ""
+  css: |-
+      #page-inner
+      { position:relative;
+        <%= @template.css :inner %>
+      }
   js: ""
 bootstrap_container:
   id: 201
