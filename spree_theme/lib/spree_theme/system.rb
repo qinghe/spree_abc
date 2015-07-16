@@ -62,8 +62,8 @@ module SpreeTheme
         #add website condition, design can edit template_theme
         @is_designer = ( Spree::TemplateTheme.accessible_by( current_ability, :edit).where(:site_id=>website.site_id).count >0 )
       end
-
-      @is_designer = false if mobile?
+      # allow edit mobile template on chrome
+      #@is_designer = false if mobile?
       #login, forget_password page only available fore unlogged user. we need this flag to show editor even user have not log in.
       @is_designer = ( cookies[:_dalianshops_designer]=='1')  if cookies[:_dalianshops_designer].present?
 

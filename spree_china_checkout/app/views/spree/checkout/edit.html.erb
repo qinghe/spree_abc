@@ -1,16 +1,19 @@
 <div id="checkout" data-hook>
   <% @order.checkout_steps[0...-1].each do |state| %>
     <div class="checkout-content <%= 'disabled-step' if state != @order.state %>" data-step="<%= state %>"data-hook="checkout_content" id="checkout_<%= state %>">
-      <%= render :partial => 'form_wrapper', :locals => { :order => @order, :state => state } %>
+      <% if @client_info.is_mobile %>
+        <%= render :partial => 'form_wrapper_bootstrap', :locals => { :order => @order, :state => state } %>
+      <% else %>
+        <%= render :partial => 'form_wrapper', :locals => { :order => @order, :state => state } %>
+      <% end %>
     </div>
   <% end %>
-  
+
   <%= render partial: 'wait_for_payment' %>
-  
+
 </div>
 
 <script>
 Spree.current_order_id = "<%= @order.number %>"
 Spree.current_order_token = "<%= @order.guest_token %>"
 </script>
-
