@@ -5,10 +5,10 @@
 %>
 
 
-<h2 class="header2"> <%= Spree.t("order_state.#{state}") %>
+<div class="panel-heading header2"> <%= Spree.t("order_state.#{state}") %>
   <%= link_to Spree.t(:edit), checkout_state_path(state), class: 'previous' %>
-</h2>
-<div class="form-wrapper clear-block" data-hook="checkout_form_wrapper">
+</div>
+<div class="panel-body form-wrapper clear-block" data-hook="checkout_form_wrapper">
   <div class="">
       <%= render :partial => 'spree/shared/error_messages', :locals => { :target => order } %>
       <% # override default form class :edit_order with :single_page_edit_order, disableSaveOnClick cause button disabled even form validation failure %>
@@ -18,7 +18,7 @@
   </div>
 
 </div>
-<div id="checkout-summary-<%= state%>" class="summary-wrapper">
+<div id="checkout-summary-<%= state%>" class="panel-body summary-wrapper">
   <% if order.passed_checkout_step? state %>
   <%= render :partial => "#{state}_summary", :locals => { :order => order } %>
   <% end %>
