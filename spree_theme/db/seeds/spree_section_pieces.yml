@@ -534,6 +534,7 @@ product_atc:
   created_at: 2011-09-20 19:40:07
   updated_at: 2011-09-20 19:40:07
   css: |
+    .<%=@template.section_selector%> > .inner {overflow:visible; } /* fix missing input bottom border on mobile*/
     .<%=@template.section_selector%> button{ <%= @template.css :button %>  }
   js: ""
 cart:
