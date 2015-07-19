@@ -815,7 +815,7 @@ order_list:
   html: |
     <h3 class="header3"><%= Spree.t(:my_orders) %></h3>
     <% if @orders.present? %>
-      <table class="order-summary">
+      <table class="table table-striped order-summary">
         <thead>
         <tr>
           <th class="order-number"><%= Spree.t(:order_number) %></th>
@@ -840,7 +840,7 @@ order_list:
         </tbody>
       </table>
     <% else %>
-      <p><%= Spree.t(:you_have_no_orders_yet) %></p>
+    <div class="alert alert-info"><%= Spree.t(:you_have_no_orders_yet) %></div>
     <% end %>
   css: ""
   js: ""
