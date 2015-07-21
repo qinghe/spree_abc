@@ -117,7 +117,7 @@ $(document).ready(function() {
       $slide_container.css({ height : $parent.css('height'), width : $parent.css('width') });
     }else{
       $self.css({ height : $parent.css('width'), width : $parent.css('width')  });
-      $slide_container.css({ height : $parent.css('width'), width : $parent.css('width') });      
+      $slide_container.css({ height : $parent.css('width'), width : $parent.css('width') });
     }
     var options = null;
     var auto_play = ( $slide_container.data('auto-play') == null ?  true : $slide_container.data('auto-play') );
@@ -360,6 +360,9 @@ $(document).ready(function() {
           return ( child2.is("*") ? child2[0].outerHTML : "no content");
           }
       });
+  });
+  $(".sidr").on( 'click',".sidr-close",function(){
+    $.sidr( 'close','sidr');
   });
 
 });
