@@ -269,7 +269,7 @@ vmenu:
   css: |-
     .<%=@template.section_selector %> ul{ margin: 0; padding: 0;}
     .<%=@template.section_selector %> li{ list-style-type:none; }
-    .<%=@template.section_selector %> a{ float: left;  clear: left;  text-align: left;  margin: 0px;  border: 0px; width: 100%; }
+    .<%=@template.section_selector %> a{ float: left;  clear: left;  text-align: left;  margin: 0px;  border: 0px; }
   js: ""
 
 menuitem:
