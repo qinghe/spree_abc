@@ -2,7 +2,6 @@
 //= require jquery.turbolinks
 //= require jquery_ujs
 //= require jquery.form
-//= require jquery.layout
 //= require jquery.ajax
 //= require jssor.slider.one
 //= require spree/frontend
@@ -11,6 +10,7 @@
 //= require interface.js
 //= require jquery.jeditable.js
 //= require turbolinks
+//require jquery.layout
 
 $(document).ready(function() {
 
