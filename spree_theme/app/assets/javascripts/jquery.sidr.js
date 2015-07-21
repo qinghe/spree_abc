@@ -31,7 +31,14 @@
     // Loads the content into the menu bar
     loadContent: function($menu, content) {
       $menu.html(content);
+      this.addCloseButton($menu);
     },
+    // add close button
+    addCloseButton: function( $menu ){
+      $('<a href="javascript:void(0);" class="sidr-close" title="close"><i class="fa fa-remove"></i></a>')
+              .prependTo($menu);
+    },
+
     // Add sidr prefixes
     addPrefix: function($element) {
       var elementId = $element.attr('id'),
@@ -57,6 +64,7 @@
 
       // Declaring
       var $menu = $('#' + name),
+          $menuOverlay = $('#' + name + '-overlay'),
           $body = $($menu.data('body')),
           $html = $('html'),
           menuWidth = $menu.outerWidth(true) ,
@@ -111,6 +119,7 @@
         }
 
         // Open menu
+        $menuOverlay.show();
         if(displace){
           $body.addClass('sidr-animating').css({
             width: $body.width(),
@@ -182,6 +191,7 @@
 
         // onClose callback
         onClose();
+        $menuOverlay.hide();
       }
     }
   };
@@ -232,13 +242,18 @@
     }, options);
 
     var name = settings.name,
-        $sideMenu = $('#' + name);
+        $sideMenu = $('#' + name), $sideOverlay = $('#' + name +'-overlay');
 
     // If the side menu do not exist create it
     if( $sideMenu.length === 0 ) {
       $sideMenu = $('<div />')
         .attr('id', name)
-        .appendTo($('body'));
+        .appendTo($(settings.body));
+      // create the overlay
+      $sideOverlay =  $('<div></div>')
+        .attr('id',  name +'-overlay')
+        .addClass('sidr-overlay')
+        .appendTo($(settings.body));
     }
 
     // Adding styles and options
