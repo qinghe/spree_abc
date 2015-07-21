@@ -1,7 +1,7 @@
 <% # copy from order_items
    order = @order
 %>
-<table id='line-items' class="index columns alpha omega sixteen" data-hook="order_details">
+<table id='line-items' class="table index columns alpha omega sixteen" data-hook="order_details">
   <col width="10%" valign="middle" halign="center">
   <col width="64%" valign="middle">
   <col width="8%" valign="middle" halign="center">
@@ -50,7 +50,7 @@
       <td class="total"><span><%= order.display_item_total.to_html %></span></td>
     </tr>
   </tfoot>
-  
+
   <tfoot id='shipment-total'>
     <% order.shipments.group_by { |s| s.selected_shipping_rate.name }.each do |name, shipments| %>
       <tr class="total" data-hook='shipment-row'>
