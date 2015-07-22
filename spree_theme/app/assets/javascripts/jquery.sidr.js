@@ -228,6 +228,7 @@
   };
 
   $.fn.sidr = function( options ) {
+    sidrOpened = false;// for reason turbolinks, reset it when initialize sidr.
 
     var settings = $.extend( {
       name          : 'sidr',         // Name for the 'sidr'
