@@ -1685,8 +1685,7 @@ click_effect_sider:
         <%= @template.css :sidr %>
       }
       .sidr-close{
-        position: absolute;
-        right: 0; top: 0; z-index: 2;
+        float:right;
       }
       .sidr-overlay{
         display: none;

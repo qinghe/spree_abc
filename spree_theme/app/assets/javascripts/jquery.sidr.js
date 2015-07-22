@@ -31,11 +31,11 @@
     // Loads the content into the menu bar
     loadContent: function($menu, content) {
       $menu.html(content);
-      this.addCloseButton($menu);
+      this.addTitle($menu);
     },
-    // add close button
-    addCloseButton: function( $menu ){
-      $('<a href="javascript:void(0);" class="sidr-close" title="close"><i class="fa fa-remove"></i></a>')
+    // add title include close button
+    addTitle: function( $menu ){
+      $('<div><button type="button" class="sidr-close close" aria-label="Close"><i class="fa fa-remove"></i></button> </div>')
               .prependTo($menu);
     },
 
