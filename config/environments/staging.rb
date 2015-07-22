@@ -37,7 +37,7 @@ SpreeAbc::Application.configure do
   # config.logger = SyslogLogger.new
 
   # Use a different cache store in production
-  # config.cache_store = :mem_cache_store
+  config.cache_store = :memory_store
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server
   # config.action_controller.asset_host = "http://assets.example.com"
@@ -57,7 +57,7 @@ SpreeAbc::Application.configure do
 
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
-  
+
   config.eager_load = true
 end
 Paperclip.options[:command_path] = "/usr/local/bin/"
