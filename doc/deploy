@@ -72,7 +72,7 @@ bundle show spree
 comment out spree/front_end/config/routes.rb
 #  root :to => 'home#index'
 
-system recovery
+system recovery&backup
 --------------------------------------------------------------
 mysql -uroot spree_abc_staging < spree_abc20141204.sql
 tar -zxvf spree_abc20141204.tar.gz
@@ -80,6 +80,7 @@ mv /webroot/spree_abc /webroot/spree_abc.bak
 mv webroot/spree_abc /webroot/
 
 tar -czvf spree_abc20150330.tar.gz spree_abc
+mysqldump -uroot spree_abc_staging > spree_abc20150330.sql
 
 feature upgrade
 ---------------------------------------------------------------
