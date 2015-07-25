@@ -1,60 +1,97 @@
-en:
+zh-CN:
+########################################### start for template ###########################################
+  views:
+    pagination:
+      first: "&laquo; first"
+      last: "last &raquo;"
+      next: next &raquo;
+      previous: ! '&laquo; previous'
+      truncate: ! '&hellip;'
+  theme:
+    product_image:
+      lightboxable: click to zoom in
+
+########################################### end for template ###########################################
   activerecord:
     attributes:
       spree/page_layout:
+        title: title
+        content_param: 内容参数
+        css_class: CSS
+        content_css_class: 内容 CSS
         section_context: section context
-        data_source: data source 
-      spree/template_file: 
-        attachment_file_name: File name
-        attachment_content_type: type
-        attachment_file_size: File size
+        data_source: data source
+        data_source_param: 数据源参数
+      spree/product:
+        theme_id: template
+      spree/taxon:
+        page_context: 页面内容类型
+        replaced_by: 页面内容替换
+      spree/template_file:
+        attachment_file_name: file name
+        attachment_content_type: file type
+        attachment_file_size: file size
+        theme_id: template
+        template_theme: template
         created_at: created at
-      spree/template_text: 
-        name: Title
+      spree/template_text:
+        name: name
         slug: Slug
-        body: Body
+        body: body
       spree/template_theme: &template_theme_labels
-        title: Title
+        title: title
         slug: Slug
-        body: Body
+        section_root_id: 基础模块
+        is_public: 是否公开
+
     models:
+      spree/page_layout:
+        one: module
+        other: module
       spree/template_file:
         one: template file
-        many: template files
+        other: template file
       spree/template_text:
         one: template text
-        many: template texts
+        other: template text
       spree/template_theme:
-        one: template theme
-        many: template themes
+        one: template
+        other: template
   helpers:
     label:
       template_theme:
         <<: *template_theme_labels
-  notice_messages:
-    template_theme_imported: 模板已经导入
-    template_theme_not_imported: 模板无法导入
   template_theme: Theme
   template_themes: Themes
   spree:
     actions:
-      import: 导入
+      import: import
+      config_desktop_theme: config desktop template
+      config_mobile_theme: config mobile template
     admin:
       tab:
-        template_themes: 模板
-        theme_texts: template materials
-        native_themes: 模板
-        foreign_themes: 模板商店
+        taxonomies: taxonomies
+        template_themes: template
+        theme_texts: themplate texts
+        native_themes: templates
+        foreign_themes: template shop
+    back_to_themes_list: back to template list
+    back_to_template_text_list: back to template text list
     back_to_template_file_list: back to template file list
-    back_to_themes_list: 回到模板列表
-    back_to_template_text_list: 回到素材列表
-    back_to_template_file_list: 回到素材列表
-    select_taxon: 选择菜单
-    select_template_image: 选择图片    
-    select_from_foreign_themes: 到模板商店选择模板   
+    china_address:
+      firstname: name
+      phone: phone
+      state: state
+      city: city
+      street: street
+    select_taxon: select a taxon
+    select_template_image: select template image
+    select_template_text: select template text
+    select_from_foreign_themes: 到模板商店选择模板
     default_page:
       home: home
       login: login
+      logout: logout
       account: account
       signup: signup
       password: password
@@ -62,29 +99,86 @@ en:
       detail: detail
       unknown: unknown
       checkout: checkout
-      thanks: thanks
-      taxonomy: taxonomy 
-    default_shipping_category_name: Default
+      thanks: thanks for order
+      taxonomy: taxonomy
+      blog: blog
+      post: post
     detail: detail
+    dialog_title: dialog title
+    global_taxons: global taxons
+    post:
+      next: next
+      previous: previous
+      no_previous: no previous
+      no_next: no next
+    notice_messages:
+      theme_imported: template imported
+      theme_released: template released
+      theme_not_imported: template could not be imported
+    page_layout:
+      data_source: 数据源
+      please_select_to_config: 请选择需要配置的模块
+      section_context: 模块适用页面
+      specific_taxon: 模块适用个别页面
+      config_resource: 模块可用素材
+    section_context:
+      home: 首页
+      list: 产品列表
+      detail: 产品详细
+      cart: 购物车
+      account: 我的账户
+      checkout: 支付页
+      thanks: 谢谢购物
+      signup: 用户注册
+      login: 用户登录
+      password: 密码管理
+      blog: 文章列表
+      post: 文章内容
+      logout: 用户退出
+      either: 任意页
+      new_site: 注册开店
+    section_data_source:
+      gpvs: 产品集合
+      this_product: 当前选择产品
+      taxon: 菜单
+      blog: 文章集合
+      post: 当前选择文章
+      gpvs_theme: 模板集合
+      previous_post: 当前选择文章-前一篇
+      next_post: 当前选择文章-下一篇
     template_file:
-      index: 图片素材
-      new: 新建图片素材
-    template_resource: template_resource
+      index: template files
+      new: new template file
+    template_resource: 网站素材
     template_text:
-      static_pages: Static pages
+      index: template texts
       static_pages_desc: Manage static page with WYSIWYG editor.
-      new_page: New page
+      new: new template text
       editing_page: Editing page
       confirm_delete: Are you sure ?
       link: Link
       meta_title: Meta Title
       page_navigation_title: "Pages"
+    template_themes: templates
     template_theme:
-      native_themes: native_themes
-      config: config 
-      assign_resource:
-    page_layout:
-      context: 
-      date_source: 
-      
-                         
+      assign_resource: assign resource
+      assign: assign
+      new: new plain template
+    theme_foreign: temlate shop
+    theme_native: template
+    theme_applied: using
+    theme_apply: apply
+    theme_assign_taxon: assign taxon
+    theme_assign_image: assing image
+    theme_config: config template
+    theme_import: import template
+    theme_copy: copy template
+    theme_prepare_import: prepare
+    theme_is_imported: imported
+    theme_is_free: free
+    preview_theme: preview
+    install_theme_with_site: install
+    is_taxon_clickable: clickable
+    theme_release: release
+    welcome_to_admin_login: Login to system
+    welcome_to_under_construction: it is underconstruction，please login to system
