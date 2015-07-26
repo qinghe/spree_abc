@@ -1,17 +1,17 @@
 zh-CN:
-########################################### start for template ###########################################    
+########################################### start for template ###########################################
   views:
     pagination:
       first: "&laquo; 首页"
-      last: "末页 &raquo;"      
+      last: "末页 &raquo;"
       next: 下一页 &raquo;
       previous: ! '&laquo; 上一页'
       truncate: ! '&hellip;'
   theme:
     product_image:
       lightboxable: 点击放大图片
-        
-########################################### end for template ###########################################    
+
+########################################### end for template ###########################################
   activerecord:
     attributes:
       spree/page_layout:
@@ -20,14 +20,14 @@ zh-CN:
         css_class: CSS
         content_css_class: 内容 CSS
         section_context: section context
-        data_source: 数据源 
+        data_source: 数据源
         data_source_param: 数据源参数
       spree/product:
         theme_id: 销售模板
       spree/taxon:
         page_context: 页面内容类型
         replaced_by: 页面内容替换
-      spree/template_file: 
+      spree/template_file:
         attachment_file_name: 文件名字
         attachment_content_type: 类型
         attachment_file_size: 文件大小
@@ -43,7 +43,7 @@ zh-CN:
         slug: Slug
         section_root_id: 基础模块
         is_public: 是否公开
-      
+
     models:
       spree/page_layout:
         one: 模块
@@ -85,8 +85,8 @@ zh-CN:
       city: 所在地区
       street: 详细地址
     select_taxon: 选择菜单
-    select_template_image: 选择图片    
-    select_template_text: 选择文本 
+    select_template_image: 选择图片
+    select_template_text: 选择文本
     select_from_foreign_themes: 到模板商店选择模板
     default_page:
       home: 首页
@@ -100,7 +100,7 @@ zh-CN:
       unknown: 未知
       checkout: 付款
       thanks: 恭喜！支付成功
-      taxonomy: 缺省菜单 
+      taxonomy: 缺省菜单
       blog: 文章列表
       post: 文章内容
     detail: 详细
@@ -110,13 +110,13 @@ zh-CN:
       next: 下一篇
       previous: 上一篇
       no_previous: 没有了
-      no_next: 没有了     
+      no_next: 没有了
     notice_messages:
       theme_imported: 模板已经购买成功
       theme_released: 模板已经发布成功
-      theme_not_imported: 模板无法导入   
+      theme_not_imported: 模板无法导入
     page_layout:
-      data_source: 数据源 
+      data_source: 数据源
       please_select_to_config: 请选择需要配置的模块
       section_context: 模块适用页面
       specific_taxon: 模块适用个别页面
@@ -140,7 +140,7 @@ zh-CN:
     section_data_source:
       gpvs: 产品集合
       this_product: 当前选择产品
-      taxon: 菜单  
+      taxon: 菜单
       blog: 文章集合
       post: 当前选择文章
       gpvs_theme: 模板集合
@@ -158,7 +158,7 @@ zh-CN:
       confirm_delete: Are you sure ?
       link: Link
       meta_title: Meta Title
-      page_navigation_title: "Pages"          
+      page_navigation_title: "Pages"
     template_themes: 模板
     template_theme:
       assign_resource: 模板素材
@@ -182,5 +182,3 @@ zh-CN:
     theme_release: 发布
     welcome_to_admin_login: 管理系统登录
     welcome_to_under_construction: 网站建设中，请登录管理系统
-      
-                         
