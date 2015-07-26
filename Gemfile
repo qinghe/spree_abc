@@ -72,7 +72,7 @@ gem 'spree_china_checkout',   :path => './spree_china_checkout'
 gem 'spree_essential_blog',   :path => './spree_essential_blog'
 
 # copy from https://github.com/RuanShan/spree_flexi_variants/tree/2-1-stable
-gem 'spree_flexi_variants',   :path => './spree_flexi_variants'
+# gem 'spree_flexi_variants',   :path => './spree_flexi_variants'
 
 # copy from https://github.com/spree-contrib/spree_comments/tree/2-0-stable
 gem 'spree_comments',   :path => './spree_comments'

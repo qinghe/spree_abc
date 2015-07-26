@@ -14,7 +14,7 @@
   </div>
   <% index += 1 %>
 <% end %>
-<%= hidden_field_tag "products[#{product.id}]", "", :class => "hidden variant_id" %>
+<%= hidden_field_tag "variant_id", product.master.id, class: 'variant_id' %>
 <script type="text/javascript">
 //<![CDATA[
   var variant_options = new VariantOptions({

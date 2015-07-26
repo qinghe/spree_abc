@@ -19,4 +19,6 @@
       <% end%>
     </ul>
   </div>
-<% end%>
+<% else %>
+<%= hidden_field_tag "variant_id", product.master.id, class: 'variant_id' %>
+<% end %>
