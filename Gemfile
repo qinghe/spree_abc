@@ -5,7 +5,7 @@ source 'http://ruby.taobao.org/'
 # Bundle edge Rails instead:
 ruby '2.0.0'
 
-gem 'rails', '4.1.8'
+gem 'rails', '4.1.11'
 
 gem 'mysql2'
 
@@ -40,13 +40,13 @@ gem 'jquery-turbolinks'
 
 gem 'ruby-hmac' #http://ryanbigg.com/2009/07/no-such-file-to-load-hmac-sha1/
 
-gem 'spree', '~>2.4'
+gem 'spree', '~>2.4.8'
 
 # gem 'sprangular',   :path => './sprangular'
 
 # referer to https://github.com/spree/spree/issues/2013
 gem 'spree_auth_devise', :github => "spree/spree_auth_devise", :branch => "2-4-stable"
-#support rich_editor 
+#support rich_editor
 gem 'spree_editor',  :github => "spree/spree_editor", :branch=>"2-4-stable"
 #gem 'tinymce-rails-langs'
 #gem 'daemons'
@@ -54,7 +54,7 @@ gem 'spree_editor',  :github => "spree/spree_editor", :branch=>"2-4-stable"
 #'bundle update spree_multi_site' to update gem
 # bundle config require specified branch, or warning message as below
 # Cannot use local override for spree_multi_site at ../spree_multi_site because :branch is not specified in Gemfile. Specify a branch or use `bundle config --delete` to remove the local override
-  
+
 gem 'spree_multi_site',   :path => './spree_multi_site'
 
 gem "friendly_id" # spree_theme require it.
@@ -104,7 +104,7 @@ group :test do
   gem 'with_model'
 end
 #execjs need js runtime, use nodejs of system instead.
-#gem 'therubyracer' 
+#gem 'therubyracer'
 
 group :development do
   gem 'capistrano'
@@ -112,5 +112,3 @@ group :development do
   gem 'capistrano-rvm', '~> 0.1.0'
   #gem "rails-erd"
 end
-
-
