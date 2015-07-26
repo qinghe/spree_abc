@@ -433,12 +433,12 @@ product_main_image:
   css: |
     /* do not apply css padding,margin on image, image-zoom required. use wrapper instead */
     .<%=@template.section_selector%> img{
-      width: 100%; /*browser adjust img width properly*/
       <% if @template.current_piece.lightboxable? %>
       cursor: pointer;
       <% end %>
-      <%= @template.css :img %>
     }
+    /* since img has width:100%; padding/border/margin should apply to wrapper, or image width> container width*/
+    .<%=@template.section_selector%> .main_image_wrapper{ <%= @template.css :img %> }
   js: ""
 product_properties:
   id: 16
