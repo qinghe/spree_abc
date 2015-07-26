@@ -7,7 +7,7 @@ $(document).ready(function() {
   // disable progress-bar, coolpadwebkit do not support
   if( !g_client_info.is_mobile ){
     Turbolinks.enableProgressBar();
-  }  
+  }
 
   // template theme selection for designer shop
   $( "#embeded_content_wrapper" ).hover(
@@ -18,7 +18,7 @@ $(document).ready(function() {
     function() { $( "#embeded_content_wrapper" ).show(); }
   );
 
-  
+
   // code for theme, should move to template_themes.js
   $("#dialog").delegate(  "a.cancel,button.cancel", "click",function(){
       $.simplemodal.close();
@@ -42,7 +42,7 @@ function VariantOptions(params) {
     var option_types, option_values_container, index = 0;
     // option_types: all option_types included option_values
     // option_values_container: a container for  option_values of an option_type
-    var available_variant_ids = []; // base on selected option value, there are some available variant ids 
+    var available_variant_ids = []; // base on selected option value, there are some available variant ids
     var buttons;
 
 
@@ -60,7 +60,7 @@ function VariantOptions(params) {
             });
         }
     }
-    
+
     // set current option type
     function update(i) {
         index = isNaN(i) ? index : i;
@@ -76,7 +76,7 @@ function VariantOptions(params) {
         var bt = btns.not('.unavailable').removeClass('locked');
         if (!allow_select_outofstock && !allow_backorders){
             bt = bt.filter('.in-stock');
-        }            
+        }
         return bt.filter('.auto-click').removeClass('auto-click').click();
     }
 
@@ -109,10 +109,10 @@ function VariantOptions(params) {
         }
         //if (!allow_select_outofstock && !allow_backorders){
         //    bt = bt.filter('.in-stock')
-        //}            
-        
+        //}
+
         if (a.filter('.selected').length>0){
-            // unclick selected, 
+            // unclick selected,
             clear(option_types.index(a.parents('.variant-option:first')));
         }else{
             if (!option_values_container.has(a).length) {
@@ -123,8 +123,8 @@ function VariantOptions(params) {
             advance();
             if (target_variant=find_variant()) {
                 toggle(target_variant);
-            }            
-        }        
+            }
+        }
     }
 
 
@@ -155,13 +155,13 @@ function VariantOptions(params) {
     function hide_all_variant_images() {
         $('li.vtmb').hide();
     }
-    
+
     function inventory(btns) {
       // for each option_value there is collection of available variants
-      // given option_values, Intersection of those collections is final available variants   
+      // given option_values, Intersection of those collections is final available variants
         var variant_ids, variants, count = 0, selected = {};
         var sels = $.map(option_types.find('a.selected'), function(i) { return i.rel; });
-        
+
         variants = get_variant_objects(sels);
         available_variant_ids = $.map(variants, function(i) { return i.id; });
         btns.removeClass('in-stock out-of-stock unavailable').each(function(i, element) {
@@ -186,10 +186,10 @@ function VariantOptions(params) {
     //------------------------------------------------------------------------------------------
     function init_for_slide_style() {
         option_types = $(container_selector+" .variant-option");
-        option_types.find('a.option-value').click( handle_click_for_slide_style );        
+        option_types.find('a.option-value').click( handle_click_for_slide_style );
         $(container_selector+' button.next').click( next_step_click );
         $(container_selector+' button.back').click( back_step_click );
-        
+
         initialize_option_view();
     }
 
@@ -199,16 +199,16 @@ function VariantOptions(params) {
         update_model();
         // hide button back if index =0
         if (index==0){
-          $(container_selector+' button.back').attr('disabled', true);    
+          $(container_selector+' button.back').attr('disabled', true);
         }else{
-          $(container_selector+' button.back').attr('disabled', false);                
+          $(container_selector+' button.back').attr('disabled', false);
         }
         if ((index+1) == option_types.length){
-            $(container_selector+' button.next').attr('disabled', true);                
+            $(container_selector+' button.next').attr('disabled', true);
         }else{
-            $(container_selector+' button.next').attr('disabled', false);                
+            $(container_selector+' button.next').attr('disabled', false);
         }
-        
+
         // select one, or no option image show.
         if( option_values_container.find("a.option-value.selected").length == 0)  {
           option_values_container.find("a.option-value:first").click();
@@ -221,25 +221,25 @@ function VariantOptions(params) {
         option_values_container = $(option_types.get(index));
         buttons = option_values_container.find('a.option-value');
     }
-    
-    // update price?    
+
+    // update price?
     function update_view() {
-        //show 
+        //show
         var option_type_id_and_option_value_id =  buttons.filter('.selected').attr('rel').split('-');
         option_values_container.find(' .olge').hide();
         option_values_container.find(' .lge-'+option_type_id_and_option_value_id[1]).show();
     }
-    
+
     function next_step_click() {
         index++;
         initialize_option_view();
     }
-    
+
     function back_step_click() {
         index--;
         initialize_option_view();
     }
-        
+
     function handle_click_for_slide_style(evt) {
         evt.preventDefault();
         var a = $(this);
@@ -247,23 +247,23 @@ function VariantOptions(params) {
         //return if has class unavailable locked
         if( a.hasClass("unavailable") || a.hasClass("locked")|| a.hasClass("selected")){
             return;
-        }          
+        }
         buttons.not(a).removeClass('selected');
         a.addClass('selected');
-        
+
         update_view();
-        
+
         target_variant=find_variant();
         toggle(target_variant);
-                            
+
     }
     //                                end slide style
     //==========================================================================================
-    
+
     //==========================================================================================
     // common method for option value
     //------------------------------------------------------------------------------------------
-    
+
     function index_of_array(array, obj) {
         for(var i = 0; i < array.length; i++){
             if(array[i] == obj) {
@@ -272,7 +272,7 @@ function VariantOptions(params) {
         }
         return -1;
     }
-       
+
     function to_f(string) {
         return parseFloat(string.replace(/[^\d\.]/g, ''));
     }
@@ -298,7 +298,7 @@ function VariantOptions(params) {
             return false;
         }
     }
-    
+
     // get variants by selected option_vlaues
     function get_variant_objects(rels) {
       var variant_objects = [];
@@ -307,7 +307,7 @@ function VariantOptions(params) {
         var otid, ovid, opt, opv;
         i = rels.length;
         try {
-            for(var i=0; i<rels.length; i++){              
+            for(var i=0; i<rels.length; i++){
                 ids = rels[i].split('-');
                 otid = ids[0];
                 ovid = ids[1];
@@ -318,8 +318,8 @@ function VariantOptions(params) {
                       if( i == 0){//
                         variant_objects = $.map(opv, function(variant, variant_id) { return variant; });
                       }else{
-                        variant_objects = variant_objects.filter(function(variant) {  return opv[variant.id.toString()]; } );                        
-                      }                       
+                        variant_objects = variant_objects.filter(function(variant) {  return opv[variant.id.toString()]; } );
+                      }
                     }
                 }
             }
@@ -352,9 +352,9 @@ function VariantOptions(params) {
         }
     }
 
-    //                               end common methods 
+    //                               end common methods
     //==========================================================================================
-    
+
     // it is unused for now.
     function option_value_click_handler(){
         evt.preventDefault();
@@ -363,15 +363,16 @@ function VariantOptions(params) {
         //return if has class unavailable locked selected
         if( a.hasClass("unavailable") || a.hasClass("locked") ||  a.hasClass("selected")){
             return;
-        }        
+        }
         // select option type
         // select current clicked option value
-        // correct next all selected option value          
+        // correct next all selected option value
     }
-    
-    if( view_style == 'slide' ){
-      $(document).ready(init_for_slide_style);      
-    }else{
-      $(document).ready(init);
+    if( Object.getOwnPropertyNames(options).length>0){
+      if( view_style == 'slide' ){
+        $(document).ready(init_for_slide_style);
+      }else{
+        $(document).ready(init);
+      }
     }
 };
