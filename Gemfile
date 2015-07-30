@@ -57,7 +57,7 @@ gem 'spree_editor',  :github => "spree/spree_editor", :branch=>"2-4-stable"
 
 gem 'spree_multi_site',   :path => './spree_multi_site'
 
-gem "friendly_id" # spree_theme require it.
+#gem "friendly_id" # spree included.
 gem 'useragent'
 gem 'spree_theme',   :path => './spree_theme'
 

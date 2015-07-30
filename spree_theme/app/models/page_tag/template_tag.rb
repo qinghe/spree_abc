@@ -8,8 +8,8 @@ module PageTag
 #                          # those tags required current section_instance
 # template is collection of page_layout. each page_layout is section instance
   class TemplateTag < Base
-    #include ActionView::Helpers::TagHelper #add method content_tag
-    include ActionView::Helpers::AssetTagHelper
+    # should not include helper, asset_host, asset_path would not work
+    # include ActionView::Helpers::AssetTagHelper
 
     class WrappedPageLayout < WrappedModel
       self.accessable_attributes=[:id,:title,:current_data_source,:wrapped_data_source_param, :data_filter,:current_contexts, :context_either?,
@@ -144,6 +144,8 @@ module PageTag
     attr_accessor :current_piece
     #we have to store it in template, or missing after select another page_layout.
     attr_accessor :running_data_sources, :running_data_items, :running_data_source_sction_pieces, :cached_section_pieces
+    attr_accessor :helpers
+    delegate :tag, :image_tag, :content_tag, :to=> :helpers
 
     def initialize(page_generator_instance)
       super(page_generator_instance)
@@ -155,6 +157,7 @@ module PageTag
       self.running_data_source_sction_pieces = [] # data_source belongs to section_piece
       self.running_data_items = []
       self.cached_section_pieces = {}
+      self.helpers =  ActionController::Base.helpers
     end
 
     #Usage: call this in template to initialize current section and section_piece
@@ -344,8 +347,11 @@ module PageTag
       if wrapped_post
         attribute_value = case attribute_name
           when :cover
+            style = current_piece.get_content_param_by_key(:main_image_style)
             if wrapped_post.cover.present?
-              tag('img', :src=>wrapped_post.cover.url(current_piece.get_content_param_by_key(:main_image_style)), :u=>'image', :alt=>'post image', :class=>"img-responsive" )
+              tag('img', :src=>wrapped_post.cover.url(style), :u=>'image', :alt=>'post image', :class=>"img-responsive" )
+            else
+              image_tag "noimage/post_#{style}.png", { :alt=>'missing image', :class=>"img-responsive" }
             end
           when :summary
             wrapped_post.send attribute_name, self.current_piece.truncate_at
@@ -512,8 +518,8 @@ module PageTag
             else
               #seems assets digest do not support template .ruby
               #image_tag "noimage/#{style}.png", options
-              options.merge!  'data' => { 'big-image'=> "/shops/shared/images/noimage/large.png" } #zoomable required
-              image_tag "/shops/shared/images/noimage/#{style}.png", options
+              options.merge!  'data' => { 'big-image'=> "noimage/large.png" } #zoomable required
+              image_tag "noimage/#{style}.png", options
             end
           end
         else

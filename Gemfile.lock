@@ -469,7 +469,6 @@ DEPENDENCIES
   database_cleaner (~> 1.3)
   email_spec
   factory_girl_rails (~> 4.5.0)
-  friendly_id
   jquery-turbolinks
   launchy
   mail_view
@@ -499,3 +498,6 @@ DEPENDENCIES
   useragent
   webmock (= 1.8.11)
   with_model
+
+BUNDLED WITH
+   1.10.5
