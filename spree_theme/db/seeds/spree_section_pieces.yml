@@ -1698,3 +1698,23 @@ click_effect_sider:
         opacity: 0.3;
       }
   js: ''
+
+video:
+  id: 91
+  title: video
+  slug: video
+  is_selectable: "0"
+  is_container: "0"
+  html: |-
+    <!-- http://open.youku.com/tools/ -->
+    <div id="youkuplayer" class="video-player" style="width:480px;height:400px"></div>
+    <script type="text/javascript" src="http://player.youku.com/jsapi">
+      player = new YKU.Player('youkuplayer',{
+        styleid: '0',
+        client_id: 'YOUR YOUKUOPENAPI CLIENT_ID',
+        vid: ''
+      });
+    </script>
+  css: |-
+    .<%=@template.section_selector%> video-player{ <%= @template.css :video %> }
+  js: ''
