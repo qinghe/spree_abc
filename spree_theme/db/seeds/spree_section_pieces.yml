@@ -1688,12 +1688,12 @@ click_effect_sider:
       }
       .sidr-overlay{
         display: none;
-      	position: fixed;
-      	top: 0;
-      	left: 0;
-      	height: 100%;
-      	width: 100%;
-      	z-index: 2;
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        z-index: 2;
         background-color:gray;
         opacity: 0.3;
       }
@@ -1718,3 +1718,28 @@ video:
   css: |-
     .<%=@template.section_selector%> video-player{ <%= @template.css :video %> }
   js: ''
+container_hmenu_with_vertical_submenu:
+  id: 92
+  title: container hmenu with vertical submenu
+  slug: container-hmenu-with-vertical-submenu
+  is_selectable: "0"
+  is_container: "1"
+  html: ~~content~~
+  css: |
+    /* mainly copy from superfish.css */
+    .<%=@template.section_selector%> li {
+      position: relative;
+    }
+    .<%=@template.section_selector%> ul ul {
+      position: absolute;
+      display: none;
+      top: 100%;
+      left: 0;
+      z-index: 99;
+      opacity:0.8 ;
+    }
+    .<%=@template.section_selector%> ul ul {
+      top: 0;
+      left: 100%;
+    }
+  js: ""

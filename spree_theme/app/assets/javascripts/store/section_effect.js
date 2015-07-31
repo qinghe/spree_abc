@@ -18,6 +18,23 @@ $(document).ready(function() {
     $("body,html").animate({scrollTop:0},1000);
     return false;
   });
+  // navigation  horizental two level menu
+  //  menu item1 | menu item2 hovering | menu item3
+  //             | menu item21         |
+  //             | menu item22         |
+  $(".hmenu-l2 ul").css({
+      display: "none"
+  }); // Opera Fix
+  $(".hmenu-l2 li").hover(function() {
+      $(this).find('ul:first').css({
+          visibility: "visible",
+          display: "none"
+      }).slideDown("normal");
+  },  function() {
+      $(this).find('ul:first').css({
+          visibility: "hidden"
+      });
+  });
 
   // change bg,border when hovering
   $('.hoverable').hover(function(){
