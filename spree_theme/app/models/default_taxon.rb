@@ -40,6 +40,10 @@ class DefaultTaxon < SpreeTheme.taxon_class
     true
   end
 
+  # menu_item_atom required
+  def depth
+    1
+  end
 
   def name
     case current_context

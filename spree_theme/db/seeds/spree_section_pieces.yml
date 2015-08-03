@@ -251,7 +251,8 @@ hmenu:
     .<%=@template.section_selector%> a{
        display:inline-block;
        float:left;
-       margin:0; /* non-editable */}
+       margin:0; /* non-editable */
+       }
   title: hmenu
   slug: hmenu
 vmenu:
@@ -1726,9 +1727,19 @@ container_hmenu_with_vertical_submenu:
   is_container: "1"
   html: ~~content~~
   css: |
+    .<%=@template.section_selector%> > .inner {
+      overflow: visible;/* submenu required*/
+    }
     /* mainly copy from superfish.css */
-    .<%=@template.section_selector%> li {
-      position: relative;
+    /* 'section_selector ul li' override 'section_selector li'*/
+    .<%=@template.section_selector%>  ul li {
+      position: relative; display:inline-block;
+    }
+    .<%=@template.section_selector%>  ul.depth2 li{
+      display: block;
+    }
+    .<%=@template.section_selector%>  ul.depth2 a{
+      display: block;
     }
     .<%=@template.section_selector%> ul ul {
       position: absolute;
@@ -1738,8 +1749,8 @@ container_hmenu_with_vertical_submenu:
       z-index: 99;
       opacity:0.8 ;
     }
-    .<%=@template.section_selector%> ul ul {
+    /*.<%=@template.section_selector%> ul ul ul{
       top: 0;
       left: 100%;
-    }
+    }*/
   js: ""

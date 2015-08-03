@@ -18,23 +18,6 @@ $(document).ready(function() {
     $("body,html").animate({scrollTop:0},1000);
     return false;
   });
-  // navigation  horizental two level menu
-  //  menu item1 | menu item2 hovering | menu item3
-  //             | menu item21         |
-  //             | menu item22         |
-  $(".hmenu-l2 ul").css({
-      display: "none"
-  }); // Opera Fix
-  $(".hmenu-l2 li").hover(function() {
-      $(this).find('ul:first').css({
-          visibility: "visible",
-          display: "none"
-      }).slideDown("normal");
-  },  function() {
-      $(this).find('ul:first').css({
-          visibility: "hidden"
-      });
-  });
 
   // change bg,border when hovering
   $('.hoverable').hover(function(){
@@ -274,13 +257,33 @@ $(document).ready(function() {
       duration : 400
     });
   });
+  $(".hover_effect_multi_level_menu").each(function(index, element) {
+    // navigation  horizental two level menu
+    //  menu item1 | menu item2 hovering | menu item3
+    //             | menu item21         |
+    //             | menu item22         |
+    $("ul ul", element).css({
+        display: "none"
+    }); // Opera Fix
+    $("ul li", element).hover(function() {
+        $(this).find('ul:first').css({
+            visibility: "visible",
+            display: "none"
+        }).slideDown("normal");
+    },  function() {
+        $(this).find('ul:first').css({
+            visibility: "hidden"
+        });
+    });
 
+  });
   //  usage: compute child_2 display position of window for effect popup
   //    html <div id='container'>
   //           <div class='child_1'></div> <div class='child_2'></div>
   //         </div>
   //  params: direction- there are five option values  t,r,b,l,rl,
-  //
+  //            it composite of three character.
+  //            xya: x axis, y axis, a alignment.  ex. lbl,  position left bottom, align left
   function compute_popup_position( $container, direction ){
       var $self = $container;
       var child1 = $(".child_1", $self);
@@ -311,7 +314,7 @@ $(document).ready(function() {
       }else if ( direction == 'l' ){
           position[0] = offset.top - (child2.height() - child1.height() ) / 2 - scroll_top;
           position[1] = offset.left - child2.width();
-      }else if ( direction == 'bl' ){
+      }else if ( direction == 'lbl' ){
           position[0] = offset.top - (child2.height() - child1.height() )  - scroll_top;
           position[1] = offset.left - child2.width();
       }
@@ -336,9 +339,11 @@ $(document).ready(function() {
   // popup menu, enable mouse hover on popup div, user could click menu on it.
   $(".hover_effect_popup_menu_l,.hover_effect_popup_menu").each(function(i, element){
       var $self = $(element);
-      var direction = 'b';
+      var direction = 'b';// popup at bottom, center as well.
       if ($self.hasClass('hover_effect_popup_menu_l')){
-          direction = 'l';
+        direction = 'l';
+      }else if ($self.hasClass('hover_effect_popup_menu_lbl')){
+        direction = 'lbl';
       }
       function activate_element(  ){
           var $hover_effect_container = this.$hover_effect_container;
@@ -352,10 +357,10 @@ $(document).ready(function() {
             position : position,
             fixed : false
           });
-      }
+      };
       function deactivate_element(  ){
           $.simplemodal.close();
-      }
+      };
       var child1 = $(".child_1", this);
       var child2 = $(".child_2", this);
 

@@ -554,6 +554,8 @@ module Spree
           if current_data_source == DataSourceEnum.gpvs || current_data_source == DataSourceEnum.blog
             params[:per_page]= splited_params[0].to_i
             params[:pagination_enable] = ( splited_params[1].nil? ? true : (splited_params[1]=='1') )
+          elsif current_data_source == DataSourceEnum.taxon
+            params[:depth] = splited_params[0].to_i
           else
             # section :page_attribute, :product_attribute, :post_attribute
             params[:attribute_name] = splited_params[0]

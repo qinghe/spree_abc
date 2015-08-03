@@ -69,10 +69,12 @@ module Spree
 
 
     def menu_item_atom( current_piece, page )
-      leaves_content = ""
+      return '' if current_piece.enabled_depth < page.depth
+
+      leaves_content = ''
 
       unless page.leaf?
-        leaves_content = content_tag(:ul, raw( page.children.map{|child| menu_item_atom( current_piece, child )}.join ) )
+        leaves_content = content_tag(:ul, raw( page.children.map{|child| menu_item_atom( current_piece, child )}.join ), class: "depth#{page.depth+1}" )
       end
 
       item_content = content_tag(:span, page.name, class: 'name' )
