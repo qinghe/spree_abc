@@ -4,4 +4,3 @@
 20150603c: ajax request should show spinner first.
 20150801a: copy template cause strange problem, can not get param_values by page_layout.
   we have to restart server to fix it.
-20150801b: Spree::Site.system_top_domain should move to configuration, it is reload during development

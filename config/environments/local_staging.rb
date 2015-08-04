@@ -58,11 +58,7 @@ SpreeAbc::Application.configure do
 
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
-  
-  config.after_initialize do
-    Spree::Site.system_top_domain = 'david.com'  
-  end
-  
+
   config.eager_load  = false
 
   config.middleware.delete 'Rack::Cache'   # 整页缓存，用不上
@@ -74,5 +70,7 @@ SpreeAbc::Application.configure do
   config.middleware.delete 'ActionDispatch::Head'      # 如果是HEAD请求，按照GET请求执行，但是不返回body
   config.middleware.delete 'Rack::ConditionalGet'      # HTTP客户端缓存才会使用
   config.middleware.delete 'Rack::ETag'    # HTTP客户端缓存才会使用
-  
+
+  config.spree_multi_site.system_top_domain = 'david.com'
+
 end
