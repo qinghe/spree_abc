@@ -7,16 +7,12 @@ ruby '2.0.0'
 
 gem 'rails', '4.1.11'
 
-gem 'mysql2'
-
-# Use SCSS for stylesheets
-gem 'sass-rails', '~> 4.0.2'
+gem 'mysql2','0.3.19'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 
-# Use CoffeeScript for .js.coffee assets and views
-gem 'coffee-rails', '~> 4.0.0'
+
 
 #gem 'jquery-rails'
 
@@ -40,14 +36,10 @@ gem 'jquery-turbolinks'
 
 gem 'ruby-hmac' #http://ryanbigg.com/2009/07/no-such-file-to-load-hmac-sha1/
 
-gem 'spree', '~>2.4.8'
+eval(File.read(File.dirname(__FILE__) + '/common_spree_dependencies.rb'))
 
 # gem 'sprangular',   :path => './sprangular'
 
-# referer to https://github.com/spree/spree/issues/2013
-gem 'spree_auth_devise', :github => "spree/spree_auth_devise", :branch => "2-4-stable"
-#support rich_editor
-gem 'spree_editor',  :github => "spree/spree_editor", :branch=>"2-4-stable"
 #gem 'tinymce-rails-langs'
 #gem 'daemons'
 #gem 'delayed_job_active_record'

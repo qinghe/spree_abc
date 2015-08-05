@@ -1,6 +1,7 @@
 source 'http://rubygems.org'
 #source "https://rails-assets.org"
 
+eval(File.read(File.dirname(__FILE__) + '/../common_spree_dependencies.rb'))
 
 
 group :test,:development do
@@ -8,8 +9,6 @@ group :test,:development do
   gem 'simplecov' #rspec using it.
   #using backend required
   gem "mysql2"
-  gem 'spree', :github => "spree/spree", :branch => "2-4-stable"
-  gem 'spree_auth_devise', :github => "spree/spree_auth_devise", :branch => "2-4-stable"
 end
 
 #group :test do
@@ -25,10 +24,6 @@ gem "awesome_nested_set"
 gem 'useragent'
 gem "friendly_id"
 
-group :assets do
-  gem 'sass'
-  gem 'coffee-rails'
-end
 #gem 'ssl_requirement'
 
 #gem 'bootstrap-sass', '~> 3.3.1'

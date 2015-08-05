@@ -1,4 +1,4 @@
-hmenu = Spree::Section.create_section(section_piece_hash['container'], {:title=>"hmenu with vertical submenu", :usage =>'container', :content_param=>  Spree::Section::MouseEffect.superfish },
+hmenu = Spree::Section.create_section(section_piece_hash['container'], {:title=>"hmenu with vertical submenu", :usage =>'container', :content_param=>  Spree::Section::MouseEffect.multi_level_menu },
  { 'content_layout'=>{'86'=>bool_true,'86unset'=>bool_false}, 'block'=>{'101'=>"float:left",'101unset'=>bool_false}, 'inner'=>{'15hidden'=>bool_true,'21hidden'=>bool_true}})
 
 
