@@ -12,8 +12,6 @@ gem 'mysql2','0.3.19'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 
-
-
 #gem 'jquery-rails'
 
 # To use ActiveModel has_secure_password
@@ -34,7 +32,6 @@ gem 'uglifier', '>= 1.3.0'
 gem 'turbolinks'
 gem 'jquery-turbolinks'
 
-gem 'ruby-hmac' #http://ryanbigg.com/2009/07/no-such-file-to-load-hmac-sha1/
 
 eval(File.read(File.dirname(__FILE__) + '/common_spree_dependencies.rb'))
 
@@ -49,10 +46,14 @@ eval(File.read(File.dirname(__FILE__) + '/common_spree_dependencies.rb'))
 
 gem 'spree_multi_site',   :path => './spree_multi_site'
 
+# Use SCSS for stylesheets,  spree_theme/spree_devise_auth required
+gem 'sass-rails', '~> 4.0.2'
 #gem "friendly_id" # spree included.
 gem 'useragent'
 gem 'spree_theme',   :path => './spree_theme'
 
+#activemerchant_patch_for_china requried
+gem 'ruby-hmac' #http://ryanbigg.com/2009/07/no-such-file-to-load-hmac-sha1/
 #only specify it here, then could use ActiveMerchant::Billing::Integrations::Alipay::Helper directly
 gem 'alipay'
 gem 'offsite_payments'

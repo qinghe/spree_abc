@@ -1,12 +1,12 @@
 <%= render :partial => 'sub_menu' %>
 <% content_for :page_title do %>
-  <%= Spree.t(:theme_native) %> 
+  <%= Spree.t(:theme_native) %>
 <% end %>
 
 <% designable= Spree::Store.current.designable? %>
 
 <% if designable  %>
-  <% content_for :page_actions do %>  
+  <% content_for :page_actions do %>
     <li><%= button_link_to Spree.t("template_theme.new"), new_object_url, :icon => 'plus',:remote=>:true, :id=>'admin_new_template_theme' %></li>
   <% end %>
 <% end %>
@@ -23,36 +23,36 @@
        <col style="width: 10%;">
        <% end %>
        <col style="width: 25%;">
-  </colgroup>  
+  </colgroup>
   <thead>  <tr>
     <th><%= Spree::TemplateTheme.human_attribute_name(:title) %></th>
     <th>  <%= Spree.t(:theme_applied) %> </th>
-    <% if designable %>    
+    <% if designable %>
     <th><%= Spree::TemplateTheme.human_attribute_name(:is_public) %> </th>
-    <% end %>    
+    <% end %>
   </tr> </thead>
 
 
 <% @themes.each do |theme| %>
   <tr class="<%= cycle('odd', 'even') %>">
     <td> <span class="editable" data-id="<%=theme.id%>"><%= theme.title %></span></td>
-    <td align="center">      
+    <td align="center">
         <%= form_for [:admin,theme],:url=>apply_admin_template_theme_path(theme), :remote=>true do |f|%>
-        <%= radio_button_tag "is_applied", theme.id, theme.applied?  %>       
-        <% end %> 
+        <%= radio_button_tag "is_applied", theme.id, theme.applied?  %>
+        <% end %>
     </td>
     <% if designable %>
       <td align="center">
         <%= form_for [:admin,theme], :remote=>true do |f|%>
         <%= f.check_box "is_public"  %>
-        <% end %> 
+        <% end %>
       </td>
     <% end %>
     <td class="actions">
     <%= link_to_with_icon 'cogs', Spree.t(:theme_config), config_resource_admin_template_theme_path(theme), {:no_text => true} %>
-    <% if theme.has_native_layout? %>    
+    <% if theme.has_native_layout? %>
       <%= link_to_with_icon 'eye', Spree.t(:preview_theme), preview_template_theme_path(theme), {:target=>'_blank',:no_text => true} %>
-      <% if designable %>    
+      <% if false %>    
       <%= link_to_with_icon 'copy', Spree.t(:theme_copy), copy_admin_template_theme_path(theme), {:method=>:post,:no_text => true} %>
       <% end %>
       <%= link_to_with_icon 'print', Spree.t(:theme_release), release_admin_template_theme_path(theme), {:method=>:post,:no_text => true} %>
@@ -70,4 +70,3 @@
 <% end %>
 
 <br />
-
