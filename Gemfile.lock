@@ -15,6 +15,14 @@ GIT
       spree_core (~> 2.4.2)
 
 GIT
+  remote: git://github.com/qhwa/paperclip_oss_storage.git
+  revision: 3c61a07e3c797d26bf7d06a55df70cec652ddcff
+  specs:
+    paperclip_oss_storage (0.0.4)
+      paperclip (>= 3.5.2)
+      rest-client (>= 1.6.7)
+
+GIT
   remote: git://github.com/spree/spree_auth_devise.git
   revision: 9d51f3d65a1ae6bd5aa1a48b649a1c57e52107a5
   branch: 2-4-stable
@@ -198,6 +206,8 @@ GEM
       devise (>= 2.1.0)
     diff-lcs (1.2.5)
     docile (1.1.5)
+    domain_name (0.5.24)
+      unf (>= 0.0.5, < 1.0.0)
     email_spec (1.6.0)
       launchy (~> 2.1)
       mail (~> 2.2)
@@ -216,6 +226,8 @@ GEM
     highline (1.6.21)
     hike (1.2.3)
     htmlentities (4.3.4)
+    http-cookie (1.0.2)
+      domain_name (~> 0.5)
     httparty (0.13.5)
       json (~> 1.8)
       multi_xml (>= 0.5.2)
@@ -251,6 +263,7 @@ GEM
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
     net-ssh (2.9.1)
+    netrc (0.10.3)
     nokogiri (1.6.6.2)
       mini_portile (~> 0.6.0)
     offsite_payments (2.0.1)
@@ -310,6 +323,10 @@ GEM
       activesupport (>= 3.0)
       i18n
       polyamorous (~> 1.1)
+    rest-client (1.8.0)
+      http-cookie (>= 1.0.2, < 2.0)
+      mime-types (>= 1.16, < 3.0)
+      netrc (~> 0.7)
     rspec-activemodel-mocks (1.0.1)
       activemodel (>= 3.0)
       activesupport (>= 3.0)
@@ -434,6 +451,9 @@ GEM
     uglifier (2.6.0)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
+    unf (0.1.4)
+      unf_ext
+    unf_ext (0.0.7.1)
     useragent (0.10.0)
     versioncake (2.3.1)
       actionpack (>= 3.2)
@@ -474,6 +494,7 @@ DEPENDENCIES
   mail_view
   mysql2 (= 0.3.19)
   offsite_payments
+  paperclip_oss_storage!
   poltergeist (= 1.5.0)
   rails (= 4.1.11)
   rspec-activemodel-mocks

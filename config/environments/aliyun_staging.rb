@@ -60,4 +60,3 @@ SpreeAbc::Application.configure do
 
   config.eager_load = true
 end
-Paperclip.options[:command_path] = "/usr/local/bin/"

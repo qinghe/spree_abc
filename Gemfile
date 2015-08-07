@@ -69,6 +69,7 @@ gem 'spree_essential_blog',   :path => './spree_essential_blog'
 
 # copy from https://github.com/spree-contrib/spree_comments/tree/2-0-stable
 gem 'spree_comments',   :path => './spree_comments'
+gem 'paperclip_oss_storage',   :github => 'qhwa/paperclip_oss_storage'
 
 #
 gem 'bootstrap-sass', '~> 3.3.1'
