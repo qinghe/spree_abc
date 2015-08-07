@@ -24,5 +24,21 @@ namespace :spree_abc do
     }
     Rails.logger.debug "end task :refresh_images"
   end
-  
+
+  # there are product images, taxon icon, option_value image, post cover,
+  #           ckeditor_assets, template_files
+  desc "Upload images to Aliyun OSS"
+    task :product_images => :environment do
+      Spree::Site.all.each{|site|
+        Spree::Site.current = site
+        Spree::Image.all.each do |image|
+          image_full_path = Dir["#{Rails.root}/public/shops/#{Rails.env}/#{site.id}/products/#{image.id}/#{image.attachment_file_name}"].first
+          if image_full_path.present?
+            image.update(:attachment => File.open(image_full_path))
+            puts "uploading #{image.id}:#{image.attachment_file_name}"
+          end
+        end
+      }
+    end
+
 end
