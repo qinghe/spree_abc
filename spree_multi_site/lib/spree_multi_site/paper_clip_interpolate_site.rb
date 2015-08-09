@@ -8,7 +8,13 @@ unless Paperclip::Interpolations.all.include? :site
   end
 
   Paperclip.interpolates :aliyun_host do |attachment, style_name|
-    
+Rails.logger.debug " style_name = #{style_name} #{style_name.class}"
+    case style_name
+      when :original
+        Paperclip::Attachment.default_options[:oss_host]
+      else
+        Paperclip::Attachment.default_options[:img_host]
+    end
   end
 
   # support aliyun image resize service
@@ -17,7 +23,7 @@ unless Paperclip::Interpolations.all.include? :site
   # http://userdomain/object.jpg@100w_100h_90Q.jpg
   Paperclip.interpolates :aliyun_style do |attachment, style_name|
     extension = '.jpg'
-    style = case style_name
+    case style_name
       when :mini
         '@48w_48h_90Q_1x' + extension
       when :small
