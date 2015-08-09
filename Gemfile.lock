@@ -6,6 +6,15 @@ GIT
     activemerchant_patch_for_china (0.2.0)
 
 GIT
+  remote: git://github.com/RuanShan/paperclip_oss_storage.git
+  revision: bd178f2fff4bb515c2b6df92542da307dc607fcd
+  branch: master
+  specs:
+    paperclip_oss_storage (0.0.4)
+      paperclip (>= 3.5.2)
+      rest-client (>= 1.6.7)
+
+GIT
   remote: git://github.com/RuanShan/spree_alipay.git
   revision: 82e084f1aae435e86ccd280a25e177d9d7cbf562
   branch: 2-4-stable
@@ -13,14 +22,6 @@ GIT
     spree_alipay (2.4.0)
       alipay (~> 0.3.0)
       spree_core (~> 2.4.2)
-
-GIT
-  remote: git://github.com/qhwa/paperclip_oss_storage.git
-  revision: 3c61a07e3c797d26bf7d06a55df70cec652ddcff
-  specs:
-    paperclip_oss_storage (0.0.4)
-      paperclip (>= 3.5.2)
-      rest-client (>= 1.6.7)
 
 GIT
   remote: git://github.com/spree/spree_auth_devise.git
@@ -519,3 +520,6 @@ DEPENDENCIES
   useragent
   webmock (= 1.8.11)
   with_model
+
+BUNDLED WITH
+   1.10.5

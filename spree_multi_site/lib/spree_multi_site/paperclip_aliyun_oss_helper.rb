@@ -11,11 +11,10 @@ module PaperclipAliyunOssHelper
   end
 
   def fix_path_for_aliyun_oss
-    puts " it is called"
-    # ex. Spree::Taxon   path = 1/taxon/1_test.jpg
-    path = ":site/:simple_class/:id_:filename"
+    # ex. Spree::Taxon   path = 1/taxon/1_test.jpg,  :aliyun_style start with @
+    path = ":site/:simple_class/:id_:filename:aliyun_style"
     attachment_definitions[:attachment][:path] = path
-    attachment_definitions[:attachment][:url] = '/'+path
+    attachment_definitions[:attachment][:url] = ':aliyun_host/'+path
     attachment_definitions[:attachment][:styles] = {} #no need styles anymore. it is supproted by oss style
   end
 

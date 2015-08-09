@@ -45,7 +45,7 @@ SpreeAbc::Application.configure do
       access_id: ENV['ALIYUN_ACCESS_ID'] ,
       access_key: ENV['ALIYUN_ACCESS_KEY'] ,
       # 你需要在 Aliyum OSS 上面提前创建一个 Bucket
-      bucket: 'getstore' ,
+      bucket: 'otest' ,
       # 是否使用内部连接，true - 使用 Aliyun 局域网的方式访问  false - 外部网络访问
       internal: false ,
       # 配置存储的地区数据中心，默认: hangzhou
