@@ -61,7 +61,59 @@ namespace :spree_abc do
       }
     end
 
+    desc "replace image src which using ckeditor images with Aliyun OSS"
+    task :replace_image_src_for_aliyun => :environment do
+    # taxon.description, product.description, post.body
 
+             [Spree::Taxon, Spree::Product, Spree::Post].each{|model_class|
+               puts "----------------------#{model_class.name}----------------------"
+               column = (model_class == Spree::Post ? :body : :description)
+               model_class.unscoped.all.each{|model|
+                 description = model.send column
+                 if description.present?
+                   doc = Nokogiri::HTML::DocumentFragment.parse(description)
+                   Spree::Site.with_site( Spree::Site.find( model.site_id ) ) do
+                     doc.css('img').each{| img |
+                         #file.puts "#{model.id}, #{img.attr( 'src' )}"
+                         if img.attr( 'src' ) =~ /pictures\/([\d]+)\/content/
+                           picture = Ckeditor::Picture.where( id: $1 ).first
+                           if picture
+                             img['src']= picture.url
+                           else
+                             img['src']= ''
+                           end
+                         else
+                           img['src']= ''
+                         end
+                         puts "#{model.id},#{img['src']}"
+                         model.send "#{column}=", doc.to_html
+                     }
+                     model.save!
+                   end
+                 end
+               }
+             }
+             #taxon.description, product.description, post.body
+
+
+
+    end
+
+    desc "Replace image src for aliyun, it is only called internally
+      model_class is string 'spree/post'
+      rake spree_abc:aliyun:replace_image_src[spree/product,2]"
+    task :replace_image_src, [:model_class, :model_id] => :environment do |t, args|
+      model_class = args.model_class.classify.constantize
+      model = model_class.unscoped.find args.model_id
+
+      Spree::Site.with_site( Spree::Site.find( model.site_id ) ) do
+        doc = Nokogiri::HTML(model.description)
+        imgs = doc.css('img')
+
+        puts "images = #{imgs}"
+      end
+
+    end
 
   end
 end
