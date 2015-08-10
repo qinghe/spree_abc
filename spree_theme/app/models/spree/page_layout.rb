@@ -621,7 +621,6 @@ module Spree
                 form_start = form_end =nil
               end
 
-              Rails.logger.debug " from_start = #{form_start} form_end=#{form_end}"
               subpieces = <<-EOS1
               <% @template.running_data_source= @template.products( (defined?(page) ? page : @current_page) ) %>
               <% @template.running_data_source.each(){|product| @template.running_data_item = product %>

@@ -1,10 +1,10 @@
 Spree::Image.class_eval do
-#override attachement[:path]
+  #override attachement[:path]
   attachment_definitions[:attachment][:url] = '/shops/:rails_env/:site/products/:id/:basename_:style.:extension'
   attachment_definitions[:attachment][:path] = ':rails_root/public/shops/:rails_env/:site/products/:id/:basename_:style.:extension'
   attachment_definitions[:attachment][:styles] = { mini: '48x48>', small: '100x100>', product: '240x240>', medium: '350x350>', large: '600x600>' }
 
-  extend PaperclipAliyunOssHelper
+  extend SpreeMultiSite::PaperclipAliyunOssHelper
 
 end
 
@@ -12,6 +12,8 @@ Spree::Taxon.class_eval do
   #override attachement[:path]
   attachment_definitions[:icon][:url] = '/shops/:rails_env/:site/taxons/:id/:style/:basename.:extension'
   attachment_definitions[:icon][:path] = ':rails_root/public/shops/:rails_env/:site/taxons/:id/:style/:basename.:extension'
+
+  extend SpreeMultiSite::PaperclipAliyunOssHelper
 end
 
 Spree::Post.class_eval do

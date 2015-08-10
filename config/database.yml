@@ -17,7 +17,7 @@ development:
   username: root
   password:
   socket: /var/lib/mysql/mysql.sock
-aliyun_dev:
+aliyun_development:
   adapter: mysql2
   encoding: utf8
   reconnect: false

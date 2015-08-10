@@ -25,26 +25,6 @@ namespace :spree_abc do
     Rails.logger.debug "end task :refresh_images"
   end
 
-  # there are product images, taxon icon, option_value image, post cover,
-  #           ckeditor_assets, template_files
-  # rake spree_abc:migrate_product_images_to_aliyun RAILS_ENV=aliyun_dev ORIGINAL_RAILS_ENV=development
-  desc "Upload images to Aliyun OSS, ORIGINAL_RAILS_ENV, RAILS_ENV reqruied"
-    task :migrate_product_images_to_aliyun => :environment do
-      raise "ORIGINAL_RAILS_ENV required" if ENV['ORIGINAL_RAILS_ENV'].blank?
-      original_rails_env = ENV['ORIGINAL_RAILS_ENV']
-      Spree::Site.all.each{|site|
-        Spree::Site.current = site
-        Spree::Image.all.each do |image|
-          extname = File.extname image.attachment_file_name # .jpg
-          basename = File.basename image.attachment_file_name, extname
-          image_full_path = Dir["#{Rails.root}/public/shops/#{original_rails_env}/#{site.id}/products/#{image.id}/#{basename}_original#{extname}"].first
-puts "image_full_path =#{image_full_path}"          
-          if image_full_path.present?
-            image.update(:attachment => File.open(image_full_path))
-            puts "uploading #{image.id}:#{image.attachment_file_name}"
-          end
-        end
-      }
-    end
+
 
 end

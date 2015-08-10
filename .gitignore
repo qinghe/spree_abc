@@ -15,7 +15,7 @@ config/deploy/*
 Gemfile.lock
 public/shops/staging
 public/shops/development
-public/shops/aliyun_dev
+public/shops/aliyun_development
 public/shops/test
 config/deploy/production.rb
 db/full_sql
