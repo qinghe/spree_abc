@@ -365,6 +365,7 @@ module Spree
       end
 
       def build_css(tree, node, section_hash, theme_id=0)
+puts " node =#{node.id }#{node.title}"
         css = node.section.build_css
         css.insert(0, get_section_script(node))
         unless node.leaf?

@@ -2,7 +2,7 @@ namespace :spree_abc do
   namespace :aliyun do
     # there are product images, taxon icon, post cover, option_value image,
     #           ckeditor_assets, template_files
-    # rake spree_abc:migrate_product_images_to_aliyun RAILS_ENV=aliyun_dev ORIGINAL_RAILS_ENV=development
+    # rake spree_abc:aliyun:migrate_product_images_to_aliyun RAILS_ENV=aliyun_development ORIGINAL_RAILS_ENV=development
     desc "Upload product images to Aliyun OSS, ORIGINAL_RAILS_ENV, RAILS_ENV reqruied"
     task :migrate_product_images_to_aliyun => :environment do
       raise "ALIYUN_ACCESS_ID required" if ENV['ALIYUN_ACCESS_ID'].blank?
@@ -43,18 +43,19 @@ namespace :spree_abc do
     end
 
 
-    desc "some ckeditor picture endwith '.', ex. abc.jpg.  it should be abc.jpg"
-    task :fix_picture_name=> :environment do |t, args|
-      Ckeditor::Picture.unscoped.all.each{|model|
-        if model.data_file_name[/\.$/]
-          Spree::Site.with_site( Spree::Site.find( model.site_id ) ) do
-
-          end
-        puts "picture = #{model.data_file_name}"
-        end
-      }
-
-    end
+    #desc "some ckeditor picture endwith '.', ex. abc.jpg.  it should be abc.jpg"
+    #task :fix_picture_name=> :environment do |t, args|
+    #  Ckeditor::Picture.unscoped.all.each{|model|
+    #    if ['.gif','.jpg'].include? model.data_file_name #model.data_file_name[/^\./]
+    #      Spree::Site.with_site( Spree::Site.find( model.site_id ) ) do
+    #        new_path = File.join(File.dirname(model.path), 'noname'+model.data_file_name)
+    #        puts "p#{model.id} = #{model.data_file_name} #{new_path}"
+    #        FileUtils.cp( model.path, new_path)
+    #        model.update(:data => File.open(new_path))
+    #      end
+    #    end
+    #  }
+    #end
 
     desc "Upload ckeditor images to Aliyun OSS, ORIGINAL_RAILS_ENV, RAILS_ENV reqruied"
     task :migrate_ckeditor_images_to_aliyun => :environment do
@@ -63,15 +64,25 @@ namespace :spree_abc do
       original_rails_env = ENV['ORIGINAL_RAILS_ENV']
       Spree::Site.all.each{|site|
         Spree::Site.current = site
-        Ckeditor::Picture.all.each do |image|
+        Ckeditor::Picture.all.each{ |image|
           #:path => ":rails_root/public/shops/:rails_env/:site/ckeditor_assets/pictures/:id/:style_:basename.:extension",
-          image_full_path = Dir["#{Rails.root}/public/shops/#{original_rails_env}/#{site.id}/ckeditor_assets/pictures/#{image.id}/original_#{image.data_file_name}"].first
-    puts "image_full_path =#{image_full_path}"
+          path = "#{Rails.root}/public/shops/#{original_rails_env}/#{site.id}/ckeditor_assets/pictures/#{image.id}/original_*"
+          image_full_path = Dir[path].first
+          puts "path:#{path}, real:#{image_full_path}"
+
           if image_full_path.present?
+            #some ckeditor picture name is '.jpg' or '.gif', filesystem name is original_.jpg.
+            if ['.gif','.jpg'].include? image.data_file_name # model.data_file_name[/^\./]
+               new_path = File.join(File.dirname(image_full_path), 'noname'+image.data_file_name)
+               puts "p#{image.id} = #{image.data_file_name} #{new_path}"
+               FileUtils.cp( image_full_path, new_path)
+               image_full_path = new_path
+            end
+
             image.update(:data => File.open(image_full_path))
             puts "uploading #{image.id}:#{image.data_file_name}"
           end
-        end
+        }
       }
     end
 
@@ -101,7 +112,7 @@ namespace :spree_abc do
                          end
                          puts "#{model.id},#{img['src']}"
                          model.send "#{column}=", doc.to_html
-                     }
+                       }
                      model.save!
                    end
                  end
@@ -123,7 +134,27 @@ namespace :spree_abc do
     #  end
     #end
 
-
-
-  end
+    desc "Upload template files to Aliyun OSS, ORIGINAL_RAILS_ENV, RAILS_ENV reqruied
+      rake spree_abc:aliyun:migrate_template_files_to_aliyun RAILS_ENV=aliyun_development ORIGINAL_RAILS_ENV=development"
+    task :migrate_template_files_to_aliyun => :environment do
+      raise "ALIYUN_ACCESS_ID required" if ENV['ALIYUN_ACCESS_ID'].blank?
+      raise "ORIGINAL_RAILS_ENV required" if ENV['ORIGINAL_RAILS_ENV'].blank?
+      original_rails_env = ENV['ORIGINAL_RAILS_ENV']
+        Spree::TemplateFile.all.each do |image|
+          extname = File.extname image.attachment_file_name # .jpg
+          basename = File.basename image.attachment_file_name, extname
+          image_full_path = Dir["#{Rails.root}/public/shops/#{original_rails_env}/#{image.site_id}/spree/template_files/#{image.id}/#{basename}_original#{extname}"].first
+          #puts "image_full_path =#{image_full_path}"
+          Spree::Site.with_site( Spree::Site.find( image.site_id ) ) do
+            # since template_file is used as logo/css background, file name is referred without 'original_'
+            new_file_path = "#{Rails.root}/public/shops/#{original_rails_env}/#{image.site_id}/spree/template_files/#{image.id}/#{image.attachment_file_name}"
+            if image_full_path.present?
+              FileUtils.cp(image_full_path, new_file_path )
+              image.update(:attachment => File.open(new_file_path))
+              puts "uploading #{image.id}:#{image.attachment_file_name}"
+            end
+          end
+       end
+    end #task :migrate_template_files_to_aliyun
+  end #namespace :aliyun
 end

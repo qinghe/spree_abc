@@ -1,0 +1,15 @@
+1. fix invalid product,  price, sku, slug
+  # fix image src in product.description, taxon.description, post.body, required
+  rake spree_theme:load_seed[250/25h_fix_slug.rb] RAILS_ENV=aliyun_development
+
+2.    rake spree_abc:aliyun:migrate_product_images_to_aliyun RAILS_ENV=aliyun_development ORIGINAL_RAILS_ENV=development
+
+3.    rake spree_abc:aliyun:migrate_taxon_images_to_aliyun RAILS_ENV=aliyun_development ORIGINAL_RAILS_ENV=development
+
+#4. fix invalid ckeditor picture name   .jpg   original_.jpg.
+#  #  Ckeditor::Picture required
+#  rake spree_abc:aliyun:fix_picture_name RAILS_ENV=aliyun_development
+
+5. rake spree_abc:aliyun:migrate_ckeditor_images_to_aliyun RAILS_ENV=aliyun_development ORIGINAL_RAILS_ENV=development
+
+6. rake spree_abc:aliyun:replace_image_src_for_aliyun RAILS_ENV=aliyun_development

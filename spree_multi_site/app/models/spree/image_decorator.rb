@@ -20,11 +20,15 @@ Spree::Post.class_eval do
   #override attachement[:path]
   attachment_definitions[:cover][:url] = '/shops/:rails_env/:site/posts/:id/:basename_:style.:extension'
   attachment_definitions[:cover][:path] = ':rails_root/public/shops/:rails_env/:site/posts/:id/:basename_:style.:extension'
+
+  extend SpreeMultiSite::PaperclipAliyunOssHelper
 end
 
 Spree::TemplateFile.class_eval do
   attachment_definitions[:attachment][:url] = "/shops/:rails_env/:site/:class/:id/:basename_:style.:extension"
   attachment_definitions[:attachment][:path] = ":rails_root/public/shops/:rails_env/:site/:class/:id/:basename_:style.:extension"
+
+  extend SpreeMultiSite::PaperclipAliyunOssHelper
 end
 
 #Rails.application.config.spree_multi_site.site_scope_required_classes_with_image_from_other_gems.each do |attachement_name_symbol, extra_class|

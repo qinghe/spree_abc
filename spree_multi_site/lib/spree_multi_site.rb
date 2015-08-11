@@ -11,6 +11,6 @@ require 'spree_multi_site/paperclip_aliyun_oss_helper'
 
 module SpreeMultiSite
   # these keys are alipay oss folder names
-  AttachmentClassEnum = Struct.new(:spree_taxon, :spree_post, :spree_image, :ckeditor_picture, :ckeditor_file )\
-    ['Spree::Taxon','Spree::Post','Spree::Image', 'Ckeditor::Picture','Ckeditor::AttachmentFile']
+  AttachmentClassEnum = Struct.new(:spree_taxon, :spree_post, :spree_image, :ckeditor_picture, :ckeditor_file, :spree_template_file )\
+    ['Spree::Taxon','Spree::Post','Spree::Image', 'Ckeditor::Picture','Ckeditor::AttachmentFile', 'Spree::TemplateFile']
 end

@@ -13,12 +13,11 @@ module SpreeMultiSite
     end
 
     def fix_path_for_aliyun_oss
-  Rails.logger.debug " fix_path_for_aliyun_oss self.name =#{self.name} "
       # ex. Spree::Taxon   path = 1/taxon/1_test.jpg,  :aliyun_style start with @
       # taxon/post/
       path = ":site/:simple_class/:id_:filename"
       #make sure each
-      attachment_key = :attachment
+      attachment_key = :attachment  # spree_image/ spree_template_file
       attachment_key = :icon if self.name == AttachmentClassEnum.spree_taxon
       attachment_key = :cover if self.name == AttachmentClassEnum.spree_post
       attachment_key = :data if self.name == AttachmentClassEnum.ckeditor_picture  #Ckeditor::Picture,
