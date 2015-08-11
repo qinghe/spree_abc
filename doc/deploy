@@ -76,11 +76,17 @@ comment out spree/front_end/config/routes.rb
 
 setup aliyun oss
 ---------------------------------------------------------------
+Paperclip_aliyun_oss/aliyun-oss-sync require it,
 env |grep SHELL
 vi ~/.bashrc
-export ALIYUN_ACCESS_ID="xxx"
-export ALIYUN_ACCESS_KEY="xxx"
-
+export OSS_ACCESS_ID="xxx"
+export OSS_ACCESS_SECRET="xxx"
+#
+gem install aliyun-oss-sync
+#edit source lib/aosss/sync.rb
+:server            => 'oss-cn-beijing.aliyuncs.com'
+#sycn assets with aliyun
+aliyun-oss-sync push aliass.oss-cn-beijing.aliyuncs.com:assets public/assets
 
 
 system recovery&backup

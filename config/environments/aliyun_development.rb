@@ -35,8 +35,8 @@ SpreeAbc::Application.configure do
   config.paperclip_defaults= {
     storage: :aliyun,
     aliyun: {
-      access_id: ENV['ALIYUN_ACCESS_ID'] ,
-      access_key: ENV['ALIYUN_ACCESS_KEY'] ,
+      access_id: ENV['OSS_ACCESS_ID'] ,
+      access_key: ENV['OSS_ACCESS_SECRET'] ,
       # 你需要在 Aliyum OSS 上面提前创建一个 Bucket
       bucket: 'aliimg' ,
       # 是否使用内部连接，true - 使用 Aliyun 局域网的方式访问  false - 外部网络访问

@@ -13,7 +13,7 @@ namespace :spree_abc do
     # rake spree_abc:aliyun:migrate_product_images_to_aliyun RAILS_ENV=aliyun_development ORIGINAL_RAILS_ENV=development
     desc "Upload product images to Aliyun OSS, ORIGINAL_RAILS_ENV, RAILS_ENV reqruied"
     task :migrate_product_images_to_aliyun => :environment do
-      raise "ALIYUN_ACCESS_ID required" if ENV['ALIYUN_ACCESS_ID'].blank?
+      raise "OSS_ACCESS_ID required" if ENV['OSS_ACCESS_ID'].blank?
       raise "ORIGINAL_RAILS_ENV required" if ENV['ORIGINAL_RAILS_ENV'].blank?
       original_rails_env = ENV['ORIGINAL_RAILS_ENV']
       Spree::Site.all.each{|site|
@@ -33,7 +33,7 @@ namespace :spree_abc do
 
     desc "Upload taxon images to Aliyun OSS, ORIGINAL_RAILS_ENV, RAILS_ENV reqruied"
     task :migrate_taxon_images_to_aliyun => :environment do
-      raise "ALIYUN_ACCESS_ID required" if ENV['ALIYUN_ACCESS_ID'].blank?
+      raise "OSS_ACCESS_ID required" if ENV['OSS_ACCESS_ID'].blank?
       raise "ORIGINAL_RAILS_ENV required" if ENV['ORIGINAL_RAILS_ENV'].blank?
       original_rails_env = ENV['ORIGINAL_RAILS_ENV']
       Spree::Site.all.each{|site|
@@ -67,7 +67,7 @@ namespace :spree_abc do
 
     desc "Upload ckeditor images to Aliyun OSS, ORIGINAL_RAILS_ENV, RAILS_ENV reqruied"
     task :migrate_ckeditor_images_to_aliyun => :environment do
-      raise "ALIYUN_ACCESS_ID required" if ENV['ALIYUN_ACCESS_ID'].blank?
+      raise "OSS_ACCESS_ID required" if ENV['OSS_ACCESS_ID'].blank?
       raise "ORIGINAL_RAILS_ENV required" if ENV['ORIGINAL_RAILS_ENV'].blank?
       original_rails_env = ENV['ORIGINAL_RAILS_ENV']
       Spree::Site.all.each{|site|
@@ -145,7 +145,7 @@ namespace :spree_abc do
     desc "Upload template files to Aliyun OSS, ORIGINAL_RAILS_ENV, RAILS_ENV reqruied
       rake spree_abc:aliyun:migrate_template_files_to_aliyun RAILS_ENV=aliyun_development ORIGINAL_RAILS_ENV=development"
     task :migrate_template_files_to_aliyun => :environment do
-      raise "ALIYUN_ACCESS_ID required" if ENV['ALIYUN_ACCESS_ID'].blank?
+      raise "OSS_ACCESS_ID required" if ENV['OSS_ACCESS_ID'].blank?
       raise "ORIGINAL_RAILS_ENV required" if ENV['ORIGINAL_RAILS_ENV'].blank?
       original_rails_env = ENV['ORIGINAL_RAILS_ENV']
         Spree::TemplateFile.all.each do |image|
