@@ -61,6 +61,8 @@ https://community.jboss.org/wiki/InstallPostgreSQLonFedora?_sscc=t
 #http://www.imagemagick.org/script/install-source.php
 wget http://www.imagemagick.org/download/ImageMagick.tar.gz
 tar xvzf ImageMagick.tar.gz
+identify  #try it
+ldconfig  /usr/local/lib # refresh as need.
 
 5. install google nodejs #execjs required
 ln -s /usr/local/bin/node /usr/bin/node
@@ -77,7 +79,7 @@ setup aliyun oss
 env |grep SHELL
 vi ~/.bashrc
 export ALIYUN_ACCESS_ID="xxx"
-export ALIYUN_ACCESS_KEY="xxx" 
+export ALIYUN_ACCESS_KEY="xxx"
 
 
 

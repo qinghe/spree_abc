@@ -79,5 +79,6 @@ SpreeAbc::Application.configure do
       #upload_host: "http://you_bucket_name.oss.aliyun-inc.com"
     }
   }
+  config.spree_multi_site.system_top_domain = 'firecart.cn'
 end
 Paperclip.options[:command_path] = "/usr/local/bin/"
