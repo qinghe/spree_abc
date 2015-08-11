@@ -42,6 +42,20 @@ namespace :spree_abc do
       }
     end
 
+
+    desc "some ckeditor picture endwith '.', ex. abc.jpg.  it should be abc.jpg"
+    task :fix_picture_name=> :environment do |t, args|
+      Ckeditor::Picture.unscoped.all.each{|model|
+        if model.data_file_name[/\.$/]
+          Spree::Site.with_site( Spree::Site.find( model.site_id ) ) do
+
+          end
+        puts "picture = #{model.data_file_name}"
+        end
+      }
+
+    end
+
     desc "Upload ckeditor images to Aliyun OSS, ORIGINAL_RAILS_ENV, RAILS_ENV reqruied"
     task :migrate_ckeditor_images_to_aliyun => :environment do
       raise "ALIYUN_ACCESS_ID required" if ENV['ALIYUN_ACCESS_ID'].blank?
@@ -94,26 +108,22 @@ namespace :spree_abc do
                }
              }
              #taxon.description, product.description, post.body
-
-
-
     end
 
-    desc "Replace image src for aliyun, it is only called internally
-      model_class is string 'spree/post'
-      rake spree_abc:aliyun:replace_image_src[spree/product,2]"
-    task :replace_image_src, [:model_class, :model_id] => :environment do |t, args|
-      model_class = args.model_class.classify.constantize
-      model = model_class.unscoped.find args.model_id
+    #desc "Replace image src for aliyun, it is only called internally
+    #  model_class is string 'spree/post'
+    #  rake spree_abc:aliyun:replace_image_src[spree/product,2]"
+    #task :replace_image_src, [:model_class, :model_id] => :environment do |t, args|
+    #  model_class = args.model_class.classify.constantize
+    #  model = model_class.unscoped.find args.model_id
+    #  Spree::Site.with_site( Spree::Site.find( model.site_id ) ) do
+    #    doc = Nokogiri::HTML(model.description)
+    #    imgs = doc.css('img')
+    #    puts "images = #{imgs}"
+    #  end
+    #end
 
-      Spree::Site.with_site( Spree::Site.find( model.site_id ) ) do
-        doc = Nokogiri::HTML(model.description)
-        imgs = doc.css('img')
 
-        puts "images = #{imgs}"
-      end
-
-    end
 
   end
 end
