@@ -4,10 +4,10 @@ setenforce 0, or mod_passenger.so: cannot open shared object file: Permission de
 
 2. iptables
  iptables -A INPUT -p tcp --dport 80 -j ACCEPT
- service iptables save 
+ service iptables save
 
 
-app server 
+app server
 --------------------------------------------------------
 echo export TMOUT=1000000 >> /root/.bash_profile
 
@@ -45,15 +45,15 @@ db server
 -----------------------------------------------------------
 1. configure mysql to support utf-8
   [mysqld]
-  character_set_server= utf8    
+  character_set_server= utf8
 http://www.dotkam.com/2008/09/14/configure-rails-and-mysql-to-support-utf-8/
 
 
 2. yum install libxml2-devel libxslt-devel
-  nokogiri required 
+  nokogiri required
   https://github.com/sparklemotion/nokogiri
 
-  
+
 3. install pg
 https://community.jboss.org/wiki/InstallPostgreSQLonFedora?_sscc=t
 
@@ -71,6 +71,15 @@ bundle show spree
 # /home/david/.rvm/gems/ruby-1.9.3-p448/bundler/gems/spree-442b9f8ad45b
 comment out spree/front_end/config/routes.rb
 #  root :to => 'home#index'
+
+setup aliyun oss
+---------------------------------------------------------------
+env |grep SHELL
+vi ~/.bashrc
+export ALIYUN_ACCESS_ID="xxx"
+export ALIYUN_ACCESS_KEY="xxx" 
+
+
 
 system recovery&backup
 --------------------------------------------------------------
@@ -95,6 +104,6 @@ useful command
 ---------------------------------------------------------------
  CREATE USER ylyy@'localhost' IDENTIFIED BY 'huojinfeng';
  GRANT ALL PRIVILEGES ON ylyy.* TO ylyy;
- 
+
  http://blog.chinaunix.net/uid-24250828-id-3239100.html
   time dd if=/dev/zero of=test.dbf bs=8k count=300000

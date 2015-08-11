@@ -1,5 +1,13 @@
 namespace :spree_abc do
   namespace :aliyun do
+    desc "sync assets to aliyun"
+    task :sync_assets => :environment do
+       #default_options = Paperclip::Attachment.default_options[:aliyun]
+       #aliyun_assets_options = default_options.merge( bucket: :aliass )
+       #connection = Aliyun::Connection( aliyun_assets_options )
+    end
+
+
     # there are product images, taxon icon, post cover, option_value image,
     #           ckeditor_assets, template_files
     # rake spree_abc:aliyun:migrate_product_images_to_aliyun RAILS_ENV=aliyun_development ORIGINAL_RAILS_ENV=development
