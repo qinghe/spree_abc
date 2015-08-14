@@ -237,3 +237,14 @@ cart_items_for_mobile:
   css: |-
     .<%=@template.section_selector%> .cart-item-image img {width:60px;}
   js: ""
+bootstrap_sign_up_form:
+  id: 210
+  title: bootstrap sign up form
+  slug: bootstrap-sign-up-form
+  is_selectable: "1"
+  is_container: "0"
+  for_terminal: "1"
+  html: |
+    <%= render :partial => 'spree/user_registrations/new_bootstrap' %>
+  css: ""
+  js: ""
