@@ -241,7 +241,7 @@ module Spree
 
     def stylish_with_inherited
       return self.stylish if self.stylish>0
-      inherited= self.ancestors.collect{|page_layout| page_layout.stylish >0 }.last
+      inherited= self.ancestors.select{|page_layout| page_layout.stylish >0 }.last
       return inherited.stylish if inherited.present?
       return 0
     end
