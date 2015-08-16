@@ -492,6 +492,9 @@ module Spree
 
     end
 
+    # * params -
+    #   * taxon - model Spree::taxon
+    #   * selected_page_layout - model Spree::PageLayout
     # called in current_page_tag
     # is page_layout valid to taxon, taxon is current page
     # return true if taxon is decendant of specific_taxons
@@ -499,7 +502,7 @@ module Spree
       #stylish only apply page_layout with context other than either.
       if !selected_page_layout.context_either?
       #Rails.logger.debug "--------selected_page_layout=#{ selected_page_layout.title} --------"
-        return false unless ( selected_page_layout.stylish == taxon.stylish )
+        return false unless ( selected_page_layout.stylish_with_inherited == taxon.stylish_with_inherited )
       end
 
       specific_taxons  = assigned_resources( Spree::SpecificTaxon, selected_page_layout).compact
