@@ -19,9 +19,10 @@ zh-CN:
         content_param: 内容参数
         css_class: CSS
         content_css_class: 内容 CSS
-        section_context: section context
+        section_context: 适用页面
         data_source: 数据源
         data_source_param: 数据源参数
+        stylish: 样式
       spree/product:
         theme_id: 销售模板
       spree/taxon:

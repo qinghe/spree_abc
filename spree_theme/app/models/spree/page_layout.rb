@@ -464,10 +464,9 @@ module Spree
       def context_detail?
         current_contexts.include? ContextEnum.detail
       end
-
-      #def context_either?
-      #  current_contexts.include? ContextEnum.either
-      #end
+      def context_either?
+        current_contexts.include? ContextEnum.either
+      end
 
     end
 
