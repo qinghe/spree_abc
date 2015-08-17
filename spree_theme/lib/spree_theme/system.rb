@@ -82,6 +82,8 @@ module SpreeTheme
         if session[:theme_id].present?
           if Spree::TemplateTheme.where( site_id: website.site_id ).exists? session[:theme_id]  #theme could be deleted.
             @theme = Spree::TemplateTheme.find( session[:theme_id] )
+          else
+            session[:theme_id] = nil
           end
         end
       end
