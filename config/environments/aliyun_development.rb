@@ -48,7 +48,7 @@ SpreeAbc::Application.configure do
       oss_host: "aliimg.firecart.cn",  # aliyun oss host
       img_host: "aliimg2.firecart.cn",  # aliyun image service host
       # 如果有需要，你可以自己定义上传 host, 比如阿里内部的上传地址和 Aliyun OSS 对外的不同，可以在这里定义，没有需要可以不用配置
-      upload_host: "otest.cn-beijing.oss.aliyuncs.com"
+      upload_host: "otest.oss-cn-beijing.aliyuncs.com"
     }
   }
 end
