@@ -76,8 +76,11 @@ module SpreeTheme
           @theme = Spree::TemplateTheme.find( params[:id] )
           session[:theme_id] = params[:id]
         end
+        # there are more than one designable website,  design1, design2 ....
+        # since cookies domain is same top level domain, ex. .dalianshops.com
+        # session[:theme_id] maybe not belong to current website, we should test that.
         if session[:theme_id].present?
-          if Spree::TemplateTheme.exists? session[:theme_id]  #theme could be deleted.
+          if Spree::TemplateTheme.where( site_id: website.site_id ).exists? session[:theme_id]  #theme could be deleted.
             @theme = Spree::TemplateTheme.find( session[:theme_id] )
           end
         end
