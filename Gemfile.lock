@@ -487,6 +487,7 @@ DEPENDENCIES
   capistrano-rails (~> 1.1.0)
   capistrano-rvm (~> 0.1.0)
   capybara (~> 2.4)
+  coffee-rails
   database_cleaner (~> 1.3)
   email_spec
   factory_girl_rails (~> 4.5.0)
@@ -520,3 +521,6 @@ DEPENDENCIES
   useragent
   webmock (= 1.8.11)
   with_model
+
+BUNDLED WITH
+   1.10.5

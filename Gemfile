@@ -60,6 +60,7 @@ gem 'offsite_payments'
 gem 'activemerchant_patch_for_china', github:'RuanShan/activemerchant_patch_for_china', branch:'for_offsite_payments'
 gem 'spree_alipay',   :github => "RuanShan/spree_alipay", :branch=>"2-4-stable"
 
+gem 'coffee-rails'  #spree_china_checkout required
 gem 'spree_china_checkout',   :path => './spree_china_checkout'
 
 gem 'spree_essential_blog',   :path => './spree_essential_blog'
