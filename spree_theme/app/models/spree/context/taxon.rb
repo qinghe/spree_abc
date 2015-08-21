@@ -125,7 +125,7 @@ module Spree
               ContextEnum.post
             when /^\/logout/
               ContextEnum.logout
-            when '/',/^\/\?/, /^\/template_themes/
+            when '/',/^\/\?/, /^\/template_themes/, /^\/preview/
               ContextEnum.home
             else
               # it could be blog or list
