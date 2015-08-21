@@ -60,8 +60,10 @@ module Spree
         end
 
         def path
+          # consider extra_html_attributes first
+
           # self.id, self.permalink would be nil if it is class DefaultTaxon
-          context_routes[current_context] || "/#{self.id.to_i}-#{self.permalink.to_s.split('/').last}"
+          self.extra_html_attributes.try(:[],:href) || context_routes[current_context] || "/#{self.id.to_i}-#{self.permalink.to_s.split('/').last}"
         end
       end
 
