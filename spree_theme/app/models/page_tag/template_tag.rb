@@ -10,9 +10,11 @@ module PageTag
   class TemplateTag < Base
     # should not include helper, asset_host, asset_path would not work
     # include ActionView::Helpers::AssetTagHelper
+    QQOnlineRegEx = /wpa\.qq\.com/
 
     class WrappedPageLayout < WrappedModel
       MaxTaxonDepth = 9999
+
       self.accessable_attributes=[:id,:title,:current_data_source,:wrapped_data_source_param, :data_filter,:current_contexts, :context_either?,
          :get_content_param_by_key, :get_data_source_param_by_key, :is_container?, :is_image?, :is_zoomable_image?, :effects, :section_pieces, :content_css_class]
       attr_accessor :section_id, :page_layout, :parent
@@ -413,7 +415,10 @@ module PageTag
       if current_piece.content_css_class.present?
         attribute_value = content_tag :i, "", { :class=>"fa "+current_piece.content_css_class }
         if self.current_piece.clickable?
-          attribute_value = content_tag( :a, attribute_value, { href: self.current_piece.href } )
+          html_attributes = { href: self.current_piece.href }
+          #always open a new window for qq online support
+          html_attributes[:target] = '_blank' if html_attributes[:href] =~ QQOnlineRegEx
+          attribute_value = content_tag( :a, attribute_value, html_attributes)
         end
         attribute_value
       end
