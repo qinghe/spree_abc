@@ -23,7 +23,7 @@ module SpreeMultiSite
       attachment_key = :data if self.name == AttachmentClassEnum.ckeditor_picture  #Ckeditor::Picture,
       attachment_key = :data if self.name == AttachmentClassEnum.ckeditor_file     #Ckeditor::AttachmentFile
       attachment_definitions[attachment_key][:path] = path
-      attachment_definitions[attachment_key][:url] = ':aliyun_host/'+path+':aliyun_style'
+      attachment_definitions[attachment_key][:url] = 'http://:aliyun_host/'+path+':aliyun_style'
       attachment_definitions[attachment_key][:styles] = {} #no need styles anymore. it is supproted by oss style
     end
 
