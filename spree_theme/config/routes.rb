@@ -1,5 +1,5 @@
 Spree::Core::Engine.routes.draw do
-  
+
   root :to => 'template_themes#page'
   # Add your extension routes here
   resources :template_themes do
@@ -15,23 +15,23 @@ Spree::Core::Engine.routes.draw do
        get 'upload_file_dialog'
        post 'upload_file_dialog'
      end
-     
+
      resources :page_layouts, only: [:edit,:update] do
-       
+
      end
-     
+
   end
-  
+
   resources :comments, :only=>[:create] do
     collection do
       get :new_to_site
     end
   end
-  
-  get '(/:c(/:r))' => 'template_themes#page' , :c => /\d[^\/]*/ # :c, taxon_id-permalink,  :r, product_id-permalink   
+
+  get '(/:c(/:r))' => 'template_themes#page' , :c => /\d[^\/]*/ # :c, taxon_id-permalink,  :r, product_id-permalink
   get '/post/:c/:p' => 'template_themes#page', :c => /\d[^\/]*/ #
-  #match 'preview(/:c(/:r))' => 'template_themes#preview' #preview home
-   
+  get '/preview/:id' => 'template_themes#preview' #preview template_theme, for design shop only.
+
   get '/under_construction', :to => 'template_themes#under_construction', :as => :under_construction
   post '/create_admin_session', :to => 'template_themes#create_admin_session', :as => :create_admin_session
   get '/new_admin_session', :to => 'template_themes#new_admin_session', :as => :new_admin_session
@@ -46,9 +46,9 @@ Spree::Core::Engine.routes.draw do
       collection do
        get :global
      end
-    end    
+    end
   end
-  
+
   namespace :admin do
     resources :template_texts
     resources :template_files
@@ -59,15 +59,15 @@ Spree::Core::Engine.routes.draw do
       end
       member do
         get :config_resource   # assign resource(menu, image)
-        get :config_context    # 
-        get :config_data_source#    
+        get :config_context    #
+        get :config_data_source#
         get :prepare_import    # assign resource(menu, image)
         post :copy
         post :release
         post :import
-        patch :apply        
+        patch :apply
       end
-      
+
       resources :page_layouts do
         member do
           get :config_resource
