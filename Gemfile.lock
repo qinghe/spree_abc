@@ -521,6 +521,3 @@ DEPENDENCIES
   useragent
   webmock (= 1.8.11)
   with_model
-
-BUNDLED WITH
-   1.10.5
