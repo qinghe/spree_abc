@@ -14,14 +14,18 @@ namespace :spree_abc do
   # rake spree_abc:refresh_images[large]
   task :refresh_images, [:style] => :environment do |t, args|
     image_style = args.style
+    klass = ( ENV['CLASS'] || 'Spree::Image' )
     Rails.logger.debug "start task :refresh_images #{image_style}"
     Spree::Site.all.each{|site|
       Spree::Site.current = site
-      if site.assets.any?
-        site.assets.each{|asset|
+      klass.constantize.all.each{|asset|
+        if asset.attachment.present?
           asset.attachment.reprocess!(image_style.to_sym)
-        }
-      end
+        else
+          puts "warning asset #{asset.id} #{asset.attachment_file_name} is missing"
+        end
+      }
+
     }
     Rails.logger.debug "end task :refresh_images"
   end

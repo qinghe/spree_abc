@@ -61,6 +61,13 @@ module SpreeMultiSite
           when :content # ckeditor image, '800>' , as editor content
             '@800w_l1' + extension
         end
+      elsif attachment.instance.class.name == AttachmentClassEnum.spree_template_file
+        case style_symbol
+          when :mini
+            #将图按短边缩略到48x48, 然后按白色填充
+            '@48w_48h_4e' + extension
+        end
+
       end
 
     end # :aliyun_style
