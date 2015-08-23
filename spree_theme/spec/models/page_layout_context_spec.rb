@@ -6,9 +6,9 @@ describe Spree::PageLayout do
   it "valid section context" do
 
     product_detail = Spree::PageLayout.find_by_section_context( Spree::PageLayout::ContextEnum.detail)
-    product_detail.context_detail?.should be_true
+    product_detail.context_detail?.should be_truthy
     product_list = Spree::PageLayout.find_by_section_context( Spree::PageLayout::ContextEnum.list)
-    product_list.context_list?.should be_true
+    product_list.context_list?.should be_truthy
   end
 
   it "could update context" do
@@ -30,9 +30,9 @@ describe Spree::PageLayout do
   end
 
   it "could verify contexts" do
-    Spree::PageLayout.verify_contexts( Spree::PageLayout::ContextEnum.cart, [:cart, :checkout, :thankyou ] ).should be_true
+    Spree::PageLayout.verify_contexts( Spree::PageLayout::ContextEnum.cart, [:cart, :checkout, :thankyou ] ).should be_truthy
 
-    Spree::PageLayout.verify_contexts( [Spree::PageLayout::ContextEnum.cart], [:cart, :checkout, :thankyou ] ).should be_true
+    Spree::PageLayout.verify_contexts( [Spree::PageLayout::ContextEnum.cart], [:cart, :checkout, :thankyou ] ).should be_truthy
 
     Spree::PageLayout.verify_contexts( Spree::PageLayout::ContextEnum.either, [:cart, :checkout, :thankyou ] ).should be_false
   end

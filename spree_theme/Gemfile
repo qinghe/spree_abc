@@ -5,8 +5,8 @@ eval(File.read(File.dirname(__FILE__) + '/../common_spree_dependencies.rb'))
 
 
 group :test,:development do
-  gem 'ruby-graphviz' #print checkout flow
-  gem 'simplecov' #rspec using it.
+  #gem 'ruby-graphviz' #print checkout flow
+  #gem 'simplecov' #rspec using it.
   #using backend required
   gem "mysql2"
 end

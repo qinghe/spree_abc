@@ -56,11 +56,11 @@ template.add_section(section_hash['product-atc'], qty_atc_container, :title=>"pr
 others = template.add_section(section_hash['container'], main_content, :title=>"Others")
   template.add_section(section_hash['taxon-name'], others, :title=>"Taxon name")
 
-cart = template.add_section(section_hash['cart'], others, :title=>"Cart")
+cart = template.add_section(section_hash['cart-form'], others, :title=>"Cart")
   template.add_section(section_hash['cart-items'], cart, :title=>"Cart items")
   template.add_section(section_hash['order-total-price'], cart, :title=>"Order total price")
 
-checkout = template.add_section(section_hash['checkout'], others, :title=>"Checkout")
+checkout = template.add_section(section_hash['checkout-form'], others, :title=>"Checkout")
   template.add_section(section_hash['ship-form'], checkout, :title=>"Ship form")
   template.add_section(section_hash['payment-form'], checkout, :title=>"Payment form")
 
