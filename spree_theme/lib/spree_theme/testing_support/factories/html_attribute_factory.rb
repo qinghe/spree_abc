@@ -6,4 +6,11 @@ FactoryGirl.define do
     slug 'width'
   end
 
+  factory :html_attribute_height, class: Spree::HtmlAttribute do
+    css_name 'height'
+    pvalues "auto,l1"
+    punits "l,%"
+    slug 'height'
+  end
+
 end

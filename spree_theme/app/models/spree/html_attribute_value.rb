@@ -56,7 +56,7 @@ module Spree
       pvalue_computed = param_value.html_attribute_extra(html_attribute.id,'computed')
 
       object_properties = {"unset"=>pvalue_unset, "hidden"=>pvalue_hidden, "computed"=>pvalue_computed}
-      param_value_class = param_value.section_param.section_piece_param.pclass
+      #param_value_class = param_value.section_param.section_piece_param.pclass
         if html_attribute.is_special? :text
           object_properties["psvalue0"] = html_attribute.possible_selected_values.first
           object_properties["pvalue0"] =  pvalue_string
