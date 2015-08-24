@@ -275,7 +275,7 @@ module Spree
     begin 'css selector, name, value'
       # from param_value page_layout_id, section_param.section_id, section_param.section_root_id, section_param.class_name get selector and prefix
       def css_selector
-        target = self.param_value.section_param.section_piece_param.class_name
+        target = attribute_class_name
         prefix = case target
           when /cell/ # s_cell or cell
             ".s_#{self.param_value.page_layout_id}_#{self.param_value.section_param.section_root_id} td, .s_#{self.param_value.page_layout_id}_#{self.param_value.section_param.section_root_id} th"
@@ -331,9 +331,14 @@ module Spree
       def attribute_name
         self.html_attribute.css_name
       end
+
       def attribute_value
         target_properties = unset? ? default_properties : properties
         self.class.build_css_property_value( self.html_attribute, target_properties, self.param_value )
+      end
+
+      def attribute_class_name
+        self.param_value.section_param.section_piece_param.class_name
       end
     end
 

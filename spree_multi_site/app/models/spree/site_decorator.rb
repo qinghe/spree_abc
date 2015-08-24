@@ -82,8 +82,8 @@ end
 
 
 Spree::Taxonomy.class_eval do
-  belongs_to :site
-  default_scope  { where(:site_id =>  Spree::Site.current.id) }
+  include Spree::MultiSiteSystem
+
 end
 
 

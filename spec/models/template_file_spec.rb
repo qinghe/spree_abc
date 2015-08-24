@@ -2,6 +2,12 @@
 require 'rails_helper'
 describe Spree::TemplateFile do
 
+  it "should has site_id in url and path" do
+    #/home/david/git/spree_abc/public/shops/development/2/spree/template_files/11/logo_original.gif
+    #/shops/development/2/spree/template_files/11/logo_original.gif?1406963170
+    #Spree::TemplateFile.first.attachment.url
+    #
+  end
 
   it "should copy" do
     text = Spree::TemplateFile.create!( :theme_id=>1)

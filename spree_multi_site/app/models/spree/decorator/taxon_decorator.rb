@@ -1,5 +1,10 @@
-SpreeTheme.taxon_class.class_eval do
-  # taxon is from other site
+Spree::Taxon.class_eval do
+
+  # * usage - find existing taxon by taxon.permalink in current site,
+  # *   if can not found, clone whole taxonomy
+  # * params
+  #   * taxon - taxon root, usually taxon is from other site
+  #
   def self.find_or_copy( taxon )
     raise "only support taxon root" unless taxon.root?
 
@@ -11,19 +16,20 @@ SpreeTheme.taxon_class.class_eval do
     existing_taxon||cloned_branch
   end
 
-  #copy self into current site
+  # copy self into current site
   def clone_branch(  )
-    raise "only support taxon root" unless taxon.root?
+    raise "only support taxon root" unless self.root?
     #raise "only copy taxon from design site" unless taxon.site.design?
     #raise "taxon exists in current site" if self.class.exists(:permalink=>self.permalink)
     cloned_branch = nil
-      self.site.tap{|site|
-        original_current_site = Spree::Site.current
-        Spree::Site.current = site
+    current_site_id = Spree::Site.current.id
+    #maybe clone taxon from other site
+    Spree::MultiSiteSystem.with_context_free_taxon{
           #copy from http://stackoverflow.com/questions/866528/how-to-best-copy-clone-an-entire-nested-set-from-a-root-element-down-with-new-tr
           new_taxonomy = self.taxonomy.dup
+          new_taxonomy.site_id = current_site_id
           # should not save new_taxonomy here, or new_taxonomy.root.site_id is not current site id
-          h = { self => self.dup } #we start at the root
+          h = { self => self.duplicate } #we start at the root
           ordered = self.descendants
           #clone subitems
           ordered.each do |item|
@@ -37,21 +43,21 @@ SpreeTheme.taxon_class.class_eval do
             # handle icon
           end
           h.values.each{|cloned|
-            cloned.site = original_current_site
+            cloned.site_id = new_taxonomy.site_id
             cloned.taxonomy = new_taxonomy
           }
-          new_taxonomy.site = original_current_site
           new_taxonomy.root = h[self]
           cloned_branch = h[self]
-        Spree::Site.current = original_current_site
       }
       cloned_branch
   end
 
   #deep dup, include icon
-  def dup
-    original_dup = super
-    original_dup.icon = self.icon
-    original_dup
+  def duplicate
+    # do not use this.dup, do not bother lft,rgt
+    duplicated = self.class.new
+    duplicated.attributes = self.attributes.except('id', 'parent_id', 'lft', 'rgt','depth', 'replaced_by')
+    duplicated.icon = self.icon
+    duplicated
   end
 end

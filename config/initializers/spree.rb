@@ -29,5 +29,6 @@ SpreeEditor::Config.tap do |config|
 end
 
 Rails.application.config.spree_multi_site.site_scope_required_classes_from_other_gems << 'Spree::Post'
-
+Rails.application.config.spree_multi_site.site_scope_required_classes_with_image_from_other_gems << ['Spree::Post',:cover]
+Rails.application.config.spree_multi_site.site_scope_required_classes_with_image_from_other_gems << ['Spree::TemplateFile',:attachment]
 Paperclip.options[:command_path] = "/usr/local/bin/"

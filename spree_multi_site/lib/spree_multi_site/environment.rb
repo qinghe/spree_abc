@@ -14,7 +14,7 @@ require 'spree/core/environment_extension'
         # it has to be in Environment, it vary in env
         @system_top_domain = "dalianshops.com"
         @site_scope_required_classes_from_other_gems = []
-        @site_scope_required_classes_with_image_from_other_gems ={}
+        @site_scope_required_classes_with_image_from_other_gems = []
       end
     end
   end

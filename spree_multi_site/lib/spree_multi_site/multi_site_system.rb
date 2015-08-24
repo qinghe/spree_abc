@@ -22,8 +22,11 @@ module Spree
       before_create {|record| record.site_id||= Spree::Site.current.id }
 
       default_scope {
-        # admin_site_product, create or update global taxon.
-        if self == Spree::Taxon  && multi_site_context=='admin_site_product'
+        # design shop create theme product, assign it to global taxon( taxon in site 1)
+        # enable getting taxon from site 1
+        # user import theme from design site, we support import theme with taxon.
+        # enable geting taxon from design site
+        if ( self == Spree::Taxon || self == Spree::Taxonomy ) && multi_site_context=='free_taxon'
           where(nil)
         # first site list template themes
         elsif self == Spree::Product  && multi_site_context=='site1_themes'
@@ -31,7 +34,7 @@ module Spree
         # first site list product images
         elsif multi_site_context=='site_product_images'
           where(nil)
-        # admin sites, site.users site.stores ..  
+        # admin sites, site.users site.stores ..
         elsif multi_site_context=='admin_sites'
           where(nil)
         else
@@ -63,8 +66,8 @@ module Spree
       end
     end
 
-    def self.with_context_admin_site_product(&block)
-      with_context( 'admin_site_product', &block )
+    def self.with_context_free_taxon(&block)
+      with_context( 'free_taxon', &block )
     end
 
     def self.with_context_site1_themes(&block)
