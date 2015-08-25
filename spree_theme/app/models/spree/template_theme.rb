@@ -313,6 +313,7 @@ module Spree
           added_section = PageLayout.create do|obj|
             obj.section_id, obj.section_instance=section.id, section_instance
             obj.assign_attributes( attrs )
+            obj.root_id = selected_page_layout.root_id if selected_page_layout.present?
             obj.template_theme_id = self.id
             obj.site_id = SpreeTheme.site_class.current.id
             obj.is_full_html = section.section_piece.is_root?
