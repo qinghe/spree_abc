@@ -4,7 +4,7 @@ module Spree
   class PageLayout < ActiveRecord::Base
     #extend FriendlyId
     include Spree::Context::Base
-    acts_as_nested_set :scope=>['site_id','root_id' ]# scope is for :copy, no need to modify parent_id, lft, rgt.
+    acts_as_nested_set :scope=>['site_id','template_theme_id' ]# scope is for :copy, no need to modify parent_id, lft, rgt.
     belongs_to :section
     belongs_to :template_theme
     # has_many :themes, :class_name => "TemplateTheme",:primary_key=>:root_id,:foreign_key=>:page_layout_root_id
