@@ -58,7 +58,7 @@ describe Spree::PageLayout do
 
     page_layout_tree = @page_layout_tree.reload
     original_nodes = page_layout_tree.self_and_descendants
-    new_node = page_layout_tree.copy_to_new2
+    new_node = page_layout_tree.copy_to_new
     new_nodes =  new_node.self_and_descendants
 
     new_nodes.each_with_index{|node,i|
