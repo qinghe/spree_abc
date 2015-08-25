@@ -4,14 +4,15 @@ module Spree
   class PageLayout < ActiveRecord::Base
     #extend FriendlyId
     include Spree::Context::Base
-    acts_as_nested_set :scope=>"root_id" # scope is for :copy, no need to modify parent_id, lft, rgt.
+    acts_as_nested_set :scope=>['site_id','root_id' ]# scope is for :copy, no need to modify parent_id, lft, rgt.
     belongs_to :section
-    has_many :themes, :class_name => "TemplateTheme",:primary_key=>:root_id,:foreign_key=>:page_layout_root_id
+    belongs_to :template_theme
+    # has_many :themes, :class_name => "TemplateTheme",:primary_key=>:root_id,:foreign_key=>:page_layout_root_id
     has_many :param_values
     # this table is used by other site, should not use scope here
     # we want title to support multi-language, so disable friendly_id
-    #friendly_id :title, :use => :slugged
-    #has_many :full_set_nodes, -> { order 'lft' }, :class_name =>'PageLayout', :foreign_key=>:root_id, :primary_key=>:root_id
+    # friendly_id :title, :use => :slugged
+    # has_many :full_set_nodes, -> { order 'lft' }, :class_name =>'PageLayout', :foreign_key=>:root_id, :primary_key=>:root_id
     has_many :sections, :class_name =>'Section', :foreign_key=>:root_id, :primary_key=>:section_id
     has_many :section_pieces, :through=>:sections
     # remove section relatives after page_layout destroyed.
@@ -28,55 +29,55 @@ module Spree
       # create component, it is partial layout, no html body, composite of some sections.
       #notice: attribute section_id, title required
       # section.root.section_piece_id should be 'root'
-      def create_layout(section, title, attrs={})
-        #create record in table page_layouts
-        layout = create!(:section_id=>section.id) do |obj|
-          obj.title = title
-          obj.site_id = SpreeTheme.site_class.current.id
-          obj.attributes = attrs unless attrs.empty?
-          obj.section_instance = 1
-          obj.is_full_html = section.section_piece.is_root?
-        end
-        layout.update_attribute("root_id",obj.id)
-        layout
-      end
+      #def create_layout(section, title, attrs={})
+      #  #create record in table page_layouts
+      #  layout = create!(:section_id=>section.id) do |obj|
+      #    obj.title = title
+      #    obj.site_id = SpreeTheme.site_class.current.id
+      #    obj.attributes = attrs unless attrs.empty?
+      #    obj.section_instance = 1
+      #    obj.is_full_html = section.section_piece.is_root?
+      #  end
+      #  layout.update_attribute("root_id",obj.id)
+      #  layout
+      #end
 
 
       # user copy decendants of a layout to new root layout while user copy theme to new theme.
       # since copy to new root, there is no section_instance confliction.
-      def copy_decendants_to_new_parent(new_parent, original_parent, ordered_nodes)
-        original_children =  ordered_nodes.select{|node| node.parent_id == original_parent.id }
-        for node in original_children
-          new_node = node.dup
-          new_node.site_id = new_parent.site_id
-          new_node.parent_id = new_parent.id
-          new_node.root_id = new_parent.root_id
-          new_node.save!
-          if node.has_child?
-            copy_decendants_to_new_parent(new_node, node, ordered_nodes )
-          end
-        end
-        # copy_from_root_id means we have copied all decendants from that tree.
-        if new_parent.root?
-          where( root_id: new_parent.id ).update_all(["copy_from_root_id=?",original_parent.id])
-        end
-      end
+      #def copy_decendants_to_new_parent(new_parent, original_parent, ordered_nodes)
+      #  original_children =  ordered_nodes.select{|node| node.parent_id == original_parent.id }
+      #  for node in original_children
+      #    new_node = node.dup
+      #    new_node.site_id = new_parent.site_id
+      #    new_node.parent_id = new_parent.id
+      #    new_node.root_id = new_parent.root_id
+      #    new_node.save!
+      #    if node.has_child?
+      #      copy_decendants_to_new_parent(new_node, node, ordered_nodes )
+      #    end
+      #  end
+      #  # copy_from_root_id means we have copied all decendants from that tree.
+      #  if new_parent.root?
+      #    where( root_id: new_parent.id ).update_all(["copy_from_root_id=?",original_parent.id])
+      #  end
+      #end
 
       # * description - copy :page_layout_tree whole tree
       # * params
       # *   ordered_nodes -  whole tree node collection, it is ordered by left
       # * return - new ordered nodes
-      def copy_to_new(ordered_nodes, new_attributes = nil)
-        #create new root first, get new root id.
-        original_root = ordered_nodes.first
-        new_layout = original_root.dup
-        new_layout.root_id = 0 # reset the lft,rgt.
-        new_layout.site_id = Spree::Store.current.site_id
-        new_layout.save!
-        new_layout.update_attribute("root_id", new_layout.id)
-        copy_decendants_to_new_parent(new_layout, original_root,  ordered_nodes)
-        new_layout.reload.self_and_descendants
-      end
+      #def copy_to_new(ordered_nodes, new_attributes = nil)
+      #  #create new root first, get new root id.
+      #  original_root = ordered_nodes.first
+      #  new_layout = original_root.dup
+      #  new_layout.root_id = 0 # reset the lft,rgt.
+      #  new_layout.site_id = SpreeTheme.site_class.current.id
+      #  new_layout.save!
+      #  new_layout.update_attribute("root_id", new_layout.id)
+      #  copy_decendants_to_new_parent(new_layout, original_root,  ordered_nodes)
+      #  new_layout.reload.self_and_descendants
+      #end
     end
 
       # verify :come_contexts valid to :target_contexts
@@ -104,6 +105,9 @@ module Spree
     #def section_selector
     #  "s_#{self.id}_#{self.section_id}"
     #end
+    def duplicator
+      PageLayoutDuplicator.new( self.root )
+    end
 
     begin ' page_layout content'
       # a page_layout tree could be whole html or partial html, it depend's on self.section.section_piece.is_root?,
@@ -262,10 +266,18 @@ module Spree
     begin 'modify page layout tree'
       # * usage - copy whole tree
       # * return - root of new copied whole tree
+      #def copy_to_new(new_attributes = nil)
+      #  raise "only work for root" unless root?
+      #  #create new root first, get new root id.
+      #  self.class.copy_to_new( self_and_descendants, new_attributes ).first
+      #end
+
       def copy_to_new(new_attributes = nil)
         raise "only work for root" unless root?
         #create new root first, get new root id.
-        self.class.copy_to_new( self_and_descendants, new_attributes ).first
+        duplicated = self.duplicator.duplicate
+        duplicated.save!
+        duplicated
       end
 
       # it is not using
@@ -300,13 +312,12 @@ module Spree
         # section_tree = self.section.self_and_descendants.includes(:section_params)
         # get default values of this section
         #TODO no need add param_value any more, use default value before user modify it
-        layout_id = self.id
-        layout_root_id = self.root_id
+        page_layout_root_id = self.root.id
         for section_node in self.section.self_and_descendants.includes(:section_params)
           section_params = section_node.section_params
           for sp in section_params
             #use root section_id
-            ParamValue.create(:page_layout_root_id=>layout_root_id, :page_layout_id=>layout_id) do |pv|
+            ParamValue.create(:page_layout_root_id=>page_layout_root_id, :page_layout_id=>self.id) do |pv|
               pv.section_param_id = sp.id
               pv.theme_id = theme.id
               pv.pvalue = sp.default_value
@@ -318,7 +329,6 @@ module Spree
       end
 
       def remove_param_value()
-        #layout_root_id = self.root_id
         #ParamValue.delete_all(["page_layout_id=? and theme_id in (?)", self.id, themes.collect{|obj|obj.id }])
         ParamValue.delete_all(["page_layout_id=? ", self.id])
       end
@@ -729,49 +739,44 @@ module Spree
     # user copy prebuild layout tree to another layout tree as child.
     # copy it self and decendants to new parent. this only for root layout.
     # include theme param values. add theme param values to all themes which available to the new parent.
-    def add_layout_tree(copy_layout_id)
-      copy_layout = self.class.find(copy_layout_id)
-      raise "only for root layout" unless copy_layout.root?
-      copy_layout.copy_to_new_parent(self)
-    end
+    #def add_layout_tree(copy_layout_id)
+    #  copy_layout = self.class.find(copy_layout_id)
+    #  raise "only for root layout" unless copy_layout.root?
+    #  copy_layout.copy_to_new_parent(self)
+    #end
 
     #  cached_whole_tree, it is whole tree of new parent, to compute new added section instance.
     #  added_section_ids, new added section ids, but not in cache.
     #  root_layout.copy_to()
-    def copy_to_new_parent(new_parent, cached_whole_tree = nil, added_section_ids=[])
-
-      cached_whole_tree||= new_parent.root.self_and_descendants
-
-      new_section_instance =  ( cached_whole_tree.select{|xnode| xnode.section_id==self.section_id}.size +
-        added_section_ids.select{|xid| xid==self.section_id}.size ).succ
-
-      clone_node = self.dup # do not call clone, or modify itself
-      clone_node.parent_id = new_parent.id
-      clone_node.root_id = new_parent.root_id
-      clone_node.section_instance = new_section_instance
-      clone_node.copy_from_root_id =  self.root_id
-      clone_node.save!
-      added_section_ids << clone_node.section_id
-
-      # it should only have one theme.
-      copy_theme = self.root.themes.first
-      table_name = ParamValue.table_name
-      table_column_names = ParamValue.column_names
-      table_column_names.delete('id')
-      # copy param values to all available themes
-      for theme in clone_node.root.themes
-        table_column_values  = table_column_names.dup
-        table_column_values[table_column_values.index('page_layout_root_id')] = clone_node.root_id
-        table_column_values[table_column_values.index('page_layout_id')] = clone_node.id
-        table_column_values[table_column_values.index('theme_id')] = theme.id
-        sql = %Q!INSERT INTO #{table_name}(#{table_column_names.join(',')}) SELECT #{table_column_values.join(',')} FROM #{table_name} WHERE ((page_layout_root_id=#{self.root_id} and page_layout_id =#{self.id}) and theme_id =#{copy_theme.id} )!
-        self.class.connection.execute(sql)
-      end
-
-      for node in self.children
-        node.copy_to_new_parent(clone_node, cached_whole_tree, added_section_ids)
-      end
-    end
+    #def copy_to_new_parent(new_parent, cached_whole_tree = nil, added_section_ids=[])
+    #  cached_whole_tree||= new_parent.root.self_and_descendants
+    #  new_section_instance =  ( cached_whole_tree.select{|xnode| xnode.section_id==self.section_id}.size +
+    #    added_section_ids.select{|xid| xid==self.section_id}.size ).succ
+    #  clone_node = self.dup # do not call clone, or modify itself
+    #  clone_node.parent_id = new_parent.id
+    #  clone_node.root_id = new_parent.root_id
+    #  clone_node.section_instance = new_section_instance
+    #  clone_node.copy_from_root_id =  self.root_id
+    #  clone_node.save!
+    #  added_section_ids << clone_node.section_id
+    #  # it should only have one theme.
+    #  copy_theme = self.root.themes.first
+    #  table_name = ParamValue.table_name
+    #  table_column_names = ParamValue.column_names
+    #  table_column_names.delete('id')
+    #  # copy param values to all available themes
+    #  for theme in clone_node.root.themes
+    #    table_column_values  = table_column_names.dup
+    #    table_column_values[table_column_values.index('page_layout_root_id')] = clone_node.root_id
+    #    table_column_values[table_column_values.index('page_layout_id')] = clone_node.id
+    #    table_column_values[table_column_values.index('theme_id')] = theme.id
+    #    sql = %Q!INSERT INTO #{table_name}(#{table_column_names.join(',')}) SELECT #{table_column_values.join(',')} FROM #{table_name} WHERE ((page_layout_root_id=#{self.root_id} and page_layout_id =#{self.id}) and theme_id =#{copy_theme.id} )!
+    #    self.class.connection.execute(sql)
+    #  end
+    #  for node in self.children
+    #    node.copy_to_new_parent(clone_node, cached_whole_tree, added_section_ids)
+    #  end
+    #end
 
     # empty data_source_param when data_source is empty
     def fix_data_source_param
@@ -781,6 +786,7 @@ module Spree
       #  self.data_source_param = ''
       #end
     end
+
   end
 
 end

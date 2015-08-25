@@ -189,7 +189,6 @@ module Spree
                 editing_html_attribute_id = @html_attribte_id
                 @updated_html_attribute_values = do_update_param_value(@param_value, param_value_params, param_value_event, editing_html_attribute_id)
                 # get all param values by selected editor
-                #@param_values = ParamValue.within_section(@param_value).within_editor(@editor)
                 # update param value
                 render :partial=>'after_upload_dialog'
           end

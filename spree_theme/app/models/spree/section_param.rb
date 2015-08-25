@@ -79,18 +79,18 @@ module Spree
         end
       end
     end
+
     private
     #add param_value where page_layout.section_id = ? for each layout tree.
     def add_param_values
-      page_layouts = PageLayout.includes(:themes).where("section_id"=>self.section.root_id)
+      page_layouts = PageLayout.where("section_id"=>self.section.root_id)
       for page_layout in page_layouts
-        for theme in page_layout.themes
             page_layout.param_values.create do|param_value|
-              param_value.theme_id = theme.id
-              param_value.page_layout_root_id = page_layout.root_id
+              param_value.theme_id = page_layouts.template_theme_id
+              param_value.page_layout_root_id = page_layout.root.id
               param_value.section_param_id = self.id
             end
-        end
+
       end
     end
 

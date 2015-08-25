@@ -71,7 +71,6 @@ module Spree
     validates :title, presence: true
 
     attr_accessor :section_root_id
-    #attr_accessible :is_public, :site_id,:page_layout_root_id,:title, :section_root_id # section_root_id is only required for create- initialize_page_layout
     #attr_accessible :assigned_resource_ids, :template_files #import require it.
 
 
@@ -80,7 +79,7 @@ module Spree
       #
       def create_plain_template(  section_root, title, attrs={})
         #create a theme first.
-        template = TemplateTheme.create({:title=>title, :section_root_id=>section_root.id}.merge(attrs))
+        template = TemplateTheme.create( {:title=>title, :section_root_id=>section_root.id}.merge(attrs) )
       end
 
       def native
@@ -211,7 +210,7 @@ module Spree
         new_theme.title = "Imported "+ new_theme.title
         new_theme.attributes = new_attributes
         new_theme.assigned_resource_ids = {}
-        new_theme.site_id = Spree::Store.current.site_id
+        new_theme.site_id = SpreeTheme.site_class.current.id
         new_theme.store_id = Spree::Store.current.id
         new_theme.save!
         new_theme
@@ -261,7 +260,7 @@ module Spree
         new_layout = original_layout.copy_to_new
         #create theme record
         new_theme = self.dup
-        new_theme.site_id = Spree::Store.current.site_id
+        new_theme.site_id = SpreeTheme.site_class.current.id
         new_theme.store_id = Spree::Store.current.id
         new_theme.release_id = 0 # new copied theme should have no release
         new_theme.page_layout_root_id = new_layout.id
@@ -314,14 +313,12 @@ module Spree
           added_section = PageLayout.create do|obj|
             obj.section_id, obj.section_instance=section.id, section_instance
             obj.assign_attributes( attrs )
-            obj.root_id = selected_page_layout.root_id if selected_page_layout.present?
+            obj.template_theme_id = self.id
             obj.site_id = SpreeTheme.site_class.current.id
             obj.is_full_html = section.section_piece.is_root?
           end
           if selected_page_layout.present?
             added_section.move_to_child_of(selected_page_layout)
-          else
-            added_section.update_attribute("root_id",added_section.id)
           end
           #copy the default section param value to the layout
           added_section.add_param_value(self)
@@ -332,12 +329,11 @@ module Spree
       # ex. get dialog section
       def find_section_by_usage( usage )
         # ["#{PageLayout.table_name}.root_id=? and #{SectionPiece.table_name}.usage=?",self.page_layout_root_id, usage]
-        PageLayout.includes(:section).where( spree_sections:{usage: usage}, root_id: self.page_layout_root_id ).first
+        PageLayout.includes(:section).where( spree_sections:{usage: usage}, template_theme_id: original_template_theme.id ).first
       end
 
       def dialog_content_container_selector
         dialog = find_section_by_usage( 'dialog' )
-        #dialog_content_container = dialog.section.descendants.includes(:section_piece).select{|section| section.section_piece.usage=='dial-cont'}.first
         dialog.css_selector + " .dialog_content"
       end
 
@@ -361,62 +357,60 @@ module Spree
       # params
       #   file - opened file
       # return imported theme
-      def self.import_into_db( serialized_data, replace_exisit= false )
-        new_template = nil
-        template = serialized_data.stringify_keys!.fetch 'template'
-        transaction do
-          created_at =   DateTime.now
-          # support yaml/json, record is model/hash
-          #site id is 1 in exported yml, in spree_abc, design.dalianshops.com is 2
-          original_template_attributes = get_attributes_serialized_data(template).merge!( 'created_at'=>created_at )
-
-          if self.exists?(original_template_attributes['id'])
-            if replace_exisit
-              existing_template = self.find(original_template_attributes['id'])
-              existing_template.destroy
-            end
-          end
-
-          if replace_exisit
-            create!(original_template_attributes)
-          else
-            create!(original_template_attributes.except('id'))
-          end
-          new_template = self.where( original_template_attributes.slice('created_at','title','page_layout_root_id') ).first
-          # we need new template id
-          # template = self.find_by_title template.title
-          serialized_data['param_values'].each do |record|
-            attributes = get_attributes_serialized_data(record).except('id')
-            #for unknown reason param_value.created_at/updated_at may be nil
-            attributes['created_at']=created_at
-            attributes['updated_at']=attributes['created_at'] if attributes['updated_at'].blank?
-            ParamValue.create!(attributes)
-          end
-          original_nodes = serialized_data['page_layouts']
-          original_nodes = original_nodes.collect{|node| build_model_from_serialized_data( PageLayout, node)}
-          new_nodes = PageLayout.copy_to_new( original_nodes )
-          new_template.update_attribute(:page_layout_root_id, new_nodes.first.id)
-          #serialized_data[:page_layouts].each do |record|
-          #  table_name = PageLayout.table_name
-          #  connection.insert_fixture(record.attributes, table_name)
-          #end
-          new_template_files = []
-          original_template_files = []
-          serialized_data['template_files'].each_with_index do |record, i|
-            original_template_file_attributes = get_attributes_serialized_data(record)
-            attributes = original_template_file_attributes.except('id').merge!('created_at'=>created_at,'theme_id'=>new_template.id)
-            TemplateFile.create!(attributes)
-            new_template_files << TemplateFile.where( attributes.slice('created_at','theme_id') ).first
-            original_template_files << original_template_file_attributes
-          end
-          serialized_data['template_releases'].each do |record|
-            attributes = get_attributes_serialized_data(record).except('id').merge!('created_at'=>created_at,'theme_id'=>new_template.id)
-            TemplateRelease.create!(attributes)
-          end
-          fix_related_data_for_copied_theme(new_template, new_nodes, new_template_files, original_template_attributes,  original_nodes, original_template_files, created_at)
-        end
-        new_template
-      end
+      #def self.import_into_db( serialized_data, replace_exisit= false )
+      #  new_template = nil
+      #  template = serialized_data.stringify_keys!.fetch 'template'
+      #  transaction do
+      #    created_at =   DateTime.now
+      #    # support yaml/json, record is model/hash
+      #    #site id is 1 in exported yml, in spree_abc, design.dalianshops.com is 2
+      #    original_template_attributes = get_attributes_serialized_data(template).merge!( 'created_at'=>created_at )
+      #    if self.exists?(original_template_attributes['id'])
+      #      if replace_exisit
+      #        existing_template = self.find(original_template_attributes['id'])
+      #        existing_template.destroy
+      #      end
+      #    end
+      #    if replace_exisit
+      #      create!(original_template_attributes)
+      #    else
+      #      create!(original_template_attributes.except('id'))
+      #    end
+      #    new_template = self.where( original_template_attributes.slice('created_at','title','page_layout_root_id') ).first
+      #    # we need new template id
+      #    # template = self.find_by_title template.title
+      #    serialized_data['param_values'].each do |record|
+      #      attributes = get_attributes_serialized_data(record).except('id')
+      #      #for unknown reason param_value.created_at/updated_at may be nil
+      #      attributes['created_at']=created_at
+      #      attributes['updated_at']=attributes['created_at'] if attributes['updated_at'].blank?
+      #      ParamValue.create!(attributes)
+      #    end
+      #    original_nodes = serialized_data['page_layouts']
+      #    original_nodes = original_nodes.collect{|node| build_model_from_serialized_data( PageLayout, node)}
+      #    new_nodes = PageLayout.copy_to_new( original_nodes )
+      #    new_template.update_attribute(:page_layout_root_id, new_nodes.first.id)
+      #    #serialized_data[:page_layouts].each do |record|
+      #    #  table_name = PageLayout.table_name
+      #    #  connection.insert_fixture(record.attributes, table_name)
+      #    #end
+      #    new_template_files = []
+      #    original_template_files = []
+      #    serialized_data['template_files'].each_with_index do |record, i|
+      #      original_template_file_attributes = get_attributes_serialized_data(record)
+      #      attributes = original_template_file_attributes.except('id').merge!('created_at'=>created_at,'theme_id'=>new_template.id)
+      #      TemplateFile.create!(attributes)
+      #      new_template_files << TemplateFile.where( attributes.slice('created_at','theme_id') ).first
+      #      original_template_files << original_template_file_attributes
+      #    end
+      #    serialized_data['template_releases'].each do |record|
+      #      attributes = get_attributes_serialized_data(record).except('id').merge!('created_at'=>created_at,'theme_id'=>new_template.id)
+      #      TemplateRelease.create!(attributes)
+      #    end
+      #    fix_related_data_for_copied_theme(new_template, new_nodes, new_template_files, original_template_attributes,  original_nodes, original_template_files, created_at)
+      #  end
+      #  new_template
+      #end
 
       def self.build_model_from_serialized_data(model_class, serialized_data)
         if serialized_data.kind_of? ActiveRecord::Base

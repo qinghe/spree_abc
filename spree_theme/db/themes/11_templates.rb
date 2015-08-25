@@ -1,18 +1,18 @@
-=begin
-objs=[
-  { "is_enabled"=>true, "section_id"=>1, "id"=>1, "root_id"=>1, "parent_id"=>0, "lft"=>1, "rgt"=>10, "section_instance"=>0, "slug"=>"layout1"},
-  { "is_enabled"=>true, "section_id"=>2, "id"=>2, "root_id"=>1, "parent_id"=>1, "lft"=>2, "rgt"=>9, "section_instance"=>0, "slug"=>"bd"},
-  { "is_enabled"=>true, "section_id"=>2, "id"=>3, "root_id"=>1, "parent_id"=>2, "lft"=>3, "rgt"=>4, "section_instance"=>2, "slug"=>"header"},
-  { "is_enabled"=>true, "section_id"=>2, "id"=>4, "root_id"=>1, "parent_id"=>2, "lft"=>5, "rgt"=>8, "section_instance"=>3, "slug"=>"content"},
-  { "is_enabled"=>true, "section_id"=>3, "id"=>5, "root_id"=>1, "parent_id"=>4, "lft"=>6, "rgt"=>7, "section_instance"=>0, "slug"=>"menu"}]
 
-  PageLayout.delete_all
-  for ha in objs
-    obj = PageLayout.new
-    obj.send(:attributes=, ha, false)
-    obj.save
-  end
-=end
+#objs=[
+#  { "is_enabled"=>true, "section_id"=>1, "id"=>1, "root_id"=>1, "parent_id"=>0, "lft"=>1, "rgt"=>10, "section_instance"=>0, "slug"=>"layout1"},
+#  { "is_enabled"=>true, "section_id"=>2, "id"=>2, "root_id"=>1, "parent_id"=>1, "lft"=>2, "rgt"=>9, "section_instance"=>0, "slug"=>"bd"},
+#  { "is_enabled"=>true, "section_id"=>2, "id"=>3, "root_id"=>1, "parent_id"=>2, "lft"=>3, "rgt"=>4, "section_instance"=>2, "slug"=>"header"},
+#  { "is_enabled"=>true, "section_id"=>2, "id"=>4, "root_id"=>1, "parent_id"=>2, "lft"=>5, "rgt"=>8, "section_instance"=>3, "slug"=>"content"},
+#  { "is_enabled"=>true, "section_id"=>3, "id"=>5, "root_id"=>1, "parent_id"=>4, "lft"=>6, "rgt"=>7, "section_instance"=>0, "slug"=>"menu"}]
+#
+#  PageLayout.delete_all
+#  for ha in objs
+#    obj = PageLayout.new
+#    obj.send(:attributes=, ha, false)
+#    obj.save
+#  end
+
 
 # section slugs= [root,container,menu]
 objects = Spree::Section.roots

@@ -1,40 +1,46 @@
 require 'spec_helper'
 describe Spree::PageLayout do
-  let (:page_layout) { Spree::PageLayout.first }
+  let (:page_layout) { create(:page_layout) }
+  let (:context_detail) {  Spree::PageLayout::ContextEnum.detail }
+  let (:context_list) {  Spree::PageLayout::ContextEnum.list }
+  let (:context_cart) {  Spree::PageLayout::ContextEnum.cart }
+  let (:context_either) {  Spree::PageLayout::ContextEnum.either }
+  let (:context_thanks) {  Spree::PageLayout::ContextEnum.thanks }
 
+  context 'with context product list and detail' do
+    before(:each) do
+      @page_layout = create(:page_layout, section_context: "#{context_list},#{context_detail}" )
+    end
 
-  it "valid section context" do
+    it 'should has list and detail context' do
+      @page_layout.current_contexts.should eq ([context_list,context_detail])
+    end
 
-    product_detail = Spree::PageLayout.find_by_section_context( Spree::PageLayout::ContextEnum.detail)
-    product_detail.context_detail?.should be_truthy
-    product_list = Spree::PageLayout.find_by_section_context( Spree::PageLayout::ContextEnum.list)
-    product_list.context_list?.should be_truthy
-  end
+    it "valid section context" do
+      @page_layout.valid_context?(context_detail).should be_truthy
+      @page_layout.context_detail?.should be_truthy
+      @page_layout.context_list?.should be_truthy
+    end
 
-  it "could update context" do
-    list_section = Spree::PageLayout.find_by_section_context('list')
-    detail_section = Spree::PageLayout.find_by_section_context('detail')
-    #contexts = [Spree::PageLayout::ContextEnum.account, Spree::PageLayout::ContextEnum.thanks,Spree::PageLayout::ContextEnum.cart, Spree::PageLayout::ContextEnum.checkout]
-    contexts = [Spree::PageLayout::ContextEnum.list, Spree::PageLayout::ContextEnum.detail]
-    page_layout.update_section_context contexts
+    context 'with one child' do
+      it "should inherit context" do
 
-    for node in page_layout.self_and_descendants
-      if node.is_or_is_descendant_of? list_section
-        node.current_contexts.should eq(list_section.current_contexts)
-      elsif   node.is_or_is_descendant_of? detail_section
-        node.current_contexts.should eq(detail_section.current_contexts)
-      else
-        node.current_contexts.should eq(contexts)
       end
     end
   end
 
+  it "could update context" do
+    new_contexts = [context_cart]
+    page_layout.update_section_context new_contexts
+    page_layout.current_contexts.should eq(new_contexts)
+  end
+
   it "could verify contexts" do
-    Spree::PageLayout.verify_contexts( Spree::PageLayout::ContextEnum.cart, [:cart, :checkout, :thankyou ] ).should be_truthy
+    Spree::PageLayout.verify_contexts( context_cart, [context_cart, context_thanks ] ).should be_truthy
 
-    Spree::PageLayout.verify_contexts( [Spree::PageLayout::ContextEnum.cart], [:cart, :checkout, :thankyou ] ).should be_truthy
+    Spree::PageLayout.verify_contexts( [context_cart], [context_cart, context_thanks ] ).should be_truthy
 
-    Spree::PageLayout.verify_contexts( Spree::PageLayout::ContextEnum.either, [:cart, :checkout, :thankyou ] ).should be_false
+    Spree::PageLayout.verify_contexts( context_either, [context_cart, context_thanks ] ).should be_truthy
   end
 
 
