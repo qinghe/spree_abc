@@ -47,8 +47,8 @@ module Spree
     # for now template_theme and page_layout are one to one
     has_one :page_layout_root, -> { where parent_id: nil }, class_name: "Spree::PageLayout", dependent: :destroy
     has_many :page_layouts, inverse_of: :template_theme
-
-    #belongs_to :page_layout, :foreign_key=>"page_layout_root_id" #, :dependent=>:destroy  #imported theme refer to page_layout of original theme
+    #commnet it out after migration AddThemeIdToPageLayout done.
+    belongs_to :page_layout, :foreign_key=>"page_layout_root_id" #, :dependent=>:destroy  #imported theme refer to page_layout of original theme
     has_many :param_values, :foreign_key=>"theme_id", :dependent => :delete_all
     has_many :template_files, foreign_key: "theme_id", class_name: "Spree::TemplateFile", inverse_of: :template_theme, dependent: :delete_all
     has_many :template_releases, :foreign_key=>"theme_id", :dependent => :delete_all
@@ -211,8 +211,8 @@ module Spree
       end
 
       def has_native_layout?
-        original_template_theme == self
-        #!self.class.exists?(["page_layout_root_id=? and id<?", self.page_layout_root_id, self.id])
+        #original_template_theme == self
+        !self.class.exists?(["page_layout_root_id=? and id<?", self.page_layout_root_id, self.id])
       end
 
       # is theme applied to webiste
@@ -222,8 +222,8 @@ module Spree
 
       # template theme contained native page layout and param values
       def original_template_theme
-        page_layout_root.template_theme
-        #self.class.where(:page_layout_root_id=>self.page_layout_root_id).first
+        #page_layout_root.template_theme
+        self.class.where(:page_layout_root_id=>self.page_layout_root_id).first
       end
 
       def duplicator
@@ -451,6 +451,7 @@ module Spree
 
       # assign resource to page_layout node
       def assign_resource( resource, selected_page_layout = nil, resource_position = 0 )
+        selected_page_layout ||= self.page_layout_root
         create_template_resource( selected_page_layout, resource, resource_position )
       end
       # unassign resource from page_layout node

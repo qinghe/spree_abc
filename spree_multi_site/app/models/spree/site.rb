@@ -53,7 +53,9 @@ class Spree::Site < ActiveRecord::Base
     end
 
     def current=(some_site)
-      Spree::Store.current = Spree::Store.unscoped.where( site_id: some_site.id ).first
+      if some_site # durring test, add_default_data cause some_site nil
+        Spree::Store.current = Spree::Store.unscoped.where( site_id: some_site.id ).first
+      end
       some_site
     end
 

@@ -61,7 +61,7 @@ Spree::Core::Engine.routes.draw do
         get :config_resource   # assign resource(menu, image)
         get :config_context    #
         get :config_data_source#
-        get :prepare_import    # assign resource(menu, image)
+        #get :prepare_import    # assign resource(menu, image)
         post :copy
         post :release
         patch :apply

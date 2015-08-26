@@ -1,13 +1,12 @@
 #encoding: utf-8
 require 'rails_helper'
 describe Spree::Taxon do
-  let(:site) { create(:site_demo) }
   let(:image) { File.open(File.expand_path('../../fixtures/qinghe.jpg', __FILE__)) }
 
   before(:each) do
-    Spree::Site.current = site
+    Spree::Site.current = create(:site_demo)
     @root_taxon = create(:taxon_for_duplicator)
-    # root with 4 childen
+    # root with 3 childen
     @taxonomy = @root_taxon.taxonomy
     #@child_taxon = create(:taxon, :taxonomy => @taxonomy, :parent => @root_taxon, :icon => image)
   end
@@ -20,7 +19,6 @@ describe Spree::Taxon do
       duplicated_taxon = @root_taxon.duplicate
       duplicated_taxon.save!
       File.should exist(duplicated_taxon.icon.path )
-
     end
   end
 
@@ -31,15 +29,11 @@ describe Spree::Taxon do
 
 
   it "should clone taxons " do
-    puts " strart clone taxon....."
-    expect{@root_taxon.clone_branch}.to change{Spree::Taxon.count}.by(2)
-    puts " end clone taxon....."
+    expect{@root_taxon.clone_branch.save!}.to change{Spree::Taxon.count}.by(4)
   end
 
   it "should clone taxonomy " do
-    puts " strart clone taxon....."
-    expect{@root_taxon.clone_branch}.to change{Spree::Taxon.count}.by(1)
-    puts " end clone taxon....."
+    expect{@root_taxon.clone_branch.save!}.to change{Spree::Taxonomy.count}.by(1)
   end
 
   context "current site is demo2" do
@@ -49,12 +43,9 @@ describe Spree::Taxon do
     end
 
     it "should copy taxonomy to current site" do
-
       copied_taxon = @root_taxon.clone_branch
       copied_taxon.save!
       copied_tree = copied_taxon.self_and_descendants
-
-
       expect( copied_tree.size ).to eq @original_tree.size
     end
   end

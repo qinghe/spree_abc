@@ -22,5 +22,5 @@ db/full_sql
 rdoc
 .settings
 .project
-db/schema.rb
+db/*.sqlite3
 *.bak

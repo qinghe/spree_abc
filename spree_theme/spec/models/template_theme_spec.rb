@@ -31,24 +31,6 @@ describe Spree::TemplateTheme do
     page_layout_root.root?.should be_truthy
     #TODO check param_values
   end
-  context 'a published template theme' do
-    let (:published_template) { create :published_template_theme }
-
-    it "should be importable" do
-      imported_template = published_template.import
-      published_template.should be_imported
-    end
-  end
-
-  context 'a imported template theme' do
-
-    it "destroy imported one" do
-      #template.template_releases.stub(:exists?) { true }
-      # release first
-      #imported_template.has_native_layout?.should be_false
-      #imported_template.destroy
-    end
-  end
 
   context "assign template file" do
     before(:each) do

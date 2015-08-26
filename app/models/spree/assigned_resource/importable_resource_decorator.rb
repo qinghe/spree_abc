@@ -41,6 +41,7 @@ Spree::Taxon.class_eval do
       raise "only support taxon root" unless taxon.root?
 
       existing_taxon = roots.find_by_permalink( taxon.permalink )
+      cloned_branch = nil
       if existing_taxon.blank?
         cloned_branch = taxon.clone_branch(  )
         cloned_branch.save!
@@ -87,10 +88,10 @@ Spree::Taxon.class_eval do
     #deep dup, include icon
     def duplicate
       # do not use this.dup, do not bother lft,rgt
-      duplicated = self.class.new
-      duplicated.attributes = self.attributes.except('id', 'parent_id', 'lft', 'rgt','depth', 'replaced_by')
-      duplicated.icon = self.icon
-      duplicated
+      taxon = self.class.new
+      taxon.attributes = self.attributes.except('id', 'parent_id', 'lft', 'rgt','depth', 'replaced_by')
+      taxon.icon = self.icon
+      taxon
     end
 
 end

@@ -10,4 +10,7 @@ Spree::TemplateTheme.class_eval do
     Spree::TemplateThemeImporter.new( self )
   end
 
+  def import_with_resource
+    importer.import_with_resource
+  end
 end

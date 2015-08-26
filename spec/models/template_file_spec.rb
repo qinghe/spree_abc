@@ -1,6 +1,13 @@
 #encoding: utf-8
 require 'rails_helper'
 describe Spree::TemplateFile do
+  let(:image) { File.open(File.expand_path('../../fixtures/qinghe.jpg', __FILE__)) }
+  before(:each) do
+    Spree::Site.current = create(:site_demo)
+    template_theme =  create(:template_theme)
+    @template_file = Spree::TemplateFile.create( name: 'file', template_theme: template_theme )
+    @template_file.update_attribute :attachment, image
+  end
 
   it "should has site_id in url and path" do
     #/home/david/git/spree_abc/public/shops/development/2/spree/template_files/11/logo_original.gif
@@ -9,27 +16,21 @@ describe Spree::TemplateFile do
     #
   end
 
-  it "should copy" do
-    text = Spree::TemplateFile.create!( :theme_id=>1)
-    open( File.join Rails.root, 'app','assets', 'images','rails.png' ) do|f|
-      text.attachment = f
-      text.save!
-    end
-    text = Spree::TemplateFile.find text.id
-
-    new_text = text.dup
-    new_text.save!
-
-    new_text.should be_persisted
-    new_text = Spree::TemplateFile.find new_text.id
-
-    File.should exist(new_text.attachment.path )
-
-    text.reload
-    File.should exist(text.attachment.path )
-
-    Rails.logger.debug "new id=#{new_text.id} file=#{new_text.attachment.path}"
-    Rails.logger.debug "id=#{text.id} file=#{text.attachment.path}"
+  it "should has image" do
+    File.should exist(@template_file.attachment.path )
   end
+
+  #it "should not create new template file" do
+  #  expect{  Spree::TemplateFile.find_or_copy( @template_file ) }.to change{  Spree::TemplateFile.count}.by(0)
+  #end
+
+  #context " current site is demo" do
+  #  before( :each ) do
+  #    Spree::Site.current = create(:site_demo2)
+  #  end
+  #  it "should create new template file" do
+  #    expect{ described_class.find_or_copy( @template_file ) }.to change{ described_class.count}.by(1)
+  #  end
+  #end
 
 end

@@ -1,19 +1,18 @@
 #encoding: utf-8
 require 'rails_helper'
 describe Spree::TemplateText do
+  let!(:template_text) { create(:template_text) }
 
-
-  it "should copy" do
-    Spree::Site.current = Spree::Site.find 2
-
-    text = Spree::TemplateText.create!( :name=>"惟一用途",:body=>"内容")
-    Spree::Site.current = Spree::Site.find 1
-    new_text = Spree::TemplateText.find_or_copy text
-    new_text.reload
-    new_text.should be_persisted
-    new_text.site.should eq Spree::Site.current
-    new_text.name.should eq text.name
-    new_text.body.should eq text.body
+  it "should not create new template file" do
+    expect{  described_class.find_or_copy( template_text ) }.to change{  described_class.count}.by(0)
   end
 
+  context " current site is demo" do
+    before( :each ) do
+      Spree::Site.current = create(:site_demo2)
+    end
+    it "should create new template file" do
+      expect{ described_class.find_or_copy( template_text ) }.to change{ described_class.count}.by(1)
+    end
+  end
 end

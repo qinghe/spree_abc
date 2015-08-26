@@ -7,8 +7,8 @@ class AddThemeIdToPageLayout < ActiveRecord::Migration
 
     Spree::TemplateTheme.all.each{|theme|
       if theme.has_native_layout?
-        if theme.page_layout_root.present?
-          theme.page_layouts.update_all(template_theme_id: theme.id)
+        if theme.page_layout.present?
+          theme.page_layout.self_and_descendants.update_all(template_theme_id: theme.id)
         else
           theme.update_attribute(:page_layout_root_id, Spree::TemplateTheme.first.page_layout_root_id )
         end

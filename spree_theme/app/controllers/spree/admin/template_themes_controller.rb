@@ -28,8 +28,8 @@ module Spree
 
       begin 'design shop'
 
-        def prepare_import
-        end
+        #def prepare_import
+        #end
 
         #copy selected theme to new theme
         def copy
