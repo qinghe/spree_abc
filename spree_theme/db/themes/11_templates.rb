@@ -19,7 +19,7 @@ objects = Spree::Section.roots
 section_hash= objects.inject({}){|h,sp| h[sp.slug] = sp; h}
 # puts "section_hash=#{section_hash.keys}"
 template = Spree::TemplateTheme.create_plain_template(section_hash['root2'], "Template One")
-document = template.page_layout
+document = template.page_layout_root
 header = template.add_section(section_hash['container'],document, :title=>"Header")
 template.add_section(section_hash['image'], header,:title=>"Logo")
 main_menu = template.add_section(section_hash['hmenu'], header,:title=>"Main menu")

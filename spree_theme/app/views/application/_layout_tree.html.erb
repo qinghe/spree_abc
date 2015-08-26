@@ -1,8 +1,8 @@
 <%
 # list layout tree in editor page.
 # local params: theme, selected_id
-layout_root = theme.page_layout
-options ||={} 
+layout_root = theme.page_layout_root
+options ||={}
 selected_id= (options[:selected_id]||layout_root.id )
 %>
 <%=form_tag(update_layout_tree_template_theme_path(theme), :id=>"layout_tree_form",:name=>"layout_tree_form", :remote=>true) do %>
@@ -14,19 +14,19 @@ selected_id= (options[:selected_id]||layout_root.id )
   <div class="clear-block">
     <div class="fl">
     <%=raw("&nbsp;&nbsp;"*page_layout.depth)%>
-    <% # do not call form.submit. 
+    <% # do not call form.submit.
       page_layout_class = 'click_editable'
-      page_layout_class << ' selected' if page_layout.id==selected_id 
+      page_layout_class << ' selected' if page_layout.id==selected_id
     %>
-    <%= link_to( page_layout.title, "", {"href"=>'javascript:void(0)', "class"=>page_layout_class,"data-lid"=>page_layout.id,"data-tid"=>theme.id, :onmouseout=>"$('#{page_layout.css_selector}').trigger('dehighlight')",:onmouseover=>"$('#{page_layout.css_selector}').trigger('highlight')"}) %> 
+    <%= link_to( page_layout.title, "", {"href"=>'javascript:void(0)', "class"=>page_layout_class,"data-lid"=>page_layout.id,"data-tid"=>theme.id, :onmouseout=>"$('#{page_layout.css_selector}').trigger('dehighlight')",:onmouseover=>"$('#{page_layout.css_selector}').trigger('highlight')"}) %>
     <%if options[:show_assigned_resource] %>
       <% if assigned_taxons.present? %>
       <span>[t:<%= assigned_taxons.collect(&:name) %>]</span>
       <%end%>
-    <%end%>  
-    <%if options[:show_context] %>      
+    <%end%>
+    <%if options[:show_context] %>
     <span><%= page_layout.current_contexts if page_layout.section_context.present? %></span>
-    <%end%>  
+    <%end%>
     </div>
     <% if options[:configurable] %>
       <% # only show it for selected page_layout

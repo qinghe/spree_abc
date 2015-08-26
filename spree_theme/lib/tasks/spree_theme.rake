@@ -127,7 +127,7 @@ namespace :spree_theme do
     theme = Spree::TemplateTheme.find args.theme_id
     incomplete_page_layouts = []
     # section_param and param_value match each other.
-    for page_layout in theme.page_layout.self_and_descendants.includes(:section)
+    for page_layout in theme.page_layouts.includes(:section)
       if page_layout.section.present?
         section_nodes = page_layout.section.self_and_descendants.includes(:section_params)
         section_params = section_nodes.collect(&:section_params).flatten
@@ -183,15 +183,15 @@ namespace :spree_theme do
     end
   end
 
-  # since template_theme.copy_to_new has problem which cause ParamValue mailefunction
-  # we disable template_theme.copy_to_new, use task instead
+  # since template_theme.duplicate has problem which cause ParamValue mailefunction
+  # we disable template_theme.duplicate, use task instead
   desc "copy theme to new. ex. copy_theme[theme_id]"
   task :copy_theme, [:theme_id] => :environment do |t, args|
     theme = Spree::TemplateTheme.find( args.theme_id)
     Spree::TemplateTheme.connection.transaction do
-      # page_layout.copy_to_new required site.current
+      # required site.current
       SpreeTheme.site_class.current = theme.site
-      new_theme = theme.copy_to_new
+      new_theme = theme.duplicate
       puts "copied #{theme.id}-#{theme.title} to #{new_theme.id}-#{new_theme.title} "
     end
   end

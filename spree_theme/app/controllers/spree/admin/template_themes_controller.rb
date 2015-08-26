@@ -19,23 +19,6 @@ module Spree
         @themes = @themes.select{|theme| theme.template_releases.present?}
       end
 
-      # description - import theme with taxonomy into current site
-      #               in this way, it is simpler for user, click 'buy', done.
-      def import
-        imported_theme = @template_theme.import_with_resource( )
-        if imported_theme.present?
-          if imported_theme.site.template_themes.count == 1
-            imported_theme.site.apply_theme imported_theme
-          end
-          flash[:success] = Spree.t('notice_messages.theme_imported')
-        else
-          flash[:success] = Spree.t('notice_messages.theme_not_imported')
-        end
-
-        respond_to do |format|
-          format.html { redirect_to(foreign_admin_template_themes_url) }
-        end
-      end
 
       #apply this theme to site
       def apply
@@ -52,7 +35,7 @@ module Spree
         def copy
           @original_theme = TemplateTheme.find(params[:id])
           #copy theme, layout, param_value
-          @new_theme = @original_theme.copy_to_new
+          @new_theme = @original_theme.duplicate
 
           respond_to do |format|
             format.html { redirect_to(admin_template_themes_url) }

@@ -5,7 +5,7 @@
 
 <% end %>
 <div id="page_layout_wrapper">
-      <%= render :partial=>'spree/admin/page_layouts/config_resource', :locals=>{ :page_layout=> @template_theme.page_layout } %>
+      <%= render :partial=>'spree/admin/page_layouts/config_resource', :locals=>{ :page_layout=> @template_theme.page_layout_root } %>
 </div>
 
 <%= render :partial=>'theme_tabs',:locals=>{:current=>"ConfigResource"}%>

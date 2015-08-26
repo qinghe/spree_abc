@@ -64,7 +64,7 @@ module Spree
       selected_page_layout_id = params[:layout_id]
       selected_section_id = params[:selected_section_id]
       selected_type = params[:selected_type]
-      @selected_page_layout = @theme.page_layout.self_and_descendants.find(selected_page_layout_id)
+      @selected_page_layout = @theme.page_layouts.find(selected_page_layout_id)
       if op=='promote'
         @selected_page_layout.promote
       elsif op=='demote'
@@ -87,7 +87,7 @@ module Spree
         #FIXME update param_values in editor
         #@layout.reload
       end
-      @theme.page_layout.reload #layout is changed
+      @theme.page_layout_root.reload #layout is changed
       render :partial=>"layout_tree1"
     end
 

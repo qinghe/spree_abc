@@ -17,9 +17,10 @@ require 'rspec/rails'
 # of increasing the boot-up time by auto-requiring all files in the support
 # directory. Alternatively, in the individual `*_spec.rb` files, manually
 # require only the support files necessary.
-#
-# Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
+#Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
+
 require 'ffaker'
+require 'database_cleaner'
 
 require 'spree/testing_support/authorization_helpers'
 require 'spree/testing_support/factories'
@@ -30,6 +31,10 @@ require 'spree/testing_support/url_helpers'
 require 'spree/testing_support/order_walkthrough'
 require 'spree/testing_support/capybara_ext'
 require 'paperclip/matchers'
+
+require 'spree_theme/testing_support/factories'
+require 'spree_multi_site/testing_support/factories'
+#require 'factories'
 
 # Checks for pending migrations before tests are run.
 # If you are not using ActiveRecord, you can remove this line.
@@ -67,5 +72,24 @@ RSpec.configure do |config|
   config.include Spree::TestingSupport::Flash
 
   config.include Paperclip::Shoulda::Matchers
+
+
+  # Ensure Suite is set to use transactions for speed.
+  config.before :suite do
+    DatabaseCleaner.strategy = :transaction
+    DatabaseCleaner.clean_with :truncation
+  end
+
+  # Before each spec check if it is a Javascript test and switch between using database transactions or not where necessary.
+  config.before :each do
+    DatabaseCleaner.strategy = RSpec.current_example.metadata[:js] ? :truncation : :transaction
+    DatabaseCleaner.start
+  end
+
+  # After each spec clean the database.
+  config.after :each do
+    DatabaseCleaner.clean
+  end
+
 
 end

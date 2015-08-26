@@ -1,23 +1,27 @@
 #encoding: utf-8
-require 'spec_helper'
+require 'rails_helper'
 describe Spree::Taxon do
   let(:site) { create(:site_demo) }
   let(:image) { File.open(File.expand_path('../../fixtures/qinghe.jpg', __FILE__)) }
 
   before(:each) do
     Spree::Site.current = site
-    @taxonomy = create(:taxonomy)
-    @root_taxon = @taxonomy.root
-    @child_taxon = create(:taxon, :taxonomy_id => @taxonomy.id, :parent => @root_taxon, :icon => image)
+    @root_taxon = create(:taxon_for_duplicator)
+    # root with 4 childen
+    @taxonomy = @root_taxon.taxonomy
+    #@child_taxon = create(:taxon, :taxonomy => @taxonomy, :parent => @root_taxon, :icon => image)
   end
 
-  it "should duplicate taxon with icon" do
-    duplicated_taxon = @child_taxon.duplicate
-    duplicated_taxon.parent = @root_taxon
-    duplicated_taxon.save!
-    duplicated_taxon.reload
-    File.should exist(duplicated_taxon.icon.path )
+  context 'taxon with icon' do
+    before(:each) do
+      @root_taxon.update_attribute(:icon, image)
+    end
+    it "should duplicate taxon with icon" do
+      duplicated_taxon = @root_taxon.duplicate
+      duplicated_taxon.save!
+      File.should exist(duplicated_taxon.icon.path )
 
+    end
   end
 
   it "should create taxon with valid site!" do
@@ -25,16 +29,31 @@ describe Spree::Taxon do
     new_taxon.site.should eq Spree::Site.current
   end
 
+
+  it "should clone taxons " do
+    puts " strart clone taxon....."
+    expect{@root_taxon.clone_branch}.to change{Spree::Taxon.count}.by(2)
+    puts " end clone taxon....."
+  end
+
+  it "should clone taxonomy " do
+    puts " strart clone taxon....."
+    expect{@root_taxon.clone_branch}.to change{Spree::Taxon.count}.by(1)
+    puts " end clone taxon....."
+  end
+
   context "current site is demo2" do
     before(:each) do
       @original_tree = @root_taxon.self_and_descendants
       Spree::Site.current = create(:site_demo2)
     end
+
     it "should copy taxonomy to current site" do
 
       copied_taxon = @root_taxon.clone_branch
       copied_taxon.save!
       copied_tree = copied_taxon.self_and_descendants
+
 
       expect( copied_tree.size ).to eq @original_tree.size
     end

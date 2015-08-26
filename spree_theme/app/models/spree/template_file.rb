@@ -2,9 +2,8 @@ module Spree
 
   # file uploaded for template
   class TemplateFile < ActiveRecord::Base
-    include Spree::AssignedResource::SourceInterface
 
-    belongs_to :template_theme, :foreign_key=>"theme_id"
+    belongs_to :template_theme, :foreign_key=>"theme_id", :class_name =>'Spree::TemplateTheme'
 
     #validates_uniqueness_of :file_name
     has_attached_file :attachment, styles: { mini: '48x48>' }
@@ -35,9 +34,5 @@ module Spree
       original_dup
     end
 
-    # it is resource of template_theme
-    def importable?
-      false
-    end
   end
 end

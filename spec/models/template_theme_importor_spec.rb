@@ -1,5 +1,5 @@
 require 'rails_helper'
-describe Spree::Taxon do
+describe Spree::TemplateThemeImporter, :type => :model do
 
 
   #TODO

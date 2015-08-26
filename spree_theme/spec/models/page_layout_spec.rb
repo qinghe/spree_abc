@@ -54,16 +54,4 @@ describe Spree::PageLayout do
   #it "should get available data sources" do
   #end
 
-  it "should copy page_layout to new" do
-
-    page_layout_tree = @page_layout_tree.reload
-    original_nodes = page_layout_tree.self_and_descendants
-    new_node = page_layout_tree.copy_to_new
-    new_nodes =  new_node.self_and_descendants
-
-    new_nodes.each_with_index{|node,i|
-      node.title.should eq original_nodes[i].title
-    }
-    expect(original_nodes.size).to eq new_nodes.size
-  end
 end

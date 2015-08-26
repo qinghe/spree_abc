@@ -45,9 +45,12 @@ module Spree
     belongs_to :store, :foreign_key => "store_id"
 
     # for now template_theme and page_layout are one to one
-    belongs_to :page_layout, :foreign_key=>"page_layout_root_id" #, :dependent=>:destroy  #imported theme refer to page_layout of original theme
+    has_one :page_layout_root, -> { where parent_id: nil }, class_name: "Spree::PageLayout", dependent: :destroy
+    has_many :page_layouts, inverse_of: :template_theme
+
+    #belongs_to :page_layout, :foreign_key=>"page_layout_root_id" #, :dependent=>:destroy  #imported theme refer to page_layout of original theme
     has_many :param_values, :foreign_key=>"theme_id", :dependent => :delete_all
-    has_many :template_files, :foreign_key=>"theme_id", :dependent => :delete_all
+    has_many :template_files, foreign_key: "theme_id", class_name: "Spree::TemplateFile", inverse_of: :template_theme, dependent: :delete_all
     has_many :template_releases, :foreign_key=>"theme_id", :dependent => :delete_all
     # template_release may be in current or design site
     belongs_to :current_template_release, :class_name=>"TemplateRelease", :foreign_key=>"release_id"
@@ -57,7 +60,6 @@ module Spree
     #use string as key instead of integer page_layout.id, exported theme in json, after restore, key is always string
     serialize :assigned_resource_ids, Hash
 
-    scope :by_layout, ->(layout_id){ where(:page_layout_root_id => layout_id) }
     scope :within_site, ->(site){ where(:site_id=> site.id) }
     scope :released, ->{ where("release_id>0") }
     scope :published, -> { released.where(:is_public=>true) }
@@ -117,22 +119,22 @@ module Spree
       end
 
       # copy taxon,text from original_theme to new_theme
-      def import_assigned_resource( original_theme,  new_theme )
-        original_template_resources = original_theme.template_resources
-        # new_theme.assigned_resource_ids is empty now
-        new_theme.assigned_resource_ids = original_theme.assigned_resource_ids.dup
-        # import each resource
-        new_theme.template_resources.each{| template_resource |
-          unscoped_source = template_resource.unscoped_source
-          if unscoped_source.present? && unscoped_source.importable?
-             new_source = template_resource.source_class.find_or_copy unscoped_source
-             template_resource.update_attribute!(:source_id, new_source.id)
-          else
-           template_resource.destroy!
-          end
-        }
-        # assgin imported resource to new_theme
-      end
+      #def import_assigned_resource( original_theme,  new_theme )
+      #  original_template_resources = original_theme.template_resources
+      #  # new_theme.assigned_resource_ids is empty now
+      #  new_theme.assigned_resource_ids = original_theme.assigned_resource_ids.dup
+      #  # import each resource
+      #  new_theme.template_resources.each{| template_resource |
+      #    unscoped_source = template_resource.unscoped_source
+      #    if unscoped_source.present? && unscoped_source.importable?
+      #       new_source = template_resource.source_class.find_or_copy unscoped_source
+      #       template_resource.update_attribute!(:source_id, new_source.id)
+      #    else
+      #     template_resource.destroy!
+      #    end
+      #  }
+      #  # assgin imported resource to new_theme
+      #end
     end
 
     # params
@@ -154,9 +156,9 @@ module Spree
       #   * usage - may be [ruby,ehtml, css, js]
       def file_name(usage)
         if usage.to_s == 'ehtml'
-          "l#{page_layout_root_id}.html.erb"
+          "l#{page_layout_root.id}.html.erb"
         else
-          "l#{page_layout_root_id}.#{usage}"
+          "l#{page_layout_root.id}.#{usage}"
         end
       end
 
@@ -172,7 +174,7 @@ module Spree
       end
 
       def document_path
-        File.join( page_layout.site.document_path, self.path)
+        File.join( page_layout_root.site.document_path, self.path)
       end
 
       # * params
@@ -180,7 +182,7 @@ module Spree
       # * return js or css document file path, ex /shops/development/1/layouts/t1_r1/l1_t1.css
       def file_path( target )
         # theme.site do not work.
-        File.join(page_layout.site.path, self.path, file_name(target))
+        File.join(page_layout_root.site.path, self.path, file_name(target))
       end
 
       def layout_path
@@ -197,35 +199,7 @@ module Spree
     end
 
     begin 'edit template'
-      #import template theme design into current site
-      #only create template record, do not copy param_value,page_layout,template_file...
-      # * params
-      #   * resource_config - new configuration for resource
-      def import(new_attributes={})
-        raise ArgumentError unless self.template_releases.exists? && self.is_public?
-        #only released template and :is_public is importable
-        #create theme record
-        new_theme = self.dup
-        #set resource to site native
-        new_theme.title = "Imported "+ new_theme.title
-        new_theme.attributes = new_attributes
-        new_theme.assigned_resource_ids = {}
-        new_theme.site_id = SpreeTheme.site_class.current.id
-        new_theme.store_id = Spree::Store.current.id
-        new_theme.save!
-        new_theme
-      end
 
-      # for simple to user, copy taxonomy as well when import.
-      #
-      def import_with_resource( new_attributes={})
-        self.transaction do
-          new_theme = import( new_attributes )
-          #include taxon, image, file, specific-taxon
-          self.class.import_assigned_resource( self,  new_theme )
-          new_theme
-        end
-      end
 
 
       # theme from design shop has been imported into current site or not
@@ -237,7 +211,8 @@ module Spree
       end
 
       def has_native_layout?
-        !self.class.exists?(["page_layout_root_id=? and id<?", self.page_layout_root_id, self.id])
+        original_template_theme == self
+        #!self.class.exists?(["page_layout_root_id=? and id<?", self.page_layout_root_id, self.id])
       end
 
       # is theme applied to webiste
@@ -247,50 +222,58 @@ module Spree
 
       # template theme contained native page layout and param values
       def original_template_theme
-        self.class.where(:page_layout_root_id=>self.page_layout_root_id).first
+        page_layout_root.template_theme
+        #self.class.where(:page_layout_root_id=>self.page_layout_root_id).first
       end
 
+      def duplicator
+        TemplateThemeDuplicator.new( self )
+      end
+
+      def duplicate
+        duplicator.duplicate
+      end
       # Usage: user want to copy this layout&theme to new for editing or backup.
       #        we need copy param_value and theme_images
       #        note that it is only for root.
-      def copy_to_new()
-        created_at =   DateTime.now
-        original_layout = self.page_layout
-        #copy new whole tree
-        new_layout = original_layout.copy_to_new
-        #create theme record
-        new_theme = self.dup
-        new_theme.site_id = SpreeTheme.site_class.current.id
-        new_theme.store_id = Spree::Store.current.id
-        new_theme.release_id = 0 # new copied theme should have no release
-        new_theme.page_layout_root_id = new_layout.id
-        new_theme.save!
+      #def copy_to_new()
+      #  created_at =   DateTime.now
+      #  original_layout = self.page_layout_root
+      #  #copy new whole tree
+      #  new_layout = original_layout.copy_to_new
+      #  #create theme record
+      #  new_theme = self.dup
+      #  new_theme.site_id = SpreeTheme.site_class.current.id
+      #  new_theme.store_id = Spree::Store.current.id
+      #  new_theme.release_id = 0 # new copied theme should have no release
+      #  new_theme.page_layout_root_id = new_layout.id
+      #  new_theme.save!
 
-        #copy param values
-        #INSERT INTO tbl_temp2 (fld_id)    SELECT tbl_temp1.fld_order_id    FROM tbl_temp1 WHERE tbl_temp1.fld_order_id > 100;
-        table_name = ParamValue.table_name
+      #  #copy param values
+      #  #INSERT INTO tbl_temp2 (fld_id)    SELECT tbl_temp1.fld_order_id    FROM tbl_temp1 WHERE tbl_temp1.fld_order_id > 100;
+      #  table_name = ParamValue.table_name
 
-        table_column_names = ParamValue.column_names
-        table_column_names.delete('id')
-        table_column_values  = table_column_names.dup
-        # method fix_related_data_for_copied_theme handle theme_id, page_layout_root_id
-        #table_column_values[table_column_values.index('page_layout_root_id')] = new_layout.id
-        #table_column_values[table_column_values.index('theme_id')] = new_theme.id
-        table_column_values[table_column_values.index('created_at')] = "'#{created_at.utc.to_s(:db)}'" #=>'2014-08-20 02:48:23'
-        #copy param value from origin to new.
-        sql = %Q!INSERT INTO #{table_name}(#{table_column_names.join(',')}) SELECT #{table_column_values.join(',')} FROM #{table_name} WHERE  (theme_id =#{self.id})!
-        self.class.connection.execute(sql)
-        #copy template_files
-        new_template_files = self.template_files.map{|template_file|
-          new_template_file = template_file.dup
-          new_template_file.theme_id = new_theme.id
-          new_template_file.created_at = created_at
-          new_template_file.save!
-        }
-        #update layout_id to new_layout.id
-        self.class.fix_related_data_for_copied_theme(new_theme, new_layout.self_and_descendants, new_template_files, self, original_layout.self_and_descendants, self.template_files, created_at)
-        return new_theme
-      end
+      #  table_column_names = ParamValue.column_names
+      #  table_column_names.delete('id')
+      #  table_column_values  = table_column_names.dup
+      #  # method fix_related_data_for_copied_theme handle theme_id, page_layout_root_id
+      #  #table_column_values[table_column_values.index('page_layout_root_id')] = new_layout.id
+      #  #table_column_values[table_column_values.index('theme_id')] = new_theme.id
+      #  table_column_values[table_column_values.index('created_at')] = "'#{created_at.utc.to_s(:db)}'" #=>'2014-08-20 02:48:23'
+      #  #copy param value from origin to new.
+      #  sql = %Q!INSERT INTO #{table_name}(#{table_column_names.join(',')}) SELECT #{table_column_values.join(',')} FROM #{table_name} WHERE  (theme_id =#{self.id})!
+      #  self.class.connection.execute(sql)
+      #  #copy template_files
+      #  new_template_files = self.template_files.map{|template_file|
+      #    new_template_file = template_file.dup
+      #    new_template_file.theme_id = new_theme.id
+      #    new_template_file.created_at = created_at
+      #    new_template_file.save!
+      #  }
+      # #update layout_id to new_layout.id
+      #  self.class.fix_related_data_for_copied_theme(new_theme, new_layout.self_and_descendants, new_template_files, self, original_layout.self_and_descendants, self.template_files, created_at)
+      #  return new_theme
+      #end
 
       # Usage: modify layout, add the section instance as child of current node into the layout,
       # Params:
@@ -343,12 +326,12 @@ module Spree
       # export to yaml, include page_layouts, param_values, template_files
       # it is a hash with keys :template, :param_values, :page_layouts
       def serializable_data
-        template = self.class.includes(:param_values,:page_layout).find(self.id)
+        template = self.class.includes(:param_values,:page_layout_root).find(self.id)
         # template.page_layout.self_and_descendants would cause error
         # https://github.com/rails/rails/issues/5303
         # serializable_data.to_yaml, it only get error in rake task.
         # serializable_data.to_json, key is string when load
-        hash ={'template'=>template, 'param_values'=>template.param_values, 'page_layouts'=>template.page_layout.self_and_descendants.all,
+        hash ={'template'=>template, 'param_values'=>template.param_values, 'page_layouts'=>template.page_layout_root.self_and_descendants.all,
             'template_files'=>template.template_files,'template_releases'=>template.template_releases
             }
         hash
@@ -433,7 +416,7 @@ module Spree
 
     def remove_relative_data
       if self.has_native_layout?
-        self.page_layout.destroy
+        self.page_layout_root.destroy
       end
     end
 
@@ -450,7 +433,7 @@ module Spree
       # all resources used by this theme
       # return taxon roots/ images /texts,  if none assgined, return [nil] or []
       def assigned_resources( resource_class, selected_page_layout = nil )
-        selected_page_layout ||= self.page_layout
+        selected_page_layout ||= self.page_layout_root
         template_resources.select{|template_resource|
           template_resource.source_class ==  resource_class && template_resource.page_layout_id==selected_page_layout.id
         }.collect(&:source)

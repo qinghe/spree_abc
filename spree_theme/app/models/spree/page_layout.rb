@@ -4,9 +4,9 @@ module Spree
   class PageLayout < ActiveRecord::Base
     #extend FriendlyId
     include Spree::Context::Base
-    acts_as_nested_set :scope=>['site_id','template_theme_id' ]# scope is for :copy, no need to modify parent_id, lft, rgt.
+    acts_as_nested_set :scope=>['template_theme_id' ]# scope is for :copy, no need to modify parent_id, lft, rgt.
     belongs_to :section
-    belongs_to :template_theme
+    belongs_to :template_theme, :class_name =>'Spree::TemplateTheme'
     # has_many :themes, :class_name => "TemplateTheme",:primary_key=>:root_id,:foreign_key=>:page_layout_root_id
     has_many :param_values
     # this table is used by other site, should not use scope here
@@ -272,13 +272,13 @@ module Spree
       #  self.class.copy_to_new( self_and_descendants, new_attributes ).first
       #end
 
-      def copy_to_new(new_attributes = nil)
-        raise "only work for root" unless root?
-        #create new root first, get new root id.
-        duplicated = self.duplicator.duplicate
-        duplicated.save!
-        duplicated
-      end
+      #def copy_to_new(new_attributes = nil)
+      #  raise "only work for root" unless root?
+      #  #create new root first, get new root id.
+      #  duplicated = self.duplicator.duplicate
+      #  duplicated.save!
+      #  duplicated
+      #end
 
       # it is not using
       # Usage: modify layout, add the section instance as child of current node into the layout,

@@ -170,7 +170,7 @@ module SpreeTheme
         @editors = Spree::Editor.all
         @param_values_for_editors = Array.new(@editors.size){|i| []}
         editor_ids = @editors.collect{|e|e.id}
-        page_layout ||= theme.page_layout
+        page_layout ||= theme.page_layout_root
         param_values =theme.param_values().includes([:section_param=>[:section_piece_param=>:param_category]]).where(["spree_param_values.page_layout_id=? and spree_section_params.is_enabled",page_layout.id]).order("spree_param_categories.position, spree_section_params.section_id, spree_section_piece_params.position")
         #get param_values for each editors
         for pv in param_values
@@ -188,7 +188,7 @@ module SpreeTheme
         @editor ||= @editors.first
 
         @page_layout = page_layout #current selected page_layout, the node of the layout tree.
-        @page_layout||= theme.page_layout
+        @page_layout||= theme.page_layout_root
         @sections = Spree::Section.where(:is_enabled=>true).order("title").roots
         #template selection, include mobile
         @template_themes = Spree::TemplateTheme.within_site(SpreeTheme.site_class.current )

@@ -1,6 +1,5 @@
 SpreeTheme.taxon_class.class_eval do
     include Spree::Context::Taxon
-    include Spree::AssignedResource::SourceInterface
 
     before_destroy :remove_from_theme
     before_validation :set_default_values
@@ -24,10 +23,6 @@ SpreeTheme.taxon_class.class_eval do
       }
     end
 
-    # it is resource of template_theme
-    def importable?
-      root?
-    end
 
     #strange,  Mysql2::Error: Column 'page_context' cannot be null: UPDATE `spree_taxons` SET `html_attributes` = '--- {}\n', `page_context` = NULL, `replaced_by` = 491, `updated_at` = '2015-04-08 12:51:34' WHERE `spree_taxons`.`id` = 460
     #"taxon"=>{"name"=>"新闻中心", "replaced_by"=>"491", "page_context"=>"", "is_clickable"=>"1", "description"=>"", "meta_title"=>"", "meta_description"=>"", "meta_keywords"=>""},

@@ -1,6 +1,7 @@
 require 'spec_helper'
 describe Spree::TemplateTheme do
   let (:template) { create :template_theme }
+  let (:page_layout_root) { template.page_layout_root}
   let (:section_root) { create :section_root }
 
   before(:each) do
@@ -10,12 +11,12 @@ describe Spree::TemplateTheme do
 
   it "should has valid context" do
     taxon = @taxon
-    template.valid_context?( template.page_layout, taxon ).should be_truthy
+    template.valid_context?( page_layout_root, taxon ).should be_truthy
   end
 
   it "has document_path" do
-    #template.page_layout.site.path
-    expect(template.page_layout).to receive(:site).and_return( SpreeTheme.site_class.current )
+    #template.page_layout_root.site.path
+    expect(page_layout_root).to receive(:site).and_return( SpreeTheme.site_class.current )
     template.document_path.should be_present
   end
 
@@ -26,12 +27,9 @@ describe Spree::TemplateTheme do
   it "create plain template" do
     template = Spree::TemplateTheme.create_plain_template(section_root,'Template One')
     template.should be_an_instance_of(Spree::TemplateTheme)
-    template.page_layout.should be_an_instance_of(Spree::PageLayout)
-    template.page_layout.root?.should be_truthy
-
-    #first_param_value = template.param_values.first
-    #first_param_value.page_layout_id.should eq(template.page_layout.id)
-    #first_param_value.page_layout_root_id.should eq(template.page_layout.root_id)
+    page_layout_root.should be_an_instance_of(Spree::PageLayout)
+    page_layout_root.root?.should be_truthy
+    #TODO check param_values
   end
   context 'a published template theme' do
     let (:published_template) { create :published_template_theme }
@@ -49,7 +47,6 @@ describe Spree::TemplateTheme do
       # release first
       #imported_template.has_native_layout?.should be_false
       #imported_template.destroy
-      #template.page_layout.present?.should be_truthy
     end
   end
 
@@ -60,10 +57,10 @@ describe Spree::TemplateTheme do
 
     it "should assign resource" do
       template_file = @template_file
-      template.assign_resource( template_file, template.page_layout )
-      template.assign_resource( template_file, template.page_layout, 1 )
-      template.assigned_resource_id( Spree::TemplateFile, template.page_layout ).should eq template_file.id
-      template.assigned_resource_id( Spree::TemplateFile, template.page_layout, 1 ).should eq template_file.id
+      template.assign_resource( template_file, page_layout_root )
+      template.assign_resource( template_file, page_layout_root, 1 )
+      template.assigned_resource_id( Spree::TemplateFile, page_layout_root ).should eq template_file.id
+      template.assigned_resource_id( Spree::TemplateFile, page_layout_root, 1 ).should eq template_file.id
 
       template_resources = template.template_resources
       template_resources.should be_present
@@ -71,11 +68,11 @@ describe Spree::TemplateTheme do
 
     it "should unassign resource" do
       template_file = @template_file
-      template.assign_resource( template_file, template.page_layout )
-      template.unassign_resource( Spree::TemplateFile, template.page_layout )
-      template.assigned_resource_id( Spree::TemplateFile, template.page_layout ).should eq 0
+      template.assign_resource( template_file, page_layout_root )
+      template.unassign_resource( Spree::TemplateFile, page_layout_root )
+      template.assigned_resource_id( Spree::TemplateFile, page_layout_root ).should eq 0
 
-      template.assigned_resources( Spree::TemplateFile, template.page_layout ).compact.should be_blank
+      template.assigned_resources( Spree::TemplateFile, page_layout_root ).compact.should be_blank
     end
 
   end
@@ -107,7 +104,7 @@ describe Spree::TemplateTheme do
     #  new_template = template.import(:template_files => [template_file] )
     #  new_template.current_template_release.should be_present
     #  new_template.should be_a_kind_of Spree::TemplateTheme
-    #  new_template.assigned_resources( Spree::TemplateFile,template.page_layout ).should be_present
+    #  new_template.assigned_resources( Spree::TemplateFile,page_layout_root ).should be_present
     #end
   end
 
@@ -115,25 +112,25 @@ describe Spree::TemplateTheme do
   context 'assigned specific taxon' do
     before(:each) do
       @specific_taxon = create(:specific_taxon)
-      template.assign_resource( @specific_taxon, template.page_layout )
+      template.assign_resource( @specific_taxon, page_layout_root )
     end
 
     it "should get assigned specific taxon" do
       taxon = @specific_taxon
-      template.assigned_resource_id( taxon.class, template.page_layout ).should eq taxon.id
+      template.assigned_resource_id( taxon.class, page_layout_root ).should eq taxon.id
     end
 
     it "should has invalid context for other taxon" do
       another_taxon = @taxon
-      template.valid_context?( template.page_layout, another_taxon ).should be false
+      template.valid_context?( page_layout_root, another_taxon ).should be false
     end
 
     it "should unassign resource from theme after taxon destroy" do
       taxon = @taxon
-      template.assign_resource( taxon, template.page_layout )
+      template.assign_resource( taxon, page_layout_root )
       taxon.destroy
       template.reload
-      template.assigned_resource_id( taxon.class, template.page_layout ).should eq 0
+      template.assigned_resource_id( taxon.class, page_layout_root ).should eq 0
     end
   end
 

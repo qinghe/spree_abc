@@ -5,5 +5,9 @@ end
 Spree::TemplateTheme.class_eval do
   belongs_to :site
   # no need default, want to get foreign template.
-  #default_scope  { where(:site_id =>  Spree::Site.current.id) }
-end    
+
+  def importer
+    Spree::TemplateThemeImporter.new( self )
+  end
+
+end

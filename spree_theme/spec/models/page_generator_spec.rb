@@ -9,7 +9,7 @@ describe PageTag::PageGenerator do
 
   it "menu section should use default taxon in case no taxon assigned" do
     theme = @template_theme
-#    page_layout = theme.page_layout.self_and_descendants.find(:first,:conditions=>["spree_section_pieces.resources like ?",'m%'],:include=>[:sections=>:section_piece])
+#    page_layout = theme.page_layouts.find(:first,:conditions=>["spree_section_pieces.resources like ?",'m%'],:include=>[:sections=>:section_piece])
 #    menu_section = page_layout.sections.first
 #    theme.unassign_resource( SpreeTheme.taxon_class, page_layout)
 #    theme.assigned_resources( SpreeTheme.taxon_class, page_layout).compact.should be_blank
