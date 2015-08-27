@@ -30,7 +30,6 @@ module Spree
       #notice: attribute section_id, title required
       # section.root.section_piece_id should be 'root'
       #def create_layout(section, title, attrs={})
-      #  #create record in table page_layouts
       #  layout = create!(:section_id=>section.id) do |obj|
       #    obj.title = title
       #    obj.site_id = SpreeTheme.site_class.current.id

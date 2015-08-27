@@ -9,11 +9,12 @@ SpreeAbc::Application.routes.draw do
   # We ask that you don't use the :as option here, as Spree relies on it being the default of "spree"
   mount Spree::Core::Engine, :at => '/'
 
-
-  namespace :admin do
-    resources :template_themes do
-      member do
-        post :import
+  Spree::Core::Engine.add_routes do
+    namespace :admin do
+      resources :template_themes do
+        member do
+          post :import
+        end
       end
     end
   end

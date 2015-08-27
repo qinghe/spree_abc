@@ -8,18 +8,44 @@ describe Spree::Taxon do
     @root_taxon = create(:taxon_for_duplicator)
     # root with 3 childen
     @taxonomy = @root_taxon.taxonomy
-    #@child_taxon = create(:taxon, :taxonomy => @taxonomy, :parent => @root_taxon, :icon => image)
   end
 
   context 'taxon with icon' do
     before(:each) do
       @root_taxon.update_attribute(:icon, image)
     end
-    it "should duplicate taxon with icon" do
-      duplicated_taxon = @root_taxon.duplicate
-      duplicated_taxon.save!
-      File.should exist(duplicated_taxon.icon.path )
+    after(:each) do
+      @root_taxon.update_attribute(:icon, nil)
     end
+
+    it "should duplicate taxon " do
+      expect{ @root_taxon.custom_duplicate.save!}.to change{Spree::Taxon.count}.by(1)
+    end
+
+    it "should duplicate taxon with icon" do
+      copied_taxon = @root_taxon.custom_duplicate
+      copied_taxon.save!
+      copied_taxon.reload
+      File.should exist(copied_taxon.icon.path )
+    end
+
+    context "current site is demo2" do
+      let( :copied_taxon ){ taxon = @root_taxon.clone_branch; taxon.save!;taxon }
+
+      before(:each) do
+        Spree::Site.current = create(:site_demo2)
+      end
+
+      it "should copy taxonomy to current site" do
+        expect{copied_taxon}.to change{Spree::Taxon.count}.by(4)
+      end
+
+      it "should clone branch with icon" do
+        #puts "@root_taxon =#{@root_taxon.id} ,copied_taxon=#{copied_taxon.id}"
+        File.should exist(copied_taxon.icon.path )
+      end
+    end
+
   end
 
   it "should create taxon with valid site!" do
@@ -36,19 +62,6 @@ describe Spree::Taxon do
     expect{@root_taxon.clone_branch.save!}.to change{Spree::Taxonomy.count}.by(1)
   end
 
-  context "current site is demo2" do
-    before(:each) do
-      @original_tree = @root_taxon.self_and_descendants
-      Spree::Site.current = create(:site_demo2)
-    end
-
-    it "should copy taxonomy to current site" do
-      copied_taxon = @root_taxon.clone_branch
-      copied_taxon.save!
-      copied_tree = copied_taxon.self_and_descendants
-      expect( copied_tree.size ).to eq @original_tree.size
-    end
-  end
 #  it "should copy with icon" do
 #    Spree::Site.current = Spree::Site.find 2
 #    taxon = Spree::Taxon.roots.first

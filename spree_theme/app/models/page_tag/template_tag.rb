@@ -465,7 +465,7 @@ module PageTag
 
     def cached_page_layouts
       if @cached_page_layouts.nil?
-        @cached_page_layouts = theme.page_layouts.includes(:section).inject({}){ |hash,pl| hash[pl.id]=pl; hash }
+        @cached_page_layouts = theme.original_page_layouts.includes(:section).inject({}){ |hash,pl| hash[pl.id]=pl; hash }
       end
       @cached_page_layouts
     end

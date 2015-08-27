@@ -24,6 +24,10 @@ describe Spree::TemplateTheme do
     template.respond_to?(:param_values).should be_truthy
   end
 
+  it "be destroy" do
+    #test destroy
+  end
+
   it "create plain template" do
     template = Spree::TemplateTheme.create_plain_template(section_root,'Template One')
     template.should be_an_instance_of(Spree::TemplateTheme)

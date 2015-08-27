@@ -1,7 +1,7 @@
 <%
 # list layout tree in editor page.
 # local params: theme, selected_id, current
-page_layout = theme.page_layout_root
+page_layout = theme.original_page_layout_root
 selected_id ||= page_layout.id
 %>
 <%=form_tag(update_layout_tree_template_theme_path(theme), :id=>"layout_tree_form",:name=>"layout_tree_form", :remote=>true) do %>

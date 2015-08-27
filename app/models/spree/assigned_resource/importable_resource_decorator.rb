@@ -1,4 +1,4 @@
-# all Assignable source should implement source interface
+# all Assignable source should implement ImportableResource
 module Spree
   module AssignedResource
     module ImportableResource
@@ -15,12 +15,21 @@ module Spree
 end
 
 
-Spree::SpecificTaxon.class_eval do
+Spree::TemplateText.class_eval do
   include Spree::AssignedResource::ImportableResource
-
   # it is resource of template_theme
   def importable?
-    false
+    true
+  end
+
+  def self.find_or_copy( text )
+    existing_text = find_by_permalink( text.permalink )
+    if existing_text.blank?
+      cloned_branch = text.dup
+      cloned_branch.site_id = Spree::Site.current.id
+      cloned_branch.save!
+    end
+    existing_text||cloned_branch
   end
 end
 
@@ -62,11 +71,11 @@ Spree::Taxon.class_eval do
             new_taxonomy = self.taxonomy.dup
             new_taxonomy.site_id = current_site_id
             # should not save new_taxonomy here, or new_taxonomy.root.site_id is not current site id
-            h = { self => self.duplicate } #we start at the root
+            h = { self => self.custom_duplicate } #we start at the root
             ordered = self.descendants
             #clone subitems
             ordered.each do |item|
-              h[item] = item.dup
+              h[item] = item.custom_duplicate
             end
             #resolve relations
             ordered.each do |item|
@@ -86,7 +95,7 @@ Spree::Taxon.class_eval do
     end
 
     #deep dup, include icon
-    def duplicate
+    def custom_duplicate
       # do not use this.dup, do not bother lft,rgt
       taxon = self.class.new
       taxon.attributes = self.attributes.except('id', 'parent_id', 'lft', 'rgt','depth', 'replaced_by')
@@ -96,23 +105,14 @@ Spree::Taxon.class_eval do
 
 end
 
-Spree::TemplateText.class_eval do
-  include Spree::AssignedResource::ImportableResource
+Spree::SpecificTaxon.class_eval do
   # it is resource of template_theme
   def importable?
-    true
-  end
-
-  def self.find_or_copy( text )
-    existing_text = find_by_permalink( text.permalink )
-    if existing_text.blank?
-      cloned_branch = text.dup
-      cloned_branch.site_id = Spree::Site.current.id
-      cloned_branch.save!
-    end
-    existing_text||cloned_branch
+    false
   end
 end
+
+
 
 Spree::TemplateFile.class_eval do
   include Spree::AssignedResource::ImportableResource

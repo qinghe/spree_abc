@@ -54,8 +54,9 @@ module Spree
     has_many :template_releases, :foreign_key=>"theme_id", :dependent => :delete_all
     # template_release may be in current or design site
     belongs_to :current_template_release, :class_name=>"TemplateRelease", :foreign_key=>"release_id"
-    has_one :mobile, foreign_key: "master_id", dependent: :destroy, class_name: self.name
+    has_one :mobile, foreign_key: "master_id", class_name: self.name
     belongs_to :desktop, foreign_key: "master_id", class_name: self.name
+    belongs_to :duplicated_from, foreign_key: "copy_from_id", class_name: self.name
 
     #use string as key instead of integer page_layout.id, exported theme in json, after restore, key is always string
     serialize :assigned_resource_ids, Hash
@@ -74,7 +75,8 @@ module Spree
 
     attr_accessor :section_root_id
     #attr_accessible :assigned_resource_ids, :template_files #import require it.
-
+    # add method original_page_layout_root, original_page_layouts
+    delegate :page_layout_root, :page_layouts, to: :original_template_theme, prefix: :original
 
     class << self
       # template has page_layout & param_values
@@ -156,9 +158,9 @@ module Spree
       #   * usage - may be [ruby,ehtml, css, js]
       def file_name(usage)
         if usage.to_s == 'ehtml'
-          "l#{page_layout_root.id}.html.erb"
+          "l#{original_page_layout_root.id}.html.erb"
         else
-          "l#{page_layout_root.id}.#{usage}"
+          "l#{original_page_layout_root.id}.#{usage}"
         end
       end
 
@@ -174,7 +176,7 @@ module Spree
       end
 
       def document_path
-        File.join( page_layout_root.site.document_path, self.path)
+        File.join( original_template_theme.site.document_path, self.path)
       end
 
       # * params
@@ -182,7 +184,7 @@ module Spree
       # * return js or css document file path, ex /shops/development/1/layouts/t1_r1/l1_t1.css
       def file_path( target )
         # theme.site do not work.
-        File.join(page_layout_root.site.path, self.path, file_name(target))
+        File.join( original_template_theme.site.path, self.path, file_name(target))
       end
 
       def layout_path
@@ -199,8 +201,6 @@ module Spree
     end
 
     begin 'edit template'
-
-
 
       # theme from design shop has been imported into current site or not
       def imported?
@@ -222,7 +222,7 @@ module Spree
 
       # template theme contained native page layout and param values
       def original_template_theme
-        #page_layout_root.template_theme
+        # duplicated_from || self
         self.class.where(:page_layout_root_id=>self.page_layout_root_id).first
       end
 

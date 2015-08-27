@@ -78,7 +78,7 @@ module PageTag
 
     #build html, css sourse
     def build
-      self.ehtml, self.ecss, self.ejs = self.theme.page_layout_root.build_content()      
+      self.ehtml, self.ecss, self.ejs = self.theme.original_page_layout_root.build_content()      
       return self.ehtml, self.ecss, self.ejs
     end
 
