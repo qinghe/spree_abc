@@ -84,7 +84,6 @@ module Spree
       def create_plain_template(  section_root, title, attrs={})
         #create a theme first.
         template = TemplateTheme.create( {:title=>title, :section_root_id=>section_root.id}.merge(attrs) ) do |obj|
-          obj.store = Spree::Store.current
         end
       end
 
@@ -547,7 +546,8 @@ module Spree
     private
     def fix_special_attributes
       if site_id == 0
-        self.site_id = SpreeTheme.site_class.current.id
+        self.site_id =  Spree::Store.current.site_id
+        self.store_id= Spree::Store.current.id
       end
       #fix Attribute was supposed to be a Hash, but was a String
       if new_record? && assigned_resource_ids.blank?
@@ -560,8 +560,10 @@ module Spree
     def initialize_page_layout_for_plain_theme
       if section_root_id.present?
         root_section = Section.roots.find(section_root_id)
-        page_layout_root = add_section( root_section )
-        self.update_attributes( page_layout_root_id: page_layout_root.id, for_terminal: root_section.for_terminal )
+        new_page_layout_root = add_section( root_section )
+        self.update_attributes(
+           page_layout_root_id: new_page_layout_root.id,
+           for_terminal: root_section.for_terminal )
       end
     end
 
