@@ -83,7 +83,9 @@ module Spree
       #
       def create_plain_template(  section_root, title, attrs={})
         #create a theme first.
-        template = TemplateTheme.create( {:title=>title, :section_root_id=>section_root.id}.merge(attrs) )
+        template = TemplateTheme.create( {:title=>title, :section_root_id=>section_root.id}.merge(attrs) ) do |obj|
+          obj.store = Spree::Store.current
+        end
       end
 
       def native
@@ -91,7 +93,7 @@ module Spree
       end
 
       def foreign
-        where(:store_id=> Spree::Store.designable).published
+        where(:store=> Spree::Store.designable).published
       end
 
       # original_theme may be attributes in hash
