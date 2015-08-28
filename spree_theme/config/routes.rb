@@ -22,6 +22,21 @@ Spree::Core::Engine.routes.draw do
 
   end
 
+  namespace :admin do
+    resources :comments
+    resources :comment_types
+    resources :orders do
+      member do
+        get :comments
+      end
+      resources :shipments do
+        member do
+         get :comments
+       end
+      end
+    end
+  end
+
   resources :comments, :only=>[:create] do
     collection do
       get :new_to_site

@@ -1,4 +1,4 @@
-<% # site_instance.class.name.demodulize.underscore => 'site'  
+<% # site_instance.class.name.demodulize.underscore => 'site'
    t_scope = @comment.comment_scope
 %>
 
@@ -10,12 +10,12 @@
             <%= f.label :comment_type_id, Spree.t(:type) %>
             <%= f.select :comment_type_id, @comment_types.map{|ct| [ct.name, ct.id]},{} ,:class => 'fullwidth' %>
           </p>
-    <% end %>        
+    <% end %>
     <p class="field">
-      <%= f.label :comment, Spree.t(:comment,:scope=>t_scope, :site_name=>Spree::Site.current.name) %><br />
+      <%= f.label :comment, Spree.t(:comment,:scope=>t_scope, :site_name=>SpreeTheme.site_class.current.name) %><br />
       <%= f.text_area :comment, :style => 'height:120px;', :class => 'fullwidth' %>
     </p>
-    <% if @comment.user %> 
+    <% if @comment.user %>
       <%= hidden_field_tag 'comment[user_id]', @comment.user.id %>
     <% else %>
       <p class="field">
@@ -26,4 +26,4 @@
         <%= f.label :email, Spree.t(:commenter_email,:scope=>t_scope) %><br />
         <%= f.text_field :email %>
       </p>
-    <% end %>        
+    <% end %>

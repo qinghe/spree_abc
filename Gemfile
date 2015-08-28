@@ -48,7 +48,7 @@ gem 'spree_multi_site',   :path => './spree_multi_site'
 
 # Use SCSS for stylesheets,  spree_theme/spree_devise_auth required
 gem 'sass-rails', '~> 4.0.2'
-#gem "friendly_id" # spree included.
+gem "acts_as_commentable" 
 gem 'useragent'
 gem 'spree_theme',   :path => './spree_theme'
 
@@ -69,7 +69,7 @@ gem 'spree_essential_blog',   :path => './spree_essential_blog'
 # gem 'spree_flexi_variants',   :path => './spree_flexi_variants'
 
 # copy from https://github.com/spree-contrib/spree_comments/tree/2-0-stable
-gem 'spree_comments',   :path => './spree_comments'
+#gem 'spree_comments',   :path => './spree_comments' # it is moved into spree_theme
 gem 'paperclip_oss_storage',   :github => 'RuanShan/paperclip_oss_storage', :branch=>'master'
 
 #

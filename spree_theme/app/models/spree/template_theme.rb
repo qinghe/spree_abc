@@ -41,6 +41,7 @@ module Spree
     include AssignedResource::IdsHandler
     #extend FriendlyId
     TerminalEnum = Struct.new( :desktop, :mobile, :pad, :tv )[0,1,2,3]
+
     belongs_to :website, :class_name => SpreeTheme.site_class.to_s, :foreign_key => "site_id"
     belongs_to :store, :foreign_key => "store_id"
 

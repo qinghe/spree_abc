@@ -19,7 +19,8 @@ Gem::Specification.new do |s|
   s.add_dependency 'spree_core', '~> 2.4'
   s.add_dependency 'friendly_id'
   s.add_dependency 'useragent'
-  # copy from https://github.com/DynamoMTL/sprangular/gemspec
+  s.add_dependency 'acts_as_commentable', '3.0.1'
+# copy from https://github.com/DynamoMTL/sprangular/gemspec
   s.add_development_dependency 'capybara', '~> 2.4'
   s.add_development_dependency 'coffee-rails'
   s.add_development_dependency 'database_cleaner'

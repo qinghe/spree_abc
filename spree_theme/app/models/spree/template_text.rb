@@ -6,7 +6,7 @@ module Spree
     #for resource_class.resourceful
     belongs_to :site
     scope :resourceful, ->(theme){ where("1=1") }
-    default_scope ->{ where(:site_id=>Site.current.id)}
+    default_scope ->{ where(:site_id=>SpreeTheme.site_class.current.id)}
     before_validation :normalize_permalink
 
 

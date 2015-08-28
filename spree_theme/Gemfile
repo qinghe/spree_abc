@@ -18,6 +18,7 @@ end
 gem "acts_as_list"
 gem "acts_as_tree"
 gem "awesome_nested_set"
+gem 'acts_as_commentable'
 
 # spree already contain
 #gem 'jquery-rails'

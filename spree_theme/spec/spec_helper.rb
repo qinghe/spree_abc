@@ -30,6 +30,7 @@ require 'spree/testing_support/factories'
 require 'spree/testing_support/url_helpers'
 
 require 'spree_theme/testing_support/factories'
+require 'spree_theme/testing_support/request_helpers'
 
 RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods

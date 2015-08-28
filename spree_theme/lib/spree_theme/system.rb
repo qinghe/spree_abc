@@ -50,6 +50,7 @@ module SpreeTheme
       #dalianshops use template now.
       #Rails.logger.debug "request_fullpath=#{request_fullpath}"
       # fullpath may contain ?n=www.domain.com
+puts "request_fullpath = #{request_fullpath}"      
       case request_fullpath
         when /^\/under_construction/, /^\/user\/spree_user\/logout/ ,/^\/logout/, /^\/admin/
           return
@@ -87,8 +88,8 @@ module SpreeTheme
           end
         end
       end
-      #browse template by public
-      if @theme.blank? and SpreeTheme.site_class.current.template_theme.present?
+      # public view pages
+      if @theme.blank? && SpreeTheme.site_class.current.template_theme.present?
         @theme = SpreeTheme.site_class.current.template_theme
       end
   #Rails.logger.debug "@theme=#{@theme.inspect}, @is_designer=#{@is_designer},website=#{website.inspect} request.xhr?=#{request.xhr?}"

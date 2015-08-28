@@ -39,8 +39,6 @@ class Spree::Site < ActiveRecord::Base
   #generate short name fro name
   before_validation :set_short_name
   after_create :add_default_data
-  # it do not work caused by stores.default_scope  site scope
-  #scope :designable, ->{ includes(:stores).where(spree_stores: {designable:true})}
 
   class << self
     def dalianshops
