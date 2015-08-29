@@ -22,7 +22,7 @@ module Spree
 
       #apply this theme to site
       def apply
-        SpreeTheme.site_class.current.apply_theme @template_theme
+        Spree::Store.current.apply_theme @template_theme
         respond_with(@template_theme)
       end
 

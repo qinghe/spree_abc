@@ -6,7 +6,7 @@ module Spree
         Spree::Taxon::PageContextEnum.each_pair{|sym, obj|
           options<< [Spree.t("section_context.#{ sym }"), obj]
         }
-        if SpreeTheme.site_class.current.dalianshops?
+        if Spree::Site.current.dalianshops?
           Spree::Taxon::PageContextForFirstSiteEnum.each_pair{|sym, obj|
             options<< [Spree.t("section_context.#{ sym }"), obj]
           }

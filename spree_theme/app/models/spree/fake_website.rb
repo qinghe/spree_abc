@@ -4,7 +4,8 @@ module Spree
   class FakeWebsite < ActiveRecord::Base
     include SpreeTheme::SiteHelper
     before_validation :set_short_name
-
+    has_many :stores
+    
     class << self
       def current
       #  if Thread.current[:spree_site].nil?

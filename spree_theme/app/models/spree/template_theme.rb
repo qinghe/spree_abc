@@ -42,7 +42,7 @@ module Spree
     #extend FriendlyId
     TerminalEnum = Struct.new( :desktop, :mobile, :pad, :tv )[0,1,2,3]
 
-    belongs_to :website, :class_name => SpreeTheme.site_class.to_s, :foreign_key => "site_id"
+    #belongs_to :website, :class_name => SpreeTheme.site_class.to_s, :foreign_key => "site_id"
     belongs_to :store, :foreign_key => "store_id"
 
     # for now template_theme and page_layout are one to one
@@ -62,7 +62,7 @@ module Spree
     #use string as key instead of integer page_layout.id, exported theme in json, after restore, key is always string
     serialize :assigned_resource_ids, Hash
 
-    scope :within_site, ->(site){ where(:site_id=> site.id) }
+    #scope :within_site, ->(site){ where(:site_id=> site.id) }
     scope :released, ->{ where("release_id>0") }
     scope :published, -> { released.where(:is_public=>true) }
     scope :for_desktop, ->{ where( for_terminal: TerminalEnum.desktop) }
@@ -89,7 +89,7 @@ module Spree
       end
 
       def native
-        self.within_site(SpreeTheme.site_class.current )
+        where(:store=> Spree::Store.current)
       end
 
       def foreign
@@ -219,7 +219,7 @@ module Spree
 
       # is theme applied to webiste
       def applied?
-        SpreeTheme.site_class.current.template_theme ==self
+        Spree::Site.current.template_theme ==self
       end
 
       # template theme contained native page layout and param values
@@ -245,7 +245,6 @@ module Spree
       #  new_layout = original_layout.copy_to_new
       #  #create theme record
       #  new_theme = self.dup
-      #  new_theme.site_id = SpreeTheme.site_class.current.id
       #  new_theme.store_id = Spree::Store.current.id
       #  new_theme.release_id = 0 # new copied theme should have no release
       #  new_theme.page_layout_root_id = new_layout.id
@@ -546,8 +545,8 @@ module Spree
 
     private
     def fix_special_attributes
-      if site_id == 0
-        self.site_id =  Spree::Store.current.site_id
+      if store_id == 0
+        self.site_id =  SpreeTheme.site_class.current.id
         self.store_id= Spree::Store.current.id
       end
       #fix Attribute was supposed to be a Hash, but was a String

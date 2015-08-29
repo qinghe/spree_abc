@@ -1,13 +1,13 @@
 # Spree::BaseController.class_eval would not work
 # Spree::UserSessionsController derive from Devise::SessionsController, it included Spree::Core::ControllerHelpers
-require 'spree/core/controller_helpers/common'
-class<< Spree::Core::ControllerHelpers::Common
-  #Spree::Api::BaseController would include  MultiSiteSystem, get_layout should not in it.
-  #override original methods
-  def get_layout
-    Spree::Site.current.layout.present? ? Spree::Site.current.layout : Spree::Config[:layout]
-  end
-end
+#require 'spree/core/controller_helpers/common'
+#class<< Spree::Core::ControllerHelpers::Common
+#  #Spree::Api::BaseController would include  MultiSiteSystem, get_layout should not in it.
+#  #override original methods
+#  def get_layout
+#    Spree::Site.current.layout.present? ? Spree::Site.current.layout : Spree::Config[:layout]
+#  end
+#end
 
 module Spree
   module MultiSiteSystem

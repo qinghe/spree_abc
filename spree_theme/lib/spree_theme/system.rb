@@ -10,7 +10,7 @@ class << Spree::Core::ControllerHelpers::Common
     receiver.send :prepend_before_action, :initialize_template
     # receiver could be Spree::Api::BaseController or  Spree::BaseController
     #if receiver == Spree::BaseController
-    receiver.send :before_filter, :add_view_path #spree_devise_auth, and spree_core require it.
+    #receiver.send :before_filter, :add_view_path #spree_devise_auth, and spree_core require it.
     receiver.send :layout, :get_layout_if_use # never allow it to api controller.
 
   end
@@ -38,7 +38,7 @@ module SpreeTheme
       #if @is_preview
       #  return 'layout_for_preview'
       #end
-      @theme.layout_path || SpreeTheme.site_class.current.layout || Spree::Config[:layout]
+      @theme.layout_path || Spree::Store.current.layout || Spree::Config[:layout]
     end
 
     def initialize_template( request_fullpath = nil )
@@ -50,7 +50,7 @@ module SpreeTheme
       #dalianshops use template now.
       #Rails.logger.debug "request_fullpath=#{request_fullpath}"
       # fullpath may contain ?n=www.domain.com
-puts "request_fullpath = #{request_fullpath}"      
+puts "request_fullpath = #{request_fullpath}"
       case request_fullpath
         when /^\/under_construction/, /^\/user\/spree_user\/logout/ ,/^\/logout/, /^\/admin/
           return
@@ -81,7 +81,7 @@ puts "request_fullpath = #{request_fullpath}"
         # since cookies domain is same top level domain, ex. .dalianshops.com
         # session[:theme_id] maybe not belong to current website, we should test that.
         if session[:theme_id].present?
-          if Spree::TemplateTheme.where( site_id: website.site_id ).exists? session[:theme_id]  #theme could be deleted.
+          if Spree::TemplateTheme.native.exists? session[:theme_id]  #theme could be deleted.
             @theme = Spree::TemplateTheme.find( session[:theme_id] )
           else
             session[:theme_id] = nil
@@ -89,8 +89,8 @@ puts "request_fullpath = #{request_fullpath}"
         end
       end
       # public view pages
-      if @theme.blank? && SpreeTheme.site_class.current.template_theme.present?
-        @theme = SpreeTheme.site_class.current.template_theme
+      if @theme.blank? && Spree::Store.current.template_theme.present?
+        @theme = Spree::Store.current.template_theme
       end
   #Rails.logger.debug "@theme=#{@theme.inspect}, @is_designer=#{@is_designer},website=#{website.inspect} request.xhr?=#{request.xhr?}"
       if params[:controller]=~/cart|checkout|order/
@@ -191,17 +191,11 @@ puts "request_fullpath = #{request_fullpath}"
         @page_layout = page_layout #current selected page_layout, the node of the layout tree.
         @sections = Spree::Section.where(:is_enabled=>true).order("title").roots
         #template selection, include mobile
-        @template_themes = Spree::TemplateTheme.within_site(SpreeTheme.site_class.current )
+        @template_themes = Spree::TemplateTheme.native
     end
 
     def add_view_path
-      #unless view_paths.include? SpreeTheme.site_class.current.document_path
-      #  append_view_path SpreeTheme.site_class.current.document_path
-      #end
-      ## layout of imported theme is in design site home folder
-      #unless view_paths.include? SpreeTheme.site_class.designsite.document_path
-      #  append_view_path SpreeTheme.site_class.designsite.document_path
-      #end
+
     end
 
     #https://ruby-china.org/topics/22165

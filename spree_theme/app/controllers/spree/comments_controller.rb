@@ -3,7 +3,7 @@ module Spree
     before_filter :initialize_comment, :only => [:create, :new_to_site]
 
     def new_to_site
-      @comment.commentable = SpreeTheme.site_class.current
+      @comment.commentable = Spree::Store.current
     end
 
     def create

@@ -2,7 +2,6 @@ Spree::Store.class_eval do
   # Do not use default_scope, in view template_theme/foreign, we want to get store of template_theme.
   # include Spree::MultiSiteSystem
   belongs_to :site
-  belongs_to :home_page, :foreign_key=>'index_page_id', :class_name=>'Taxon'
 
   clear_validators!
 

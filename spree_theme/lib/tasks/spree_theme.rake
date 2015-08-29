@@ -104,7 +104,7 @@ namespace :spree_theme do
   task :release_theme, [:theme_id] =>[ :environment ] do |t, args|
     theme = Spree::TemplateTheme.find( args.theme_id)
     # current site is required for build css( image url )
-    SpreeTheme.site_class.current = theme.site
+    Spree::Store.current = theme.store
     theme.release({},{:page_only=>true})
     puts "released #{theme.site.layout}"
   end
@@ -190,7 +190,7 @@ namespace :spree_theme do
     theme = Spree::TemplateTheme.find( args.theme_id)
     Spree::TemplateTheme.connection.transaction do
       # required site.current
-      SpreeTheme.site_class.current = theme.site
+      Spree::Store.current = theme.store
       new_theme = theme.duplicate
       puts "copied #{theme.id}-#{theme.title} to #{new_theme.id}-#{new_theme.title} "
     end
