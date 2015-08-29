@@ -15,8 +15,8 @@ describe Spree::TemplateTheme do
   end
 
   it "has document_path" do
-    #template.page_layout_root.site.path
-    expect(page_layout_root).to receive(:site).and_return( SpreeTheme.site_class.current )
+    #template.original_template_theme.store.path
+    expect(store).to receive(:path).and_return( 'this is a path' )
     template.document_path.should be_present
   end
 

@@ -178,7 +178,7 @@ module Spree
       end
 
       def document_path
-        File.join( original_template_theme.site.document_path, self.path)
+        File.join( original_template_theme.store.document_path, self.path)
       end
 
       # * params
@@ -186,7 +186,7 @@ module Spree
       # * return js or css document file path, ex /shops/development/1/layouts/t1_r1/l1_t1.css
       def file_path( target )
         # theme.site do not work.
-        File.join( original_template_theme.site.path, self.path, file_name(target))
+        File.join( original_template_theme.store.path, self.path, file_name(target))
       end
 
       def layout_path

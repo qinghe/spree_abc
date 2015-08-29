@@ -17,4 +17,12 @@ Spree::Store.class_eval do
     self.theme_id= theme.id
     save!
   end
+
+  def document_path
+    SpreeTheme.site_class.current.document_path
+  end
+
+  def path
+    SpreeTheme.site_class.current.path
+  end
 end

@@ -9,7 +9,7 @@ module Spree
     def create
       @comment.attributes =  permitted_resource_params
       if @comment.save
-        flash[:success] = Spree.t(:comment_successfully_created, :scope=>@comment.comment_scope)
+        flash[:success] = Spree.t(:comment_successfully_created)
         respond_with(@comment) do |format|
           format.html { redirect_to :back }
           format.js   { render :layout => false }

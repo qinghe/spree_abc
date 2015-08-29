@@ -3,7 +3,8 @@
 # request.fullpath not start with /admin
 module SpreeTheme
   module TestingSupport
-    module RequestHelpers
+    module Helpers
+
       module Request
         def stub_initialize_template!
           before(:each) {
@@ -25,5 +26,5 @@ module SpreeTheme
   end
 end
 RSpec.configure do |config|
-  config.extend SpreeTheme::TestingSupport::RequestHelpers::Request, type: :controller
+  config.extend SpreeTheme::TestingSupport::Helpers::Request, type: :controller
 end

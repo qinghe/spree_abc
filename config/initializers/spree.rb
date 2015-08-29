@@ -19,6 +19,7 @@ end
 Spree.user_class = "Spree::User"
 
 Spree::Api::Config.requires_authentication = false
+SpreeTheme.site_class = "Spree::Site"
 #SpreeTheme.taxon_class = "Spree::Taxon"
 #SpreeTheme.post_class = "Spree::Post"
 

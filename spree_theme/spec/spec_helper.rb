@@ -31,6 +31,7 @@ require 'spree/testing_support/url_helpers'
 
 require 'spree_theme/testing_support/factories'
 require 'spree_theme/testing_support/request_helpers'
+require 'spree_theme/testing_support/controller_requests'
 
 RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
@@ -51,6 +52,7 @@ RSpec.configure do |config|
   # Adds convenient methods to request Spree's controllers
   # spree_get :index
   config.include Spree::TestingSupport::ControllerRequests, type: :controller
+  config.include SpreeTheme::TestingSupport::ControllerRequests, type: :controller
 
   # == Mock Framework
   #
@@ -63,7 +65,7 @@ RSpec.configure do |config|
   config.color = true
 
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
-  config.fixture_path = "#{::Rails.root}/spec/fixtures"
+  config.fixture_path = "#{SpreeTheme::Engine.root}/spec/fixtures"
 
   # Capybara javascript drivers require transactional fixtures set to false, and we use DatabaseCleaner
   # to cleanup after each test instead.  Without transactional fixtures set to false the records created

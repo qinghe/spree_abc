@@ -34,7 +34,10 @@ gem 'jquery-turbolinks'
 
 
 eval(File.read(File.dirname(__FILE__) + '/common_spree_dependencies.rb'))
-
+# referer to https://github.com/spree/spree/issues/2013
+gem 'spree_auth_devise', :github => "spree/spree_auth_devise", :branch => "2-4-stable"
+#support rich_editor
+gem 'spree_editor',  :github => "spree/spree_editor", :branch=>"2-4-stable"
 # gem 'sprangular',   :path => './sprangular'
 
 #gem 'tinymce-rails-langs'
@@ -48,7 +51,7 @@ gem 'spree_multi_site',   :path => './spree_multi_site'
 
 # Use SCSS for stylesheets,  spree_theme/spree_devise_auth required
 gem 'sass-rails', '~> 4.0.2'
-gem "acts_as_commentable" 
+gem "acts_as_commentable"
 gem 'useragent'
 gem 'spree_theme',   :path => './spree_theme'
 

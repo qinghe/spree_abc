@@ -13,4 +13,10 @@ FactoryGirl.define do
     slug 'height'
   end
 
+  factory :background_image, class: Spree::HtmlAttribute do
+    css_name 'background-image'
+    pvalues "none,0i"
+    punits ""
+    slug 'background-image'
+  end
 end

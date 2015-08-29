@@ -174,13 +174,14 @@ module Spree
         @global_param_value_events=[]
         if self.page_events.present?
           last_position =  self.page_events.size - 1
+          # tell current section, this is new html attribute value.
           pve = PageEvent::ParamValueEvent.new(self.page_events.first, self, self.original_html_attribute_values.first, self.updated_html_attribute_values.first )
           @param_value_events<<pve
-          # tell current section, this is new html attribute value.
-          se = PageEvent::GlobalParamValueEvent.new(self.page_events.first, self, self.original_html_attribute_values.first, self.updated_html_attribute_values.first )
-          if self.page_layout.subscribe_event?(se)
-            @global_param_value_events << se
-          end
+          # Disable GlobalParamValueEvent, it is not using and well tested.
+          #se = PageEvent::GlobalParamValueEvent.new(self.page_events.first, self, self.original_html_attribute_values.first, self.updated_html_attribute_values.first )
+          #if self.page_layout.subscribe_event?(se)
+          #  @global_param_value_events << se
+          #end
         end
       end
 

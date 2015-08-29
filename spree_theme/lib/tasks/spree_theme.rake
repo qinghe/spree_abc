@@ -29,7 +29,7 @@ namespace :spree_theme do
     if seed_path=='1'
       file_path = File.join(SpreeTheme::Engine.root,'db','themes','designs', "#{theme_key}.#{format}")
     else
-      file_path =  File.join(theme.site.document_path, "#{theme_key}.#{format}")
+      file_path =  File.join(theme.store.document_path, "#{theme_key}.#{format}")
     end
     open(file_path,'w') do |file|
       if format == 'json'

@@ -13,7 +13,7 @@ class AddThemeIdToPageLayout < ActiveRecord::Migration
           # do not use page_layotu.self_and_descendants,  scope is changed to template_theme_id now.
           Spree::PageLayout.where( root_id: theme.page_layout_root_id).update_all(template_theme_id: theme.id)
         else
-          original_template_theme = Spree::TemplateTheme.where( page_layout_root_id: theme.page_layout_root_id).first
+          original_template_theme = Spree::TemplateTheme.where( page_layout_root_id: theme.page_layout_root_id).order('id').first
           theme.update_attribute(:copy_from_id, original_template_theme.id )
         end
       else
