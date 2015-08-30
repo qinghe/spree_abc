@@ -19,7 +19,7 @@ module Spree
       # rails 3.2.19
       # fix: Spree::Taxon.create!({ taxonomy_id: 0, name: 'name' }, without_protection: true) =>
       # <Spree::Taxon id: 30, name: "name", taxonomy_id: 0, site_id: nil,  depth: 0, page_context: 0, html_attributes: nil, replaced_by: 0>
-      before_create {|record| record.site_id||= Spree::Site.current.id }
+      # before_create {|record| record.site_id||= Spree::Site.current.id }
 
       default_scope {
         # design shop create theme product, assign it to global taxon( taxon in site 1)
@@ -45,7 +45,6 @@ module Spree
     end
 
     module ClassMethods
-      # remove it after upgrade to rails 4.0
       def multi_site_context
         MultiSiteSystem.multi_site_context
       end

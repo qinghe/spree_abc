@@ -24,10 +24,13 @@ Dir[File.join(File.dirname(__FILE__), 'support/**/*.rb')].each { |f| require f }
 
 # Requires factories and other useful helpers defined in spree_core.
 require 'spree/testing_support/authorization_helpers'
-require 'spree/testing_support/capybara_ext'
-require 'spree/testing_support/controller_requests'
 require 'spree/testing_support/factories'
+require 'spree/testing_support/preferences'
+require 'spree/testing_support/controller_requests'
+require 'spree/testing_support/flash'
 require 'spree/testing_support/url_helpers'
+require 'spree/testing_support/order_walkthrough'
+require 'spree/testing_support/capybara_ext'
 
 # Requires factories defined in lib/spree_multi_site/factories.rb
 require 'spree_multi_site/testing_support/factories'
@@ -44,8 +47,10 @@ RSpec.configure do |config|
   #
   # visit spree.admin_path
   # current_path.should eql(spree.products_path)
+  config.include Spree::TestingSupport::Preferences
   config.include Spree::TestingSupport::UrlHelpers
-
+  config.include Spree::TestingSupport::ControllerRequests
+  config.include Spree::TestingSupport::Flash
   # == Mock Framework
   #
   # If you prefer to use mocha, flexmock or RR, uncomment the appropriate line:

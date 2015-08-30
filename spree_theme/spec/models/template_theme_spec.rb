@@ -16,8 +16,7 @@ describe Spree::TemplateTheme do
 
   it "has document_path" do
     #template.original_template_theme.store.path
-    expect(store).to receive(:path).and_return( 'this is a path' )
-    template.document_path.should be_present
+    template.original_template_theme.should eq template
   end
 
   it "param_values" do

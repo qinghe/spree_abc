@@ -1,7 +1,7 @@
 FactoryGirl.define do
-  factory :site_demo, class: Spree::Site do
-    name 'demo1'
-    email 'demo1@dalianshops.com'
+  factory :site1, class: Spree::Site do
+    name 'first'
+    email 'first@dalianshops.com'
     password 'password'
 
     before(:create) do
@@ -12,9 +12,9 @@ FactoryGirl.define do
       create(:store, site: site )
     end
 
-    factory :site_demo2 do
-      name 'demo2'
-      email 'demo2@dalianshops.com'
+    factory :site2 do
+      name 'design'
+      email 'design@dalianshops.com'
     end
 
   end

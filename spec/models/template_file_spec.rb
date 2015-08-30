@@ -3,7 +3,7 @@ require 'rails_helper'
 describe Spree::TemplateFile do
   let(:image) { File.open(File.expand_path('../../fixtures/qinghe.jpg', __FILE__)) }
   before(:each) do
-    Spree::Site.current = create(:site_demo)
+    Spree::Site.current = create(:site1)
     template_theme =  create(:template_theme)
     @template_file = Spree::TemplateFile.create( name: 'file', template_theme: template_theme )
     @template_file.update_attribute :attachment, image
@@ -26,7 +26,7 @@ describe Spree::TemplateFile do
 
   #context " current site is demo" do
   #  before( :each ) do
-  #    Spree::Site.current = create(:site_demo2)
+  #    Spree::Site.current = create(:site2)
   #  end
   #  it "should create new template file" do
   #    expect{ described_class.find_or_copy( @template_file ) }.to change{ described_class.count}.by(1)

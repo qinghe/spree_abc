@@ -3,6 +3,7 @@ require 'rails_helper'
 describe Spree::Site do
 
   before(:each) do
+    create(:admin_role) 
     @site = Spree::Site.new(:name=>'ABCD',:domain=>'www.abc.net',"email"=>"test@abc.com", "password"=>"a12345z")
   end
 

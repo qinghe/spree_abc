@@ -4,7 +4,7 @@ describe Spree::Taxon do
   let(:image) { File.open(File.expand_path('../../fixtures/qinghe.jpg', __FILE__)) }
 
   before(:each) do
-    Spree::Site.current = create(:site_demo)
+    Spree::Site.current = create(:site1)
     @root_taxon = create(:taxon_for_duplicator)
     # root with 3 childen
     @taxonomy = @root_taxon.taxonomy
@@ -33,7 +33,7 @@ describe Spree::Taxon do
       let( :copied_taxon ){ taxon = @root_taxon.clone_branch; taxon.save!;taxon }
 
       before(:each) do
-        Spree::Site.current = create(:site_demo2)
+        Spree::Site.current = create(:site2)
       end
 
       it "should copy taxonomy to current site" do

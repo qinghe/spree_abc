@@ -4,8 +4,8 @@ Spree::Admin::TemplateThemesController.class_eval do
   def import
     imported_theme = @template_theme.import_with_resource( )
     if imported_theme.present?
-      if imported_theme.site.template_themes.count == 1
-        imported_theme.site.apply_theme imported_theme
+      if imported_theme.store.template_themes.count == 1
+        imported_theme.store.apply_theme imported_theme
       end
       flash[:success] = Spree.t('notice_messages.theme_imported')
     else
@@ -16,5 +16,5 @@ Spree::Admin::TemplateThemesController.class_eval do
       format.html { redirect_to(foreign_admin_template_themes_url) }
     end
   end
-  
+
 end

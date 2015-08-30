@@ -33,6 +33,8 @@ require 'spree/testing_support/capybara_ext'
 require 'paperclip/matchers'
 
 require 'spree_theme/testing_support/factories'
+require 'spree_theme/testing_support/request_helpers'
+require 'spree_theme/testing_support/controller_requests'
 require 'spree_multi_site/testing_support/factories'
 #require 'factories'
 
@@ -70,6 +72,7 @@ RSpec.configure do |config|
   config.include Spree::TestingSupport::UrlHelpers
   config.include Spree::TestingSupport::ControllerRequests
   config.include Spree::TestingSupport::Flash
+  config.include SpreeTheme::TestingSupport::ControllerRequests, type: :controller
 
   config.include Paperclip::Shoulda::Matchers
 

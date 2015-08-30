@@ -2,7 +2,7 @@ require 'rails_helper'
 describe Spree::TemplateThemeImporter, :type => :model do
 
   before(:each) do
-    Spree::Site.current = create(:site_demo)
+    Spree::Site.current = create(:site1)
     taxon = create(:taxon_for_duplicator) #
     @importable_template_theme = create(:importable_template_theme )
     @importable_template_theme.assign_resource( taxon )
@@ -10,7 +10,7 @@ describe Spree::TemplateThemeImporter, :type => :model do
 
   context " current site is demo" do
     before( :each ) do
-      Spree::Site.current = create(:site_demo2)
+      Spree::Site.current = create(:site2)
     end
     it "should create new template theme" do
       expect{ @importable_template_theme.importer.import(  ) }.to change{ Spree::TemplateTheme.count}.by(1)

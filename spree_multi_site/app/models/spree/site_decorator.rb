@@ -35,13 +35,11 @@ Spree::Prototype.class_eval do
 end
 
 Spree::Preference.class_eval do
-  belongs_to :site
-  default_scope  { where(:site_id =>  Spree::Site.current.id) }
+  include Spree::MultiSiteSystem
 end
 
 Spree::PaymentMethod.class_eval do
-  belongs_to :site
-  default_scope  { where(:site_id =>  Spree::Site.current.id) }
+  include Spree::MultiSiteSystem
 end
 
 Spree::Product.class_eval do
@@ -71,19 +69,16 @@ end
 #TODO add site_id into shipments?
 
 Spree::ShippingCategory.class_eval do
-  belongs_to :site
-  default_scope  { where(:site_id =>  Spree::Site.current.id) }
+  include Spree::MultiSiteSystem
 end
 
 Spree::ShippingMethod.class_eval do
-  belongs_to :site
-  default_scope  { where(:site_id =>  Spree::Site.current.id) }
+  include Spree::MultiSiteSystem
 end
 
 
 Spree::Taxonomy.class_eval do
   include Spree::MultiSiteSystem
-
 end
 
 

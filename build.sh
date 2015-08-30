@@ -16,10 +16,7 @@ export RSPEC_RETRY_COUNT=2
 
 # Spree defaults
 echo "Setup SpreeAbc defaults and creating test db..."
-bundle check || bundle update --quiet
-bundle exec rake db:setup RAILS_ENV=test
-
-
+bundle check
 
 # Spree Abc
 echo "**************************************"
@@ -31,7 +28,7 @@ bundle update --quiet; bundle exec rspec spec
 echo "******************************************"
 echo "* Setup Spree Theme and running RSpec...  "
 echo "******************************************"
-cd ../spree_theme; set_gemfile; bundle update --quiet; bundle exec rspec spec
+cd ./spree_theme; set_gemfile; bundle update --quiet; bundle exec rspec spec
 
 # Spree Mulit-Site
 echo "***************************************"
