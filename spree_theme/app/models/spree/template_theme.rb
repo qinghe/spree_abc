@@ -219,7 +219,7 @@ module Spree
 
       # is theme applied to webiste
       def applied?
-        Spree::Site.current.template_theme ==self
+        Spree::Store.current.template_theme ==self
       end
 
       # template theme contained native page layout and param values

@@ -72,9 +72,10 @@ describe Spree::TemplateTheme do
     template.release_id.should == template_release.id
   end
 
-  #it "should be applied" do
-  #  template.applied?.should be_truthy
-  #end
+  it "should be applied" do
+    Spree::Store.current.update_attribute( :theme_id, template.id )
+    template.applied?.should be_truthy
+  end
 
   it "assign attributes" do
     original_title = "it is test"
