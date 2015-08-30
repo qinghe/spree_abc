@@ -15,8 +15,8 @@ class Spree::Comment < ActiveRecord::Base
 
   #attr_accessible :commentable_id, :commentable_type, :user_id, :comment_type_id, :comment, :cellphone, :email
 
-  # for translations,  for each commentable object, title could be different 
-  def comment_scope
-    commentable.class.name.demodulize.underscore
-  end
+  # for translations,  for each commentable object, title could be different
+  #def comment_scope
+  #  commentable.class.name.demodulize.underscore
+  #end
 end

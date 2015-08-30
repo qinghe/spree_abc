@@ -17,7 +17,7 @@ zh-CN:
       spree/comment:
         email: 电子邮箱
         cellphone: 手机
-        comment: 评论      
+        comment: 评论
       spree/page_layout:
         title: 名称
         content_param: 内容参数
@@ -89,6 +89,8 @@ zh-CN:
       state: 邮编
       city: 所在地区
       street: 详细地址
+    comment_successfully_created: 谢谢您的反馈，我们已收到。
+    comment_to_store: 亲爱的用户：欢迎您抢先体验“%{store_name}”，有任何意见和建议，或在使用过程中遇到问题，请告诉我们，我们会每天关注反馈信息，不断优化产品，为您提供更好的服务！
     select_taxon: 选择菜单
     select_template_image: 选择图片
     select_template_text: 选择文本
@@ -151,6 +153,7 @@ zh-CN:
       gpvs_theme: 模板集合
       previous_post: 当前选择文章-前一篇
       next_post: 当前选择文章-下一篇
+    store_comment: 请留下您对“%{store_name}”的意见和建议！
     template_file:
       index: 图片素材
       new: 新建图片素材
@@ -192,12 +195,6 @@ zh-CN:
     for: for
     comments: Comments
     comment: Comment
-    site:
-      add_comment: 亲爱的用户：欢迎您抢先体验“%{site_name}”，有任何意见和建议，或在使用过程中遇到问题，请告诉我们，我们会每天关注反馈信息，不断优化产品，为您提供更好的服务！
-      comment: 请留下您对“%{site_name}”的意见和建议！
-      commenter_email: 您常用的电子邮箱
-      commenter_cellphone: 您常用的联系电话
-      comment_successfully_created: 谢谢您的反馈，我们已收到。
     add_comment_type: Add Comment Type
     comment_types: Comment Types
     manage_comment_types: Manage comment types

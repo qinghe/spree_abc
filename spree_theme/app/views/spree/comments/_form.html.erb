@@ -1,7 +1,3 @@
-<% # site_instance.class.name.demodulize.underscore => 'site'
-   t_scope = @comment.comment_scope
-%>
-
     <%= hidden_field_tag 'comment[commentable_id]', @comment.commentable.id %>
     <%= hidden_field_tag 'comment[commentable_type]', @comment.commentable.class %>
 
@@ -12,18 +8,18 @@
           </p>
     <% end %>
     <p class="field">
-      <%= f.label :comment, Spree.t(:comment,:scope=>t_scope, :site_name=>SpreeTheme.site_class.current.name) %><br />
+      <%= f.label :comment, Spree.t(:store_comment, :store_name=>Spree::Store.current.name) %><br />
       <%= f.text_area :comment, :style => 'height:120px;', :class => 'fullwidth' %>
     </p>
     <% if @comment.user %>
       <%= hidden_field_tag 'comment[user_id]', @comment.user.id %>
     <% else %>
       <p class="field">
-        <%= f.label :cellphone, Spree.t(:commenter_cellphone,:scope=>t_scope) %><br />
+        <%= f.label :cellphone %><br />
         <%= f.text_field :cellphone %>
       </p>
       <p class="field">
-        <%= f.label :email, Spree.t(:commenter_email,:scope=>t_scope) %><br />
+        <%= f.label :email %><br />
         <%= f.text_field :email %>
       </p>
     <% end %>

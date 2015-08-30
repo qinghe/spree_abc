@@ -111,10 +111,11 @@ root:
       margin: 0; padding: 0;
     }
     /* keep input width same with container */
-    #page-wrapper form.fullwidth input[type="text"], #page-wrapper form.fullwidth input[type="password"], #page-wrapper form.fullwidth input[type="phone"], #page-wrapper form.fullwidth input[type="email"], #page-wrapper form.fullwidth input[type="number"], #page-wrapper form.fullwidth input[type="url"]{
+    #page-wrapper form.fullwidth input[type="text"], #page-wrapper form.fullwidth input[type="password"], #page-wrapper form.fullwidth input[type="phone"], #page-wrapper form.fullwidth input[type="email"], #page-wrapper form.fullwidth input[type="number"], #page-wrapper form.fullwidth input[type="url"], #page-wrapper textarea.fullwidth{
       box-sizing: border-box;
       width: 100%;
     }
+
       #page
       { <% font_size = @template.css(:page, html_attribute_ids: [24]) %>
         <% if font_size == 'font_size:10px' %>
