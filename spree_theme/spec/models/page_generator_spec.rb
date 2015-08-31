@@ -2,10 +2,17 @@ require 'spec_helper'
 describe PageTag::PageGenerator do
   before (:each) {
     SpreeTheme.site_class.current = create(:fake_site)
-    @template_theme = create(:published_template_theme)
+    @template_theme = create(:previewable_template_theme)
     #@page_generator = PageTag::PageGenerator.previewer( DefaultTaxon.instance, @template_theme, :controller=>Spree::TemplateThemesController.new)
   }
 
+  context "preview page" do
+    let(:pg) { PageTag::PageGenerator.previewer( DefaultTaxon.instance, @template_theme, :controller=>Spree::TemplateThemesController.new) }
+    it "preview page" do
+      pg
+    end
+
+  end
 
   it "menu section should use default taxon in case no taxon assigned" do
     theme = @template_theme

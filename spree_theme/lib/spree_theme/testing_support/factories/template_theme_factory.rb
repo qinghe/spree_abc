@@ -5,6 +5,9 @@ FactoryGirl.define do
       create( :page_layout, template_theme: theme)
     end
 
+    # template_theme
+    #    page_layout
+    #    template_release
     factory :published_template_theme, class: Spree::TemplateTheme do
       is_public true
       after(:create) do |theme, evaluator|
@@ -18,10 +21,22 @@ FactoryGirl.define do
     name 'tempalte release'
   end
 
-# template_theme
-#      page_layout_root
-#              page_layout_nodes( size=2)
-#                       param_values( size=5, theme_id, page_layout_id )
+  # template_theme
+  #      page_layout_root
+  #          section_root
+  #             section_piece_root
+  factory :previewable_template_theme, class: Spree::TemplateTheme do
+    title 'template theme for preview'
+    after(:create) do |theme, evaluator|
+      create(:page_layout_root, template_theme: theme)
+    end
+  end
+
+
+  # template_theme
+  #      page_layout_root
+  #              page_layout_nodes( size=2)
+  #                       param_values( size=5, theme_id, page_layout_id )
 
   factory :duplicatabl_template_theme, class: Spree::TemplateTheme do
     title 'full template theme'

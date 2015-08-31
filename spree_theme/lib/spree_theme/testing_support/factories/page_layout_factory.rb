@@ -16,4 +16,10 @@ FactoryGirl.define do
     title 'page layout node'
   end
 
+  factory :page_layout_root, class: Spree::PageLayout do
+    association :section, factory: :section_root
+    title 'page layout root'
+  end
+
+
 end
