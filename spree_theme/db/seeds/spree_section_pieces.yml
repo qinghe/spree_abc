@@ -1755,3 +1755,22 @@ container_hmenu_with_vertical_submenu:
       left: 100%;
     }*/
   js: ""
+post_title_with_ellipsis:
+  id: 93
+  title: post title with ellipsis
+  slug: post-title-with-ellipsis
+  is_selectable: "0"
+  is_container: "0"
+  for_terminal: "0"
+  html: |
+    <%= @template.post_attribute( :title )  %>
+  css: |
+    .<%=@template.section_selector%> .inner a{
+      display:inline; /*it has to be inline for overflow:ellipsis*/
+    }
+    .<%=@template.section_selector%> .inner {
+      overflow:hidden;
+      text-overflow:ellipsis;
+      white-space:nowrap;
+    }
+  js: ""
