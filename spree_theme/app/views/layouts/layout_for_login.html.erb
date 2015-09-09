@@ -7,7 +7,7 @@
   <head data-hook="inside_head">
     <%= render :partial => 'spree/shared/head' %>
     <%= stylesheet_link_tag 'spree/backend/all' %>
-    <%= javascript_include_tag :admin_login %>
+    <%= javascript_include_tag 'store/login' %>
   </head>
   <body class="<%= body_class %> admin-login-body" id="<%= @body_id || 'default' %>" data-hook="body">
 
@@ -18,12 +18,12 @@
       <div class="login-container">
           <h2 class="admin-container-title"> <%= Spree.t(:welcome_to_admin_login)%></h2>
           <div data-hook>
-    
+
             <div  class="" data-hook>
               <%= flash_messages %>
               <%= yield %>
             </div>
-    
+
           </div>
       </div>
     </div>
