@@ -545,8 +545,8 @@ module Spree
 
     private
     def fix_special_attributes
-      if store_id == 0
-        self.site_id =  SpreeTheme.site_class.current.id
+      if store.blank? # when test, store_id may be nil
+        self.site_id = SpreeTheme.site_class.current.id
         self.store_id= Spree::Store.current.id
       end
       #fix Attribute was supposed to be a Hash, but was a String

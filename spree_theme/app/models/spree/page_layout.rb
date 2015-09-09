@@ -95,10 +95,6 @@ module Spree
         #|| (some_contexts==[ContextEnum.home]&&target_contexts.include?(ContextEnum.list))
       end
 
-    #theme.document_path use it
-    def site
-      SpreeTheme.site_class.find( self.site_id )
-    end
     # get section css selector, then replace html with new rendered content
     # it is same as TemplateTag/WrappedPageLayout, consider merge them.
     #def section_selector

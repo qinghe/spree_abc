@@ -7,6 +7,12 @@ Spree::Store.class_eval do
   has_many :template_themes, :dependent=>:destroy
   belongs_to :home_page, :foreign_key=>'index_page_id', :class_name=>'Taxon'
 
+
+  # shop's resource should be in this folder
+  def self.document_root
+    File.join(Rails.root,'public')
+  end
+
   def layout
     self.template_theme.present? ? self.template_theme.layout_path : nil
   end
@@ -19,10 +25,10 @@ Spree::Store.class_eval do
   end
 
   def document_path
-    SpreeTheme.site_class.current.document_path
+    self.class.document_root + self.path
   end
 
   def path
-    SpreeTheme.site_class.current.path
+    File.join( File::SEPARATOR + 'shops', Rails.env, self.site_id.to_s )
   end
 end

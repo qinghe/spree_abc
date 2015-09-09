@@ -14,20 +14,6 @@ module SpreeTheme
       def globalsite
         dalianshops
       end
-
-      # shop's resource should be in this folder
-      def document_root
-        File.join(Rails.root,'public')
-      end
-
-    end
-
-    def document_path
-      self.class.document_root + self.path
-    end
-
-    def path
-      File.join( File::SEPARATOR + 'shops', Rails.env, self.id.to_s )
     end
 
     # customer could select a theme when creating site.
