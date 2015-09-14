@@ -1688,6 +1688,9 @@ click_effect_sider:
       .sidr-close{
         float:right;
       }
+      .sidr-close .fa{
+        font-size: 2em;
+      }
       .sidr-overlay{
         display: none;
         position: fixed;
