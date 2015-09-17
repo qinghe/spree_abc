@@ -46,59 +46,56 @@ namespace :spree_theme do
     puts "exported file #{file_path}"
   end
 
-  desc "import theme. params SPREE_REPLACE.
-        path = spree_theme/db/themes/designs/{site_id}_{theme_id}_{time}.json|yml
-        default path=shops/rails_env/shop_id/{site_id}_{theme_id}_{time}.json|yml"
-  task :import_theme , [:site_id,:theme_id,:format, :seed_path] => :environment do |t, args|
-    site_id, theme_id, format, seed_path = args.site_id, args.theme_id, args.format, args.seed_path
-    # rake task require class
-    Spree::ParamValue; Spree::PageLayout; Spree::TemplateFile;Spree::TemplateRelease;
-
-    SpreeTheme.site_class.current = SpreeTheme.site_class.find site_id
-
-    if seed_path=='1'
-      file_path = File.join(SpreeTheme::Engine.root,'db','themes','designs', "#{SpreeTheme.site_class.current.id}_#{theme_id}*.#{format}")
-    else
-      file_path = File.join(SpreeTheme.site_class.current.document_path, "#{SpreeTheme.site_class.current.id}_#{theme_id}*.#{format}")
-    end
-    puts "theme_path = #{file_path}"
-
-    file_path = Dir[file_path].sort.last
-
-    if file_path.end_with? 'json'
-      serialized_data = open( file_path ) do |file|
-          serialized_data = JSON.load(file)
-      end
-      theme_key = File.basename( file_path, ".json" )
-    else
-      serialized_data = open( file_path ) do |file|
-          serialized_data = YAML::load(file)
-      end
-      theme_key = File.basename( file_path, ".yml" )
-    end
-
-    if serialized_data.present?
-      theme = Spree::TemplateTheme.import_into_db(serialized_data, ENV['SPREE_REPLACE'].present?)
-      theme_template_file_path = File.expand_path(theme_key, File.dirname(file_path))
-
-      theme.template_files
-      theme.template_files.each{|template_file|
-        File.open(File.join(theme_template_file_path, template_file.attachment_file_name) ) do|file|
-          template_file.attachment = file
-          template_file.save!
-        end
-      }
-      if theme.template_releases.present?
-        theme.current_template_release = theme.template_releases.last
-        theme.save!
-      end
-      puts "try to release it..."
-     #Rake::Task['spree_theme:release_theme'].execute(theme.id)
-      theme.release({},{:page_only=>true})
-    end
-
-    puts "imported file #{file_path}, imported theme id is #{theme.id}"
-  end
+#  desc "import theme. params SPREE_REPLACE.
+#        path = spree_theme/db/themes/designs/{site_id}_{theme_id}_{time}.json|yml
+#        default path=shops/rails_env/shop_id/{site_id}_{theme_id}_{time}.json|yml"
+#  task :import_theme , [:site_id,:theme_id,:format, :seed_path] => :environment do |t, args|
+#    site_id, theme_id, format, seed_path = args.site_id, args.theme_id, args.format, args.seed_path
+#    # rake task require class
+#    Spree::ParamValue; Spree::PageLayout; Spree::TemplateFile;Spree::TemplateRelease;
+#    SpreeTheme.site_class.current = SpreeTheme.site_class.find site_id
+#    if seed_path=='1'
+#      file_path = File.join(SpreeTheme::Engine.root,'db','themes','designs', "#{SpreeTheme.site_class.current.id}_#{theme_id}*.#{format}")
+#    else
+#      file_path = File.join(SpreeTheme.site_class.current.document_path, "#{SpreeTheme.site_class.current.id}_#{theme_id}*.#{format}")
+#    end
+#    puts "theme_path = #{file_path}"
+#
+#    file_path = Dir[file_path].sort.last
+#
+#    if file_path.end_with? 'json'
+#      serialized_data = open( file_path ) do |file|
+#          serialized_data = JSON.load(file)
+#      end
+#      theme_key = File.basename( file_path, ".json" )
+#    else
+#      serialized_data = open( file_path ) do |file|
+#          serialized_data = YAML::load(file)
+#      end
+#      theme_key = File.basename( file_path, ".yml" )
+#    end
+#
+#    if serialized_data.present?
+#      theme = Spree::TemplateTheme.import_into_db(serialized_data, ENV['SPREE_REPLACE'].present?)
+#      theme_template_file_path = File.expand_path(theme_key, File.dirname(file_path))
+#      theme.template_files
+#      theme.template_files.each{|template_file|
+#        File.open(File.join(theme_template_file_path, template_file.attachment_file_name) ) do|file|
+#          template_file.attachment = file
+#          template_file.save!
+#        end
+#      }
+#      if theme.template_releases.present?
+#        theme.current_template_release = theme.template_releases.last
+#        theme.save!
+#      end
+#      puts "try to release it..."
+#     #Rake::Task['spree_theme:release_theme'].execute(theme.id)
+#      theme.release({},{:page_only=>true})
+#    end
+#
+#    puts "imported file #{file_path}, imported theme id is #{theme.id}"
+#  end
 
   desc "release theme without new template_release, rake spree_theme:release_theme[1]"
   task :release_theme, [:theme_id] =>[ :environment ] do |t, args|

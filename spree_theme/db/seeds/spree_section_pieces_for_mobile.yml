@@ -51,6 +51,18 @@ root_for_mobile:
       { position:relative;
         <%= @template.css :inner %>
       }
+      .clear-block:after {
+        content: ".";
+        display: block;
+        height: 0;
+        clear: both;
+        visibility: hidden;
+        font-size: 0;
+      }
+      .clear-block {
+        display: block;
+      }
+
   js: ""
 bootstrap_container:
   id: 201
