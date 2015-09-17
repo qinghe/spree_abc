@@ -1,6 +1,10 @@
 FactoryGirl.define do
   factory :section, class: Spree::Section do
     association :section_piece, factory: :section_piece
+    after(:create) do |s, evaluator|
+      s.root_id = s.id
+      s.save
+    end
   end
 
   factory :section_container, class: Spree::Section do
