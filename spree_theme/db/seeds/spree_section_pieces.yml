@@ -1230,7 +1230,7 @@ grouped_option_values_selector:
     }
     .option-value.locked,
     .option-value.locked:hover {
-      cursor: default;
+      cursor: not-allowed;
     }
     .option-value.locked img {
       filter:alpha(opacity=50);
@@ -1238,6 +1238,7 @@ grouped_option_values_selector:
       -khtml-opacity: 0.5;
       opacity: 0.5;
     }
+
   js: ""
 option_values_in_slide_style:
   id: 63
