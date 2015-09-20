@@ -180,7 +180,7 @@ namespace :spree_theme do
     end
   end
 
-  # since template_theme.duplicate has problem which cause ParamValue mailefunction
+  # since template_theme.duplicate has problem which cause ParamValue malfunctional
   # we disable template_theme.duplicate, use task instead
   desc "copy theme to new. ex. copy_theme[theme_id]"
   task :copy_theme, [:theme_id] => :environment do |t, args|
