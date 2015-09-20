@@ -45,7 +45,7 @@ zh-CN:
         considered_risky: "风险预警"
         coupon_code: "优惠券号码"
         created_at: "下单日期"
-        email: "电子邮件"
+        email: "电子邮箱"
         ip_address: IP地址
         item_total: "小记"
         number: "订单号"
@@ -657,7 +657,7 @@ zh-CN:
         no_user_or_email_specified:
         no_user_specified:
         not_first_order:
-    email: "电子邮件"
+    email: "电子邮箱"
     empty: "空"
     empty_cart: "清空购物车"
     enable_mail_delivery: "开启邮件发送"
@@ -997,7 +997,7 @@ zh-CN:
     parent_category: 上级分类
     password: "密码"
     password_reset_instructions: 密码重置指南
-    password_reset_instructions_are_mailed: 如何重置密码的步骤已经通过电子邮件发送给您，请检查您的电子邮件。
+    password_reset_instructions_are_mailed: 如何重置密码的步骤已经通过电子邮件发送给您，请检查您的电子邮箱。
     password_reset_token_not_found: 对不起，我们无法找到您的帐号。如果您遇到问题，请尝试从您的电子邮件中重新复制粘铁URL到浏览器中，或者重新进行重置密码的步骤
     password_updated: 密码更新成功
     paste: "粘贴"
