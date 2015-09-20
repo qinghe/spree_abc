@@ -12,7 +12,13 @@ module Spree
       new_template_theme.page_layout_root = duplicate_page_layout( new_template_theme )
       new_template_theme.template_files = duplicate_template_files( new_template_theme )
       new_template_theme.save!
-
+      # page_layout_root is nested_set, it is not same as template_files
+      # new_template_theme.page_layout_root_id is 0.
+      # new_template_theme.save => new_template_theme.page_layout_root.save => new_template_theme.page_layout_root.template_theme.save
+      # so in fact new_template_theme is saved first, then page_layout_root.save ...
+      # even new_template_theme saved and page_layout_root saved
+      # we need to fix new_template_theme.page_layout_root_id
+      new_template_theme.update_attributes!( page_layout_root_id: new_template_theme.page_layout_root.id )
       handle_param_values( new_template_theme )
       handle_template_resources(new_template_theme )
       new_template_theme
@@ -25,6 +31,7 @@ module Spree
       new_template_theme.site_id = SpreeTheme.site_class.current.id
       new_template_theme.store_id = Spree::Store.current.id
       new_template_theme.release_id = 0 # new copied theme should have no release
+      new_template_theme.page_layout_root_id = 0
       new_template_theme
     end
 
@@ -76,7 +83,7 @@ module Spree
       #table_column_values[table_column_values.index('created_at')] = "'#{created_at.utc.to_s(:db)}'" #=>'2014-08-20 02:48:23'
       #copy param value from origin to new.
       sql = %Q!INSERT INTO #{table_name}(#{table_column_names.join(',')}) SELECT #{table_column_values.join(',')} FROM #{table_name} WHERE  (theme_id =#{original_theme_id})!
-      ParamValue.connection.execute(sql)
+      ActiveRecord::Base.connection.execute(sql)
 
       new_page_layout_nodes = new_template_theme.page_layouts
       new_page_layout_nodes.each{|node|

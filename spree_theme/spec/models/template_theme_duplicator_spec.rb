@@ -16,24 +16,39 @@ describe Spree::TemplateThemeDuplicator, :type => :model do
     template_theme.param_values.should be_present
   end
 
-  it "should copy to new" do
-    #pp template_theme
-    #pp template_theme.page_layouts
-    #pp template_theme.param_values
-     original_page_layouts = template_theme.page_layouts
-     duplicated_template = duplicator.duplicate
+  context "duplicated" do
+    it 'has template_theme' do
+      expect{duplicator.duplicate}.to change{Spree::TemplateTheme.count}.by(1)
+    end
 
-     duplicated_template.page_layout_root.should_not eq template_theme.page_layout_root
+    it 'has page_layout_root' do      
+      expect(duplicator.duplicate.page_layout_root).to be_present
+    end
 
-     duplicated_template.page_layouts.size.should eq original_page_layouts.size
-     duplicated_template.param_values.size.should eq template_theme.param_values.size
+    it 'has page_layouts' do
+      page_layout_count = template_theme.page_layouts.count
+      expect{duplicator.duplicate}.to change{Spree::PageLayout.count}.by( page_layout_count )
+    end
 
-     duplicated_template.page_layouts.each_with_index{|pl,index|
-       pl.param_values.size.should eq Spree::PageLayout.find( pl.copy_from_id).param_values.size
-       pl.template_theme_id.should eq duplicated_template.id
-     }
-     duplicated_template.current_template_release.should be_blank
+    it 'has param_values' do
+      param_value_count = template_theme.param_values.count
+      expect{duplicator.duplicate}.to change{Spree::ParamValue.count}.by( param_value_count )
+    end
 
+    it 'has param_values for each page_layout' do
+      duplicated_template = duplicator.duplicate
+      duplicated_template.page_layouts.each_with_index{|pl,index|
+        pl.param_values.size.should eq Spree::PageLayout.find( pl.copy_from_id).param_values.count
+      }
+    end
+
+    it 'has no release' do
+      expect( duplicator.duplicate.current_template_release).to be_nil
+    end
+
+    it 'has_native_layout?' do
+      expect( duplicator.duplicate.has_native_layout?).to be_truthy
+    end
   end
 
   context 'with template files' do

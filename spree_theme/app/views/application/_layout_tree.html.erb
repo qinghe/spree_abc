@@ -8,12 +8,12 @@ selected_id= (options[:selected_id]||layout_root.id )
 <%=form_tag(update_layout_tree_template_theme_path(theme), :id=>"layout_tree_form",:name=>"layout_tree_form", :remote=>true) do %>
 
   <div id='page_layout_tree_inner' class="block">
-  <% for page_layout in layout_root.self_and_descendants%>
+  <% Spree::PageLayout.each_with_level( layout_root.self_and_descendants) { |page_layout, level|%>
     <% assigned_taxons = theme.assigned_resources(SpreeTheme.taxon_class, page_layout)
     %>
   <div class="clear-block">
     <div class="fl">
-    <%=raw("&nbsp;&nbsp;"*page_layout.depth)%>
+    <%=raw("&nbsp;&nbsp;"*level)%>
     <% # do not call form.submit.
       page_layout_class = 'click_editable'
       page_layout_class << ' selected' if page_layout.id==selected_id
@@ -49,7 +49,7 @@ selected_id= (options[:selected_id]||layout_root.id )
       </div>
     <% end %>
   </div>
-  <% end %>
+  <% } %>
   </div>
 <%=hidden_field_tag "selected_section_id" %>
 <%=hidden_field_tag "op" %>

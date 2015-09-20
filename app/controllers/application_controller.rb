@@ -18,6 +18,8 @@ class ApplicationController < ActionController::Base
         type.html { render :status => :not_found, :file    => "#{::Rails.root}/public/404", :formats => [:html], :layout => nil}
         type.all  { render :status => :not_found, :nothing => true }
       end
+    else
+      raise e
     end
 
   end

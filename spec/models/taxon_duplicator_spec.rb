@@ -37,7 +37,7 @@ describe Spree::Taxon do
       end
 
       it "should copy taxonomy to current site" do
-        expect{copied_taxon}.to change{Spree::Taxon.count}.by(4)
+        expect{copied_taxon}.to change{ Spree::Taxon.count }.by(12)
       end
 
       it "should clone branch with icon" do
@@ -53,15 +53,25 @@ describe Spree::Taxon do
     new_taxon.site.should eq Spree::Site.current
   end
 
+  context "clone branch" do
+    it "should clone taxons " do
+      expect{@root_taxon.clone_branch.save!}.to change{Spree::Taxon.count}.by( 12 )
+    end
 
-  it "should clone taxons " do
-    expect{@root_taxon.clone_branch.save!}.to change{Spree::Taxon.count}.by(4)
+    it "should clone taxons with same depth" do
+      cloned_branch = @root_taxon.clone_branch
+      cloned_branch.save!
+      @root_taxon.self_and_descendants.each_with_index{|original, i|
+        cloned = cloned_branch.self_and_descendants[i]
+#Rails.logger.debug "---- node.depth #{original.depth} #{original.permalink}, original.depth#{ cloned.depth } #{cloned.permalink} --------"
+        expect( original.depth).to eq cloned.depth
+      }
+    end
+
+    it "should clone taxonomy " do
+      expect{@root_taxon.clone_branch.save!}.to change{Spree::Taxonomy.count}.by(1)
+    end
   end
-
-  it "should clone taxonomy " do
-    expect{@root_taxon.clone_branch.save!}.to change{Spree::Taxonomy.count}.by(1)
-  end
-
 #  it "should copy with icon" do
 #    Spree::Site.current = Spree::Site.find 2
 #    taxon = Spree::Taxon.roots.first

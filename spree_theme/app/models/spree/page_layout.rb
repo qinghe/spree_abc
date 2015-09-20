@@ -4,7 +4,8 @@ module Spree
   class PageLayout < ActiveRecord::Base
     #extend FriendlyId
     include Spree::Context::Base
-    acts_as_nested_set :scope=>['template_theme_id' ]# scope is for :copy, no need to modify parent_id, lft, rgt.
+    # depth is massed up while duplicate full set. so we disable it here.
+    acts_as_nested_set :scope=>['template_theme_id' ], :depth_column=>'notallowed'# scope is for :copy, no need to modify parent_id, lft, rgt.
     belongs_to :section
     belongs_to :template_theme, :class_name =>'Spree::TemplateTheme'
     # has_many :themes, :class_name => "TemplateTheme",:primary_key=>:root_id,:foreign_key=>:page_layout_root_id
