@@ -195,7 +195,11 @@ container:
   css: |-
     /* width,height, skinnables */
     .<%=@template.section_selector%>
-    { float:left; padding:0;  margin:0 auto; /* overflow:hidden; inner has hidden,it is useless */
+    { float:left; padding:0;  margin:0 auto;
+      overflow:hidden;
+      /* overflow is required for centered block float:none, margin: auto.
+       * http://yuiblog.com/blog/2010/05/19/css-101-block-formatting-contexts/
+       */
       position:relative;
       <%=@template.css(:block)%>
     }
