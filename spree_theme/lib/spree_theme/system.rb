@@ -70,7 +70,7 @@ module SpreeTheme
       @client_info = ClientInfo.new( :is_mobile => mobile?, :is_preview=>@is_designer)
 
       # user could select theme to view in editor.
-      if website.designable?
+      if @is_designer
         #get template from query string
         if params[:action]=='preview' && params[:id].present?
           @theme = Spree::TemplateTheme.find( params[:id] )
