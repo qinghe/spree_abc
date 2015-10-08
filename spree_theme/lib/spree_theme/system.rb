@@ -69,8 +69,10 @@ module SpreeTheme
 
       @client_info = ClientInfo.new( :is_mobile => mobile?, :is_preview=>@is_designer)
 
+      #current_user.is_designer means he could design template_theme.
+      #current_site.designable means current user could preview published template_theme
       # user could select theme to view in editor.
-      if @is_designer
+      if  website.designable?
         #get template from query string
         if params[:action]=='preview' && params[:id].present?
           @theme = Spree::TemplateTheme.find( params[:id] )
