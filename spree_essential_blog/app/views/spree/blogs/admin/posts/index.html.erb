@@ -18,7 +18,7 @@
     <%= search_form_for [:admin, @search] do |f| %>
 
         <div data-hook="admin_posts_index_search">
-          <div class="alpha nine columns">
+          <div class=" sixteen columns">
             <div class="field">
             <%= f.label :title_cont, Spree.t("title") %><br />
             <%= f.text_field :title_cont, :size => 25 %>
@@ -46,7 +46,7 @@
        <col style="width: 16%;">
        <col style="width: 8%;">
        <col style="width: 12%;">
-    </colgroup>    
+    </colgroup>
   <thead>
 	<tr>
     	<th colspan="2"><%= sort_link @search, :title, Spree.t("title") %></th>
@@ -79,4 +79,3 @@
 <% end %>
 
 <%= paginate @collection %>
-

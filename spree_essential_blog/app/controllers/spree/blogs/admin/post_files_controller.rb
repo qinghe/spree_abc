@@ -1,5 +1,5 @@
-class Spree::Blogs::Admin::PostImagesController < Spree::Admin::ResourceController
-  
+class Spree::Blogs::Admin::PostFilesController < Spree::Admin::ResourceController
+
   before_filter :load_data
 
   create.before :set_viewable
@@ -8,30 +8,30 @@ class Spree::Blogs::Admin::PostImagesController < Spree::Admin::ResourceControll
 
   def update_positions
     params[:positions].each do |id, index|
-      Spree::PostImage.update_all(['position=?', index], ['id=?', id])
+      Spree::PostFile.update_all(['position=?', index], ['id=?', id])
     end
 
     respond_to do |format|
       format.js  { render :text => 'Ok' }
     end
   end
-  
+
   private
-  
+
   def location_after_save
-    admin_post_images_url(@post)
+    admin_post_files_url(@post)
   end
 
   def load_data
-    @post = Spree::Post.find_by_path(params[:post_id])
+    @post = Spree::Post.find_by_permalink!(params[:post_id])
   end
 
   def set_viewable
-    @post_image.viewable = @post
+    @post_file.viewable = @post
   end
 
   def destroy_before
-    @viewable = @post_image.viewable
+    @viewable = @post_file.viewable
   end
 
 end

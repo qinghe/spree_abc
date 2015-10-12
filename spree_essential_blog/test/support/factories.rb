@@ -17,7 +17,7 @@ FactoryGirl.define do
     name  "Jellies"
   end
   
-  factory :spree_post_image, :class => Spree::PostImage do
+  factory :spree_post_file, :class => Spree::PostFile do
     viewable { Spree::Post.first }
     attachment { sample_image }
   end

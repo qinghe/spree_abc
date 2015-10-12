@@ -24,12 +24,15 @@ zh-CN:
       spree/post:
         one: 文章
         other: 文章
+      spree/post_file:
+        one: 文件
+        other: 文件
 
   spree:
     back_to_post_list: 回到文章列表
     post_list: 文章列表
     new_post: 新建文章
-    edit_post: 编辑文章  
+    edit_post: 编辑文章
     admin:
       tab:
         posts: 文章
@@ -41,10 +44,10 @@ zh-CN:
       post:
         index:
           post_list: 文章列表
-        new: 
+        new:
           new_post: 新建文章
         edit:
-          edit_post: 编辑文章  
+          edit_post: 编辑文章
       post_products:
         index:
           add_related_product: Add Related Products
@@ -61,7 +64,10 @@ zh-CN:
     home:
       title: Recent Posts
     archive: Blog Archive
+    files: 文件
+    new_post_file: 新建文件
     no_posts: No posts found!
+    no_post_files_found: 找不到任何文件!
     posts: 文章
     post:
       index:
@@ -74,6 +80,8 @@ zh-CN:
         back_to_posts: "Back to the blog"
       show:
         tagged: Tagged
+    post_details: 文章详细
+    post_files: 文件
     settings:
       blogs: Manage Blogs
       explain_blogs: Add or Edit Blogs for posts.

@@ -5,18 +5,18 @@
 <% end %>
 
 <div class="clearfix" >
-    <div class="eight columns alpha">
+    <div class="six columns alpha">
     <%= form.field_container :author do %>
       <%= form.label :author %><br />
-      <%= form.text_field :author, :class => 'datetime fullwidth' %>      
+      <%= form.text_field :author, :class => 'datetime fullwidth' %>
       <%= error_message_on :post, :author %>
     <% end %>
     </div>
-    
-    <div class="eight columns omega">
+
+    <div class="six columns omega">
     <%= form.field_container :posted_at do %>
       <%= form.label :posted_at %><br />
-      <%= form.text_field :posted_at, :class => 'datetime fullwidth' %>      
+      <%= form.text_field :posted_at, :class => 'datetime fullwidth' %>
       <%= error_message_on :post, :posted_at %>
     <% end %>
     </div>
@@ -27,7 +27,7 @@
   <%= form.file_field :cover %>
   <%= error_message_on :post, :cover %>
 <% end %>
-    
+
 <%= form.field_container :body do %>
   <%= form.label :body %><br />
   <%= form.text_area :body, :class => 'fullwidth'  %>
@@ -58,8 +58,7 @@
     <%= form.text_field :meta_description, :class => 'fullwidth' %>
   <% end %>
 </div>
-    
+
 <%= form.field_container :live do %>
   <%= form.check_box :live  %> <%= form.label :live %><br />
 <% end %>
-

@@ -1,0 +1,17 @@
+<%= render :partial => 'spree/blogs/admin/shared/post_tabs', :locals => {:current => "Post Files"} unless request.xhr? %>
+
+<%= render 'spree/shared/error_messages', :target => @post_file %>
+
+<%= form_for(@post_file, :url => admin_post_files_path(@post), :html => { :multipart => true }) do |f| %>
+  <fieldset data-hook="new_image">
+    <legend align="center"><%= Spree.t(:new_post_file) %></legend>
+    <%= render :partial => 'form', :locals => { :f => f } %>
+
+    <div class="form-buttons filter-actions actions" data-hook="buttons">
+      <%= button Spree.t('actions.update'), 'refresh' %>
+      <span class="or"><%= Spree.t(:or) %></span>
+      <%= link_to_with_icon 'remove', Spree.t('actions.cancel'), admin_post_files_url(@post), :id => 'cancel_link', :class => 'button' %>
+    </div>
+  </fieldset>
+
+<% end %>
