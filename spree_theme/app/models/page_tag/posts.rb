@@ -3,23 +3,23 @@ module PageTag
   # key is data_source name, value is proper blog_posts_tag
   #      self.blog_posts_tags_cache = {}
   class Posts < ModelCollection
-    
+
     class WrappedPost < WrappedModel
-      self.accessable_attributes=[:id, :title, :body, :posted_at, :cover, :summary, :author]
+      self.accessable_attributes=[:id, :title, :body, :posted_at, :cover, :summary, :author, :files]
       delegate *self.accessable_attributes, :to => :model
-      
-      
+
+
       def path
         "/post"+ collection_tag.wrapped_taxon.partial_path + "/#{model.id}-#{model.permalink}"
-      end     
-    end  
-    
-    
+      end
+    end
+
+
     def wrapped_models
-      return @wrapped_models if @wrapped_models      
+      return @wrapped_models if @wrapped_models
       @wrapped_models = models.collect{|model|  WrappedPost.new(self, model) }
     end
-        
+
 
     # means the current select blog post in erubis context.
     #def current
@@ -28,6 +28,6 @@ module PageTag
     #  end
     #  @current
     #end
-     
+
   end
 end

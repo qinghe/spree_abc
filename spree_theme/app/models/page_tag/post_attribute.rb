@@ -26,7 +26,7 @@ module PageTag
             attribute_value + content_tag(:a, "[#{Spree.t(:detail)}]", html_options)
           elsif attribute_name == :file
             #file is downloadable
-            content_tag(:a, wrapped_post.title, { href: post_file.attachment.url, title: attribute_value })
+            content_tag(:a, post_file.alt.present? ? post_file.alt : wrapped_post.title, { href: post_file.attachment.url, title: attribute_value })
           else
             content_tag(:a, attribute_value, html_options)
           end
@@ -48,7 +48,7 @@ module PageTag
 
 
     def post_file
-      options[:file] || wrapped_post.model.files.first
+      options[:file] || wrapped_post.files.first
     end
 
   end
