@@ -285,110 +285,21 @@ module PageTag
       else
         page = (self.running_data_item_by_class( Menus::WrappedMenu ) || self.current_page_tag)
       end
-      attribute_value = case attribute_name
-        when :icon
-          if page.icon.present?
-            tag('img', :src=>page.icon.url(:original), :u=>'image', :alt=>page.name, :class=>"img-responsive" )
-          else
-            ''
-          end
-        when :summary
-          page.send attribute_name, self.current_piece.truncate_at
-        when :more # it is same as clickable page name
-          Spree.t('more')
-        when :root_name
-          page.name
-        else
-          page.send attribute_name
-      end
-      if self.current_piece.clickable? || attribute_name==:more
-        html_options = page.extra_html_attributes
-        html_options[:href] ||= page.path
-        if attribute_name == :summary
-          attribute_value << content_tag(:a, "[#{Spree.t(:detail)}]", html_options)
-        else
-          content_tag(:a, attribute_value, html_options)
-        end
-      elsif attribute_name==:name
-        # make it as link anchor,  wrapped with span, css text-* applicable
-        content_tag :span, attribute_value, {:id=>"p_#{self.current_piece.id}_#{page.id}"}
-      else
-        attribute_value
-      end
+      PageAttribute.new( current_piece, page ).get( attribute_name )
     end
 
     # * params
     #   * attribute_name - symbol :name, :image, :thumbnail
     def product_attribute( attribute_name, options = { } )
-      wrapped_product = (self.running_data_item_by_class( Products::WrappedProduct ) )
-      if wrapped_product
-        attribute_value = case attribute_name
-          when :name
-            # make it as link anchor
-            content_tag :span, wrapped_product.name, {:id=>"p_#{self.current_piece.id}_#{wrapped_product.id}"}
-          when :image
-            product_image( wrapped_product, options[:image] )
-          when :thumbnail
-            i = options[:image]
-            content_tag(:a, create_product_image_tag( i, wrapped_product, {}, current_piece.get_content_param_by_key(:thumbnail_style)),
-            #image_tag(i.attachment.url( current_piece.get_content_param_by_key(:thumbnail_style))),
-                         { href: i.attachment.url( current_piece.get_content_param_by_key(:main_image_style)) }
-                         )
-          else
-            wrapped_product.send attribute_name
-          end
-        if attribute_name== :image && self.current_piece.is_zoomable_image?
-          # main image
-          # wrap with a, image-zoom required
-          # content_tag(:a, attribute_value, { class: 'image-zoom' })
-          attribute_value
-        elsif self.current_piece.clickable?
-          content_tag(:a, attribute_value, { href: wrapped_product.path })
-        else
-          attribute_value
-        end
-      end
+      wrapped_model = (self.running_data_item_by_class( Products::WrappedProduct ) )
+      ProductAttribute.new( current_piece, wrapped_model, options ).get( attribute_name )  if wrapped_model
     end
 
-    def post_attribute(  attribute_name )
-      wrapped_post = (self.running_data_item_by_class( Posts::WrappedPost ))
-      if wrapped_post
-        attribute_value = case attribute_name
-          when :cover
-            style = current_piece.get_content_param_by_key(:main_image_style)
-            if wrapped_post.cover.present?
-              tag('img', :src=>wrapped_post.cover.url(style), :u=>'image', :alt=>'post image', :class=>"img-responsive" )
-            else
-              image_tag "noimage/post_#{style}.png", { :alt=>'missing image', :class=>"img-responsive" }
-            end
-          when :summary
-            wrapped_post.send attribute_name, self.current_piece.truncate_at
-          else
-            wrapped_post.send attribute_name
-          end
-
-        if self.current_piece.clickable?
-          html_options = { href: wrapped_post.path }
-          if attribute_name == :summary
-            attribute_value + content_tag(:a, "[#{Spree.t(:detail)}]", html_options)
-          else
-            content_tag(:a, attribute_value, html_options)
-          end
-        elsif attribute_name == :title
-          # make it as link anchor
-          content_tag :span, attribute_value, {:id=>"p_#{self.current_piece.id}_#{wrapped_post.id}"}
-        elsif attribute_name == :posted_at
-          case self.current_piece.datetime_style
-            when :date
-              pretty_date attribute_value
-            else
-              pretty_datetime attribute_value
-          end
-
-        else
-          attribute_value
-        end
-      end
+    # * params
+    #   * options - file, get specified file of post
+    def post_attribute(  attribute_name, options = { }  )
+      wrapped_model = (self.running_data_item_by_class( Posts::WrappedPost ))
+      PostAttribute.new( current_piece, wrapped_model, options ).get( attribute_name )  if wrapped_model
     end
 
     def site_attribute( attribute_name )
@@ -510,66 +421,8 @@ module PageTag
       running_data_items.select{|item| item.is_a? klass }.last
     end
 
-    private
-    def create_product_image_tag( image, product, options, style)
-      #Rails.logger.debug " image = #{image} product = #{product}, options= #{options}, style=#{style}"
-      options.reverse_merge! alt: image.alt.blank? ? product.name : image.alt
-      # data-big-image for jqzoom, large=600x600
-      options.merge!  'data' => { 'big-image'=> image.attachment.url(:large) }
-      image_tag( image.attachment.url(style), options )
-    end
-    # copy from BaseHelper#define_image_method
-    def product_image_by_spree(product, style, options = {})
-        if product.images.empty?
-          if !product.is_a?(Spree::Variant) && !product.variant_images.empty?
-            create_product_image_tag(product.variant_images.first, product, options, style)
-          else
-            if product.is_a?(Spree::Variant) && !product.product.variant_images.empty?
-              create_product_image_tag(product.product.variant_images.first, product, options, style)
-            else
-              #seems assets digest do not support template .ruby
-              #image_tag "noimage/#{style}.png", options
-              options.merge!  'data' => { 'big-image'=> "noimage/large.png" } #zoomable required
-              image_tag "noimage/#{style}.png", options
-            end
-          end
-        else
-          create_product_image_tag(product.images.first, product, options, style)
-        end
-    end
 
-    # * params
-    #   * options - available keys for image_tag
-    #   * specified_image - show this image
-    def product_image(wrapped_product, specified_image = nil, options = {})
-      product = wrapped_product.model
-      Spree::MultiSiteSystem.with_context_site_product_images{
-        main_image_style = current_piece.get_content_param_by_key(:main_image_style)
-        main_image_position = current_piece.get_content_param_by_key(:main_image_position)
-        options.merge! itemprop: "image"
-        # only main image have title 'click to get lightbox'
-        if current_piece.lightboxable?
-          options.merge!  title: I18n.t( "theme.product_image.lightboxable")
-        end
 
-        if specified_image
-          # mainly for feature product image slider
-          create_product_image_tag( specified_image, product, options, main_image_style)
-        elsif main_image_position>0
-          if product.images[main_image_position].present?
-            create_product_image_tag(product.images[main_image_position], product, options, main_image_style)
-          end
-        else
-          product_image_by_spree( product, main_image_style, options)
-        end
-      }
-    end
 
-    def pretty_datetime(time)
-      [I18n.l(time.to_date, format: :long), time.strftime("%l:%M %p")].join(" ")
-    end
-    def pretty_date(time)
-      I18n.l(time.to_date, format: :long)
-    end
   end
 end

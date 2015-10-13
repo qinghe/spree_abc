@@ -32,8 +32,8 @@
         <td class="no-border">
           <span class="handle"></span>
         </td>
-        <td> <%= link_to(image_tag(image.url_thumb), image.attachment.url(:large)) %></td>
-        <td><%= image.alt %></td>
+        <td> <%= link_to(image_tag(image.url_thumb), image.attachment.url ) %> </td>
+        <td> <%= image.alt %> </td>
         <td class="actions">
             <%= link_to_with_icon('edit', Spree.t("edit"), edit_admin_post_file_url(@post, image), :no_text => true, :data => {:action => 'edit'}) %>
             &nbsp;

@@ -4,6 +4,10 @@ def load_section_piece
   records.values.each{|row|
       Spree::SectionPiece.connection.insert_fixture(row, Spree::SectionPiece.table_name)
   }
+  records = YAML.load_file(File.join(File.dirname(__FILE__),'spree_section_pieces2.yml'))
+  records.values.each{|row|
+      Spree::SectionPiece.connection.insert_fixture(row, Spree::SectionPiece.table_name)
+  }
   records = YAML.load_file(File.join(File.dirname(__FILE__),'spree_section_pieces_for_mobile.yml'))
   records.values.each{|row|
       Spree::SectionPiece.connection.insert_fixture(row, Spree::SectionPiece.table_name)

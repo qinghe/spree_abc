@@ -1,0 +1,22 @@
+post_files:
+  id: 100
+  title: post files
+  slug: post-files
+  is_selectable: "0"
+  is_container: "0"
+  for_terminal: "0"
+  html: |
+    <div  data-hook="post_images" >
+    <% if post.files.any? %>
+      <ul class="" data-hook>
+        <% post.files.each do |i| %>
+          <li class='tmb-all tmb-<%= i.viewable.id %>'>
+            <%= @template.post_attribute( :file, file: i ) %>
+          </li>
+        <% end %>
+      </ul>
+    <% end %>
+    </div>
+  css: |
+    ''
+  js: ""
