@@ -1064,7 +1064,9 @@ slider:
       <%# jssor require with,height in element style. %>
       <div u="slides" style="position: absolute;overflow:hidden;" >
         <% @template.menu.children.each{|page| %>
-          <div><%= image_tag page.icon.url(:original), :u=>'image', :alt=>page.name %></div>
+          <div>
+            <%= link_to_if @template.current_piece.clickable?, image_tag( page.icon.url(:original), :u=>'image', :alt=>page.name), page.path %>
+          </div>
         <% } %>
       </div>
         <!-- Bullet Navigator Skin Begin -->
