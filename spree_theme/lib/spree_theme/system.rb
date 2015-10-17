@@ -136,6 +136,13 @@ module SpreeTheme
 
       # site has a released theme
       if @theme.present?
+        #support feature is_public
+        unless website.is_public?
+          #if it is not public, only admin could preview template_theme.
+          unless try_spree_current_user
+            redirect_to :under_construction
+          end
+        end
 
         if mobile? && @theme.mobile
           @theme = @theme.mobile
