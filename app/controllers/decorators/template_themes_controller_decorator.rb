@@ -3,6 +3,11 @@ Spree::Admin::TemplateThemesController.class_eval do
   #               in this way, it is simpler for user, click 'buy', done.
   def import
     imported_theme = @template_theme.import_with_resource( )
+    if  @template_theme.mobile.present?
+      imported_mobile_theme = @template_theme.mobile.import_with_resource( )
+      imported_mobile_theme.update_attribute(:master_id, imported_theme.id)
+    end
+
     if imported_theme.present?
       if imported_theme.store.template_themes.count == 1
         imported_theme.store.apply_theme imported_theme

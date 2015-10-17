@@ -19,7 +19,7 @@ module Spree
     #
     def import_with_resource( new_attributes={})
       Spree::TemplateTheme.transaction do
-        new_theme = import( new_attributes )        
+        new_theme = import( new_attributes )
         duplicate_assigned_resource( new_theme )
         new_theme
       end
@@ -29,9 +29,8 @@ module Spree
     def duplicate_template_theme( new_attributes )
       #import template theme design into current site
       #only create template record, do not copy param_value,page_layout,template_file...
-      # * params
-      #   * resource_config - new configuration for resource
-        raise ArgumentError unless original_template_theme.template_releases.exists? && original_template_theme.is_public?
+      #mobile template is unpublic, it should be duplicatable
+        raise ArgumentError unless original_template_theme.template_releases.exists?
         #only released template and :is_public is importable
         #create theme record
         new_theme = original_template_theme.dup
