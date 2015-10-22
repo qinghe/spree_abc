@@ -90,7 +90,7 @@ module Spree
       end
 
       #is it a home page?
-      def page_home?
+      def home?
         page_context == 1
       end
 

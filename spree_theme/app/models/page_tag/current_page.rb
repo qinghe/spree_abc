@@ -36,7 +36,9 @@ module PageTag
 
     #title is current page title,  resource.title-page.title-website.title
     def title
-      if detail_page?
+      if home?
+        website.name
+      elsif detail_page?
         "#{resource.name} - #{page.name} - #{website.name}"
       else
         "#{page.name} - #{website.name}"

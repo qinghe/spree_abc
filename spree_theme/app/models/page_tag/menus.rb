@@ -1,7 +1,7 @@
 module PageTag
   class Menus < Base
     class WrappedMenu < WrappedModel
-      self.accessable_attributes=[:id, :name, :icon, :summary, :path, :permalink, :tooltips, :is_clickable?, :page_home?,:depth, :leaf?,:root?,:persisted?, :extra_html_attributes, :description, :replaced_by ]
+      self.accessable_attributes=[:id, :name, :icon, :summary, :path, :permalink, :tooltips, :is_clickable?, :home?,:depth, :leaf?,:root?,:persisted?, :extra_html_attributes, :description, :replaced_by ]
       delegate *self.accessable_attributes, :to => :model
       delegate :taxonomy, :root, :to => :model
       
@@ -62,7 +62,7 @@ module PageTag
       
       def partial_path
         # menu.id would be nil if it is class DefaultTaxon    
-        if( model.persisted? && !model.page_home? )    
+        if( model.persisted? && !model.home? )    
           path
         else
           # in case default home page show all products,

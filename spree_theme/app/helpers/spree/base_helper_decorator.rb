@@ -30,7 +30,7 @@ module Spree
 
     def breadcrumbs(current_page_tag, separator="&nbsp;&raquo;&nbsp;")
       # current_page_tag is nil in page /unauthorized
-      return "" if current_page?("/") || current_page_tag.nil? ||current_page_tag.page_home?
+      return "" if current_page?("/") || current_page_tag.nil? ||current_page_tag.home?
       separator = raw(separator)
       crumbs = [content_tag(:li, link_to(Spree.t(:home), spree.root_path) + separator)]
       if current_page_tag
