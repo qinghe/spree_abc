@@ -40,7 +40,7 @@ SpreeAbc::Application.configure do
   config.cache_store = :memory_store
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server
-  config.action_controller.asset_host = "http://aliasscdn.firecart.cn"
+  config.action_controller.asset_host = "http://aliasscdn.getstore.cn"
 
   # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
   config.assets.precompile += %w( html5shiv.js )
@@ -73,12 +73,12 @@ SpreeAbc::Application.configure do
       data_centre: 'beijing',
       # 使用自定义域名，设定此项，carrierwave 返回的 URL 将会用自定义域名
       # 自定于域名请 CNAME 到 you_bucket_name.oss.aliyuncs.com (you_bucket_name 是你的 bucket 的名称)
-      oss_host: "aliimg.firecart.cn",  # aliyun oss host
-      img_host: "aliimg2.firecart.cn",  # aliyun image service host
+      oss_host: "aliimg.getstore.cn",  # aliyun oss host
+      img_host: "aliimg2.getstore.cn",  # aliyun image service host
       # 如果有需要，你可以自己定义上传 host, 比如阿里内部的上传地址和 Aliyun OSS 对外的不同，可以在这里定义，没有需要可以不用配置
       upload_host: "aliimg.oss-cn-beijing-internal.aliyuncs.com"
     }
   }
-  config.spree_multi_site.system_top_domain = 'firecart.cn'
+  config.spree_multi_site.system_top_domain = 'getstore.cn'
 end
 Paperclip.options[:command_path] = "/usr/local/bin/"
