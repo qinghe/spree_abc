@@ -175,7 +175,7 @@ module SpreeTheme
       end
     end
 
-    def prepare_params_for_editors(theme,editor=nil,page_layout = nil)
+    def prepare_params_for_editors(theme,editor=nil,page_layout = nil, template_query_medium = nil)
         @editors = Spree::Editor.all
         @param_values_for_editors = Array.new(@editors.size){|i| []}
         editor_ids = @editors.collect{|e|e.id}
@@ -195,7 +195,8 @@ module SpreeTheme
         @theme =  theme
         @editor = editor
         @editor ||= @editors.first
-
+        @template_query_medium = template_query_medium
+        @template_query_medium ||= theme.template_query_media.first
         @page_layout = page_layout #current selected page_layout, the node of the layout tree.
         @sections = Spree::Section.where(:is_enabled=>true).order("title").roots
         #template selection, include mobile

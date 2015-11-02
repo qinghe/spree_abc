@@ -6,7 +6,9 @@
 # method of this form should be 'get', every time user click a section, get_param_values belong to the section.
 %>
 <%= form_tag(get_param_values_template_theme_path(@theme), { :remote=>true, :method=>'post', 'data-type'=>'script', :id=>"layout_editor_form",:name=>"layout_editor_form"}) do %>
-
+    <div class="fr" style="padding: 0 40px;">
+      <%= select_tag( :query_medium_id, options_from_collection_for_select( @theme.query_media,:id, :name) ) if @theme.query_media.present? %>
+    </div>
     <ul class="tabs block_header clear-block">
     <% for tab in @editors%>
       <li data-id="<%=tab.id%>">
@@ -18,24 +20,22 @@
  %>
  <div>
 <% @editors.each_index{ |idx|%>
-  <div style="<%= 'display:none' if @editors[idx]!=@editor %>">    
+  <div style="<%= 'display:none' if @editors[idx]!=@editor %>">
   <%# render :partial=>"editor", :locals => {:editor=>@editors[idx], :param_values=>@param_values_for_editors[idx]}%>
   <%=raw partial_editor( @editors[idx], @param_values_for_editors[idx]) %>
   </div>
 <%}%>
  </div>
-<%# put these hidden fields here, refresh this form while update editors 
+<%# put these hidden fields here, refresh this form while update editors
 %>
 <%=hidden_field_tag "selected_page_layout_id", @page_layout.id %>
 <%=hidden_field_tag "selected_theme_id", @theme.id %>
 <%=hidden_field_tag "selected_editor_id", @editor.id %>
 
-<%# set these hidden fields while a paramvalue just changed. 
+<%# set these hidden fields while a paramvalue just changed.
 %>
 <%=hidden_field_tag "editing_param_value_id" %>
 <%=hidden_field_tag "editing_html_attribute_id" %>
 <%=hidden_field_tag "param_value_event" %>
 
 <% end%>
-
-
