@@ -8,6 +8,10 @@ module Spree
     belongs_to :template_theme, :foreign_key=>"theme_id"
 
     serialize :pvalue, Hash
+    #serialize :pvalue1, Hash
+    #serialize :pvalue2, Hash
+    #serialize :pvalue3, Hash
+
     before_update :collect_events # skip create
     after_update :trigger_events
 

@@ -7,11 +7,11 @@ module Spree
     # create an instance from a string it is param_value.pvalue[html_attribute_id]
     # create an instance from hash {pvalue0, psvalue0, unit0}
     # params: computed, html_attribute_id is in section_piece_param.computed_ha_ids.
-    def self.parse_from(param_value, html_attribute, pvalue_properties={}, computed = false)
+    def self.parse_from(param_value, html_attribute, pvalue_properties={}, media_width = 0)
 
       if pvalue_properties.empty?
         #pvalue_string could be nil,  in this case, get default_pvalue_string?
-        pvalue_properties = do_parse(param_value, html_attribute)
+        pvalue_properties = do_parse(param_value, html_attribute, media_width)
       else
         # build htmlAttributeValue instane from postd params, we need check "unset" param, set to false if it is nil.
         # tidy posted pvalue_properties, only keep valid values.
@@ -48,7 +48,7 @@ module Spree
     end
 
     #every html_attribute_value, should have defalut value, or pvalue is nil after unset
-    def self.do_parse(param_value, html_attribute)
+    def self.do_parse(param_value, html_attribute, media_width)
       #use html attribute value in param_value.pvalue
       pvalue_string = param_value.pvalue_for_haid(html_attribute.id)
       pvalue_unset = param_value.html_attribute_extra(html_attribute.id,'unset')

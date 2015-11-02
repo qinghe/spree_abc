@@ -115,11 +115,10 @@ objs=[
   {"id"=>114, "title"=>"background-repeat", "pvalues"=>"repeat-x,no-repeat", "pvalues_desc"=>"Repeat-x,No-repeat", "punits"=>"", "neg_ok"=>false, "default_value"=>-1, "pvspecial"=>"", "css_name"=>"background-repeat"},
   {"id"=>115, "title"=>"composite", "pvalues"=>"", "pvalues_desc"=>"", "punits"=>"", "neg_ok"=>false, "default_value"=>-1, "pvspecial"=>"", "css_name"=>"composite"},
   {"id"=>116, "title"=>"sitemap_view_style", "pvalues"=>"1,0", "pvalues_desc"=>"1,0", "punits"=>"", "neg_ok"=>false, "default_value"=>-1, "pvspecial"=>"", "css_name"=>"sitemap_view_style"},
-  {"id"=>117, "title"=>"composite", "pvalues"=>"1809,1810,1811,1812,1813", "pvalues_desc"=>"1809,1810,1811,1812,1813", "punits"=>"", "neg_ok"=>false, "default_value"=>1, "pvspecial"=>"", "css_name"=>"composite"}]
+  {"id"=>117, "title"=>"background-size", "pvalues"=>"auto|auto,cover|cover,contain|contain,l1|l1", "pvalues_desc"=>"auto|auto,cover|cover,contain|contain,l1|l1", "punits"=>"l,%", "neg_ok"=>false, "default_value"=>1, "pvspecial"=>"hv", "css_name"=>"background-size"}]
 
-Spree::HtmlAttribute.delete_all              
+Spree::HtmlAttribute.delete_all
 for ha in objs
   ha[:slug] = nil # 5.0, it has to be nil to generate new
   obj = Spree::HtmlAttribute.create!( ha )
 end
-                
