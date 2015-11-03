@@ -7,7 +7,7 @@ objs=[
   {"id"=>5, "position"=>6, "is_enabled"=>true, "editor_id"=>0, "slug"=>"dialog_content" },
   {"id"=>6, "position"=>9, "is_enabled"=>true, "editor_id"=>0, "slug"=>"title" }, #header3
   {"id"=>7, "position"=>2, "is_enabled"=>true, "editor_id"=>0, "slug"=>"fixed_position" },
-  {"id"=>9, "position"=>7, "is_enabled"=>true, "editor_id"=>0, "slug"=>"sider" }, 
+  {"id"=>9, "position"=>7, "is_enabled"=>true, "editor_id"=>0, "slug"=>"sider" },
   {"id"=>10, "position"=>10, "is_enabled"=>true, "editor_id"=>0, "slug"=>"header0" }, #header0
   # a
   {"id"=>11, "position"=>11, "is_enabled"=>true, "editor_id"=>4, "slug"=>"link" },
@@ -54,6 +54,11 @@ objs=[
   {"id"=>92, "position"=>92, "is_enabled"=>true, "editor_id"=>0, "slug"=>"last_child" },
   # hovered on hover-effect-expansion-container
   {"id"=>101, "position"=>101, "is_enabled"=>true, "editor_id"=>0, "slug"=>"hovered" },
+  # query media background
+  {"id"=>1051, "position"=>1051, "is_enabled"=>true, "editor_id"=>0, "slug"=>"background1" },
+  {"id"=>1052, "position"=>1052, "is_enabled"=>true, "editor_id"=>0, "slug"=>"background2" },
+  {"id"=>1053, "position"=>1053, "is_enabled"=>true, "editor_id"=>0, "slug"=>"background3" },
+
   ]
 
 Spree::ParamCategory.delete_all

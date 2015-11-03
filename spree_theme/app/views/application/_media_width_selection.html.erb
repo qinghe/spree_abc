@@ -1,1 +1,3 @@
-
+<div class="fr" style="padding: 0 40px;">
+  <%= select_tag( :query_medium_id, options_from_collection_for_select( @theme.query_media,:id, :name) ) if @theme.query_media.present? %>
+</div>

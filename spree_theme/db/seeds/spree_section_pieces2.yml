@@ -22,3 +22,13 @@ post_files:
       list-style: none;
       margin: 0; padding: 0;}
   js: ""
+container_background:
+  id: 101
+  title: container background
+  slug: container-background
+  is_selectable: "0"
+  is_container: "1"
+  html: ~~content~~
+  css: |
+    .<%=@template.section_selector%> a{ display: inline-block; <%=@template.css(:s_a) %> }
+  js: ""

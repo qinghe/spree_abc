@@ -6,9 +6,7 @@
 # method of this form should be 'get', every time user click a section, get_param_values belong to the section.
 %>
 <%= form_tag(get_param_values_template_theme_path(@theme), { :remote=>true, :method=>'post', 'data-type'=>'script', :id=>"layout_editor_form",:name=>"layout_editor_form"}) do %>
-    <div class="fr" style="padding: 0 40px;">
-      <%= select_tag( :query_medium_id, options_from_collection_for_select( @theme.query_media,:id, :name) ) if @theme.query_media.present? %>
-    </div>
+    
     <ul class="tabs block_header clear-block">
     <% for tab in @editors%>
       <li data-id="<%=tab.id%>">
