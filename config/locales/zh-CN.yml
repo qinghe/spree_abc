@@ -893,6 +893,7 @@ zh-CN:
     next: "下一页"
     no_actions_added: "未添加动作"
     no_orders_found: 找不到任何订单
+    no_payment_found: 找不到任何支付方式
     no_payment_methods_found: 找不到任何支付方式
     no_pending_payments:
     no_products_found: 找不到产品
@@ -919,7 +920,7 @@ zh-CN:
       product_not_deleted: "产品无法被删除"
       variant_deleted: "具体型号已经被删除"
       variant_not_deleted: "具体型号不能被删除"
-    num_orders:
+    num_orders: "订单数量"
     on_hand: "库存"
     open: "打开"
     open_all_adjustments: "启用所有价格调整"
@@ -933,13 +934,14 @@ zh-CN:
     options: "选项"
     or: "或"
     or_over_price: ! '%{price}或以上'
-    ord_qty: 订单数量
-    ord_total: 订单总计
+    ord_qty: "订单数量"
+    ord_total: "订单总计"
     order: "订单"
     order_adjustments: "订单调整"
     order_already_updated:
     order_approved:
     order_canceled: "订单已取消"
+    order_date: "下单日期"
     order_details: "订单详情"
     order_email_resent: "重新发出了订单邮件"
     order_information: "订单信息"
@@ -960,7 +962,9 @@ zh-CN:
         thanks: "谢谢您的购买。"
         total: 总计：%{total}
     order_not_found: "我们无法找到您的订单。请重新尝试。"
+    
     order_number: "订单号 %{number}"
+    order_numbers: "订单号"
     order_populator:
       out_of_stock: ! '%{item} 库存不足'
       please_enter_reasonable_quantity: 请输入一个合理的数量
