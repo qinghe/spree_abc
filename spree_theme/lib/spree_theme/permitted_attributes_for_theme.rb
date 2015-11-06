@@ -14,7 +14,6 @@ module Spree
     @@template_theme_attributes = [ :is_public, :site_id,:page_layout_root_id,:title, :section_root_id, :assigned_resource_ids, :for_terminal, :user_terminal_id ]
     @@product_attributes += [:global_taxon_ids, :global_taxons, :theme_id, :summary]
     @@taxon_attributes += [:page_context, :replaced_by, :is_clickable, :tooltips, :stylish]
-    @@order_attributes += [ :user_terminal_id ]
 
     @@comment_type_attributes = [:name, :applies_to]
     @@comment_attributes = [:commentable_id, :commentable_type, :user_id, :comment_type_id, :comment, :cellphone, :email]
