@@ -1,14 +1,3 @@
-require 'spree_core'
-require 'spree_theme/engine'
-require 'spree_theme/paper_clip_interpolate_site'
-require 'spree_theme/system'
-require 'spree_theme/site_helper'
-require 'spree_theme/seed_helper'
-require 'spree_theme/permitted_attributes_for_theme'
-require 'spree_theme/simple_permalink'
-require 'spree_theme/template_base_helper'
-require 'spree_theme/client_info'
-
 module SpreeTheme
 
   mattr_accessor :site_class, :taxon_class, :post_class
@@ -42,3 +31,14 @@ module SpreeTheme
     end
   end
 end
+
+require 'spree_core'
+require 'spree_theme/engine'
+require 'spree_theme/paper_clip_interpolate_site'
+require 'spree_theme/system'
+require 'spree_theme/site_helper'
+require 'spree_theme/seed_helper'
+require 'spree_theme/permitted_attributes_for_theme'
+require 'spree_theme/simple_permalink'
+require 'spree_theme/template_base_helper'
+require 'spree_theme/client_info'

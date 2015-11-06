@@ -5,9 +5,9 @@
 
 $(document).ready(function() {
   // disable progress-bar, coolpadwebkit do not support
-  if( !g_client_info.is_mobile ){
-    Turbolinks.enableProgressBar();
-  }
+  //if( !g_client_info.is_mobile ){
+  //  Turbolinks.enableProgressBar();
+  //}
 
   // template theme selection for designer shop
   $( "#embeded_content_wrapper" ).hover(

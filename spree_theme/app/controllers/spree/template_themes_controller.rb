@@ -115,7 +115,7 @@ module Spree
       end
     end
 
-    # * params - query_medium_id
+    # * params - terminal_id
 
     def update_param_value
       param_value_event = params[:param_value_event]
@@ -124,7 +124,7 @@ module Spree
       theme_id = params[:selected_theme_id]
       editor_id = params[:selected_editor_id]
       layout_id = params[:selected_page_layout_id]
-      query_medium_id = params[:query_medium_id]
+      terminal_id = params[:terminal_id]
       param_value_keys = params.keys.select{|k| k=~/pv[\d]+/}
 
         param_value_params = params["pv#{editing_param_value_id}"]
@@ -135,8 +135,8 @@ module Spree
       theme = TemplateTheme.find(theme_id)
       editor = Editor.find(editor_id)
       page_layout = PageLayout.find(layout_id)
-      template_query_medium = TemplateQueryMedium.where( template_theme_id: theme.id, query_medium_id: query_medium_id ).first
-      prepare_params_for_editors(theme,editor, page_layout, template_query_medium)
+      user_terminal = nil#UserTerminal.where( terminal_id: terminal_id ).first
+      prepare_params_for_editors(theme,editor, page_layout, user_terminal)
 
       respond_to do |format|
         format.html

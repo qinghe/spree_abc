@@ -67,7 +67,8 @@ module SpreeTheme
       #login, forget_password page only available fore unlogged user. we need this flag to show editor even user have not log in.
       @is_designer = ( cookies[:_dalianshops_designer]=='1')  if cookies[:_dalianshops_designer].present?
 
-      @client_info = ClientInfo.new( :is_mobile => mobile?, :is_preview=>@is_designer)
+      @client_info = current_terminal
+      @client_info.is_preview = @is_designer
 
       #current_user.is_designer means he could design template_theme.
       #current_site.designable means current user could preview published template_theme
@@ -175,7 +176,7 @@ module SpreeTheme
       end
     end
 
-    def prepare_params_for_editors(theme,editor=nil,page_layout = nil, template_query_medium = nil)
+    def prepare_params_for_editors(theme,editor=nil,page_layout = nil, template_terminal = nil)
         @editors = Spree::Editor.all
         @param_values_for_editors = Array.new(@editors.size){|i| []}
         editor_ids = @editors.collect{|e|e.id}
@@ -196,8 +197,8 @@ module SpreeTheme
         @editor = editor
         @editor ||= @editors.first
         #it is not done, comment it out for now.
-        #@template_query_medium = template_query_medium
-        #@template_query_medium ||= theme.template_query_media.first
+        #@template_terminal = template_terminal
+        #@template_terminal ||= theme.template_terminals.first
         @page_layout = page_layout #current selected page_layout, the node of the layout tree.
         @sections = Spree::Section.where(:is_enabled=>true).order("title").roots
         #template selection, include mobile
@@ -221,6 +222,13 @@ module SpreeTheme
       agent_str = request.user_agent.to_s.downcase
       return false if agent_str =~ /ipad/
       agent_str =~ Regexp.new(MOBILE_USER_AGENTS)
+    end
+
+    def current_terminal
+      unless @current_terminal
+        @current_terminal = ( mobile? ? Spree::UserTerminal.cellphone.first : Spree::UserTerminal.pc.first )
+      end
+      @current_terminal
     end
 
     def get_default_taxon(  )

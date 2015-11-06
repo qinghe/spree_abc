@@ -59,9 +59,6 @@ module Spree
     belongs_to :desktop, foreign_key: "master_id", class_name: self.name
     belongs_to :duplicated_from, foreign_key: "copy_from_id", class_name: self.name
 
-    has_many :template_query_media, dependent: :delete_all, inverse_of: :template_theme
-    has_many :query_media, through: :template_query_media
-
     #use string as key instead of integer page_layout.id, exported theme in json, after restore, key is always string
     serialize :assigned_resource_ids, Hash
 
