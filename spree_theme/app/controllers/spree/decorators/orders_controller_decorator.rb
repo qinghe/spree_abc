@@ -1,7 +1,8 @@
 #encoding: utf-8
 module Spree
   OrdersController.class_eval do
-    # action :update, :edit, :show, :populate support ajax
+    before_action :associate_terminal
+  # action :update, :edit, :show, :populate support ajax
     respond_to :html, :js
 
     def associate_terminal
