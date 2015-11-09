@@ -1,8 +1,8 @@
-// it caused tool item icon massed up in staging env. 
+// it caused tool item icon massed up in staging env.
 
 CKEDITOR.editorConfig = function( config ) {
-    // copied from original config.js ckeditor 4.0.11  
-    
+    // copied from original config.js ckeditor 4.0.11
+
     // Define changes to default configuration here. For example:
     // config.language = 'fr';
     // config.uiColor = '#AADC6E';
@@ -87,8 +87,8 @@ CKEDITOR.editorConfig = function( config ) {
         }
       }
     });
-        
-    config.language = 'zh-cn';   
+
+    config.language = 'zh-cn';
     // Default setting.
     //config.toolbarGroups = [
     //    { name: 'document',    groups: [ 'mode', 'document' ] },
@@ -104,7 +104,7 @@ CKEDITOR.editorConfig = function( config ) {
     //    '/',
     //    { name: 'styles' },
     //    { name: 'colors' },
-    //    { name: 'others' },        
+    //    { name: 'others' },
     //    //{ name: 'about' }
     //];
 
@@ -113,14 +113,14 @@ CKEDITOR.editorConfig = function( config ) {
       { name: 'clipboard', items : [ 'Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo' ] }, 
       //{ name: 'editing', items : [ 'Find','Replace','-','SelectAll','-','SpellChecker', 'Scayt' ] },
       //{ name: 'forms', items : [ 'Form', 'Checkbox', 'Radio', 'TextField', 'Textarea', 'Select', 'Button', 'ImageButton','HiddenField' ] },
-      //'/',
-      //{ name: 'basicstyles', items : [ 'Bold','Italic','Underline','Strike','Subscript','Superscript','-','RemoveFormat' ] },
-      //{ name: 'paragraph', items : [ 'NumberedList','BulletedList','-','Outdent','Indent','-','Blockquote','CreateDiv', '-','JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock','-','BidiLtr','BidiRtl' ] },
-      { name: 'links', items : [ 'Link','Unlink' ] },     
+      { name: 'links', items : [ 'Link','Unlink' ] },     
       //{ name: 'insert', items : [ 'Image','Flash','Table','HorizontalRule','Smiley','SpecialChar','PageBreak','Iframe' ] },
       { name: 'insert', items : [ 'Image','Flash','Table','HorizontalRule' ] },
       { name: 'tools', items : [ 'Maximize', 'ShowBlocks' ] },
-      '/', 
+      //'/',
+      { name: 'basicstyles', items : [ 'Bold','Italic','Underline','Strike','Subscript','Superscript','-','RemoveFormat' ] },
+      { name: 'paragraph', items : [ 'NumberedList','BulletedList','-','Outdent','Indent','-','Blockquote','CreateDiv', '-','JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock','-','BidiLtr','BidiRtl' ] },
+      //'/', 
       { name: 'styles', items : [ 'Styles','Format','Font','FontSize' ] },     
       { name: 'colors', items : [ 'TextColor','BGColor' ] }, 
       //{ name: 'tools', items : [ 'Maximize', 'ShowBlocks','-','About' ] } 
