@@ -1,9 +1,9 @@
 section_piece = find_section_piece('container-background')
 
 
-inner =  { "editor_id"=>3, "class_name"=>"inner", "pclass"=>"css", "param_category_id"=>1051,  "html_attribute_ids"=>"2,3,4,5"}
+inner =  { "editor_id"=>3, "class_name"=>"inner1", "pclass"=>"css", "param_category_id"=>1051,  "html_attribute_ids"=>"2,3,4,5"}
 create_section_piece_param( section_piece, inner)
-inner =  { "editor_id"=>3, "class_name"=>"inner", "pclass"=>"css", "param_category_id"=>1052,  "html_attribute_ids"=>"2,3,4,5"}
+inner =  { "editor_id"=>3, "class_name"=>"inner2", "pclass"=>"css", "param_category_id"=>1052,  "html_attribute_ids"=>"2,3,4,5"}
 create_section_piece_param( section_piece, inner)
 
 

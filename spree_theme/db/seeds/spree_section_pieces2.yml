@@ -30,5 +30,8 @@ container_background:
   is_container: "1"
   html: ~~content~~
   css: |
-    .<%=@template.section_selector%> a{ display: inline-block; <%=@template.css(:s_a) %> }
+    @media screen and (min-width: 1441px) {
+      /*1440*731 1920x975 background-size: cover;*/
+      .<%=@template.section_selector%> > .inner{ <%=@template.css(:inner1)%>  }
+    }
   js: ""
