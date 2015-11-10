@@ -31,7 +31,7 @@ container_background:
   html: ~~content~~
   css: |
     @media screen and (min-width: 1441px) {
-      /*1440*731 1920x975 background-size: cover;*/
-      .<%=@template.section_selector%> > .inner{ <%=@template.css(:inner1)%>  }
+      /*1440*731 1920x975 */
+      .<%=@template.section_selector%> > .inner{ background-size: cover; <%=@template.css(:inner1)%>  }
     }
   js: ""
