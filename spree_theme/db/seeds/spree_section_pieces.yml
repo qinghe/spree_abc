@@ -110,8 +110,9 @@ root:
     #page-wrapper form[id] p {
       margin: 0; padding: 0;
     }
-    /* keep input width same with container */
-    #page-wrapper form.fullwidth input[type="text"], #page-wrapper form.fullwidth input[type="password"], #page-wrapper form.fullwidth input[type="phone"], #page-wrapper form.fullwidth input[type="email"], #page-wrapper form.fullwidth input[type="number"], #page-wrapper form.fullwidth input[type="url"], #page-wrapper textarea.fullwidth{
+    /* keep input width same with container, exclude radio,checkbox */
+    /* us .selector, descendants could override it by .selector input */
+    form.fullwidth input[type="text"], form.fullwidth input[type="password"], form.fullwidth input[type="phone"], form.fullwidth input[type="email"], form.fullwidth input[type="number"], form.fullwidth input[type="url"], textarea.fullwidth{
       box-sizing: border-box;
       width: 100%;
     }
@@ -880,7 +881,8 @@ container_form:
   css: |
     .<%=@template.section_selector%> label.error{ <%=@template.css(:s_error) %> }
     .<%=@template.section_selector%> label{ <%=@template.css(:s_label) %> }
-    .<%=@template.section_selector%> input{ <%=@template.css(:s_input) %> }
+    .<%=@template.section_selector%> form input[type='text'], .<%=@template.section_selector%> form input[type='password'], .<%=@template.section_selector%> form input[type='email'], .<%=@template.section_selector%>  form textarea
+    { <%=@template.css(:s_input) %> }
     .<%=@template.section_selector%> button{ <%=@template.css(:s_button) %> }
     .<%=@template.section_selector%> button:hover{ <%=@template.css(:s_button_h) %> }
 
