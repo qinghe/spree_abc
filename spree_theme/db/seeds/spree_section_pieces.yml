@@ -1013,7 +1013,7 @@ site_form:
   html: |
     <%= render :partial => 'themes/sites/quick_lunch' %>
   css: |
-    .<%=@template.section_selector%> p{
+    .<%=@template.section_selector%> .field{
       float:left;
     }
   js: ""

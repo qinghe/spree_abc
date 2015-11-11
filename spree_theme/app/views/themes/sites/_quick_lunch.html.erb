@@ -2,26 +2,36 @@
  @site ||= SpreeTheme.site_class.new
  @user ||= @site.users.build
 %>
-<%= form_for :site, :url => quick_lunch_path, :html=>{:id=>"site_form"} do |f| %>
-    <div >
-        <p>
-          <%= f.text_field :name, :class => 'fullwidth title', :placeholder => Spree.t(:name_store), :minlength=>4, :maxlength=>24, :required=>""  %>
-        </p>
-          <p>
-            <%= f.email_field :email, :placeholder => Spree.t(:email)%>
-          </p>
-          <p>
-            <%= f.password_field :password, :placeholder=>Spree.t(:password), :minlength=>6, :maxlength=>24, :required=>"" %>
-          </p>
-          
-        <p><%= f.button Spree.t(:new_site), :class => 'button primary' %></p>
-    </div>
+<%= form_for :site, :url => quick_lunch_path, :html=>{:id=>"site_form", :class=>"fullwidth"} do |f| %>
+      <div class="field">
+        <div>
+        <%= f.text_field :name, :class => 'title', :placeholder => Spree.t(:name_store), :minlength=>4, :maxlength=>24  %>
+        </div>
+        <div> </div>
+      </div>
+
+      <div class="field">
+        <div>
+        <%= f.email_field :email, :placeholder => Spree.t(:email) %>
+      </div>
+        <div> </div>
+      </div>
+      <div class="field">
+        <div>
+        <%= f.password_field :password, :placeholder=>Spree.t(:password), :minlength=>6, :maxlength=>24 %>
+        </div>
+        <div> </div>
+      </div>
+      <div><%= f.button Spree.t(:new_site), :class => 'button primary' %></div>
 <% end %>
 <script>
 $("#site_form").validate({
+  focusCleanup: true,
+  errorPlacement: function(error, element) {
+    error.appendTo( element.parent("div").next("div") );
+  },
   rules: {
     'site[email]': {
-      required: true,
       email: true,
       remote: {
         url: <%=raw check_email_path.to_json %>,
