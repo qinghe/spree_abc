@@ -35,3 +35,20 @@ container_background:
       .<%=@template.section_selector%> > .inner{ background-size: cover; <%=@template.css(:inner1)%>  }
     }
   js: ""
+one_click_trial:
+  id: 102
+  title: one click trial
+  slug: one-click-trial
+  is_selectable: "0"
+  is_container: "1"
+  html: |
+    <%= render "themes/sites/one_click_trial" %>
+  css: |
+    #launch_site_container {
+      display:none;
+    }
+    .<%=@template.section_selector%> .modal_close_img{
+      position:absolute;
+      font-size: 22px;
+    }
+  js: ""

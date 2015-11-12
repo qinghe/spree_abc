@@ -9,17 +9,12 @@
         </div>
         <div> </div>
       </div>
-
       <div class="field">
-        <div>
-        <%= f.email_field :email, :placeholder => Spree.t(:email) %>
-      </div>
+        <div> <%= f.email_field :email, :placeholder => Spree.t(:email) %>  </div>
         <div> </div>
       </div>
       <div class="field">
-        <div>
-        <%= f.password_field :password, :placeholder=>Spree.t(:password), :minlength=>6, :maxlength=>24 %>
-        </div>
+        <div> <%= f.password_field :password, :placeholder=>Spree.t(:password), :minlength=>6, :maxlength=>24 %> </div>
         <div> </div>
       </div>
       <div class="field"><%= f.button Spree.t(:new_site), :class => 'button primary' %></div>
