@@ -1099,7 +1099,8 @@ taxon_icon:
   updated_at: 2011-09-20 19:40:07
   css: |
     .<%=@template.section_selector%> {
-      margin: 0; padding: 0;
+      /*margin: 0;  it is required to align center*/
+      padding: 0;
     }
     .<%= @template.section_selector %> img { width:100%; }
   js: ""
