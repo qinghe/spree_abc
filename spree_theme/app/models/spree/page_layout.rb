@@ -5,11 +5,11 @@ module Spree
     #extend FriendlyId
     include Spree::Context::Base
     # depth is massed up while duplicate full set. so we disable it here.
-    acts_as_nested_set :scope=>['template_theme_id' ], :depth_column=>'notallowed'# scope is for :copy, no need to modify parent_id, lft, rgt.
+    acts_as_nested_set :scope=>['template_theme_id' ], :depth_column=>'notallowed', :dependent=> :destroy # scope is for :copy, no need to modify parent_id, lft, rgt.
     belongs_to :section
     belongs_to :template_theme, :class_name =>'Spree::TemplateTheme'
     # has_many :themes, :class_name => "TemplateTheme",:primary_key=>:root_id,:foreign_key=>:page_layout_root_id
-    has_many :param_values
+    has_many :param_values, dependent: :delete_all
     # this table is used by other site, should not use scope here
     # we want title to support multi-language, so disable friendly_id
     # friendly_id :title, :use => :slugged
@@ -17,7 +17,7 @@ module Spree
     has_many :sections, :class_name =>'Section', :foreign_key=>:root_id, :primary_key=>:section_id
     has_many :section_pieces, :through=>:sections
     # remove section relatives after page_layout destroyed.
-    before_destroy :remove_section
+    # before_destroy :remove_section
     before_save :fix_data_source_param
 
     delegate :is_html_root?, :is_container?, :is_image?, :is_zoomable_image?, to: :section

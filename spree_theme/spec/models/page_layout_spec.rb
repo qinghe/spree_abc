@@ -1,16 +1,31 @@
 require 'spec_helper'
 describe Spree::PageLayout do
-  #let (:page_layout) { create(:page_layout) }
+  let (:page_layout) { create(:page_layout) }
+  let (:page_layout_tree) { create(:page_layout_tree) }
+  #   root
+  #     node1
+  #     node2 - pv(1)
+  #       node21 - pv(2)
+  #       node22 - pv(2)
   before(:each){
-    SpreeTheme.site_class.current = create(:fake_site)
-    @page_layout_tree = create(:page_layout_tree)
+    @node_has_children =  page_layout_tree.children.last
+  #  SpreeTheme.site_class.current = create(:fake_site)
+  #  @page_layout_tree = create(:page_layout_tree)
   }
 
-  #it "build html css js" do
-  #  html, css = page_layout.build_content
-  #  html.present?.should be_truthy
-  #  css.present?.should be_truthy
-  #end
+  it "build html css js" do
+    html, css = page_layout_tree.build_content
+    html.present?.should be_truthy
+  end
+
+  it "destory a node with children" do
+    @node_has_children.children.should be_present
+    expect{ @node_has_children.destroy }.to change{Spree::PageLayout.count}.by( -3 )
+  end
+
+  it "destory a node with children" do
+    expect{ @node_has_children.destroy }.to change{Spree::ParamValue.count}.by( -5 )
+  end
 
   #it "has partial html" do
   #  page_layout.partial_html.should be_kind_of Spree::HtmlPage::PartialHtml
@@ -19,7 +34,7 @@ describe Spree::PageLayout do
   #it "create new page_layout tree" do
   #  objects = Spree::Section.roots
   #  section_hash= objects.inject({}){|h,sp| h[sp.slug] = sp; h}
-    # center area
+  #  center area
   #  center_area = Spree::PageLayout.create_layout(section_hash['center_area'], "center_area")
   #  center_area.add_section(section_hash['center_part'],:title=>"center_part")
   #  center_area.add_section(section_hash['left_part'],:title=>"left_part")
