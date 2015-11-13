@@ -3,25 +3,25 @@
     <div class="left" data-hook="admin_site_form_left">
       <p>
         <%= f.label :name %> <br />
-        <%= f.text_field :name, :class => 'fullwidth ', :minlength=>4, :maxlength=>30, :required=>""  %>
+        <%= f.text_field :name, :minlength=>4, :maxlength=>30, :required=>""  %>
       </p>
 
       <p>
         <%= f.label :short_name %> <br />
-        <%= f.text_field :short_name, :class => 'fullwidth ', :minlength=>4, :maxlength=>30, :required=>""  %>
-        <span id="dalianshops">.dalianshops.com</span> 
+        <%= f.text_field :short_name, :minlength=>4, :maxlength=>30, :required=>""  %>
+        <span id="dalianshops">.dalianshops.com</span>
       </p>
-   
+
         <p>
           <%= f.label  :email, Spree.t(:email)  %><br />
           <%= f.email_field :email %>
         </p>
-      
+
         <p>
           <%= f.label :password, Spree.t(:password) %><br />
           <%= f.password_field :password, :minlength=>6, :maxlength=>30, :required=>"" %>
         </p>
-      
+
         <p>
           <%= f.label :password_confirmation, Spree.t(:confirm_password) %><br />
           <%= f.password_field :password_confirmation, :minlength=>6, :maxlength=>30, :required=>"" %>
@@ -30,9 +30,9 @@
       <% if @template_theme.present? %>
         <p>
           <%= f.label :foreign_theme_id %> <br />
-          <%= f.hidden_field :foreign_theme_id, :value=>@template_theme.id %> 
-          <%= text_field_tag :template_theme_name, @template_theme.title, :class => 'fullwidth', :readonly=>true, :size=>30 %>
-        </p>      
+          <%= f.hidden_field :foreign_theme_id, :value=>@template_theme.id %>
+          <%= text_field_tag :template_theme_name, @template_theme.title, :readonly=>true, :size=>30 %>
+        </p>
       <% end %>
     </div>
   </div>

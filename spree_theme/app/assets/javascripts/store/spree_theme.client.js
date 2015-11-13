@@ -20,7 +20,7 @@ $(document).ready(function() {
 
 
   // code for theme, should move to template_themes.js
-  $("#dialog").delegate(  "a.cancel,button.cancel", "click",function(){
+  $(".dialog_title").delegate(  "a.cancel,button.cancel", "click",function(){
       $.simplemodal.close();
   });
 });

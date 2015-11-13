@@ -581,6 +581,11 @@ module Spree
       end
     end
 
+    # self.css_class + self.usage
+    def get_css_class
+      self.section.usage.present? ? "#{css_class} u_#{self.section.usage}" : css_class
+    end
+
     private
     # a page_layout build itself.
     def build_section_html(tree, node, section_hash)
@@ -597,7 +602,7 @@ module Spree
       piece = node.section.build_html
       # replace ~~selectors~~ with ex. 's_112_2 c_111'
       unless node.root?
-        offline_css = "s_#{node.id}_#{node.section_id} c_#{node.parent_id} #{node.css_class}"
+        offline_css = "s_#{node.id}_#{node.section_id} c_#{node.parent_id} #{node.get_css_class}"
         if node.has_extra_selector?
           piece.sub!('~~selector~~', "#{offline_css} <%=@template.get_css_classes %>")
         else

@@ -894,10 +894,10 @@ dialog_title:
   is_selectable: "0"
   is_container: "0"
   html: |
-      <div class="title"> <%= Spree.t(:dialog_title) %> <a class="cancel">X</a> </div>
+      <div class="dialog_title"> <%= Spree.t(:dialog_title) %> <a class="cancel">X</a> </div>
   css: |
-    #dialog .title{ <%=@template.css(:title) %> }
-    #dialog .title a.cancel{
+    .<%=@template.section_selector%>  .dialog_title{ <%=@template.css(:dialog_title) %> }
+    .<%=@template.section_selector%>  .dialog_title a.cancel{
       border:0;  padding:0;  margin:0; background: transparent none; text-decoration: none;/*reset it, prevent root's default */
       float:right; cursor:pointer;
       <%=@template.css(:cancel) %>
@@ -915,9 +915,9 @@ dialog_content:
     <div class="dialog_content" >   ~~content~~   </div>
   css: |
     /* background, margin, border, padding */
-    #dialog .dialog_content
+    .<%=@template.section_selector%>  .dialog_content
     {
-      <%=@template.css(:inner)%>
+      <%=@template.css(:dialog_content)%>
     }
   js: ""
 logo:

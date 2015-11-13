@@ -41,6 +41,7 @@ one_click_trial:
   slug: one-click-trial
   is_selectable: "0"
   is_container: "1"
+  usage: unused
   html: |
     <%= render "themes/sites/one_click_trial" %>
   css: |
@@ -52,3 +53,15 @@ one_click_trial:
       font-size: 22px;
     }
   js: ""
+container_dialog:
+  id: 103
+  title: container dialog
+  slug: container-dialog
+  is_selectable: "0"
+  is_container: "1"
+  usage: "dialog"
+  html: ~~content~~
+  css: |
+    .<%=@template.section_selector%>
+    { display:none;   }
+    .simplemodal-overlay{ background-color:black; }
