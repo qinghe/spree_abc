@@ -5,7 +5,7 @@ objs=[
 
   {"id"=>4, "position"=>5, "is_enabled"=>true, "editor_id"=>0, "slug"=>"dialog_title" },
   {"id"=>5, "position"=>6, "is_enabled"=>true, "editor_id"=>0, "slug"=>"dialog_content" },
-  {"id"=>6, "position"=>9, "is_enabled"=>true, "editor_id"=>0, "slug"=>"title" }, #header3
+  {"id"=>6, "position"=>9, "is_enabled"=>true, "editor_id"=>0, "slug"=>"header3" }, #header3
   {"id"=>7, "position"=>2, "is_enabled"=>true, "editor_id"=>0, "slug"=>"fixed_position" },
   {"id"=>9, "position"=>7, "is_enabled"=>true, "editor_id"=>0, "slug"=>"sider" },
   {"id"=>10, "position"=>10, "is_enabled"=>true, "editor_id"=>0, "slug"=>"header0" }, #header0
