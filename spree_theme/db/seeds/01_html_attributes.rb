@@ -114,7 +114,7 @@ objs=[
   {"id"=>113, "title"=>"background-repeat", "pvalues"=>"repeat-y,no-repeat", "pvalues_desc"=>"Repeat-y,No-repeat", "punits"=>"", "neg_ok"=>false, "default_value"=>-1, "pvspecial"=>"", "css_name"=>"background-repeat"},
   {"id"=>114, "title"=>"background-repeat", "pvalues"=>"repeat-x,no-repeat", "pvalues_desc"=>"Repeat-x,No-repeat", "punits"=>"", "neg_ok"=>false, "default_value"=>-1, "pvspecial"=>"", "css_name"=>"background-repeat"},
   {"id"=>115, "title"=>"composite", "pvalues"=>"", "pvalues_desc"=>"", "punits"=>"", "neg_ok"=>false, "default_value"=>-1, "pvspecial"=>"", "css_name"=>"composite"},
-  {"id"=>116, "title"=>"sitemap_view_style", "pvalues"=>"1,0", "pvalues_desc"=>"1,0", "punits"=>"", "neg_ok"=>false, "default_value"=>-1, "pvspecial"=>"", "css_name"=>"sitemap_view_style"},
+  {"id"=>116, "title"=>"opacity", "pvalues"=>"inherit,l0", "pvalues_desc"=>"inherit,l0", "punits"=>"", "neg_ok"=>false, "default_value"=>0, "pvspecial"=>"", "css_name"=>"opacity"},
   {"id"=>117, "title"=>"background-size", "pvalues"=>"auto|auto,cover|cover,contain|contain,l1|l1", "pvalues_desc"=>"auto|auto,cover|cover,contain|contain,l1|l1", "punits"=>"l,%", "neg_ok"=>false, "default_value"=>1, "pvspecial"=>"hv", "css_name"=>"background-size"}]
 
 Spree::HtmlAttribute.delete_all

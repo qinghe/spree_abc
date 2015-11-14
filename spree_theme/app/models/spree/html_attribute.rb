@@ -10,7 +10,7 @@ module Spree
     cattr_accessor :psv_for_manual_entry_enum, :unit_collection, :special_enum
     # slug db,bool,text,src pvalue are special
     #possible selected value for manual entry
-    self.psv_for_manual_entry_enum =  {:href=>'0u', :bool=>'0b', :text=>'0t', :size=>'l1', :color=>'0c', :src=>'0i',:db=>'0d', :image=>'0i'}
+    self.psv_for_manual_entry_enum =  {:href=>'0u', :bool=>'0b', :text=>'0t', :size=>'l1', :color=>'0c', :src=>'0i',:db=>'0d', :image=>'0i', :opacity=>'l0'}
     self.unit_collection = {:l=>['px','em']}
 
     @@html_attribute_hash = nil
@@ -26,11 +26,11 @@ module Spree
       (html_attribute_ids.kind_of? ::Array) ? all_to_hash.values_at(*html_attribute_ids) : all_to_hash.fetch(html_attribute_ids)
     end
 
-    def self.[](key)
-      all_hash = self.all_to_hash
-      val = psv_for_manual_entry_enum[key]
-      all_hash[val.to_s]
-    end
+    #def self.[](key)
+    #  all_hash = self.all_to_hash
+    #  val = psv_for_manual_entry_enum[key]
+    #  all_hash[val.to_s]
+    #end
 
     #keys are db, bool, text, src, color
     #key should only be symbol
@@ -145,6 +145,8 @@ module Spree
           [0,'px']
         when psv_for_manual_entry_enum[:bool]
           [0,'']
+        when psv_for_manual_entry_enum[:opacity]
+          [1,'']
         else
           ['','']
       end

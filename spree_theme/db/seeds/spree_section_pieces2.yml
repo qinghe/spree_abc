@@ -64,4 +64,7 @@ container_dialog:
   css: |
     .<%=@template.section_selector%>
     { display:none;   }
-    .simplemodal-overlay{ background-color:black; }
+    .simplemodal-overlay{ background-color:black;
+      opacity: 50;
+      <%=@template.css(:dialog_overlay)%>
+    }
