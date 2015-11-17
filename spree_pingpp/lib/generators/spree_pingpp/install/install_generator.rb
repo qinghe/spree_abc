@@ -1,4 +1,4 @@
-module SpreePingppHtml5
+module SpreePingpp
   module Generators
     class InstallGenerator < Rails::Generators::Base
 

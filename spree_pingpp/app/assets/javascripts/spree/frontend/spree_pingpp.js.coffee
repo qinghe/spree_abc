@@ -3,7 +3,9 @@ Spree.routes.handle_pingpp = Spree.pathFor('checkout/handle_pingpp')
 
 Spree.ready ($) ->
   Spree.onPingppPayment = () ->
-    if ($ '#checkout_form_payment').is('*')
+    ($ '#checkout').delegate '#checkout_form_payment', 'submit', (event) ->
+      alert('yes it is called in spree_pingpp')
+      #event.preventDefault();
       $('.pingpp_channel').click ->
         $.ajax
           type: 'patch'

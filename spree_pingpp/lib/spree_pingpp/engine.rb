@@ -1,4 +1,4 @@
-module SpreePingppHtml5
+module SpreePingpp
   class Engine < Rails::Engine
     require 'spree/core'
     isolate_namespace Spree

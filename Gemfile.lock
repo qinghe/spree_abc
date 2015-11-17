@@ -81,7 +81,7 @@ PATH
       useragent
 
 GEM
-  remote: http://ruby.taobao.org/
+  remote: https://ruby.taobao.org/
   specs:
     actionmailer (4.1.11)
       actionpack (= 4.1.11)
@@ -502,3 +502,6 @@ DEPENDENCIES
   useragent
   webmock (= 1.8.11)
   with_model
+
+BUNDLED WITH
+   1.10.5
