@@ -1,0 +1,8 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+zh-CN:
+  spree:
+    pingpp_channel:
+      alipay_pc_direct: 支付宝
+      upacp_pc: 银联
