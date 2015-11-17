@@ -10,9 +10,9 @@ Spree::Order.class_eval do
   belongs_to :user_terminal
 
   # make it longer, alipay out_trade_no should unique
-  ORDER_NUMBER_LENGTH  = 16
-  ORDER_NUMBER_LETTERS = false
-  ORDER_NUMBER_PREFIX  = 'R'
+  # ORDER_NUMBER_LENGTH  = 16
+  # ORDER_NUMBER_LETTERS = false
+  # ORDER_NUMBER_PREFIX  = 'R'
 
   def associate_terminal!( user_terminal )
     self.user_terminal = user_terminal

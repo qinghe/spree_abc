@@ -65,8 +65,8 @@ gem 'spree_alipay',   :github => "RuanShan/spree_alipay", :branch=>"2-4-stable"
 
 gem 'coffee-rails'  #spree_china_checkout required
 gem 'spree_china_checkout',   :path => './spree_china_checkout'
-
 gem 'spree_essential_blog',   :path => './spree_essential_blog'
+gem 'spree_pingpp',   :path => './spree_pingpp'
 
 # copy from https://github.com/RuanShan/spree_flexi_variants/tree/2-1-stable
 # gem 'spree_flexi_variants',   :path => './spree_flexi_variants'

@@ -50,6 +50,7 @@ template.add_section(section_hash['product-name'], detail_right, :title=>"produc
 template.add_section(section_hash['product-description'], detail_right, :title=>"product description")
 template.add_section(section_hash['product-price'], detail_right, :title=>"product price")
 qty_atc_container = template.add_section(section_hash['container'], detail_right, :title=>"container")
+template.add_section(section_hash['product-option-values'], qty_atc_container, :title=>"product options")
 template.add_section(section_hash['product-quantity'], qty_atc_container, :title=>"product quantity")
 template.add_section(section_hash['product-atc'], qty_atc_container, :title=>"product atc")
 
@@ -99,10 +100,10 @@ signup.reload
 product_list.reload   #reload left, right
 product_detail.reload #reload left, right
 product_list.update_section_context( Spree::PageLayout::ContextEnum.list )
-product_list.update_data_source( Spree::PageLayout::ContextDataSourceMap[Spree::PageLayout::ContextEnum.list].first )
+product_list.update_data_source( Spree::PageLayout::DataSourceEnum.gpvs )
 
 product_detail.update_section_context( Spree::PageLayout::ContextEnum.detail )
-product_detail.update_data_source( Spree::PageLayout::ContextDataSourceMap[Spree::PageLayout::ContextEnum.detail].first )
+product_detail.update_data_source( Spree::PageLayout::DataSourceEnum.this_product )
 
 
 

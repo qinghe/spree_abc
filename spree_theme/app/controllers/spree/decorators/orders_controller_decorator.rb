@@ -8,7 +8,7 @@ module Spree
     def associate_terminal
       @order ||= current_order
       if @order
-        @order.associate_terminal!(current_terminal) if @order.user_terminal.blank?
+        @order.associate_terminal!(current_terminal) if @order.user_terminal != current_terminal
       end
     end
   end
