@@ -47,6 +47,14 @@ SpreeAbc::Application.configure do
 
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address:              'smtp.getstore.cn',
+    port:                 25,
+    user_name:            'notice@getstore.cn',
+    password:              ENV['NOTICE_AT_GETSTORE'],
+    authentication:       'plain',
+    enable_starttls_auto: true  }
 
   # Enable threaded mode
   # config.threadsafe!

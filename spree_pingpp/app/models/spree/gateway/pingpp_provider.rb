@@ -49,11 +49,11 @@ module Spree
       when PingppChannelEnum.upacp_pc
         params.merge! extra_upacp_params
       end
+        charge = Pingpp::Charge.create( params  )
+        # store charge "id": "ch_Hm5uTSifDOuTy9iLeLPSurrD",
+        payment = get_payment_by_order( order )
+        payment.update_attribute( :response_code, charge['id'] )
 
-      charge = Pingpp::Charge.create( params  )
-      # store charge "id": "ch_Hm5uTSifDOuTy9iLeLPSurrD",
-      payment = get_payment_by_order( order )
-      payment.update_attribute( :response_code, charge['id'] )
       charge
     end
 

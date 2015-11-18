@@ -23,10 +23,15 @@ module Spree
           payment_provider = payment_method.provider
           #please try with host 127.0.0.1 instead localhost, or get invalid url http://localhost:3000/...
           #order_path( order, :only_path => false )
-          @charge = payment_provider.create_charge( @order, pingpp_channel, spree.pingpp_charge_done_path( :only_path => false ) )
-          #redirect_to payment_provider.get_payment_url( charge )
-          #render json: charge
-          render( :payment_pingpp_dispatch ) and return
+          begin
+            @charge = payment_provider.create_charge( @order, pingpp_channel, spree.pingpp_charge_done_path( :only_path => false ) )
+            #redirect_to payment_provider.get_payment_url( charge )
+            #render json: charge
+            render( :payment_pingpp_dispatch ) and return
+          rescue Pingpp::PingppError => error
+            Rails.logger.error error
+            redirect_to checkout_state_path( @order.state )            
+          end
       else
         render( :edit ) and return
       end
