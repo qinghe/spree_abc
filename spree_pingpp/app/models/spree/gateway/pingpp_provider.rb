@@ -1,6 +1,11 @@
 require "pingpp"
 module Spree
   class Gateway::PingppProvider
+    PINGPP_NOTIFY_URL = 'https://api.pingxx.com/notify/charges/',
+    PINGPP_MOCK_URL = 'http://sissi.pingxx.com/mock.php',
+    ALIPAY_PC_DIRECT_URL = 'https://mapi.alipay.com/gateway.do',
+    UPACP_PC_URL = 'https://gateway.95516.com/gateway/api/frontTransReq.do'
+
     PingppChannelEnum = Struct.new( :alipay_pc_direct, :upacp_pc )[ 'alipay_pc_direct', 'upacp_pc']
     attr_accessor :payment_method
 
@@ -12,7 +17,6 @@ module Spree
     def setup_api_key( key )
       Pingpp.api_key = key
     end
-
 
     def create_charge( order, channel, success_url )
       channel ||= PingppChannelEnum.alipay_pc_direct
@@ -52,6 +56,49 @@ module Spree
       payment.update_attribute( :response_code, charge['id'] )
       charge
     end
+
+    def get_payment_url( charge )
+      channel = charge['channel'];
+      raise "no_such_channel: #{channel}" unless PingppChannelEnum.values.include? channel
+      raise "no_credential" unless charge['credential'].present?
+      raise "no_valid_channel_credential" unless charge['credential'][channel].present?
+
+      if charge['livemode'] == false
+        return test_mode_notify_url(charge);
+      end
+
+      credential = charge['credential'][channel];
+
+      if channel == PingppChannelEnum.upacp_pc
+        form_submit(cfg.UPACP_PC_URL, 'post', credential);
+
+      elsif channel == PingppChannelEnum.alipay_pc_direct
+        credential["_input_charset"] = 'utf-8';
+        ALIPAY_PC_DIRECT_URL + "?" + credential.to_param;
+      end
+
+    end
+
+    def test_mode_notify_url(charge)
+      params = { ch_id: charge['id'], scheme: 'http',  channel: charge['channel']  }
+
+      if charge['order_no']
+        params['order_no'] = charge['order_no']
+      elsif charge['orderNo']
+        params['order_no'] = charge['orderNo']
+      end
+
+      if charge['time_expire']
+        params['time_expire'] = charge['time_expire']
+      elsif charge['timeExpire']
+        params['time_expire'] = charge['timeExpire']
+      end
+      if charge['extra']
+        params['extra'] = charge['extra'].to_json
+      end
+      PINGPP_MOCK_URL+'?'+ params.to_param
+    end
+
 
     def cancel( order )
       Pingpp::Charge.retrieve("CHARGE_ID").refunds.create(:description => "Refund Description")

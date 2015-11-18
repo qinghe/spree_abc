@@ -1,5 +1,5 @@
 
 <% payment_method.available_channels.each_with_index{|channel, i|  %>
-  <%= radio_button_tag "payment_pingpp_channel", channel, i==0,  class: 'pingpp_channel'  %>
+  <%= hidden_field_tag "payment_pingpp[#{payment_method.id}]", channel %>
   <%= image_tag "billing_integrations/pingpp/#{channel}.jpg", alt: Spree.t( "pingpp_channel.#{channel}") %>
 <% } %>

@@ -5,9 +5,12 @@ module Spree
     preference :app_key, :string
     preference :channels, :string
     #Pingpp.api_key = "YOUR-KEY"
+    def provider_class
+      Gateway::PingppProvider
+    end
 
     def provider
-      Gateway::PingppProvider.new( self )
+      provider_class.new( self )
     end
 
     def source_required?

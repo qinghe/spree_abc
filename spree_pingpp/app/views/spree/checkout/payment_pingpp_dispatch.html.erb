@@ -1,0 +1,12 @@
+<%= javascript_tag defer: 'defer' do -%>
+pingppPc.createPayment( <%== @charge.to_json %>, function(result, err){
+  if( result == "success" ){
+
+  }else if(result == "fail" ){
+    alert(err)
+  }else if( result == "cancel" ){
+    alert(err)
+  }
+
+} )
+<% end %>

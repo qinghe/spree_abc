@@ -35,9 +35,7 @@ module Spree
     end
 
     def complete_order( order )
-        # payment.state always :complete for both service, payment.source store more detail
-        # it require pending_payments to process_payments!
-        order.complete!
+      order.complete!
     end
 
   end
