@@ -36,7 +36,7 @@ module Spree
     end
 
     def complete_order( order )
-      order.complete!
+      order.next
     end
 
   end
