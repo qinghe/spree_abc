@@ -57,7 +57,7 @@ module Spree
       charge
     end
 
-    def retrieve_charge
+    def retrieve_charge( order )
       payment = get_payment_by_order( order )
       charge = Pingpp::Charge.retrieve( payment.response_code )
     end
