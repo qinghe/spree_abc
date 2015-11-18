@@ -18,7 +18,7 @@ module Spree
 
     def charge_notify
       begin
-        event = JSON.parse( request.body )
+        event = JSON.parse( request.raw_post )
         response_status, response_body = PingppEventHandler.new( event ).perform
       rescue JSON::ParserError
         response_body = 'JSON 解析失败'
