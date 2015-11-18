@@ -81,7 +81,8 @@ module Spree
 
     # Default mail headers settings
     preference :send_core_emails, :boolean, :default => true
-    preference :mails_from, :string, :default => 'spree@example.com'
+    #preference :mails_from, :string, :default => 'spree@example.com'
+    preference :mails_from, :string, :default => 'notice@getstore.cn'
 
     # searcher_class allows spree extension writers to provide their own Search class
     def searcher_class
