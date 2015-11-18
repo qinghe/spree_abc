@@ -53,7 +53,8 @@ SpreeAbc::Application.configure do
     port:                 25,
     user_name:            'notice@getstore.cn',
     password:              ENV['NOTICE_AT_GETSTORE'],
-    authentication:       'plain',
+    authentication:       'login',
+    openssl_verify_mode: 'none',
     enable_starttls_auto: true  }
 
   # Enable threaded mode
