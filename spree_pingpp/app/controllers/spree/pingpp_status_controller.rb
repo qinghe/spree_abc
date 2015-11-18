@@ -9,6 +9,14 @@ module Spree
       #alipay, get, "result"=>"success", "out_trade_no"=>"R677576938"
       #upacp_pc, post, "orderId"=>"R677576938", "respMsg"=>"success"
       order = retrieve_order
+      # get charge from server, notify message may be delay
+      unless order.complete?
+        payment_method = order.payments.last.payment_method
+        if payment_method.kind_of? Spree::Gateway::PingppBase
+          charge = payment_method.provider.retrieve_charge( order )
+          order.reload if charge['paid']
+        end
+      end
       if order.complete?
         spree.order_path( order )
       else

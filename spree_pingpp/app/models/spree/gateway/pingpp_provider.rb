@@ -57,6 +57,11 @@ module Spree
       charge
     end
 
+    def retrieve_charge
+      payment = get_payment_by_order( order )
+      charge = Pingpp::Charge.retrieve( payment.response_code )
+    end
+
     def get_payment_url( charge )
       channel = charge['channel'];
       raise "no_such_channel: #{channel}" unless PingppChannelEnum.values.include? channel
@@ -105,7 +110,7 @@ module Spree
     end
 
     def get_payment_by_order( order )
-      order.unprocessed_payments.first
+      order.payments.last
     end
 
     def get_client_ip
