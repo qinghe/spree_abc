@@ -20,9 +20,9 @@ module Spree
         end
       end
       if order.complete?
-        spree.order_path( order )
+        redirect_to spree.order_path( order )
       else
-        redirect_to checkout_state_path(@order.state)
+        redirect_to checkout_state_path(order.state)
       end
     end
 
