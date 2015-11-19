@@ -27,10 +27,9 @@ module Spree
 
     def charge_succeeded
       charge = event['data']['object']
-      payment = Spree::Payment.find_by_response_code charge['id']
-      # payment is nil when test from pingxx
-      if payment
-        complete_order payment.order
+      order = get_order_by_charge charge
+      if order
+        complete_order order
       end
       self.status = 200
       self.response_body = 'OK'
