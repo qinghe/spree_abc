@@ -7,11 +7,14 @@ describe "Alipay", :js => true, :type => :feature do
   let!(:product) { FactoryGirl.create(:product, :name => 'iPad') }
 
   before do
-    @gateway = Spree::Gateway::AlipayDualfun.create!({
-      preferred_partner: '2088002627298374',
-      preferred_sign: 'f4y25qc539qakg734vn2jpqq6gmybxoz',
-      name: "Alipay",
+    @gateway = Spree::Gateway::PingppPc.create!({
+      name: "PingppPcAlipay",
       active: true,
+      preferences: {
+        channels: 'alipay_pc_direct',
+        app_key: 'app_S8qPKGyH8SKSvfLq',
+        api_key: 'sk_test_W9azX94mLu1O4SCibPHCCyHG'
+      }
     })
     FactoryGirl.create(:shipping_method)
   end

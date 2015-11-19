@@ -5,4 +5,6 @@ en:
   spree:
     pingpp_channel:
       alipay_pc_direct: Alipay PC direct
+      alipay_wap: Alipay Phone
       upacp_pc: UnionPay PC
+      upacp_wap: UnionPay Phone

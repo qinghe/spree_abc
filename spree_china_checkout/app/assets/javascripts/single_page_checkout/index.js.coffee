@@ -1,4 +1,4 @@
-#= require_tree .
+#= require single_page_checkout/step_handler
 
 $ ->
   ($ '#checkout').delegate 'a.previous', 'click', ->

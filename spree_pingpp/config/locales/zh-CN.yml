@@ -5,4 +5,6 @@ zh-CN:
   spree:
     pingpp_channel:
       alipay_pc_direct: 支付宝
+      alipay_wap: Alipay Phone
       upacp_pc: 银联
+      upacp_wap: UnionPay Phone

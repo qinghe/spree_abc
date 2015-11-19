@@ -20,7 +20,8 @@ module SpreePingpp
 
     config.after_initialize do |app|
       app.config.spree.payment_methods += [
-        Spree::Gateway::PingppPc
+        Spree::Gateway::PingppPc,
+        Spree::Gateway::PingppMobile
       ]
     end
   end
