@@ -1,12 +1,13 @@
 require "pingpp"
 module Spree
-  class PingppEventHandler
+  class Gateway::PingppEventHandler
+    include Gateway::PingppHelper
+
     attr_accessor :event, :response_body, :status
     def initialize( event )
       self.event = event
       status = 400
       response_body = '' # 可自定义
-
     end
 
     def perform
@@ -33,10 +34,6 @@ module Spree
       end
       self.status = 200
       self.response_body = 'OK'
-    end
-
-    def complete_order( order )
-      order.next
     end
 
   end

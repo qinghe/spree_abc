@@ -5,6 +5,9 @@ module Spree
     preference :app_key, :string
     preference :channels, :string
     #Pingpp.api_key = "YOUR-KEY"
+
+    delegate :purchase, to: :provider
+
     def provider_class
       Gateway::PingppProvider
     end
@@ -13,8 +16,9 @@ module Spree
       provider_class.new( self )
     end
 
+    # it is required to make payment completed.
     def source_required?
-      false
+      true
     end
 
     def available_channels

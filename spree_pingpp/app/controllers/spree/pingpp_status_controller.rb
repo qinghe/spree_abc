@@ -1,6 +1,8 @@
 #inspired by https://github.com/spree-contrib/spree_skrill
 module Spree
   class PingppStatusController < StoreController
+    include Gateway::PingppHelper
+
     #fixes Action::Controller::InvalidAuthenticityToken error on alipay_notify
     skip_before_action :verify_authenticity_token
 
@@ -12,10 +14,10 @@ module Spree
       # get charge from server, notify message may be delay
       unless order.complete?
         payment_method = order.payments.last.payment_method
-        if payment_method.kind_of? Spree::Gateway::PingppBase
+        if payment_method.kind_of? Gateway::PingppBase
           charge = payment_method.provider.retrieve_charge( order )
           if charge['paid']
-            order.reload
+            complete_order( order )
           end
         end
       end
@@ -29,7 +31,7 @@ module Spree
     def charge_notify
       begin
         event = JSON.parse( request.raw_post )
-        response_status, response_body = PingppEventHandler.new( event ).perform
+        response_status, response_body = Gateway::PingppEventHandler.new( event ).perform
       rescue JSON::ParserError
         response_body = 'JSON 解析失败'
       end
@@ -40,9 +42,9 @@ module Spree
 
     def retrieve_order()
       order_number = ( params["orderId"] || params["out_trade_no"] )
-      @order = Spree::Order.find_by_number!(order_number)
+      # channel alipay_wap cannel_url is charge_done,  order_number maybe nil in that case.
+      Spree::Order.find_by_number(order_number) || current_order
     end
-
 
   end
 end

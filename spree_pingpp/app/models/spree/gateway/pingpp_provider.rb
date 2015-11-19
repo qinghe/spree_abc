@@ -1,6 +1,7 @@
 require "pingpp"
 module Spree
   class Gateway::PingppProvider
+    include Gateway::PingppHelper
     #PINGPP_NOTIFY_URL = 'https://api.pingxx.com/notify/charges/',
     #PINGPP_MOCK_URL = 'http://sissi.pingxx.com/mock.php',
     #ALIPAY_PC_DIRECT_URL = 'https://mapi.alipay.com/gateway.do',
@@ -114,8 +115,15 @@ module Spree
       Pingpp::Charge.retrieve("CHARGE_ID").refunds.create(:description => "Refund Description")
     end
 
-    def get_payment_by_order( order )
-      order.payments.last
+    # * description - before order transition to: :complete
+    # *   call spree/payment#gateway_action
+    # * params
+    #   * options - gateway_options
+    # * return - pingpp_response
+    def purchase(money, credit_card, options = {})
+      # since pingpp is offsite payment, this method is placehodler only.
+      # in this way, we could go through spree payment process.
+      return Gateway::PingppResponse.new
     end
 
   end
