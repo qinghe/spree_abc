@@ -257,6 +257,7 @@ zh-CN:
       spree/return_authorization:
         one: 退款
         other: 退款
+      spree/return_authorization_reason:
       spree/role:
         one: "角色"
         other: "角色"
@@ -329,8 +330,8 @@ zh-CN:
     active: "激活"
     add: "添加"
     add_action_of_type: "添加激活方式"
-    add_category: 添加分类
-    add_country: 添加国家
+    add_country: "添加国家"
+    add_coupon_code:
     add_new_header: "添加新的头部"
     add_new_style: "添加新的样式"
     add_one: "新建"
@@ -395,6 +396,7 @@ zh-CN:
     all_adjustments_opened: "所有价格调整已被成功启用！"
     all_departments: "所有部门"
     allow_backorders: 允许预定
+    all_items_have_been_returned:
     allow_ssl_in_development_and_test: "允许在开发以及测试模式下使用SSL"
     allow_ssl_in_production: "允许在生产模式下使用SSL"
     allow_ssl_in_staging: "允许在演示模式下使用SSL"
@@ -425,6 +427,7 @@ zh-CN:
     assign_taxon: 指派分类
     assign_taxons: 指派分类
     associated_adjustment_closed: "相关联的价格调整已被关闭，并且不会被重复计算。您需要启用它吗？"
+    at_symbol: '@'
     attachment_default_style: 附件样式
     attachment_default_url: 附件链接
     attachment_path: 附件路径
@@ -432,6 +435,7 @@ zh-CN:
     attachment_url: 附加链接
     authorization_failure: "认证失败"
     authorized: 已认证
+    auto_capture:
     availability: Availability
     available_on: "上架日期"
     average_order_value:
@@ -465,8 +469,8 @@ zh-CN:
     backorderable_default: 缺省允许预订
     backorders_allowed: 允许预订
     balance_due: "尚欠款"
-    best_selling_products: 销售最佳产品
-    best_selling_taxons: 销售最佳分类
+    base_amount:
+    base_percent:
     bill_address: "账单地址"
     billing: "账单"
     billing_address: "账单地址"
@@ -478,6 +482,9 @@ zh-CN:
     cancel_my_account: Cancel my account
     cancel_my_account_description: Unhappy?
     canceled: 已取消
+    canceled_at:
+    canceler:
+    cannot_create_customer_returns:
     cannot_create_payment_without_payment_methods: 您无法在没有定义任何支付方式的情况下进行支付。
     cannot_create_returns: 没有配送的订单不能申请退货
     cannot_perform_operation: 无法执行请求的操作
@@ -556,6 +563,7 @@ zh-CN:
     coupon_code_max_usage: "优惠券号码使用次数超出限制"
     coupon_code_not_eligible: "您的订单号码无法在您的订单上生效。"
     coupon_code_not_found: "您所输入的优惠券号码不存在。请重新输入。"
+    coupon_code_unknown_error:
     create: "创建"
     create_a_new_account: 创建一个新帐号
     created_at: 创建日期
@@ -569,6 +577,7 @@ zh-CN:
     credit_card: "信用卡"
     credit_cards: "信用卡"
     credit_owed: "应予退款"
+    credits:
     currency: "币种"
     currency_decimal_mark: 货币小数点标记
     currency_settings: "当前设置"
@@ -582,6 +591,7 @@ zh-CN:
     customer_returns: 顾客退货
     customer_search: "顾客搜索"
     cut: "剪切"
+    cvv_response:
     dash:
       jirafe:
         app_id:
@@ -604,6 +614,7 @@ zh-CN:
     default_meta_description: 缺省SEO描述
     default_meta_keywords: 缺省SEO关键字
     default_seo_title: 缺省SEO标题
+    default_refund_amount:
     default_tax: 缺省缴税
     default_tax_zone: 缺省缴税区域
     delete: "删除"
@@ -743,6 +754,7 @@ zh-CN:
       this_file_language: "中文(简体)"
       translations: "翻译"
     icon: "图标"
+    identifier:
     image: "图片"
     images: "图片"
     implement_eligible_for_return:
@@ -754,6 +766,7 @@ zh-CN:
     include_in_shipment: 包含在配送中
     included_in_other_shipment: 包含在其他配送中
     included_in_price: "包含在售价中"
+    included_price_validation: "除非您设置了默认的缴税区域，否则无法选择"
     incomplete:
     info_number_of_skus_not_shown:
     info_product_has_multiple_skus:
@@ -827,6 +840,7 @@ zh-CN:
     login_failed: "登录认证失败。"
     login_name: "用户名"
     logout: "退出"
+    logs:
     look_for_similar_items: "寻找类似的产品"
     maestro_or_solo_cards: Maestro/Solo cards
     mail_delivery_enabled: 邮件发送功能已启用
@@ -874,6 +888,8 @@ zh-CN:
     new_promotion_category: "新建促销分类"
     new_property: "新建属性"
     new_prototype: "新建原型"
+    new_refund:
+    new_refund_reason:
     new_return_authorization: "新建退货"
     new_shipment: 新建配送
     new_shipping_category: "新建配送分类"
@@ -900,6 +916,7 @@ zh-CN:
     no_promotions_found: 找不到任何促销活动
     no_resource_found: 找不到任何%{resource}
     no_results: "无任何结果"
+    no_returns_found:
     no_rules_added: "未添加规则"
     no_shipping_method_selected: "找不到任何配送方式"
     no_stock_locations_found:
@@ -1482,6 +1499,8 @@ zh-CN:
     tax_categories: "缴税分类"
     tax_categories_setting_description: 设定缴税分类以确定哪些产品是需要缴税的.
     tax_category: "缴税分类"
+    tax_code:
+    tax_included:
     tax_rate_amount_explanation:
     tax_rates: "税率"
     taxon: "分类"
@@ -1542,7 +1561,7 @@ zh-CN:
     update: "更新"
     updating: "更新中"
     usage_limit: "使用限制"
-    use_app_default:
+    use_app_default: "系统缺省"
     use_billing_address: "使用账单地址"
     use_new_cc: "使用一张新卡"
     use_s3: "使用Amazon S3存储图片"
