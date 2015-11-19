@@ -2,9 +2,9 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
 
   # CUSTOM EXCEPTION HANDLING
-  #rescue_from StandardError do |e|
-  #  handle_error(e)
-  #end
+  rescue_from StandardError do |e|
+    handle_error(e)
+  end
 
   protected
 
