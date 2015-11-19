@@ -2,5 +2,5 @@
 
 <div data-hook="user_terminal" class="field">
     <%= label_tag :payment_method_user_terminal_id, Spree.t(:user_terminal) %>
-    <%= select(:payment_method, :user_terminal_id, options_from_collection_for_select(Spree::UserTerminal.all, :id, :name), {}, {:class => 'select2 fullwidth'}) %>
+    <%= collection_select(:payment_method, :user_terminal_id, Spree::UserTerminal.all, :id, :name, { selected: @object.user_terminal_id}, {:class => 'select2 fullwidth'}) %>
 </div>
