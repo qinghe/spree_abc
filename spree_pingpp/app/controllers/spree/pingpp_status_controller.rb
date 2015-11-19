@@ -17,7 +17,7 @@ module Spree
         if payment_method.kind_of? Gateway::PingppBase
           charge = payment_method.provider.retrieve_charge( order )
           if charge['paid']
-            complete_order( order )
+             order.reload
           end
         end
       end
