@@ -38,6 +38,17 @@ module Spree
       render plain: response_body, status: response_status, content_type: 'text/plain; charset=utf-8'
     end
 
+    def test_charge_notify
+      begin
+        event = JSON.parse( request.raw_post )
+        response_status, response_body = Gateway::PingppEventHandler.new( event ).perform
+      rescue JSON::ParserError
+        response_body = 'JSON 解析失败'
+      end
+      render plain: response_body, status: response_status, content_type: 'text/plain; charset=utf-8'
+    end
+
+
     private
 
     def retrieve_order()

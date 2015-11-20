@@ -30,7 +30,7 @@ module Spree
             render( :payment_pingpp_dispatch ) and return
           rescue Pingpp::PingppError => error
             Rails.logger.error error
-            redirect_to checkout_state_path( @order.state )            
+            redirect_to checkout_state_path( @order.state )
           end
       else
         render( :edit ) and return
