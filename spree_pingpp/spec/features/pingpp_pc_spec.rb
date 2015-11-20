@@ -21,30 +21,36 @@ describe "Alipay", :js => true, :type => :feature do
 
 
   it "pays for an order successfully" do
+
+    payment_method_css = "#order_payments_attributes__payment_method_id_#{@gateway.id}"
+
+
     visit spree.root_path
     click_link product.name
     click_button 'Add To Cart'
     click_button 'Checkout'
-    within("#guest_checkout") do
-      fill_in "Email", :with => "test@example.com"
-      click_button 'Continue'
-    end
+
+    #within("#guest_checkout") do
+    #  fill_in "Email", :with => "test@example.com"
+    #  click_button 'Continue'
+    #end
+
     fill_in_billing
     click_button "Save and Continue"
     # Delivery step doesn't require any action
     click_button "Save and Continue"
-    find("#paypal_button").click
-    switch_to_paypal_login
-    fill_in "login_email", :with => "pp@spreecommerce.com"
-    fill_in "login_password", :with => "thequickbrownfox"
-    click_button "Log In"
-    find("#continue_abovefold").click   # Because there's TWO continue buttons.
-    page.should have_content("Your order has been processed successfully")
 
-    Spree::Payment.last.source.transaction_id.should_not be_blank
+    choose payment_method_css
+    click_button "Save and Continue"
+    # should redirect to  pingpp mock page
+    find("#btn_pay").click
+    #page.should have_content("Your order has been processed successfully")
+    #Spree::Payment.last.should be_complete
   end
 
   def fill_in_billing
+    fill_in "order_email", :with => "test@example.com"
+
     within("#billing") do
       fill_in "First Name", :with => "Test"
       fill_in "Last Name", :with => "User"
