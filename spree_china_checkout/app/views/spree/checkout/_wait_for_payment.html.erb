@@ -2,7 +2,7 @@
   <p class="info">请您在新打开的页面上完成付款。</p>
   <p class="notice">付款完成前请不要关闭此窗口。<br>完成付款后请根据您的情况点击下面的按钮：</p>
   <p class="act">
-    <%= form_for @order, :url => update_checkout_path( 'complete') do |form| %>
+    <%= form_for @order, :url => spree.order_path(  @order ), html: {method: :get} do |form| %>
       <%=  form.button  "已完成付款" %>
       <button type="button" name="give_help" class="cancel">付款遇到问题</button>
     <% end %>

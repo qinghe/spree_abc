@@ -1,6 +1,6 @@
 <div id="checkout" data-hook>
   <% @order.checkout_steps[0...-1].each do |state| %>
-    <div class="panel panel-default checkout-content <%= 'disabled-step' if state != @order.state %>" data-step="<%= state %>"data-hook="checkout_content" id="checkout_<%= state %>">
+    <div class="panel panel-default checkout-content <%= 'disabled-step' if state != @order.state %>" data-step="<%= state %>" data-hook="checkout_content" id="checkout_<%= state %>">
         <%= render :partial => ( @client_info.is_mobile ? 'form_wrapper_bootstrap' : 'form_wrapper'), :locals => { :order => @order, :state => state } %>
     </div>
   <% end %>

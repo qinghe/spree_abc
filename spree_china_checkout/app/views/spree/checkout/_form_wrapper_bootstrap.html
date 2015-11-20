@@ -1,7 +1,6 @@
 <% # do not support confirm anymore
-
+   # do not open new window for mobile terminal.
   form_html_options = { :id => "checkout_form_#{state}", :class=>"single_page_edit_order" }
-  form_html_options[:target] = '_blank' if state == 'payment'
 %>
 
 
