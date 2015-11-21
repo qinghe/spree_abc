@@ -6,12 +6,6 @@
         <%= f.text_field :name, :minlength=>4, :maxlength=>30, :required=>""  %>
       </p>
 
-      <p>
-        <%= f.label :short_name %> <br />
-        <%= f.text_field :short_name, :minlength=>4, :maxlength=>30, :required=>""  %>
-        <span id="dalianshops">.dalianshops.com</span>
-      </p>
-
         <p>
           <%= f.label  :email, Spree.t(:email)  %><br />
           <%= f.email_field :email %>
