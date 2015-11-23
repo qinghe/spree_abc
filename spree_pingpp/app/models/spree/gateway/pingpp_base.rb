@@ -22,7 +22,7 @@ module Spree
     end
 
     def available_channels
-      self.preferred_channels.split(',')
+      self.preferred_channels.try(:split, ',') || []
     end
 
   end
