@@ -59,9 +59,9 @@ gem 'spree_theme',   :path => './spree_theme'
 gem 'ruby-hmac' #http://ryanbigg.com/2009/07/no-such-file-to-load-hmac-sha1/
 #only specify it here, then could use ActiveMerchant::Billing::Integrations::Alipay::Helper directly
 gem 'alipay'
-gem 'offsite_payments'
-gem 'activemerchant_patch_for_china', github:'RuanShan/activemerchant_patch_for_china', branch:'for_offsite_payments'
-gem 'spree_alipay',   :github => "RuanShan/spree_alipay", :branch=>"2-4-stable"
+#gem 'offsite_payments'
+#gem 'activemerchant_patch_for_china', github:'RuanShan/activemerchant_patch_for_china', branch:'for_offsite_payments'
+gem 'spree_alipay',   :github => "RuanShan/spree_alipay", :branch=>"2-4-better"
 
 gem 'coffee-rails'  #spree_china_checkout required
 gem 'spree_china_checkout',   :path => './spree_china_checkout'
@@ -83,7 +83,7 @@ gem 'activerecord-session_store'
 
 group :test, :development do
   gem 'sqlite3'
-  gem 'mail_view'  #, :git => 'https://github.com/37signals/mail_view.git'
+  #gem 'mail_view'  #, :git => 'https://github.com/37signals/mail_view.git'
 end
 
 group :test do

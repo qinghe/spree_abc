@@ -30,9 +30,11 @@ namespace :spree_abc do
     Rails.logger.debug "end task :refresh_images"
   end
 
-  #desc "run all test of spree_abc"
-  #task :test => :environment do
-  #  `bundle exec rspec`
-  #end
+  desc "Load sample into design/demo site"
+  task :load_sample => :environment do
+    Spree::Site.find(2).load_sample
+    Spree::Site.find(3).load_sample
+    #{}`bundle exec rspec`
+  end
 
 end

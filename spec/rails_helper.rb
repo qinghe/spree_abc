@@ -76,16 +76,23 @@ RSpec.configure do |config|
 
   config.include Paperclip::Shoulda::Matchers
 
+  except_tables = %w[ spree_section_pieces spree_html_attributes spree_param_categories spree_editors spree_section_piece_params spree_sections spree_section_params spree_user_terminals]
 
   # Ensure Suite is set to use transactions for speed.
   config.before :suite do
     DatabaseCleaner.strategy = :transaction
-    DatabaseCleaner.clean_with :truncation
+    DatabaseCleaner.clean_with :truncation, { except: except_tables }
   end
 
   # Before each spec check if it is a Javascript test and switch between using database transactions or not where necessary.
   config.before :each do
-    DatabaseCleaner.strategy = RSpec.current_example.metadata[:js] ? :truncation : :transaction
+    #except_tables = %w[ spree_section_pieces spree_html_attributes spree_param_categories spree_editors spree_section_piece_params spree_sections spree_section_params ]
+
+    if RSpec.current_example.metadata[:js]
+      DatabaseCleaner.strategy = :truncation , { except: except_tables }
+    else
+      DatabaseCleaner.strategy = :transaction
+    end
     DatabaseCleaner.start
   end
 

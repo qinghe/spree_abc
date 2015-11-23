@@ -188,9 +188,10 @@ module Spree
     # set pvalue, psvalue, unit, unset
     # if the reperts==1  key are pvalue, psvalue, unit,unset
     # if the reperts>1   key are pvalue{n}, psvalue{n}, n start from 0
+    # ex. ['pvalue'] = '500px'
     def []=(key,val)
       #unset or bool like this way
-      if val.kind_of?(TrueClass) or val.kind_of?(FalseClass)
+      if val.kind_of?(TrueClass) || val.kind_of?(FalseClass)
         val = val ? HtmlAttribute::BOOL_TRUE : HtmlAttribute::BOOL_FALSE
       end
       if key=~/unset/

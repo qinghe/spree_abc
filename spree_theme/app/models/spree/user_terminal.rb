@@ -7,7 +7,6 @@ module Spree
     scope :cellphone, ->{ where( name: 'Cellphone' ) }
     scope :pc, ->{ where( name: 'PC' ) }
 
-
     def is_mobile
       name == 'Cellphone'
     end

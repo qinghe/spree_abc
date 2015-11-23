@@ -1,11 +1,4 @@
 GIT
-  remote: git://github.com/RuanShan/activemerchant_patch_for_china.git
-  revision: ead71ea3bb7f67eef6f95036dfdb4b58686773eb
-  branch: for_offsite_payments
-  specs:
-    activemerchant_patch_for_china (0.2.0)
-
-GIT
   remote: git://github.com/RuanShan/paperclip_oss_storage.git
   revision: bd178f2fff4bb515c2b6df92542da307dc607fcd
   branch: master
@@ -16,16 +9,17 @@ GIT
 
 GIT
   remote: git://github.com/RuanShan/spree_alipay.git
-  revision: 82e084f1aae435e86ccd280a25e177d9d7cbf562
-  branch: 2-4-stable
+  revision: 93be2d153cde8fb04833a17171f3c0d3f0eb6482
+  branch: 2-4-better
   specs:
-    spree_alipay (2.4.0)
-      alipay (~> 0.3.0)
-      spree_core (~> 2.4.2)
+    spree_alipay (2.4.10)
+      alipay (~> 0.10.0)
+      ruby-hmac
+      spree_core (~> 2.4.0)
 
 GIT
   remote: git://github.com/spree/spree_auth_devise.git
-  revision: 9a86a5c6ef99a9994a5195aa432ceaa9134a425b
+  revision: d1ce9bc2e4318c02d93a866057b0ac604f6173aa
   branch: 2-4-stable
   specs:
     spree_auth_devise (2.4.0)
@@ -37,7 +31,7 @@ GIT
 
 GIT
   remote: git://github.com/spree/spree_editor.git
-  revision: b1f78767999598f4619e8f419187e64c6023b09d
+  revision: 600274016c1b963507347f1d6e87dd1a81ef0b65
   branch: 2-4-stable
   specs:
     spree_editor (2.2.1)
@@ -114,7 +108,7 @@ GEM
       activemodel (= 4.1.11)
       activesupport (= 4.1.11)
       arel (~> 5.0.0)
-    activerecord-session_store (0.1.1)
+    activerecord-session_store (0.1.2)
       actionpack (>= 4.0.0, < 5)
       activerecord (>= 4.0.0, < 5)
       railties (>= 4.0.0, < 5)
@@ -130,9 +124,9 @@ GEM
     acts_as_list (0.7.2)
       activerecord (>= 3.0)
     addressable (2.3.8)
-    alipay (0.3.1)
+    alipay (0.10.0)
     arel (5.0.1.20140414130214)
-    autoprefixer-rails (6.0.2)
+    autoprefixer-rails (6.1.0.1)
       execjs
       json
     awesome_nested_set (3.0.2)
@@ -154,14 +148,14 @@ GEM
       xpath (~> 2.0)
     carmen (1.0.2)
       activesupport (>= 3.0.0)
-    ckeditor (4.1.3)
+    ckeditor (4.1.5)
       cocaine
       orm_adapter (~> 0.5.0)
-    cldr-plurals-runtime-rb (1.0.0)
+    cldr-plurals-runtime-rb (1.0.1)
     climate_control (0.0.3)
       activesupport (>= 3.0)
     cliver (0.3.2)
-    cocaine (0.5.7)
+    cocaine (0.5.8)
       climate_control (>= 0.0.3, < 1.0)
     coffee-rails (4.1.0)
       coffee-script (>= 2.2.0)
@@ -169,14 +163,14 @@ GEM
     coffee-script (2.4.1)
       coffee-script-source
       execjs
-    coffee-script-source (1.9.1.1)
+    coffee-script-source (1.10.0)
     colorize (0.7.7)
     crack (0.4.2)
       safe_yaml (~> 1.0.0)
-    css_parser (1.3.6)
+    css_parser (1.3.7)
       addressable
-    database_cleaner (1.5.0)
-    deface (1.0.1)
+    database_cleaner (1.5.1)
+    deface (1.0.2)
       colorize (>= 0.5.8)
       nokogiri (~> 1.6.0)
       polyglot
@@ -191,7 +185,7 @@ GEM
       devise (>= 2.1.0)
     diff-lcs (1.2.5)
     docile (1.1.5)
-    domain_name (0.5.24)
+    domain_name (0.5.25)
       unf (>= 0.0.5, < 1.0.0)
     email_spec (1.6.0)
       launchy (~> 2.1)
@@ -213,7 +207,7 @@ GEM
     htmlentities (4.3.4)
     http-cookie (1.0.2)
       domain_name (~> 0.5)
-    httparty (0.13.5)
+    httparty (0.13.7)
       json (~> 1.8)
       multi_xml (>= 0.5.2)
     i18n (0.7.0)
@@ -233,11 +227,9 @@ GEM
       addressable (~> 2.3)
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
-    mail_view (2.0.4)
-      tilt
-    mime-types (2.6.1)
+    mime-types (2.99)
     mini_portile (0.6.2)
-    minitest (5.8.0)
+    minitest (5.8.3)
     monetize (1.3.1)
       money (~> 6.6)
     money (6.6.1)
@@ -245,8 +237,8 @@ GEM
     multi_json (1.11.2)
     multi_xml (0.5.5)
     mysql2 (0.3.19)
-    netrc (0.10.3)
-    nokogiri (1.6.6.2)
+    netrc (0.11.0)
+    nokogiri (1.6.6.4)
       mini_portile (~> 0.6.0)
     offsite_payments (2.0.1)
       active_utils (~> 2.2.0)
@@ -262,7 +254,7 @@ GEM
       activesupport (>= 3.2.0)
       cocaine (~> 0.5.5)
       mime-types
-    paranoia (2.1.3)
+    paranoia (2.1.4)
       activerecord (~> 4.0)
     pingpp (2.0.8)
       json (~> 1.8, >= 1.8.1)
@@ -276,7 +268,7 @@ GEM
     polyamorous (1.2.0)
       activerecord (>= 3.0)
     polyglot (0.3.5)
-    premailer (1.8.4)
+    premailer (1.8.6)
       css_parser (>= 1.3.6)
       htmlentities (>= 4.0.0)
     premailer-rails (1.8.2)
@@ -313,7 +305,7 @@ GEM
       http-cookie (>= 1.0.2, < 2.0)
       mime-types (>= 1.16, < 3.0)
       netrc (~> 0.7)
-    rspec-activemodel-mocks (1.0.1)
+    rspec-activemodel-mocks (1.0.2)
       activemodel (>= 3.0)
       activesupport (>= 3.0)
       rspec-mocks (>= 2.99, < 4.0)
@@ -412,7 +404,7 @@ GEM
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (>= 2.8, < 4.0)
-    sqlite3 (1.3.10)
+    sqlite3 (1.3.11)
     state_machine (1.2.0)
     stringex (1.5.1)
     thor (0.19.1)
@@ -437,7 +429,7 @@ GEM
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.7.1)
-    useragent (0.15.2)
+    useragent (0.16.2)
     versioncake (2.3.1)
       actionpack (>= 3.2)
       activesupport (>= 3.2)
@@ -448,7 +440,7 @@ GEM
     webmock (1.8.11)
       addressable (>= 2.2.7)
       crack (>= 0.1.7)
-    websocket-driver (0.6.2)
+    websocket-driver (0.6.3)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.2)
     with_model (1.2.1)
@@ -460,7 +452,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  activemerchant_patch_for_china!
   activerecord-session_store
   acts_as_commentable
   alipay
@@ -473,9 +464,7 @@ DEPENDENCIES
   factory_girl_rails (~> 4.5.0)
   jquery-turbolinks
   launchy
-  mail_view
   mysql2 (= 0.3.19)
-  offsite_payments
   paperclip_oss_storage!
   poltergeist (= 1.5.0)
   rails (= 4.1.11)

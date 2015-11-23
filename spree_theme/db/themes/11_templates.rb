@@ -12,13 +12,14 @@
 #    obj.send(:attributes=, ha, false)
 #    obj.save
 #  end
-
-
+bool_false =  Spree::HtmlAttribute::BOOL_FALSE
+bool_true =  Spree::HtmlAttribute::BOOL_TRUE
 # section slugs= [root,container,menu]
 objects = Spree::Section.roots
 section_hash= objects.inject({}){|h,sp| h[sp.slug] = sp; h}
 # puts "section_hash=#{section_hash.keys}"
 template = Spree::TemplateTheme.create_plain_template(section_hash['root2'], "Template One")
+
 document = template.page_layout_root
 header = template.add_section(section_hash['container'],document, :title=>"Header")
 template.add_section(section_hash['image'], header,:title=>"Logo")
@@ -34,10 +35,10 @@ main_content = template.add_section(section_hash['container'], body, :title=>"ma
 template.add_section(section_hash['vmenu'], lftnav, :title=>"Categories")
 
 product_list = template.add_section(section_hash['container'], main_content, :title=>"product list")
-product_detail = template.add_section(section_hash['container'], main_content, :title=>"product detail")
+product_detail = template.add_section(section_hash['container'], main_content, { title: "product detail"})
 product = template.add_section(section_hash['container'], product_list, :title=>"product")
-template.add_section(section_hash['product-name'], product, :title=>"product name")
-template.add_section(section_hash['product-image'], product, :title=>"product image")
+template.add_section(section_hash['product-name'], product, { title: "product name", content_param: 1 })
+template.add_section(section_hash['product-image'], product, { title: "product name", content_param: 1 })
 template.add_section(section_hash['product-price'], product, :title=>"product price")
 
 detail_left = template.add_section(section_hash['container'], product_detail, :title=>"left part")
@@ -82,6 +83,8 @@ login = template.add_section(section_hash['container'], others, :title=>"Login")
 signup = template.add_section(section_hash['container'], others, :title=>"Signup")
   template.add_section(section_hash['sign-up-form'], signup, :title=>"Sign up form")
 
+
+# set context
 others.reload
   others.update_section_context( [Spree::PageLayout::ContextEnum.cart,Spree::PageLayout::ContextEnum.checkout, Spree::PageLayout::ContextEnum.thanks, Spree::PageLayout::ContextEnum.login, Spree::PageLayout::ContextEnum.signup, Spree::PageLayout::ContextEnum.account] )
 cart.reload
@@ -105,6 +108,8 @@ product_list.update_data_source( Spree::PageLayout::DataSourceEnum.gpvs )
 product_detail.update_section_context( Spree::PageLayout::ContextEnum.detail )
 product_detail.update_data_source( Spree::PageLayout::DataSourceEnum.this_product )
 
+#form enable
+product_detail.update_attribute( :content_param,  512 )
 
 
 template.add_section(section_hash['hmenu'], footer, :title=>"footer menu")

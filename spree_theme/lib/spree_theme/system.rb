@@ -217,7 +217,7 @@ module SpreeTheme
                           'pdxgw|netfront|xiino|vodafone|portalmmm|sagem|mot-|sie-|ipod|up\\.b|' +
                           'webos|amoi|novarra|cdm|alcatel|pocket|iphone|mobileexplorer|mobile'
     def mobile?
-      return true if cookies[:_dalianshops_terminal]=='1'
+      return true if cookies[:_dalianshops_terminal]=='2'
 
       agent_str = request.user_agent.to_s.downcase
       return false if agent_str =~ /ipad/
@@ -228,7 +228,7 @@ module SpreeTheme
       unless @current_terminal
         @current_terminal = ( mobile? ? Spree::UserTerminal.cellphone.first : Spree::UserTerminal.pc.first )
       end
-      @current_terminal
+      @current_terminal 
     end
 
     def get_default_taxon(  )
