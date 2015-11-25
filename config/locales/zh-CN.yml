@@ -466,7 +466,7 @@ zh-CN:
     back_to_users_list: 回到用户列表
     back_to_zones_list: 回到区域列表
     backorderable: 可预订
-    backorderable_default: 缺省允许预订
+    backorderable_default: 缺货允许预订
     backorders_allowed: 允许预订
     balance_due: "尚欠款"
     base_amount:
