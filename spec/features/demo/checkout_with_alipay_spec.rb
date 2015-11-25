@@ -60,12 +60,15 @@ describe "Alipay", :js => true, :type => :feature do
     visit spree.products_path
 
     click_link product.name
-    find('#add-to-cart-button').click #click_button
-    click_button 'Checkout'
+    find('button#add-to-cart-button').click #click_button
+    find('button#checkout-link').click
 
+    click_link '创建一个新帐号' #make a new account
     # spree_auth_devise requried
-    within("#guest_checkout") do
-      fill_in "Email", :with => "test@example.com"
+    within("#new_spree_user") do
+      find('#spree_user_email').set('test@example.com')
+      find('#spree_user_password').set('spree123')
+      find('#spree_user_password').set('spree123')
       click_button 'Continue'
     end
   end
