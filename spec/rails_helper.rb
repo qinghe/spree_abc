@@ -43,13 +43,14 @@ require 'spree_multi_site/testing_support/factories'
 ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
+
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
   # instead of true.
-  config.use_transactional_fixtures = true
+  config.use_transactional_fixtures = false
 
   # RSpec Rails can automatically mix in different behaviours to your tests
   # based on their file location, for example enabling you to call `get` and
@@ -86,7 +87,8 @@ RSpec.configure do |config|
 
   # Before each spec check if it is a Javascript test and switch between using database transactions or not where necessary.
   config.before :each do
-    #except_tables = %w[ spree_section_pieces spree_html_attributes spree_param_categories spree_editors spree_section_piece_params spree_sections spree_section_params ]
+    Rails.cache.clear
+    WebMock.disable!
 
     if RSpec.current_example.metadata[:js]
       DatabaseCleaner.strategy = :truncation , { except: except_tables }

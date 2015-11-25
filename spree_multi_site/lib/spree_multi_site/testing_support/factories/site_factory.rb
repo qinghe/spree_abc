@@ -9,7 +9,10 @@ FactoryGirl.define do
     end
 
     after(:create) do| site |
-      create(:store, site: site )
+      store = create(:store, site: site, is_public: true )
+      #it is not work.
+      #store.is_public = true
+      #store.save!
     end
 
     factory :site2 do

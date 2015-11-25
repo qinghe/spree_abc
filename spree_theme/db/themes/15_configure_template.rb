@@ -25,7 +25,7 @@ for partial_html in html_page.partial_htmls
   when 'content'
     partial_html['block_height']['unset'] = true
     partial_html['block_height'].update
-    partial_html['content_layout_clear']['unset'] = true
+    partial_html['content_layout_clear']['unset'] = false
     partial_html['content_layout_clear']['psvalue'] = 'none'
     partial_html['content_layout_clear'].update
 
@@ -35,6 +35,9 @@ for partial_html in html_page.partial_htmls
     partial_html['block_width']['pvalue'] = 600
     partial_html['block_width']['unit'] = 'px'
     partial_html['block_width'].update
+  when 'product list', 'product detail', 'product', 'left part', 'right part'
+    partial_html['block_height']['unset'] = true
+    partial_html['block_height'].update
 
   when 'lftnav'
     partial_html['block_height']['unset'] = true

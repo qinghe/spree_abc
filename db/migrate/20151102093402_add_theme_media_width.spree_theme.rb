@@ -14,14 +14,6 @@ class AddThemeMediaWidth < ActiveRecord::Migration
     add_reference( :spree_template_themes, :user_terminal )
     add_reference( :spree_orders, :user_terminal )
 
-    if table_exists?( :spree_user_terminals )
-
-      pc = Spree::UserTerminal.create!(name: 'PC', medium_width: 'all' )
-      phone = Spree::UserTerminal.create!(name: 'Cellphone', medium_width: 'all' )
-      pad = Spree::UserTerminal.create!(name: 'Pad', medium_width: 'all' )
-
-    end
-
   end
 
 end

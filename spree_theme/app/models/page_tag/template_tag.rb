@@ -218,6 +218,7 @@ module PageTag
             objs = [self.page_generator.resource]
           end
       end
+
       #Rails.logger.debug "self.current_piece=#{self.current_piece.title},wrapped_taxon = #{wrapped_taxon.name},objs=#{objs.inspect}"
       if objs.present?
         # wrapped_taxon may not be current taxon

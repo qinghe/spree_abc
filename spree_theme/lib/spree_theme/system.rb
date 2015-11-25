@@ -42,7 +42,6 @@ module SpreeTheme
     end
 
     def initialize_template( request_fullpath = nil )
-
       request_fullpath ||= request.fullpath
 
       # in case  tld/create_admin_session, should show system layout, theme may have no login section. ex www.dalianshops.com
@@ -228,7 +227,7 @@ module SpreeTheme
       unless @current_terminal
         @current_terminal = ( mobile? ? Spree::UserTerminal.cellphone.first : Spree::UserTerminal.pc.first )
       end
-      @current_terminal 
+      @current_terminal
     end
 
     def get_default_taxon(  )
