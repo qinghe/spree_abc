@@ -77,7 +77,10 @@ RSpec.configure do |config|
 
   config.include Paperclip::Shoulda::Matchers
 
-  except_tables = %w[ spree_section_pieces spree_html_attributes spree_param_categories spree_editors spree_section_piece_params spree_sections spree_section_params spree_user_terminals]
+  except_tables = %w[ spree_section_pieces spree_html_attributes spree_param_categories \
+    spree_editors spree_section_piece_params \
+    spree_sections spree_section_params spree_user_terminals \
+    spree_countries spree_states spree_cities]
 
   # Ensure Suite is set to use transactions for speed.
   config.before :suite do

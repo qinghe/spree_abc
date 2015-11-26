@@ -7,7 +7,6 @@ describe "Alipay", :js => true, :type => :feature do
   before(:all) do
     raise "plese set ALIPAY_KEY, ALIPAY_PID" unless  ENV['ALIPAY_PID'] && ENV['ALIPAY_KEY']
     FactoryGirl.create(:shipping_method)
-
     Spree::Site.current = create(:site1)
     load  File.join( Rails.root, 'spree_theme', 'db', 'themes','seed.rb')
     # for unkonwn reason, is_public is false, we set it here
@@ -37,21 +36,37 @@ describe "Alipay", :js => true, :type => :feature do
       payment_method_css = "order_payments_attributes__payment_method_id_#{@gateway.id}"
 
       add_to_cart
+
+      fill_in_address
+
     end
   end
 
-  def fill_in_billing
+  def fill_in_address
 
-    within("#billing") do
-      fill_in "First Name", :with => "Test"
-      fill_in "Last Name", :with => "User"
-      fill_in "Street Address", :with => "1 User Lane"
-      # City, State and ZIP must all match for PayPal to be happy
-      fill_in "City", :with => "Adamsville"
-      select "United States of America", :from => "order_bill_address_attributes_country_id"
-      select "Alabama", :from => "order_bill_address_attributes_state_id"
-      fill_in "Zip", :with => "35005"
-      fill_in "Phone", :with => "555-AME-RICA"
+    within("#checkout_form_address") do
+      #  order_bill_address_attributes_country_id
+      select "中国", :from => "order_bill_address_attributes_country_id" # china
+      select "辽宁", :from => "order_bill_address_attributes_state_id"   # liaoning
+      select "大连", :from => "order_bill_address_attributes_city_id" # city
+      fill_in "姓名", :with => "Test" #name
+      fill_in "详细地址", :with => "xi'an road 6#, 1120room"
+
+      fill_in "邮编", :with => "116000"       #postal code
+      fill_in "电话", :with => "13888888888" #phone
+      click_button '保存并继续'
+    end
+  end
+
+  def fill_in_delivery
+    within("#checkout_form_delivery") do
+      click_button '保存并继续'
+    end
+  end
+
+  def fill_in_payment
+    within("#checkout_form_payment") do
+      click_button '支付'
     end
   end
 
@@ -68,8 +83,8 @@ describe "Alipay", :js => true, :type => :feature do
     within("#new_spree_user") do
       find('#spree_user_email').set('test@example.com')
       find('#spree_user_password').set('spree123')
-      find('#spree_user_password').set('spree123')
-      click_button 'Continue'
+      find('#spree_user_password_confirmation').set('spree123')
+      click_button '创建' #create
     end
   end
 
