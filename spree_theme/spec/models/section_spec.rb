@@ -31,8 +31,11 @@ describe Spree::Section do
     let (:section) { create(:section_with_children).reload }
 
     it "build  html" do
+Rails.logger.debug " .........start section = #{section.inspect} #{section.children.inspect} "
       html = section.build_html
       html.should eq "<div> this is a section piece </div>"
+
+Rails.logger.debug " .........end build html....."
     end
   end
 

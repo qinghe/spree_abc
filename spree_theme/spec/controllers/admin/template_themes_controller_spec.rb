@@ -2,7 +2,7 @@ require "spec_helper"
 
 describe Spree::Admin::TemplateThemesController, :type => :controller do
   stub_authorization!
-  stub_initialize_template!
+  #stub_initialize_template!
 
   let(:template_theme) do
     create(:template_theme)
@@ -11,7 +11,6 @@ describe Spree::Admin::TemplateThemesController, :type => :controller do
   describe "GET #native" do
 
     context 'with none template themes' do
-
       it "responds successfully with an HTTP 200 status code" do
         spree_get :native
         expect(response).to be_success
@@ -20,8 +19,10 @@ describe Spree::Admin::TemplateThemesController, :type => :controller do
     end
   end
 
-  describe "post #apply" do
-    context 'with a template themes' do
+    context 'apply theme to store' do
+      before(:each) do
+        Spree::Store.current(  create(:store)  )
+      end
 
       it "responds successfully with an HTTP 200 status code" do
         spree_xhr_post :apply, :id=>template_theme.id
@@ -29,7 +30,6 @@ describe Spree::Admin::TemplateThemesController, :type => :controller do
         #expect(response).to render_template("native")
       end
     end
-  end
 
 
 end

@@ -9,7 +9,7 @@ module SpreeTheme
         def stub_initialize_template!
           before(:each) {
             #refer to spree/core/store
-            Spree::Store.current(  create(:store).url )
+            #Spree::Store.current(  create(:store).url )
             allow(controller).to receive(:initialize_template).and_return(nil)
           }
         end
@@ -26,5 +26,5 @@ module SpreeTheme
   end
 end
 RSpec.configure do |config|
-  config.extend SpreeTheme::TestingSupport::Helpers::Request, type: :controller
+  config.extend SpreeTheme::TestingSupport::Helpers::Request #, type: :controller
 end

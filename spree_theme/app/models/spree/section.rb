@@ -63,7 +63,7 @@ module Spree
     end
 
     def build_html
-      #use full_set_nodes instead of self_and_descendants,  full_set_nodes is included.
+      #use full_set_nodes instead of self_and_descendants,  full_set_nodes is includable.
        tree = self.full_set_nodes
        build_html_piece(tree, self, self.section_piece_in_hash)
     end

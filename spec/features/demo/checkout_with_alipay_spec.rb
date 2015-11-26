@@ -32,8 +32,8 @@ describe "Alipay", :js => true, :type => :feature do
     end
     it "pay an order successfully" do
       shipping_method = Spree::ShippingMethod.first
-      Rails.logger.debug " shipping_method = #{shipping_method.inspect}"
-      Rails.logger.debug " zone = #{Spree::Zone.first.inspect}"
+      #Rails.logger.debug " shipping_method = #{shipping_method.inspect}"
+      #Rails.logger.debug " zone = #{Spree::Zone.first.inspect}"
       #order[payments_attributes][][payment_method_id]
       #order_payments_attributes__payment_method_id_1
       payment_method_css = "order_payments_attributes__payment_method_id_#{@gateway.id}"
