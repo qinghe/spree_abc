@@ -16,11 +16,6 @@
           <%= f.password_field :password, :minlength=>6, :maxlength=>30, :required=>"" %>
         </p>
 
-        <p>
-          <%= f.label :password_confirmation, Spree.t(:confirm_password) %><br />
-          <%= f.password_field :password_confirmation, :minlength=>6, :maxlength=>30, :required=>"" %>
-        </p>
-
       <% if @template_theme.present? %>
         <p>
           <%= f.label :foreign_theme_id %> <br />

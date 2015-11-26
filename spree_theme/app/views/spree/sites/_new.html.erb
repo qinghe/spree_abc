@@ -18,9 +18,6 @@ $("#new_site").validate({
         url: <%== check_email_path.to_json %>,
         type: "post"
       }
-    },
-    'site[password_confirmation]':{
-      equalTo:'#site_password'
     }
 
   },
