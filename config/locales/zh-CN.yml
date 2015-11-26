@@ -239,6 +239,8 @@ zh-CN:
         one: "支付方式"
         other: "支付方式"
       spree/product:
+        one: "产品"
+        other: "产品"
       spree/promotion:
         one: "促销"
         other: "促销"
