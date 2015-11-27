@@ -3,7 +3,6 @@
 <div data-hook="admin_product_form_summary">
   <div id="product_summary_field" class="field">
     <%= f.label :summary %>
-    <%= f.text_field :summary %>
-  </div>    
+    <%= f.text_field :summary, class: 'form-control' %>
+  </div>
 </div>
-   

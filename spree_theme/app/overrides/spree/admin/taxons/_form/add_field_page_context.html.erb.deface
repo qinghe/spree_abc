@@ -1,7 +1,7 @@
-<!-- insert_bottom '[data-hook="admin_inside_taxon_form"] .alpha.five.columns' -->
+<!-- insert_bottom '[data-hook="admin_inside_taxon_form"] .col-md-5' -->
     <%= f.field_container :replaced_by do %>
       <%= f.label :replaced_by %><br />
-      <%= f.hidden_field :replaced_by, { :class => 'fullwidth' }%>      
+      <%= f.hidden_field :replaced_by, { :class => 'fullwidth' }%>
       <%= f.error_message_on :replaced_by %>
     <% end %>
     <%= f.field_container :page_context do %>
@@ -12,7 +12,7 @@
     <% end %>
     <%= f.field_container :is_clickable do %>
       <label>
-      <%= f.check_box :is_clickable %> <%= Spree.t(:is_taxon_clickable) %>     
+      <%= f.check_box :is_clickable %> <%= Spree.t(:is_taxon_clickable) %>
       </label>
       <%= f.error_message_on :is_clickable %>
     <% end %>
@@ -20,7 +20,7 @@
   <script>
   $(document).ready(function () {
     set_resource_taxon_select('taxon_replaced_by', false, Spree.routes.taxons_search);
-  });  
-  
+  });
+
   </script>
 <% end %>
