@@ -1,39 +1,15 @@
 #encoding: utf-8
 module Spree
   CheckoutController.class_eval do
-    # Updates the order and advances to the next state (when possible.)
-    def update
-      if @order.update_attributes(object_params)
-        fire_event('spree.checkout.update')
+    before_action :associate_terminal
 
-        while(@order.next) do
-          if pay_with_billing_integration?
-            break
-          end
-        end
-        #since update is override, call it explicitly for alipay 
-        if pay_with_billing_integration?
-          handle_billing_integration
-          return
-        end
-        
-        unless @order.completed?
-          flash[:error] = @order.errors.full_messages.join("\n")
-          redirect_to checkout_state_path(@order.state) and return
-        end
-
-        if @order.completed?
-          session[:order_id] = nil
-          flash.notice = Spree.t(:order_processed_successfully)
-          flash[:commerce_tracking] = "nothing special"
-          redirect_to completion_route
-        else
-          redirect_to checkout_state_path(@order.state)
-        end
-      else
-        render :edit
+    def associate_terminal
+      @order ||= current_order
+      if @order
+        @order.associate_terminal!(current_terminal) if @order.user_terminal != current_terminal
       end
     end
+
     private
     # For payment step, filter order parameters to produce the expected nested
     # attributes for a single payment and its source, discarding attributes
@@ -53,14 +29,6 @@ module Spree
       end
       params[:order]
     end
-    
-    def pay_with_billing_integration?
-      if @order.next_step_complete?
-        if @order.pending_payments.first.payment_method.kind_of? BillingIntegration 
-          return true
-        end
-      end
-      return false
-    end
+
   end
 end

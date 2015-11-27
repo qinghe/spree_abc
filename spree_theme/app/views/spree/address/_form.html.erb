@@ -62,7 +62,7 @@
 
   <p class="field" id=<%="#{address_id}address1" %>>
     <%= form.label :address1, Spree.t('china_address.street') %><span class="required">*</span><br />
-    <%= form.text_field :address1, :class => 'required' %>
+    <%= form.text_field :address1, class: 'required', size: '66', maxlength: '66' %>
   </p>
 
   <p class="field" id=<%="#{address_id}zipcode" %>>

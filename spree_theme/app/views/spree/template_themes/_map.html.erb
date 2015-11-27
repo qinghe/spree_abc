@@ -1,0 +1,95 @@
+<%
+map_lat = current_store.map_lat.to_f
+map_lng = current_store.map_lng.to_f
+map_title   = current_store.map_title
+map_content = current_store.map_content
+%> 
+ 
+      <!--引用百度地图API-->
+      <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=22a9ee71dbd70f2233ef6f5591ee6023"></script>
+      <!--百度地图容器-->
+      <div style="width: 100%;height: 100%;" id="map" title="baidu-map"></div>
+      <script type="text/javascript">
+      //创建和初始化地图函数：
+      function initMap(){
+        createMap();//创建地图
+        setMapEvent();//设置地图事件
+        addMapControl();//向地图添加控件
+        addMapOverlay();//向地图添加覆盖物
+      }
+      //创建地图函数：
+      function createMap(){
+        //var map = new BMap.Map("map"); 
+        //map.centerAndZoom(new BMap.Point(116.40781,39.923966),15);
+        var map = new BMap.Map("map");//在百度地图容器中创建一个地图
+        var point = new BMap.Point(<%=map_lng%>,<%=map_lat%>);//定义一个中心点坐标
+        map.centerAndZoom(point,17);//设定地图的中心点和坐标并将地图显示在地图容器中
+        window.map = map;//将map变量存储在全局
+      }
+
+      function setMapEvent(){
+        map.enableDragging();//启用地图拖拽事件，默认启用(可不写)
+        map.enableScrollWheelZoom();//启用地图滚轮放大缩小
+        map.enableDoubleClickZoom();//启用鼠标双击放大，默认启用(可不写)
+        map.enableKeyboard();//启用键盘上下左右键移动地图
+      }
+      function addClickHandler(target,window){
+        target.addEventListener("click",function(){
+        target.openInfoWindow(window);
+        });
+      }
+      function addMapOverlay(){
+        var markers = [
+        {content:"<%== map_content%>",title:"<%=map_title%>",imageOffset: {width:-69,height:-21},position:{lat:<%=map_lat%>,lng:<%=map_lng%>}},
+        ];
+        for(var index = 0; index < markers.length; index++ ){
+        var point = new BMap.Point(markers[index].position.lng,markers[index].position.lat);
+        var marker = new BMap.Marker(point,{icon:new BMap.Icon("http://app.baidu.com/map/images/us_mk_icon.png",new BMap.Size(20,25),{
+          imageOffset: new BMap.Size(markers[index].imageOffset.width,markers[index].imageOffset.height)
+        })});
+        var label = new BMap.Label(markers[index].title,{offset: new BMap.Size(25,5)});
+        var opts = {
+          title: markers[index].title,
+          enableMessage: false
+        };
+        var infoWindow = new BMap.InfoWindow(markers[index].content,opts);
+        marker.setLabel(label);
+        //addClickHandler(marker,infoWindow);
+        map.addOverlay(marker);
+        
+                // code for customize event
+        (function(){
+          var _iw = infoWindow;
+          var _marker = marker;
+          _marker.addEventListener("click",function(){
+          this.openInfoWindow(_iw);
+          });
+          _iw.addEventListener("open",function(){
+          _marker.getLabel().hide();
+          })
+          _iw.addEventListener("close",function(){
+          _marker.getLabel().show();
+          })
+          label.addEventListener("click",function(){
+          _marker.openInfoWindow(_iw);
+          })
+          label.hide();
+          _marker.openInfoWindow(_iw);
+        })()
+        };
+
+
+      }
+      //地图控件添加函数：
+      function addMapControl(){
+        //向地图中添加缩放控件
+        var ctrl_nav = new BMap.NavigationControl({anchor:BMAP_ANCHOR_TOP_LEFT,type:BMAP_NAVIGATION_CONTROL_LARGE});
+        map.addControl(ctrl_nav);
+        //向地图中添加缩略图控件
+        var ctrl_ove = new BMap.OverviewMapControl({anchor:BMAP_ANCHOR_BOTTOM_RIGHT,isOpen:1});
+        map.addControl(ctrl_ove);
+        //向地图中添加比例尺控件
+        var ctrl_sca = new BMap.ScaleControl({anchor:BMAP_ANCHOR_BOTTOM_LEFT});
+        map.addControl(ctrl_sca);
+      }
+      </script>

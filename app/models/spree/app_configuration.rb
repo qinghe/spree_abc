@@ -51,7 +51,7 @@ module Spree
     preference :currency_thousands_separator, :string, default: ","
     preference :display_currency, :boolean, default: false
 #    preference :default_country_id, :integer
-    preference :default_country_id, :integer, default: 41
+    preference :default_country_id, :integer, default: 1
     preference :dismissed_spree_alerts, :string, default: ''
     preference :expedited_exchanges, :boolean, default: false # NOTE this requires payment profiles to be supported on your gateway of choice as well as a delayed job handler to be configured with activejob. kicks off an exchange shipment upon return authorization save. charge customer if they do not return items within timely manner.
     preference :expedited_exchanges_days_window, :integer, default: 14 # the amount of days the customer has to return their item after the expedited exchange is shipped in order to avoid being charged
@@ -80,8 +80,10 @@ module Spree
     preference :track_inventory_levels, :boolean, default: true # Determines whether to track on_hand values for variants / products.
 
     # Default mail headers settings
-    preference :send_core_emails, :boolean, :default => true
-    preference :mails_from, :string, :default => 'spree@example.com'
+    #preference :send_core_emails, :boolean, :default => true
+    preference :send_core_emails, :boolean, :default => false
+    #preference :mails_from, :string, :default => 'spree@example.com'
+    preference :mails_from, :string, :default => 'notice@getstore.cn'
 
     # searcher_class allows spree extension writers to provide their own Search class
     def searcher_class

@@ -2,4 +2,4 @@
 @theme = Spree::TemplateTheme.first
 @theme.release
 
-SpreeTheme.site_class.current.apply_theme @theme
+Spree::Store.current.apply_theme @theme

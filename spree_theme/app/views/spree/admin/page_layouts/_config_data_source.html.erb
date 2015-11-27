@@ -1,0 +1,37 @@
+
+<fieldset id="page_layout_container" class="">
+  <% if @page_layout.present? %>  
+      <% page_layout = @page_layout%>
+      <legend align="center"><%= page_layout.title %></legend>
+      <%= form_for :page_layout, url: update_data_source_admin_template_theme_page_layout_path(@template_theme,page_layout),remote: true do |f|%>
+        <div class="field">
+          <%= label_tag :section_data_source, Spree.t('page_layout.data_source') %><br>
+          <% current_data_source = page_layout.current_data_source
+             options = options_for_select((Spree::PageLayout::DataSourceEnum.members).collect{|section_data_source| [Spree.t("section_data_source.#{ section_data_source }"), section_data_source] }, current_data_source )          
+          %>
+          <%= select_tag "section_data_source", options , include_blank: true,class: 'select2' %>      
+        </div>        
+        <div class="form-buttons filter-actions actions" data-hook="buttons">
+          <%= button Spree.t('actions.update'), 'refresh' %>
+          <span class="or"><%= Spree.t(:or) %></span>
+          <%= button_link_to Spree.t('actions.cancel'), '', :icon => 'remove', :onclick=>"$('#page_layout_container').hide();return false;" %>
+        </div>
+      <%end%>
+  <% else %>
+      <legend align="center"><%= Spree.t('page_layout.please_select_to_config') %></legend>
+      <div class="alpha twelve columns no-objects-found">
+        <%= Spree.t(:no_resource_found, resource: I18n.t(:other, scope: 'activerecord.models.spree/page_layout')) %>,
+      </div>
+  <% end %>      
+</fieldset> 
+
+<% unless Rails.env.test? %>
+  <script>
+  // copy from spree/backend/assets/javascripts/admin/taxon_autocomlete.js.erb
+// assign resource to theme
+  $(document).ready(function () {
+    $('.select2-container').css({width: '40em'});
+  });  
+  
+  </script>
+<% end %>

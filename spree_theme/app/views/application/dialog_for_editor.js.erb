@@ -1,0 +1,8 @@
+
+
+$("#dialog_for_editor").html(<%== ( render :partial => action_name,:formats=>[:html] ).to_json %>)
+
+$("#dialog_for_editor").simplemodal({closeHTML:'', escClose:true, overlayClose:true});
+$("#dialog_for_editor a.cancel,#dialog_for_editor button.cancel").click( function(){
+  $.simplemodal.close();
+});

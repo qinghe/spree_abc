@@ -1,15 +1,17 @@
 <%= render :partial => 'sub_menu' %>
-<% content_for :page_actions do %>  
-  <li><%= button_link_to Spree.t("template_file.new"), new_object_url, :icon => 'icon-plus' %></li>
+<% content_for :page_actions do %>
+  <li><%= button_link_to Spree.t("template_file.new"), new_object_url, :icon => 'plus' %></li>
 <% end %>
 
 <%= render :partial=>'tabs',:locals=>{:current=>"TemplateFile"}%>
 
+<% if @template_files.any? %>
 
 <table class="index">
   <colgroup>
-    <col style="width: 22%" />
-    <col style="width: 22%" />
+    <col style="width: 8%" />
+    <col style="width: 18%" />
+    <col style="width: 18%" />
     <col style="width: 10%" />
     <col style="width: 8%" />
     <col style="width: 24%" />
@@ -17,7 +19,7 @@
   </colgroup>
   <thead>
     <tr>
-      <th><%= Spree::TemplateFile.human_attribute_name(:attachment_file_name) %></th>
+      <th colspan="2"><%= Spree::TemplateFile.human_attribute_name(:attachment_file_name) %></th>
       <th><%= Spree::TemplateFile.human_attribute_name(:template_theme) %></th>
       <th><%= Spree::TemplateFile.human_attribute_name(:attachment_content_type) %></th>
       <th><%= Spree::TemplateFile.human_attribute_name(:attachment_file_size) %></th>
@@ -25,10 +27,11 @@
       <th class="actions"></th>
     </tr>
   </thead>
-  
+
   <tbody>
     <% @template_files.each do |page| %>
       <tr class="<%= cycle('odd', 'even') %>" id="<%= dom_id page %>">
+        <td> <%= image_tag page.attachment.url(:mini) %> </td>
         <td> <%= page.name %> </td>
         <td> <%= page.template_theme.title if page.template_theme.present? %>  </td>
         <td> <%= page.attachment_content_type %>  </td>
@@ -42,3 +45,11 @@
     <% end %>
   </tbody>
 </table>
+<%= paginate @template_files %>
+
+<% else %>
+  <div class="alpha twelve columns no-objects-found">
+    <%= Spree.t(:no_resource_found, resource: I18n.t(:other, scope: 'activerecord.models.spree/template_file')) %>,
+    <%= link_to Spree.t(:add_one), spree.new_admin_template_file_path %>!
+  </div>
+<% end %>

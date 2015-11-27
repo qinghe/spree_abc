@@ -1,8 +1,8 @@
 class ActsAsTaggableOnPosts < ActiveRecord::Migration
   def self.up
-    #table tags, tagings are part of gem acts-as-taggable-on, no spree namespace 
+    #table tags, tagings are part of gem acts-as-taggable-on, no spree namespace
     return if table_exists? :tags
-    
+
     create_table :tags do |t|
       t.string :name
     end
@@ -13,7 +13,9 @@ class ActsAsTaggableOnPosts < ActiveRecord::Migration
       # long enough to store the required class names.
       t.references :taggable, :polymorphic => true
       t.references :tagger, :polymorphic => true
-      t.string :context
+      # Limit is created to prevent MySQL error on index
+      # length for MyISAM table type: http://bit.ly/vgW2Ql
+      t.string :context, limit: 128
       t.datetime :created_at
     end
 
@@ -26,5 +28,5 @@ class ActsAsTaggableOnPosts < ActiveRecord::Migration
     drop_table :tags
     drop_table :taggings
   end
-  
+
 end

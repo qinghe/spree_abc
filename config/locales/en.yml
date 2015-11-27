@@ -261,8 +261,9 @@ en:
       signed_up: Welcome! You have signed up successfully.
       updated: You updated your account successfully.
     user_sessions:
-      signed_in: Signed in successfully.
-      signed_out: Signed out successfully.
+      spree_user:
+        signed_in: Signed in successfully.
+        signed_out: Signed out successfully.
   errors:
     messages:
       already_confirmed: was already confirmed

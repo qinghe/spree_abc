@@ -1,0 +1,63 @@
+@import 'store/spree_theme_variables';
+@import 'image-zoom';
+@import 'jquery.lightbox';
+@import 'store/spree_china_checkout';
+ 
+html.turbolinks-progress-bar::before {
+  background-color: red !important;
+  height: 2px !important;
+}
+ 
+/* mobile required it as well */
+#embeded_content_wrapper{
+  position: absolute;
+  top:0;
+  left:0;
+  right:0;
+  height:30px;
+  border-bottom: solid 1px #EBEBEB;
+  background-color: #F8F8F8;
+  z-index: 100;
+  display: none;
+}
+#embeded_content_wrapper .theme_selection_wrapper{
+  text-align:right;
+}
+
+#embeded_content_wrapper_icon{
+  position: absolute;
+  top:0;
+  right:0;
+  height:30px;
+  width:30px;
+  border: solid 1px #EBEBEB;
+  background-color: #F8F8F8;
+  z-index: 99;
+  font-size: 0.7em;
+}
+/* state name */
+.hidden {
+  display: none;
+}
+
+/*--------------------------------------*/
+/* Flash notices & errors
+/*--------------------------------------*/
+/*
+.flash {
+  padding: 10px;
+  color: $layout_background_color;
+  font-weight: bold;
+  margin-bottom: 10px;
+
+  &.notice {
+    background-color: $link_text_color;
+  }
+  &.success {
+    background-color: $c_green;
+  }
+  &.error {
+    background-color: $c_red;
+  }
+}
+*/

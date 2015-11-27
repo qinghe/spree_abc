@@ -1,0 +1,18 @@
+<h3 class="header3"> <%= Spree.t("shipping_address") %> </h3>
+
+<div class="" data-hook="billing_fieldset_wrapper">
+    <%= form.fields_for :bill_address do |bill_form| %>
+      <%= render :partial => 'spree/address/form_bootstrap', :locals => { :form => bill_form, :address_type => 'billing', :address => @order.bill_address } %>
+    <% end %>
+
+    <%= hidden_field_tag 'order[use_billing]', '1' %>
+    <% if try_spree_current_user.respond_to?(:persist_order_address) %>
+      <%= hidden_field_tag 'save_user_address', '1' %>
+    <% end %>
+
+
+    <div class="form-buttons" data-hook="buttons">
+      <%= form.button Spree.t(:save_and_continue), :class => 'continue button primary' %>
+    </div>
+
+</div>

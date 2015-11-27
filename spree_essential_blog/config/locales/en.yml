@@ -16,6 +16,7 @@ en:
         body: Body
         live: Published
         tags: Tags
+        author: Author
       post_category:
         model_name: Category
         name: Name

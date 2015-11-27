@@ -28,5 +28,10 @@ module PageTag
       }
       self
     end
+    
+    def index( wrapped_model )
+      self.wrapped_models.index wrapped_model
+    end
+    
   end
 end

@@ -61,43 +61,6 @@ module PageEvent
       is_value_changed = (param_value_event.event == ParamValue::EventEnum[:pv_changed]) # value changed or unit changed
       is_fixed = self.fixed?
       source_section_name = param_value_event.source_section_name
-      part_triggered = ['center_part','left_part','right_part'].include? source_section_name
-      page_triggered = ['root'].include? source_section_name
-      # width of one in these three changed.       
-      if self.section_slug=='center_area'
-        left_part = self.children.select{|s| s.section_slug=='left_part'}.first
-        right_part = self.children.select{|s| s.section_slug=='right_part'}.first
-        center_part = self.children.select{|s| s.section_slug=='center_part'}.first
-  Rails.logger.debug "left_part=#{left_part}, right_part=#{right_part}, center_part=#{center_part}"        
-        if part_triggered
-          if false #is_fixed, enable fixed center_area later. 
-            center_part_width = center_part.html_attribute_values( 'block_width' )
-            if source_section_name == 'left_part'
-              center_part_width['pvalue']+= param_value_event.difference
-  
-            elsif  source_section_name == 'right_part'
-              
-            else
-              
-            end
-          else          
-            left_part_block_width =  left_part.html_attribute_values( 'block_width' )            
-            left_part_block_margin = left_part.html_attribute_values( 'block_margin' )
-            right_part_block_width = right_part.html_attribute_values( 'block_width' )
-            right_part_block_margin = right_part.html_attribute_values( 'block_margin' )
-            center_part_inner_margin = center_part.html_attribute_values( 'inner_margin' )
-            if source_section_name == 'left_part'
-              center_part_inner_margin['pvalue3']+= param_value_event.difference
-              left_part_block_margin['pvalue1'] = -left_part_block_width['pvalue'] #margin-right = -left_part.width
-            elsif  source_section_name == 'right_part'
-              center_part_inner_margin['pvalue1']+= param_value_event.difference   
-              right_part_block_margin['pvalue3'] = -right_part_block_width['pvalue'] #margin-left = -right_part.width                 
-            end
-            self.updated_html_attribute_values.push(center_part_inner_margin, left_part_block_margin, right_part_block_margin)
-          end
-          
-        end                   
-      end    
     end
 
     

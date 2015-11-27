@@ -127,7 +127,9 @@ products.each do |product_attrs|
   #Spree::Config[:currency] = "USD"
 
   #default_shipping_category = Spree::ShippingCategory.find_by_name!("缺省")
-  product = Spree::Product.create!(default_attrs.merge(product_attrs), :without_protection => true)
+  product = Spree::Product.create!(default_attrs.merge(product_attrs)) do |prod|
+    prod.slug  = nil # friendly_id 5.0 required
+  end
   #Spree::Config[:currency] = "EUR"
   #product.reload
   #product.price = eur_price
