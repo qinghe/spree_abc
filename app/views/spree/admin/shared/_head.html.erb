@@ -1,4 +1,6 @@
-<meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
 <%= csrf_meta_tags %>
 
@@ -14,14 +16,13 @@
 <%= stylesheet_link_tag 'spree/backend/all' %>
 
 <%= javascript_include_tag 'spree/backend/all' %>
+<%= render "spree/admin/shared/translations" %>
 
 <!--[if lt IE 9]>
   <%= javascript_include_tag 'html5shiv' %>
 <![endif]-->
-<%= render "spree/admin/shared/translations" %>
 
 <%= javascript_tag do -%>
-  jQuery.alerts.dialogClass = 'spree';
   <%== "var AUTH_TOKEN = #{form_authenticity_token.inspect};" %>
   <%== "Spree.api_key = '#{try_spree_current_user.spree_api_key}';" if try_spree_current_user %>
 <% end %>

@@ -21,7 +21,7 @@ module Spree
     alias_attribute(:name, :attachment_file_name)
 
     #it is required, even for logo, app_configuration has default logo, each theme could customize logo
-    validate :template_theme, :presence=>true
+    validates_presence_of :template_theme
 
     #for resource_class.resourceful
     scope :resourceful, ->(theme){ where(:theme_id=>theme.id)}

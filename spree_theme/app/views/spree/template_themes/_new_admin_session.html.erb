@@ -1,22 +1,27 @@
-<% # actions: new_admin_section/create_admin_session 
-   #show error message in dialog, 
+<% # actions: new_admin_section/create_admin_session
+   #show error message in dialog,
  %>
-<%= flash_messages if request.xhr? %>
-
-<%= form_for Spree::User.new, :as => :spree_user, :url => create_admin_session_path, :method=>:post, :remote=>request.xhr? do |f| %>
-  <div id="password-credentials">
-    <table class="no-borders">
-        <tr>
-            <td><%= f.label :email, Spree.t(:email) %></td>
-            <td><%= f.email_field :email, :class => 'fullwidth', :tabindex => 1 %></td>
-        </tr>
-        <tr>
-            <td> <%= f.label :password, Spree.t(:password) %></td>
-            <td><%= f.password_field :password, :class => 'fullwidth', :tabindex => 2 %></td>
-        </tr>
-        <tr>
-            <td></td> <td><%= f.submit Spree.t(:login), :class => 'button primary', :tabindex => 3 %></td>
-        </tr>
-    </table>
-    
-<% end %>
+<div class="col-md-6 col-md-offset-3">
+  <p>
+      <%=image_tag 'logo/logo2c.png'%>
+  </p>
+  <div class="panel panel-default">
+  <%= flash_messages if request.xhr? %>
+        <div class="panel-heading">
+           <h3 class="panel-title"> <%= Spree.t(:welcome_to_admin_login)%></h3>
+        </div>
+    <%= form_for Spree::User.new, :as => :spree_user, :url => create_admin_session_path, :method=>:post, :remote=>request.xhr? do |f| %>
+        <div  class="panel-body" data-hook="login">
+          <div id="password-credentials">
+            <p><%= f.label :email, Spree.t(:email) %>
+                <%= f.email_field :email, :class => 'form-control', :tabindex => 1, autofocus: true %>
+            </p>
+            <p> <%= f.label :password, Spree.t(:password) %>
+                <%= f.password_field :password, :class => 'form-control', :tabindex => 2 %>
+            </p>
+          </div>
+            <p>   <%= f.submit Spree.t(:login), :class => 'btn btn-lg btn-success btn-block', :tabindex => 3 %>     </p>
+        </div>
+    <% end %>
+  </div>
+</div>

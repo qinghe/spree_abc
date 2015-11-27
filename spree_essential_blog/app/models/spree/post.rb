@@ -1,9 +1,10 @@
 module Spree
   class Post < ActiveRecord::Base
     #attr_accessible :title, :cover, :teaser, :body, :posted_at, :author, :live, :tag_list, :taxon_ids, :product_ids_string
+    extend FriendlyId
+    friendly_id :slug_candidates, :use => :slugged
 
     acts_as_taggable
-
     # for flash messages
     alias_attribute :name, :title
 
@@ -18,7 +19,9 @@ module Spree
     has_many :files, :as => :viewable, :class_name => "Spree::PostFile", :dependent => :destroy
 
     #validates :blog_id, :title, :presence => true
-    validates :permalink,  :presence => true, :uniqueness =>{ :scope=>:site_id }, :if => proc{ |record| !record.title.blank? }
+    #validates :permalink,  :presence => true, :uniqueness =>{ :scope=>:site_id }, :if => proc{ |record| !record.title.blank? }
+    validates :slug, length: { minimum: 3 }
+
     validates :body,  :presence => true
     validates :posted_at, :datetime => true
 
@@ -43,7 +46,7 @@ module Spree
     scope :past, -> { where("posted_at <= ?", Time.now).ordered }
     scope :live, -> {  where(:live => true ) }
 
-   	make_permalink
+   	#make_permalink
 
     # add search related
     cattr_accessor :searcher_class do
@@ -117,7 +120,14 @@ module Spree
     end
 
     def to_param
-      permalink.present? ? permalink : (permalink_was || title.to_s.to_url)
+      slug
+    end
+
+    def slug_candidates
+        [
+          :name,
+          [:name, :site_id],
+        ]
     end
 
   end

@@ -4,10 +4,11 @@ Spree::Asset.class_eval do
   include Spree::MultiSiteSystem
 end
 
-Spree::Configuration.class_eval do
-  belongs_to :site
-  default_scope  { where(:site_id =>  Spree::Site.current.id) }
-end
+#Spree::Configuration.class_eval do
+#  belongs_to :site
+#  default_scope  { where(:site_id =>  Spree::Site.current.id) }
+#end
+
 Spree::LogEntry.class_eval do
   belongs_to :site
   default_scope  { where(:site_id =>  Spree::Site.current.id) }
