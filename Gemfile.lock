@@ -39,6 +39,14 @@ GIT
       spree_backend (~> 2.4.0)
       tinymce-rails (~> 4.0.16)
 
+GIT
+  remote: git://github.com/spree/spree_simple_dash.git
+  revision: 6b0ee67b7be3f0c3fa619460951757c9c2b5efa2
+  branch: master
+  specs:
+    spree_simple_dash (2.4.0)
+      spree_core (~> 2.4.0)
+
 PATH
   remote: ./spree_china_checkout
   specs:
@@ -494,6 +502,7 @@ DEPENDENCIES
   spree_essential_blog!
   spree_multi_site!
   spree_pingpp!
+  spree_simple_dash!
   spree_theme!
   sqlite3
   timecop

@@ -9,6 +9,7 @@
 //= require ckeditor/init
 //= require spree/backend
 //= require spree/backend/spree_editor
+//= require spree/backend/spree_simple_dash
 //= require admin/spree_theme
 //= require admin/spree_essential_blog
 //= require_tree .

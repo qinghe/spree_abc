@@ -1012,7 +1012,6 @@ zh-CN:
     out_of_stock: "没有库存"
     out_of_stock_products: 没有库存的产品
     over_paid: Over Paid
-    overview: "首页"
     package_from: "包裹来自"
     pagination:
       next_page: "下一页 »"

@@ -1,5 +1,8 @@
-<% # copy from spree/admin/shared/_tabs, add post tab 
+<% # copy from spree/admin/shared/_tabs, add post tab
 %>
+<% if can? :admin, Spree::Admin::OverviewController %>
+  <%= tab :overview, icon: 'tasks'  %>
+<% end %>
 
 <% if can? :admin, Spree::Order %>
   <%= tab *Spree::BackendConfiguration::ORDER_TABS, icon: 'shopping-cart' %>
