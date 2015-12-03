@@ -62,7 +62,6 @@
       <td class="align-center"><%= post.live ? Spree.t('say_yes') : Spree.t('not') %></td>
       <td class="actions">
           <%= link_to_edit post, :no_text => true, :class => 'edit' if can?(:edit, post) %>
-          &nbsp;
           <%= link_to_delete post, :no_text => true if can?(:delete, post)  %>
       </td>
     </tr>
