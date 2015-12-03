@@ -36,8 +36,6 @@ gem 'jquery-turbolinks'
 
 
 eval(File.read(File.dirname(__FILE__) + '/common_spree_dependencies.rb'))
-# referer to https://github.com/spree/spree/issues/2013
-gem 'spree_auth_devise', :github => "spree/spree_auth_devise", :branch => "3-0-stable"
 #support rich_editor
 gem 'spree_editor',  :github => "spree/spree_editor", :branch=>"3-0-stable"
 # gem 'sprangular',   :path => './sprangular'

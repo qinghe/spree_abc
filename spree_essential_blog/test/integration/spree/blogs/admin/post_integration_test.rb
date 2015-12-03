@@ -3,7 +3,7 @@
 
 require 'test_helper'
 
-class Spree::Blogs::Admin::PostIntegrationTest < SpreeEssentials::IntegrationCase
+class Spree::Admin::PostIntegrationTest < SpreeEssentials::IntegrationCase
 
   setup do
     Spree::Post.destroy_all

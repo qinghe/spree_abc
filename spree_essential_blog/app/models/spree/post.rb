@@ -125,8 +125,8 @@ module Spree
 
     def slug_candidates
         [
-          :name,
-          [:name, :site_id],
+          :title,
+          [:title, :site_id],
         ]
     end
 

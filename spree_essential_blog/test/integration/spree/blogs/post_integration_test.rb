@@ -4,10 +4,10 @@
 require 'test_helper'
   
 
-class Spree::Blogs::PostIntegrationTest < SpreeEssentials::IntegrationCase
+class Spree::PostIntegrationTest < SpreeEssentials::IntegrationCase
   
  
-  include Spree::Blogs::PostsHelper
+  include Spree::PostsHelper
   
   def setup
     Spree::Blog.destroy_all

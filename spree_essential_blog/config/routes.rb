@@ -1,6 +1,5 @@
 Spree::Core::Engine.routes.append do
-  scope(:module => "blogs") do
-    namespace :admin do
+  namespace :admin do
       resources :posts do
         resources :files,   :controller => "post_files" do
           collection do
@@ -10,7 +9,6 @@ Spree::Core::Engine.routes.append do
         resources :products, :controller => "post_products"
         resources :categories, :controller => "post_categories"
       end
-    end
   end
 #  scope(:module => "blogs") do
 #    namespace :admin do

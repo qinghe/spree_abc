@@ -74,7 +74,7 @@ class Spree::Admin::PostFilesIntegrationTest < SpreeEssentials::IntegrationCase
   context "several post images" do
   
     setup do
-      setup_action_controller_behaviour(Spree::Blogs::Admin::PostFilesController)
+      setup_action_controller_behaviour(Spree::Admin::PostFilesController)
       @post_files = Array.new(2) {|i| Factory(:spree_post_file, :alt => "Image ##{i + 1}", :viewable => @post, :position => i) }
     end
     
