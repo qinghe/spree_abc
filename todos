@@ -33,6 +33,9 @@ developer todo
    it overrides method OrderContent.add which is called by /api/orders/R413483534/line_items
 7. page_layout scoped root_id, site_id. copy_to_new required.
 
+8. 支持手机注册/验证/通知
+https://github.com/plataformatec/devise/wiki/How-To:-Allow-users-to-sign-in-using-their-username-or-email-address
+
 sales todo
 ===============================================================================================
 1. 市场调查
