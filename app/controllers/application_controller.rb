@@ -7,6 +7,12 @@ class ApplicationController < ActionController::Base
   end
 
   protected
+  #https://github.com/plataformatec/devise/wiki/How-To:-Allow-users-to-sign-in-using-their-username-or-email-address
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:cellphone, :email, :password, :password_confirmation, :remember_me) }
+    devise_parameter_sanitizer.for(:sign_in) { |u| u.permit(:login, :cellphone, :email, :password, :remember_me) }
+    devise_parameter_sanitizer.for(:account_update) { |u| u.permit(:cellphone, :email, :password, :password_confirmation, :current_password) }    
+  end
 
   def handle_error(e)
     if e
