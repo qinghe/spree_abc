@@ -22,5 +22,6 @@ db/full_sql
 rdoc
 .settings
 .project
+.ruby-version
 db/*.sqlite3
 *.bak
