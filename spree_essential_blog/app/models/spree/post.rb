@@ -86,7 +86,7 @@ module Spree
 
     def summary( truncate_at=100)
       #copy from Action View Sanitize Helpers
-      HTML::FullSanitizer.new.sanitize( body ).truncate( truncate_at )
+      Rails::Html::FullSanitizer.new.sanitize( body ).truncate( truncate_at )
     end
 
   	def rendered_preview

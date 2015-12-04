@@ -14,7 +14,7 @@ SpreeTheme.taxon_class.class_eval do
 
     def summary( truncate_at=100)
       #copy from Action View Sanitize Helpers
-      Rails::HTML::FullSanitizer.new.sanitize( description || '' ).truncate( truncate_at )
+      Rails::Html::FullSanitizer.new.sanitize( description || '' ).truncate( truncate_at )
     end
 
     def remove_from_theme

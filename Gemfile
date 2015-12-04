@@ -80,7 +80,7 @@ gem 'autoprefixer-rails'
 
 gem 'activerecord-session_store'
 
-gem 'sidekiq'
+#gem 'sidekiq'
 
 group :test, :development do
   gem 'sqlite3'
