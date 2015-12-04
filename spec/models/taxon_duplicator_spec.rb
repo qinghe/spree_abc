@@ -63,7 +63,7 @@ describe Spree::Taxon do
       cloned_branch.save!
       @root_taxon.self_and_descendants.each_with_index{|original, i|
         cloned = cloned_branch.self_and_descendants[i]
-#Rails.logger.debug "---- node.depth #{original.depth} #{original.permalink}, original.depth#{ cloned.depth } #{cloned.permalink} --------"
+#Rails.logger.debug "---- node.depth #{original.depth} #{original.friendly_id}, original.depth#{ cloned.depth } #{cloned.friendly_id} --------"
         expect( original.depth).to eq cloned.depth
       }
     end

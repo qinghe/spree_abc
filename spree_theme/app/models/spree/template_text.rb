@@ -1,5 +1,7 @@
 module Spree
   class TemplateText < ActiveRecord::Base
+    extend FriendlyId
+    friendly_id :slug_candidates, :use => :slugged
 
     validates_presence_of :name
     #attr_accessible :name, :body
@@ -7,14 +9,14 @@ module Spree
     belongs_to :site
     scope :resourceful, ->(theme){ where("1=1") }
     default_scope ->{ where(:site_id=>SpreeTheme.site_class.current.id)}
-    before_validation :normalize_permalink
-
 
     private
 
-    def normalize_permalink
-      self.permalink = (permalink.blank? ? name.to_s.to_url : permalink).downcase.gsub(/(^[\/\-\_]+)|([\/\-\_]+$)/, "")
+    def slug_candidates
+        [
+          :name,
+          [:name, :site_id],
+        ]
     end
-
   end
 end

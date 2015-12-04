@@ -18,7 +18,7 @@ module PageTag
       end
 
       def path
-        collection_tag.wrapped_taxon.partial_path + "/#{model.id}-#{model.slug}"
+        collection_tag.wrapped_taxon.partial_path + "/#{model.id}-#{model.friendly_id}"
       end
       # product image and variant images
       def whole_images

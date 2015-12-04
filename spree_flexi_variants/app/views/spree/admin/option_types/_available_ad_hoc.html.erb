@@ -15,7 +15,7 @@
         <td class="actions"><%= link_to_with_icon 'plus', t("select"),
           url_for(:controller => "admin/option_types",
                   :id => ot,
-                  :product_id => @product.permalink,
+                  :product_id => @product.friendly_id,
                   :action => "select_ad_hoc",
                   :option_type_id =>  ot),
                   :class => 'iconlink' %>

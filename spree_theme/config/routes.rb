@@ -43,7 +43,7 @@ Spree::Core::Engine.routes.draw do
     end
   end
 
-  get '(/:c(/:r))' => 'template_themes#page' , :c => /\d[^\/]*/ # :c, taxon_id-permalink,  :r, product_id-permalink
+  get '(/:c(/:r))' => 'template_themes#page' , :c => /\d[^\/]*/ # :c, taxon_id-friendly_id,  :r, product_id-friendly_id
   get '/post/:c/:p' => 'template_themes#page', :c => /\d[^\/]*/ #
   get '/preview/:id' => 'template_themes#preview' #preview template_theme, for design shop only.
 

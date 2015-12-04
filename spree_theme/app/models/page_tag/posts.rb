@@ -10,7 +10,7 @@ module PageTag
 
 
       def path
-        "/post"+ collection_tag.wrapped_taxon.partial_path + "/#{model.id}-#{model.permalink}"
+        "/post"+ collection_tag.wrapped_taxon.partial_path + "/#{model.id}-#{model.friendly_id}"
       end
     end
 

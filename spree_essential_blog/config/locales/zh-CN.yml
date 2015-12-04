@@ -6,7 +6,6 @@ zh-CN:
       blog:
         model_name: Blog
         name: Name
-        permalink: Permalink
       spree/post:
         model_name: 文章
         title: 标题
@@ -19,7 +18,6 @@ zh-CN:
       post_category:
         model_name: Category
         name: Name
-        permalink: Permalink
     models:
       spree/post:
         one: 文章
