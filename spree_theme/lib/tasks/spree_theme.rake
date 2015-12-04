@@ -103,7 +103,7 @@ namespace :spree_theme do
     # current site is required for build css( image url )
     Spree::Store.current = theme.store
     theme.release({},{:page_only=>true})
-    puts "released #{theme.site.layout}"
+    puts "released theme #{theme.title} - at #{theme.layout_path}"
   end
 
   desc "get css of theme one, rake spree_theme:get_css[1,2,'block']"
