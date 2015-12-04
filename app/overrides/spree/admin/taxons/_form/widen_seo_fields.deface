@@ -1,4 +1,0 @@
-set_attributes '.twelve.columns.alpha.omega'
-
-attributes :class => 'sixteen columns alpha omega'
-

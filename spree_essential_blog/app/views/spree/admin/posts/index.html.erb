@@ -3,7 +3,7 @@
 <% end %>
 
 <% content_for :page_actions do %>
-    <%= button_link_to Spree.t('new_post'), new_admin_post_url, { :class => "btn-success",:icon => 'plus', :id => 'admin_new_post' }%>
+  <%= button_link_to Spree.t('new_post'), new_admin_post_url, { :class => "btn-success",:icon => 'add', :id => 'admin_new_post' }%>
 <% end if can? :create, Spree::Post %>
 
 <% content_for :table_filter_title do %>

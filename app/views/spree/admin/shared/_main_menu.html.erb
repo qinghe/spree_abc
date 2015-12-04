@@ -34,6 +34,12 @@
   </ul>
 <% end %>
 
+<% if can? :admin, Spree::TemplateTheme %>
+  <ul class="nav nav-sidebar">
+    <%= main_menu_tree Spree.t(:template_themes), icon: "asterisk", sub_menu: "template_theme", url: "#sidebar-template-themes" %>
+  </ul>
+<% end %>
+
 <% if can? :admin, current_store %>
   <ul class="nav nav-sidebar">
     <%= main_menu_tree Spree.t(:configurations), icon: "wrench", sub_menu: "configuration", url: "#sidebar-configuration" %>

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe "admin session", inaccessible: true do
+describe "admin session", :type => :feature do
   before(:each) do
     Spree::Site.current= create(:site1)
     @user = create(:admin_user, :email => "email@person.com", :password => "secret", :password_confirmation => "secret", :site_id=> Spree::Site.current.id)

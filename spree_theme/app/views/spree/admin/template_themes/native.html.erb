@@ -1,4 +1,3 @@
-<%= render :partial => 'sub_menu' %>
 <% content_for :page_title do %>
   <%= Spree.t(:theme_native) %>
 <% end %>
@@ -49,13 +48,13 @@
       </td>
     <% end %>
     <td class="actions">
-    <%= link_to_with_icon 'cogs', Spree.t(:theme_config), config_resource_admin_template_theme_path(theme), {:no_text => true} %>
-    <%= link_to_with_icon 'eye', Spree.t(:preview_theme), preview_template_theme_path(theme), {:target=>'_blank',:no_text => true} %>
+    <%= link_to_edit Spree.t(:theme_config), url: config_resource_admin_template_theme_path(theme), :no_text => true %>
+    <%= link_to_with_icon 'eye-open', Spree.t(:preview_theme), preview_template_theme_path(theme), {class: "btn btn-primary btn-sm",:target=>'_blank',:no_text => true} %>
     <% if theme.has_native_layout? %>
       <% if false %>
-      <%= link_to_with_icon 'copy', Spree.t(:theme_copy), copy_admin_template_theme_path(theme), {:method=>:post,:no_text => true} %>
+      <%= link_to_clone Spree.t(:theme_copy), url: copy_admin_template_theme_path(theme) %>
       <% end %>
-      <%= link_to_with_icon 'print', Spree.t(:theme_release), release_admin_template_theme_path(theme), {:method=>:post,:no_text => true} %>
+      <%= link_to_with_icon 'print', Spree.t(:theme_release), release_admin_template_theme_path(theme), {class: "btn btn-primary btn-sm", :method=>:post,:no_text => true} %>
     <% end %>
     <%= link_to_delete theme, :no_text => true if can?(:delete, theme)  %>
     </td>
@@ -63,7 +62,7 @@
 <% end %>
 </table>
 <% else %>
-  <div class="alpha twelve columns no-objects-found">
+  <div class="alert alert-info no-objects-found">
     <%= Spree.t(:no_resource_found, resource: I18n.t(:other, scope: 'activerecord.models.spree/template_theme')) %>,
     <%= link_to Spree.t(:select_from_foreign_themes), spree.foreign_admin_template_themes_path %>!
   </div>

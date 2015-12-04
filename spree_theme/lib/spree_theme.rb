@@ -1,4 +1,5 @@
 module SpreeTheme
+  TEMPLATE_THEME_TABS = [:native_themes, :theme_texts, :foreign_themes]
 
   mattr_accessor :site_class, :taxon_class, :post_class
 

@@ -30,6 +30,7 @@ require 'spree/testing_support/flash'
 require 'spree/testing_support/url_helpers'
 require 'spree/testing_support/order_walkthrough'
 require 'spree/testing_support/capybara_ext'
+
 require 'paperclip/matchers'
 
 require 'spree_theme/testing_support/factories'

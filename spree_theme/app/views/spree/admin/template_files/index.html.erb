@@ -1,13 +1,12 @@
-<%= render :partial => 'sub_menu' %>
 <% content_for :page_actions do %>
-  <li><%= button_link_to Spree.t("template_file.new"), new_object_url, :icon => 'plus' %></li>
+  <%= button_link_to Spree.t("template_file.new"), new_object_url, class: "btn-success", :icon => 'plus' %>
 <% end %>
 
-<%= render :partial=>'tabs',:locals=>{:current=>"TemplateFile"}%>
+<%= render :partial=>'spree/admin/shared/template_text_tabs',:locals=>{:current=>"TemplateFile"}%>
 
 <% if @template_files.any? %>
 
-<table class="index">
+<table class="table">
   <colgroup>
     <col style="width: 8%" />
     <col style="width: 18%" />
@@ -48,7 +47,7 @@
 <%= paginate @template_files %>
 
 <% else %>
-  <div class="alpha twelve columns no-objects-found">
+  <div class="alert alert-info no-objects-found">
     <%= Spree.t(:no_resource_found, resource: I18n.t(:other, scope: 'activerecord.models.spree/template_file')) %>,
     <%= link_to Spree.t(:add_one), spree.new_admin_template_file_path %>!
   </div>

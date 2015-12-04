@@ -22,19 +22,19 @@ bundle check
 echo "**************************************"
 echo "* Setup Spree Abc and running RSpec..."
 echo "**************************************"
-bundle update --quiet; bundle exec rspec spec
+bundle exec rspec spec
 
 # Spree Theme
 echo "******************************************"
 echo "* Setup Spree Theme and running RSpec...  "
 echo "******************************************"
-cd ./spree_theme; set_gemfile; bundle update --quiet; bundle exec rspec spec
+cd ./spree_theme; set_gemfile; bundle exec rspec spec
 
 # Spree Mulit-Site
 echo "***************************************"
 echo "* Setup Spree Mulit-Site and running RSpec..."
 echo "***************************************"
-cd ../spree_multi_site; set_gemfile; bundle update --quiet; bundle exec rspec spec
+cd ../spree_multi_site; set_gemfile; bundle exec rspec spec
 
 # Spree Frontend
 #echo "*******************************************"
