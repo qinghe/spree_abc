@@ -80,6 +80,8 @@ gem 'autoprefixer-rails'
 
 gem 'activerecord-session_store'
 
+gem 'sidekiq'
+
 group :test, :development do
   gem 'sqlite3'
   #gem 'mail_view'  #, :git => 'https://github.com/37signals/mail_view.git'
