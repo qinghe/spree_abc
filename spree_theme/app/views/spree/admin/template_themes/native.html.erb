@@ -6,7 +6,7 @@
 
 <% if designable  %>
   <% content_for :page_actions do %>
-    <li><%= button_link_to Spree.t("template_theme.new"), new_object_url, :icon => 'plus',:remote=>:true, :id=>'admin_new_template_theme' %></li>
+    <%= button_link_to Spree.t("template_theme.new"), new_object_url, :class => "btn-success", :icon => 'plus',:remote=>:true, :id=>'admin_new_template_theme' %>
   <% end %>
 <% end %>
 

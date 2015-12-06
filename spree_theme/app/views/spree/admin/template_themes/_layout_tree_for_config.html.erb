@@ -6,14 +6,25 @@ selected_id ||= page_layout.id
 %>
 <%=form_tag(update_layout_tree_template_theme_path(theme), :id=>"layout_tree_form",:name=>"layout_tree_form", :remote=>true) do %>
 
-  <div id='page_layout_tree_inner' class="block">
-  <ul >
-    <li data-lid=<%= page_layout.id %> data-tid=<%= theme.id %> data-action="<%= params[:action]%>" >
-    <%= link_to( page_layout.title, "#",
-      {"class"=>(page_layout.id==selected_id ? "selected":"")})
-      %>
-      <%= render :partial=>'page_layout', :locals=>{:theme=>theme, :page_layout=>page_layout, :selected_id=>selected_id, :current=>current  } %>
-    </li>
-  </ul>
+<fieldset class="no-border-top">
+  <div>
+    <%= label_tag nil, Spree.t(:tree) %><br />
+    <script>
+      Spree.routes.template_theme_page_layouts_path = "<%= spree.api_template_theme_page_layouts_path(@template_theme) %>";
+      Spree.routes.admin_template_theme_page_layouts_path = "<%= spree.admin_template_theme_page_layouts_path(@template_theme) %>";
+      Spree.routes.jstree_theme_path = "<%= stylesheet_path("jquery.jstree/themes/apple/style.css") %>";
+    </script>
+    <div id="page_layout_tree" class="tree"></div>
   </div>
+  <div id="progress" style="display:none;">
+    <%= image_tag 'select2-spinner.gif', :title => 'Spinner', :style => "vertical-align:bottom;" %> <%= Spree.t(:updating) %>..
+  </div>
+
+  <div class="info"><%= Spree.t(:page_layout_tree_instruction) %></div>
+
+  <br>
+
+
+</fieldset>
+
 <%end%>
