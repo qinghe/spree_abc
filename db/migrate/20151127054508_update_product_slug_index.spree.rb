@@ -2,6 +2,7 @@
 class UpdateProductSlugIndex < ActiveRecord::Migration
   def change
     remove_index :spree_products, :slug
-    add_index :spree_products, :slug, unique: true
+    add_index :spree_products, [:site_id, :slug], :name => "index_spree_products_on_slug", :unique => true
+
   end
 end
