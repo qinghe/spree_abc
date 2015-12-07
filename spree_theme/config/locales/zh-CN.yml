@@ -91,6 +91,8 @@ zh-CN:
       street: 详细地址
     comment_successfully_created: 谢谢您的反馈，我们已收到。
     comment_to_store: 亲爱的用户：欢迎您抢先体验“%{store_name}”，有任何意见和建议，或在使用过程中遇到问题，请告诉我们，我们会每天关注反馈信息，不断优化产品，为您提供更好的服务！
+    new_template_file: 新建图片素材
+    new_template_text: 新建文本素材
     select_taxon: 选择菜单
     select_template_image: 选择图片
     select_template_text: 选择文本
@@ -157,17 +159,16 @@ zh-CN:
     store_comment: 请留下您对“%{store_name}”的意见和建议！
     template_file:
       index: 图片素材
-      new: 新建图片素材
     template_resource: 网站素材
     template_text:
       index: 文本素材
       static_pages_desc: Manage static page with WYSIWYG editor.
-      new: 新建文本素材
       editing_page: Editing page
       confirm_delete: Are you sure ?
       link: Link
       meta_title: Meta Title
       page_navigation_title: "Pages"
+    template_texts: '文本素材'
     template_themes: 模板
     template_theme:
       assign_resource: 模板素材

@@ -1,0 +1,12 @@
+<% content_for :head do %>
+  <%= javascript_tag "var template_theme_id = #{@template_theme.id};
+    var loading = '#{escape_javascript Spree.t(:loading)}';
+    var server_error = '#{escape_javascript Spree.t(:server_error)}';
+    var template_theme_error = '#{escape_javascript Spree.t(:template_theme_error)}';
+
+    $(document).ready(function(){
+      setup_template_theme_tree(template_theme_id);
+    });
+    "
+  %>
+<% end %>

@@ -2,23 +2,24 @@
 //= require jquery.ajax
 //= require jquery.jeditable
 //= require admin/resource_autocomplete
+//= require admin/page_layouts
 //= require store/spree_theme.routes
 
 
 jQuery(function ($) {
-  $('#page_layout_tree_inner').bind('select_node.jstree', function (e, data) {
-    var selected_node = data.rslt.obj
-    var url = [Spree.routes.admin_page_layouts( selected_node.data('tid')),selected_node.data('lid'), selected_node.data('action') ].join('/')
-    $.ajax({ url: url, type: 'GET', dataType: "script"})
-  }).bind('deselect_all.jstree', function (e, data) {
-    //$(this).find('select').hide()
-  })
-  .jstree(
-    { themes:{ theme: "apple", url: "/assets/jquery.jstree/themes/apple/style.css" },
-    // plugins: ["themes"]
-      core : {  multiple: false,  animation: 0  }
-    }
-  );
+//  $('#page_layout_tree_inner').bind('select_node.jstree', function (e, data) {
+//    var selected_node = data.rslt.obj
+//    var url = [Spree.routes.admin_page_layouts( selected_node.data('tid')),selected_node.data('lid'), selected_node.data('action') ].join('/')
+//    $.ajax({ url: url, type: 'GET', dataType: "script"})
+//  }).bind('deselect_all.jstree', function (e, data) {
+//    //$(this).find('select').hide()
+//  })
+//  .jstree(
+//    { themes:{ theme: "apple", url: "/assets/jquery.jstree/themes/apple/style.css" },
+//    // plugins: ["themes"]
+//      core : {  multiple: false,  animation: 0  }
+//    }
+//  );
 
 
   $('#listing_template_themes .editable').editable(function(value, settings) {

@@ -1,18 +1,10 @@
 
-<div class="row">
-  <div class="alpha twelve columns">
-    <div data-hook="page_translate" >
-    <%= f.field_container :theme_id do %>
+    <%= f.field_container :theme_id, class: ['form-group'] do %>
       <%= f.label :theme_id %> <span class="required">*</span><br />
       <%= f.select :theme_id,Spree::TemplateTheme.native.map{|theme| [theme.title, theme.id]}, {},:class => 'fullwidth select2' %>
     <% end %>
-    <%= f.field_container :attachment do %>
+    <%= f.field_container :attachment, class: ['form-group'] do %>
       <%= f.label :attachment, Spree.t(:filename) %> <span class="required">*</span><br />
       <%= f.file_field :attachment, :class => 'fullwidth title' %>
       <%= f.error_message_on :attachment %>
     <% end %>
-
-    </div>
-  </div>
-</div>
-

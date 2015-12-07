@@ -1,6 +1,5 @@
-<%= render :partial => 'sub_menu' %>
 <% content_for :page_actions do %>
-  <%= button_link_to Spree.t("template_text.new"), new_object_url, :class => "btn-success", :icon => 'add' %>
+  <%= button_link_to Spree.t("new_template_text"), new_object_url, :class => "btn-success", :icon => 'add' %>
 <% end %>
 <%= render :partial=>'spree/admin/shared/template_text_tabs',:locals=>{:current=>"TemplateText"}%>
 

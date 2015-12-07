@@ -1,8 +1,8 @@
 <% content_for :page_actions do %>
-  <%= button_link_to Spree.t("template_file.new"), new_object_url, class: "btn-success", :icon => 'plus' %>
+  <%= button_link_to Spree.t("new_template_file"), new_object_url, class: "btn-success", :icon => 'plus' %>
 <% end %>
 
-<%= render :partial=>'spree/admin/shared/template_text_tabs',:locals=>{:current=>"TemplateFile"}%>
+<%= render :partial=>'spree/admin/shared/template_file_tabs',:locals=>{:current=>"TemplateFile"}%>
 
 <% if @template_files.any? %>
 
@@ -12,15 +12,13 @@
     <col style="width: 18%" />
     <col style="width: 18%" />
     <col style="width: 10%" />
-    <col style="width: 8%" />
     <col style="width: 24%" />
-    <col style="width: 12%" />
+    <col style="width: 16%" />
   </colgroup>
   <thead>
     <tr>
       <th colspan="2"><%= Spree::TemplateFile.human_attribute_name(:attachment_file_name) %></th>
       <th><%= Spree::TemplateFile.human_attribute_name(:template_theme) %></th>
-      <th><%= Spree::TemplateFile.human_attribute_name(:attachment_content_type) %></th>
       <th><%= Spree::TemplateFile.human_attribute_name(:attachment_file_size) %></th>
       <th><%= Spree::TemplateFile.human_attribute_name(:created_at) %></th>
       <th class="actions"></th>
@@ -33,7 +31,6 @@
         <td> <%= image_tag page.attachment.url(:mini) %> </td>
         <td> <%= page.name %> </td>
         <td> <%= page.template_theme.title if page.template_theme.present? %>  </td>
-        <td> <%= page.attachment_content_type %>  </td>
         <td> <%= page.attachment_file_size %>     </td>
         <td> <%= pretty_time(page.created_at) %>  </td>
         <td  class="actions">

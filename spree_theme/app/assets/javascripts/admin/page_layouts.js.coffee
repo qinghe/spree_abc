@@ -64,29 +64,30 @@ handle_delete = (e, data) ->
       last_rollback = null
 
 root = exports ? this
-root.setup_page_layout_tree = (page_layout_id) ->
-  if page_layout_id != undefined
+root.setup_template_theme_tree = (template_theme_id) ->
+  if template_theme_id != undefined
     # this is defined within admin/taxonomies/edit
-    root.base_url = Spree.url(Spree.routes.page_layouts_path)
+    # /api/template_themes/:template_theme_id/page_layouts
+    root.base_url = Spree.url(Spree.routes.template_theme_page_layouts_path)
 
     $.ajax
-      url: Spree.url(base_url.path().replace("/taxons", "/jstree")).toString(),
+      url: Spree.url(base_url.path().replace("/page_layouts", "/jstree")).toString(),
       data:
         token: Spree.api_key
-      success: (page_layout) ->
+      success: (template_theme) ->
         last_rollback = null
 
         conf =
           json_data:
-            data: page_layout,
+            data: template_theme,
             ajax:
               url: (e) ->
+                # /api/template_themes/:template_theme_id/page_layouts/
                 Spree.url(base_url.path() + '/' + e.prop('id') + '/jstree' + '?token=' + Spree.api_key).toString()
           themes:
             theme: "apple",
             url: Spree.url(Spree.routes.jstree_theme_path)
           strings:
-            new_node: new_taxon,
             loading: Spree.translations.loading + "..."
           crrm:
             move:

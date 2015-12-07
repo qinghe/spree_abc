@@ -57,6 +57,16 @@ Spree::Core::Engine.routes.draw do
 
   #api extension
   namespace :api, :defaults => { :format => 'json' } do
+    resources :template_themes do
+      member do
+        get :jstree
+      end
+      resources :page_layouts do
+        member do
+          get :jstree
+        end
+      end
+    end
     resources :taxons, :only => [:index] do
       collection do
        get :global

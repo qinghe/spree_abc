@@ -4,27 +4,31 @@
 page_layout = theme.original_page_layout_root
 selected_id ||= page_layout.id
 %>
+
+<div id="ajax_error" class="errorExplanation" style="display:none;"></div>
+
 <%=form_tag(update_layout_tree_template_theme_path(theme), :id=>"layout_tree_form",:name=>"layout_tree_form", :remote=>true) do %>
 
-<fieldset class="no-border-top">
-  <div>
-    <%= label_tag nil, Spree.t(:tree) %><br />
-    <script>
-      Spree.routes.template_theme_page_layouts_path = "<%= spree.api_template_theme_page_layouts_path(@template_theme) %>";
-      Spree.routes.admin_template_theme_page_layouts_path = "<%= spree.admin_template_theme_page_layouts_path(@template_theme) %>";
-      Spree.routes.jstree_theme_path = "<%= stylesheet_path("jquery.jstree/themes/apple/style.css") %>";
-    </script>
-    <div id="page_layout_tree" class="tree"></div>
-  </div>
-  <div id="progress" style="display:none;">
-    <%= image_tag 'select2-spinner.gif', :title => 'Spinner', :style => "vertical-align:bottom;" %> <%= Spree.t(:updating) %>..
-  </div>
+  <fieldset class="no-border-top">
+    <div class="form-group">
+      <%= label_tag nil, Spree.t(:tree) %><br />
+      <script>
+        Spree.routes.template_theme_page_layouts_path = "<%= spree.api_template_theme_page_layouts_path(@template_theme) %>";
+        Spree.routes.admin_template_theme_page_layouts_path = "<%= spree.admin_template_theme_page_layouts_path(@template_theme) %>";
+        Spree.routes.jstree_theme_path = "<%= stylesheet_path("jquery.jstree/themes/apple/style.css") %>";
+      </script>
 
-  <div class="info"><%= Spree.t(:page_layout_tree_instruction) %></div>
+      <div id="page_layout_tree" class="tree">
+        <div class="alert alert-warning">
+          <%= Spree.t(:loading_tree) %>
+        </div>
+      </div>
+    </div>
 
-  <br>
+    <div class="alert alert-info">
+      <%= Spree.t(:page_layout_tree_instruction) %>
+    </div>
 
-
-</fieldset>
+  </fieldset>
 
 <%end%>
