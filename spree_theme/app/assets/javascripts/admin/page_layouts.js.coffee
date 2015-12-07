@@ -85,7 +85,7 @@ root.setup_template_theme_tree = (template_theme_id) ->
                 # /api/template_themes/:template_theme_id/page_layouts/
                 Spree.url(base_url.path() + '/' + e.prop('id') + '/jstree' + '?token=' + Spree.api_key).toString()
           themes:
-            theme: "apple",
+            theme: "spree",
             url: Spree.url(Spree.routes.jstree_theme_path)
           strings:
             loading: Spree.translations.loading + "..."
