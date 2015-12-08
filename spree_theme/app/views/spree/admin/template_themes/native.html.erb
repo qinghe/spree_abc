@@ -22,13 +22,15 @@
        <% end %>
        <col style="width: 25%;">
   </colgroup>
-  <thead>  <tr>
-    <th><%= Spree::TemplateTheme.human_attribute_name(:title) %></th>
-    <th>  <%= Spree.t(:theme_applied) %> </th>
-    <% if designable %>
-    <th><%= Spree::TemplateTheme.human_attribute_name(:is_public) %> </th>
-    <% end %>
-  </tr> </thead>
+  <thead>
+    <tr>
+      <th><%= Spree::TemplateTheme.human_attribute_name(:title) %></th>
+      <th>  <%= Spree.t(:theme_applied) %> </th>
+      <% if designable %>
+      <th><%= Spree::TemplateTheme.human_attribute_name(:is_public) %> </th>
+      <% end %>
+    </tr> 
+  </thead>
 
 
 <% @themes.each do |theme| %>

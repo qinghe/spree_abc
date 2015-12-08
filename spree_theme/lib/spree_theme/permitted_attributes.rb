@@ -1,3 +1,4 @@
+require 'spree/permitted_attributes'
 module Spree
   module PermittedAttributes
     ATTRIBUTES_FOR_THEME=[:page_layout_attributes,:param_value_attributes,:section_piece_param_attributes,

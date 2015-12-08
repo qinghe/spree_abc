@@ -1,5 +1,5 @@
 <% content_for :page_title do %>
-  <%= Spree.t(:theme_config) %> &ldquo;<%= @template_theme.title %>&rdquo;
+  <%= link_to  Spree.t("template_themes"), admin_template_themes_path %> / <%= @template_theme.title %>
 <% end %>
 
 <% content_for :sidebar_title do %>

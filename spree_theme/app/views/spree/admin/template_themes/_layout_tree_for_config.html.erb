@@ -15,18 +15,23 @@ selected_id ||= page_layout.id
       <script>
         Spree.routes.template_theme_page_layouts_path = "<%= spree.api_template_theme_page_layouts_path(@template_theme) %>";
         Spree.routes.admin_template_theme_page_layouts_path = "<%= spree.admin_template_theme_page_layouts_path(@template_theme) %>";
-        Spree.routes.jstree_theme_path = "<%= stylesheet_path("jquery.jstree/themes/spree/style.css") %>";
+        Spree.routes.jstree_theme_path = "<%= stylesheet_path("jquery.jstree/themes/spree2/style.css") %>";
       </script>
 
-      <div id="page_layout_tree" class="tree">
-        <div class="alert alert-warning">
-          <%= Spree.t(:loading_tree) %>
-        </div>
+      <div id="template_theme_tree" class="tree">
+        <ul >
+          <li data-lid=<%= page_layout.id %> data-tid=<%= theme.id %> data-action="<%= params[:action]%>" >
+          <%= link_to( page_layout.title, "#",
+            {"class"=>(page_layout.id==selected_id ? "selected":"")})
+            %>
+            <%= render :partial=>'page_layout', :locals=>{:theme=>theme, :page_layout=>page_layout, :selected_id=>selected_id, :current=>current  } %>
+          </li>
+        </ul>
       </div>
     </div>
 
     <div class="alert alert-info">
-      <%= Spree.t(:page_layout_tree_instruction) %>
+      <%= Spree.t(:template_theme_tree_instruction) %>
     </div>
 
   </fieldset>

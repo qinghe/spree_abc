@@ -1,18 +1,20 @@
 <% content_for :page_title do %>
   <%= Spree.t(:theme_foreign) %>
 <% end %>
+
 <table class="table">
   <colgroup>
        <col style="width: 65%;">
        <col style="width: 10%;">
        <col style="width: 12%;">
-       <col style="width: 10%;">
+       <col style="width: 13%;">
   </colgroup>
 
   <tr>
     <th><%= Spree::TemplateTheme.human_attribute_name(:title) %></th>
     <th><%= Spree.t(:theme_is_free) %></th>
     <th><%= Spree.t(:theme_is_imported) %></th>
+    <th> </th>
   </tr>
 
   <% @themes.each do |theme| %>

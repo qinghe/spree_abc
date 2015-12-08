@@ -2,12 +2,12 @@
 //= require jquery.ajax
 //= require jquery.jeditable
 //= require admin/resource_autocomplete
-//= require admin/page_layouts
+//= require admin/template_themes
 //= require store/spree_theme.routes
 
 
 jQuery(function ($) {
-//  $('#page_layout_tree_inner').bind('select_node.jstree', function (e, data) {
+//  $('#template_theme_tree').bind('select_node.jstree', function (e, data) {
 //    var selected_node = data.rslt.obj
 //    var url = [Spree.routes.admin_page_layouts( selected_node.data('tid')),selected_node.data('lid'), selected_node.data('action') ].join('/')
 //    $.ajax({ url: url, type: 'GET', dataType: "script"})
