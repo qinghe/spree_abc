@@ -68,6 +68,7 @@ module Spree
     scope :for_desktop, ->{ where( for_terminal: TerminalEnum.desktop) }
     scope :for_mobile, ->{ where( for_terminal: TerminalEnum.mobile) }
 
+    # assigned_resource_ids it has to be {} or nil, '' would cause ActiveRecord::SerializationTypeMismatch on 4.2.2
     before_validation :fix_special_attributes
     before_destroy :remove_relative_data
     after_create :initialize_page_layout_for_plain_theme
