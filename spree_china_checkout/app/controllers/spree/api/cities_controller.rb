@@ -21,10 +21,10 @@ module Spree
       private
         def scope
           if params[:state_id]
-            @state = Spree::State.accessible_by(current_ability, :read).find(params[:state_id])
-            return @state.cities.accessible_by(current_ability, :read)
+            @state = Spree::State.find(params[:state_id])
+            return @state.cities
           else
-            return Spree::State.accessible_by(current_ability, :read)
+            return Spree::State.where
           end
         end
     end

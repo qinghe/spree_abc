@@ -79,6 +79,9 @@ zh-CN:
     back_to_template_text_list: back to template text list
     back_to_template_file_list: back to template file list
     china_address:
+      state_prompt: "Select State"
+      city_prompt: "Select City"
+      district_prompt: "Select District"
       firstname: name
       phone: phone
       state: state

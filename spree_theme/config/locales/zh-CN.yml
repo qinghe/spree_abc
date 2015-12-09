@@ -84,6 +84,9 @@ zh-CN:
     back_to_template_text_list: 回到素材列表
     back_to_template_file_list: 回到素材列表
     china_address:
+      state_prompt: "省份/自治区"
+      city_prompt: "城市/地区/自治州"
+      district_prompt: "区/县"
       firstname: 收货人姓名
       phone: 电话
       state: 邮编

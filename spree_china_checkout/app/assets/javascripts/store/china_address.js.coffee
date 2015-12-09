@@ -79,4 +79,4 @@ Spree.ready ($) ->
       Spree.updateCity 'b'
     ($ '#bcity select').change ->
       Spree.updateDistrict 'b'
-    Spree.updateCity 'b'
+#    Spree.updateCity 'b'
