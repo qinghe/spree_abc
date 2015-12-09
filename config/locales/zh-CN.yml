@@ -583,7 +583,7 @@ zh-CN:
     credits:
     currency: "币种"
     currency_decimal_mark: 货币小数点标记
-    currency_settings: "当前设置"
+    currency_settings: "货币设置"
     currency_symbol_position: "在金额之前或者之后放置币种符号？"
     currency_thousands_separator: "千元分割符"
     current: "现在的"
