@@ -3,7 +3,7 @@ if @state
   node(:states_required) { true }
 end
 
-child(@cities => :states) do
+child(@cities => :cities) do
   attributes *[:id, :name, :abbr, :state_id]
 end
 

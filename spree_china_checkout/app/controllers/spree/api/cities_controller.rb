@@ -3,7 +3,6 @@ module Spree
     class CitiesController < Spree::Api::BaseController
       #initializers/rabl_extra.rb is not working right.
       #get sight from api/controller_setup
-      append_view_path File.expand_path("../../../views", File.dirname(__FILE__))
 
       skip_before_filter :check_for_user_or_api_key
       skip_before_filter :authenticate_user
@@ -22,10 +21,10 @@ module Spree
       private
         def scope
           if params[:state_id]
-            @state = State.find(params[:state_id])
-            return @state.cities
+            @state = Spree::State.accessible_by(current_ability, :read).find(params[:state_id])
+            return @state.cities.accessible_by(current_ability, :read)
           else
-            return State.scoped
+            return Spree::State.accessible_by(current_ability, :read)
           end
         end
     end

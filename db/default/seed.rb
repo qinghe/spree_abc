@@ -3,6 +3,11 @@
 files = [ "spree/countries", "spree/roles" ]
 for file in files
   path = File.join(File.dirname(__FILE__), "#{file}.rb")
-  puts "loading #{path}"     
+  puts "loading #{path}"
   load path
 end
+
+#load countries from spree_china_checkout
+
+seed_path =  File.join(SpreeChinaCheckout::Engine.root,'db', 'seeds', 'countries.rb')
+load seed_path

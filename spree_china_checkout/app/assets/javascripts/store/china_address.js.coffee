@@ -1,6 +1,7 @@
 Spree.ready ($) ->
 
-  Spree.routes.cities_search = "/api/cities"
+  Spree.routes.cities_search = Spree.pathFor("api/cities")
+  Spree.routes.districts_search = Spree.pathFor("api/districts")
   if ($ '#checkout_form').is('form')
      ($ '#checkout_form').validate()
 
@@ -8,6 +9,8 @@ Spree.ready ($) ->
 
     getStateId = (region) ->
       $('#' + region + 'state select').val()
+    getCityId = (region) ->
+      $('#' + region + 'city select').val()
 
     Spree.updateCity = (region) ->
       stateId = getStateId(region)
@@ -15,15 +18,29 @@ Spree.ready ($) ->
         unless Spree.Checkout[stateId]?
           $.get Spree.routes.cities_search, {state_id: stateId}, (data) ->
             Spree.Checkout[stateId] =
-              states: data.states
-              states_required: data.states_required
+              addresses: data.cities
+              addresses_required: data.cities_required
             Spree.fillAddress(Spree.Checkout[stateId], region, 'city')
         else
           Spree.fillAddress(Spree.Checkout[stateId], region, 'city')
+    Spree.updateDistrict = (region) ->
+      stateId = getStateId(region)
+      cityId = getCityId(region)
+
+      if cityId?
+        city_key = stateId+'_'+cityId
+        unless Spree.Checkout[city_key]?
+          $.get Spree.routes.districts_search, {city_id: cityId}, (data) ->
+            Spree.Checkout[city_key] =
+              addresses: data.districts
+              addresses_required: data.districts_required
+            Spree.fillAddress(Spree.Checkout[city_key], region, 'district')
+        else
+          Spree.fillAddress(Spree.Checkout[city_key], region, 'district')
 
     Spree.fillAddress = (data, region, area) ->
-      statesRequired = data.states_required
-      states = data.states
+      states = data.addresses
+      statesRequired = data.addresses_required
 
       statePara = ($ '#' + region + area)
       stateSelect = statePara.find('select')
@@ -60,4 +77,6 @@ Spree.ready ($) ->
         stateSelect.removeClass('required')
     ($ '#bstate select').change ->
       Spree.updateCity 'b'
+    ($ '#bcity select').change ->
+      Spree.updateDistrict 'b'
     Spree.updateCity 'b'
