@@ -114,7 +114,7 @@ module PageTag
           menus_cache[key] = DefaultTaxonRoot.instance_by_context( wrapped_resource.context ).self_and_descendants
         end
       end
-Rails.logger.debug "wrapped_page_layout=#{key}, menu_tree=#{menu_tree}"
+Rails.logger.debug "wrapped_page_layout=#{key}, menu_tree=#{menu_tree.inspect}"
       if menus_cache[key].present?
         WrappedMenu.new( self, menus_cache[key].first)
       else
