@@ -1,5 +1,5 @@
 // copy from spree/backend/assets/javascripts/admin/taxon_autocomlete.js.erb
-// locals {:dom_id, :multiple, :search_url}  # Spree.routes.taxons_search or Spree.routes.global_taxons_search  
+// locals {:dom_id, :multiple, :search_url}  # Spree.routes.taxons_search or Spree.routes.global_taxons_search
 'use strict';
 
 var set_resource_taxon_select = function(dom_id, multiple, search_url){
@@ -7,14 +7,17 @@ var set_resource_taxon_select = function(dom_id, multiple, search_url){
     $('#'+dom_id).select2({
       placeholder: Spree.translations.taxon_placeholder,
       multiple: multiple,
+      allowClear: true,
       initSelection: function (element, callback) {
-        var url = Spree.url(search_url, {
-          ids: element.val()
+        var url = Spree.url(Spree.routes.taxons_search, {
+          ids: element.val(),
+          without_children: true,
+          token: Spree.api_key
         });
         return $.getJSON(url, null, function (data) {
           if(multiple){
           return callback(data['taxons']);
-          } else { 
+          } else {
           return callback(data['taxons'].pop());
           }
         });
@@ -26,9 +29,11 @@ var set_resource_taxon_select = function(dom_id, multiple, search_url){
           return {
             per_page: 50,
             page: page,
+            without_children: true,
             q: {
               name_cont: term
-            }
+            },
+            token: Spree.api_key
           };
         },
         results: function (data, page) {
