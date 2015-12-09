@@ -1,3 +1,8 @@
+<%= javascript_tag " var please_select_state_prompt = '#{j Spree.t('china_address.state_prompt')}';
+  var please_select_city_prompt = '#{j Spree.t('china_address.city_prompt')}';
+  var please_select_district_prompt = '#{j Spree.t('china_address.district_prompt')}';" %>
+
+
 <% address_id = address_type.chars.first %>
 <div class="inner" data-hook=<%="#{address_type}_inner" %>>
   <%= form.hidden_field :lastname, :class => '', :value=>'unused' %>

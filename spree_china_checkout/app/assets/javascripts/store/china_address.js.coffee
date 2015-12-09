@@ -7,28 +7,38 @@ Spree.ready ($) ->
 
   if ($ '#checkout_form_address').is('*')
 
+    getCountryId = (region) ->
+      $('#' + region + 'country select').val()
     getStateId = (region) ->
       $('#' + region + 'state select').val()
     getCityId = (region) ->
       $('#' + region + 'city select').val()
 
     Spree.updateCity = (region) ->
+      countryId = getCountryId(region)
       stateId = getStateId(region)
-      if stateId?
-        unless Spree.Checkout[stateId]?
+      if stateId? && stateId!=''
+        state_key = countryId+'_'+stateId
+        unless Spree.Checkout[state_key]?
           $.get Spree.routes.cities_search, {state_id: stateId}, (data) ->
-            Spree.Checkout[stateId] =
+            Spree.Checkout[state_key] =
               addresses: data.cities
               addresses_required: data.cities_required
-            Spree.fillAddress(Spree.Checkout[stateId], region, 'city')
+            Spree.fillAddress(Spree.Checkout[state_key], region, 'city')
+            Spree.updateDistrict('b')
         else
-          Spree.fillAddress(Spree.Checkout[stateId], region, 'city')
+          Spree.fillAddress(Spree.Checkout[state_key], region, 'city')
+      else
+        Spree.fillAddress( { }, region, 'city')
+
+
     Spree.updateDistrict = (region) ->
+      countryId = getCountryId(region)
       stateId = getStateId(region)
       cityId = getCityId(region)
 
-      if cityId?
-        city_key = stateId+'_'+cityId
+      if cityId? && cityId!=''
+        city_key = countryId+'_'+stateId+'_'+cityId
         unless Spree.Checkout[city_key]?
           $.get Spree.routes.districts_search, {city_id: cityId}, (data) ->
             Spree.Checkout[city_key] =
@@ -37,44 +47,31 @@ Spree.ready ($) ->
             Spree.fillAddress(Spree.Checkout[city_key], region, 'district')
         else
           Spree.fillAddress(Spree.Checkout[city_key], region, 'district')
+      else
+        Spree.fillAddress( { }, region, 'district')
 
     Spree.fillAddress = (data, region, area) ->
-      states = data.addresses
+      prompt = switch area
+        when 'state' then please_select_state_prompt
+        when 'city' then please_select_city_prompt
+        when 'district' then please_select_district_prompt
+        else ''
+      states = data.addresses || []
       statesRequired = data.addresses_required
 
       statePara = ($ '#' + region + area)
       stateSelect = statePara.find('select')
-      stateInput = statePara.find('input')
       stateSpanRequired = statePara.find('state-required')
-      if states.length > 0
-        selected = parseInt stateSelect.val()
-        stateSelect.html ''
-        statesWithBlank = [{ name: '', id: ''}].concat(states)
-        $.each statesWithBlank, (idx, state) ->
-          opt = ($ document.createElement('option')).attr('value', state.id).html(state.name)
-          opt.prop 'selected', true if selected is state.id
-          stateSelect.append opt
+      selected = parseInt stateSelect.val()
+      stateSelect.html ''
+      statesWithBlank = [{ name: prompt, id: ''}].concat(states)
+      $.each statesWithBlank, (idx, state) ->
+        opt = ($ document.createElement('option')).attr('value', state.id).html(state.name)
+        opt.prop 'selected', true if selected is state.id
+        stateSelect.append opt
 
-        stateSelect.prop('disabled', false).show()
-        stateInput.hide().prop 'disabled', true
-        statePara.show()
-        stateSpanRequired.show()
-        stateSelect.addClass('required') if statesRequired
-        stateInput.removeClass('required')
-      else
-        stateSelect.hide().prop 'disabled', true
-        stateInput.show()
-        if statesRequired
-          stateSpanRequired.show()
-          stateInput.addClass('required')
-        else
-          stateInput.val ''
-          stateSpanRequired.hide()
-          stateInput.removeClass('required')
-        statePara.toggle(!!statesRequired)
-        stateInput.prop('disabled', !statesRequired)
-        stateInput.removeClass('hidden')
-        stateSelect.removeClass('required')
+      stateSelect.addClass('required') if statesRequired
+
     ($ '#bstate select').change ->
       Spree.updateCity 'b'
     ($ '#bcity select').change ->

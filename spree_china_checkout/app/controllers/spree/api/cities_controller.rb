@@ -9,7 +9,7 @@ module Spree
 
       def index
         @cities = scope.ransack(params[:q]).result.
-                    includes(:state).order('name ASC')
+                    includes(:state)
 
         if params[:page] || params[:per_page]
           @cities = @cities.page(params[:page]).per(params[:per_page])
