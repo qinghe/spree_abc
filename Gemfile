@@ -37,8 +37,8 @@ gem 'jquery-turbolinks'
 
 eval(File.read(File.dirname(__FILE__) + '/common_spree_dependencies.rb'))
 #support rich_editor
-gem 'spree_editor',  :github => "spree/spree_editor", :branch=>"3-0-stable"
-# gem 'sprangular',   :path => './sprangular'
+gem 'spree_editor',  github: "spree/spree_editor", branch: "3-0-stable"
+# gem 'sprangular',   path: './sprangular'
 
 #gem 'tinymce-rails-langs'
 #gem 'daemons'
@@ -47,12 +47,12 @@ gem 'spree_editor',  :github => "spree/spree_editor", :branch=>"3-0-stable"
 # bundle config require specified branch, or warning message as below
 # Cannot use local override for spree_multi_site at ../spree_multi_site because :branch is not specified in Gemfile. Specify a branch or use `bundle config --delete` to remove the local override
 
-gem 'spree_multi_site',   :path => './spree_multi_site'
+gem 'spree_multi_site',   path: './spree_multi_site'
 
 # Use SCSS for stylesheets,  spree_theme/spree_devise_auth required
 gem "acts_as_commentable"
 gem 'useragent'
-gem 'spree_theme',   :path => './spree_theme'
+gem 'spree_theme',   path: './spree_theme'
 
 #activemerchant_patch_for_china requried
 gem 'ruby-hmac' #http://ryanbigg.com/2009/07/no-such-file-to-load-hmac-sha1/
@@ -60,19 +60,19 @@ gem 'ruby-hmac' #http://ryanbigg.com/2009/07/no-such-file-to-load-hmac-sha1/
 gem 'alipay'
 #gem 'offsite_payments'
 #gem 'activemerchant_patch_for_china', github:'RuanShan/activemerchant_patch_for_china', branch:'for_offsite_payments'
-gem 'spree_alipay',   :github => "RuanShan/spree_alipay", :branch=>"3-0-stable"
+gem 'spree_alipay',   github:  "RuanShan/spree_alipay", branch: "3-0-stable"
 
 gem 'coffee-rails'  #spree_china_checkout required
-gem 'spree_china_checkout',   :path => './spree_china_checkout'
-gem 'spree_essential_blog',   :path => './spree_essential_blog'
-gem 'spree_pingpp',   :path => './spree_pingpp'
+gem 'spree_china_checkout',   path: './spree_china_checkout'
+gem 'spree_essential_blog',   path: './spree_essential_blog'
+gem 'spree_pingpp',   path: './spree_pingpp'
 
 # copy from https://github.com/RuanShan/spree_flexi_variants/tree/2-1-stable
-# gem 'spree_flexi_variants',   :path => './spree_flexi_variants'
+# gem 'spree_flexi_variants',   path: './spree_flexi_variants'
 
 # copy from https://github.com/spree-contrib/spree_comments/tree/2-0-stable
-#gem 'spree_comments',   :path => './spree_comments' # it is moved into spree_theme
-gem 'paperclip_oss_storage',   :github => 'RuanShan/paperclip_oss_storage', :branch=>'master'
+#gem 'spree_comments',   path: './spree_comments' # it is moved into spree_theme
+gem 'paperclip_oss_storage',   github: 'RuanShan/paperclip_oss_storage', branch: 'master'
 
 #
 gem 'bootstrap-sass', '~> 3.3.6'
@@ -80,6 +80,7 @@ gem 'autoprefixer-rails'
 
 gem 'activerecord-session_store'
 
+#gem 'proclaimer', github: 'RuanShan/proclaimer', branch: 'master'
 #gem 'sidekiq'
 
 group :test, :development do
