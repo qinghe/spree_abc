@@ -74,6 +74,7 @@ gem 'spree_pingpp',   path: './spree_pingpp'
 #gem 'spree_comments',   path: './spree_comments' # it is moved into spree_theme
 gem 'paperclip_oss_storage',   github: 'RuanShan/paperclip_oss_storage', branch: 'master'
 
+gem 'spree_mail_settings',   github: 'RuanShan/spree_mail_settings', branch: 'master'
 #
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'autoprefixer-rails'

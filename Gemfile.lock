@@ -18,6 +18,14 @@ GIT
       spree_core (~> 3.0.0)
 
 GIT
+  remote: git://github.com/RuanShan/spree_mail_settings.git
+  revision: fbc4a6d8e3e1c0a798e7d7d96b81422a29abb004
+  branch: master
+  specs:
+    spree_mail_settings (2.2.0)
+      spree_backend (~> 3.0.0)
+
+GIT
   remote: git://github.com/spree/spree.git
   revision: 2f7322cdd764fd84bcb802eb157ad55118ff7ea0
   branch: 3-0-stable
@@ -515,6 +523,7 @@ DEPENDENCIES
   spree_china_checkout!
   spree_editor!
   spree_essential_blog!
+  spree_mail_settings!
   spree_multi_site!
   spree_pingpp!
   spree_theme!

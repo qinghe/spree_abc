@@ -29,21 +29,12 @@
               <%= f.text_area :meta_description, class: 'form-control'  %>
             </div>
 
-        <div class="row">
-          <div class="col-md-6">
+
             <div class="form-group" data-hook="admin_general_setting_input_url">
               <%= f.label :url %>
               <%= f.text_field :url, class: 'form-control'  %>
             </div>
-          </div>
 
-          <div class="col-md-6">
-            <div class="form-group" data-hook="admin_general_setting_mail_from_address">
-              <%= f.label :mail_from_address %>
-              <%= f.text_field :mail_from_address, class: 'form-control'  %>
-            </div>
-          </div>
-        </div>
       <% end %>
     <%= fields_for :site, @store.site do |f| %>
       <div class="row">

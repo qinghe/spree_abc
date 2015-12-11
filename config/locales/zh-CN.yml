@@ -849,7 +849,7 @@ zh-CN:
     maestro_or_solo_cards: Maestro/Solo cards
     mail_delivery_enabled: 邮件发送功能已启用
     mail_delivery_not_enabled: 邮件发送功能尚未启用
-    mail_method_settings: 邮件方式设置
+    mail_method_settings: 邮件设置
     mail_methods: 邮件服务
     mail_server_preferences: 邮件服务器首选项
     make_refund: 进行退款??
