@@ -1527,6 +1527,7 @@ zh-CN:
         greeting: "恭喜!"
         message: "如果您收到此邮件，则说明您的邮件设置是正确的"
         subject: "测试邮件"
+        thanks: "谢谢使用【店加】"
     test_mode: "测试模式"
     thank_you_for_your_order: "感谢您的订购，请打印这张订单作为购买凭证。"
     there_are_no_items_for_this_order:
