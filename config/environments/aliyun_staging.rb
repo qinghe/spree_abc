@@ -55,7 +55,7 @@ SpreeAbc::Application.configure do
     password:              ENV['NOTICE_AT_GETSTORE'],
     authentication:       'login',
     openssl_verify_mode: 'none',
-    enable_starttls_auto: true  }
+    enable_starttls_auto: false  }
 
   # Enable threaded mode
   # config.threadsafe!
