@@ -223,12 +223,12 @@ container:
       <%end%>
     }
     <% if @template.current_piece.per_page >0 %>
-    /* #copy from spree_backend/assets/stylesheets/admin/components/pagination */
-    .<%=@template.section_selector%> .pagination { float:left; clear:both; } /* add clear */
-    .<%=@template.section_selector%> .pagination .page{ display: inline-block; text-align: center;
+    /* since 3-0-stable pagination is ul */
+    .<%=@template.section_selector%> .pagination { float:left; clear:both; padding:0; margin:0;} /* add clear */
+    .<%=@template.section_selector%> .pagination li{ display: inline-block; text-align: center;
       <%=@template.css(:pagination_page)%>
     }
-    .<%=@template.section_selector%> .pagination .current{
+    .<%=@template.section_selector%> .pagination .active{
       <%=@template.css(:pagination_current)%>
     }
     <% end %>
