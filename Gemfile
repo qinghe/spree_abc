@@ -60,7 +60,7 @@ gem 'ruby-hmac' #http://ryanbigg.com/2009/07/no-such-file-to-load-hmac-sha1/
 gem 'alipay'
 #gem 'offsite_payments'
 #gem 'activemerchant_patch_for_china', github:'RuanShan/activemerchant_patch_for_china', branch:'for_offsite_payments'
-gem 'spree_alipay',   github:  "RuanShan/spree_alipay", branch: "3-0-stable"
+gem 'spree_alipay',   github:  "RuanShan/spree_alipay", branch: "master"
 
 gem 'coffee-rails'  #spree_china_checkout required
 gem 'spree_china_checkout',   path: './spree_china_checkout'

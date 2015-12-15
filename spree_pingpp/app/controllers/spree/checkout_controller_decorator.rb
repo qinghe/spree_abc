@@ -21,7 +21,7 @@ module Spree
           #more flow detail
           #https://pingxx.com/guidance/products/sdk
           payment_provider = payment_method.provider
-          #please try with host 127.0.0.1 instead localhost, or get invalid url http://localhost:3000/...
+          #test with host 127.0.0.1 instead localhost, or get invalid url http://localhost:3000/...
           #order_path( order, :only_path => false )
           begin
             @charge = payment_provider.create_charge( @order, pingpp_channel, spree.pingpp_charge_done_path( :only_path => false ) )
