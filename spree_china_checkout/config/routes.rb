@@ -1,4 +1,4 @@
-Spree::Core::Engine.routes.draw do
+Spree::Core::Engine.add_routes do
 
   # Add your extension routes here
   namespace :api, :defaults => { :format => 'json' } do

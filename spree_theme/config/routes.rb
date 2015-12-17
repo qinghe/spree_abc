@@ -1,4 +1,4 @@
-Spree::Core::Engine.routes.draw do
+Spree::Core::Engine.add_routes do
 
   root :to => 'template_themes#page'
   # Add your extension routes here
@@ -53,7 +53,7 @@ Spree::Core::Engine.routes.draw do
   post '/check_email', :to => 'users#check_email', :as => :check_email
 end
 
-Spree::Core::Engine.routes.draw do
+Spree::Core::Engine.add_routes do
 
   #api extension
   namespace :api, :defaults => { :format => 'json' } do
