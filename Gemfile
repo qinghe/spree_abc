@@ -5,7 +5,7 @@ source 'https://ruby.taobao.org/'
 # Bundle edge Rails instead:
 ruby '2.1.5'
 
-gem 'rails', '4.2.2'
+gem 'rails', '4.2.5'
 
 gem 'mysql2','0.3.19'
 
