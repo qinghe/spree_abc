@@ -24,7 +24,7 @@ Spree::Store.class_eval do
         self.by_url(domain).first
       end
     else
-      self.first
+      self.default
     end
     current_store
   end
