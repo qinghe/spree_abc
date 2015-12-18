@@ -1,6 +1,6 @@
 object false
 if @state
-  node(:states_required) { true }
+  node(:cities_required) { true }
 end
 
 child(@cities => :cities) do
