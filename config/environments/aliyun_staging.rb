@@ -44,7 +44,9 @@ SpreeAbc::Application.configure do
 
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
-  config.action_mailer.delivery_method = :smtp
+  # use delivery_method :spree which added by spree_mail_settings
+  config.action_mailer.delivery_method = :spree
+  # add smtp_settings as default options
   config.action_mailer.smtp_settings = {
     address:              'smtp.getstore.cn',
     port:                 25,
@@ -52,8 +54,16 @@ SpreeAbc::Application.configure do
     password:              ENV['NOTICE_AT_GETSTORE'],
     authentication:       'login',
     openssl_verify_mode: 'none',
-    enable_starttls_auto: false  }
+    enable_starttls_auto: false
+  }
 
+  config.middleware.use ExceptionNotification::Rack,
+    :email => {
+      :email_prefix => "[GetStoreException] ",
+      :sender_address => %{"notice" <notice@getstore.cn>},
+      :exception_recipients => %w{admin@getstore.cn},
+      :email_headers        => { "X-GetStore-Header" => "Exception" }
+  }
   # Enable threaded mode
   # config.threadsafe!
 

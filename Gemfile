@@ -83,6 +83,7 @@ gem 'activerecord-session_store'
 
 #gem 'proclaimer', github: 'RuanShan/proclaimer', branch: 'master'
 #gem 'sidekiq'
+gem 'exception_notification'
 
 group :test, :development do
   gem 'sqlite3'

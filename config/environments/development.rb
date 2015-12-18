@@ -30,5 +30,17 @@ SpreeAbc::Application.configure do
 
   config.eager_load  = false
 
+  config.action_mailer.delivery_method = :file
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = true
+
+  config.middleware.use ExceptionNotification::Rack,
+    :email => {
+      :email_prefix => "[Exception] ",
+      :sender_address => %{"info" <info@localhost>},
+      :exception_recipients => %w{www},
+      :email_headers        => { "X-SPREE-MAIL-BCC" => "Disable" }
+  }
+
   config.spree_multi_site.system_top_domain = 'david.com'
 end
