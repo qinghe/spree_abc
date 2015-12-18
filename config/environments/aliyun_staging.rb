@@ -62,7 +62,7 @@ SpreeAbc::Application.configure do
       :email_prefix => "[GetStoreException] ",
       :sender_address => %{"notice" <notice@getstore.cn>},
       :exception_recipients => %w{admin@getstore.cn},
-      :email_headers        => { "X-GetStore-Header" => "Exception" }
+      :email_headers        =>  { "X-SPREE-MAIL-BCC" => "Disable" }
   }
   # Enable threaded mode
   # config.threadsafe!
