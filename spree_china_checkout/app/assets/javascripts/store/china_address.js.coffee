@@ -4,10 +4,9 @@ Spree.ready ($) ->
   Spree.routes.districts_search = Spree.pathFor("api/districts")
 
   Spree.onAddress = () ->
-    if ($ '#checkout_form').is('form')
-       ($ '#checkout_form').validate()
 
     if ($ '#checkout_form_address').is('*')
+      ($ '#checkout_form_address').validate()
 
       getCountryId = (region) ->
         $('#' + region + 'country select').val()

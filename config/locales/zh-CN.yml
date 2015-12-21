@@ -5,6 +5,7 @@ zh-CN:
         address1: "地址"
         address2: "地址（继续）"
         city: "城市"
+        district: "区/县"
         country: "国家"
         firstname: "名字"
         lastname: "姓氏"

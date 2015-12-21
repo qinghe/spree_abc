@@ -39,7 +39,7 @@
     </span>
 
     <span class="field" id=<%="#{address_id}district" %>>
-      <% districts = address.try(:city).try(:districts ) || [] %>
+      <% districts = address.try(:china_city).try(:districts ) || [] %>
       <%= form.collection_select(:district_id, districts,
                             :id, :name,
                             {:include_blank => Spree.t('china_address.district_prompt')},

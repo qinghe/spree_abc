@@ -5,6 +5,7 @@ en:
         address1: Address
         address2: Address (contd.)
         city: City
+        district: District
         country: Country
         firstname: First Name
         lastname: Last Name
