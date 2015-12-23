@@ -30,7 +30,16 @@ SpreeAbc::Application.configure do
 
   config.eager_load  = false
 
-  config.action_mailer.delivery_method = :file
+  config.action_mailer.delivery_method = :spree
+  config.action_mailer.smtp_settings = {
+    address:              'smtp.getstore.cn',
+    port:                 25,
+    user_name:            'notice@getstore.cn',
+    password:              ENV['NOTICE_AT_GETSTORE'],
+    authentication:       'login',
+    openssl_verify_mode: 'none',
+    enable_starttls_auto: false
+  }
 
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
@@ -38,8 +47,8 @@ SpreeAbc::Application.configure do
   config.middleware.use ExceptionNotification::Rack,
     :email => {
       :email_prefix => "[Exception] ",
-      :sender_address => %{"info" <info@localhost>},
-      :exception_recipients => %w{www},
+      :sender_address => %{"info" <notice@getstore.cn>},
+      :exception_recipients => %w{admin@getstore.cn},
       :email_headers        => { "X-SPREE-MAIL-BCC" => "Disable" }
   }
 
