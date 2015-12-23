@@ -25,7 +25,8 @@ require 'database_cleaner'
 require 'spree/testing_support/authorization_helpers'
 require 'spree/testing_support/factories'
 require 'spree/testing_support/preferences'
-require 'spree/testing_support/controller_requests'
+#spree-2f7322cdd764/core/lib/spree/testing_support/controller_requests.rb:32:in `block in <module:ControllerRequests>': undefined method `routes' for #<Class:0x00000004541d58> (NoMethodError)
+#require 'spree/testing_support/controller_requests'
 require 'spree/testing_support/flash'
 require 'spree/testing_support/url_helpers'
 require 'spree/testing_support/order_walkthrough'
@@ -73,7 +74,7 @@ RSpec.configure do |config|
 
   config.include Spree::TestingSupport::Preferences
   config.include Spree::TestingSupport::UrlHelpers
-  config.include Spree::TestingSupport::ControllerRequests
+#  config.include Spree::TestingSupport::ControllerRequests
   config.include Spree::TestingSupport::Flash
   config.include SpreeTheme::TestingSupport::ControllerRequests, type: :controller
 

@@ -12,6 +12,7 @@ SpreeAbc::Application.routes.draw do
     end
   end
 
+
   mount Ckeditor::Engine => '/ckeditor'
 
   # This line mounts Spree's routes at the root of your application.
@@ -75,6 +76,8 @@ SpreeAbc::Application.routes.draw do
 
   # See how all your routes lay out with "rake routes"
 
+  get 'raise_action_not_found', :to =>"errors#raise_action_not_found"
+  get 'raise_invalid_authenticity_token', :to => "errors#raise_invalid_authenticity_token"
   # This is a legacy wild controller route that's not recommended for RESTful applications.
   # Note: This route will make all actions in every controller accessible via GET requests.
   # match ':controller(/:action(/:id))(.:format)'
