@@ -51,9 +51,7 @@ Spree::Core::Engine.add_routes do
   post '/create_admin_session', :to => 'template_themes#create_admin_session', :as => :create_admin_session
   get '/new_admin_session', :to => 'template_themes#new_admin_session', :as => :new_admin_session
   post '/check_email', :to => 'users#check_email', :as => :check_email
-end
 
-Spree::Core::Engine.add_routes do
 
   #api extension
   namespace :api, :defaults => { :format => 'json' } do
