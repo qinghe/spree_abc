@@ -19,7 +19,7 @@ GIT
 
 GIT
   remote: git://github.com/RuanShan/spree_mail_settings.git
-  revision: a7fc38cd9acae6f4541b02a9aacd0d6d2af435ce
+  revision: 7b27653637f2b0cc72031304003fe72023e54440
   branch: master
   specs:
     spree_mail_settings (3.0.0)
