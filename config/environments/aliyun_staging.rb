@@ -43,10 +43,10 @@ SpreeAbc::Application.configure do
   config.action_controller.asset_host = "http://aliasscdn.getstore.cn"
 
   # Disable delivery errors, bad email addresses will be ignored
-  # config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.show_previews = true
   # use delivery_method :spree which added by spree_mail_settings
   config.action_mailer.delivery_method = :spree
-  #config.action_mailer.show_previews = false
   # add smtp_settings as default options
   config.action_mailer.smtp_settings = {
     address:              'smtp.getstore.cn',
