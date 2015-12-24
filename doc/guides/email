@@ -1,0 +1,13 @@
+1. system exception notification
+  configure: default smtp
+
+2. customer notification, ex. make an order
+
+  configure: store.smtp_settings,  if store.smtp_username is empty, use system default
+
+3. user get bcc email address
+  configure: store.smtp_settings
+
+
+
+spree_mail_settings should support more mail_server_settings

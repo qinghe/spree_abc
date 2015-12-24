@@ -30,7 +30,7 @@ SpreeAbc::Application.configure do
 
   config.eager_load  = false
 
-  config.action_mailer.delivery_method = :spree
+  config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
     address:              'smtp.getstore.cn',
     port:                 25,
@@ -43,14 +43,16 @@ SpreeAbc::Application.configure do
 
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
-
+  config.action_mailer.show_previews = true
+  # ExceptionNotification is using ActionMailer::Base as mailer,
+  # it is using above smtp_setting,
+  # spree_mail_settings is using Spree::BaseMailer,
   config.middleware.use ExceptionNotification::Rack,
     :email => {
-      :email_prefix => "[Exception] ",
+      :email_prefix => "[LocalException] ",
       :sender_address => %{"info" <notice@getstore.cn>},
-      :exception_recipients => %w{admin@getstore.cn},
-      :email_headers        => { "X-SPREE-MAIL-BCC" => "Disable" }
-  }
+      :exception_recipients => %w{admin@getstore.cn}
+    }
 
   config.spree_multi_site.system_top_domain = 'david.com'
 end

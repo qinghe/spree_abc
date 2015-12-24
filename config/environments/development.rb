@@ -39,9 +39,8 @@ SpreeAbc::Application.configure do
     :email => {
       :email_prefix => "[Exception] ",
       :sender_address => %{"info" <info@localhost>},
-      :exception_recipients => %w{www},
-      :email_headers        => { "X-SPREE-MAIL-BCC" => "Disable" }
-  }
+      :exception_recipients => %w{mail-to-info}
+    }
 
   config.spree_multi_site.system_top_domain = 'david.com'
 end
