@@ -46,7 +46,7 @@ SpreeAbc::Application.configure do
   config.action_mailer.raise_delivery_errors = false
   config.action_mailer.show_previews = false
   # use delivery_method :spree which added by spree_mail_settings
-  config.action_mailer.delivery_method = :spree
+  config.action_mailer.delivery_method = :smtp
   # add smtp_settings as default options
   config.action_mailer.smtp_settings = {
     address:              'smtp.getstore.cn',
