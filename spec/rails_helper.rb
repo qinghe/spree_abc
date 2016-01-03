@@ -52,7 +52,7 @@ RSpec.configure do |config|
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
   # instead of true.
-  config.use_transactional_fixtures = true
+  config.use_transactional_fixtures = false
 
   config.include FactoryGirl::Syntax::Methods
 
@@ -96,19 +96,21 @@ RSpec.configure do |config|
   # Ensure Suite is set to use transactions for speed.
   config.before :suite do
     DatabaseCleaner.strategy = :transaction
-    DatabaseCleaner.clean_with :truncation, { except: except_tables }
+    DatabaseCleaner.clean_with :truncation #, { except: except_tables }
   end
 
   # Before each spec check if it is a Javascript test and switch between using database transactions or not where necessary.
   config.before :each do
     Rails.cache.clear
     WebMock.disable!
-    if RSpec.current_example.metadata[:js]
-      DatabaseCleaner.strategy = :truncation , { except: except_tables }
-    else
-      DatabaseCleaner.strategy = :transaction
-    end
+    DatabaseCleaner.strategy = RSpec.current_example.metadata[:js] ? :truncation : :transaction
     DatabaseCleaner.start
+    #if RSpec.current_example.metadata[:js]
+    #  DatabaseCleaner.strategy = :truncation , { except: except_tables }
+    #else
+    #  DatabaseCleaner.strategy = :transaction
+    #end
+    #DatabaseCleaner.start
   end
 
   # After each spec clean the database.

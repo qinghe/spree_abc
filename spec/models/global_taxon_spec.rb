@@ -1,7 +1,7 @@
 require 'rails_helper'
 describe Spree::Taxon do
-  let(:site1){ create(:site1)}
-  let(:site2){ create(:site2)}
+  let!(:site1){ create(:site1)}
+  let!(:site2){ create(:site2)}
   before(:each) do
     Spree::Site.with_site( site1) do
        @taxon_of_site1 = create(:taxon, :name => "Taxon of site1")

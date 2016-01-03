@@ -21,7 +21,7 @@ describe Spree::TemplateThemeImporter, :type => :model do
     end
 
     it "should create new template theme with taxon" do
-      expect{ @importable_template_theme.import_with_resource(  ) }.to change{ Spree::Taxon.count}.by(4)
+      expect{ @importable_template_theme.import_with_resource(  ) }.to change{ Spree::Taxon.count}.by(12)
     end
 
     context 'a imported template theme' do

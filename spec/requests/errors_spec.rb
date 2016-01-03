@@ -1,10 +1,10 @@
 require 'rails_helper'
 describe 'making a request to an unrecognised path' do
 
-  it 'returns 404' do
-    get '/nowhere'
-    expect(response.status).to eq(404)
-  end
+#  it 'returns 404' do
+#    get '/nowhere'
+#    expect(response.status).to eq(404)
+#  end
 end
 
 # routing
