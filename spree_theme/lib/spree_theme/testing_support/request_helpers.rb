@@ -10,7 +10,7 @@ module SpreeTheme
           before(:each) {
             #refer to spree/core/store
             #Spree::Store.current(  create(:store).url )
-            allow(controller).to receive(:initialize_template).and_return(nil)
+            allow(controller).to receive(:initialize_template).and_return(true)
           }
         end
 

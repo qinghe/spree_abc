@@ -1,13 +1,14 @@
 require 'rails_helper'
 
 describe Spree::Admin::TemplateThemesController, :type => :controller do
+  stub_authorization!
+  stub_initialize_template!
+
   before(:each){
     @site2 = create(:site2)
     Spree::Site.current = create(:site1)
   }
   describe "demo #import theme from design" do
-    stub_authorization!
-    stub_initialize_template!
 
     let(:template_theme){ create(:importable_template_theme, store_id: @site2.stores.first.id  ) }
     it "responds successfully with an HTTP 200 status code" do

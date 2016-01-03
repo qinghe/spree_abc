@@ -50,8 +50,11 @@ module SpreeTheme
       # Rails.logger.debug "request_fullpath=#{request_fullpath}"
       # fullpath may contain ?n=www.domain.com
       case request_fullpath
+      when /^\/create_admin_session/,/^\/new_admin_session/
+        @special_layout = 'layout_for_login'
+        return
       when /^\/under_construction/, /^\/user\/spree_user\/logout/ ,/^\/logout/, /^\/admin/
-          return
+        return
       end
 
       website = Spree::Store.current
@@ -126,10 +129,7 @@ module SpreeTheme
 
       # @theme is required since we support create admin session by ajax.
       case request_fullpath
-        when /^\/create_admin_session/,/^\/new_admin_session/
-          #copy from spree_auth_devise/lib/views/spree/layouts/login
-          @special_layout = 'layout_for_login'
-          return
+
         when /^\/comments/,/^\/new_site/,/^\/create_site/ # it need layout when development, in fact it is always ajax.
           @special_layout = 'under_construction'
           return

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe "Create site", :type => :request do
+describe Spree::SitesController, :type => :controller do
 
   before(:all) do
     Spree::Site.current = create(:site1)
@@ -28,7 +28,7 @@ describe "Create site", :type => :request do
       #    assert_select('#site_email', 'unknown@getstore.cn' )
       #    assert_select('#site_password', 'spree123' )
       #end
-      post "/create_site", new_site_params
+      spree_post "create", new_site_params
 
       assert assigns(:site)
 
@@ -50,7 +50,7 @@ describe "Create site", :type => :request do
       #    assert_select('#site_password', 'spree123' )
       #end
       new_site_params[:site][:foreign_theme_id] = template_theme.id
-      post "/create_site", new_site_params
+      spree_post "create", new_site_params
       site = assigns(:site)
       assert site
       expect( site.foreign_template_theme ).to be_kind_of Spree::TemplateTheme

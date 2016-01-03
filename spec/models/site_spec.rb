@@ -1,10 +1,11 @@
 require 'rails_helper'
 
 describe Spree::Site do
+  let(:email) { "test@abc.com" }
 
   before(:each) do
-    create(:admin_role) 
-    @site = Spree::Site.new(:name=>'ABCD',:domain=>'www.abc.net',"email"=>"test@abc.com", "password"=>"a12345z")
+    create(:admin_role)
+    @site = Spree::Site.new(:name=>'ABCD',:domain=>'www.abc.net',"email"=>email, "password"=>"a12345z")
   end
 
   it "should be valid" do
@@ -12,11 +13,13 @@ describe Spree::Site do
   end
 
   it "should create site and user" do
-    user_attributes = {"email"=>"test@abc.com", "password"=>"a12345z", "password_confirmation"=>"a12345z"}
-    @site.users<< Spree::User.new(user_attributes)
+    #user_attributes = {"email"=>"test@abc.com", "password"=>"a12345z", "password_confirmation"=>"a12345z"}
+    #@site.users<< Spree::User.new(user_attributes)
     @site.save
     @site.should_not be_new_record
-    @site.users.first.email.should eq(user_attributes['email'])
+    Spree::Site.with_site @site do
+      @site.users.first.email.should eq(email)
+    end
   end
 
   #it "shold load samples" do

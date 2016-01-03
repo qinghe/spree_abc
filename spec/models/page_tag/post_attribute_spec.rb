@@ -3,6 +3,7 @@ require 'rails_helper'
 describe PageTag::PostAttribute do
 
   before do
+    Spree::Site.current = create(:site1)
     @post = create( :post )
   end
 
