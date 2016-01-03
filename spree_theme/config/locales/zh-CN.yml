@@ -48,7 +48,8 @@ zh-CN:
         slug: Slug
         section_root_id: 基础模块
         is_public: 是否公开
-
+      spree/store_logo:
+        attachment: logo
     models:
       spree/page_layout:
         one: 模块

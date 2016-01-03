@@ -7,6 +7,27 @@ Spree::Store.class_eval do
   has_many :template_themes, :dependent=>:destroy
   belongs_to :home_page, :foreign_key=>'index_page_id', :class_name=>'Taxon'
 
+  has_one :logo, class_name: 'Spree::StoreLogo', :as => :viewable,  :dependent => :destroy
+  has_one :favicon, class_name: 'Spree::StoreFavicon', :as => :viewable,  :dependent => :destroy
+  #has_attached_file :logo,
+  #  styles: { mini: '48x48>' },
+  #  default_style: :mini,
+  #  url: '/spree/stores/:id/:basename_:style.:extension',
+  #  path: ':rails_root/public/spree/stores/:id/:basename_:style.:extension',
+  #  default_url: '/assets/images/logo/dalianshops.png'
+
+  #validates_attachment :logo,
+  #  content_type: { content_type: ["image/jpg", "image/jpeg", "image/png", "image/gif"] }
+
+  #has_attached_file :favicon,
+  #  styles: { mini: '48x48>' },
+  #  default_style: :mini,
+  #  url: '/spree/stores/:id/:basename_:style.:extension',
+  #  path: ':rails_root/public/spree/stores/:id/:basename_:style.:extension',
+  #  default_url: '/assets/images/favicon.ico'
+
+  #validates_attachment :favicon,
+  #  content_type: { content_type: ["image/x-icon"] }
 
   # shop's resource should be in this folder
   def self.document_root

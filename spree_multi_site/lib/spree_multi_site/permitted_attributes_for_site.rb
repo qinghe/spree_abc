@@ -8,5 +8,6 @@ module Spree
       # from app_configuration
       :allow_ssl_in_production, :allow_ssl_in_development_and_test, :allow_ssl_in_staging, :check_for_spree_alerts, :display_currency, :hide_cents, :currency, :currency_symbol_position, :currency_decimal_mark, :currency_thousands_separator
       ]
+    @@store_attributes += [:store_logo]
   end
 end
