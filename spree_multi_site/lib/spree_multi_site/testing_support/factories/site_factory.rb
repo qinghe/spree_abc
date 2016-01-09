@@ -1,22 +1,23 @@
 FactoryGirl.define do
   factory :site1, class: Spree::Site do
     name 'first'
-    email 'first@dalianshops.com'
+    email 'first@example.com'
     password 'password'
+    short_name 'www' # indicate tld
 
     before(:create) do
       Spree::Role.find_by(name: 'admin') || create(:role, name: 'admin')
     end
 
     after(:create) do| site |
-      store = create(:store, site: site, is_public: true )
+      store = create(:store, site: site )
     end
 
   end
 
   factory :site2, class: Spree::Site  do
     name 'design'
-    email 'design@dalianshops.com'
+    email 'design@example.com'
     password 'password'
 
     before(:create) do
@@ -24,7 +25,7 @@ FactoryGirl.define do
     end
 
     after(:create) do| site |
-      store = create(:store, site: site, is_public: true )
+      store = create(:store, site: site )
     end
 
   end

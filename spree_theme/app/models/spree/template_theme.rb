@@ -349,7 +349,7 @@ module Spree
       #  transaction do
       #    created_at =   DateTime.now
       #    # support yaml/json, record is model/hash
-      #    #site id is 1 in exported yml, in spree_abc, design.dalianshops.com is 2
+      #    #site id is 1 in exported yml, in spree_abc, design.tld is 2
       #    original_template_attributes = get_attributes_serialized_data(template).merge!( 'created_at'=>created_at )
       #    if self.exists?(original_template_attributes['id'])
       #      if replace_exisit
@@ -548,7 +548,7 @@ module Spree
     private
     def fix_special_attributes
       if store.blank? # when test, store_id may be nil
-        self.site_id = SpreeTheme.site_class.current.id
+        #self.site_id = SpreeTheme.site_class.current.id
         self.store_id= Spree::Store.current.id
       end
       #fix Attribute was supposed to be a Hash, but was a String

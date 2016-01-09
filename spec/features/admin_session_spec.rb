@@ -3,7 +3,7 @@ require 'rails_helper'
 describe "admin session", :type => :feature do
   before(:each) do
     Spree::Site.current= create(:site1)
-    @user = create(:admin_user, :email => "email@person.com", :password => "secret", :password_confirmation => "secret", :site_id=> Spree::Site.current.id)
+    @user = create(:admin_user, :email => "email@example.com", :password => "secret", :password_confirmation => "secret", :site_id=> Spree::Site.current.id)
     visit spree.admin_path
   end
 
@@ -19,7 +19,7 @@ describe "admin session", :type => :feature do
   end
 
   it "should not sign admin of other site" do
-    @user = create(:admin_user, :email => "email2@person.com", :password => "secret", :password_confirmation => "secret", :site_id=>2)
+    @user = create(:admin_user, :email => "email2@example.com", :password => "secret", :password_confirmation => "secret", :site_id=>2)
     fill_in_user
     click_on "登录"
     page.current_url.should include( 'new_admin_session' )

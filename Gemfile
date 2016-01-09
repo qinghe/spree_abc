@@ -110,9 +110,10 @@ end
 #execjs need js runtime, use nodejs of system instead.
 #gem 'therubyracer'
 
-#group :development do
+group :development do
+  gem 'pry-rails'
 #  gem 'capistrano'
 #  gem 'capistrano-rails', '~> 1.1.0'
 #  gem 'capistrano-rvm', '~> 0.1.0'
 #  #gem "rails-erd"
-#end
+end

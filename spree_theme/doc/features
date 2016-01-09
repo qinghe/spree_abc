@@ -95,7 +95,7 @@ a design/shopping site must have a released theme, or redirect to under_contruct
     6. user login
     www.tld/admin/
     7. customer view live template demo
-    templates.dalianshops.com  -> /var/www/shops/1
+    design.tld  -> /var/www/shops/2
     8. customer browse published template list
     www.tld/admin/template_themes/
     9. shop folders

@@ -5,11 +5,11 @@ module Spree
     include SpreeTheme::SiteHelper
     before_validation :set_short_name
     has_many :stores
-    
+
     class << self
       def current
       #  if Thread.current[:spree_site].nil?
-      #    website = self.find_or_initialize_by_domain_and_name('design.dalianshops.com','DalianShops Design Site' )
+      #    website = self.find_or_initialize_by_domain_and_name('design.example.com','Design Site' )
       #    #or Rails.env.development?
       #    if website.new_record?
       #      website.id = 2

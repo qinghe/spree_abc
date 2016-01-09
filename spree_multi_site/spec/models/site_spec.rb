@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Spree::Site do
   before(:each) do
     create(:admin_role)
-    @site = Spree::Site.new(:name=>'ABCD',:domain=>'www.abc.net', :email=>'test@dalianshops.com', :password=>'123456')
+    @site = Spree::Site.new(:name=>'ABCD',:domain=>'www.abc.net', :email=>'test@example.com', :password=>'123456')
   end
 
   it "should be valid with blank domain" do
@@ -38,7 +38,7 @@ describe Spree::Site do
   # raise error ./app/models/spree/site.rb:56:in `current'
   #it "should create site and admin user" do
   #  site_params = { "name"=>"test", "short_name"=>"test",
-  #        "users_attributes"=>{"0"=>{"email"=>"test@dalianshops.com", "password"=>"123456", "password_confirmation"=>"123456"}}
+  #        "users_attributes"=>{"0"=>{"email"=>"test@example.com", "password"=>"123456", "password_confirmation"=>"123456"}}
   #        }
   #  site = Spree::Site.new(site_params)
   #  site.save
@@ -67,8 +67,8 @@ describe Spree::Site do
   end
 
   it "shold create two site and load samples for them" do
-    #@site1 = Spree::Site.create!(:name=>'Site1',:domain=>'www.site1.net',:short_name=>'site1', :email=>'site1@dalianshops.com', :password=>'123456')
-    #@site2 = Spree::Site.create!(:name=>'Site1',:domain=>'www.site2.net',:short_name=>'site2', :email=>'site2@dalianshops.com', :password=>'123456')
+    #@site1 = Spree::Site.create!(:name=>'Site1',:domain=>'www.site1.net',:short_name=>'site1', :email=>'site1@example.com', :password=>'123456')
+    #@site2 = Spree::Site.create!(:name=>'Site1',:domain=>'www.site2.net',:short_name=>'site2', :email=>'site2@example.com', :password=>'123456')
     #@site1.load_sample
     #@site2.load_sample
     #product image copied and in right folder.

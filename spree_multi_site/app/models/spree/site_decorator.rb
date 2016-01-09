@@ -111,13 +111,12 @@ Spree::TaxRate.class_eval do
 end
 
 Spree::Tracker.class_eval do
-  belongs_to :site
-  default_scope  { where(:site_id =>  Spree::Site.current.id) }
+  include Spree::MultiSiteSystem
 end
 
 Spree.user_class.class_eval do
   # user.email validation is unique, it is defined in devise/lib/models/validatable.rb
-  # 1. we required dalianshops user have unique email,
+  # 1. we required user have unique email,
   # 2. we allow user modify their password after sign up.
   # fix unique with scope [site_id] would conflict with 1
   include Spree::MultiSiteSystem
@@ -136,8 +135,7 @@ Spree::Variant.class_eval do
 end
 
 Spree::Zone.class_eval do
-  belongs_to :site
-  default_scope  { where(:site_id =>  Spree::Site.current.id) }
+  include Spree::MultiSiteSystem
 
   clear_validators!
   # Add new validates_uniqueness_of with correct scope

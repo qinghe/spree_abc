@@ -73,7 +73,7 @@ module Spree
           self.param_values.each{|pv|
             if pv.pvalue[html_attribute_id] == default_html_attribute_value
               pv.pvalue.delete html_attribute_id
-              pv.update_column(:pvalue, pv.pvalue.to_yaml)
+              pv.update_column(:pvalue, pv.pvalue)
             end
           }
         end
@@ -83,7 +83,7 @@ module Spree
     private
     #add param_value where page_layout.section_id = ? for each layout tree.
     def add_param_values
-      page_layouts = PageLayout.where("section_id"=>self.section.root_id)
+      page_layouts = PageLayout.where("section_id"=>self.section.root.id)
       for page_layout in page_layouts
             page_layout.param_values.create do|param_value|
               param_value.theme_id = page_layout.template_theme_id

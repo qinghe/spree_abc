@@ -1,33 +1,42 @@
 #encoding: utf-8
 module Spree
     class SitesController< StoreController
+      #only www.tld could access this controller
+      before_filter :authorize_site
       respond_to :html,:js
-      
+
+      def one_click_trial
+        #js only
+        #respond_with(@site) do |format|
+        #  format.html {    }
+        #end
+      end
+
       def new
         if params[:template_theme_id].present?
-          @template_theme = Spree::TemplateTheme.foreign.find params[:template_theme_id]  
+          @template_theme = Spree::TemplateTheme.foreign.find params[:template_theme_id]
         end
         @site = Site.new
         @user = @site.users.build
         @store = @site.stores.build
       end
-      
-      # called from dalianshops home page
+
+      # called from www.tld home page
       def quick_lunch
-        
+
         @site = create_site( permitted_resource_params )
         if @site.persisted?
           redirect_to @site.admin_url
         else
-          redirect_to root_path()            
-        end        
+          redirect_to root_path()
+        end
       end
-      
+
       def show
         @site =  Site.find(params[:id])
         render :after_new
       end
-      
+
       def create
         @site = create_site(  permitted_resource_params )
         if @site.persisted?
@@ -36,15 +45,15 @@ module Spree
           respond_with(@site) do |format|
             format.html { redirect_to @site.admin_url }
             format.js { render :js => "window.location = '#{@site.admin_url}'" }
-          end         
+          end
         else
           respond_with(@site) do |format|
             format.js { render :action => 'new'}
-          end         
+          end
         end
       end
-            
-      # options 
+
+      # options
       def create_site( permitted_site_params)
         site = Site.new(permitted_site_params)
         if site.save
@@ -54,20 +63,28 @@ module Spree
             #@site.update_attributes!(:loading_sample=>true)
             # add job to load sample
             #Delayed::Job.enqueue SampleSeedJob.new( @site )
-          end 
+          end
         else
           flash[:error] = Spree.t('errors.messages.could_not_create_site')
-        end  
+        end
         site
       end
-      
+
       def permitted_resource_params
         params[object_name].present? ? params.require(object_name).permit! : ActionController::Parameters.new
       end
-      
+
       def object_name
         'site'
-      end     
+      end
+
+      def authorize_site
+        unless Store.current.god?
+          redirect_to 'http://'+Store.god.subdomain, status: :moved_permanently
+          #raise CanCan::AccessDenied.new("Not authorized!", :access, Site)
+        end
+      end
+
     end
-  
+
 end

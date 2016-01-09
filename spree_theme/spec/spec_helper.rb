@@ -92,3 +92,8 @@ RSpec.configure do |config|
   config.fail_fast = ENV['FAIL_FAST'] || false
   config.order = "random"
 end
+
+RSpec.configure do |config|
+  config.include Devise::TestHelpers,   type: :controller
+  config.include Rack::Test::Methods,   type: :feature
+end

@@ -9,13 +9,6 @@ module SpreeTheme
       after_create :initialize_first_theme_if_selected # site_id is required for it
     end
 
-    module ClassMethods
-      #supply global taxon to other site.
-      def globalsite
-        dalianshops
-      end
-    end
-
     # customer could select a theme when creating site.
     def initialize_first_theme_if_selected
       if foreign_template_theme.present?

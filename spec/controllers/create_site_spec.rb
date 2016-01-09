@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe Spree::SitesController, :type => :controller do
 
-  before(:all) do
+  before(:each) do
     Spree::Site.current = create(:site1)
     #load  File.join( Rails.root, 'spree_theme', 'db', 'themes', 'first', 'site_form.rb')
     # for unkonwn reason, is_public is false, we set it here
@@ -13,7 +13,7 @@ describe Spree::SitesController, :type => :controller do
     { site:
       { name: 'a unique store',
         password: '666666',
-        email: 'unknown@getstore.cn'
+        email: 'unknown@example.com'
       }
     }
   }

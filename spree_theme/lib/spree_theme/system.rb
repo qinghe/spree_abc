@@ -44,9 +44,8 @@ module SpreeTheme
     def initialize_template( request_fullpath = nil )
       request_fullpath ||= request.fullpath
 
-      # in case  tld/create_admin_session, should show system layout, theme may have no login section. ex www.dalianshops.com
+      # in case  tld/create_admin_session, should show system layout, theme may have no login section.
       @special_layout = nil
-      # dalianshops use template now.
       # Rails.logger.debug "request_fullpath=#{request_fullpath}"
       # fullpath may contain ?n=www.domain.com
       case request_fullpath

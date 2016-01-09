@@ -12,7 +12,7 @@ require 'spree/core/environment_extension'
         #@preferences = Spree::MultiSiteConfiguration.new
         #"Spree.user_class MUST be a String or Symbol object, not a Class object."
         # it has to be in Environment, it vary in env
-        @system_top_domain = "dalianshops.com"
+        @system_top_domain = "example.com"
         @site_scope_required_classes_from_other_gems = []
         @site_scope_required_classes_with_image_from_other_gems = []
       end

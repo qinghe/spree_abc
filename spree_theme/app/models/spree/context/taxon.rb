@@ -72,7 +72,6 @@ module Spree
       #     /user  context is account
       # return :either(detail or list), cart, checkout, register, login
       def current_context
-        # consider query_string d=www.dalianshops.com and preview path /template_themes/2/preview
         @context_context = nil
         if request_fullpath.present? #for current page, request_fullpath is present
           @context_context = get_context_by_full_path( request_fullpath )

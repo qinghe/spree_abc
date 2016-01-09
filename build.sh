@@ -20,30 +20,18 @@ bundle check
 
 # Spree Abc
 echo "**************************************"
-echo "* Setup Spree Abc and running RSpec..."
+echo "* Setup SpreeAbc and running RSpec..."
 echo "**************************************"
 bundle exec rspec spec
 
 # Spree Theme
 echo "******************************************"
-echo "* Setup Spree Theme and running RSpec...  "
+echo "* Setup SpreeTheme and running RSpec...  "
 echo "******************************************"
-cd ./spree_theme; set_gemfile; bundle exec rspec spec
+cd ./spree_theme; set_gemfile; bundle install; bundle exec rspec spec
 
 # Spree Mulit-Site
 echo "***************************************"
-echo "* Setup Spree Mulit-Site and running RSpec..."
+echo "* Setup SpreeMulitSite and running RSpec..."
 echo "***************************************"
-cd ../spree_multi_site; set_gemfile; bundle exec rspec spec
-
-# Spree Frontend
-#echo "*******************************************"
-#echo "* Setup Spree Frontend and running RSpec..."
-#echo "*******************************************"
-#cd ../frontend; set_gemfile; bundle update --quiet; bundle exec rspec spec
-
-# Spree Sample
-#echo "*****************************************"
-#echo "* Setup Spree Sample and running RSpec..."
-#echo "*****************************************"
-#cd ../sample; set_gemfile; bundle update --quiet; bundle exec rspec spec
+cd ../spree_multi_site; set_gemfile; bundle install; bundle exec rspec spec

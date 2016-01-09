@@ -1,4 +1,4 @@
-source 'http://rubygems.org'
+source 'https://ruby.taobao.org'
 #source "https://rails-assets.org"
 
 eval(File.read(File.dirname(__FILE__) + '/../common_spree_dependencies.rb'))
@@ -25,7 +25,7 @@ gem 'acts_as_commentable'
 gem 'useragent'
 gem "friendly_id"
 
-#gem 'ssl_requirement'
-
+gem 'turbolinks'
+gem 'jquery-turbolinks'
 
 gemspec

@@ -1,7 +1,7 @@
 # This migration comes from spree_multi_site (originally 20141027010101)
 class AddProductsGlobalTaxons < ActiveRecord::Migration
-  # we want to display product in s.dalianshops.com
-  # each product should have global taxon( taxon in dalianshops )  
+  # we want to display product in www.tld
+  # each product should have global taxon( taxon in www.tld )  
   create_table :spree_products_global_taxons, :id => false do |t|
     t.references :product
     t.references :taxon
