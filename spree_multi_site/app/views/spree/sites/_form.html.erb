@@ -3,12 +3,12 @@
     <div class="left" data-hook="admin_site_form_left">
       <p>
         <%= f.label :name %> <br />
-        <%= f.text_field :name, :minlength=>4, :maxlength=>30, :required=>""  %>
+        <%= f.text_field :name, :minlength=>4, :maxlength=>30, :required=>true  %>
       </p>
 
         <p>
           <%= f.label  :email, Spree.t(:email)  %><br />
-          <%= f.email_field :email %>
+          <%= f.email_field :email, size: 30 %>
         </p>
 
         <p>

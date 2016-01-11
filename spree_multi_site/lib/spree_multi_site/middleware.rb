@@ -6,6 +6,8 @@ module SpreeMultiSite
 
 
     def call(env)
+      #env['ORIGINAL_FULLPATH'] = /,
+      #env['REQUEST_URI'] = http://localhost:3000/
       request = Rack::Request.new(env)
       resource_extension = request.path[/\.[\w]+/]
       # ignore .css, .js, .img, except .json
@@ -17,7 +19,7 @@ module SpreeMultiSite
     end
 
     def get_store_from_request( request )
-      
+
       store = Spree::Store.by_domain( request.host )
 
       # support domain, ex. www.david.com

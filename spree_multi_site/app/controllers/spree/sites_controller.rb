@@ -70,6 +70,7 @@ module Spree
         site
       end
 
+      private
       def permitted_resource_params
         params[object_name].present? ? params.require(object_name).permit! : ActionController::Parameters.new
       end
@@ -79,7 +80,8 @@ module Spree
       end
 
       def authorize_site
-        unless Store.current.god?
+        # Site.current.god? would not work, god site loaded for unexist domain 
+        unless request.host.end_with? Spree::Site.system_top_domain
           redirect_to 'http://'+Store.god.subdomain, status: :moved_permanently
           #raise CanCan::AccessDenied.new("Not authorized!", :access, Site)
         end
