@@ -111,7 +111,9 @@ end
 #gem 'therubyracer'
 
 group :development do
+  gem "spring"
   gem 'pry-rails'
+#  gem 'web-console', '~> 3.0'
 #  gem 'capistrano'
 #  gem 'capistrano-rails', '~> 1.1.0'
 #  gem 'capistrano-rvm', '~> 0.1.0'
