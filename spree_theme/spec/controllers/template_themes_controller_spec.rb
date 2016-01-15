@@ -2,12 +2,12 @@ require "spec_helper"
 
 describe Spree::TemplateThemesController, :type => :controller do
   stub_initialize_template!
-
-  let(:param_value) { create(:updatable_param_value) }
-  let(:background_image) { create(:background_image) }
-  before(:each) {
-    allow( param_value).to receive(:html_attribute_ids).and_return( [1,2] )
-  }
+  context "template editor" do
+    let(:param_value) { create(:updatable_param_value) }
+    let(:background_image) { create(:background_image) }
+    before(:each) {
+      allow( param_value).to receive(:html_attribute_ids).and_return( [1,2] )
+    }
     #FIXME test it
     it "get upload image dialog" do
 
@@ -23,11 +23,18 @@ describe Spree::TemplateThemesController, :type => :controller do
         }
       expect(response).to be_success
     end
+  end
 
-  it "preview vie designable store"  do
-    spree_get :preview
-    expect(response).to be_success
+  context "designable store " do
+    before(:each) {
+      create(:store, default: true, designable: true)
+      allow( controller ).to receive(:get_layout_if_use).and_return( false )
+    }
 
+    it "preview "  do
+      spree_get :preview
+      expect(response).to be_success
+    end
   end
 
   it "should not previewable vie nondesignable store"  do

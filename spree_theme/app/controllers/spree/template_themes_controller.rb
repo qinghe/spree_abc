@@ -183,23 +183,19 @@ module Spree
       if request.post?
         #TODO replace same name of template file
         uploaded_image = TemplateFile.new(  params.require(:template_file).permit! )
-        if uploaded_image.valid?
-          uploaded_image['theme_id']=@param_value.theme_id
-          if uploaded_image.save
-                # update param value to selected uploaded image
-                param_value_params={@html_attribute_id.to_s=>{"unset"=>"0", "pvalue0"=>uploaded_image.attachment_file_name, "psvalue0"=>"0i"}}
-                param_value_event = ParamValue::EventEnum[:pv_changed]
-                editing_html_attribute_id = @html_attribte_id
-                @updated_html_attribute_values = do_update_param_value(@param_value, param_value_params, param_value_event, editing_html_attribute_id)
-                # get all param values by selected editor
-                # update param value
-                render :partial=>'after_upload_dialog'
-          end
-        else
-        end
+        uploaded_image['theme_id']=@param_value.theme_id
+        uploaded_image.save!
+        # update param value to selected uploaded image
+        param_value_params={@html_attribute_id.to_s=>{"unset"=>"0", "pvalue0"=>uploaded_image.attachment_file_name, "psvalue0"=>"0i"}}
+        param_value_event = ParamValue::EventEnum[:pv_changed]
+        editing_html_attribute_id = @html_attribte_id
+        @updated_html_attribute_values = do_update_param_value(@param_value, param_value_params, param_value_event, editing_html_attribute_id)
+        # get all param values by selected editor
+        # update param value
+        render :partial=>'after_upload_dialog'        
       else
         @theme = TemplateTheme.find(@param_value.theme_id)
-        render "application/dialog_for_editor"
+        render "dialog_for_editor"
 
       end
     end
