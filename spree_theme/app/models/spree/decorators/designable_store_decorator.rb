@@ -33,4 +33,11 @@ Spree::Store.class_eval do
   def path
     File.join( File::SEPARATOR + 'shops', Rails.env, self.site_id.to_s )
   end
+
+
+  private
+  #override original one
+  def ensure_default_exists_and_is_unique
+  end
+
 end

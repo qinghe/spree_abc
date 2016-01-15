@@ -1,2 +1,2 @@
-$('form.edit_template_theme input:radio').removeAttr('checked');
-$('form.edit_template_theme #is_applied_<%=@template_theme.id%>').attr('checked','true');
+$('form.edit_template_theme input:radio').removeProp('checked');
+$('form.edit_template_theme #is_applied_<%=@template_theme.id%>').prop('checked','checked');
