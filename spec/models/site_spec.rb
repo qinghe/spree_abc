@@ -28,6 +28,7 @@ describe Spree::Site do
   #end
 
   it "should has associations" do
+    Spree::Site.current = @site
     @site.users.build.should be_present
     @site.products.build.should be_present
     @site.zones.build.should be_present

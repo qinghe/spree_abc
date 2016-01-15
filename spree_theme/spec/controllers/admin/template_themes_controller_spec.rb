@@ -21,7 +21,7 @@ describe Spree::Admin::TemplateThemesController, :type => :controller do
 
     context 'apply theme to store' do
       before(:each) do
-        Spree::Store.current(  create(:store)  )
+        Spree::Store.current(  create(:store, default:true)  )
       end
 
       it "responds successfully with an HTTP 200 status code" do

@@ -25,15 +25,4 @@ describe Spree::SitesController do
     end
   end
 
-  context "with site others" do
-    before do
-      create(:site1)
-      Spree::Site.current = create(:site2)
-    end
-
-    it "should raise access_denied" do
-      spree_get :one_click_trial
-      expect(response).to have_http_status(:moved_permanently)
-    end
-  end
 end

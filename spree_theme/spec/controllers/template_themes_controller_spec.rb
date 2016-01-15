@@ -11,14 +11,14 @@ describe Spree::TemplateThemesController, :type => :controller do
     #FIXME test it
     it "get upload image dialog" do
 
-      xhr_get :upload_file_dialog,{:param_value_id=>param_value.id,:html_attribute_id=> background_image.id }
+      xhr_get :upload_file_dialog,{:id=> param_value.theme_id, :param_value_id=>param_value.id,:html_attribute_id=> background_image.id }
       expect(response).to be_success
       assigns(:param_value).should eq(param_value)
     end
 
     it "post upload template image" do
       file = fixture_file_upload("qinghe.jpg", 'image/jpg')
-      xhr_post :upload_file_dialog, { :param_value_id=>param_value.id,:html_attribute_id=> background_image.id,
+      xhr_post :upload_file_dialog, {:id=> param_value.theme_id,  :param_value_id=>param_value.id,:html_attribute_id=> background_image.id,
         :template_file => {"attachment"=> file}
         }
       expect(response).to be_success

@@ -10,7 +10,7 @@ FactoryGirl.define do
     end
 
     after(:create) do| site |
-      store = create(:store, site: site )
+      store = create(:store, site: site, default: true )
     end
 
   end

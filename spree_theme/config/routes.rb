@@ -8,12 +8,12 @@ Spree::Core::Engine.add_routes do
        post :get_param_values # to support post data>1024byte
        post :update_param_value
        post :update_layout_tree
+       get  :upload_file_dialog
+       post :upload_file_dialog
      end
 
      collection do
-       get :preview # add function preview_template_themes_path
-       get 'upload_file_dialog'
-       post 'upload_file_dialog'
+       #get :preview # add function preview_template_themes_path
      end
 
      resources :page_layouts, only: [:edit,:update] do

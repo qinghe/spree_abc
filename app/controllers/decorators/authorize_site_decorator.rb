@@ -1,6 +1,6 @@
 Spree::TemplateThemesController.class_eval do
   #store could preview native template theme
-  #before_filter :authorize_site, only: [:preview]
+  #before_filter :authorize_site
 
   #def authorize_site
   #  # Site.current.god? would not work, god site loaded for unexist domain

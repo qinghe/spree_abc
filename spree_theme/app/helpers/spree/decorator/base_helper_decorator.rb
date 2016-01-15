@@ -250,7 +250,7 @@ module Spree
           manual_value_tag << radio_button_tag("#{pv_ele_id}[pvalue#{i}]", bool_false,pvalue==bool_false, :onchange=>manual_value_onchange )+"No"
         elsif html_attribute.is_special?(:image)
           manual_value_tag << select("#{pv_ele_id}","pvalue#{i}", param_value.template_theme.template_files.collect{|item| [item.attachment_file_name, item.attachment_file_name]}, {:selected=>pvalue ,:include_blank=>"Please select "},{ :onchange=>manual_value_onchange})
-          manual_value_tag << link_to( "upload file...",{:controller=>"spree/template_themes", :action=>"upload_file_dialog",:param_value_id=>param_value.id, :html_attribute_id=>html_attribute.id, :selected_editor_id=>@editor.id},:method =>:get,:remote=>true )
+          manual_value_tag << link_to( "upload file...", spree.upload_file_dialog_template_theme_path( param_value.template_theme,:param_value_id=>param_value.id, :html_attribute_id=>html_attribute.id, :selected_editor_id=>@editor.id),:method =>:get,:remote=>true )
         else
           manual_value_tag << text_field_tag("#{pv_ele_id}[pvalue#{i}]", pvalue, {:class=>"pv-pv",  :onchange=>manual_value_onchange})
         end

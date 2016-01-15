@@ -58,11 +58,11 @@ module SpreeTheme
 
       website = Spree::Store.current
       # get theme first, then look for page for selected theme. design shop require index page for each template
-      @is_designer =  website.designable?
-      #if website.designable?
-      #  #add website condition, design can edit template_theme
-      #  @is_designer = ( Spree::TemplateTheme.accessible_by( current_ability, :edit).where(:site_id=>website.site_id).count >0 )
-      #end
+      @is_designer =  false
+      if website.designable?
+        # make sure user logged in and has ability
+        @is_designer = ( Spree::TemplateTheme.accessible_by( current_ability, :edit).where(:site_id=>website.site_id).count >0 )
+      end
       # allow edit mobile template on chrome
       #@is_designer = false if mobile?
       #login, forget_password page only available fore unlogged user. we need this flag to show editor even user have not log in.
