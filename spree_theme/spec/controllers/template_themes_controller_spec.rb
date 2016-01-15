@@ -24,5 +24,13 @@ describe Spree::TemplateThemesController, :type => :controller do
       expect(response).to be_success
     end
 
+  it "preview vie designable store"  do
+    spree_get :preview
+    expect(response).to be_success
+
+  end
+
+  it "should not previewable vie nondesignable store"  do
+  end
 
 end

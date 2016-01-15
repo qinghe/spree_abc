@@ -1,7 +1,6 @@
 module Spree
   class TemplateThemesController < Spree::StoreController
     helper 'spree/products'
-    before_filter :add_view_path
     delegate :taxon_class,:site_class, :to=>:"SpreeTheme"
 
     def page
@@ -240,6 +239,7 @@ module Spree
       #consider localhost?
       request.host.end_with?  Site.system_top_domain
     end
+
   end
 
 end

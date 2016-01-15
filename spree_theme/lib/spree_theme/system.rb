@@ -58,11 +58,11 @@ module SpreeTheme
 
       website = Spree::Store.current
       # get theme first, then look for page for selected theme. design shop require index page for each template
-      @is_designer = false
-      if website.designable?
-        #add website condition, design can edit template_theme
-        @is_designer = ( Spree::TemplateTheme.accessible_by( current_ability, :edit).where(:site_id=>website.site_id).count >0 )
-      end
+      @is_designer =  website.designable?
+      #if website.designable?
+      #  #add website condition, design can edit template_theme
+      #  @is_designer = ( Spree::TemplateTheme.accessible_by( current_ability, :edit).where(:site_id=>website.site_id).count >0 )
+      #end
       # allow edit mobile template on chrome
       #@is_designer = false if mobile?
       #login, forget_password page only available fore unlogged user. we need this flag to show editor even user have not log in.
@@ -77,7 +77,7 @@ module SpreeTheme
       if  website.designable?
         #get template from query string
         if params[:action]=='preview' && params[:id].present?
-          @theme = Spree::TemplateTheme.find( params[:id] )
+          @theme = website.template_themes.find( params[:id] )
           session[:theme_id] = params[:id]
         end
         # there are more than one designable website,  design1, design2 ....
@@ -202,10 +202,6 @@ module SpreeTheme
         @sections = Spree::Section.where(:is_enabled=>true).order("title").roots
         #template selection, include mobile
         @template_themes = Spree::TemplateTheme.native
-    end
-
-    def add_view_path
-
     end
 
     #https://ruby-china.org/topics/22165
