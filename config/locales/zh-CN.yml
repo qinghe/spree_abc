@@ -349,7 +349,7 @@ zh-CN:
     add_stock_management: "添加库存管理"
     add_to_cart: "加入购物车"
     add_variant: "添加具体型号"
-    additional_item: "额外项目花费"
+    additional_item: "额外每件商品费用"
     address1: "地址"
     address2: "地址（继续）"
     adjustable:
@@ -722,7 +722,7 @@ zh-CN:
     finalize: "完成"
     finalized_payments: 已付款项目
     find_a_taxon: 请选择分类
-    first_item: 首件产品价格??
+    first_item: 首件产品费用
     first_name: "名"
     first_name_begins_with: "客户姓名"
     flat_percent: "固定费率 (百分比)"
@@ -860,7 +860,7 @@ zh-CN:
     match_choices:
       all: "全部"
       none: "清空"
-    max_items: 最大商品项??
+    max_items: 最大商品数量
     member_since: "首次购物日期"
     memo:
     meta_description: SEO描述
@@ -1406,7 +1406,7 @@ zh-CN:
     shipping_category: "配送分类"
     shipping_flat_rate_per_item: 固定费率 (每商品)
     shipping_flat_rate_per_order: 固定费率 (每订单)
-    shipping_flexible_rate: "以每项计弹性价格"
+    shipping_flexible_rate: "依据商品数量计算价格"
     shipping_instructions: "配送指南"
     shipping_method: "配送方式"
     shipping_methods: "配送方式"
