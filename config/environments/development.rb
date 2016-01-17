@@ -35,12 +35,12 @@ SpreeAbc::Application.configure do
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
 
-  config.middleware.use ExceptionNotification::Rack,
-    :email => {
-      :email_prefix => "[Exception] ",
-      :sender_address => %{"info" <info@localhost>},
-      :exception_recipients => %w{mail-to-info}
-    }
-
-  config.spree_multi_site.system_top_domain = 'david.com'
+  #config.middleware.use ExceptionNotification::Rack,
+  #  :email => {
+  #    :email_prefix => "[Exception] ",
+  #    :sender_address => %{"info" <info@localhost>},
+  #    :exception_recipients => %w{mail-to-info}
+  #  }
+  # authorize_site compare request.host with system_top_domain
+  config.spree_multi_site.system_top_domain = 'localhost'
 end

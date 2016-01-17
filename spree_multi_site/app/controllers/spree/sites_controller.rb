@@ -1,12 +1,9 @@
 module Spree
     class SitesController< StoreController
-      respond_to :html,:js
+      #respond_to :html,:js
 
       def one_click_trial
-        #js only
-        #respond_with(@site) do |format|
-        #  format.html {    }
-        #end
+        @site = Site.new
       end
 
       def new

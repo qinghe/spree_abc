@@ -35,7 +35,7 @@ module PageTag
       #Usage: css selector for current section piece instance
       #       we may need css selector for current section instance
       def piece_selector
-        if self.page_layout.id and self.section_id
+        if self.page_layout.id && self.section_id
           "s_#{self.to_key}"
         end
       end
@@ -182,12 +182,12 @@ module PageTag
         page_layout = cached_page_layouts[page_layout_id]
         self.current_piece = WrappedPageLayout.new(self, page_layout, section_id)
         unless page_layout.root?
-          parent_page_layout = cached_page_layouts[page_layout.parent_id]
-          parent_key = "#{parent_page_layout.id}_0"
+          parent_key = "#{page_layout.parent_id}_0"
           #cached_section_pieces[parent_key] may be nil, we do not select
           self.current_piece.parent = cached_section_pieces[parent_key]
         end
-        #Rails.logger.debug "select #{page_layout.title}, section_id=#{section_id}, parent=#{self.current_piece.parent.try(:page_layout).try(:title)}"
+        #Rails.logger.debug "-- cached_section_pieces =#{cached_section_pieces.keys.inspect}"
+        #Rails.logger.debug "-- select #{page_layout.title}, key=#{key}, parent_id=#{page_layout.parent_id}, parent=#{self.current_piece.parent.try(:page_layout).try(:title)}"
         self.cached_section_pieces[key] = self.current_piece
       end
     end
