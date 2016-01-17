@@ -4,7 +4,7 @@ Spree::PageLayoutsController.class_eval do
 
   def authorize_site
     # Site.current.god? would not work, god site loaded for unexist domain
-    unless Spree::Store.current.designable?
+    unless @is_designer
       redirect_to 'http://'+Spree::Store.god.subdomain, status: :moved_permanently
       #raise CanCan::AccessDenied.new("Not authorized!", :access, Site)
     end
