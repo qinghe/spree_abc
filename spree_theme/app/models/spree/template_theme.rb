@@ -47,7 +47,8 @@ module Spree
 
     # for now template_theme and page_layout are one to one
     has_one :page_layout_root, -> { where parent_id: nil }, class_name: "Spree::PageLayout"
-    has_many :page_layouts, inverse_of: :template_theme
+    # partial_htmls required, initialize parent first.
+    has_many :page_layouts, ->{ order('lft') }, inverse_of: :template_theme
     #commnet it out after migration AddThemeIdToPageLayout done.
     belongs_to :page_layout, :foreign_key=>"page_layout_root_id" #, :dependent=>:destroy  #imported theme refer to page_layout of original theme
     has_many :param_values, :foreign_key=>"theme_id", :dependent => :delete_all
