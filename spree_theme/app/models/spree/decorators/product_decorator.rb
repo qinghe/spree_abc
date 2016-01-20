@@ -1,4 +1,9 @@
 Spree::Product.class_eval do
+  # theme_id could not be null in db
+  # in Rails 4.2.5
+  # product.update_attributes( theme_id: '' ), sql is theme_id=NULL
+  before_validation :fix_attributes
+
 
   def option_values
     @_option_values ||= Spree::OptionValue.for_product(self).order(:position).sort_by {|ov| ov.option_type.position }
@@ -30,4 +35,10 @@ Spree::Product.class_eval do
     @_variant_options_hash = hash
   end
 
+  private
+  def fix_attributes
+    unless theme_id.kind_of?( Fixnum )
+      self.theme_id = theme_id.to_i
+    end
+  end
 end
