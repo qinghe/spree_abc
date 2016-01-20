@@ -54,12 +54,15 @@ Spree::Product.class_eval do
   # Try building a slug based on the following fields in increasing order of specificity.
   def slug_candidates
     [
-      :name,
-      [:name, :sku],
-      [:name, :sku, :site_id]
+      :name_to_url,
+      [:name_to_url, :sku],
+      [:name_to_url, :sku, :site_id]
     ]
   end
 
+  def name_to_url
+    name.to_url
+  end
 end
 
 Spree::Property.class_eval do

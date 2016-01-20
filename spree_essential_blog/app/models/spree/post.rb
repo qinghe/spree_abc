@@ -125,9 +125,15 @@ module Spree
 
     def slug_candidates
         [
-          :title,
-          [:title, :site_id],
+          :title_to_url,
+          [:title_to_url, :site_id],
         ]
+    end
+
+    # make title as slug candidate,
+    # "女性穿内衣的6大误区".to_url => "nu-xing-chuan-nei-yi-de-6da-wu-qu"
+    def title_to_url
+      title.to_url
     end
 
   end
