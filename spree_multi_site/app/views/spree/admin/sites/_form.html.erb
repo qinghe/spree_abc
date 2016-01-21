@@ -1,37 +1,17 @@
-<div data-hook="admin_site_form_fields">
-  <div class="clearfix">
-    <div class="left" data-hook="admin_site_form_left">
-      <%= f.field_container :name do %>
-        <%= f.label :name, t(:site_name) %> <span class="required">*</span><br />
-        <%= f.text_field :name, :class => 'fullwidth title' %>
-        <%= f.error_message_on :name %>
-      <% end %>
-      <%= f.field_container :domain do %>
-        <%= f.label :domain, t(:site_domain) %> <br />
-        <%= f.text_field :domain, :class => 'fullwidth title' %>
-        <%= f.error_message_on :domain %>
-      <% end %>
-      <%= f.field_container :short_name do %>
-        <%= f.label :short_name, t(:site_short_name) %> <span class="required">*</span><br />
-        <%= f.text_field :short_name, :class => 'fullwidth title' %>
-        <%= f.error_message_on :short_name %>
-      <% end %>
-      <%= f.field_container :layout do %>
-        <%= f.label :layout, t(:site_layout) %> <br />
-        <%= f.text_field :layout, :class => 'fullwidth title' %>
-        <%= f.error_message_on :layout %>
-      <% end %>
-
-      <%= f.field_container :has_sample do %>
-        <%= f.label :has_sample, t(:site_has_sample) %> <br />
-        <%= f.check_box :has_sample, :class => 'fullwidth title' %>
-        <%= f.error_message_on :has_sample %>
-      <% end %>
-      <% if @site.new_record? %>
-        
-        <%= render :partial => 'spree/admin/sites/user', :locals => { :user => @user } %>
-            
-      <% end %>
-    </div>
+<div data-hook="admin_country_form_fields">
+  <div data-hook="name" class="form-group">
+    <%= f.label :name, Spree.t(:name) %>
+    <%= f.text_field :name, :class => 'form-control' %>
   </div>
+  <div data-hook="domain" class="form-group">
+    <%= f.label :domain %>
+    <%= f.text_field :domain, :class => 'form-control' %>
+  </div>
+
+  <div data-hook="status" class="form-group">
+    <%= f.label :status %>
+
+    <%= f.select :status, Spree::Site.statuses.to_a.map { |w| [w[0].humanize, w[0]] }, {}, :class => 'select2' %>
+  </div>
+
 </div>

@@ -29,6 +29,7 @@ class Spree::Site < ActiveRecord::Base
   # so it require a default value.
   self.subdomain_regexp = /\A([a-z0-9\-])*\Z/
 
+  enum status: { active: 0, inactive: 1 }
   #these attr is only used when create site, it is unavailabe in other case.
   attr_accessor :email, :password, :password_confirmation
 
@@ -40,6 +41,8 @@ class Spree::Site < ActiveRecord::Base
   #generate short name fro name
   before_validation :set_short_name
   after_create :add_default_data
+
+  after_save :fix_status_of_stores
 
   class << self
 
@@ -210,4 +213,12 @@ class Spree::Site < ActiveRecord::Base
     end
   end
 
+
+  def fix_status_of_stores
+    if active?
+      self.stores.update_all( is_public: true )
+    else
+      self.stores.update_all( is_public: false )      
+    end
+  end
 end
