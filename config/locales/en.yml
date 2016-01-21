@@ -562,6 +562,7 @@ en:
     extension: Extension
     filename: Filename
     fill_in_customer_info: Please fill in customer info
+    filter: Filter
     filter_results: Filter Results
     finalize: Finalize
     first_item: First Item Cost

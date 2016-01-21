@@ -717,6 +717,7 @@ zh-CN:
     extensions: "扩展"
     filename: 文件名
     fill_in_customer_info: 请填写顾客信息
+    filter: "搜索"
     filter_results: 过滤结果
     final_confirmation: 最终确认
     finalize: "完成"
