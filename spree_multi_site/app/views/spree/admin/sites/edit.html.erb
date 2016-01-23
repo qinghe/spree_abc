@@ -1,8 +1,12 @@
-<h1><%= t("editing_site") %></h1>
-<p id="ajax_error" class="errorExplanation" style="display:none;"></p>
+<% content_for :page_title do %>
+  <%= Spree.t(:editing_resource, resource: Spree::Site.model_name.human) %>
+<% end %>
+
+<%= render :partial => 'spree/admin/shared/error_messages', :locals => { :target => @site } %>
+
 <%= form_for [:admin, @site] do |f| %>
-  <%= render :partial => "form", :locals => { :f => f } %>
-    <p class="form-buttons">
-      <%= button t(:update) %> <%= t(:or) %> <%= link_to t(:cancel), admin_sites_path %>
-    </p>
+  <fieldset>
+    <%= render :partial => 'form', :locals => { :f => f } %>
+    <%= render :partial => 'spree/admin/shared/edit_resource_links' %>
+  </fieldset>
 <% end %>
