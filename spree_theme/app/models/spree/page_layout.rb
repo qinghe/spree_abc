@@ -17,7 +17,7 @@ module Spree
     has_many :section_pieces, :through=>:sections
     # remove section relatives after page_layout destroyed.
     # before_destroy :remove_section
-    before_save :fix_data_source_param
+    before_validation :set_default_values
 
     delegate :is_html_root?, :is_container?, :is_image?, :is_zoomable_image?, to: :section
 
@@ -779,12 +779,13 @@ module Spree
     #end
 
     # empty data_source_param when data_source is empty
-    def fix_data_source_param
+    def set_default_values
       #page_attribute no need data_source.
 
       #if self.data_source.blank? && self.data_source_param.present?
       #  self.data_source_param = ''
       #end
+      self.content_param = 0 if content_param.blank?
     end
 
   end
