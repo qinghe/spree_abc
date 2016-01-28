@@ -15,6 +15,7 @@ root:
       <%= favicon_link_tag 'favicon.ico' %>
       <%# it is in main app/assets/ include spree_theme, spree_china_checkout, store/product, store/cart, store/checkout ... %>
       <%= javascript_include_tag 'spree/frontend/all', "data-turbolinks-track" => true %>
+      <%= render "spree/shared/translations" %>
       <%= stylesheet_link_tag 'store/spree_theme.desktop', "data-turbolinks-track" => true %>
       <% if @current_page.is_preview %>
         <%= stylesheet_link_tag 'store/spree_theme'  %>

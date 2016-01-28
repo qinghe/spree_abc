@@ -195,6 +195,8 @@ zh-CN:
     is_taxon_clickable: 分类是否可点击
     theme_release: 发布
     user_terminal: 用戶终端
+    unsupported_browser_add_favorite: '您的浏览器不支持,请按 Ctrl+D 手动收藏!'
+    unsupported_browser_set_home: '抱歉，您所使用的浏览器无法完成此操作。您需要手动将【"+url+"】设置为首页。'
     welcome_to_admin_login: 管理系统登录
     welcome_to_under_construction: 网站建设中，请登录管理系统
 #for comment

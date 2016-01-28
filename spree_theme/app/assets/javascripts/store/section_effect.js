@@ -2,6 +2,43 @@
 //= require jquery.menuhover
 //= require jquery.sidr
 
+function AddFavorite() {
+    var url = window.location;
+    var title = document.title;
+    var ua = navigator.userAgent.toLowerCase();
+    if (ua.indexOf("360se") > -1) {
+      alert(Spree.translations.unsupported_browser_add_favorite);
+    }
+    else if (ua.indexOf("msie 8") > -1) {
+        window.external.AddToFavoritesBar(url, title); //IE8
+    }
+    else if (document.all) {
+      try{
+        window.external.addFavorite(url, title);
+      }catch(e){
+        alert(Spree.translations.unsupported_browser_add_favorite);
+      }
+    }
+    //else if(window.sidebar) {
+    //  // add rel=sidebar
+    //  // firefox handle it.
+    //}
+    else {// firefox,chrome,safair
+      alert(Spree.translations.unsupported_browser_add_favorite);
+    }
+}
+
+function SetHome(){
+  try{
+    this.style.behavior='url(#default#homepage)';
+    this.setHomePage(window.location);
+  }catch(e){
+    alert(Spree.translations.unsupported_browser_set_home);
+  }
+}
+
+
+
 $(document).ready(function() {
   //return to top
   $('.return_top').click(function(){
@@ -363,13 +400,15 @@ $(document).ready(function() {
       };
       var child1 = $(".child_1", this);
       var child2 = $(".child_2", this);
-
-      $(element).menuhover({
-          activate: activate_element,
-          deactivate: deactivate_element,
-          submenuDirection: direction,
-          $hover: child2
-      });
+      // eliminate empty popup simplemodal
+      if(child2.width()>0 && child2.height()>0){
+        $(element).menuhover({
+            activate: activate_element,
+            deactivate: deactivate_element,
+            submenuDirection: direction,
+            $hover: child2
+        });
+      }
   });
   $(".click_effect_sider").each(function(i, element){
     var child2 = $(".child_2", element);

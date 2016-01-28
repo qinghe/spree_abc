@@ -111,6 +111,9 @@ zh-CN:
     detail: detail
     dialog_title: dialog title
     global_taxons: global taxons
+    install_theme_with_site: install
+    is_taxon_clickable: clickable
+    preview_theme: preview
     post:
       next: next
       previous: previous
@@ -181,9 +184,8 @@ zh-CN:
     theme_prepare_import: prepare
     theme_is_imported: imported
     theme_is_free: free
-    preview_theme: preview
-    install_theme_with_site: install
-    is_taxon_clickable: clickable
     theme_release: release
+    unsupported_browser_add_favorite: browser does not support add favorite
+    unsupported_browser_set_home: browser does not support set home page
     welcome_to_admin_login: Login to system
     welcome_to_under_construction: it is underconstruction，please login to system
