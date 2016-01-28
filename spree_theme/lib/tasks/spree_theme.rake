@@ -202,17 +202,16 @@ namespace :spree_theme do
   task :generate_html, [:theme_id] => :environment do |t, args|
     theme = Spree::TemplateTheme.find( args.theme_id)
     # required site.current
-    Spree::Store.current = theme.store
-    menu = DefaultTaxonRoot.instance('/').children.first
-    controller = Spree::TemplateThemesController.new #include
-    generator = PageTag::PageGenerator.generator( menu, theme, {resource: nil, controller: controller})
-    generator.context.each_pair{|key,val|
-      controller.instance_variable_set( "@#{key}", val)
-    }
-    controller.instance_variable_set( "@client_info", Spree::UserTerminal.pc.first)
-
-    controller.request = ActionDispatch::Request.new({})
-    controller.render_to_string file: theme.layout_path, layout:false
+    #Spree::Store.current = theme.store
+    #menu = DefaultTaxonRoot.instance('/').children.first
+    #controller = Spree::TemplateThemesController.new #include
+    #generator = PageTag::PageGenerator.generator( menu, theme, {resource: nil, controller: controller})
+    #generator.context.each_pair{|key,val|
+    #  controller.instance_variable_set( "@#{key}", val)
+    #}
+    #controller.instance_variable_set( "@client_info", Spree::UserTerminal.pc.first)
+    #controller.request = ActionDispatch::Request.new({})
+    #controller.render_to_string file: theme.layout_path, layout:false
   end
 
 
