@@ -31,7 +31,9 @@ Spree::Store.class_eval do
   end
 
   def path
-    File.join( File::SEPARATOR + 'shops', Rails.env, self.site_id.to_s )
+    # use SpreeTheme.site_class.current.id instead of site_id,
+    # Store.id
+    File.join( File::SEPARATOR + 'shops', Rails.env, SpreeTheme.site_class.current.id.to_s )
   end
 
 

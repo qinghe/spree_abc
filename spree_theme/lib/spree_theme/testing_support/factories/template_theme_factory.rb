@@ -27,6 +27,7 @@ FactoryGirl.define do
   #             section_piece_root
   factory :previewable_template_theme, class: Spree::TemplateTheme do
     title 'template theme for preview'
+    store
     after(:create) do |theme, evaluator|
       create(:page_layout_root, template_theme: theme)
     end

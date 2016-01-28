@@ -61,7 +61,7 @@ module SpreeTheme
       @is_designer =  false
       if website.designable?
         # make sure user logged in and has ability
-        @is_designer = ( Spree::TemplateTheme.accessible_by( current_ability, :edit).where(:site_id=>website.site_id).count >0 )
+        @is_designer = ( Spree::TemplateTheme.accessible_by( current_ability, :edit).where(:store_id=> website.id).count >0 )
       end
       # allow edit mobile template on chrome
       #@is_designer = false if mobile?

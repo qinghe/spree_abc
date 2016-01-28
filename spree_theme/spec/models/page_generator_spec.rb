@@ -7,9 +7,9 @@ describe PageTag::PageGenerator do
   }
 
   context "preview page" do
-    let(:pg) { PageTag::PageGenerator.previewer( DefaultTaxon.instance, @template_theme, :controller=>Spree::TemplateThemesController.new) }
-    it "preview page" do
-      pg
+    let(:page_generator) { PageTag::PageGenerator.previewer( DefaultTaxon.instance, @template_theme, :controller=>Spree::TemplateThemesController.new) }
+    it "release page" do
+      page_generator.release
     end
 
   end
