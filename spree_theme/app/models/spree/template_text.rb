@@ -7,7 +7,7 @@ module Spree
     scope :resourceful, ->(theme){ where("1=1") }
     default_scope ->{ where(:site_id=>SpreeTheme.site_class.current.id)}
     before_validation :normalize_permalink
-
+    #before_destroy check is it assigned.
     private
 
     def normalize_permalink

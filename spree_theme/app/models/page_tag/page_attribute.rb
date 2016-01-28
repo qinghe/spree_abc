@@ -26,7 +26,9 @@ module PageTag
         if attribute_name == :summary
           attribute_value << content_tag(:a, "[#{Spree.t(:detail)}]", html_options)
         else
-          content_tag(:a, attribute_value, html_options)
+          if wrapped_page.clickable?
+            content_tag(:a, attribute_value, html_options)
+          end
         end
       elsif attribute_name==:name
         # make it as link anchor,  wrapped with span, css text-* applicable
