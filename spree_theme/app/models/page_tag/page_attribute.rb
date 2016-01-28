@@ -28,6 +28,8 @@ module PageTag
         else
           if wrapped_page.clickable?
             content_tag(:a, attribute_value, html_options)
+          else
+            attribute_value
           end
         end
       elsif attribute_name==:name
