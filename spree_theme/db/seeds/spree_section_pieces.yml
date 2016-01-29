@@ -192,8 +192,8 @@ container:
   is_container: "1"
   html: |-
     <div class="content_layout ~~selector~~" >
-       <div class="inner clear-block">~~content~~</div>
-    </div>
+      <div class="inner clear-block">~~content~~</div>
+    </div> 
   css: |-
     /* width,height, skinnables */
     .<%=@template.section_selector%>
