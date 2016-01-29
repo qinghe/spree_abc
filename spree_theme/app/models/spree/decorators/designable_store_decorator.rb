@@ -32,8 +32,10 @@ Spree::Store.class_eval do
 
   def path
     # use SpreeTheme.site_class.current.id instead of site_id,
+    # here we have to user self.site_id, site.current may not same as self.site
+    # ex. current site use a theme of design site to render page
     # Store.id
-    File.join( File::SEPARATOR + 'shops', Rails.env, SpreeTheme.site_class.current.id.to_s )
+    File.join( File::SEPARATOR + 'shops', Rails.env, site_id.to_s )
   end
 
 
