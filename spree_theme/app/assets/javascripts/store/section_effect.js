@@ -401,7 +401,7 @@ $(document).ready(function() {
       var child1 = $(".child_1", this);
       var child2 = $(".child_2", this);
       // eliminate empty popup simplemodal
-      if(child2 && child2.children().html().trim().length==0){
+      if(child2 && child2.children().html().trim().length>0){
         $(element).menuhover({
             activate: activate_element,
             deactivate: deactivate_element,
