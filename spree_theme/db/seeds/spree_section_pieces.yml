@@ -190,9 +190,10 @@ container:
   id: 2
   is_selectable: "1"
   is_container: "1"
-  # no space around tag, js required, $(div).width()==0
   html: |-
-    <div class="content_layout ~~selector~~" ><div class="inner clear-block">~~content~~</div></div> 
+    <div class="content_layout ~~selector~~" >
+      <div class="inner clear-block">~~content~~</div>
+    </div> 
   css: |-
     /* width,height, skinnables */
     .<%=@template.section_selector%>
