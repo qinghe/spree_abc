@@ -2,8 +2,8 @@ Spree::Address.class_eval do
   #attr_accessible :city_name, :city_id # follow state
   belongs_to :china_city, foreign_key: 'city_id', class_name: 'City'
   belongs_to :district
-
-  validates :district, presence: true
+  #disable validation to walk arount order address editing at backend
+  #validates :district, presence: true
 
   before_validation :set_city, :only=>[:city]
 
