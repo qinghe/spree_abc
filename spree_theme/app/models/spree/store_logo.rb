@@ -4,8 +4,9 @@ class Spree::StoreLogo < Spree::StoreAsset
   #attr_accessible :alt, :attachment
 
   has_attached_file :attachment,
-                    :url => "/shops/:rails_env/:class/:id/:filename",
-                    :path => ":rails_root/public/shops/:rails_env/:class/:id/:filename",
+                    :url => "/shops/:rails_env/:class/:id/:style_:filename",
+                    :path => ":rails_root/public/shops/:rails_env/:class/:id/:style_:filename",
+                    styles: { mini: '48x48>' },
                     default_url: '/assets/images/logo/dalianshops.png'
 
   validates_attachment :attachment, presence: true,

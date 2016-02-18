@@ -13,6 +13,7 @@
         #  next unless Spree::Config.has_preference? name
         #  Spree::Config[name] = value
         #end
+Rails.logger.debug " --- store_params = #{store_params.inspect} permitted_store_attributes=#{permitted_store_attributes}---"        
         current_store.update_attributes store_params
 
         current_store.site.update_attributes site_params

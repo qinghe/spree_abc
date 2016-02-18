@@ -174,6 +174,8 @@ class Spree::Site < ActiveRecord::Base
 
   # current site'subdomain => short_name.tld
   def subdomain
+    #for debug at localhost
+    return self.class.system_top_domain if self.class.system_top_domain == 'localhost'
     short_name + '.' + self.class.system_top_domain
   end
 
@@ -218,7 +220,7 @@ class Spree::Site < ActiveRecord::Base
     if active?
       self.stores.update_all( is_public: true )
     else
-      self.stores.update_all( is_public: false )      
+      self.stores.update_all( is_public: false )
     end
   end
 end

@@ -24,6 +24,10 @@ zh-CN:
         data_source_param: 数据源参数
       spree/product:
         theme_id: template
+      spree/store_logo:
+        attachment: LOGO
+      spree/store_favicon:
+        attachment: FAVICON
       spree/taxon:
         page_context: 页面内容类型
         replaced_by: 页面内容替换
@@ -87,6 +91,8 @@ zh-CN:
       state: state
       city: city
       street: street
+    logo: LOGO
+    favicon: FAVICON
     new_template_text: new template text
     new_template_file: new template file
     select_taxon: select a taxon

@@ -29,6 +29,10 @@ zh-CN:
         stylish: 样式
       spree/product:
         theme_id: 销售模板
+      spree/store_logo:
+        attachment: 文件名
+      spree/store_favicon:
+        attachment: FAVICON
       spree/taxon:
         page_context: 页面内容类型
         replaced_by: 页面内容替换
@@ -81,6 +85,7 @@ zh-CN:
         theme_texts: 模板素材
         native_themes: 模板
         foreign_themes: 模板商店
+    attachment: 文件名
     back_to_themes_list: 回到模板列表
     back_to_template_text_list: 回到素材列表
     back_to_template_file_list: 回到素材列表
@@ -95,6 +100,8 @@ zh-CN:
       street: 详细地址
     comment_successfully_created: 谢谢您的反馈，我们已收到。
     comment_to_store: 亲爱的用户：欢迎您抢先体验“%{store_name}”，有任何意见和建议，或在使用过程中遇到问题，请告诉我们，我们会每天关注反馈信息，不断优化产品，为您提供更好的服务！
+    logo: LOGO
+    favicon: FAVICON
     new_template_file: 新建图片素材
     new_template_text: 新建文本素材
     select_taxon: 选择菜单

@@ -10,6 +10,8 @@ Spree::Store.class_eval do
   has_one :logo, class_name: 'Spree::StoreLogo', :as => :viewable,  :dependent => :destroy
   has_one :favicon, class_name: 'Spree::StoreFavicon', :as => :viewable,  :dependent => :destroy
 
+  accepts_nested_attributes_for :logo
+
   # shop's resource should be in this folder
   def self.document_root
     File.join(Rails.root,'public')
