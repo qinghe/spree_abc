@@ -1355,7 +1355,7 @@ zh-CN:
     sales_totals: "总销量"
     save_and_continue: "保存并继续"
     save_my_address: "保存我的地址"
-    say_no: "不"
+    say_no: "否"
     say_yes: "是的"
     scope: "范围"
     search: "搜索"
@@ -1367,7 +1367,7 @@ zh-CN:
     select_a_return_authorization_reason:
     select_a_stock_location:
     select_from_prototype: "从原型中选择"
-    select_stock:
+    select_stock: "选择库存商品"
     send_copy_of_all_mails_to: "将所有邮件的副本发送至"
     send_mails_as: "发送邮件作为"
     server: "服务器"
@@ -1501,7 +1501,7 @@ zh-CN:
     successfully_removed: "%{resource} 已被成功删除!"
     successfully_signed_up_for_analytics:
     successfully_updated: "%{resource} 已被成功更新!"
-    summary:
+    summary: "概览"
     tax: "税"
     tax_categories: "缴税分类"
     tax_categories_setting_description: 设定缴税分类以确定哪些产品是需要缴税的.
