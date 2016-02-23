@@ -193,7 +193,7 @@ container:
   html: |-
     <div class="content_layout ~~selector~~" >
       <div class="inner clear-block">~~content~~</div>
-    </div> 
+    </div>
   css: |-
     /* width,height, skinnables */
     .<%=@template.section_selector%>
@@ -248,7 +248,7 @@ hmenu:
   is_container: "1"
   resources: m
   html: |-
-    <ul > <% get_menu_items(@template.current_piece).each{|page| %>
+    <ul > <% get_menu_items(@template.current_piece).each_with_index{|page, page_index| %>
              ~~content~~
           <% } %>
     </ul>
@@ -272,7 +272,7 @@ vmenu:
   title: vmenu
   slug: vmenu
   html: |-
-    <ul > <% get_menu_items(@template.current_piece).each{|page| %>
+    <ul > <% get_menu_items(@template.current_piece).each_with_index{|page, page_index| %>
              ~~content~~
           <% } %>
     </ul>
@@ -289,7 +289,7 @@ menuitem:
   title: menuitem
   slug: menuitem
   html: |
-    <%= menu_item_atom( @template.current_piece, page )  %>
+    <%= menu_item_atom( @template.current_piece, page, page_index )  %>
   css: |-
       .<%=@template.section_selector %> {
        <%= @template.css :shell %>
@@ -299,6 +299,9 @@ menuitem:
        position:relative;overflow: hidden;
        <%= @template.css :a %>
       }
+      /* index start from 0, first is even */
+      .<%=@template.section_selector %> a.even{ <%= @template.css :even %> }
+      .<%=@template.section_selector %> a.odd{ <%= @template.css :odd %> }
       .<%=@template.section_selector %> a:hover{
         <%= @template.css :a_h %>
       }
@@ -961,7 +964,7 @@ logged_and_unlogged_menu:
     <% menu = (spree_current_user ? @template.menu : @template.menu2) %>
     <% if menu.present? %>
     <ul >
-      <% menu.children.each{|page| %>
+      <% menu.children.each_with_index{|page, page_index| %>
          ~~content~~
       <% } %>
     </ul>

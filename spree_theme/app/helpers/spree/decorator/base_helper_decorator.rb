@@ -67,26 +67,29 @@ module Spree
       "/0/#{product.id}"
     end
 
-
-    def menu_item_atom( current_piece, page )
+    # * params
+    #   * page - WrappedMenu
+    #   * page_index -  start from 0, for compatible, default is 0
+    def menu_item_atom( current_piece, page, page_index = 0)
       return '' if current_piece.enabled_depth < page.depth
 
       leaves_content = ''
-
       unless page.leaf?
-        leaves_content = content_tag(:ul, raw( page.children.map{|child| menu_item_atom( current_piece, child )}.join ), class: "depth#{page.depth+1}" )
+        child_index = -1
+        leaves_content = content_tag(:ul, raw( page.children.map{|child| child_index+=1 ;menu_item_atom( current_piece, child, child_index )}.join ), class: "depth#{page.depth+1}" )
       end
-
+Rails.logger.debug "-------- page=#{page.name} page_index=#{page_index}  -----------"      
+      cycle_css_class = (page_index%2 == 0 ? 'even' : 'odd')
       item_content = content_tag(:span, page.name, class: 'name' )
 
       item_content=  if page.clickable?
            if page.current?
-             link_to item_content, page.path, page.extra_html_attributes.merge( { :class=>"selected depth#{page.depth}" } )
+             link_to item_content, page.path, page.extra_html_attributes.merge( { :class=>"selected depth#{page.depth} #{cycle_css_class}" } )
            else
-             link_to item_content, page.path, page.extra_html_attributes.merge( { :class=>"depth#{page.depth}" } )
+             link_to item_content, page.path, page.extra_html_attributes.merge( { :class=>"depth#{page.depth} #{cycle_css_class}" } )
            end
         else
-          link_to item_content, page.path, page.extra_html_attributes.merge( { :class=>"noclick depth#{page.depth}", :href=>'javascript:void(0)' } )
+          link_to item_content, page.path, page.extra_html_attributes.merge( { :class=>"noclick depth#{page.depth} #{cycle_css_class}", :href=>'javascript:void(0)' } )
         end
 
       content_tag(:li,  raw( item_content+ leaves_content ) )
