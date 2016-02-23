@@ -1542,7 +1542,7 @@ zh-CN:
     tiers:
     time: "时间"
     to_add_variants_you_must_first_define: "要添加具体型号，您需要先定义"
-    total: "总计"
+    total: "小计"
     total_per_item:
     total_pre_tax_refund:
     total_price:
