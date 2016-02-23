@@ -11,13 +11,10 @@
   </head>
   <body>
     <div class="container">
-
       <div class="row">
-          <%= render partial: 'spree/admin/shared/header' %>
-
-          <%= flash_alert(flash) %>
+        <%= render partial: 'spree/admin/shared/header' %>
+        <%= flash_alert(flash) %>
         <div class="col-md-4 col-md-offset-4">
-
           <%= yield %>
         </div>
       </div>
