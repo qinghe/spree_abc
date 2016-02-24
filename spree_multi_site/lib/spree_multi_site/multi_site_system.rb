@@ -29,7 +29,7 @@ module Spree
         if ( self == Spree::Taxon || self == Spree::Taxonomy ) && multi_site_context=='free_taxon'
           where(nil)
         # first site list template themes
-        elsif self == Spree::Product  && multi_site_context=='site1_themes'
+        elsif ( self == Spree::Product || self == Spree::Property ) && multi_site_context=='site1_themes'
           where(nil)
         # first site list product images
         elsif multi_site_context=='site_product_images'

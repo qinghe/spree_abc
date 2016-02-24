@@ -64,7 +64,7 @@ module PageTag
     #   * specified_image - show this image
     def product_image(wrapped_product, specified_image = nil, options = {})
       product = wrapped_product.model
-      Spree::MultiSiteSystem.with_context_site_product_images{
+      #Spree::MultiSiteSystem.with_context_site_product_images{
         main_image_style = current_piece.get_content_param_by_key(:main_image_style)
         main_image_position = current_piece.get_content_param_by_key(:main_image_position)
         options.merge! itemprop: "image"
@@ -83,7 +83,7 @@ module PageTag
         else
           product_image_by_spree( product, main_image_style, options)
         end
-      }
+      #}
     end
 
   end

@@ -636,9 +636,10 @@ module Spree
               else
                 form_start = form_end =nil
               end
-
+              # once data_source retrieved, we should use context :site1_themes to support product_property.property.presentation              
               subpieces = <<-EOS1
               <% @template.running_data_source= @template.products( (defined?(page) ? page : @current_page) ) %>
+
               <% @template.running_data_source.each(){|product| @template.running_data_item = product %>
                   #{form_start}
                   #{subpieces}

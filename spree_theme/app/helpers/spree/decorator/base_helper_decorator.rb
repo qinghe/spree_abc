@@ -48,19 +48,19 @@ module Spree
                          )
     end
 
-    def product_main_image( current_piece, product )
-      Spree::MultiSiteSystem.with_context_site_product_images{
-        main_image_style = current_piece.get_content_param_by_key(:main_image_style)
-        main_image_position = current_piece.get_content_param_by_key(:main_image_position)
-        if main_image_position>0
-          if product.images[main_image_position].present?
-            create_product_image_tag(product.images[main_image_position], product, {:itemprop => "image"}, main_image_style)
-          end
-        else
-          send("#{main_image_style}_image", product, :itemprop => "image")
-        end
-      }
-    end
+    #def product_main_image( current_piece, product )
+    #  Spree::MultiSiteSystem.with_context_site_product_images{
+    #    main_image_style = current_piece.get_content_param_by_key(:main_image_style)
+    #    main_image_position = current_piece.get_content_param_by_key(:main_image_position)
+    #    if main_image_position>0
+    #      if product.images[main_image_position].present?
+    #        create_product_image_tag(product.images[main_image_position], product, {:itemprop => "image"}, main_image_style)
+    #      end
+    #    else
+    #      send("#{main_image_style}_image", product, :itemprop => "image")
+    #    end
+    #  }
+    #end
 
     # override resource path, add taxon into path
     def product_path( product )
