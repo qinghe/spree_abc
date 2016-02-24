@@ -75,10 +75,10 @@ module Spree
 
       leaves_content = ''
       unless page.leaf?
-        child_index = -1
+        child_index = page_index # consider all descendants as one list for even/odd 
         leaves_content = content_tag(:ul, raw( page.children.map{|child| child_index+=1 ;menu_item_atom( current_piece, child, child_index )}.join ), class: "depth#{page.depth+1}" )
       end
-Rails.logger.debug "-------- page=#{page.name} page_index=#{page_index}  -----------"      
+Rails.logger.debug "-------- page=#{page.name} page_index=#{page_index}  -----------"
       cycle_css_class = (page_index%2 == 0 ? 'even' : 'odd')
       item_content = content_tag(:span, page.name, class: 'name' )
 
