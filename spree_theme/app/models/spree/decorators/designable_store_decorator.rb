@@ -40,6 +40,11 @@ Spree::Store.class_eval do
     File.join( File::SEPARATOR + 'shops', Rails.env, site_id.to_s )
   end
 
+  # for feature show template detail
+  # access templates of design shop
+  def template_accessible?
+    code == 'www'
+  end
 
   private
   #override original one

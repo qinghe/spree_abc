@@ -56,12 +56,12 @@ module SpreeTheme
         return
       end
 
-      website = Spree::Store.current
+      store = Spree::Store.current
       # get theme first, then look for page for selected theme. design shop require index page for each template
       @is_designer =  false
-      if website.designable?
+      if store.designable?
         # make sure user logged in and has ability
-        @is_designer = ( Spree::TemplateTheme.accessible_by( current_ability, :edit).where(:store_id=> website.id).count >0 )
+        @is_designer = ( Spree::TemplateTheme.accessible_by( current_ability, :edit).where(:store_id=> store.id).count >0 )
       end
       # allow edit mobile template on chrome
       #@is_designer = false if mobile?
@@ -74,15 +74,15 @@ module SpreeTheme
       #current_user.is_designer means he could design template_theme.
       #current_site.designable means current user could preview published template_theme
       # user could select theme to view in editor.
-      if  website.designable?
+      if  store.designable?
         #get template from query string
         if params[:action]=='preview' && params[:id].present?
-          @theme = website.template_themes.find( params[:id] )
+          @theme = store.template_themes.find( params[:id] )
           session[:theme_id] = params[:id]
         end
-        # there are more than one designable website,  design1, design2 ....
+        # there are more than one designable store,  design1, design2 ....
         # since cookies domain is same top level domain, ex. .dalianshops.com
-        # session[:theme_id] maybe not belong to current website, we should test that.
+        # session[:theme_id] maybe not belong to current store, we should test that.
         if session[:theme_id].present?
           if Spree::TemplateTheme.native.exists? session[:theme_id]  #theme could be deleted.
             @theme = Spree::TemplateTheme.find( session[:theme_id] )
@@ -95,7 +95,7 @@ module SpreeTheme
       if @theme.blank? && Spree::Store.current.template_theme.present?
         @theme = Spree::Store.current.template_theme
       end
-  #Rails.logger.debug "@theme=#{@theme.inspect}, @is_designer=#{@is_designer},website=#{website.inspect} request.xhr?=#{request.xhr?}"
+  #Rails.logger.debug "@theme=#{@theme.inspect}, @is_designer=#{@is_designer},store=#{store.inspect} request.xhr?=#{request.xhr?}"
       if params[:controller]=~/cart|checkout|order/
         @menu = get_default_taxon
       elsif params[:controller]=~/user/
@@ -103,6 +103,9 @@ module SpreeTheme
       else
         if params[:r]
           @resource = Spree::Product.find_by_id(params[:r])
+          if @resource.nil? && store.template_accessible?
+            @resource = Spree::Product.unscoped.for_template.find_by_id( params[:r] )
+          end
         end
         if params[:p]
           @resource = Spree::Post.find_by_id(params[:p])
@@ -112,10 +115,10 @@ module SpreeTheme
         end
         # get default_taxon from root, or it has no root, inherited_page_context cause error
         # @theme could be nil at present.
-        @menu ||= ( @theme.try(:home_page) || website.home_page || get_default_taxon)
+        @menu ||= ( @theme.try(:home_page) || store.home_page || get_default_taxon)
         #elsif SpreeTheme.taxon_class.home.present?
         # #it is discarded, it is conflict with feature theme has own index page. it would show product assigned index page of other theme
-        # #now each theme has own index page. website has own index page.
+        # #now each theme has own index page. store has own index page.
         # #just set home page in taxon is ok as well
         #  @menu = SpreeTheme.taxon_class.home
       end
@@ -137,7 +140,7 @@ module SpreeTheme
       # site has a released theme
       if @theme.present?
         #support feature is_public
-        unless website.is_public?
+        unless store.is_public?
           #if it is not public, only admin could preview template_theme.
           unless try_spree_current_user
             redirect_to :under_construction

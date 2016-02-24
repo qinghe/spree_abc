@@ -1,4 +1,5 @@
 Spree::Product.class_eval do
+  scope :for_template, ->{ where.not( theme_id: 0 ) }
   # theme_id could not be null in db
   # in Rails 4.2.5
   # product.update_attributes( theme_id: '' ), sql is theme_id=NULL
