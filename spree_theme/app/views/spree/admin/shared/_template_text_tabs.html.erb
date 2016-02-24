@@ -4,13 +4,13 @@
 
 <% content_for :sidebar do %>
     <ul class="nav nav-pills nav-stacked" data-hook="admin_post_tabs">
+      <%= content_tag :li, :class => ('active' if current == 'TemplateFile') do %>
+        <%= link_to_with_icon 'picture', Spree.t("template_file.index"), admin_template_files_url() %>
+      <% end if can?(:admin, Spree::TemplateFile) %>
 
       <%= content_tag :li, :class => ('active' if current == 'TemplateText') do %>
         <%= link_to_with_icon 'edit', Spree.t("template_text.index"), admin_template_texts_url() %>
       <% end if can?(:admin, Spree::TemplateText) %>
 
-      <%= content_tag :li, :class => ('active' if current == 'TemplateFile') do %>
-        <%= link_to_with_icon 'picture', Spree.t("template_file.index"), admin_template_files_url() %>
-      <% end if can?(:admin, Spree::TemplateFile) %>
     </ul>
 <% end %>

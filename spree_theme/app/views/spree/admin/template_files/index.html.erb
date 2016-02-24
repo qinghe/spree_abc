@@ -28,7 +28,9 @@
   <tbody>
     <% @template_files.each do |page| %>
       <tr class="<%= cycle('odd', 'even') %>" id="<%= dom_id page %>">
-        <td> <%= image_tag page.attachment.url(:mini) %> </td>
+        <td>
+          <%= link_to image_tag(page.attachment.url(:mini)), page.attachment.url %>
+        </td>
         <td> <%= page.name %> </td>
         <td> <%= page.template_theme.title if page.template_theme.present? %>  </td>
         <td> <%= page.attachment_file_size %>     </td>
