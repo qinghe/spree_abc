@@ -31,8 +31,7 @@ end
 # use @order.line_items, @order.add_variant instead
 
 Spree::Prototype.class_eval do
-  belongs_to :site
-  default_scope  { where(:site_id =>  Spree::Site.current.id) }
+  include Spree::MultiSiteSystem
 end
 
 Spree::Preference.class_eval do
