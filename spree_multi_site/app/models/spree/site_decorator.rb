@@ -65,8 +65,7 @@ Spree::Product.class_eval do
 end
 
 Spree::Property.class_eval do
-  belongs_to :site
-  default_scope  { where(:site_id =>  Spree::Site.current.id) }
+  include Spree::MultiSiteSystem
 end
 
 #TODO add site_id into shipments?
