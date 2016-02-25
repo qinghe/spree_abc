@@ -114,3 +114,5 @@ useful command
 
  http://blog.chinaunix.net/uid-24250828-id-3239100.html
   time dd if=/dev/zero of=test.dbf bs=8k count=300000
+
+ bundle update --source spree_alipay
