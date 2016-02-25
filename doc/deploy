@@ -116,3 +116,5 @@ useful command
   time dd if=/dev/zero of=test.dbf bs=8k count=300000
 
  bundle update --source spree_alipay
+ bundle config local.spree_alipay ../spree_alipay
+ bundle config  --delete local.spree_alipay
