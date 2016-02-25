@@ -42,6 +42,7 @@ zh-CN:
         attachment_file_size: 文件大小
         theme_id: 所属模板
         template_theme: 所属模板
+        alt: Alt文本
         created_at: 上传时间
       spree/template_text:
         name: 用途

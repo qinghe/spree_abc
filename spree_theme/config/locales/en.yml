@@ -36,6 +36,7 @@ zh-CN:
         attachment_content_type: file type
         attachment_file_size: file size
         theme_id: template
+        alt: alt
         template_theme: template
         created_at: created at
       spree/template_text:

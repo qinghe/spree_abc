@@ -33,7 +33,7 @@
         </td>
         <td> <%= page.name %> </td>
         <td> <%= page.template_theme.title if page.template_theme.present? %>  </td>
-        <td> <%= page.attachment_file_size %>     </td>
+        <td> <%= page.attachment_file_size.to_s(:human_size) %>     </td>
         <td> <%= pretty_time(page.created_at) %>  </td>
         <td  class="actions">
           <%= link_to_edit page, :no_text => true %>
