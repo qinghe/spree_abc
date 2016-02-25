@@ -22,11 +22,13 @@ module Spree
 
     def create_charge( order, channel, success_url )
       channel ||= PingppPcChannelEnum.alipay_pc_direct
+      product_names = order.products.pluck(:name)
+
       params = {
         :order_no => order.number,
-        :amount   => (order.total * 100).to_i,                     # in cent
-        :subject  => "Order : #{order.number}",
-        :body     => order.products.collect(&:name).to_s,  #String(400)
+        :amount   => (order.total * 100).to_i,               # in cent
+        :subject  => product_names.join(',').truncate(128),
+        :body     => product_names.join(',').truncate(500),  #String(400)
         :channel  => channel,
         :currency => "cny",
         :client_ip=> order.last_ip_address,
