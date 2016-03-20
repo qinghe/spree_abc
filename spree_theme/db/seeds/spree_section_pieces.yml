@@ -238,7 +238,7 @@ container:
     .<%=@template.current_piece.child_selector%>.data_last, .<%=@template.current_piece.child_selector%>.data_last>div{ margin-right:0; padding-right:0; border-right:0; }
     /* inner width is computed base on outer width, padding, border, margin. we should reset it for last column */
     /* comment out for theme40, bootstrap_column have on inner, data_last apply to child*/
-    .<%=@template.current_piece.child_selector%>.data_last>div.inner{ width: auto; }*/
+    .<%=@template.current_piece.child_selector%>.data_last>div.inner{ width: auto; }
     <% end %>
   title: container
   slug: container
