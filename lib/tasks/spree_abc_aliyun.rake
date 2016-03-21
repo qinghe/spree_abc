@@ -94,6 +94,7 @@ namespace :spree_abc do
       }
     end
 
+    #replice picures/nn/content/... with  aliimg.firecart.cn/nn/ckeditor_picture/121_original_2.jpg
     desc "replace image src which using ckeditor images with Aliyun OSS"
     task :replace_image_src_for_aliyun => :environment do
     # taxon.description, product.description, post.body
@@ -128,6 +129,42 @@ namespace :spree_abc do
              }
              #taxon.description, product.description, post.body
     end
+
+    #replace aliimg.firecart.cn with  aliimg.getstore.cn
+    desc "replace image src which using ckeditor images with Aliyun OSS"
+    task :replace_image_src_host_for_aliyun => :environment do
+    # taxon.description, product.description, post.body
+
+             [Spree::Taxon, Spree::Product, Spree::Post].each{|model_class|
+               puts "----------------------#{model_class.name}----------------------"
+               column = (model_class == Spree::Post ? :body : :description)
+               model_class.unscoped.all.each{|model|
+                 description = model.send column
+                 if description.present?
+                   doc = Nokogiri::HTML::DocumentFragment.parse(description)
+                   Spree::Site.with_site( Spree::Site.find( model.site_id ) ) do
+                     doc.css('img').each{| img |
+                       puts "#{model.id},#{img['src'] }"
+                         #file.puts "#{model.id}, #{img.attr( 'src' )}"
+                       if img.attr( 'src' ) =~ /ckeditor_picture\/([\d]+)/
+                           picture = Ckeditor::Picture.where( id: $1 ).first
+                           if picture
+                             img['src']= picture.url
+                           else
+                             img['src']= ''
+                           end
+                        end
+                         puts "#{model.id},#{img['src']}"
+                         model.send "#{column}=", doc.to_html
+                     }
+                     #model.save!
+                   end
+                 end
+               }
+             }
+             #taxon.description, product.description, post.body
+    end
+
 
     #desc "Replace image src for aliyun, it is only called internally
     #  model_class is string 'spree/post'

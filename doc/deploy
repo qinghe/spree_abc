@@ -118,3 +118,5 @@ useful command
  bundle update --source spree_alipay
  bundle config local.spree_alipay ../spree_alipay
  bundle config  --delete local.spree_alipay
+---------------------------------------------------------------
+1 php.ini short_open_tag On

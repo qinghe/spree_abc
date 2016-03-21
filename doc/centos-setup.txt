@@ -14,10 +14,27 @@ usermod -a -G sudo deploy
 5. 为 deploy 用户设置密码：
   passwd deploy
 
-6. 
+6.
   curl -sSL https://get.rvm.io | bash -s stable
 
-7. 
+7.
   rvm use --install --default 2.1.2
   rvm use 2.1.2@spree_abc --create --default
 
+8. generates ssh key for github
+https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/
+
+9. install mysql
+  yum -y install mysql-server mysql mysql-devel
+
+10. secure mysql
+/usr/bin/mysql_secure_installation
+
+11. make mysql/httpd as service
+sudo chkconfig httpd on
+sudo chkconfig mysqld on
+
+
+12. modify folder 'deploy' permission for apache
+http://wiki.apache.org/httpd/13PermissionDenied
+chmod 711 deploy
