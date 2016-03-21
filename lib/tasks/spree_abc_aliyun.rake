@@ -157,7 +157,7 @@ namespace :spree_abc do
                          puts "#{model.id},#{img['src']}"
                          model.send "#{column}=", doc.to_html
                      }
-                     #model.save!
+                     model.save!
                    end
                  end
                }
