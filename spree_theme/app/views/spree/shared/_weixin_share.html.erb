@@ -1,0 +1,5 @@
+<% if @current_page.product_tag.present? %>
+<div class ='weixin_quan' style='margin:0 auto;width:0px;height:0px;overflow:hidden;'>
+  <%= @current_page.product_tag.simple_image( :medium ) %>
+</div>
+<% end %>

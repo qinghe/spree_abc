@@ -12,8 +12,8 @@
 module PageTag
   class CurrentPage < Menus::WrappedMenu
 
-    attr_accessor :page_generator,:website_tag, :template_tag, :product_tag
-    delegate :theme, :resource, :to => :page_generator
+    attr_accessor :page_generator,:website_tag, :template_tag, :product_tag, :post_tag
+    delegate :theme, :resource, :product, :post, :to => :page_generator
     delegate :is_preview, :to => :page_generator
     delegate :design?, :to => :website_tag, :prefix=>"site"
     alias_attribute :page, :model
@@ -26,12 +26,17 @@ module PageTag
       # it is required to generate path
       self.collection_tag = ::PageTag::Menus.new(self.template_tag)
       self.model = self.page_generator.menu #Menus::WrappedMenu required model
-      # get current product
-      if self.page_generator.resource.present?
-        self.product_tag = Products::WrappedProduct.new( self.collection_tag, page_generator.resource)
-      else
-        self.product_tag = nil
+
+      # current product
+      if self.page_generator.product.present?
+        self.product_tag = Products::WrappedProduct.new( self.collection_tag, page_generator.product)
       end
+      
+      # current post
+      if self.page_generator.post.present?
+        self.post_tag = Posts::WrappedPost.new( self.collection_tag, page_generator.post)
+      end
+
     end
 
     #title is current page title,  resource.title-page.title-website.title

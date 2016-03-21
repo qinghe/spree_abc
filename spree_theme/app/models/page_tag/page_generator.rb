@@ -2,7 +2,8 @@
 module PageTag
   class PageGenerator
 
-    attr_accessor :template_release, :menu, :theme, :resource # resource could be product, blog_post, flash, file, image...
+    attr_accessor :template_release, :menu, :theme
+    attr_accessor :resource, :product, :post # resource could be product, blog_post, flash, file, image...
     attr_accessor :editor
 
     #these attributes are for templates
@@ -50,13 +51,15 @@ module PageTag
     def initialize( theme, menu, options={})
       self.theme = theme
       self.menu = menu
-      self.resource = nil
+      self.resource = self.product = self.post = nil
       self.is_preview = options[:preview].present?
 
       self.editor = options[:editor]
       if options[:resource].present?
         self.resource = options[:resource]
+        identify_resource( self.resource )
       end
+
       html = css = js = nil
       ehtml = ecss = ejs = nil
       #init template variables, used in templates
@@ -135,6 +138,17 @@ module PageTag
       self.context = {:current_page=>current_page_tag,
         :website=>current_page_tag.website_tag, :template=>current_page_tag.template_tag
         }
+    end
+
+    # resource could be product, blog_post, flash, file, image...
+    def identify_resource( resource )
+      self.product = self.post = nil
+      case resource.class.name
+      when 'Spree::Product'
+        self.product = resource
+      when 'Spree::Post'
+        self.post = resource
+      end
     end
 
     def erb( )

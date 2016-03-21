@@ -24,6 +24,10 @@ module PageTag
       def whole_images
         ( self.images + self.variant_images ).uniq
       end
+
+      def simple_image( style )
+        ProductAttribute.new( nil, self ).simple_image( style )
+      end
     end
 
     def wrapped_models

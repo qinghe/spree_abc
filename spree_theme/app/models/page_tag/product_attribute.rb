@@ -13,7 +13,6 @@ module PageTag
           when :thumbnail
             i = options[:image]
             content_tag(:a, create_product_image_tag( i, wrapped_product, {}, current_piece.get_content_param_by_key(:thumbnail_style)),
-            #image_tag(i.attachment.url( current_piece.get_content_param_by_key(:thumbnail_style))),
                          { href: i.attachment.url( current_piece.get_content_param_by_key(:main_image_style)) }
                          )
           else
@@ -29,8 +28,13 @@ module PageTag
         else
           attribute_value
         end
-
     end
+
+    # get image ignore current_piece
+    def simple_image(style)
+      product_image_by_spree( wrapped_product.model, style )
+    end
+
     private
     def create_product_image_tag( image, product, options, style)
       #Rails.logger.debug " image = #{image} product = #{product}, options= #{options}, style=#{style}"

@@ -29,6 +29,8 @@ root_for_mobile:
       <%= render "spree/shared/sync_analytics" %>
       </head>
       <body class="clear-block <%= @current_page.agent_selector(request.user_agent) %>">
+        <%= render "spree/shared/weixin_share" %>
+
       <% if @current_page.site_design? && !@current_page.is_preview %>
         <%= render "spree/shared/theme_selection_for_nondesigner" %>
       <% end %>

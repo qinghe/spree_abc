@@ -214,8 +214,8 @@ module PageTag
           }
         when Spree::PageLayout::DataSourceEnum.this_product
           #default_taxon.id is 0
-          if self.page_generator.resource.kind_of? Spree::Product
-            objs = [self.page_generator.resource]
+          if self.page_generator.product
+            objs = [self.page_generator.product]
           end
       end
 
@@ -240,8 +240,8 @@ module PageTag
           #@searcher.current_currency = current_currency
           objs = searcher.retrieve_posts
         when Spree::PageLayout::DataSourceEnum.post
-          if self.page_generator.resource.kind_of? Spree::Post
-            objs = [self.page_generator.resource]
+          if self.page_generator.post
+            objs = [self.page_generator.post]
           end
       end
       if objs.present?
@@ -256,12 +256,12 @@ module PageTag
       objs = []
       case data_source
         when Spree::PageLayout::DataSourceEnum.next_post
-          if self.page_generator.resource.kind_of? Spree::Post
+          if self.page_generator.post.present?
             item = Spree::PostClassification.where( taxon_id: wrapped_taxon.id, post_id: self.page_generator.resource.id ).first.try(:lower_item).try(:post)
             objs << item if item.present?
           end
         when Spree::PageLayout::DataSourceEnum.previous_post
-          if self.page_generator.resource.kind_of? Spree::Post
+          if self.page_generator.post.present?
             item = Spree::PostClassification.where( taxon_id: wrapped_taxon.id, post_id: self.page_generator.resource.id ).first.try(:higher_item).try(:post)
             objs << item if item.present?
           end
