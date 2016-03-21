@@ -1,6 +1,6 @@
-<% #local params: 
-   #  theme: theme 
-   #  page_layout: current page_layout  
+<% #local params:
+   #  theme: theme
+   #  page_layout: current page_layout
    #  page_layouts: whole page_layout tree
   page_layouts||= page_layout.self_and_descendants
   children = page_layouts.select{|pl| pl.parent_id == page_layout.id}
@@ -15,16 +15,17 @@
       <% if current == 'ConfigResource'%>
           <span class="config_resource">
           <% assigned_resources =  theme.assigned_resources_by_page_layout child  %>
-            <% assigned_resources.each{ |assigned_resource| next if assigned_resource.kind_of?(Spree::SpecificTaxon) %>            
-            <%= assigned_resource.name %>
-            <% }%> 
+            <% assigned_resources.each{ |assigned_resource| next if assigned_resource.kind_of?(Spree::SpecificTaxon) %>
+            <% # assigned_resource could be nil if user delete it after assigned  %>
+            <%= assigned_resource.name if assigned_resource.present? %>
+            <% }%>
           </span>
       <% elsif current == 'ConfigContext'%>
           <span class="config_context">
             <% if child.section_context.present? %>
             <%= child.current_contexts.map{|section_context| Spree.t("section_context.#{section_context}")}.join(',')%>
-            <% end %>  
-          </span>        
+            <% end %>
+          </span>
           <span class="specific_taxon">
           <% assigned_resources =  theme.assigned_resources( Spree::SpecificTaxon, child ).compact %>
           <%= assigned_resources.map(&:name).join(',') %>
@@ -32,8 +33,8 @@
       <% elsif current == 'ConfigDataSource'%>
           <span class="config_data_source">
           <% if child.data_source.present? %>
-          <%= Spree.t("section_data_source.#{child.current_data_source}") %>        
-          <% end %>  
+          <%= Spree.t("section_data_source.#{child.current_data_source}") %>
+          <% end %>
           </span>
         <% end %>
       <%= render :partial => 'page_layout', :locals => { :theme => theme, :page_layout=>child, :page_layouts=>page_layouts, :selected_id=>selected_id, :current=>current } %>
