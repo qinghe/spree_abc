@@ -128,9 +128,9 @@ $(document).ready(function() {
   });
 
   function ScaleSlider(jssor_slider) {
-      var parentWidth = $(jssor_slider.$Elmt.parentNode).width();
+      var parentWidth = $('#slider1_container').parent().width();//$(jssor_slider.$Elmt.parentNode).width();
       if(parentWidth)
-        jssor_slider.$SetScaleWidth(parentWidth);
+      jssor_slider1.$ScaleWidth(parentWidth);//jssor_slider.$SetScaleWidth(parentWidth);
       else
         window.setTimeout(ScaleSlider, 30);
   }

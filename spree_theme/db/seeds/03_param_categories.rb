@@ -26,7 +26,7 @@ objs=[
   {"id"=>23, "position"=>123, "is_enabled"=>true, "editor_id"=>0, "slug"=>"arraw_navigator" },
   {"id"=>24, "position"=>124, "is_enabled"=>true, "editor_id"=>0, "slug"=>"thumbnail_navigator" },
 
-  #product img
+  #product img/logo
   {"id"=>28, "position"=>128, "is_enabled"=>true, "editor_id"=>0, "slug"=>"image_style" },
   {"id"=>30, "position"=>130, "is_enabled"=>true, "editor_id"=>0, "slug"=>"main_image" },
   {"id"=>31, "position"=>131, "is_enabled"=>true, "editor_id"=>0, "slug"=>"thumb_image" },
