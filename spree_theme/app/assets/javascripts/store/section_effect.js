@@ -200,9 +200,11 @@ $(document).ready(function() {
         //you can remove responsive code if you don't want the slider scales while window resizes
         //Scale slider immediately
         ScaleSlider(jssor_slider1);
-        //if (!navigator.userAgent.match(/(iPhone|iPod|iPad|BlackBerry|IEMobile)/)) {
-        //    $(window).bind('resize', ScaleSlider);
-        //}
+
+        //Scale slider while window load/resize/orientationchange.
+        $(window).bind("load", ScaleSlider);
+        $(window).bind("resize", ScaleSlider);
+        $(window).bind("orientationchange", ScaleSlider);
         //responsive code end
     }
   });

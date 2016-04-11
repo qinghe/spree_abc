@@ -17,6 +17,8 @@ module PageTag
           Spree.t('more')
         when :root_name
           wrapped_page.name
+        when :root_tooltips
+          wrapped_page.tooltips
         else
           wrapped_page.send attribute_name
       end
