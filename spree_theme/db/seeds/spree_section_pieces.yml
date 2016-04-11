@@ -59,7 +59,7 @@ root:
       keep it simple for now.
       https://ruby-china.org/topics/14005
       */
-      font-family: Helvetica, Tahoma, Arial, STXihei, "华文细黑", "Microsoft YaHei", "微软雅黑", SimSun, "宋体", Heiti, "黑体", sans-serif;
+      font-family: Helvetica, Tahoma, Arial, "Microsoft YaHei", "微软雅黑", SimSun, "宋体", STXihei, "华文细黑", Heiti, "黑体", sans-serif;
       /*
       <% if @template.css(:font_family)== 'serif' %>
       font-family: Times, "Times New Roman", Georgia, SimSun, serif;
