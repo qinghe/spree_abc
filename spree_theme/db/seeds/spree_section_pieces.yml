@@ -55,11 +55,18 @@ root:
     }
     body, caption, th, td, input, textarea, select, option, legend, fieldset
     {
+      /*
+      keep it simple for now.
+      https://ruby-china.org/topics/14005
+      */
+      font-family: Helvetica, Tahoma, Arial, STXihei, "华文细黑", "Microsoft YaHei", "微软雅黑", SimSun, "宋体", Heiti, "黑体", sans-serif;
+      /*
       <% if @template.css(:font_family)== 'serif' %>
       font-family: Times, "Times New Roman", Georgia, SimSun, serif;
       <% else %>
       font-family: Tahoma, Verdana, Arial, Helvetica, STXihei, "Microsoft YaHei", SimHei, sans-serif;
       <% end %>
+      */
     }
     /*ol,ul { list-style: none; }*/
     /* **** Defaults **** */  /** headings **/
@@ -946,7 +953,7 @@ logo:
     .<%= @template.section_selector %> img {
       /*http://stackoverflow.com/questions/4888223/align-image-in-center-and-middle-within-div*/
       display: block;  margin-left: auto; margin-right: auto;
-      <%=@template.css(:img)%>      
+      <%=@template.css(:img)%>
       /*width:100%; add params for it later*/
     }
   js: ""
