@@ -3,7 +3,7 @@ source 'https://ruby.taobao.org/'
 #source "https://rails-assets.org"
 
 # Bundle edge Rails instead:
-ruby '2.1.5'
+ruby '2.2.4'
 
 gem 'rails', '4.2.5'
 

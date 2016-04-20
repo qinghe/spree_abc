@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/RuanShan/paperclip_oss_storage.git
-  revision: bd178f2fff4bb515c2b6df92542da307dc607fcd
+  revision: c2df34ed4fc242bea415c9eceaf999e46bc650da
   branch: master
   specs:
     paperclip_oss_storage (0.0.4)
@@ -555,4 +555,4 @@ DEPENDENCIES
   with_model
 
 BUNDLED WITH
-   1.10.6
+   1.11.2

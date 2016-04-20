@@ -6,7 +6,7 @@ module Spree
      :comment_type_attributes, :comment_attributes]
     mattr_reader *ATTRIBUTES_FOR_THEME
 
-    @@page_layout_attributes = [ :section_id,:title, :content_param, :data_source, :data_source_param, :css_class, :content_css_class, :stylish, :section_context ]
+    @@page_layout_attributes = [ :section_id,:title, :content_param, :data_source, :data_source_param, :css_class, :css_class_for_js, :content_css_class, :stylish, :section_context ]
     @@param_value_attributes = [ :page_layout_root_id, :page_layout_id, :section_id ]
     @@section_piece_param_attributes = [ :editor,:param_category, :section_piece, :class_name, :pclass, :html_attribute_ids ]
     @@section_attributes = [ :section_piece_id, :title, :global_events, :subscribed_global_events,:is_enabled, :for_terminal ]

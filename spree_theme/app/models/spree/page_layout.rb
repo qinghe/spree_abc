@@ -1,5 +1,19 @@
 # section param effect on content, we use data_source_param, such as pagination
 # section param effect on css, we use content_param, such as clickable, image size
+
+
+# content_param: 内容参数 columns=n/clickable=1/image_size
+# css_class_for_js: css 类， 应用于js。
+# css_class: css 类， 应用于css。 CSS bootstrap .col-xs-n, .container, .container-fluid
+# content_css_class(css_class_for_font): 字体图标 awesomefont/glyphicon,
+#   TODO: 定制font-awesome， css_class 可以支持这个功能。
+# data_source： 数据源类型， 菜单/产品/文章
+# data_source_param: 数据源参数 per_page
+# stylish: 所属样式，一个模板可以定义产品/文章的多个显示样式，每个页面可以选择适用的样式。 default is 0
+#
+
+
+
 module Spree
   class PageLayout < ActiveRecord::Base
     #extend FriendlyId
@@ -646,7 +660,7 @@ module Spree
                     #{form_end}
                 <% } %>
                 #{get_pagination}
-              <% } %>                
+              <% } %>
               <% @template.running_data_source = nil %>
               EOS1
               #set var_collection  to nil, or render pagination more times

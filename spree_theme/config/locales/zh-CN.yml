@@ -21,8 +21,9 @@ zh-CN:
       spree/page_layout:
         title: 名称
         content_param: 内容参数
-        css_class: CSS
-        content_css_class: 内容 CSS
+        css_class: 模块CSS
+        css_class_for_js: JS使用CSS
+        content_css_class: 内容使用CSS
         section_context: 适用页面
         data_source: 数据源
         data_source_param: 数据源参数

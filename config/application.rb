@@ -69,7 +69,6 @@ module SpreeAbc
     config.active_record.raise_in_transactional_callbacks = true
     # Enable the asset pipeline
     config.assets.enabled = true
-    config.assets.js_compressor = :uglifier
 
   end
 end
