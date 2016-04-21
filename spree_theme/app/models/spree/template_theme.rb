@@ -491,12 +491,14 @@ module Spree
       specific_taxons  = assigned_resources( Spree::SpecificTaxon, selected_page_layout).compact
       specific_taxon_ids = specific_taxons.collect(&:id)
       is_valid = (selected_page_layout.valid_context?(taxon.current_context))
+
       if is_valid && specific_taxon_ids.present?
         is_valid = specific_taxon_ids.include?(taxon.id)
         unless is_valid
           is_valid = specific_taxons.map{|specific_taxon| taxon.is_descendant_of?(specific_taxon) }.include?( true )
         end
       end
+
       is_valid
     end
 

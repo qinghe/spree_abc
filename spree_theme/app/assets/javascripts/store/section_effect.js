@@ -37,7 +37,19 @@ function SetHome(){
   }
 }
 
-
+function ScaleSlider(jssor_slider) {
+  // console.debug( jssor_slider )
+  //Object { $Elmt=div.effect_slider,  $Options={...},  $PlayTo=PlayTo(),  more...}
+  //Object { data=slider, originalEvent=Event load,  type="load",  timeStamp=0,  more...}
+  var element = ( jssor_slider.$Elmt || jssor_slider.data.$Elmt )
+  if( element ){
+    var parentWidth= $(element.parentNode).width();
+    if(parentWidth=false)
+      jssor_slider.$ScaleWidth(parentWidth);//jssor_slider.$SetScaleWidth(parentWidth);
+    //else
+    //  window.setTimeout(function(jssor_slider){ ScaleSlider(jssor_slider); }, 30);
+  }
+}
 
 $(document).ready(function() {
   //return to top
@@ -127,14 +139,6 @@ $(document).ready(function() {
     }
   });
 
-  function ScaleSlider(jssor_slider) {
-      var parentWidth = $('#slider1_container').parent().width();//$(jssor_slider.$Elmt.parentNode).width();
-      if(parentWidth)
-      jssor_slider1.$ScaleWidth(parentWidth);//jssor_slider.$SetScaleWidth(parentWidth);
-      else
-        window.setTimeout(ScaleSlider, 30);
-  }
-
   // dom structure
   //   <div class="container">  <div class="inner">
   //      <!-- div.effect_slider is required, jssor manipulate it. -->
@@ -156,9 +160,13 @@ $(document).ready(function() {
       $self.css({ height : $parent.css('width'), width : $parent.css('width')  });
       $slide_container.css({ height : $parent.css('width'), width : $parent.css('width') });
     }
-    var options = null;
+    var transitions = { fade: [{$Duration:1200,$Opacity:2}] };
+    var options = null, slideshow_options=null;
     var auto_play = ( $slide_container.data('auto-play') == null ?  true : $slide_container.data('auto-play') );
     var display_pieces = $slide_container.data('display-pieces');
+    var transition_name =  $slide_container.data('transition');
+
+
     if( display_pieces ){
         var slide_width = $self.find("[u='slides']>div").width();
         var display_piece = Math.ceil( $parent.width() / slide_width );
@@ -184,7 +192,7 @@ $(document).ready(function() {
             };
 
     } else{
-        options = {
+      options = {
                 $AutoPlay : auto_play,
                 $FillMode : 2,
                 $BulletNavigatorOptions : {
@@ -192,7 +200,14 @@ $(document).ready(function() {
                   $ChanceToShow : 2,
                   $AutoCenter : 1
                 }
-              };
+      };
+      if( transitions[transition_name] ){
+        options['$SlideshowOptions'] = {
+          $Class: $JssorSlideshowRunner$,
+          $Transitions: transitions[transition_name]
+        }
+      }
+
     }
     if( $slide_container.children().length>0){
         var jssor_slider1 = new $JssorSlider$($self.get(0), options);
@@ -202,9 +217,9 @@ $(document).ready(function() {
         ScaleSlider(jssor_slider1);
 
         //Scale slider while window load/resize/orientationchange.
-        $(window).bind("load", ScaleSlider);
-        $(window).bind("resize", ScaleSlider);
-        $(window).bind("orientationchange", ScaleSlider);
+        $(window).bind("load", jssor_slider1, ScaleSlider);
+        $(window).bind("resize",jssor_slider1, ScaleSlider);
+        $(window).bind("orientationchange", jssor_slider1, ScaleSlider);
         //responsive code end
     }
   });
@@ -412,6 +427,7 @@ $(document).ready(function() {
         });
       }
   });
+
   $(".click_effect_sider").each(function(i, element){
     var child2 = $(".child_2", element);
     //var class_names = $(".child_2", element).attr('class').replace(/(^\s+)|(\s+$)/g,"").replace(/\s+/g,'.');

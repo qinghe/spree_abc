@@ -68,3 +68,34 @@ container_dialog:
       opacity: 50;
       <%=@template.css(:dialog_overlay)%>
     }
+slider_data_taxons_transition_fade:
+  id: 104
+  title: slider data taxons transition fade
+  slug: slider-data-taxons-transition-fade
+  is_selectable: "0"
+  is_container: "0"
+  html: |-
+      <%# jssor require with,height in element style. %>
+      <div u="slides" style="position: absolute;overflow:hidden;" data-transition='fade'>
+      <% if @template.menu.present? %>
+        <% @template.menu.children.each{|page| %>
+          <div><%= image_tag page.icon.url(:original), :u=>'image', :alt=>page.name %></div>
+        <% } %>
+      <% end %>
+      </div>
+  css: ''
+  js: ''
+product_search:
+  id: 105
+  title: product search
+  slug: product-search
+  is_selectable: "0"
+  is_container: "1"
+  html: |
+    <%= render "themes/product_search" %>
+  css: |
+    #launch_site_container {
+      display:none;
+    }
+
+  js: ""

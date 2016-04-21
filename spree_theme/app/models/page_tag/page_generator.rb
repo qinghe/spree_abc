@@ -68,7 +68,7 @@ module PageTag
       if options[:controller].present?
         self.controller = options[:controller]
       end
-      self.resource_options = options.slice(:page)
+      self.resource_options = options.slice(:page, :keywords)
     end
 
     def url_prefix

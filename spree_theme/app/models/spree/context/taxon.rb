@@ -126,6 +126,8 @@ module Spree
               ContextEnum.post
             when /^\/logout/
               ContextEnum.logout
+            when /^\/products/
+              ContextEnum.search
             when '/',/^\/\?/, /^\/template_themes/, /^\/preview/
               ContextEnum.home
             else

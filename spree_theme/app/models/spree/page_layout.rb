@@ -105,7 +105,7 @@ module Spree
       def self.verify_contexts( some_contexts, target_contexts )
         some_contexts = [some_contexts] unless some_contexts.kind_of?( Array )
         #Rails.logger.debug "some_contexts=#{some_contexts.inspect}, target_contexts=#{target_contexts}, [ContextEnum.either]=#{[ContextEnum.either].inspect}, is_valid = #{ret}"
-        ret = ( some_contexts==[ContextEnum.either] || target_contexts==[ContextEnum.either] || (target_contexts&some_contexts)==some_contexts )
+        ret = ( some_contexts==[ContextEnum.either] || target_contexts==[ContextEnum.either] || (target_contexts&some_contexts)==some_contexts ) || (some_contexts==[ContextEnum.search] && target_contexts.include?(ContextEnum.list))
         #|| (some_contexts==[ContextEnum.home]&&target_contexts.include?(ContextEnum.list))
       end
 
@@ -596,7 +596,11 @@ module Spree
 
     # self.css_class + self.usage
     def get_css_class
-      self.section.usage.present? ? "#{css_class} u_#{self.section.usage}" : css_class
+      css = String.new()
+      css << css_class if css_class.present?
+      #css << css_class_for_js if css_class_for_js.present?
+      css << "u_#{self.section.usage}" if self.section.usage.present?
+      css
     end
 
     private

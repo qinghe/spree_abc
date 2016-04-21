@@ -96,7 +96,7 @@ module SpreeTheme
         @theme = Spree::Store.current.template_theme
       end
   #Rails.logger.debug "@theme=#{@theme.inspect}, @is_designer=#{@is_designer},store=#{store.inspect} request.xhr?=#{request.xhr?}"
-      if params[:controller]=~/cart|checkout|order/
+      if params[:controller]=~/cart|checkout|order|products/
         @menu = get_default_taxon
       elsif params[:controller]=~/user/
         @menu = get_default_taxon
@@ -164,9 +164,9 @@ module SpreeTheme
         # initialize page generator @lg all the time, even for xhr, we need to partial section. ex. minicart
         # we have to initialize PageTag::PageGenerator here, page like login  do not go to template_thems_controller/page
           if @is_designer
-            @lg = PageTag::PageGenerator.previewer( @menu, @theme, {:resource=>@resource, :controller=>self, :page=>params[:page]})
+            @lg = PageTag::PageGenerator.previewer( @menu, @theme, {:resource=>@resource, :controller=>self, :page=>params[:page], :keywords=>params[:keywords]})
           else
-            @lg = PageTag::PageGenerator.generator( @menu, @theme, {:resource=>@resource, :controller=>self, :page=>params[:page]})
+            @lg = PageTag::PageGenerator.generator( @menu, @theme, {:resource=>@resource, :controller=>self, :page=>params[:page], :keywords=>params[:keywords]})
           end
           @lg.context.each_pair{|key,val|
             # expose variable to view

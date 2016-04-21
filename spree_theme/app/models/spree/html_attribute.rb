@@ -10,8 +10,10 @@ module Spree
     cattr_accessor :psv_for_manual_entry_enum, :unit_collection, :special_enum
     # slug db,bool,text,src pvalue are special
     #possible selected value for manual entry
-    self.psv_for_manual_entry_enum =  {:href=>'0u', :bool=>'0b', :text=>'0t', :size=>'l1', :color=>'0c', :src=>'0i',:db=>'0d', :image=>'0i', :opacity=>'l0'}
-    self.unit_collection = {:l=>['px','em']}
+    self.psv_for_manual_entry_enum =  {:href=>'0u', :bool=>'0b', :text=>'0t', :size=>'l1', :color=>'0c', :src=>'0i',:db=>'0d', :image=>'0i', :opacity=>'l0', :duration=>'l2'}
+    self.unit_collection = { l: ['px','em'],
+        d: ['s']
+      }
 
     @@html_attribute_hash = nil
     def self.all_to_hash
@@ -147,6 +149,8 @@ module Spree
           [0,'']
         when psv_for_manual_entry_enum[:opacity]
           [1,'']
+        when psv_for_manual_entry_enum[:duration]
+          [0,'']
         else
           ['','']
       end
