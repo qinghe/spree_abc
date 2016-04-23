@@ -2,7 +2,7 @@
 staging:
   version: 25e
 aliyun_staging:
-  version: 25r
+  version: 267
 local_staging:
   version: 23z
 development:
