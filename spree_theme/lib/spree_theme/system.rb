@@ -152,9 +152,9 @@ module SpreeTheme
           end
         end
 
-        if mobile? && @theme.mobile
-          @theme = @theme.mobile
-        end
+        #if mobile? && @theme.mobile
+        #  @theme = @theme.mobile
+        #end
 
         unless request.xhr?
           if @is_designer
