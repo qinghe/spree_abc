@@ -35,7 +35,7 @@
     },
     // add title include close button
     addTitle: function( $menu ){
-      $('<div class="sidr-close-container"><a class="sidr-close" href="javascript:vaid(0);"><i class="fa fa-remove"></i></a> </div>')
+      $('<div class="sidr_close_container"><a class="sidr_close" href="javascript:vaid(0);"><i class="fa fa-remove"></i></a> </div>')
               .prependTo($menu);
     },
 
@@ -253,7 +253,7 @@
       // create the overlay
       $sideOverlay =  $('<div></div>')
         .attr('id',  name +'-overlay')
-        .addClass('sidr-overlay')
+        .addClass('sidr_overlay')
         .appendTo($(settings.body));
     }
 

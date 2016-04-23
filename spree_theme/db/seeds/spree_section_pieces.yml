@@ -1688,17 +1688,17 @@ click_effect_sider:
         */
         <%= @template.css :sidr %>
       }
-      .sidr-close{
+      .sidr_close{
         position: absolute;
         top: 0;
         right: 0;
         z-index: 1;
         <%= @template.css :sidr_close %>
       }
-      .sidr-close .fa{
+      .sidr_close .fa{
         font-size: 2em;
       }
-      .sidr-overlay{
+      .sidr_overlay{
         display: none;
         position: fixed;
         top: 0;
