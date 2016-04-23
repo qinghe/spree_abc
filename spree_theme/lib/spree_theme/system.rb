@@ -97,7 +97,7 @@ module SpreeTheme
       end
   #Rails.logger.debug "@theme=#{@theme.inspect}, @is_designer=#{@is_designer},store=#{store.inspect} request.xhr?=#{request.xhr?}"
       if params[:controller]=~/cart|checkout|order|products/
-        @menu = get_default_taxon
+        @menu = get_default_taxon #products is for search
       elsif params[:controller]=~/user/
         @menu = get_default_taxon
       else

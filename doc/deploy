@@ -83,7 +83,7 @@ export OSS_ACCESS_ID="xxx"
 export OSS_ACCESS_SECRET="xxx"
 #
 gem install aliyun-oss-sync
-#edit source lib/aosss/sync.rb
+#edit source lib/aosss/sync.rb, method init_connection
 :server            => 'oss-cn-beijing.aliyuncs.com'
 #sycn assets with aliyun
 aliyun-oss-sync push aliass:assets public/assets

@@ -94,8 +94,17 @@ product_search:
   html: |
     <%= render "themes/product_search" %>
   css: |
-    #launch_site_container {
-      display:none;
+    .search_form {
     }
-
   js: ""
+container_absolute:
+  id: 106
+  title: container absolute
+  slug: container-absolute
+  is_selectable: "0"
+  is_container: "1"
+  html: |
+    ~~content~~
+  css: |
+    .<%=@template.section_selector%> {z-index:5; position:absolute;  <%=@template.css(:absolute_position) %>}
+  js: ''

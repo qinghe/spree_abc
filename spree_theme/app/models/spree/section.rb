@@ -198,6 +198,10 @@ module Spree
     def is_html_root?
       usage =='root'
     end
+
+    def usage_css_name
+      usage.present? ? "u_#{self.usage}" : ''
+    end
   end
 
 end

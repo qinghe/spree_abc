@@ -599,7 +599,7 @@ module Spree
       css = String.new()
       css << css_class if css_class.present?
       #css << css_class_for_js if css_class_for_js.present?
-      css << "u_#{self.section.usage}" if self.section.usage.present?
+      css << " "+ self.section.usage_css_name
       css
     end
 
