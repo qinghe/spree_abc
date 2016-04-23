@@ -1683,12 +1683,17 @@ click_effect_sider:
         z-index: 15;
         overflow-x: none;
         overflow-y: auto;
-        /* Theme Settings */
+        /* Theme Settings
         box-shadow: inset 0 0 5px 5px #ebebeb;
+        */
         <%= @template.css :sidr %>
       }
       .sidr-close{
-        float:right;
+        position: absolute;
+        top: 0;
+        right: 0;
+        z-index: 1;
+        <%= @template.css :sidr_close %>
       }
       .sidr-close .fa{
         font-size: 2em;
@@ -1703,6 +1708,7 @@ click_effect_sider:
         z-index: 14;
         background-color:gray;
         opacity: 0.3;
+        <%= @template.css :sidr_overlay %>
       }
   js: ''
 
