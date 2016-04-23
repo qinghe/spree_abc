@@ -106,5 +106,5 @@ container_absolute:
   html: |
     ~~content~~
   css: |
-    .<%=@template.section_selector%> {z-index:5; position:absolute;  <%=@template.css(:absolute_position) %>}
+    .<%=@template.section_selector%> {z-index:1; position:absolute;  <%=@template.css(:absolute_position) %>}
   js: ''
