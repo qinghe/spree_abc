@@ -160,7 +160,7 @@ module SpreeTheme
              #@editor_panel = render_to_string :partial=>'layout_editor_panel'
           end
         end
-
+        Rails.logger.info "SpreeTheme theme: #{@theme.id}, @is_designer: #{ @is_designer}, @menu: #{@menu.id}-#{@menu.name}"
         # initialize page generator @lg all the time, even for xhr, we need to partial section. ex. minicart
         # we have to initialize PageTag::PageGenerator here, page like login  do not go to template_thems_controller/page
           if @is_designer
