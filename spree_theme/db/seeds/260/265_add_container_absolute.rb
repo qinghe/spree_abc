@@ -8,7 +8,7 @@ end
 
 
 #absolute_container
-Spree::Section.where(:title=>'absolute container').each(&:destroy)
+#Spree::Section.where(:title=>'absolute container').each(&:destroy)
 absolute_container = Spree::Section.create_section( section_piece_hash['container'], {:title=>"absolute container"},
 { 'content_layout'=>{'86'=>bool_true,'86unset'=>bool_false}, 'block'=>{'21'=>"width:100px",'21unset'=>bool_false,'15'=>"height:100px",'15unset'=>bool_false,'101'=>"float:left",'101unset'=>bool_false}, 'inner'=>{'2'=>'background-color:silver','2unset'=>bool_false,'15hidden'=>bool_true}}
 )
