@@ -95,6 +95,11 @@ module SpreeTheme
       if @theme.blank? && Spree::Store.current.template_theme.present?
         @theme = Spree::Store.current.template_theme
       end
+      # public view pages vie cellphone
+      if mobile? &&  @theme && @theme.mobile
+        @theme = @theme.mobile
+      end
+      # theme could differ in home page
   #Rails.logger.debug "@theme=#{@theme.inspect}, @is_designer=#{@is_designer},store=#{store.inspect} request.xhr?=#{request.xhr?}"
       if params[:controller]=~/cart|checkout|order|products/
         @menu = get_default_taxon #products is for search
