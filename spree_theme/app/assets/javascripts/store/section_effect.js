@@ -440,7 +440,10 @@ $(document).ready(function() {
           }
       });
   });
-  $(".sidr").on( 'click',".sidr-close",function(){
+  $(".sidr").on( 'click',".sidr_close",function(){
+    $.sidr( 'close','sidr');
+  });
+  $("body").on( 'click',".sidr_overlay",function(){
     $.sidr( 'close','sidr');
   });
 

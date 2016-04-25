@@ -35,7 +35,7 @@
     },
     // add title include close button
     addTitle: function( $menu ){
-      $('<div class="sidr_close_container"><a class="sidr_close" href="javascript:vaid(0);"><i class="fa fa-remove"></i></a> </div>')
+      $('<div class="sidr_close_container"><a class="sidr_close" href="javascript:void(0);"><i class="fa fa-remove"></i></a> </div>')
               .prependTo($menu);
     },
 
