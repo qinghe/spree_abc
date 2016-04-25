@@ -1,6 +1,6 @@
   <% if @template_theme.for_desktop? && @template_theme.mobile.present? %>
       <%= button_link_to Spree.t('actions.config_mobile_theme'), config_resource_admin_template_theme_url( @template_theme.mobile ), :icon => 'mobile-phone', :class=>"btn" %>
-  <% elsif @template_theme.for_mobile? %>
+  <% elsif @template_theme.for_mobile? &&  @template_theme.desktop.present? %>
       <%= button_link_to Spree.t('actions.config_desktop_theme'), config_resource_admin_template_theme_url( @template_theme.desktop ), :icon => 'desktop', :class=>"btn"  %>
   <% end %>
 
