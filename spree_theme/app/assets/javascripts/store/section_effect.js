@@ -433,7 +433,7 @@ $(document).ready(function() {
     //var class_names = $(".child_2", element).attr('class').replace(/(^\s+)|(\s+$)/g,"").replace(/\s+/g,'.');
       $(".child_1", element).sidr({
         body: '#page-inner', // append into page innner, apply page css.
-        displace: false,
+        displace: true,
         renaming: false,
         source: function(){
           return ( child2.is("*") ? child2[0].outerHTML : "no content");
@@ -443,7 +443,7 @@ $(document).ready(function() {
   $(".sidr").on( 'click',".sidr_close",function(){
     $.sidr( 'close','sidr');
   });
-  $("body").on( 'click',".sidr_overlay",function(){
+  $("#page").on( 'click',".sidr_overlay",function(){
     $.sidr( 'close','sidr');
   });
 

@@ -3,7 +3,7 @@
 //= require jquery_ujs
 //= require jquery.form
 //= require jquery.ajax
-//= require jssor.slider.one
+//= require jssor.slider.20.min
 //= require spree/frontend
 //= require store/spree_theme.client
 //= require store/spree_theme.routes
