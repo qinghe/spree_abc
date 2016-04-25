@@ -1699,7 +1699,7 @@ click_effect_sider:
         font-size: 2em;
         <%= @template.css :sidr_close %>
       }
-      .sidr .sidr_overlay{
+      .sidr_overlay{
         display: none;
         position: fixed;
         top: 0;
