@@ -31,7 +31,7 @@ gem 'sass-rails', '~> 5.0'
 #  gem "rspec-rails", "~> 2.0"
 #  gem "capybara"
 #end
-gem 'turbolinks'
+gem 'turbolinks', '~> 2.5.3'
 gem 'jquery-turbolinks'
 
 

@@ -2,6 +2,7 @@
 //= require jquery.simplemodal
 //= require jquery.lightbox.custom
 //= require store/section_effect
+//= require store/section_editor
 
 $(document).ready(function() {
   // disable progress-bar, coolpadwebkit do not support
