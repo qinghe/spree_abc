@@ -49,6 +49,8 @@ root_for_mobile:
       </body>
     </html>
   css: |-
+      #page /* sidr displace feature required */
+      { position:relative;      }
       #page-inner
       { position:relative;
         <%= @template.css :inner %>
