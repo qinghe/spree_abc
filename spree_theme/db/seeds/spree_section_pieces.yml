@@ -150,6 +150,7 @@ root:
         { position:relative;
         <%= @template.css :inner %>
         }
+    #infscr-loading{ background-color:white; clear:both; text-align:center; border-radius:4px;}
     .<%=@template.current_piece.child_selector%>
     {
       <% if @template.css(:content_layout).to_i > 0 %>
@@ -240,7 +241,6 @@ container:
       <%=@template.css(:pagination_current)%>
     }
     .<%=@template.section_selector%>.infinitescroll .pagination{ display:none;}
-    #infscr-loading{ background-color:white; clear:both; text-align:center; border-radius:4px;}
     <% end %>
     <% if @template.current_piece.column_count >0 %>
     /* css for last column in row, feature center content, for mobile column, no inner div */
