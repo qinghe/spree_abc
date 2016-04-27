@@ -226,7 +226,7 @@ module Spree
           #bit 2,3,4,5,6  max is 31
           #000010       000100   000110       001000     001010      001100    001110        010000    010010
           #2:home       4:cart   6:checkout   8:thanks   10:signup   12:login  14:account   16:blog    18:list
-          #1            2        3            4          5           6         7            8          9   # keep it same as
+          #1            2        3            4          5           6         7            8          9   # keep it same as taxon.page_context
           (get_content_param&62)>>1
         else
           nil

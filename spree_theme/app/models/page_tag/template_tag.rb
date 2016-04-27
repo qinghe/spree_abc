@@ -136,8 +136,10 @@ module PageTag
       #   content_param > current_data_item > default(home)
       def href
         if clickable?
+           #  current_piece.url > current_data_item.url > current_page.url
            return page_layout.href if get_content_param_by_key( :context ) > 0
            return self.collection_tag.running_data_item.path if self.collection_tag.running_data_item.present?
+           return self.collection_tag.current_page_tag.path
         end
       end
 
