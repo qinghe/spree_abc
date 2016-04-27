@@ -240,6 +240,7 @@ container:
       <%=@template.css(:pagination_current)%>
     }
     .<%=@template.section_selector%>.infinitescroll .pagination{ display:none;}
+    #infscr-loading{ background-color:white; clear:both; text-align:center; border-radius:4px;}
     <% end %>
     <% if @template.current_piece.column_count >0 %>
     /* css for last column in row, feature center content, for mobile column, no inner div */

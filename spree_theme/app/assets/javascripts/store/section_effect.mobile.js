@@ -22,6 +22,10 @@ $(function() {
     var section_id = matches[1];
 //console.debug( section_css_class, '.'+section_css_class+" .pagination .next a")
     $element.infinitescroll({
+      loading: {
+        msgText: "<em>努力加载中...</em>",
+        finishedMsg: "<em>恭喜你,已无更多内容.</em>"
+      },
       //debug           : true,
       contentSelector : '.'+section_css_class+"> .inner",
       navSelector     : '.'+section_css_class+" .pagination",
