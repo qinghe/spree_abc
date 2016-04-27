@@ -1,5 +1,6 @@
 //= require image-zoom
 //= require jquery.menuhover
+//= require jquery.infinitescroll.dev
 //= require jquery.sidr
 
 function AddFavorite() {

@@ -1,8 +1,11 @@
-<%# ui-layout-south required by jquery.layout 
+<%# ui-layout-south required by jquery.layout
   # sg_ignore, SelectorGodget ignore it.
+  # for infinitescroll_request, editor is redundant.
 %>
+<% unless request.xhr? %>
 <div id='editor_panel' class="clear-block ui-layout-south sg_ignore">
   <a href="javascript:void(0)" class="close">X </a>
   <%= render 'layout_editor' %>
 </div>
 <div id='editor_panel_icon'> editor </div>
+<% end %>

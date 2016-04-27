@@ -239,6 +239,7 @@ container:
     .<%=@template.section_selector%> .pagination .active{
       <%=@template.css(:pagination_current)%>
     }
+    .<%=@template.section_selector%>.infinitescroll .pagination{ display:none;}
     <% end %>
     <% if @template.current_piece.column_count >0 %>
     /* css for last column in row, feature center content, for mobile column, no inner div */

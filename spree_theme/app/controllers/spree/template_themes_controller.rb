@@ -51,7 +51,6 @@ module Spree
     #    d: domain of website
     #    c: menu_id
     def preview
-
     end
 
     # params
@@ -192,7 +191,7 @@ module Spree
         @updated_html_attribute_values = do_update_param_value(@param_value, param_value_params, param_value_event, editing_html_attribute_id)
         # get all param values by selected editor
         # update param value
-        render :partial=>'after_upload_dialog'        
+        render :partial=>'after_upload_dialog'
       else
         @theme = TemplateTheme.find(@param_value.theme_id)
         render "dialog_for_editor"

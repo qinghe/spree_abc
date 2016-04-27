@@ -100,6 +100,11 @@ module PageTag
       def lightboxable?
         is_image? && get_content_param_by_key(:lightboxable)
       end
+
+      def infinitescroll?
+        get_data_source_param_by_key( :pagination_style ) == Spree::PageLayout::PaginationStyle.infinitescroll
+      end
+
       # view content as grid.
       def column_count
         is_container? ?  get_content_param_by_key( :model_count_in_row ) : 0
@@ -110,6 +115,7 @@ module PageTag
         is_container? ?  get_data_source_param_by_key( :per_page ).to_i : 0
       end
 
+      # pagination as page links enable?
       def pagination_enable?
         # only container could have pagination
         is_container? && get_data_source_param_by_key( :pagination_enable )
@@ -197,19 +203,19 @@ module PageTag
       case self.current_piece.current_data_source
         when Spree::PageLayout::DataSourceEnum.gpvs
           #copy from taxons_controller#show
-          searcher_params = { taxon: wrapped_taxon.resource_taxon_id }.merge(self.current_piece.wrapped_data_source_param ).merge(self.page_generator.resource_options)
-          searcher = Spree::Config.searcher_class.new(searcher_params)
+          #searcher_params = { taxon: wrapped_taxon.resource_taxon_id }.merge(self.current_piece.wrapped_data_source_param ).merge( resource_params )
+          searcher = Spree::Config.searcher_class.new( build_searcher_params( wrapped_taxon ))
           #@searcher.current_user = try_spree_current_user
           #@searcher.current_currency = current_currency
           objs = searcher.retrieve_products
         when Spree::PageLayout::DataSourceEnum.gpvs_theme
           objs = Spree::MultiSiteSystem.with_context_site1_themes{
-            searcher_params ={}
-            if wrapped_taxon.persisted?
-              searcher_params.merge!(:search=>{:in_global_taxon=>wrapped_taxon.model} )
-            end
-            searcher_params.merge!(self.current_piece.wrapped_data_source_param ).merge!(self.page_generator.resource_options)
-            searcher = Spree::Config.searcher_class.new(searcher_params)
+            #searcher_params ={}
+            #if wrapped_taxon.persisted?
+            #  searcher_params.merge!(:search=>{:in_global_taxon=>wrapped_taxon.model} )
+            #end
+            #searcher_params.merge!(self.current_piece.wrapped_data_source_param ).merge!( resource_params )
+            searcher = Spree::Config.searcher_class.new( build_searcher_params( wrapped_taxon ) )
             searcher.retrieve_products.theme_only.to_a # explicitly load some records, or default_scope would work when out of this block.
           }
         when Spree::PageLayout::DataSourceEnum.this_product
@@ -234,8 +240,8 @@ module PageTag
       case self.current_piece.current_data_source
         when Spree::PageLayout::DataSourceEnum.blog
           #copy from taxons_controller#show
-          searcher_params = {taxon: wrapped_taxon.resource_taxon_id}.merge(self.current_piece.wrapped_data_source_param ).merge(self.page_generator.resource_options)
-          searcher = SpreeTheme.post_class.searcher_class.new(searcher_params)
+          #searcher_params = {taxon: wrapped_taxon.resource_taxon_id}.merge(self.current_piece.wrapped_data_source_param ).merge(self.page_generator.resource_options)
+          searcher = SpreeTheme.post_class.searcher_class.new( build_searcher_params( wrapped_taxon ) )
           #@searcher.current_user = try_spree_current_user
           #@searcher.current_currency = current_currency
           objs = searcher.retrieve_posts
@@ -369,6 +375,7 @@ module PageTag
       css_classes << " zoomable" if current_piece.zoomable?
       css_classes << " hoverable" if current_piece.hoverable?
       css_classes << " lightboxable" if current_piece.lightboxable?
+      css_classes << " infinitescroll" if current_piece.infinitescroll?
 
       css_classes
 
@@ -422,7 +429,30 @@ module PageTag
       running_data_items.select{|item| item.is_a? klass }.last
     end
 
+    def build_searcher_params( wrapped_taxon )
+      # a page_layout tree could have sveral gpvs assigned, each gpvs have own pagination
+      pagination_params = self.page_generator.resource_options[:pagination_params]
+      extrernal_searcher_params = self.page_generator.resource_options[:searcher_params]
+      # self.current_piece.wrapped_data_source_param   per_page
+      params = { }
+      params.merge! self.current_piece.wrapped_data_source_param.slice(:per_page)
 
+      if pagination_params[:pagination_plid].to_i == current_piece.id
+        params.merge!( pagination_params.slice(:page) )
+      end
+      params.merge! extrernal_searcher_params
+
+      case self.current_piece.current_data_source
+        when Spree::PageLayout::DataSourceEnum.gpvs
+          params.merge!( taxon: wrapped_taxon.resource_taxon_id )
+        when Spree::PageLayout::DataSourceEnum.blog
+          params.merge!( taxon: wrapped_taxon.resource_taxon_id )
+        when Spree::PageLayout::DataSourceEnum.gpvs_theme
+          params.merge!(:search=>{:in_global_taxon=>wrapped_taxon.model} ) if wrapped_taxon.persisted?
+      end
+      #Rails.logger.debug " build_searcher_params =#{params.inspect} pagination_params=#{pagination_params.inspect} current_piece.id=#{current_piece.id}"
+      params
+    end
 
 
   end

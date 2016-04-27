@@ -18,6 +18,8 @@ module Spree
   class PageLayout < ActiveRecord::Base
     #extend FriendlyId
     include Spree::Context::Base
+    PaginationStyle = Struct.new( :page_links, :infinitescroll, :more, :none )['1', 'i', 'm', '0']
+
     # depth is massed up while duplicate full set. so we disable it here.
     acts_as_nested_set :scope=>['template_theme_id' ], :depth_column=>'notallowed', :dependent=> :destroy # scope is for :copy, no need to modify parent_id, lft, rgt.
     belongs_to :section
@@ -146,8 +148,8 @@ module Spree
       end
 
       def has_extra_selector?
-        #child1,child2...              data1,data2...                                          zoomable                  columns>0, data_first,data_last
-        self.effects.present? || parent.effects.present? || parent.data_source.present? || self.get_content_param > 0 || parent.get_content_param > 0
+        #child1,child2...              data1,data2...                                          zoomable                  columns>0, data_first,data_last  infinitescroll
+        self.effects.present? || parent.effects.present? || parent.data_source.present? || self.get_content_param > 0 || parent.get_content_param > 0 || self.data_source_param.present?
       end
 
 
@@ -578,7 +580,9 @@ module Spree
           splited_params = data_source_param.split(',')
           if current_data_source == DataSourceEnum.gpvs || current_data_source == DataSourceEnum.blog
             params[:per_page]= splited_params[0].to_i
-            params[:pagination_enable] = ( splited_params[1].nil? ? true : (splited_params[1]=='1') )
+            params[:pagination_enable] = ( splited_params[1].blank? ||  splited_params[1] == '1')
+            params[:pagination_style] = ( splited_params[2] )
+
           elsif current_data_source == DataSourceEnum.taxon
             params[:depth] = splited_params[0].to_i
           else
@@ -663,7 +667,7 @@ module Spree
                     #{subpieces}
                     #{form_end}
                 <% } %>
-                #{get_pagination}
+                #{get_pagination(node)}
               <% } %>
               <% @template.running_data_source = nil %>
               EOS1
@@ -674,7 +678,7 @@ module Spree
               <% @template.running_data_source.each{|post| @template.running_data_item = post %>
                   #{subpieces}
               <% } %>
-              #{get_pagination}
+              #{get_pagination(node)}
               <% @template.running_data_source = nil %>
               EOS1
             when DataSourceEnum.next_post, DataSourceEnum.previous_post
@@ -748,10 +752,13 @@ module Spree
 
     # show pagination when section is configured, data_source_param > 0
     # ex. in home page, we have product list, we do not want to show pagination even products.count > Spree::Config[products_per_page]
-    def get_pagination(  )
+    def get_pagination( node )
+      pagination_params = { pagination_style: node.get_data_source_param_by_key(:pagination_style),
+        pagination_plid: node.id
+      }
       # section is configured and datasource have pages
       # notice: current piece is data iterator parent at present.  ex. product_list(current_piece)->one_product
-      "<%= paginate( @template.running_data_source ) if @template.current_piece.per_page>0 && @template.current_piece.pagination_enable? && @template.running_data_source.try( :has_pages? ) %> "
+      "<%= paginate( @template.running_data_source, params: #{pagination_params.to_s} ) if @template.current_piece.per_page>0 && @template.current_piece.pagination_enable? && @template.running_data_source.try( :has_pages? ) %> "
     end
 
     # Do not support add_layout_tree now. Page layout should be full html, Keep it simple.

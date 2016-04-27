@@ -23,8 +23,9 @@ module SpreeTheme
     # override spree's
     # only cart|account using layout while rendering, product list|detail page render without layout.
     def get_layout_if_use
-
-      if request.xhr?
+      #Rails.logger.debug " request.xhr?=#{request.xhr?} infinitescroll_request?=#{infinitescroll_request?},@is_designer=#{@is_designer} "
+      #infinite_scroll_request is xhr, but want to get full html
+      if request.xhr? && !infinitescroll_request?
         return false
       end
       # keep it before check "designer", page for admin login never need design
@@ -100,7 +101,7 @@ module SpreeTheme
         @theme = @theme.mobile
       end
       # theme could differ in home page
-  #Rails.logger.debug "@theme=#{@theme.inspect}, @is_designer=#{@is_designer},store=#{store.inspect} request.xhr?=#{request.xhr?}"
+      #Rails.logger.debug "@theme=#{@theme.inspect}, @is_designer=#{@is_designer},store=#{store.inspect} request.xhr?=#{request.xhr?}"
       if params[:controller]=~/cart|checkout|order|products/
         @menu = get_default_taxon #products is for search
       elsif params[:controller]=~/user/
@@ -165,13 +166,13 @@ module SpreeTheme
              #@editor_panel = render_to_string :partial=>'layout_editor_panel'
           end
         end
-        Rails.logger.info "SpreeTheme theme: #{@theme.id}, @is_designer: #{ @is_designer}, @menu: #{@menu.id}-#{@menu.name}"
+        Rails.logger.info "SpreeTheme template_theme_id: #{@theme.id}, is_designer: #{ @is_designer}, menu_id: #{@menu.id}-#{@menu.name}"
         # initialize page generator @lg all the time, even for xhr, we need to partial section. ex. minicart
         # we have to initialize PageTag::PageGenerator here, page like login  do not go to template_thems_controller/page
           if @is_designer
-            @lg = PageTag::PageGenerator.previewer( @menu, @theme, {:resource=>@resource, :controller=>self, :page=>params[:page], :keywords=>params[:keywords]})
+            @lg = PageTag::PageGenerator.previewer( @menu, @theme, { resource: @resource, controller: self, pagination_params: pagination_params, searcher_params: searcher_params})
           else
-            @lg = PageTag::PageGenerator.generator( @menu, @theme, {:resource=>@resource, :controller=>self, :page=>params[:page], :keywords=>params[:keywords]})
+            @lg = PageTag::PageGenerator.generator( @menu, @theme, { resource: @resource, controller: self, pagination_params: pagination_params, searcher_params: searcher_params})
           end
           @lg.context.each_pair{|key,val|
             # expose variable to view
@@ -237,5 +238,24 @@ module SpreeTheme
     def get_default_taxon(  )
       DefaultTaxonRoot.instance(request.fullpath).children.first
     end
+
+    def infinitescroll_request?
+      params[:pagination_style] == Spree::PageLayout::PaginationStyle.infinitescroll
+    end
+
+    def pagination_params
+      {
+        page: params[:page],
+        pagination_plid: params[:pagination_plid],
+        pagination_style: params[:pagination_style]
+      }
+    end
+
+    def searcher_params
+      {
+        keywords: params[:keywords]
+      }
+    end
+
   end
 end
