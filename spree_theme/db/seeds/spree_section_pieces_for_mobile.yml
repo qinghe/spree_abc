@@ -55,6 +55,7 @@ root_for_mobile:
       { position:relative;
         <%= @template.css :inner %>
       }
+      .infinitescroll .pagination{ display:none;}
       #infscr-loading{ background-color:white; clear:both; text-align:center; border-radius:4px;}
       .clear-block:after {
         content: ".";
