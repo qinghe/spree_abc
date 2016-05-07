@@ -195,6 +195,11 @@ module Spree
         document_file_path( :ruby )
       end
 
+      # call compiled_method
+      def compiled_layout_path
+        "layout_for_compiled"
+      end
+
       def document_file_path( target )
         File.join( document_path, file_name(target) )
       end

@@ -39,7 +39,7 @@ module SpreeTheme
       #if @is_preview
       #  return 'layout_for_preview'
       #end
-      @theme.layout_path || Spree::Store.current.layout || Spree::Config[:layout]
+      @theme.compiled_layout_path || Spree::Store.current.layout || Spree::Config[:layout]
     end
 
     def initialize_template( request_fullpath = nil )

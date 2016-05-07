@@ -1,6 +1,20 @@
 module Spree
   module BaseHelper
     #include SpreeTheme::TemplateBaseHelper
+    def method_missing(method_name, *args, &block)
+      if image_style = image_style_from_method_name(method_name)
+        define_image_method(image_style)
+        self.send(method_name, *args)
+      elsif template_theme_id = template_theme_id_from_method_name( method_name )
+        Rails.logger.debug "self=#{self}, method_name=#{method_name} template_theme_id=#{template_theme_id}"
+        define_compiled_template_theme_method( template_theme_id )
+        self.send(method_name, *args)
+      else
+        super
+      end
+    end
+
+
     #==================================================================================================
     # template methods, using by template
     #==================================================================================================
@@ -282,6 +296,22 @@ module Spree
           <div class="fr"> #{unset_tag} </div>
         </div>
       EOS2
+    end
+
+    private
+
+    def define_compiled_template_theme_method( template_theme_id )
+      template_theme = Spree::TemplateTheme.find template_theme_id
+      method_name = "compliled_template_theme_method_#{template_theme_id}"
+      self.send("instance_eval", "def #{method_name}; #{File.read(template_theme.layout_path)}; end", '(TemplateThemesHelper)')
+    end
+
+    # Returns style of image or nil
+    def template_theme_id_from_method_name(method_name)
+      regex = /\Acompliled_template_theme_method_/
+      if method_name.to_s.match(regex) && template_theme_id = method_name.to_s.sub(regex, '')
+        template_theme_id if Spree::TemplateTheme.exists?( template_theme_id )
+      end
     end
 
   end
