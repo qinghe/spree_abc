@@ -1,4 +1,3 @@
-#it is not using now.
 module Spree
   class CompiledTemplateTheme
     attr_accessor :template_theme
@@ -14,19 +13,25 @@ module Spree
       self.template_theme = template_theme
     end
 
-    def render
-      send self.compiled_method_name
+    def src
+      #Rails.cache.fetch( compiled_method_name, expires_in: 1.year) do
+        File.read(template_theme.layout_path)
+      #end
     end
 
-    def method_missing(method_name, *args, &block)
-      if template_theme_id = template_theme_id_from_method_name( method_name )
-        #Rails.logger.debug "self=#{self}, method_name=#{method_name} template_theme_id=#{template_theme_id}"
-        define_compiled_template_theme_method( template_theme_id )
-        self.send(method_name, *args)
-      else
-        super
-      end
-    end
+#    def render
+#      send self.compiled_method_name
+#    end
+
+#    def method_missing(method_name, *args, &block)
+#      if template_theme_id = template_theme_id_from_method_name( method_name )
+#        #Rails.logger.debug "self=#{self}, method_name=#{method_name} template_theme_id=#{template_theme_id}"
+#        define_compiled_template_theme_method( template_theme_id )
+#        self.send(method_name, *args)
+#      else
+#        super
+#      end
+#    end
 
     # compliled template theme method format
     # _cttm_at{current_template_release.updated_at.to_i}_#{current_template_release.theme_id}
@@ -39,6 +44,7 @@ module Spree
     def compiled_method_name_prefix
       "_cttm_at#{current_template_release.updated_at.to_i}_"
     end
+
 
     private
     def define_compiled_template_theme_method( template_theme_id )

@@ -503,6 +503,10 @@ module Spree
       for_terminal == TerminalEnum.mobile
     end
 
+    def compiled_template_theme
+      CompiledTemplateTheme.new self
+    end
+
     private
     def fix_special_attributes
       if store.blank? # when test, store_id may be nil
