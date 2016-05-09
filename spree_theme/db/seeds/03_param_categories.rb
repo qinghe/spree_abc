@@ -68,6 +68,7 @@ objs=[
   #dialog
   {"id"=>501, "position"=>21, "is_enabled"=>true, "editor_id"=>0, "slug"=>"dialog_close" },
   {"id"=>502, "position"=>22, "is_enabled"=>true, "editor_id"=>0, "slug"=>"dialog_overlay" },
+  {"id"=>531, "position"=>531, "is_enabled"=>true, "editor_id"=>0, "slug"=>"fa" },
   ]
 
 Spree::ParamCategory.delete_all

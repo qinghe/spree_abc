@@ -134,7 +134,10 @@ font_awesome:
   for_terminal: "1"
   html: |
     <%=@template.font_awesome %>
-  css: ''
+  css: |
+    .<%=@template.section_selector%>  fa{
+      <%= @template.css(:fa) %>
+    }
   js: ""
 #http://www.tuicool.com/articles/3QnyAf , width is required, one line only.
 product_name_with_ellipsis:
