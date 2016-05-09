@@ -581,7 +581,7 @@ cart:
         <%= form_for @order, :url => update_cart_path, :html => {:id => 'update-cart'} do |order_form| %>
           <div data-hook="inside_cart_form">
             <% #place holder for action /cart %>
-            <%= yield if block_given? %>  ~~content~~
+            ~~content~~
             <div class="cart_buttons" data-hook="cart_buttons">
               <%= button_tag :class => 'primary', :id => 'update-button' do %>
                 <%= Spree.t(:update) %>
@@ -609,8 +609,7 @@ account:
   slug: account
   is_selectable: "0"
   is_container: "0"
-  html: |
-    <%= yield if block_given? %>
+  html: ''
   created_at: 2011-09-20 19:40:07
   updated_at: 2011-09-20 19:40:07
   css: ""
@@ -659,7 +658,8 @@ checkout:
   is_selectable: "0"
   is_container: "0"
   html: |
-   <%= yield if block_given? %>~~content~~
+   <%= render partial: 'spree/checkout/edit' %>
+   ~~content~~
   created_at: 2011-09-20 19:40:07
   updated_at: 2011-09-20 19:40:07
   css: |
@@ -675,7 +675,7 @@ thanks:
   is_selectable: "0"
   is_container: "0"
   html: |
-    <%= yield if block_given? %>~~content~~
+    ~~content~~
   created_at: 2011-09-20 19:40:07
   updated_at: 2011-09-20 19:40:07
   css: ""
