@@ -6,7 +6,7 @@ module Spree
         define_image_method(image_style)
         self.send(method_name, *args)
       elsif template_theme_id = template_theme_id_from_method_name( method_name )
-        Rails.logger.debug "self=#{self}, method_name=#{method_name} template_theme_id=#{template_theme_id}"
+        #Rails.logger.debug "self=#{self}, method_name=#{method_name} template_theme_id=#{template_theme_id}"
         define_compiled_template_theme_method( template_theme_id )
         self.send(method_name, *args)
       else
@@ -302,13 +302,14 @@ module Spree
 
     def define_compiled_template_theme_method( template_theme_id )
       template_theme = Spree::TemplateTheme.find template_theme_id
-      method_name = "compliled_template_theme_method_#{template_theme_id}"
+      method_name = template_theme.complied_method_name
+Rails.logger.info "SpreeTheme definde_method: #{method_name}"      
       self.send("instance_eval", "def #{method_name}; #{File.read(template_theme.layout_path)}; end", '(TemplateThemesHelper)')
     end
 
     # Returns style of image or nil
     def template_theme_id_from_method_name(method_name)
-      regex = /\Acompliled_template_theme_method_/
+      regex = Spree::TemplateTheme.complied_method_name_prefix_regex
       if method_name.to_s.match(regex) && template_theme_id = method_name.to_s.sub(regex, '')
         template_theme_id if Spree::TemplateTheme.exists?( template_theme_id )
       end

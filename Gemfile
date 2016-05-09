@@ -84,6 +84,16 @@ gem 'activerecord-session_store'
 #gem 'proclaimer', github: 'RuanShan/proclaimer', branch: 'master'
 #gem 'sidekiq'
 gem 'exception_notification'
+#gem 'spree_social', github: 'spree-contrib/spree_social', branch: 'master'
+#gem 'omniauth'
+#gem "omniauth-wechat-oauth2", git: 'git@github.com:yangsr/omniauth-wechat-oauth2.git'
+
+# memcached 1.4+
+# Dalli, kgio is for Dalli
+#gem 'kgio'
+#gem 'dalli'
+
+gem 'rack-mini-profiler', require: false
 
 group :test, :development do
   gem 'sqlite3'

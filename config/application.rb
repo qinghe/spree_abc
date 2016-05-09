@@ -70,5 +70,6 @@ module SpreeAbc
     # Enable the asset pipeline
     config.assets.enabled = true
 
+    #config.cache_store = [:mem_cache_store, '127.0.0.1', { namespace: 'getstore', compress: true }]
   end
 end
