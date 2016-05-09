@@ -303,7 +303,7 @@ module Spree
     def define_compiled_template_theme_method( template_theme_id )
       template_theme = Spree::TemplateTheme.find template_theme_id
       method_name = template_theme.complied_method_name
-Rails.logger.info "SpreeTheme definde_method: #{method_name}"      
+Rails.logger.info "SpreeTheme definde_method: #{method_name} #{self.object_id}"      
       self.send("instance_eval", "def #{method_name}; #{File.read(template_theme.layout_path)}; end", '(TemplateThemesHelper)')
     end
 

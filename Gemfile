@@ -93,7 +93,6 @@ gem 'exception_notification'
 #gem 'kgio'
 #gem 'dalli'
 
-gem 'rack-mini-profiler', require: false
 
 group :test, :development do
   gem 'sqlite3'
@@ -123,6 +122,7 @@ end
 group :development do
   gem "spring"
   gem 'pry-rails'
+  gem 'rack-mini-profiler', require: false
 #  gem 'web-console', '~> 3.0'
 #  gem 'capistrano'
 #  gem 'capistrano-rails', '~> 1.1.0'
