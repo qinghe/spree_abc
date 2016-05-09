@@ -147,7 +147,9 @@ module Spree
     # params
     #   options:  page_only- do not create template_release record, rake task import_theme required it
     def release( release_attributes= {},option={})
-      unless option[:page_only]
+      if option[:page_only]
+        self.current_template_release.touch #trigger define new compiled_template_theme method
+      else
         template_release = self.template_releases.build
         template_release.name = "just a test"
         template_release.save!
