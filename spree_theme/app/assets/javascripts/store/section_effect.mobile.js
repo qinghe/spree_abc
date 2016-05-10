@@ -4,7 +4,9 @@ $(function() {
   var section_css_class_regex = /\bs\_([0-9]+)\_([0-9]+)\b/;
 
   $("#page").on( 'tap', '.sidr_overlay', function(e) {
-    $.sidr( 'close','sidr');
+    //sidr0-overlay
+    var sidr_name = $(this).attr('id').split('-').shift();
+    $.sidr( 'close', sidr_name );
     e.preventDefault();
   });
   // prevent scrolling happen
