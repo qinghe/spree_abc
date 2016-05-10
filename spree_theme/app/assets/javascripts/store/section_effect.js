@@ -444,10 +444,17 @@ $(document).ready(function() {
       });
   });
   $(".sidr").on( 'click',".sidr_close",function(){
-    $.sidr( 'close','sidr');
+    //<div id="sidr0"> <div class='sidr_close_container'> <a class="sidr_close"></a> </div>
+    //</div>
+    var sidr_name = $(this).parents('.sidr').attr('id')
+    $.sidr( 'close', sidr_name);
   });
   $("#page").on( 'click',".sidr_overlay",function(){
-    $.sidr( 'close','sidr');
+    //<div id="sidr0"> </div>
+    //<div id="sidr0-overlay"> </div>
+    //sidr0-overlay
+    var sidr_name = $(this).attr('id').split('-').shift();
+    $.sidr( 'close',sidr_name);
   });
 
 });
