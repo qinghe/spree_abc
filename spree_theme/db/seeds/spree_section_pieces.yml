@@ -1697,7 +1697,7 @@ click_effect_sider:
         top: 0;
         right: 0;
         z-index: 1;
-        font-size: 2em;
+        font-size: 0; /* for now we can not set css for each sidr_close, keep it 0 for simple*/
         <%= @template.css :sidr_close %>
       }
       .sidr_overlay{
