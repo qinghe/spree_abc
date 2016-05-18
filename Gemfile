@@ -122,7 +122,8 @@ end
 group :development do
   gem "spring"
   gem 'pry-rails'
-  gem 'rack-mini-profiler', require: false
+  #gem 'rack-mini-profiler', require: false
+  gem 'byebug'
 #  gem 'web-console', '~> 3.0'
 #  gem 'capistrano'
 #  gem 'capistrano-rails', '~> 1.1.0'

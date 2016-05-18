@@ -25,3 +25,4 @@ rdoc
 .ruby-version
 db/*.sqlite3
 *.bak
+.byebug_history
