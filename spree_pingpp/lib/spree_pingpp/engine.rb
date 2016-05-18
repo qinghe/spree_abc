@@ -15,6 +15,12 @@ module SpreePingpp
       end
     end
 
+    initializer "spree.assets.precompile", :group => :all do |app|
+      app.config.assets.precompile += %w[
+        spree/frontend/spree_pingpp.js
+      ]
+    end
+
     config.to_prepare &method(:activate).to_proc
 
 

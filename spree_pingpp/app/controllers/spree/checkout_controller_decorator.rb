@@ -6,7 +6,6 @@ module Spree
 
     def payment_pingpp_hook
       @pingpp_base_class = Spree::Gateway::PingppBase
-Rails.logger.debug "---- @order.next_step_complete? = #{@order.next_step_complete?}"
       return unless @order.next_step_complete?
       #in confirm step, only param is  {"state"=>"confirm"}
       payment_method = get_payment_method_by_params(  )
@@ -17,9 +16,7 @@ Rails.logger.debug "---- @order.next_step_complete? = #{@order.next_step_complet
 
     # handle all supported billing_integration
     def handle_pingpp( payment_method )
-Rails.logger.debug "---- start calling ..handle_pingpp"
       if @order.update_from_params( params, permitted_checkout_attributes, request.headers.env )
-Rails.logger.debug "---- update_from_params success"
         pingpp_channel = params['payment_pingpp'][payment_method.id.to_s]
           #more flow detail
           #https://pingxx.com/guidance/products/sdk
@@ -31,7 +28,7 @@ Rails.logger.debug "---- update_from_params success"
             #redirect_to payment_provider.get_payment_url( charge )
             #render json: charge
             # since compiled template_theme is method, :yield do not work any more.
-            render :payment_pingpp_dispatch, layout: false
+            render :payment_pingpp_dispatch, layout: 'layout_for_pingpp'
           rescue Pingpp::PingppError => error
             Rails.logger.error error
             redirect_to checkout_state_path( @order.state )

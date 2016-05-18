@@ -1,5 +1,17 @@
 <!doctype html>
-
-<head data-hook="inside_head">
-  <%= render partial: 'spree/shared/head' %>
-</head>
+<!--[if lt IE 7 ]> <html class="ie ie6" lang="<%= I18n.locale %>"> <![endif]-->
+<!--[if IE 7 ]>    <html class="ie ie7" lang="<%= I18n.locale %>"> <![endif]-->
+<!--[if IE 8 ]>    <html class="ie ie8" lang="<%= I18n.locale %>"> <![endif]-->
+<!--[if IE 9 ]>    <html class="ie ie9" lang="<%= I18n.locale %>"> <![endif]-->
+<!--[if gt IE 9]><!--><html lang="<%= I18n.locale %>"><!--<![endif]-->
+  <head data-hook="inside_head">
+    <%= javascript_include_tag 'spree/frontend/spree_pingpp' %>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+          <%= yield %>
+      </div>
+    </div>
+  </body>
+</html>

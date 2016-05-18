@@ -7,6 +7,5 @@
 
 //= require store/spree_theme
 //= require store/spree_china_checkout
-//= require 'pingpp-pc'
 // some template have no mobile version, however it should support pingpp.
-//= require 'pingpp'
+//= require 'spree/frontend/spree_pingpp'

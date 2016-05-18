@@ -23,8 +23,7 @@ module SpreeTheme
     # sets the manifests / assets to be precompiled, even when initialize_on_precompile is false
     initializer "spree.assets.precompile", :group => :all do |app|
       app.config.assets.precompile += %w[
-        store/spree_theme.*
-        jquery.jstree/themes/spree2/*
+        store/spree_theme.*        
       ]
     end
 
