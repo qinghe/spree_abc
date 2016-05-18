@@ -31,7 +31,7 @@ module PageTag
       if self.page_generator.product.present?
         self.product_tag = Products::WrappedProduct.new( self.collection_tag, page_generator.product)
       end
-      
+
       # current post
       if self.page_generator.post.present?
         self.post_tag = Posts::WrappedPost.new( self.collection_tag, page_generator.post)
@@ -41,7 +41,9 @@ module PageTag
 
     #title is current page title,  resource.title-page.title-website.title
     def title
-      if home?
+      if home? || page.root?
+        # do not show page name for root, for case, show all products on home page.
+        # home page point to product category root. show website.name as title.
         website.name
       elsif detail_page?
         "#{resource.name} - #{page.name} - #{website.name}"

@@ -6,11 +6,9 @@ class << Spree::Core::ControllerHelpers::Common
     included_without_theme_support(receiver)
     receiver.send :include, SpreeTheme::System
     # template holds data for page render, we have to initialize it even for api
-    #receiver.send :before_filter, :initialize_template
     receiver.send :prepend_before_action, :initialize_template
     # receiver could be Spree::Api::BaseController or  Spree::BaseController
     #if receiver == Spree::BaseController
-    #receiver.send :before_filter, :add_view_path #spree_devise_auth, and spree_core require it.
     receiver.send :layout, :get_layout_if_use # never allow it to api controller.
 
   end
