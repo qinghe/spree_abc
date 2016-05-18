@@ -63,9 +63,9 @@ container_dialog:
   html: ~~content~~
   css: |
     .<%=@template.section_selector%>
-    { display:none;   }
+    { display:none;  box-shadow: 0 5px 15px rgba(0,0,0,.5); }
     .simplemodal-overlay{ background-color:black;
-      opacity: 50;
+      opacity: 0.6;
       <%=@template.css(:dialog_overlay)%>
     }
 slider_data_taxons_transition_fade:
