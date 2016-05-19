@@ -108,3 +108,20 @@ container_absolute:
   css: |
     .<%=@template.section_selector%> {z-index:1; position:absolute;  <%=@template.css(:absolute_position) %>}
   js: ''
+flash_message:
+  id: 107
+  title: flash message
+  slug: flash-message
+  is_selectable: 0
+  is_container: 0
+  html: <%= flash_messages %>
+  css: |
+    .<%=@template.section_selector%> .alert { padding: 5px; border: 1px solid transparent; border-radius: 4px;}
+    .<%=@template.section_selector%> .alert-success,.<%=@template.section_selector%> .alert-notice {
+       color: #3c763d;  background-color: #dff0d8;  border-color: #d6e9c6;
+    }
+    .<%=@template.section_selector%> .alert-info {  color: #31708f; background-color: #d9edf7; border-color: #bce8f1; }
+    .<%=@template.section_selector%> .alert-warning { color: #8a6d3b; background-color: #fcf8e3; border-color: #faebcc; }
+    .<%=@template.section_selector%> ..alert-danger { color: #a94442; background-color: #f2dede; border-color: #ebccd1;}
+
+  js: ''

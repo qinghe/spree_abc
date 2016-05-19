@@ -36,8 +36,9 @@ zh-CN:
       signed_out: "成功注销。"
     user_sessions:
       spree_user:
-        signed_in: 登录成功.
-        signed_out: 退出成功.
+        signed_in: "登录成功。"
+        signed_out: "退出成功。"
+        already_signed_out: "退出成功。"
     unlocks:
       send_instructions: "您将在几分钟之后收到一封说明如何解锁帐号的邮件。"
       unlocked: "您的帐号已被成功解锁。您现在已登录。"

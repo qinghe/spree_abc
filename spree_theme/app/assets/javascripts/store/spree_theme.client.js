@@ -24,6 +24,9 @@ $(document).ready(function() {
   $(".u_dialog").delegate(  "a.cancel,button.cancel", "click",function(){
       $.simplemodal.close();
   });
+  // Make flash messages disappear
+  setTimeout('$(".alert-auto-disappear").slideUp()', 5000);
+
 });
 
 // copy from project https://github.com/citrus/spree_variant_options

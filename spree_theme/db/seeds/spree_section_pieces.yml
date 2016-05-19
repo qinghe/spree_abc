@@ -29,7 +29,6 @@ root:
       <% if @current_page.site_design? && !@current_page.is_preview %>
         <%= render "spree/shared/theme_selection_for_nondesigner" %>
       <% end %>
-      <%= flash_messages %>
       <div id="page-wrapper" class="<%=@template.section_selector%>">
       <div id="page" class=''><div id="page-inner" class="inner clear-block">
         ~~content~~
