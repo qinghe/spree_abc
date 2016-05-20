@@ -23,19 +23,21 @@ $(function() {
     var section_css_class = matches[0]//
     var section_id = matches[1];
 //console.debug( section_css_class, '.'+section_css_class+" .pagination .next a")
-    $element.infinitescroll({
-      loading: {
-        msgText: "<em>努力加载中...</em>",
-        finishedMsg: "<em>恭喜你,已无更多内容.</em>"
-      },
-      //debug           : true,
-      contentSelector : '.'+section_css_class+"> .inner",
-      navSelector     : '.'+section_css_class+" .pagination",
-      // selector for the paged navigation (it will be hidden)
-      nextSelector    : '.'+section_css_class+" .pagination .next a",
-      // selector for the NEXT link (to page 2)
-      itemSelector    : '.'+section_css_class+' .c_'+section_id,
-      // selector for all items you'll retrieve
-    });
+    if( $('.pagination', this).is('*') ){
+      $element.infinitescroll({
+        loading: {
+          msgText: "<em>努力加载中...</em>",
+          finishedMsg: "<em>恭喜你,已无更多内容.</em>"
+        },
+        //debug           : true,
+        contentSelector : '.'+section_css_class+"> .inner",
+        navSelector     : '.'+section_css_class+" .pagination",
+        // selector for the paged navigation (it will be hidden)
+        nextSelector    : '.'+section_css_class+" .pagination .next a",
+        // selector for the NEXT link (to page 2)
+        itemSelector    : '.'+section_css_class+' .c_'+section_id,
+        // selector for all items you'll retrieve
+      });
+    }
   });
 });
