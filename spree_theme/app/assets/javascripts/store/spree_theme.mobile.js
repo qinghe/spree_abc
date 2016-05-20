@@ -3,6 +3,7 @@
 //= require jquery_ujs
 //= require jquery.form
 //= require jquery.finger
+//= require jquery.simplemodal.mobile
 //= require jssor.slider.20.min
 //= require spree/frontend
 //= require store/spree_theme.client

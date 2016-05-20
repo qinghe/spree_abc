@@ -1,5 +1,4 @@
 //= require jquery.validate/localization/messages_zh-CN
-//= require jquery.simplemodal
 //= require jquery.lightbox.custom
 //= require store/section_effect
 //= require store/section_editor

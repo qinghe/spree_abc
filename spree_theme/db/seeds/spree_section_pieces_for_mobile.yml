@@ -268,3 +268,27 @@ bootstrap_sign_up_form:
     <%= render :partial => 'spree/user_registrations/new_bootstrap' %>
   css: ""
   js: ""
+
+bootstrap_dialog_title:
+  id: 212
+  title: bootstrap dialog title
+  slug: bootstrap-dialog-title
+  is_selectable: "0"
+  is_container: "0"
+  html: |
+    <div class="clear-block dialog_titlebar">
+      <div class="dialog_title"> <%= Spree.t(:dialog_title) %>  </div>
+      <div class="dialog_close_wrapper"> <a class="cancel dialog_close">
+          <i class="fa fa-2x fa-chevron-left" aria-hidden="true"></i>
+        </a> </div>
+    </div>
+  css: |
+    .<%=@template.section_selector%>  .dialog_titlebar{ <%=@template.css(:dialog_titlebar) %> }
+    .<%=@template.section_selector%>  .dialog_title{ float:left; font-size:0;}
+    .<%=@template.section_selector%>  .dialog_close_wrapper{ float:left; }
+    .<%=@template.section_selector%>  .dialog_close_wrapper a.dialog_close{
+      border:0;  padding:0;  margin:0; background: transparent none; text-decoration: none;/*reset it, prevent root's default */
+      cursor:pointer;
+      <%=@template.css(:dialog_close) %>
+     }
+  js: ""
