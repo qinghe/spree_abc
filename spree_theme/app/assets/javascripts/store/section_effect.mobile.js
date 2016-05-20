@@ -30,7 +30,8 @@ $(function() {
         pagination: '.'+section_css_class+" .pagination",
         next:       '.'+section_css_class+" .pagination .next a"
       });
-      ias.extension(new IASSpinnerExtension());            // shows a spinner (a.k.a. loader)
+      //disable spinner since it maybe always showing if too much scroll event.
+      //ias.extension(new IASSpinnerExtension());            // shows a spinner (a.k.a. loader)
       ias.extension(new IASTriggerExtension({offset: 3})); // shows a trigger after page 3
       ias.extension(new IASNoneLeftExtension({ text: 'There are no more pages left to load.' }));
       //$element.infinitescroll({
