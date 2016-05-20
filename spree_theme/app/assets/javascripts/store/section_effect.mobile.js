@@ -20,7 +20,7 @@ $(function() {
     var $element = $(element);
     var css_class = $element.attr('class');
     var matches = css_class.match( section_css_class_regex );
-    var section_css_class = matches[0]//
+    var section_css_class = matches[0]
     var section_id = matches[1];
 //console.debug( section_css_class, '.'+section_css_class+" .pagination .next a")
     if( $('.pagination', this).is('*') ){
@@ -32,7 +32,8 @@ $(function() {
       });
       //disable spinner since it maybe always showing if too much scroll event.
       //ias.extension(new IASSpinnerExtension());            // shows a spinner (a.k.a. loader)
-      ias.extension(new IASTriggerExtension({offset: 3})); // shows a trigger after page 3
+      // shows a trigger after page 3
+      ias.extension(new IASTriggerExtension({offset: 3}));
       ias.extension(new IASNoneLeftExtension({ text: 'There are no more pages left to load.' }));
       //$element.infinitescroll({
       //  loading: {
