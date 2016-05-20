@@ -32,9 +32,7 @@ $(function() {
       });
       ias.extension(new IASSpinnerExtension());            // shows a spinner (a.k.a. loader)
       ias.extension(new IASTriggerExtension({offset: 3})); // shows a trigger after page 3
-      ias.extension(new IASNoneLeftExtension({
-        text: 'There are no more pages left to load.'      // override text when no pages left
-      }));
+      ias.extension(new IASNoneLeftExtension({ text: 'There are no more pages left to load.' }));
       //$element.infinitescroll({
       //  loading: {
       //    msgText: "<em>努力加载中...</em>",
