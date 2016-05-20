@@ -269,10 +269,10 @@ bootstrap_sign_up_form:
   css: ""
   js: ""
 
-bootstrap_dialog_title:
+bootstrap_dialog_titlebar:
   id: 212
-  title: bootstrap dialog title
-  slug: bootstrap-dialog-title
+  title: bootstrap dialog titlebar
+  slug: bootstrap-dialog-titlebar
   is_selectable: "0"
   is_container: "0"
   html: |

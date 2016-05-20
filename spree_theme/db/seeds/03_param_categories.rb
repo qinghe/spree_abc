@@ -3,7 +3,7 @@ objs=[
   {"id"=>2, "position"=>3, "is_enabled"=>true, "editor_id"=>0, "slug"=>"general_position" },
   {"id"=>3, "position"=>4, "is_enabled"=>true, "editor_id"=>0, "slug"=>"general_hover" },
 
-  {"id"=>4, "position"=>5, "is_enabled"=>true, "editor_id"=>0, "slug"=>"dialog_title" },
+  {"id"=>4, "position"=>5, "is_enabled"=>true, "editor_id"=>0, "slug"=>"dialog_titlebar" },
   {"id"=>5, "position"=>6, "is_enabled"=>true, "editor_id"=>0, "slug"=>"dialog_content" },
   {"id"=>6, "position"=>9, "is_enabled"=>true, "editor_id"=>0, "slug"=>"header3" }, #header3
   {"id"=>7, "position"=>2, "is_enabled"=>true, "editor_id"=>0, "slug"=>"fixed_position" },

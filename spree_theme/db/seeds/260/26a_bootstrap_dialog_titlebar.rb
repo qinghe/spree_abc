@@ -1,4 +1,4 @@
-section_piece = find_section_piece 'bootstrap-dialog-title'
+section_piece = find_section_piece 'bootstrap-dialog-titlebar'
 unless section_piece.section_piece_params.exists?( :class_name=>'dialog_titlebar' )
   titlebar =  { "editor_id"=>2,  "class_name"=>"dialog_titlebar", "pclass"=>"css", "param_category_id"=>4,  "html_attribute_ids"=>"31,32,7,8,6"}
   create_section_piece_param( section_piece, titlebar)
