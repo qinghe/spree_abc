@@ -142,7 +142,7 @@ module PageTag
            return self.collection_tag.current_page_tag.path
         end
       end
-
+      
       # taxon depth for section menu
       def enabled_depth
         get_data_source_param_by_key(:depth) || MaxTaxonDepth
@@ -222,8 +222,8 @@ module PageTag
           }
         when Spree::PageLayout::DataSourceEnum.this_product
           #default_taxon.id is 0
-          if self.page_generator.product
-            objs = [self.page_generator.product]
+          if self.current_page_tag.product_tag.present?
+            objs = [self.current_page_tag.product_tag]
           end
       end
 
@@ -278,6 +278,13 @@ module PageTag
         objs = Posts.new( self.page_generator, objs, wrapped_taxon)
       end
       objs
+    end
+
+    def related_products
+      current_product = (self.running_data_item_by_class( Products::WrappedProduct ) || self.current_page_tag.product_tag )
+      if current_product && self.current_piece
+
+      end
     end
 
     # in template_tag have no method link_to, content_tag, it have to be in base_helper

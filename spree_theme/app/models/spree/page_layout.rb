@@ -596,6 +596,16 @@ module Spree
       def get_data_source_param_by_key( key )
         wrapped_data_source_param[key]
       end
+
+      # some resource dependent on data_source, ex. RelationType
+      def get_resources_by_data_source()
+        resources = case current_data_source
+          when DataSourceEnum.related_products
+            RelationType.all
+        end
+        
+      end
+
     end
 
     # self.css_class + self.usage
@@ -672,6 +682,16 @@ module Spree
               <% @template.running_data_source = nil %>
               EOS1
               #set var_collection  to nil, or render pagination more times
+            when DataSourceEnum.related_products
+              subpieces = <<-EOS1
+              <% @template.running_data_source= @template.related_products(  ) %>
+                <% @template.running_data_source.each(){|product| @template.running_data_item = product %>
+                    #{subpieces}
+                <% } %>
+                #{get_pagination(node)}
+              <% @template.running_data_source = nil %>
+              EOS1
+
             when DataSourceEnum.blog, DataSourceEnum.post
               subpieces = <<-EOS1
               <% @template.running_data_source= @template.posts( (defined?(page) ? page : @current_page) ) %>

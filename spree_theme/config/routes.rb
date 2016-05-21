@@ -35,6 +35,16 @@ Spree::Core::Engine.add_routes do
        end
       end
     end
+    resources :relation_types
+    resources :products, only: [] do
+      get :related, on: :member
+      resources :relations do
+        collection do
+          post :update_positions
+        end
+      end
+    end
+
   end
 
   resources :comments, :only=>[:create] do
@@ -55,20 +65,31 @@ Spree::Core::Engine.add_routes do
 
   #api extension
   namespace :api, :defaults => { :format => 'json' } do
-    resources :template_themes do
-      member do
-        get :jstree
-      end
-      resources :page_layouts do
-        member do
-          get :jstree
+    namespace :v1 do
+    resources :products, only: [] do
+      get :related, on: :member
+      resources :relations do
+        collection do
+          post :update_positions
         end
       end
     end
-    resources :taxons, :only => [:index] do
-      collection do
-       get :global
-     end
+
+      resources :template_themes do
+        member do
+          get :jstree
+        end
+        resources :page_layouts do
+          member do
+            get :jstree
+          end
+        end
+      end
+      resources :taxons, :only => [:index] do
+        collection do
+         get :global
+       end
+      end
     end
   end
 

@@ -2,18 +2,20 @@
 <fieldset id="page_layout_container" class="">
   <% if @page_layout.present? %>
       <% page_layout = @page_layout
-         page_layout_with_resource = Spree::PageLayout.eager_load(:section_pieces).where( id: page_layout.id ).where.not( spree_section_pieces: { resources: ''} ).first %>
+         section_piece_with_resource = page_layout.section_pieces.with_resources.first
+         resource_options = page_layout.get_resources_by_data_source
+      %>
       <%= form_for :page_layout, url: update_resource_admin_template_theme_page_layout_path(@template_theme,page_layout),remote: true do |f|%>
           <div class="form-group">
             <%= label_tag :config_resource, Spree.t('page_layout.config_resource') %><br>
-            <% if page_layout_with_resource.present? %>
-              <% page_layout = page_layout_with_resource %>
-              <% page_layout.section_pieces.first.wrapped_resources.each_with_index{| wrapped_resource,idx | %>
-                <%
+            <% if section_piece_with_resource.present? %>
+              <% section_piece_with_resource.wrapped_resources.each_with_index{| wrapped_resource,idx |
                     assigned_resource_id = @template_theme.assigned_resource_id(wrapped_resource.resource_class, page_layout, idx)
-                %>
+              %>
                   <%= select_tag "assigned_resource_ids[]",options_from_collection_for_select(wrapped_resource.resource_class.resourceful(@template_theme ), :id, :name, assigned_resource_id ), include_blank: true, class: 'select2', multiple: "multiple"  %>
               <% } %>
+            <% elsif !resource_options.nil?  %>
+
             <% else %>
                  <% assigned_resource_id = @template_theme.assigned_resource_id(SpreeTheme.taxon_class, page_layout) %>
                  <%= hidden_field_tag "assigned_resource_ids[]",'', :value=>( assigned_resource_id>0 ? assigned_resource_id : '' ) %>
@@ -36,7 +38,7 @@
 <% unless Rails.env.test? %>
   <script>
   $(document).ready(function () {
-    <% if page_layout_with_resource.blank? %>
+    <% if section_piece_with_resource.blank? %>
     set_resource_taxon_select('assigned_resource_ids_', false, Spree.routes.taxons_search);
     <% end %>
   });

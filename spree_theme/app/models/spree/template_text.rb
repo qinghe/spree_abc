@@ -3,9 +3,12 @@ module Spree
     validates_presence_of :name
     #attr_accessible :name, :body
     #for resource_class.resourceful
-    belongs_to :site
-    scope :resourceful, ->(theme){ where("1=1") }
     default_scope ->{ where(:site_id=>SpreeTheme.site_class.current.id)}
+
+    belongs_to :site
+
+    scope :resourceful, ->(theme){ where("1=1") }
+
     before_validation :normalize_permalink
     #before_destroy check is it assigned.
     private

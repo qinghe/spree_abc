@@ -3,15 +3,14 @@ module SpreeTheme
     isolate_namespace Spree
     engine_name 'spree_theme'
 
-    config.autoload_paths += %W(#{config.root}/lib)
+    config.autoload_paths += %W(#{config.root}/lib #{config.root}/app/models/spree/calculator)
     # use rspec for tests
     config.generators do |g|
       g.test_framework :rspec
     end
 
-    config.after_initialize do |app|
-      #config.paths['app/views'] << path
-      #ActionController::Base.append_view_path( Rails.root.join( "public", "shops", Rails.env ) )
+    initializer 'spree.promo.register.promotion.calculators' do |app|
+      app.config.spree.calculators.promotion_actions_create_adjustments << Spree::Calculator::RelatedProductDiscount
     end
 
     def self.activate
@@ -23,7 +22,8 @@ module SpreeTheme
     # sets the manifests / assets to be precompiled, even when initialize_on_precompile is false
     initializer "spree.assets.precompile", :group => :all do |app|
       app.config.assets.precompile += %w[
-        store/spree_theme.*        
+        store/spree_theme.*
+        jquery.jstree/themes/spree2/style.css
       ]
     end
 

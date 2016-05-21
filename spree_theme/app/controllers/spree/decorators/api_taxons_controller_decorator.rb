@@ -1,4 +1,4 @@
-Spree::Api::TaxonsController.class_eval do
+Spree::Api::V1::TaxonsController.class_eval do
   # read global taxon of dalianshops from other site
   def global
 

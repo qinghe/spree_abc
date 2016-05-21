@@ -1,4 +1,4 @@
-zh-CN:
+en:
 ########################################### start for template ###########################################
   views:
     pagination:
@@ -53,6 +53,12 @@ zh-CN:
       spree/page_layout:
         one: module
         other: module
+      spree/relation:
+        one: Relation
+        other: Relations
+      spree/relation_type:
+        one: Relation Type
+        other: Relation Types
       spree/template_file:
         one: template file
         other: template file
@@ -94,6 +100,13 @@ zh-CN:
       street: street
     logo: LOGO
     favicon: FAVICON
+    new_relation_type: New Relation Type
+    related_product_discount: Related Product Discount
+    applies_to: Applies To
+    related_products: Related Products
+    add_related_product: Add Related Product
+    name_or_sku_short: Name or SKU
+    no_relation_types: You need to configure Relation Types before you can use this feature.
     new_template_text: new template text
     new_template_file: new template file
     select_taxon: select a taxon

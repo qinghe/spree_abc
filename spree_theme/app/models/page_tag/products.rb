@@ -28,6 +28,10 @@ module PageTag
       def simple_image( style )
         ProductAttribute.new( nil, self ).simple_image( style )
       end
+
+      def related_products
+        
+      end
     end
 
     def wrapped_models

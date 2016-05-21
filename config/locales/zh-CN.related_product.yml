@@ -1,0 +1,18 @@
+---
+zh-CN:
+  activerecord:
+    models:
+      spree/relation:
+        one: Relation
+        other: Relations
+      spree/relation_type:
+        one: 关联类型
+        other: 关联类型
+  spree:
+    new_relation_type: 新建关联类型
+    related_product_discount: 相关产品折扣
+    applies_to: 应用于
+    related_products: 相关产品
+    add_related_product: 添加相关产品
+    name_or_sku_short: 名称或SKU
+    no_relation_types: You need to configure Relation Types before you can use this feature.

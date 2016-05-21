@@ -5,7 +5,7 @@ source 'https://ruby.taobao.org/'
 # Bundle edge Rails instead:
 ruby '2.2.4'
 
-gem 'rails', '4.2.5'
+gem 'rails', '~>4.2.6'
 
 gem 'mysql2','0.3.19'
 
@@ -37,7 +37,8 @@ gem 'jquery-turbolinks'
 
 eval(File.read(File.dirname(__FILE__) + '/common_spree_dependencies.rb'))
 #support rich_editor
-gem 'spree_editor',  github: "spree/spree_editor", branch: "3-0-stable"
+gem 'spree_editor',  github: "spree/spree_editor", branch: "3-1-stable"
+#gem 'spree_related_products', github: 'RuanShan/spree_related_products', branch: "3-1-stable"
 # gem 'sprangular',   path: './sprangular'
 
 #gem 'tinymce-rails-langs'
