@@ -16,8 +16,9 @@
 
 module Spree
   class PageLayout < ActiveRecord::Base
-    #extend FriendlyId
     include Spree::Context::Base
+    include Spree::AssignedResource::SectionResourceGlue
+
     PaginationStyle = Struct.new( :page_links, :infinitescroll, :more, :none )['1', 'i', 'm', '0']
 
     # depth is massed up while duplicate full set. so we disable it here.
@@ -547,7 +548,7 @@ module Spree
               is_valid = true
             end
           else #sub level data source
-#Rails.logger.debug "self.inherited_data_source=#{self.inherited_data_source}"
+            #Rails.logger.debug "self.inherited_data_source=#{self.inherited_data_source}"
             is_valid = ( DataSourceChainMap[self.inherited_data_source].include? self.current_data_source)
           end
         else
@@ -595,15 +596,6 @@ module Spree
 
       def get_data_source_param_by_key( key )
         wrapped_data_source_param[key]
-      end
-
-      # some resource dependent on data_source, ex. RelationType
-      def get_resources_by_data_source()
-        resources = case current_data_source
-          when DataSourceEnum.related_products
-            RelationType.all
-        end
-        
       end
 
     end

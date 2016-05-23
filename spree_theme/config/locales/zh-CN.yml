@@ -170,6 +170,7 @@ zh-CN:
       gpvs_theme: 模板集合
       previous_post: 当前选择文章-前一篇
       next_post: 当前选择文章-下一篇
+      related_products: 相关产品
     store_comment: 请留下您对“%{store_name}”的意见和建议！
     template_file:
       index: 图片素材

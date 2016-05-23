@@ -7,7 +7,8 @@ module PageTag
     class WrappedProduct < WrappedModel
       self.accessable_attributes=[:id,:name,:description,:theme_id,:images,:variant_images,:has_variants?,:price_in, :price, :master, :currency, :variants_and_option_values, :grouped_option_values,:variants_for_option_value, :total_on_hand,:variant_options_hash,:product_customization_types ]
       delegate *self.accessable_attributes, :to => :model
-      delegate :template_theme, :to=>:model
+      delegate :template_theme,:relations_for_relation_type, :to=>:model
+      delegate :wrapped_taxon, to: :collection_tag
       #:model_name use by small_image
       def self.model_name
         Spree::Product.model_name
@@ -29,8 +30,8 @@ module PageTag
         ProductAttribute.new( nil, self ).simple_image( style )
       end
 
-      def related_products
-        
+      def related_products( relation_type )
+        RelatedProducts.new( page_generator, relations_for_relation_type( relation_type), wrapped_taxon, self )
       end
     end
 

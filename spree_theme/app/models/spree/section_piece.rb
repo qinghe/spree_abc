@@ -10,22 +10,26 @@ module Spree
     scope :html_roots, ->{ where( is_root: true) }
     # resources m:/m:signup
     # return array of struct{:resource, :context}
-    def wrapped_resources
-        collection = resources.split('/').collect{|res_ctx|
-          resource, context = res_ctx.split(':')
-          Struct.new(:resource, :context,:resource_class).new.tap{|wrapped_resource|
-            wrapped_resource.resource = resource
-            wrapped_resource.context  = (context ? context.to_sym : DefaultTaxon::ContextEnum.home)
-            wrapped_resource.resource_class = case wrapped_resource.resource
-              when 'm'
-                SpreeTheme.taxon_class
-              when 't'
-                Spree::TemplateText
-              when 'i'
-                Spree::TemplateFile
-            end
-          }
-        }
+    #def wrapped_resources
+    #    collection = resources.split('/').collect{|res_ctx|
+    #      resource, context = res_ctx.split(':')
+    #      Struct.new(:resource, :context,:resource_class).new.tap{|wrapped_resource|
+    #        wrapped_resource.resource = resource
+    #        wrapped_resource.context  = (context ? context.to_sym : DefaultTaxon::ContextEnum.home)
+    #        wrapped_resource.resource_class = case wrapped_resource.resource
+    #          when 'm'
+    #            SpreeTheme.taxon_class
+    #          when 't'
+    #            Spree::TemplateText
+    #          when 'i'
+    #            Spree::TemplateFile
+    #        end
+    #      }
+    #    }
+    #end
+
+    def resource_strings
+      resources.split('/')
     end
 
   end

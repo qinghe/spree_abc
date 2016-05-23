@@ -15,4 +15,4 @@ zh-CN:
     related_products: 相关产品
     add_related_product: 添加相关产品
     name_or_sku_short: 名称或SKU
-    no_relation_types: You need to configure Relation Types before you can use this feature.
+    no_relation_types: 请先添加关联类型，然后再创建相关产品.

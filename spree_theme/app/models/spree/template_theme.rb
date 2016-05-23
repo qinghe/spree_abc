@@ -38,7 +38,7 @@
 module Spree
   #it is a theme of page_layout
   class TemplateTheme < ActiveRecord::Base
-    include AssignedResource::IdsHandler
+    include AssignedResource::TemplateResourceGlue
     include Shared::TemplateThemePath
     #extend FriendlyId
     TerminalEnum = Struct.new( :desktop, :mobile, :pad, :tv )[0,1,2,3]
@@ -380,56 +380,6 @@ module Spree
       end
     end
 
-    begin 'assigned resource'
-
-      # get resources order by taxon/image/text,
-      # return array of resources, nil may be contained
-      def assigned_resources_by_page_layout( selected_page_layout = nil )
-        template_resources.select{|template_resource|
-          template_resource.page_layout_id==selected_page_layout.id
-        }.collect(&:source)
-      end
-
-      # all resources used by this theme
-      # return taxon roots/ images /texts,  if none assgined, return [nil] or []
-      def assigned_resources( resource_class, selected_page_layout = nil )
-        selected_page_layout ||= self.page_layout_root
-        template_resources.select{|template_resource|
-          template_resource.source_class ==  resource_class && template_resource.page_layout_id==selected_page_layout.id
-        }.collect(&:source)
-      end
-
-      # get assigned menu by specified page_layout_id, page_tag required
-      # params:
-      #   resource_position: get first( position 0 ) of assigned resources by default
-      #     logged_and_unlogged_menu required this feature
-      def assigned_resource_id( resource_class, selected_page_layout = nil, resource_position=0 )
-        template_resources.select{|template_resource|
-          template_resource.source_class ==  resource_class && template_resource.page_layout_id==selected_page_layout.id && template_resource.position == resource_position
-        }.first.to_i
-      end
-
-      # assign resource to page_layout node
-      def assign_resource( resource, selected_page_layout = nil, resource_position = 0 )
-        selected_page_layout ||= self.page_layout_root
-        create_template_resource( selected_page_layout, resource, resource_position )
-      end
-      # unassign resource from page_layout node
-      def unassign_resource( resource_class, selected_page_layout, resource_position = 0 )
-        template_resources.select{|template_resource|
-          template_resource.source_class ==  resource_class && template_resource.page_layout_id==selected_page_layout.id && template_resource.position == resource_position
-        }.each(&:destroy!)
-
-      end
-
-      #clear assigned_resource from theme
-      def unassign_resource_from_theme!( resource )
-        template_resources.select{|template_resource|
-          template_resource.source ==  resource
-        }.each(&:destroy!)
-      end
-
-    end
 
     # * params -
     #   * taxon - model Spree::taxon
@@ -477,10 +427,10 @@ module Spree
       #  end
       #end
 
-      def get_resource_class_by_key( resource_key )
-        # "spree/template_file" => Spree::TemplateFile
-        resource_key.classify.constantize
-      end
+      #def get_resource_class_by_key( resource_key )
+      #  # "spree/template_file" => Spree::TemplateFile
+      #  resource_key.classify.constantize
+      #end
     end
 
     # taxon_id which is assigned to template_theme and its context is index

@@ -15,8 +15,9 @@ module PageTag
     class WrappedPageLayout < WrappedModel
       MaxTaxonDepth = 9999
 
-      self.accessable_attributes=[:id,:title,:current_data_source,:wrapped_data_source_param, :data_filter,:current_contexts, :context_either?,
-         :get_content_param_by_key, :get_data_source_param_by_key, :is_container?, :is_image?, :is_zoomable_image?, :effects, :section_pieces, :content_css_class]
+      self.accessable_attributes=[:id,:title,:current_data_source,:wrapped_data_source_param, :data_filter,:current_contexts, :context_either?,\
+         :get_content_param_by_key, :get_data_source_param_by_key, :is_container?, :is_image?, :is_zoomable_image?, :effects, :section_pieces, \
+         :content_css_class, :section_piece_resources]
       attr_accessor :section_id, :page_layout, :parent
 
       delegate *self.accessable_attributes, to: :page_layout
@@ -72,11 +73,16 @@ module PageTag
         assigned_id
       end
       def assigned_image_id
-        self.collection_tag.theme.assigned_resource_id(Spree::TemplateFile, page_layout)
+        self.collection_tag.theme.assigned_resource_id( Spree::TemplateFile, page_layout )
       end
       def assigned_text_id
-        self.collection_tag.theme.assigned_resource_id(Spree::TemplateText, page_layout)
+        self.collection_tag.theme.assigned_resource_id( Spree::TemplateText, page_layout )
       end
+
+      def assgined_relation_type
+        self.collection_tag.theme.assigned_resources( Spree::RelationType, page_layout ).first
+      end
+
       # start from 1
       def nth_of_siblings
         self.collection_tag.cached_page_layouts.values.select{|pl| pl.parent_id == page_layout.parent_id && pl != page_layout && pl.lft < page_layout.lft }.size + 1
@@ -142,7 +148,7 @@ module PageTag
            return self.collection_tag.current_page_tag.path
         end
       end
-      
+
       # taxon depth for section menu
       def enabled_depth
         get_data_source_param_by_key(:depth) || MaxTaxonDepth
@@ -282,8 +288,11 @@ module PageTag
 
     def related_products
       current_product = (self.running_data_item_by_class( Products::WrappedProduct ) || self.current_page_tag.product_tag )
-      if current_product && self.current_piece
-
+      relation_type = self.current_piece.assgined_relation_type
+      if current_product && relation_type
+        current_product.related_products( relation_type )
+      else
+        []
       end
     end
 
