@@ -29,12 +29,14 @@ module PageTag
 
       # current product
       if self.page_generator.product.present?
-        self.product_tag = Products::WrappedProduct.new( self.collection_tag, page_generator.product)
+        products_tag = Products.new( page_generator, [ page_generator.product ], self )
+        self.product_tag = products_tag.wrapped_models.first
       end
 
       # current post
       if self.page_generator.post.present?
-        self.post_tag = Posts::WrappedPost.new( self.collection_tag, page_generator.post)
+        posts_tag = Products.new( page_generator, [ page_generator.post ], self )
+        self.post_tag = posts_tag.wrapped_models.first
       end
 
     end
