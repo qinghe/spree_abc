@@ -579,7 +579,7 @@ module Spree
         params = {}
         if data_source_param.present?
           splited_params = data_source_param.split(',')
-          if current_data_source == DataSourceEnum.gpvs || current_data_source == DataSourceEnum.blog
+          if current_data_source == DataSourceEnum.gpvs || current_data_source == DataSourceEnum.blog || current_data_source == DataSourceEnum.related_products
             params[:per_page]= splited_params[0].to_i
             params[:pagination_enable] = ( splited_params[1].blank? ||  splited_params[1] == '1')
             params[:pagination_style] = ( splited_params[2] )
