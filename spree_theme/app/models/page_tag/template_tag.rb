@@ -473,7 +473,7 @@ module PageTag
       # self.current_piece.wrapped_data_source_param   per_page
       params = { }
       params.merge! self.current_piece.wrapped_data_source_param.slice(:per_page)
-byebug
+
       #infinitescroll pagination
       if pagination_params[:pagination_plid].to_i == current_piece.id
         params.merge!( pagination_params.slice(:page) )
