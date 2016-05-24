@@ -40,7 +40,7 @@ module PageTag
 
         if accurate_taxon_model
           #collection_tag may cause problem, fix it as meet.
-          WrappedMenu.new( wrapped_taxon.collection_tag, accurate_taxon_model )
+          PageTag::Menus::WrappedMenu.new( wrapped_taxon.collection_tag, accurate_taxon_model )
         else
           wrapped_taxon
         end
