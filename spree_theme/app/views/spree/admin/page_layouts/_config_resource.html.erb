@@ -12,12 +12,12 @@
               <% section_piece_resources.each_with_index{| wrapped_resource,idx |
                     assigned_resource_id = @template_theme.assigned_resource_id(wrapped_resource.resource_class, page_layout, idx)
               %>
-                  <%= select_tag "assigned_resource_ids[]",options_from_collection_for_select(wrapped_resource.resource_class.resourceful(@template_theme ), :id, :name, assigned_resource_id ), include_blank: true, class: 'select2', multiple: "multiple"  %>
+                  <%= select_tag "assigned_resource_ids[]",options_from_collection_for_select(wrapped_resource.resource_class.resourceful(@template_theme ), :id, :name, assigned_resource_id ), include_blank: true, class: 'select2', multiple: "multiple" %>
               <% } %>
             <% elsif data_source_based_resource.present?
               assigned_resource_id = @template_theme.assigned_resource_id(data_source_based_resource.resource_class, page_layout)
             %>
-              <%= select_tag "assigned_resource_ids[]",options_from_collection_for_select( data_source_based_resource.resource_class.resourceful(@template_theme ), :id, :name, assigned_resource_id ), include_blank: true, class: 'select2' %>
+              <%= select_tag "assigned_resource_ids[]",options_from_collection_for_select( data_source_based_resource.resource_class.resourceful(@template_theme ), :id, :name, assigned_resource_id ), include_blank: true, class: 'select2', multiple: "multiple" %>
 
             <% else %>
                  <% assigned_resource_id = @template_theme.assigned_resource_id(SpreeTheme.taxon_class, page_layout) %>

@@ -145,6 +145,7 @@ zh-CN:
       section_context: 模块适用页面
       specific_taxon: 模块适用个别页面
       config_resource: 模块可用素材
+    related_case_in_taxon: 相关案例
     section_context:
       home: 首页
       list: 产品列表

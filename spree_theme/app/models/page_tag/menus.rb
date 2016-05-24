@@ -3,7 +3,7 @@ module PageTag
     class WrappedMenu < WrappedModel
       self.accessable_attributes=[:id, :name, :icon, :summary, :path, :friendly_id, :tooltips, :is_clickable?, :home?,:depth, :leaf?,:root?,:persisted?, :extra_html_attributes, :description, :replaced_by ]
       delegate *self.accessable_attributes, :to => :model
-      delegate :taxonomy, :root, :to => :model
+      delegate :taxonomy, :root, :persisted?,  :to => :model
 
       def children
         self.model.children.collect{|item| WrappedMenu.new(self.collection_tag, item)}
@@ -19,7 +19,7 @@ module PageTag
 
       def ancestor_ids
         if @ancestor_ids.nil?
-          @ancestor_ids = self.model.ancestors.map(&:id)
+          @ancestor_ids = self.model.ancestors.pluck(:id)
         end
         @ancestor_ids
       end

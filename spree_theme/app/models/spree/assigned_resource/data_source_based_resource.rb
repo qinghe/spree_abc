@@ -8,12 +8,16 @@ module Spree
       end
 
       def resource_class
-        case self.page_layout.current_data_source
-        when Spree::PageLayout::DataSourceEnum.related_products
-          Spree::RelationType
-        else
-          nil
+        if page_layout.current_data_source ==  Spree::PageLayout::DataSourceEnum.related_products
+          return Spree::RelationType
         end
+
+        child_data_sources = page_layout.children.collect( &:current_data_source ).select( &:present? )
+
+        if child_data_sources.include? Spree::PageLayout::DataSourceEnum.related_products
+          return Spree::RelationType
+        end
+
       end
 
     end

@@ -80,7 +80,7 @@ module PageTag
       end
 
       def assgined_relation_type
-        self.collection_tag.theme.assigned_resources( Spree::RelationType, page_layout ).first
+        self.collection_tag.theme.assigned_resources( Spree::RelationType, page_layout ).first || self.collection_tag.theme.inherited_assigned_resources( Spree::RelationType, page_layout ).first
       end
 
       # start from 1
@@ -206,13 +206,13 @@ module PageTag
       end
     end
 
-    def products( wrapped_taxon )
+    def products( wrapped_taxon, options={} )
       objs = []
       case self.current_piece.current_data_source
-        when Spree::PageLayout::DataSourceEnum.gpvs
+      when Spree::PageLayout::DataSourceEnum.gpvs, Spree::PageLayout::DataSourceEnum.related_products
           #copy from taxons_controller#show
           #searcher_params = { taxon: wrapped_taxon.resource_taxon_id }.merge(self.current_piece.wrapped_data_source_param ).merge( resource_params )
-          searcher = Spree::Config.searcher_class.new( build_searcher_params( wrapped_taxon ))
+          searcher = Spree::Config.searcher_class.new( build_searcher_params( wrapped_taxon, options ))
           #@searcher.current_user = try_spree_current_user
           #@searcher.current_currency = current_currency
           objs = searcher.retrieve_products
@@ -286,7 +286,20 @@ module PageTag
       objs
     end
 
+    # products in same taxon
     def related_products
+      current_product = (self.running_data_item_by_class( Products::WrappedProduct ) || self.current_page_tag.product_tag )
+      #current_product ? current_product.related_products(  ) : []
+      if current_product
+        products( current_product.related_taxon_tag, { search:{ without_ids: [current_product.id]} } )
+      else
+        []
+      end
+
+    end
+
+
+    def related_products_by_relation_type
       current_product = (self.running_data_item_by_class( Products::WrappedProduct ) || self.current_page_tag.product_tag )
       relation_type = self.current_piece.assgined_relation_type
       if current_product && relation_type
@@ -345,6 +358,11 @@ module PageTag
       else
         attribute_value
       end
+    end
+
+    def relation_attribute(  attribute_name, options = { }  )
+      relation_type = self.current_piece.assgined_relation_type
+      attribute_value = relation_type.send attribute_name
     end
 
     def font_awesome
@@ -447,28 +465,32 @@ module PageTag
       running_data_items.select{|item| item.is_a? klass }.last
     end
 
-    def build_searcher_params( wrapped_taxon )
+    def build_searcher_params( wrapped_taxon, options={} )
       # a page_layout tree could have sveral gpvs assigned, each gpvs have own pagination
       pagination_params = self.page_generator.resource_options[:pagination_params]
+      # for global search
       extrernal_searcher_params = self.page_generator.resource_options[:searcher_params]
       # self.current_piece.wrapped_data_source_param   per_page
       params = { }
       params.merge! self.current_piece.wrapped_data_source_param.slice(:per_page)
 
+      #infinitescroll pagination
       if pagination_params[:pagination_plid].to_i == current_piece.id
         params.merge!( pagination_params.slice(:page) )
       end
       params.merge! extrernal_searcher_params
 
       case self.current_piece.current_data_source
-        when Spree::PageLayout::DataSourceEnum.gpvs
-          params.merge!( taxon: wrapped_taxon.resource_taxon_id )
-        when Spree::PageLayout::DataSourceEnum.blog
-          params.merge!( taxon: wrapped_taxon.resource_taxon_id )
-        when Spree::PageLayout::DataSourceEnum.gpvs_theme
-          params.merge!(:search=>{:in_global_taxon=>wrapped_taxon.model} ) if wrapped_taxon.persisted?
+      when Spree::PageLayout::DataSourceEnum.gpvs, Spree::PageLayout::DataSourceEnum.related_products
+        params.merge!( taxon: wrapped_taxon.resource_taxon_id )
+      when Spree::PageLayout::DataSourceEnum.blog
+        params.merge!( taxon: wrapped_taxon.resource_taxon_id )
+      when Spree::PageLayout::DataSourceEnum.gpvs_theme
+        params.merge!(:search=>{:in_global_taxon=>wrapped_taxon.model} ) if wrapped_taxon.persisted?
       end
       #Rails.logger.debug " build_searcher_params =#{params.inspect} pagination_params=#{pagination_params.inspect} current_piece.id=#{current_piece.id}"
+
+      params[:search] = options[:search] if options.key?( :search )
       params
     end
 

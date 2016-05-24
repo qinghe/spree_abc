@@ -65,6 +65,13 @@ module Spree
         }.collect(&:source)
       end
 
+      def inherited_assigned_resources( resource_class, selected_page_layout )
+        ancestor_ids = selected_page_layout.ancestors.pluck(:id )
+        template_resources.select{|template_resource|
+          template_resource.source_class ==  resource_class && ancestor_ids.include?(template_resource.page_layout_id)
+        }.collect(&:source)
+      end
+
       # get assigned menu by specified page_layout_id, page_tag required
       # params:
       #   resource_position: get first( position 0 ) of assigned resources by default

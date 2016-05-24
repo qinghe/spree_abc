@@ -9,7 +9,8 @@ module Spree
           #assigned_resource_ids could be ['']
           assigned_resource_ids.select!(&:present?) if assigned_resource_ids.kind_of? Array
           section_piece_resources = @page_layout.section_piece_resources
-          data_source_based_resource = @page_layout.data_source_based_resources
+          # now we are use related products in taxon, fix it when using relation_type
+          data_source_based_resource = nil #@page_layout.data_source_based_resources
 
           if assigned_resource_ids.present?
             if section_piece_resources.present?
@@ -34,6 +35,8 @@ module Spree
               section_piece_resources.each_with_index{|section_resource,index|
                 @template_theme.unassign_resource(section_resource.resource_class , @page_layout, index)
               }
+            elsif data_source_based_resource.present?
+              @template_theme.unassign_resource(data_source_based_resource.resource_class, @page_layout)
             else
               @template_theme.unassign_resource(SpreeTheme.taxon_class, @page_layout)
             end

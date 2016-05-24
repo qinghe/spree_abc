@@ -123,3 +123,22 @@ flash_message:
     .<%=@template.section_selector%> ..alert-danger { color: #a94442; background-color: #f2dede; border-color: #ebccd1;}
 
   js: ''
+relation_type_name:
+  id: 108
+  title: relation type name
+  slug: relation-type-name
+  is_selectable: "0"
+  is_container: "0"
+  html: |
+    <%= @template.relation_attribute(:name) %>
+  css: ""
+  js: ""
+related_taxon_name:
+  id: 109
+  title: related taxon name
+  slug: related-taxon-name
+  is_selectable: "0"
+  is_container: "0"
+  html: ""
+  css: ""
+  js: ""

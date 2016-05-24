@@ -15,12 +15,18 @@ module Spree
 
       def data_source_based_resources
         #''.present? => false
-          case self.current_data_source
-          when Spree::PageLayout::DataSourceEnum.related_products
-              Spree::AssignedResource::DataSourceBasedResource.new( self )
-            else
-              nil
-          end
+        # self/children  data_source include? Spree::PageLayout::DataSourceEnum.related_products
+        # we have to consider children's data_source, for feature  relation_type.name
+        if self.current_data_source ==  Spree::PageLayout::DataSourceEnum.related_products
+          return Spree::AssignedResource::DataSourceBasedResource.new( self )
+        end
+
+        child_data_sources = self.children.collect( &:current_data_source ).select( &:present? )
+
+        if child_data_sources.include? Spree::PageLayout::DataSourceEnum.related_products
+          return Spree::AssignedResource::DataSourceBasedResource.new( self )
+        end
+
       end
 
     end
