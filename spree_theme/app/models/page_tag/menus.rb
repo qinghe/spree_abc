@@ -108,7 +108,7 @@ module PageTag
 
       if menus_cache[key].blank?
         # get default menu, with_resources may return [] since support assign resource to container.
-        section_resource = wrapped_page_layout.section_piece_resources.fetch resource_position
+        section_resource = wrapped_page_layout.section_piece_resources.slice resource_position
         if section_resource
           menus_cache[key] = DefaultTaxonRoot.instance_by_context( section_resource.context ).self_and_descendants
         end
