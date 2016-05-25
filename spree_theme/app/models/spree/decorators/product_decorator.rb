@@ -4,6 +4,10 @@ Spree::Product.class_eval do
     where.not(id: ids)
   end
 
+  add_simple_scopes [:ascend_by_created_at, :descend_by_created_at]
+  whitelisted_ransackable_attributes << 'created_at'
+
+
   scope :for_template, ->{ where.not( theme_id: 0 ) }
   # theme_id could not be null in db
   # in Rails 4.2.5

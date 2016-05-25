@@ -480,9 +480,17 @@ module PageTag
       end
       params.merge! extrernal_searcher_params
 
+      sort_by = self.current_piece.wrapped_data_source_param.fetch(:sort_by, nil )
+
       case self.current_piece.current_data_source
       when Spree::PageLayout::DataSourceEnum.gpvs, Spree::PageLayout::DataSourceEnum.related_products
-        params.merge!( taxon: wrapped_taxon.resource_taxon_id )
+        if sort_by == 'created_at_desc'
+          params.merge!( search:{ sorts: 'created_at desc' } )
+          # the newest products of site, ignore taxon
+          #products in taxon is always positioned
+        else
+          params.merge!( taxon: wrapped_taxon.resource_taxon_id )
+        end
       when Spree::PageLayout::DataSourceEnum.blog
         params.merge!( taxon: wrapped_taxon.resource_taxon_id )
       when Spree::PageLayout::DataSourceEnum.gpvs_theme
