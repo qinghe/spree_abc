@@ -19,7 +19,8 @@ module PageTag
 
       def ancestor_ids
         if @ancestor_ids.nil?
-          @ancestor_ids = self.model.ancestors.pluck(:id)
+          # model could be default taxon, ancestors may be array other than where()
+          @ancestor_ids = self.model.ancestors.map(&:id)
         end
         @ancestor_ids
       end
