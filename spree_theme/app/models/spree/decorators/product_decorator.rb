@@ -5,6 +5,7 @@ Spree::Product.class_eval do
   end
 
   add_simple_scopes [:ascend_by_created_at, :descend_by_created_at]
+  # get newer products of site
   whitelisted_ransackable_attributes << 'created_at'
 
 
@@ -14,17 +15,18 @@ Spree::Product.class_eval do
   # product.update_attributes( theme_id: '' ), sql is theme_id=NULL
   before_validation :fix_attributes
 
-
+  # refer to https://github.com/AgilTec/spree_variant_options  
   def option_values
-    @_option_values ||= Spree::OptionValue.for_product(self).order(:position).sort_by {|ov| ov.option_type.position }
+    @_option_values ||= Spree::OptionValue.for_product(self)
   end
 
   def grouped_option_values
     @_grouped_option_values ||= option_values.group_by(&:option_type)
+    @_grouped_option_values.sort_by { |option_type, option_values| option_type.position }.reverse 
   end
 
   def variants_for_option_value(value)
-    @_variant_option_values ||= variants.includes(:option_values).all
+    @_variant_option_values ||= variants.includes(:option_values)
     @_variant_option_values.select { |i| i.option_value_ids.include?(value.id) }
   end
 

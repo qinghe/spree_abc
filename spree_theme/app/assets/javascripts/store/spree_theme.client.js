@@ -174,11 +174,12 @@ function VariantOptions(params) {
                 disable($(element).addClass('unavailable locked'));
             } else if (variant_ids.length == 1) {
                 var _var = variants.pop();
-                $(element).addClass((allow_backorders || _var.count) ? available_variant_ids.length == 1 ? 'in-stock auto-click' : 'in-stock' : 'out-of-stock');
+                $(element).addClass((allow_backorders ||_var.in_stock) ? available_variant_ids.length == 1 ? 'in-stock auto-click' : 'in-stock' : 'out-of-stock');
+                //$(element).addClass((allow_backorders || _var.count) ? available_variant_ids.length == 1 ? 'in-stock auto-click' : 'in-stock' : 'out-of-stock');
             } else if (allow_backorders) {
                 $(element).addClass('in-stock');
             } else {
-                $.each(variants, function(variant) { count += variant.count; });
+                $.each(variants, function(variant) { count += (variant.in_stock ? 1 : 0); });
                 $(element).addClass(count ? 'in-stock' : 'out-of-stock');
             }
         });
@@ -337,7 +338,7 @@ function VariantOptions(params) {
         if (target_variant) {
             form_container.find('input.variant_id').val(target_variant.id);
             form_container.find('.price').removeClass('unselected').text(target_variant.price);
-            if (target_variant.count > 0 || allow_backorders)
+            if (target_variant.in_stock || allow_backorders)
                 form_container.find('button[type=submit]').attr('disabled', false).fadeTo(100, 1);
             try {
                 show_variant_images(target_variant.id);
