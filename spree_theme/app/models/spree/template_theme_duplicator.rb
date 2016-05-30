@@ -1,4 +1,10 @@
 # mainly COPY from spree/core/product_duplicator
+# tables
+# site_related_tables:    template_theme,
+# site_unrelated tables:  page_layout, param_value, template_file
+
+
+
 module Spree
   class TemplateThemeDuplicator
     attr_accessor :original_template_theme
@@ -51,7 +57,7 @@ module Spree
       end
       h.each_pair{|item, cloned|
         cloned.copy_from_id = item.id
-        cloned.site_id = SpreeTheme.site_class.current.id
+        #cloned.site_id = SpreeTheme.site_class.current.id
         cloned.template_theme = new_template_theme
       }
       cloned_branch = h[page_layout_root]
@@ -105,7 +111,8 @@ module Spree
         end
       }
       # after page_layout_key updated,  confirm template_resource existing.
-      obsolete_template_resources.select{|template_resource| template_resource.source.nil? }.each(&:destroy!)
+      # reload new_template_theme which may be from other store.
+      new_template_theme.template_resources.select{|template_resource| template_resource.source.nil? }.each(&:destroy!)
     end
   end
 end

@@ -34,7 +34,7 @@ zh-CN:
     user_sessions:
       signed_in: "成功登录。"
       signed_out: "成功注销。"
-    user_sessions:
+    sessions:
       spree_user:
         signed_in: "登录成功。"
         signed_out: "退出成功。"

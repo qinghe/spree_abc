@@ -183,11 +183,12 @@ namespace :spree_theme do
   # since template_theme.duplicate has problem which cause ParamValue malfunctional
   # we disable template_theme.duplicate, use task instead
   desc "copy theme to new. ex. copy_theme[theme_id]"
-  task :copy_theme, [:theme_id] => :environment do |t, args|
+  task :copy_theme, [:theme_id, :store_id] => :environment do |t, args|
     theme = Spree::TemplateTheme.find( args.theme_id)
+    store = Spree::Store.find( args.store_id || theme.store_id )
     Spree::TemplateTheme.connection.transaction do
       # required site.current
-      Spree::Store.current = theme.store
+      Spree::Store.current = store
       new_theme = theme.duplicate
       puts "copied #{theme.id}-#{theme.title} to #{new_theme.id}-#{new_theme.title} "
     end
