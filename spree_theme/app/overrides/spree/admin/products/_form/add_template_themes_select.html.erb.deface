@@ -1,6 +1,6 @@
 <!-- insert_before '[data-hook="admin_product_form_meta"]' -->
-<% if Spree::Store.current.designable? %>
-  <% template_themes = Spree::TemplateTheme.native %>
+<% if Spree::Store.current.code=='www' %>
+  <% template_themes = Spree::TemplateTheme.foreign %>
   <div class="twelve columns alpha omega" >
     <div data-hook="admin_product_form_template_themes">
       <%= f.field_container :product_template_themes do %>
@@ -8,20 +8,6 @@
         <%= f.collection_select :theme_id, template_themes ,'id','title',  { include_blank: true }, { name: 'product[theme_id]', class: 'select2 fullwidth' } %>
       <% end %>
     </div>
-
-    <div data-hook="admin_product_form_global_taxons">
-      <%= f.field_container :global_taxons do %>
-        <%= f.label :global_taxon_ids, Spree.t(:global_taxons) %><br />
-        <%= f.hidden_field :global_taxon_ids, :value => @product.global_taxon_ids.join(',') %>
-      <% end %>
-    </div>
   </div>
-  <% unless Rails.env.test? %>
-  <script>
-  $(document).ready(function () {
-    set_resource_taxon_select("product_global_taxon_ids", true, Spree.routes.global_taxons_search);
-  });
-  </script>
-  <% end %>
 
 <% end %>

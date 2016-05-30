@@ -217,15 +217,13 @@ module PageTag
           #@searcher.current_currency = current_currency
           objs = searcher.retrieve_products
         when Spree::PageLayout::DataSourceEnum.gpvs_theme
-          objs = Spree::MultiSiteSystem.with_context_site1_themes{
             #searcher_params ={}
             #if wrapped_taxon.persisted?
             #  searcher_params.merge!(:search=>{:in_global_taxon=>wrapped_taxon.model} )
             #end
             #searcher_params.merge!(self.current_piece.wrapped_data_source_param ).merge!( resource_params )
-            searcher = Spree::Config.searcher_class.new( build_searcher_params( wrapped_taxon ) )
-            searcher.retrieve_products.theme_only.to_a # explicitly load some records, or default_scope would work when out of this block.
-          }
+          searcher = Spree::Config.searcher_class.new( build_searcher_params( wrapped_taxon ) )
+          objs =  searcher.retrieve_products.theme_only.to_a # explicitly load some records, or default_scope would work when out of this block.
         when Spree::PageLayout::DataSourceEnum.this_product
           #default_taxon.id is 0
           if self.current_page_tag.product_tag.present?
@@ -494,7 +492,8 @@ module PageTag
       when Spree::PageLayout::DataSourceEnum.blog
         params.merge!( taxon: wrapped_taxon.resource_taxon_id )
       when Spree::PageLayout::DataSourceEnum.gpvs_theme
-        params.merge!(:search=>{:in_global_taxon=>wrapped_taxon.model} ) if wrapped_taxon.persisted?
+        params.merge!( taxon: wrapped_taxon.resource_taxon_id )
+        #params.merge!(:search=>{:in_global_taxon=>wrapped_taxon.model} ) if wrapped_taxon.persisted?
       end
       #Rails.logger.debug " build_searcher_params =#{params.inspect} pagination_params=#{pagination_params.inspect} current_piece.id=#{current_piece.id}"
 

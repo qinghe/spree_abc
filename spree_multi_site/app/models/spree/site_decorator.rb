@@ -46,8 +46,8 @@ Spree::Product.class_eval do
   include Spree::MultiSiteSystem
   include Spree::ProductExtraScope
 
-  has_many :global_classifications, dependent: :delete_all
-  has_many :global_taxons, through: :global_classifications, source: :taxon
+  #has_many :global_classifications, dependent: :delete_all
+  #has_many :global_taxons, through: :global_classifications, source: :taxon
 
 
   # Try building a slug based on the following fields in increasing order of specificity.
@@ -72,10 +72,13 @@ end
 
 Spree::ShippingCategory.class_eval do
   include Spree::MultiSiteSystem
+  clear_validators!
+  validates :name, presence: true, uniqueness: { allow_blank: true, scope: :site_id }
 end
 
 Spree::ShippingMethod.class_eval do
   include Spree::MultiSiteSystem
+
 end
 
 

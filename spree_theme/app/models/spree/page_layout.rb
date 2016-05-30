@@ -665,14 +665,12 @@ module Spree
               # once data_source retrieved, we should use context :site1_themes to support product_property.property.presentation
               subpieces = <<-EOS1
               <% @template.running_data_source= @template.products( (defined?(page) ? page : @current_page) ) %>
-              <% Spree::MultiSiteSystem.with_context_site1_themes{ %>
                 <% @template.running_data_source.each(){|product| @template.running_data_item = product %>
                     #{form_start}
                     #{subpieces}
                     #{form_end}
                 <% } %>
                 #{get_pagination(node)}
-              <% } %>
               <% @template.running_data_source = nil %>
               EOS1
               #set var_collection  to nil, or render pagination more times

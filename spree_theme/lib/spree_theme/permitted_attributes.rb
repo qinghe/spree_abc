@@ -13,7 +13,7 @@ module Spree
     @@template_file_attributes = [ :theme_id, :attachment, :page_layout_id, :alt ]
     @@template_text_attributes = [ :name, :body ]
     @@template_theme_attributes = [ :is_public, :site_id,:page_layout_root_id,:title, :section_root_id, :assigned_resource_ids, :for_terminal, :user_terminal_id ]
-    @@product_attributes += [:global_taxon_ids, :global_taxons, :theme_id, :summary]
+    @@product_attributes += [ :theme_id, :summary]
     @@taxon_attributes += [:page_context, :replaced_by, :is_clickable, :tooltips, :stylish]
 
     @@comment_type_attributes = [:name, :applies_to]
