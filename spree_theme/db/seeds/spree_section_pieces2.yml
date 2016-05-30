@@ -142,3 +142,67 @@ related_taxon_name:
   html: ""
   css: ""
   js: ""
+
+slider_bullet_navigator:
+  id: 110
+  title: slider bullet navigator
+  slug: slider-bullet-navigator
+  is_selectable: "1"
+  is_container: "1"
+  html: |-
+      <!-- Bullet Navigator Skin Begin -->
+      <div u="navigator" class= "jssorb03" style="position: absolute;">
+          <!-- bullet navigator item prototype -->
+          <div u="prototype" style="position: absolute; width: 19px; height: 19px;"></div>
+      </div>
+  css: |-
+    .<%=@template.section_selector%> [u='navigator']{
+      position: absolute;
+      bottom:0;
+    }
+    .jssorb03 div, .jssorb03 div:hover, .jssorb03 .av
+    {
+        background: url('/shops/shared/images/jssor/n21.png') no-repeat;
+        overflow:hidden;
+        cursor: pointer;
+    }
+    .jssorb03 div { background-position: -5px -5px; }
+    .jssorb03 div:hover, .jssorb03 .av:hover { background-position: -35px -5px; }
+    .jssorb03 .av { background-position: -65px -5px; }
+    .jssorb03 .dn, .jssorb03 .dn:hover { background-position: -95px -5px; }
+
+slider_arrow_navigator:
+  id: 111
+  title: slider arrow navigator
+  slug: slider-arrow-navigator
+  is_selectable: "1"
+  is_container: "1"
+  html: |-
+    <span data-u="arrowleft" class="jssora22l arrowleft" style="top: 123px; left: 8px;" data-autocenter="2"></span>
+    <span data-u="arrowright" class="jssora22r arrowright" style="top: 123px; right: 8px;" data-autocenter="2"></span>
+  css: |-
+    /* jssor slider arrow navigator skin 22 css */
+    /*
+    .jssora22l                  (normal)
+    .jssora22r                  (normal)
+    .jssora22l:hover            (normal mouseover)
+    .jssora22r:hover            (normal mouseover)
+    .jssora22l.jssora22ldn      (mousedown)
+    .jssora22r.jssora22rdn      (mousedown)
+    */
+    .jssora22l, .jssora22r {
+        display: block;
+        position: absolute;
+        /* size of arrow element */
+        width: 40px;
+        height: 58px;
+        cursor: pointer;
+        background: url('/shops/shared/images/jssor/a22.png') center center no-repeat;
+        overflow: hidden;
+    }
+    .jssora22l { background-position: -10px -31px; }
+    .jssora22r { background-position: -70px -31px; }
+    .jssora22l:hover { background-position: -130px -31px; }
+    .jssora22r:hover { background-position: -190px -31px; }
+    .jssora22l.jssora22ldn { background-position: -250px -31px; }
+    .jssora22r.jssora22rdn { background-position: -310px -31px; }

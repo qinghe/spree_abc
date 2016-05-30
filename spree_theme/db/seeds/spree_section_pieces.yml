@@ -1610,11 +1610,6 @@ slider_core:
         <div style="position: absolute; display: block; background: url(/shops/shared/images/jssor/loading.gif) no-repeat center center; top: 0px; left: 0px;width: 100%;height:100%;"> </div>
       </div>
       ~~content~~
-      <!-- Bullet Navigator Skin Begin -->
-      <div u="navigator" class= "jssorb03" style="position: absolute;">
-          <!-- bullet navigator item prototype -->
-          <div u="prototype" style="position: absolute; width: 19px; height: 19px;"></div>
-      </div>
     </div>
   css: |-
     .<%=@template.section_selector%> > .inner { min-height:1px;min-width:1px; /* hight, width are required*/}
@@ -1622,20 +1617,6 @@ slider_core:
     .<%=@template.section_selector%> [u='slides']{
       cursor: move; left: 0px; top: 0px;
     }
-    .<%=@template.section_selector%> [u='navigator']{
-      position: absolute;
-      bottom:0;
-    }
-    .jssorb03 div, .jssorb03 div:hover, .jssorb03 .av
-    {
-        background: url('/shops/shared/images/jssor/n21.png') no-repeat;
-        overflow:hidden;
-        cursor: pointer;
-    }
-    .jssorb03 div { background-position: -5px -5px; }
-    .jssorb03 div:hover, .jssorb03 .av:hover { background-position: -35px -5px; }
-    .jssorb03 .av { background-position: -65px -5px; }
-    .jssorb03 .dn, .jssorb03 .dn:hover { background-position: -95px -5px; }
 
 slider_data_taxons:
   id: 88
