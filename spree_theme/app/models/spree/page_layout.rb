@@ -19,7 +19,7 @@ module Spree
     include Spree::Context::Base
     include Spree::AssignedResource::SectionResourceGlue
 
-    PaginationStyle = Struct.new( :page_links, :infinitescroll, :more, :none )['1', 'i', 'm', '0']
+    PaginationStyle = Struct.new( :page_links, :pn_links, :infinitescroll, :more, :none )['1', 'pn', 'i', 'm', '0']
 
     # depth is massed up while duplicate full set. so we disable it here.
     acts_as_nested_set :scope=>['template_theme_id' ], :depth_column=>'notallowed', :dependent=> :destroy # scope is for :copy, no need to modify parent_id, lft, rgt.
@@ -765,12 +765,20 @@ module Spree
     # show pagination when section is configured, data_source_param > 0
     # ex. in home page, we have product list, we do not want to show pagination even products.count > Spree::Config[products_per_page]
     def get_pagination( node )
-      pagination_params = { pagination_style: node.get_data_source_param_by_key(:pagination_style),
+      params = node.wrapped_data_source_param
+      pagination_params = { pagination_style: params[:pagination_style],
         pagination_plid: node.id
       }
       # section is configured and datasource have pages
       # notice: current piece is data iterator parent at present.  ex. product_list(current_piece)->one_product
-      "<%= paginate( @template.running_data_source, params: #{pagination_params.to_s} ) if @template.current_piece.per_page>0 && @template.current_piece.pagination_enable? && @template.running_data_source.try( :has_pages? ) %> "
+      #if @template.current_piece.per_page>0 && @template.current_piece.pagination_enable?
+      if params[:pagination_enable] && params[:per_page] >0
+        if params[:pagination_style] == PaginationStyle.pn_links
+          "<%= paginate( @template.running_data_source, theme: 'pn', params: #{pagination_params.to_s} )  if @template.running_data_source.try( :has_pages? ) %> "
+        else
+          "<%= paginate( @template.running_data_source, params: #{pagination_params.to_s} )  if @template.running_data_source.try( :has_pages? ) %> "
+        end
+      end
     end
 
     # Do not support add_layout_tree now. Page layout should be full html, Keep it simple.
