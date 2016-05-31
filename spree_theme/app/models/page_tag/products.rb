@@ -30,7 +30,7 @@ module PageTag
         ProductAttribute.new( nil, self ).simple_image( style )
       end
 
-      def related_taxon_tag
+      def accurate_taxon_tag
         current_taxon_model = wrapped_taxon.model
         accurate_taxon_model = nil
         #get model's taxon, related_products_by_taxon, required.

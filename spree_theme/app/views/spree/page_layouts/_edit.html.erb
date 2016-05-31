@@ -29,6 +29,10 @@
       <%= f.select "data_source", options , include_blank: true, class: 'select2' %>
     </div>
     <div>
+        <%= f.label :data_filter %>
+        <%= f.text_field :data_filter %> next,previous
+    </div>
+    <div>
         <%= f.label :data_source_param %>
         <%= f.text_field :data_source_param %> per_page
     </div>

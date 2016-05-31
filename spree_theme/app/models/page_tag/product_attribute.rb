@@ -4,20 +4,24 @@ module PageTag
     alias_attribute :wrapped_product, :wrapped_model
 
     def get( attribute_name )
-        attribute_value = case attribute_name
-          when :name
+      attribute_value = case attribute_name
+        when :name
             # make it as link anchor
             content_tag :span, wrapped_product.name, {:id=>"p_#{self.current_piece.id}_#{wrapped_product.id}"}
-          when :image
+        when :image
             product_image( wrapped_product, options[:image] )
-          when :thumbnail
+        when :thumbnail
             i = options[:image]
             content_tag(:a, create_product_image_tag( i, wrapped_product, {}, current_piece.get_content_param_by_key(:thumbnail_style)),
                          { href: i.attachment.url( current_piece.get_content_param_by_key(:main_image_style)) }
                          )
-          else
+        when :icon_angle_right
+           '>'
+        when :icon_angle_left
+           '<'
+        else
             wrapped_product.send attribute_name
-          end
+        end
         if attribute_name== :image && self.current_piece.is_zoomable_image?
           # main image
           # wrap with a, image-zoom required

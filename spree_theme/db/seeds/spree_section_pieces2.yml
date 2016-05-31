@@ -206,3 +206,23 @@ slider_arrow_navigator:
     .jssora22r:hover { background-position: -190px -31px; }
     .jssora22l.jssora22ldn { background-position: -250px -31px; }
     .jssora22r.jssora22rdn { background-position: -310px -31px; }
+product_next_attribute:
+  id: 112
+  title: product next attribute
+  slug: product-next-attribute
+  is_selectable: "0"
+  is_container: "0"
+  html: |
+    <%= @template.product_attribute( :icon_angle_right, {data: @template.next_product, placeholder: '>'} ) %>
+  css: ""
+  js: ""
+product_previous_attribute:
+  id: 113
+  title: product previous attribute
+  slug: product-previous-attribute
+  is_selectable: "0"
+  is_container: "0"
+  html: |
+    <%= @template.product_attribute( :icon_angle_left, {data: @template.previous_product, placeholder: '<'} ) %>
+  css: ""
+  js: ""

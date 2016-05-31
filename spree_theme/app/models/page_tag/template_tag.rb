@@ -264,19 +264,18 @@ module PageTag
 
     # feature next_post, previous_post
     def related_posts( wrapped_taxon, options = {} )
-      data_source = ( options[:data_source] || self.current_piece.current_data_source )
+      data_filter = ( options[:data_filter] || self.current_piece.data_filter )
+      current_post = (self.running_data_item_by_class( Posts::WrappedPost ) || self.current_page_tag.post_tag )
       objs = []
-      case data_source
-        when Spree::PageLayout::DataSourceEnum.next_post
-          if self.page_generator.post.present?
-            item = Spree::PostClassification.where( taxon_id: wrapped_taxon.id, post_id: self.page_generator.resource.id ).first.try(:lower_item).try(:post)
+      if self.page_generator.post.present?
+        case data_filter
+        when Spree::PageLayout::DataSourceFilterEnum.next
+            item = Spree::PostClassification.where( taxon_id: wrapped_taxon.id, post_id: current_post.id ).first.try(:lower_item).try(:post)
             objs << item if item.present?
-          end
-        when Spree::PageLayout::DataSourceEnum.previous_post
-          if self.page_generator.post.present?
-            item = Spree::PostClassification.where( taxon_id: wrapped_taxon.id, post_id: self.page_generator.resource.id ).first.try(:higher_item).try(:post)
+        when Spree::PageLayout::DataSourceFilterEnum.previous
+            item = Spree::PostClassification.where( taxon_id: wrapped_taxon.id, post_id: current_post.id ).first.try(:higher_item).try(:post)
             objs << item if item.present?
-          end
+        end
       end
       if objs.present?
         objs = Posts.new( self.page_generator, objs, wrapped_taxon)
@@ -285,17 +284,34 @@ module PageTag
     end
 
     # products in same taxon
-    def related_products
+    def related_products( options = {} )
+      #data_source = ( options[:data_source] || self.current_piece.current_data_source )
+      data_filter = ( options[:data_filter] || self.current_piece.data_filter )
+
       current_product = (self.running_data_item_by_class( Products::WrappedProduct ) || self.current_page_tag.product_tag )
-      #current_product ? current_product.related_products(  ) : []
       if current_product
-        products( current_product.related_taxon_tag, { search:{ without_ids: [current_product.id]} } )
+        case data_filter
+        when Spree::PageLayout::DataSourceFilterEnum.next
+          item = Spree::Classification.where( taxon_id: current_product.accurate_taxon_tag.id, product_id: current_product.id ).first.try(:lower_item).try(:product)
+          item.present? ? Products.new( self.page_generator, [item], current_product.accurate_taxon_tag ) : []
+        when Spree::PageLayout::DataSourceFilterEnum.previous
+          item = Spree::Classification.where( taxon_id: current_product.accurate_taxon_tag.id, product_id: self.page_generator.resource.id ).first.try(:higher_item).try(:product)
+          item.present? ? Products.new( self.page_generator, [item], current_product.accurate_taxon_tag ) : []
+        else
+          products( current_product.accurate_taxon_tag, { search:{ without_ids: [current_product.id]} } )
+        end
       else
         []
       end
-
     end
 
+    def next_product
+      related_products( data_filter: 'next' ).first
+    end
+
+    def previous_product
+      related_products( data_filter: 'previous' ).first
+    end
 
     def related_products_by_relation_type
       current_product = (self.running_data_item_by_class( Products::WrappedProduct ) || self.current_page_tag.product_tag )
@@ -327,15 +343,24 @@ module PageTag
 
     # * params
     #   * attribute_name - symbol :name, :image, :thumbnail
+    #   * options -
+    #      * data -  Products::WrappedProduct
+    #      * placeholder - string
     def product_attribute( attribute_name, options = { } )
-      wrapped_model = (self.running_data_item_by_class( Products::WrappedProduct ) )
-      ProductAttribute.new( current_piece, wrapped_model, options ).get( attribute_name )  if wrapped_model
+      wrapped_model =  self.running_data_item_by_class( Products::WrappedProduct )
+      wrapped_model = options.delete(:data) if options.key?( :data )
+
+      if wrapped_model
+        ProductAttribute.new( current_piece, wrapped_model, options ).get( attribute_name )
+      else
+        options.delete(:placeholder)
+      end
     end
 
     # * params
     #   * options - file, get specified file of post
     def post_attribute(  attribute_name, options = { }  )
-      wrapped_model = (self.running_data_item_by_class( Posts::WrappedPost ))
+      wrapped_model = ( options.delete(:data) || self.running_data_item_by_class( Posts::WrappedPost ))
       PostAttribute.new( current_piece, wrapped_model, options ).get( attribute_name )  if wrapped_model
     end
 

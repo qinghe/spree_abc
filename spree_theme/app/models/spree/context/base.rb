@@ -24,6 +24,8 @@ module Spree
         [:gpvs, :this_product, :taxon, :blog, :post,:previous_post, :next_post, :related_products, :gpvs_theme]
       DataSourceEmpty = :""
 
+      DataSourceFilterEnum  = Struct.new( :next, :previous )\
+        ['next', 'previous']
       def context_either?
         raise "unimplement"
       end
