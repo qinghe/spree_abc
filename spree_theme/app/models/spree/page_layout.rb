@@ -586,7 +586,7 @@ module Spree
             params[:pagination_enable] = ( splited_params[1].blank? ||  splited_params[1] == '1')
             params[:pagination_style] = ( splited_params[2] )
 
-          elsif current_data_source == DataSourceEnum.taxon
+          elsif current_data_source == DataSourceEnum.taxonomy
             params[:depth] = splited_params[0].to_i
           else
             # section :page_attribute, :product_attribute, :post_attribute
@@ -701,7 +701,7 @@ module Spree
             #  <% } %>
             #  <% @template.running_data_source = nil %>
             #  EOS1
-            when DataSourceEnum.taxon
+            when DataSourceEnum.taxonomy
               #assigned menu could be root or node
               subpieces = <<-EOS3
               <% if @template.menu.present? %>
