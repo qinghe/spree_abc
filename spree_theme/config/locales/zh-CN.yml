@@ -165,7 +165,8 @@ zh-CN:
     section_data_source:
       gpvs: 产品集合
       this_product: 当前选择产品
-      taxon: 菜单
+      taxon: 分类
+      taxonomy: 分类树
       blog: 文章集合
       post: 当前选择文章
       gpvs_theme: 模板集合

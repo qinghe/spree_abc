@@ -701,21 +701,30 @@ module Spree
             #  <% } %>
             #  <% @template.running_data_source = nil %>
             #  EOS1
-            when DataSourceEnum.taxonomy
-              #assigned menu could be root or node
-              subpieces = <<-EOS3
-              <% if @template.menu.present? %>
-                <% if @template.menu.root? %>
-                  <% @template.running_data_source= @template.menu.children %>
-                  <% @template.running_data_source.each{|page| @template.running_data_item = page %> #{subpieces} <%}%>
-                  <% @template.running_data_source = nil %>
-                <% else %>
-                  <% @template.running_data_source= @template.menu %>
-                  <% @template.running_data_source.tap{|page| @template.running_data_item = page %> #{subpieces} <%}%>
-                  <% @template.running_data_source = nil %>
-                <% end %>
+          when DataSourceEnum.taxonomy
+            #assigned menu could be root or node
+            subpieces = <<-EOS3
+            <% if @template.menu.present? %>
+              <% if @template.menu.root? %>
+                <% @template.running_data_source= @template.menu.children %>
+                <% @template.running_data_source.each{|page| @template.running_data_item = page %> #{subpieces} <%}%>
+                <% @template.running_data_source = nil %>
+              <% else %>
+                <% @template.running_data_source= @template.menu %>
+                <% @template.running_data_source.tap{|page| @template.running_data_item = page %> #{subpieces} <%}%>
+                <% @template.running_data_source = nil %>
               <% end %>
-              EOS3
+            <% end %>
+            EOS3
+          when DataSourceEnum.taxon
+            #assigned node, could be root
+            subpieces = <<-EOS6
+            <% if @template.menu.present? %>
+                <% @template.running_data_source= @template.menu %>
+                <% @template.running_data_source.tap{|page| @template.running_data_item = page %> #{subpieces} <%}%>
+                <% @template.running_data_source = nil %>
+            <% end %>
+            EOS6
           end
         end
         # we recovery template.select after ~~content~~
