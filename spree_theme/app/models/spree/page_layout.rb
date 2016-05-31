@@ -585,7 +585,7 @@ module Spree
             params[:per_page]= splited_params[0].to_i
             params[:pagination_enable] = ( splited_params[1].blank? ||  splited_params[1] == '1')
             params[:pagination_style] = ( splited_params[2] )
-            
+
           elsif current_data_source == DataSourceEnum.taxon
             params[:depth] = splited_params[0].to_i
           else
@@ -693,14 +693,14 @@ module Spree
               #{get_pagination(node)}
               <% @template.running_data_source = nil %>
               EOS1
-            when DataSourceEnum.next_post, DataSourceEnum.previous_post
-              subpieces = <<-EOS1
-              <% @template.running_data_source= @template.related_posts( (defined?(page) ? page : @current_page) ) %>
-              <% @template.running_data_source.each{|post| @template.running_data_item = post %>
-                  #{subpieces}
-              <% } %>
-              <% @template.running_data_source = nil %>
-              EOS1
+            #when DataSourceEnum.related_posts
+            #  subpieces = <<-EOS1
+            #  <% @template.running_data_source= @template.related_posts( (defined?(page) ? page : @current_page) ) %>
+            #  <% @template.running_data_source.each{|post| @template.running_data_item = post %>
+            #      #{subpieces}
+            #  <% } %>
+            #  <% @template.running_data_source = nil %>
+            #  EOS1
             when DataSourceEnum.taxon
               #assigned menu could be root or node
               subpieces = <<-EOS3
