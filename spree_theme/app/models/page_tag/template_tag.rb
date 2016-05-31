@@ -321,7 +321,8 @@ module PageTag
       else
         page = (self.running_data_item_by_class( Menus::WrappedMenu ) || self.current_page_tag)
       end
-      PageAttribute.new( current_piece, page ).get( attribute_name )
+      # page may be nil
+      PageAttribute.new( current_piece, page ).get( attribute_name ) if page
     end
 
     # * params
