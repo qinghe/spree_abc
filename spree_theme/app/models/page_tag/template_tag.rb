@@ -15,7 +15,7 @@ module PageTag
     class WrappedPageLayout < WrappedModel
       MaxTaxonDepth = 9999
 
-      self.accessable_attributes=[:id,:title,:current_data_source,:wrapped_data_source_param, :data_filter,:current_contexts, :context_either?,\
+      self.accessable_attributes=[:id,:title,:current_data_source, :wrapped_data_source_param, :data_filter, :data_source_order_by, :current_contexts, :context_either?,\
          :get_content_param_by_key, :get_data_source_param_by_key, :is_container?, :is_image?, :is_zoomable_image?, :effects, :section_pieces, \
          :content_css_class, :section_piece_resources]
       attr_accessor :section_id, :page_layout, :parent
@@ -504,11 +504,11 @@ module PageTag
       end
       params.merge! extrernal_searcher_params
 
-      sort_by = self.current_piece.wrapped_data_source_param.fetch(:sort_by, nil )
+      order_by = self.current_piece.data_source_order_by
 
       case self.current_piece.current_data_source
       when Spree::PageLayout::DataSourceEnum.gpvs, Spree::PageLayout::DataSourceEnum.related_products
-        if sort_by == 'created_at_desc'
+        if order_by == 'created_at_desc'
           params.merge!( search:{ sorts: 'created_at desc' } )
           # the newest products of site, ignore taxon
           #products in taxon is always positioned

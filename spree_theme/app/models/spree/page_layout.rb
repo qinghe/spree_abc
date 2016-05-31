@@ -585,7 +585,7 @@ module Spree
             params[:per_page]= splited_params[0].to_i
             params[:pagination_enable] = ( splited_params[1].blank? ||  splited_params[1] == '1')
             params[:pagination_style] = ( splited_params[2] )
-            params[:sort_by] = ( splited_params[3] )
+            
           elsif current_data_source == DataSourceEnum.taxon
             params[:depth] = splited_params[0].to_i
           else
