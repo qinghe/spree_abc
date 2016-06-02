@@ -119,7 +119,9 @@ module SpreeTheme
         end
         # get default_taxon from root, or it has no root, inherited_page_context cause error
         # @theme could be nil at present.
-        @menu ||= ( @theme.try(:home_page) || store.home_page || get_default_taxon)
+        # store.home should be before theme.home, 
+        # theme could have several homes, store should have only one default. splash screen feature required
+        @menu ||= ( store.home_page || @theme.try(:home_page) || get_default_taxon)
         #elsif SpreeTheme.taxon_class.home.present?
         # #it is discarded, it is conflict with feature theme has own index page. it would show product assigned index page of other theme
         # #now each theme has own index page. store has own index page.
