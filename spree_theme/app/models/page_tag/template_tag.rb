@@ -323,22 +323,56 @@ module PageTag
       end
     end
 
-    # in template_tag have no method link_to, content_tag, it have to be in base_helper
-    def page_attribute(  attribute_name = nil )
-      attribute_name ||=  self.current_piece.attribute_name.to_sym
+    def related_taxons( options = {} )
+      data_filter = ( options[:data_filter] || self.current_piece.data_filter )
+      taxon = (self.running_data_item_by_class( Menus::WrappedMenu ) || self.current_page_tag  )
+      objs = []
+      if taxon
+        case data_filter
+        when Spree::PageLayout::DataSourceFilterEnum.next
+          item = taxon.right_sibling
+          objs << item if item.present?
+        when Spree::PageLayout::DataSourceFilterEnum.previous
+          item = taxon.left_sibling
+          objs << item if item.present?
+        else
+          objs = taxon.siblings
+        end
+      end
+      objs.collect{|item| Menus::WrappedMenu.new(self.menus_tag, item)}
+    end
 
-      if attribute_name.to_s =~/root\_/
-        # in this case, taxonomy have no running_data_item at this time.
-        #   <container with resource menu>
-        #     <taxonomy>
-        #     <vertical menus>
-        #   </container>
-        page = self.menu
-      else
-        page = (self.running_data_item_by_class( Menus::WrappedMenu ) || self.current_page_tag)
+    def next_taxon
+      related_taxons( data_filter: 'next' ).first
+    end
+
+    def previous_taxon
+      related_taxons( data_filter: 'previous' ).first
+    end
+
+
+    # in template_tag have no method link_to, content_tag, it have to be in base_helper
+    def page_attribute(  attribute_name = nil, options = { } )
+      attribute_name ||=  self.current_piece.attribute_name.to_sym
+      page = options.delete(:data)
+      unless page
+        if attribute_name.to_s =~/root\_/
+          # in this case, taxonomy have no running_data_item at this time.
+          #   <container with resource menu>
+          #     <taxonomy>
+          #     <vertical menus>
+          #   </container>
+          page = self.menu
+        else
+          page = (self.running_data_item_by_class( Menus::WrappedMenu ) || self.current_page_tag)
+        end
       end
       # page may be nil
-      PageAttribute.new( current_piece, page ).get( attribute_name ) if page
+      if page
+        PageAttribute.new( current_piece, page ).get( attribute_name )
+      else
+        options.delete(:placeholder)
+      end
     end
 
     # * params

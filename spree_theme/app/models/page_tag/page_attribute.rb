@@ -19,6 +19,10 @@ module PageTag
           wrapped_page.name
         when :root_tooltips
           wrapped_page.tooltips
+        when :icon_angle_right
+           '>'
+        when :icon_angle_left
+           '<'
         else
           wrapped_page.send attribute_name
       end

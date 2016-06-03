@@ -649,7 +649,7 @@ module Spree
           case node.current_data_source
             # var_collection has to vary in name, may be nested.
             # data_source, data_item is for column index computing.
-            when DataSourceEnum.gpvs, DataSourceEnum.this_product, DataSourceEnum.gpvs_theme
+          when DataSourceEnum.gpvs, DataSourceEnum.this_product, DataSourceEnum.gpvs_theme
               # for this_product, we have to wrapped with form, or option_value radio would not work.
               form_enabled = node.get_content_param_by_key( :form_enabled )
               remote_form_enabled = node.get_content_param_by_key( :remote_form_enabled )
@@ -674,7 +674,7 @@ module Spree
               <% @template.running_data_source = nil %>
               EOS1
               #set var_collection  to nil, or render pagination more times
-            when DataSourceEnum.related_products
+          when DataSourceEnum.related_products
               subpieces = <<-EOS1
               <% @template.running_data_source= @template.related_products(  ) %>
                 <% @template.running_data_source.each(){|product| @template.running_data_item = product %>
@@ -684,7 +684,7 @@ module Spree
               <% @template.running_data_source = nil %>
               EOS1
 
-            when DataSourceEnum.blog, DataSourceEnum.post
+          when DataSourceEnum.blog, DataSourceEnum.post
               subpieces = <<-EOS1
               <% @template.running_data_source= @template.posts( (defined?(page) ? page : @current_page) ) %>
               <% @template.running_data_source.each{|post| @template.running_data_item = post %>
@@ -702,29 +702,36 @@ module Spree
             #  <% @template.running_data_source = nil %>
             #  EOS1
           when DataSourceEnum.taxonomy
-            #assigned menu could be root or node
-            subpieces = <<-EOS3
-            <% if @template.menu.present? %>
-              <% if @template.menu.root? %>
-                <% @template.running_data_source= @template.menu.children %>
-                <% @template.running_data_source.each{|page| @template.running_data_item = page %> #{subpieces} <%}%>
-                <% @template.running_data_source = nil %>
-              <% else %>
-                <% @template.running_data_source= @template.menu %>
-                <% @template.running_data_source.tap{|page| @template.running_data_item = page %> #{subpieces} <%}%>
-                <% @template.running_data_source = nil %>
+              #assigned menu could be root or node
+              subpieces = <<-EOS3
+              <% if @template.menu.present? %>
+                <% if @template.menu.root? %>
+                  <% @template.running_data_source= @template.menu.children %>
+                  <% @template.running_data_source.each{|page| @template.running_data_item = page %> #{subpieces} <%}%>
+                  <% @template.running_data_source = nil %>
+                <% else %>
+                  <% @template.running_data_source= @template.menu %>
+                  <% @template.running_data_source.tap{|page| @template.running_data_item = page %> #{subpieces} <%}%>
+                  <% @template.running_data_source = nil %>
+                <% end %>
               <% end %>
-            <% end %>
-            EOS3
+              EOS3
           when DataSourceEnum.taxon
-            #assigned node, could be root
-            subpieces = <<-EOS6
-            <% if @template.menu.present? %>
-                <% @template.running_data_source= @template.menu %>
-                <% @template.running_data_source.tap{|page| @template.running_data_item = page %> #{subpieces} <%}%>
-                <% @template.running_data_source = nil %>
-            <% end %>
-            EOS6
+              #assigned node, could be root
+              subpieces = <<-EOS6
+              <% if @template.menu.present? %>
+                  <% @template.running_data_source= @template.menu %>
+                  <% @template.running_data_source.tap{|page| @template.running_data_item = page %> #{subpieces} <%}%>
+                  <% @template.running_data_source = nil %>
+              <% end %>
+              EOS6
+          when DataSourceEnum.related_taxa
+              #assigned node, could be root
+              subpieces = <<-EOS7
+                  <% @template.running_data_source= @template.related_taxa%>
+                  <% @template.running_data_source.each{|page| @template.running_data_item = page %> #{subpieces} <%}%>
+                  <% @template.running_data_source = nil %>
+              EOS7
           end
         end
         # we recovery template.select after ~~content~~

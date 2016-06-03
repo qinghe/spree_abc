@@ -226,3 +226,23 @@ product_previous_attribute:
     <%= @template.product_attribute( :icon_angle_left, {data: @template.previous_product, placeholder: '<'} ) %>
   css: ""
   js: ""
+taxon_next_attribute:
+  id: 114
+  title: taxon next attribute
+  slug: taxon-next-attribute
+  is_selectable: "0"
+  is_container: "0"
+  html: |
+    <%= @template.page_attribute( :icon_angle_right, {data: @template.next_taxon, placeholder: '>'} ) %>
+  css: ""
+  js: ""
+taxon_previous_attribute:
+  id: 115
+  title: taxon previous attribute
+  slug: taxon-previous-attribute
+  is_selectable: "0"
+  is_container: "0"
+  html: |
+    <%= @template.page_attribute( :icon_angle_left, {data: @template.previous_taxon, placeholder: '<'} ) %>
+  css: ""
+  js: ""
