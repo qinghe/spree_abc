@@ -246,3 +246,14 @@ taxon_previous_attribute:
     <%= @template.page_attribute( :icon_angle_left, {data: @template.previous_taxon, placeholder: '<'} ) %>
   css: ""
   js: ""
+full_screen
+  id: 116
+  title: full screen
+  slug: full-screen
+  is_selectable: "0"
+  is_container: "1"
+  html: |
+    ~~content~~
+  css: |
+    .<%=@template.section_selector%> { z-index:1; position:fixed;  top:0;left:0;right:0;bottom:0;}
+    .<%=@template.section_selector%> >.inner { width:100%; height:100%; }
