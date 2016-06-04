@@ -246,7 +246,7 @@ taxon_previous_attribute:
     <%= @template.page_attribute( :icon_angle_left, {data: @template.previous_taxon, placeholder: '<'} ) %>
   css: ""
   js: ""
-full_screen
+full_screen:
   id: 116
   title: full screen
   slug: full-screen
