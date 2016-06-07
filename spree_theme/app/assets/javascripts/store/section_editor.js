@@ -69,14 +69,10 @@ $(document).ready(function() {
 
     $(document).on( 'click',"#layout_tree_form .click_editable",function(){
         self = $(this);
-        if($('#page_layout_editable').is(':checked')){
-        	// check event.editable to see editable initialized or not
-        	// $(this).data('event.editable', settings.event);
-          self.trigger('click_editable');
-        }else{
+
           $('#selected_page_layout_id').val(self.data('lid'));
           $('#layout_editor_form').trigger('submit');
-        }
+        
     });
 
     $(document).on('mouseover',"#editors .tabs li", function(){

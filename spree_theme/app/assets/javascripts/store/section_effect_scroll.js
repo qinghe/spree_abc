@@ -1,19 +1,19 @@
 // it is using jssor.20 for effect slider
-function ScaleSlider(jssor_slider) {
-  // console.debug( jssor_slider )
-  //Object { $Elmt=div.effect_slider,  $Options={...},  $PlayTo=PlayTo(),  more...}
-  //Object { data=slider, originalEvent=Event load,  type="load",  timeStamp=0,  more...}
-  var element = ( jssor_slider.$Elmt || jssor_slider.data.$Elmt )
-  if( element ){
-    var parentWidth= $(element.parentNode).width();
-    if(parentWidth=false)
-      jssor_slider.$ScaleWidth(parentWidth);//jssor_slider.$SetScaleWidth(parentWidth);
-    //else
-    //  window.setTimeout(function(jssor_slider){ ScaleSlider(jssor_slider); }, 30);
-  }
-}
-$(document).ready(function() {
 
+$(document).ready(function() {
+  function ScaleSlider(event) {
+    // console.debug( jssor_slider )
+    //Object { data=slider, originalEvent=Event load,  type="load",  timeStamp=0,  more...}
+    var slider =  event.data
+    var refSize = slider.$Elmt.parentNode.clientWidth;
+    if (refSize) {
+        refSize = Math.min(refSize, 1920);
+        slider.$ScaleWidth(refSize);
+    }
+    //else {
+    //    window.setTimeout(ScaleSlider, 30);
+    //}
+  }
   // dom structure
   //   <div class="container">  <div class="inner">
   //      <!-- div.effect_slider is required, jssor manipulate it. -->
@@ -25,27 +25,28 @@ $(document).ready(function() {
   $(".effect_slider").each(function(index, element) {
     var $self = $(element);
     var $parent = $self.parent();
-    var $slide_container = $self.children("[u='slides']");
+    //slides
+    var $slides = $self.children("[data-u='slides']");
     var $arrow_navigator = $self.children(".arrowleft");
-    var $bullet_navigator = $self.children("[u='navigator']");
+    var $bullet_navigator = $self.children("[data-u='navigator']");
+    // for feature fullwidth
+    var parent_width = $parent.width();
     // if parent height is 1, use width. it is for product image slider on mobile
-    var height = $parent.height();
-    if (height > 1){
-      $self.css({ height : $parent.css('height'), width : $parent.css('width')  });
-      $slide_container.css({ height : $parent.css('height'), width : $parent.css('width') });
-    }else{
-      $self.css({ height : $parent.css('width'), width : $parent.css('width')  });
-      $slide_container.css({ height : $parent.css('width'), width : $parent.css('width') });
-    }
+    var height = $slides.height();
+    var width = $slides.width();
+
+    $self.css({ height: height, width: width  });
+    $slides.css({ height: height, width: width });
+
     var transitions = { fade: [{$Duration:1200,$Opacity:2}] };
     var options = null, slideshow_options=null;
-    var auto_play = ( $slide_container.data('auto-play') == null ?  true : $slide_container.data('auto-play') );
-    var display_pieces = $slide_container.data('display-pieces');
-    var transition_name =  $slide_container.data('transition');
+    var auto_play = ( $slides.data('auto-play') == null ?  true : $slides.data('auto-play') );
+    var display_pieces = $slides.data('display-pieces');
+    var transition_name =  $slides.data('transition');
 
 
     if( display_pieces ){
-        var slide_width = $self.find("[u='slides']>div").width();
+        var slide_width = $self.find("[data-u='slides']>div").width();
         var display_piece = Math.ceil( $parent.width() / slide_width );
         // get width of a slide
         options = {
@@ -97,12 +98,14 @@ $(document).ready(function() {
       }
 
     }
-    if( $slide_container.children().length>0){
+    if( $slides.children().length>0){
         var jssor_slider1 = new $JssorSlider$($self.get(0), options);
         //responsive code begin
         //you can remove responsive code if you don't want the slider scales while window resizes
         //Scale slider immediately
-        ScaleSlider(jssor_slider1);
+        if ( parent_width != width){
+          ScaleSlider({ data:jssor_slider1} );
+        }
 
         //Scale slider while window load/resize/orientationchange.
         $(window).bind("load", jssor_slider1, ScaleSlider);

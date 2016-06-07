@@ -1060,12 +1060,12 @@ slider:
     <%# outer div is required, jssor duplicate it and set style. %>
     <% if @template.menu.present? %>
       <!-- Loading Screen -->
-      <div u="loading" style="position: absolute; top: 0px; left: 0px;width: 100%;height:100%;">
+      <div data-u="loading" style="position: absolute; top: 0px; left: 0px;width: 100%;height:100%;">
         <div style="filter: alpha(opacity=70); opacity:0.7; position: absolute; display: block; background-color: #000000; top: 0px; left: 0px;width: 100%;height:100%;"></div>
         <div style="position: absolute; display: block; background: url(/shops/shared/images/jssor/loading.gif) no-repeat center center; top: 0px; left: 0px;width: 100%;height:100%;"> </div>
       </div>
       <%# jssor require with,height in element style. %>
-      <div u="slides" style="position: absolute;overflow:hidden;" >
+      <div data-u="slides" class="slides" style="position: absolute;overflow:hidden;" >
         <% @template.menu.children.each{|page| %>
           <div>
             <%= link_to_if @template.current_piece.clickable?, image_tag( page.icon.url(:original), :u=>'image', :alt=>page.name), page.path %>
@@ -1073,7 +1073,7 @@ slider:
         <% } %>
       </div>
         <!-- Bullet Navigator Skin Begin -->
-        <div u="navigator" class= "jssorb03" style="position: absolute;">
+        <div data-u="navigator" class= "jssorb03" style="position: absolute;">
             <!-- bullet navigator item prototype -->
             <div u="prototype" style="position: absolute; width: 19px; height: 19px;"></div>
         </div>
@@ -1082,10 +1082,11 @@ slider:
   css: |-
     .<%=@template.section_selector%> > .inner { min-height:1px;min-width:1px; /* hight, width are required*/}
     .effect_slider { position:relative; }
-    .<%=@template.section_selector%> [u='slides']{
+    .<%=@template.section_selector%> [data-u='slides']{
+      <%=@template.css(:slides)%>
       cursor: move; left: 0px; top: 0px;
     }
-    .<%=@template.section_selector%> [u='navigator']{
+    .<%=@template.section_selector%> [data-u='navigator']{
       position: absolute;
       bottom:0;
     }
@@ -1605,7 +1606,7 @@ slider_core:
   html: |-
     <div class="effect_slider" >
       <!-- Loading Screen -->
-      <div u="loading" style="position: absolute; top: 0px; left: 0px;width: 100%;height:100%;">
+      <div data-u="loading" style="position: absolute; top: 0px; left: 0px;width: 100%;height:100%;">
         <div style="filter: alpha(opacity=70); opacity:0.7; position: absolute; display: block; background-color: #000000; top: 0px; left: 0px;width: 100%;height:100%;"></div>
         <div style="position: absolute; display: block; background: url(/shops/shared/images/jssor/loading.gif) no-repeat center center; top: 0px; left: 0px;width: 100%;height:100%;"> </div>
       </div>
@@ -1614,7 +1615,8 @@ slider_core:
   css: |-
     .<%=@template.section_selector%> > .inner { min-height:1px;min-width:1px; /* hight, width are required*/}
     .effect_slider { position:relative; }
-    .<%=@template.section_selector%> [u='slides']{
+    .<%=@template.section_selector%> .slides {
+      <%=@template.css(:slides)%>
       cursor: move; left: 0px; top: 0px;
     }
 
@@ -1626,7 +1628,7 @@ slider_data_taxons:
   is_container: "0"
   html: |-
       <%# jssor require with,height in element style. %>
-      <div u="slides" style="position: absolute;overflow:hidden;" >
+      <div data-u="slides" class="slides" style="position: absolute;overflow:hidden;" >
       <% if @template.menu.present? %>
         <% @template.menu.children.each{|page| %>
           <div><%= image_tag page.icon.url(:original), :u=>'image', :alt=>page.name %></div>
@@ -1642,7 +1644,7 @@ slider_data_product_images:
   is_selectable: "0"
   is_container: "0"
   html: |-
-      <div u="slides" style="position: absolute;overflow:hidden;" data-auto-play="false">
+      <div data-u="slides" class="slides" style="position: absolute;overflow:hidden;" data-auto-play="false">
          <% (@template.running_data_item.try(:whole_images)).each{|image| %>
           <div><%= @template.product_attribute( :image, image: image ) %></div>
          <% } %>
