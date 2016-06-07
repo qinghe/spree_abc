@@ -47,7 +47,7 @@ $(document).ready(function() {
 
     if( display_pieces ){
         var slide_width = $self.find("[data-u='slides']>div").width();
-        var display_piece = Math.ceil( $parent.width() / slide_width );
+        var display_piece = Math.ceil( width / slide_width );
         // get width of a slide
         options = {
                 $AutoPlay: auto_play,                                    //[Optional] Whether to auto play, to enable slideshow, this option must be set to true, default value is false
