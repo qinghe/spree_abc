@@ -3,6 +3,7 @@
 //= require jquery.ias.dev
 //= require jquery.sidr
 //= require store/section_effect_scroll
+//= require store/ckeditor_effect
 
 function AddFavorite() {
     var url = window.location;
