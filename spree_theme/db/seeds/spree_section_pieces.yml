@@ -1547,7 +1547,7 @@ slider_scrolling:
   css: |-
     .<%=@template.section_selector%> > .inner { min-height:1px;min-width:1px; /* hight, width are required*/}
     .effect_slider { position:relative; }
-    .<%=@template.section_selector%> [u='slides']{
+    .<%=@template.section_selector%> [data-u='slides']{
       <%=@template.css(:slides)%>
       cursor: move; left: 0px; top: 0px;
     }
