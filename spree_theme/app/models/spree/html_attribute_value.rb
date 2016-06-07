@@ -138,7 +138,7 @@ module Spree
           val = pvalue_properties["psvalue0"]
         end
       else
-        val = html_attribute.repeats.times.collect{|i|
+        vals = html_attribute.repeats.times.collect{|i|
           if html_attribute.is_special? :color #no need unit for color
             html_attribute.manual_entry?(pvalue_properties["psvalue#{i}"]) ?
               "#{pvalue_properties["pvalue#{i}"]}" : pvalue_properties["psvalue#{i}"]
@@ -146,7 +146,11 @@ module Spree
             html_attribute.manual_entry?(pvalue_properties["psvalue#{i}"]) ?
               "#{pvalue_properties["pvalue#{i}"]}#{pvalue_properties["unit#{i}"]}" : pvalue_properties["psvalue#{i}"]
           end
-        }.join(' ')
+        }
+        if html_attribute.css_name == 'background-size' && html_attribute.selected_value?( vals[0])
+          vals = vals.uniq # ['contain' 'contain'] => ['contain']
+        end
+        val = vals.join(' ')
       end
       val
     end
