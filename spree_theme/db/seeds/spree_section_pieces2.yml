@@ -74,7 +74,7 @@ slider_data_taxons_transition_fade:
   is_container: "0"
   html: |-
       <%# jssor require with,height in element style. %>
-      <div u="slides" style="position: absolute;overflow:hidden;" data-transition='fade'>
+      <div data-u="slides" class="slides" style="position: absolute;overflow:hidden;" data-transition='fade'>
       <% if @template.menu.present? %>
         <% @template.menu.children.each{|page| %>
           <div><%= image_tag page.icon.url(:original), :u=>'image', :alt=>page.name %></div>

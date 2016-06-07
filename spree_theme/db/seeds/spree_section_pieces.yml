@@ -1535,12 +1535,12 @@ slider_scrolling:
   html: |-
     <div class="effect_slider" >
       <!-- Loading Screen -->
-      <div u="loading" style="position: absolute; top: 0px; left: 0px;width: 100%;height:100%;">
+      <div data-u="loading" style="position: absolute; top: 0px; left: 0px;width: 100%;height:100%;">
         <div style="filter: alpha(opacity=70); opacity:0.7; position: absolute; display: block; background-color: #000000; top: 0px; left: 0px;width: 100%;height:100%;"></div>
         <div style="position: absolute; display: block; background: url(/shops/shared/images/jssor/loading.gif) no-repeat center center; top: 0px; left: 0px;width: 100%;height:100%;"> </div>
       </div>
       <%# jssor require with,height in element style. %>
-      <div u="slides" data-display-pieces='n' style="position: absolute;overflow:hidden;" >
+      <div data-u="slides" class="slides" data-display-pieces='n' style="position: absolute;overflow:hidden;" >
         ~~content~~
       </div>
     </div>
@@ -1548,6 +1548,7 @@ slider_scrolling:
     .<%=@template.section_selector%> > .inner { min-height:1px;min-width:1px; /* hight, width are required*/}
     .effect_slider { position:relative; }
     .<%=@template.section_selector%> [u='slides']{
+      <%=@template.css(:slides)%>
       cursor: move; left: 0px; top: 0px;
     }
 
