@@ -9,7 +9,7 @@ class Spree::PostFile < Spree::Asset
 
   validates_attachment :attachment,    presence: true,
     content_type: { content_type: %w(image/jpeg image/gif image/png text/plain application/vnd.ms-powerpoint application/msword aplication/zip application/pdf) },
-    size: { in: 0..10.megabytes }
+    size: { in: 0..20.megabytes }
 
   def url_thumb
     @url_thumb ||= Ckeditor::Utils.filethumb(attachment_file_name)
