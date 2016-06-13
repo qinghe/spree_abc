@@ -33,4 +33,9 @@ $(document).ready(function() {
       event.preventDefault();
     })
 
+
+    if( $('.ck_effect_screen_logo').is('*')){
+      window.setTimeout("window.location.href=$('.ck_effect_screen_logo').attr('href')", 3000)
+    }
+
 })
