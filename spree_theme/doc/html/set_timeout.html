@@ -1,0 +1,27 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>text-overflow</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<script type="text/javascript" src="./hover-effect/js/jquery-1.8.1.min.js"></script>
+<script type="text/javascript">
+   $(document).ready( function(){
+     if( $('#a1').is('*')){
+       window.setTimeout("alert('works!');window.location.href=$('#a1').attr('href')", 3000)
+     }
+   })
+</script>
+<style type="text/css">
+  *{padding:0;margin:0}
+  a{ text-decoration:none;color:#6699ff}
+  ul,li{list-style:none;text-align:left}
+  #jb51net li{width:150px;overflow:hidden;text-overflow:ellipsis;border-bottom:1px #ff8000 dashed;}
+</style>
+</head>
+<body>
+<ul id="jb51net">
+<li><a id="a1" href="/#"><span>trigger click in timeout function </span></a></li>
+</ul>
+</body>
+</html>
