@@ -33,9 +33,9 @@ $(document).ready(function() {
       event.preventDefault();
     })
 
-
+    //http://stackoverflow.com/questions/5811122/how-to-trigger-a-click-on-a-link-using-jquery
     if( $('.ck_effect_screen_logo').is('*')){
-      window.setTimeout("window.location.href=$('.ck_effect_screen_logo').attr('href')", 3000)
+      window.setTimeout("$('.ck_effect_screen_logo').children().click()", 3000)
     }
 
 })

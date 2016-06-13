@@ -2,12 +2,13 @@
 @import 'image-zoom';
 @import 'jquery.lightbox';
 @import 'store/spree_china_checkout';
- 
+@import 'store/ck_hack';
+
 html.turbolinks-progress-bar::before {
   background-color: red !important;
   height: 2px !important;
 }
- 
+
 /* mobile required it as well */
 #embeded_content_wrapper{
   position: absolute;
