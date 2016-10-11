@@ -127,5 +127,5 @@ CKEDITOR.editorConfig = function( config ) {
 
     ];
     config.toolbar = 'Full';   
-    config.extraAllowedContent = 'a[href,target,title,class,data-*]';
+    config.extraAllowedContent = 'a[class,style,href,target,title,data-*]';
 };

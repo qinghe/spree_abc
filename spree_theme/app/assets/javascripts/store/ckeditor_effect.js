@@ -38,4 +38,16 @@ $(document).ready(function() {
       window.setTimeout("$('.ck_effect_screen_logo').children().click()", 3000)
     }
 
+    // <div class = "ck_effect_hover">
+    // <a data-hover-bg-color="green"> link </a>
+    // </div>
+    $(".ck_effect_hover a").hover(function(event){
+      var $this =  $(this);
+      //var hover_bg_color = $this.data("hover-bg-color");
+      $this.css({'background-color': $this.data("hover-background"), 'color':  $this.data("hover-color")});
+    },function(event){
+      var $this =  $(this);
+      $this.css({'background-color': '', 'color':''});
+    })
+
 })
