@@ -43,13 +43,23 @@ $(document).ready(function() {
     // </div>
     $(".ck_effect_hover a").hover(function(event){
       var $this =  $(this);
-      //var hover_bg_color = $this.data("hover-bg-color");
-      $this.css({'background-color': $this.data("hover-background"), 'color':  $this.data("hover-color")});
+      var hover_style = $this.data("hover-style")
+      // background-color:white;color:black
+      if( hover_style)
+      {
+        var attrs = _.chain(hover_style.split(";")).map( function( attr){ return attr.split(':')}).filter( function(attr){ return attr.length==2;}).value();
+        //['color','red'] => { color: 'red' }
+        attrs = _.object(attrs);
+        $this.css( attrs);
+      }
     },function(event){
       var $this =  $(this);
-      if( $this.data("color") != null)
+      var normal_style = $this.data("style")
+      if( normal_style )
       {
-        $this.css({'background-color': $this.data("background"), 'color': $this.data("color")});        
+        var attrs = _.chain(normal_style.split(";")).map( function( attr){ return attr.split(':')}).filter( function(attr){ return attr.length==2;}).value();
+        attrs = _.object(attrs);
+        $this.css( attrs);
       }else{
         $this.css({'background-color': '', 'color':''});
       }
