@@ -47,7 +47,12 @@ $(document).ready(function() {
       $this.css({'background-color': $this.data("hover-background"), 'color':  $this.data("hover-color")});
     },function(event){
       var $this =  $(this);
-      $this.css({'background-color': '', 'color':''});
+      if( $this.data("color") != null)
+      {
+        $this.css({'background-color': $this.data("background"), 'color': $this.data("color")});        
+      }else{
+        $this.css({'background-color': '', 'color':''});
+      }
     })
 
 })

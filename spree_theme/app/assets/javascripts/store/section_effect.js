@@ -283,7 +283,12 @@ $(document).ready(function() {
   }
 
   $(".hover_effect_popup").hover(function(e) {
-      var position = compute_popup_position( $(this), 'rl' );
+      var $this = $(this);
+      var direction = 'rl';
+      if ($this.hasClass('direction-t')){
+        direction = 't';
+      }
+      var position = compute_popup_position( $this, direction );
       //console.log( "pos y=%d, x=%d", position[0], position[1] );
       $(".child_2", this).simplemodal({
         appendTo: '#page-wrapper',
