@@ -127,5 +127,9 @@ useful command
 bundle exec rake assets:precompile RAILS_ENV=aliyun_staging
 aliyun-oss-sync push aliass:assets public/assets
 touch tmp/restart.txt
+
 2. update section piece
 bundle exec rake spree_theme:reload_section_piece RAILS_ENV=aliyun_staging
+
+3. copy theme to new design site
+bundle exec rake spree_theme:copy_theme[44,369] RAILS_ENV=aliyun_staging
