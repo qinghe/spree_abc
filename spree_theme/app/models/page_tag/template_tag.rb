@@ -380,7 +380,9 @@ module PageTag
     #   * options -
     #      * data -  Products::WrappedProduct
     #      * placeholder - string
-    def product_attribute( attribute_name, options = { } )
+    def product_attribute( attribute_name=nil, options = { } )
+      attribute_name ||=  self.current_piece.attribute_name.to_sym
+
       wrapped_model =  self.running_data_item_by_class( Products::WrappedProduct )
       wrapped_model = options.delete(:data) if options.key?( :data )
 
