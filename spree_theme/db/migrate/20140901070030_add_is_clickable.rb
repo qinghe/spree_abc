@@ -12,7 +12,8 @@ class AddIsClickable < ActiveRecord::Migration
     #   bit 2,3,4 indicate main_image size,  00: product, 01:large, 10: original, 11:small
     #                                                     16        32            48   
     #   bit 5,6,7 indicate thumbnail size    00: small,   01:large, 10: original, 11:product
-    #                                     
+    # for section menu, bit 3,4 indicate 'hover effect'
+    #   bit 3 two menu item exchange on hover                                    
   end
 
 end

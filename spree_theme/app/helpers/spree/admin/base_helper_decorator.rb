@@ -3,15 +3,15 @@ module Spree
     module BaseHelper
       def page_contexts_for_options(  )
         options = []
-        Spree::Taxon::PageContextEnum.each_pair{|sym, obj| 
-          options<< [Spree.t("section_context.#{ sym }"), obj] 
+        Spree::Taxon::PageContextEnum.each_pair{|sym, obj|
+          options<< [Spree.t("section_context.#{ sym }"), obj]
         }
         if Spree::Site.current.dalianshops?
-          Spree::Taxon::PageContextForFirstSiteEnum.each_pair{|sym, obj| 
-            options<< [Spree.t("section_context.#{ sym }"), obj] 
-          }          
+          Spree::Taxon::PageContextForFirstSiteEnum.each_pair{|sym, obj|
+            options<< [Spree.t("section_context.#{ sym }"), obj]
+          }
         end
-        
+
         options
       end
     end

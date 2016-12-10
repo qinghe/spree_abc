@@ -1,54 +1,57 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
-# id is required, or reload_section_piece would not work, sections is using section_piece_id. 
+# id is required, or reload_section_piece would not work, sections is using section_piece_id.
 root:
   id: 1
   is_selectable: true
   is_container: true
   is_root: true
   html: |-
-    <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-    <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr">
-    <head>
+    <!DOCTYPE html>
+    <html lang="zh-CN">
+      <head>
       <title><%= @current_page.title%></title>
+      <meta http-equiv="X-UA-Compatible" content="IE=Edge">
       <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-      <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8" />
       <%== meta_data_tags %>
-      <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"/>
-      <%# it is in main app/assets/ include spree_theme, spree_china_checkout, store/product, store/cart, store/checkout ... %>      
-      <%= javascript_include_tag 'spree/frontend/all' %>      
-    <% if @current_page.is_preview %>
-      <%= stylesheet_link_tag 'store/spree_theme', :media => 'screen' %>
-    <% else%>
-      <%= stylesheet_link_tag 'store/spree_theme.client', :media => 'screen' %>
-      <link rel="stylesheet" href="<%=@website.public_path('css')%>" type="text/css" />
-    <% end %>    
-    <%= csrf_meta_tags %>
-    <%= render "spree/shared/analytics" %>
-    </head>
-    <body class="clear-block">
-      <% if @current_page.site_design? %>
-        <%= render "spree/shared/theme_selection_for_nondesigner" %>      
+      <%= favicon_link_tag 'favicon.ico' %>
+      <%# it is in main app/assets/ include spree_theme, spree_china_checkout, store/product, store/cart, store/checkout ... %>
+      <%= javascript_include_tag 'spree/frontend/all', "data-turbolinks-track" => true %>
+      <%= stylesheet_link_tag 'store/spree_theme.desktop', "data-turbolinks-track" => true %>
+      <% if @current_page.is_preview %>
+        <%= stylesheet_link_tag 'store/spree_theme'  %>
+      <% else%>
+        <link rel="stylesheet" href="<%=@website.public_path('css')%>" type="text/css" data-turbolinks-track />
+      <% end %>
+      <%= csrf_meta_tags %>
+      <%= render "spree/shared/sync_analytics" %>
+      </head>
+      <body class="clear-block <%= @current_page.agent_selector(request.user_agent) %>">
+      <% if @current_page.site_design? && !@current_page.is_preview %>
+        <%= render "spree/shared/theme_selection_for_nondesigner" %>
       <% end %>
       <%= flash_messages %>
-      <div id="page-wrapper" class="<%='ui-layout-center' if @current_page.is_preview %>">
-      <div id="page" class='<%=g_piece_selector%>'><div id="page-inner" class="<%=g_piece_selector%>_inner clear-block">
+      <div id="page-wrapper" class="<%=@template.section_selector%>">
+      <div id="page" class=''><div id="page-inner" class="inner clear-block">
         ~~content~~
       </div><!-- /#page-inner -->
       </div><!-- /#page -->
       </div><!-- /#jquery.layout require it -->
       <%= javascript_tag  do -%>
-        g_is_preview = <%= @current_page.is_preview.to_json %>  
+        g_client_info = <%== @client_info.to_json %>
       <% end -%>
-    </body>
+      <% if @current_page.is_preview %>
+         <%= render 'layout_editor_panel' %>
+      <% end %>
+      <%= render "spree/shared/analytics" %>
+      </body>
     </html>
   css: |
     body
-    { font-size: 100%;
-      /*line-height: 1em;*/ 
+    { /*font-size: 100%;  #use font-size define in bootstrap
+      line-height: 1em;*/
       margin: 0;
       padding: 0;
       <%= @template.css :body %>
-    }    
+    }
     body, caption, th, td, input, textarea, select, option, legend, fieldset
     {
       <% if @template.css(:font_family)== 'serif' %>
@@ -56,101 +59,76 @@ root:
       <% else %>
       font-family: Tahoma, Verdana, Arial, Helvetica, STXihei, "Microsoft YaHei", SimHei, sans-serif;
       <% end %>
-    }    
+    }
     /*ol,ul { list-style: none; }*/
-    /* **** Defaults **** */  /** headings **/     
+    /* **** Defaults **** */  /** headings **/
     h1
     { font-size: 2em;
       line-height: 1.3em;
       margin-top: 0;
       margin-bottom: 0.5em; /* 0.5em is equavalent to 1em in the page's base font. A margin specified in ems is relative to
                                the element's font-size, not to the pages' base font size. */
-    }    
+    }
     h2
     { font-size: 1.5em;
       line-height: 1.3em;
       margin-top: 0.667em; /* Equivalent to 1em in the page's base font: 1 / 1.5 = 0.667em */
       margin-bottom: 0.667em;
-    }    
+    }
     h3
     { font-size: 1.3em;
       line-height: 1.3em;
       margin-top: 0.769em; /* Equivalent to 1em in the page's base font: 1 / 1.3 = 0.769 */
       margin-bottom: 0.769em;
-    }    
+    }
     table { border-collapse:collapse; border-spacing:0 }
     th, thead th, tbody th
     { text-align: left;
       font-style:normal;
-      font-weight:normal;  
+      font-weight:normal;
       vertical-align: middle;
     }
     img
     { border: 0;
-      /* remove extra height, 
+      /* remove extra height,
        * http://stackoverflow.com/questions/6483994/css-font-size-img-tag
        */
-      vertical-align:middle; 
+      vertical-align:middle;
     }
     table {
-      width:100%; 
+      width:100%;
     }
+    /* all global setting apply to page_wrapper, simplemodal append to it. */
     /* set padding margin to label */
-    #page form[id] label {
+    #page-wrapper form[id] label {
       display: inline-block;
     }
-    /* 
-     * product description should escape css reset 
-     * checkout_form, login_form, site_form... 
+    /*
+     * product description should escape css reset
+     * checkout_form, login_form, site_form...
      */
-    #page form[id] p {       
+    #page-wrapper form[id] p {
       margin: 0; padding: 0;
     }
-          
-    <% if @template.css :use_bbtl %>
-    div#bbtl
-    { position:absolute;
-      top:0;
-      left:0;
-      <%= @template.css :bbtl %>
+    /* keep input width same with container, exclude radio,checkbox */
+    /* us .selector, descendants could override it by .selector input */
+    form.fullwidth input[type="text"], form.fullwidth input[type="password"], form.fullwidth input[type="phone"], form.fullwidth input[type="email"], form.fullwidth input[type="number"], form.fullwidth input[type="url"], textarea.fullwidth{
+      box-sizing: border-box;
+      width: 100%;
     }
-    <% end %>
-    <% if @template.css :use_bbtr %>
-    div#bbtr
-    { position:absolute;
-      top:0;
-      right:0;
-      <%= @template.css :bbtr %>
-    }
-    <% end %>
-    <% if @template.css :use_pbbl %>
-    div#pbbl
-    { position:absolute;
-      bottom:0;
-      left:0;
-      <%= @template.css :pbbl %>
-    }
-    <% end %>
-    <% if @template.css :use_pbbr %>
-    div#pbbr
-    { position:absolute;
-      bottom:0;
-      right:0;
-      <%= @template.css :pbbr %>
-    }
-    <% end %>
+
       #page
       {
-        <% if @template.css(:font_size)== 10%>
+        <% if 'font_size' == 'font_size:10px' %>
         font-size: 0.625em; /* 16px x .625 = 10px */
         line-height: 1.4em; /* 10px x 1.4 = 14px */
-        <% elsif @template.css(:font_size)== 12%>
+        <% elsif 'font_size' == 'font_size:12px' %>
         font-size: 0.75em; /* 16px x .75 = 12px */
         line-height: 1.333em; /* 12px x 1.333 = 16px */
-        <% elsif @template.css(:font_size)== 14%>
+        <% elsif 'font_size' == 'font_size:14px' %>
         font-size: 0.875em; /* 16px x .875 = 14px */
         line-height: 1.286; /* 14px x 1.286 = 18px */
-        <% elsif @template.css(:font_size)== 16%>
+        <% else %>
         font-size: 1em; /* 16px x 1 = 16px */
         line-height: 1.13; /* 16px x 1.13 = 18px */
         <% end %>
@@ -162,10 +140,10 @@ root:
       }
         #page-inner
         { position:relative;
-        <% @template.css :inner %>
+        <%= @template.css :inner %>
         }
-    .<%=@template.current_piece.child_selector%> 
-    {  
+    .<%=@template.current_piece.child_selector%>
+    {
       <% if @template.css(:content_layout).to_i > 0 %>
       clear:none;
       <% else %>
@@ -183,25 +161,12 @@ root:
     .clear-block {
       display: block;
     }
-    .tlc, .trc, .blc, .brc
-    { background-repeat: no-repeat;
-      width:100%;
-      height:100%;
-    }
-    .tb, .bb
-    { background-repeat: repeat-x;
-      width:100%;
-      height:100%;
-    }
-    .lb, .rb
-    { width:100%;
-      height:100%;
-    }
+
     /* common setting for subsections, they are in container-link, container-form, container-table now.
-     * a 
+     * a
      *   a active
      *   a visited
-     *   a hover     
+     *   a hover
      *   a select
      *   a select hover
      * table border, margin, bg, font(font-size, font-weight, text-decoration, color, text-align )
@@ -214,8 +179,8 @@ root:
      *   lable margin, border, padding, bg, font
      *   error margin, border, padding, bg, font
      *   input margin, border, padding, bg, font
-     */ 
-    
+     */
+
   title: root
   slug: root
   js: ""
@@ -225,33 +190,31 @@ container:
   is_selectable: "1"
   is_container: "1"
   html: |-
-    <!-- container  -->
-    <div class="<%=g_piece_selector%> <%=@template.current_piece.as_child_selector%> content_layout" >
-          <div class="<%=g_piece_selector%>_inner clear-block">          
-          ~~content~~
-          <% if @template.current_piece.current_data_source.present? 
-              if @var_collection.present? && @var_collection.try( :has_pages? ) %>
-              <%= paginate @var_collection %>
-              <% #set it to nil, or render pagination more times 
-                @var_collection = nil 
-              end 
-             end %>
-          </div>          
-    </div> 
+    <div class="content_layout ~~selector~~" >
+       <div class="inner clear-block">~~content~~</div>
+    </div>
   css: |-
     /* width,height, skinnables */
-    .<%=g_piece_selector%>
-    { float:left; overflow:hidden;  padding:0;  margin:0 auto; 
+    .<%=@template.section_selector%>
+    { float:left; padding:0;  margin:0 auto;
+      overflow:hidden;
+      /* overflow is required for centered block float:none, margin: auto.
+       * http://yuiblog.com/blog/2010/05/19/css-101-block-formatting-contexts/
+       */
       position:relative;
       <%=@template.css(:block)%>
     }
     /* background, margin, border, padding */
-    .<%=g_piece_selector%> .<%=g_piece_selector%>_inner
+    .<%=@template.section_selector%> > .inner
     { overflow: hidden;/* keep border visible*/
-      min-height:1px;min-width:1px;  /* it is required as placeholder */
+      /* min-height:1px;min-width:1px;   it is required as placeholder,cause problem when image width 100% */
       <%=@template.css(:inner)%>
     }
-    .<%=@template.current_piece.child_selector%> 
+    .<%=@template.section_selector%> > .inner.hover
+    {
+      <%=@template.css(:hover)%>
+    }
+    .<%=@template.current_piece.child_selector%>
     {
       <%if @template.css(:content_layout).present? %>
         <%= @template.css(:content_layout) %>
@@ -259,47 +222,43 @@ container:
         clear:both;
       <%end%>
     }
-    /* #copy from spree_backend/assets/stylesheets/admin/components/pagination */    
-    .<%=g_piece_selector%> .pagination { float:left; clear:both; } /* add clear */
-    .<%=g_piece_selector%> .pagination .page{ display: inline-block; text-align: center;
-      <%=@template.css(:pagination_page)%> 
+    <% if @template.current_piece.per_page >0 %>
+    /* #copy from spree_backend/assets/stylesheets/admin/components/pagination */
+    .<%=@template.section_selector%> .pagination { float:left; clear:both; } /* add clear */
+    .<%=@template.section_selector%> .pagination .page{ display: inline-block; text-align: center;
+      <%=@template.css(:pagination_page)%>
     }
-    .<%=g_piece_selector%> .pagination .current{
-      <%=@template.css(:pagination_current)%> 
-    }    
-    /* !unused, css for first/last child, feature center content */
-    <% if @template.current_piece.current_data_source.present? %>
-    .<%=@template.current_piece.child_selector%>:first-child{
-    } 
-    .<%=@template.current_piece.child_selector%>:last-child{
-    }     
-    <% end %> 
-   
+    .<%=@template.section_selector%> .pagination .current{
+      <%=@template.css(:pagination_current)%>
+    }
+    <% end %>
+    <% if @template.current_piece.column_count >0 %>
+    /* css for last column in row, feature center content, for mobile column, no inner div */
+    .<%=@template.current_piece.child_selector%>.data_last, .<%=@template.current_piece.child_selector%>.data_last>div{ margin-right:0; padding-right:0; border-right:0; }
+    <% end %>
   title: container
   slug: container
-  
+
 hmenu:
   id: 3
   is_selectable: "0"
   is_container: "1"
   resources: m
   html: |-
-    <ul class="<%=g_piece_selector%>" >
-    <% if @template.menu.present? %>
-    <% @template.menu.children.each{|page| %>
-       ~~content~~
-    <% } %>
-    <% end %>
+    <ul > <% get_menu_items(@template.current_piece).each{|page| %>
+             ~~content~~
+          <% } %>
     </ul>
   css: |-
-    .<%=g_piece_selector%>, .<%=g_piece_selector%> ul{ margin: 0; padding: 0;}
-    .<%=g_piece_selector%> li{ 
+    .<%=@template.section_selector%> ul{ margin: 0; padding: 0;}
+    .<%=@template.section_selector%> li{
       list-style-type:none;
       display:inline;}
-    .<%=g_piece_selector%> a{ 
-     display:inline-block;
-     float:left;
-     margin:0; /* non-editable */}
+    .<%=@template.section_selector%> a{
+       display:inline-block;
+       float:left;
+       margin:0; /* non-editable */
+       }
   title: hmenu
   slug: hmenu
 vmenu:
@@ -310,20 +269,16 @@ vmenu:
   title: vmenu
   slug: vmenu
   html: |-
-    <ul class="<%=g_piece_selector%>">
-    <% if @template.menu.present? %>
-    <% @template.menu.children.each{|page| %>
-       ~~content~~
-    <% } %>
-    <% end %>
+    <ul > <% get_menu_items(@template.current_piece).each{|page| %>
+             ~~content~~
+          <% } %>
     </ul>
   css: |-
-    .<%=g_piece_selector%>,.<%=g_piece_selector%> ul{ margin: 0; padding: 0;}
-    .<%=g_piece_selector%> li{ list-style-type:none; }
-    .<%=g_piece_selector%> a{ float: left;  clear: left;  text-align: left;  margin: 0px;  border: 0px;  }
-
+    .<%=@template.section_selector %> ul{ margin: 0; padding: 0;}
+    .<%=@template.section_selector %> li{ list-style-type:none; }
+    .<%=@template.section_selector %> a{ float: left;  clear: left;  text-align: left;  margin: 0px;  border: 0px; }
   js: ""
-   
+
 menuitem:
   id: 6
   is_selectable: "0"
@@ -331,53 +286,29 @@ menuitem:
   title: menuitem
   slug: menuitem
   html: |
-    <% lambda_item = lambda{ |page| 
-        if page.clickable? 
-           if page.current?
-             link_to page.name, page.path, page.extra_html_attributes.merge( {:id=>"pi#{g_piece_selector}_page.id", :class=>"selected depth#{page.depth}"} )
-           else
-             link_to page.name, page.path, page.extra_html_attributes.merge( {:id=>"pi#{g_piece_selector}_page.id", :class=>"depth#{page.depth}"} )
-           end 
-        else
-          link_to page.name, page.path, page.extra_html_attributes.merge( {:id=>"pi#{g_piece_selector}_page.id", :class=>"noclick depth#{page.depth}", :href=>'javascript:void(0)'} )
-        end
-      }
-    %>
-    <li class="<%=g_piece_selector%>">
-      <%= lambda_item.call(page) %>
-      <% unless page.leaf? %>
-      <ul><% page.children.each{|page| %>
-           <li>  <%= lambda_item.call(page) %> 
-           <% unless page.leaf? %>
-             <ul> <% page.children.each{|page| %>
-               <li>  <%= lambda_item.call(page) %> </li>
-             <% } %> </ul>
-           <% end %>    
-           </li>
-      <% } %> </ul>
-      <% end %>      
-    </li>
-    
+    <%= menu_item_atom( @template.current_piece, page )  %>
   css: |-
-      .<%=g_piece_selector%> {
+      .<%=@template.section_selector %> {
        <%= @template.css :shell %>
-      } 
-      /*override parent container .selector a */     
-      .<%=g_piece_selector%> a{
-       <%= @template.css :a %>  
       }
-      .<%=g_piece_selector%> a:hover{  
-        <%= @template.css :a_h %> 
+      /* override parent container .selector a */
+      .<%=@template.section_selector %> a{
+       position:relative;overflow: hidden;
+       <%= @template.css :a %>
       }
-      .<%=g_piece_selector%> .selected{ 
-        <%= @template.css :selected %> 
+      .<%=@template.section_selector %> a:hover{
+        <%= @template.css :a_h %>
       }
-      .<%=g_piece_selector%> a.selected:hover{  <%= @template.css :as_h %> }
-      .<%=g_piece_selector%> .noclick{ cursor:default; <%= @template.css :noclick %> }
-      .<%=g_piece_selector%> a.depth1{ <%= @template.css :depth1 %>  }
-      .<%=g_piece_selector%> a.depth2{ <%= @template.css :depth2 %>  }
-      .<%=g_piece_selector%> a.depth3{ <%= @template.css :depth3 %>  }
-      .<%=g_piece_selector%> a.depth4{ <%= @template.css :depth4 %>  }
+      .<%=@template.section_selector %> .selected{
+        <%= @template.css :selected %>
+      }
+      .<%=@template.section_selector %> a.selected:hover{  <%= @template.css :as_h %> }
+      .<%=@template.section_selector %> .noclick{ cursor:default; <%= @template.css :noclick %> }
+      .<%=@template.section_selector %> a.depth1{ <%= @template.css :depth1 %>  }
+      .<%=@template.section_selector %> a.depth2{ <%= @template.css :depth2 %>  }
+      .<%=@template.section_selector %> a.depth3{ <%= @template.css :depth3 %>  }
+      .<%=@template.section_selector %> a.depth4{ <%= @template.css :depth4 %>  }
+
   js: ""
 image:
   id: 7
@@ -386,15 +317,15 @@ image:
   is_selectable: "0"
   is_container: "0"
   resources: i
-  html: | 
-    <% if @template.image.present? %>    
+  html: |
+    <% if @template.image.present? %>
          <img src="<%= @template.image.url %>"  border="0" />
     <% else %>
-         <img alt='no image'  border="0" />         
+         <img alt='no image'  border="0" />
     <% end %>
   created_at: 2011-09-20 19:40:07
   updated_at: 2011-09-20 19:40:07
-  css: ""
+  css: .<%= @template.section_selector %> img { width:100%; }
   js: ""
 text:
   id: 8
@@ -403,7 +334,7 @@ text:
   is_selectable: "0"
   is_container: "0"
   resources: t
-  html: <%= raw @template.text %>
+  html: <%== @template.text %>
   created_at: 2011-09-20 19:40:07
   updated_at: 2011-09-20 19:40:07
   css: ""
@@ -414,17 +345,12 @@ product_image:
   slug: product-image
   is_selectable: "0"
   is_container: "0"
-  html: |  
-    <% if defined? product %>      
-     <% if @template.current_piece.view_as_clickable? %>
-      <%= link_to product_main_image( @template.current_piece, product ), product.path %>
-     <% else %>
-      <%= product_main_image( @template.current_piece, product ) %>
-     <% end %> 
-    <% end %>
+  html: |
+    <%= @template.product_attribute( :image ) %>
   created_at: 2011-09-20 19:40:07
   updated_at: 2011-09-20 19:40:07
-  css: ""
+  css: |
+    .<%= @template.section_selector %> img { width:100%; }
   js: ""
 product_description:
   id: 12
@@ -432,37 +358,28 @@ product_description:
   slug: product-description
   is_selectable: "0"
   is_container: "0"
-  html: |      
-    <% if defined? product %>
-       <%=raw product.description %>
-    <% end %>
+  html: |
+    <%== @template.product_attribute( :description )  %>
   created_at: 2011-09-20 19:40:07
   updated_at: 2011-09-20 19:40:07
   css: ""
-  js: ""    
+  js: ""
 product_name:
   id: 13
   title: Product name
   slug: product-name
   is_selectable: "0"
   is_container: "0"
-  html: |    
-    <% if defined? product %>
-     <%# span only for selector  .g_piece_selector a %>
-     <% if @template.current_piece.view_as_clickable? %>
-       <a href="<%= product.path %>"> <%=product.name %> </a>
-     <% else %>
-       <%=product.name %>
-     <% end %>
-    <% end %>
+  html: |
+    <%= @template.product_attribute( :name )  %>
   created_at: 2011-09-20 19:40:07
   updated_at: 2011-09-20 19:40:07
   css: |
-    .<%=@template.current_piece.section_selector%>  a{
-      <%= @template.css :a %> 
+    .<%=@template.section_selector%>  a{
+      <%= @template.css :a %>
     }
-    .<%=@template.current_piece.section_selector%>  a:hover{
-      <%= @template.css :a_h %> 
+    .<%=@template.section_selector%>  a:hover{
+      <%= @template.css :a_h %>
     }
   js: ""
 product_thumbnails:
@@ -471,20 +388,20 @@ product_thumbnails:
   slug: product_thumbnails
   is_selectable: "0"
   is_container: "0"
-  html: |   
-    <%# no need for thumbnails unless there is more than one image %>
-    <div id="product-images" data-hook="product_images" class="<%=g_piece_selector%>">
+  html: |
+    <!-- no need for thumbnails unless there is more than one image -->
+    <div id="product-images" data-hook="product_images" >
     <% if (product.images + product.variant_images).uniq.size > 1 %>
       <ul id="product-thumbnails" class="thumbnails inline" data-hook>
       <% product.images.each do |i| %><li class='tmb-all tmb-<%= i.viewable.id %>'>
-          <%= link_to_product_thumbnail( @template.current_piece, i ) %>
+          <%= @template.product_attribute( :thumbnail, image: i ) %>
         </li>
         <% end %>
         <% if product.has_variants? %>
         <% product.variant_images.each do |i| %>
           <% next if product.images.include?(i) %>
           <li class='vtmb tmb-<%= i.viewable.id %>'>
-            <%= link_to_product_thumbnail( @template.current_piece, i ) %>
+            <%= @template.product_attribute( :thumbnail, image: i ) %>
           </li>
         <% end %>
       <% end %>
@@ -494,9 +411,9 @@ product_thumbnails:
   created_at: 2011-09-20 19:40:07
   updated_at: 2011-09-20 19:40:07
   css: |-
-    .<%=g_piece_selector%> ul{ margin: 0; padding: 0;}
-    .<%=g_piece_selector%> li{ list-style-type:none; }
-    .<%=g_piece_selector%> ul.inline  li {
+    .<%=@template.section_selector%> ul{ margin: 0; padding: 0;}
+    .<%=@template.section_selector%> li{ list-style-type:none; }
+    .<%=@template.section_selector%> ul.inline  li {
     /*
      * it is inline-block, we should remove space between li.
      * http://stackoverflow.com/questions/16234440/space-between-li
@@ -504,8 +421,8 @@ product_thumbnails:
       display: inline;
       float:left;
     }
-    .<%=g_piece_selector%> img {
-      <%= @template.css :img %> 
+    .<%=@template.section_selector%> .thumbnails img {
+      <%= @template.css :img %>
     }
   js: ""
 product_main_image:
@@ -514,16 +431,22 @@ product_main_image:
   slug: product_main_image
   is_selectable: "0"
   is_container: "0"
-  html: |   
-    <div id="main-image"  class="<%=g_piece_selector%>">       
-      <%= product_main_image( @template.current_piece, product ) %>
+  html: |
+    <div id="main-image" class="main_image_wrapper">
+      <%= @template.product_attribute( :image  ) %>
     </div>
   created_at: 2011-09-20 19:40:07
   updated_at: 2011-09-20 19:40:07
   css: |
-    .<%=g_piece_selector%> img{
-      <%= @template.css :img %> 
+    /* do not apply css padding,margin on image, image-zoom required. use wrapper instead */
+    .<%=@template.section_selector%> .main_image_wrapper img{
+      width: 100%;
+      <% if @template.current_piece.lightboxable? %>
+      cursor: pointer;
+      <% end %>
     }
+    /* since img has width:100%; padding/border/margin should apply to wrapper, or image width> container width*/
+    .<%=@template.section_selector%> .main_image_wrapper{ <%= @template.css :img %> }
   js: ""
 product_properties:
   id: 16
@@ -531,9 +454,9 @@ product_properties:
   slug: product_properties
   is_selectable: "0"
   is_container: "0"
-  html: |   
-    <% unless product.product_properties.empty? %>  
-      <table class="<%=g_piece_selector%>" >
+  html: |
+    <% unless product.product_properties.empty? %>
+      <table >
         <tbody>
           <% product.product_properties.each do |product_property| %>
             <% css_class = cycle('even', 'odd', :name => "properties") %>
@@ -549,17 +472,17 @@ product_properties:
   created_at: 2011-09-20 19:40:07
   updated_at: 2011-09-20 19:40:07
   css: |
-    .<%=g_piece_selector%> {
-      width:100%; 
+    .<%=@template.section_selector%> table {
+      width:100%;
     }
-    .<%=g_piece_selector%> .cell{
-      <%= @template.css :cell %> 
+    .<%=@template.section_selector%> .cell{
+      <%= @template.css :cell %>
     }
-    .<%=g_piece_selector%> th{
-      <%= @template.css :th %> 
+    .<%=@template.section_selector%> th{
+      <%= @template.css :th %>
     }
-    .<%=g_piece_selector%> td{
-      <%= @template.css :td %> 
+    .<%=@template.section_selector%> td{
+      <%= @template.css :td %>
     }
 
   js: ""
@@ -577,7 +500,7 @@ product_price:
             <div>
               <span class="price selling" itemprop="price">
                 <%= display_price(product.master) %>
-              </span>            
+              </span>
             </div>
           </div>
         </div>
@@ -586,8 +509,8 @@ product_price:
             <br>
             <div><span class="price selling" itemprop="price"><%= Spree.t('product_not_available_in_this_currency') %></span></div>
           </div>
-      <% end %>    
-    <% end %> 
+      <% end %>
+    <% end %>
   created_at: 2011-09-20 19:40:07
   updated_at: 2011-09-20 19:40:07
   css: ""
@@ -598,16 +521,13 @@ product_quantity:
   slug: product_quantity
   is_selectable: "0"
   is_container: "0"
-  html: |       
-    <% # products[product_id]&quantity for product contained options or just variants[id]=>quantity, more detail in Spree::OrderPopulator %>
-    <%= number_field_tag (product.variants_and_option_values.any? ? :quantity : "variants[#{product.master.id}]"), 1, :class => 'title', :min => 1 %> 
-
+  html: |
+    <%= number_field_tag :quantity, 1, :class => 'title', :min => 1 %>
   created_at: 2011-09-20 19:40:07
   updated_at: 2011-09-20 19:40:07
   css: |
-    .<%=@template.current_piece.section_selector%>  input{
-      <%= @template.css :input %> 
-    }
+    .<%=@template.section_selector%> > .inner {overflow:visible; } /* fix missing input bottom border on mobile*/
+    .<%=@template.section_selector%>  input{ <%= @template.css :input %>   }
   js: ""
 product_atc:
   id: 19
@@ -615,16 +535,15 @@ product_atc:
   slug: product_atc
   is_selectable: "0"
   is_container: "0"
-  html: |   
+  html: |
       <%= button_tag  :id => 'add-to-cart-button', :type => :submit  do %>
             <%= Spree.t(:add_to_cart) %>
       <% end %>
   created_at: 2011-09-20 19:40:07
   updated_at: 2011-09-20 19:40:07
   css: |
-    .<%=@template.current_piece.section_selector%> button{
-      <%= @template.css :button %> 
-    }
+    .<%=@template.section_selector%> > .inner {overflow:visible; } /* fix missing input bottom border on mobile*/
+    .<%=@template.section_selector%> button{ <%= @template.css :button %>  }
   js: ""
 cart:
   id: 20
@@ -633,12 +552,12 @@ cart:
   is_selectable: "1"
   is_container: "1"
   html: |
-    <% if @order.line_items.empty? %>    
-      <div class="<%=g_piece_selector%>" data-hook="empty_cart">
+    <% if @order.line_items.empty? %>
+      <div data-hook="empty_cart">
         <p><%= Spree.t(:your_cart_is_empty) %></p>
-      </div>    
+      </div>
     <% else %>
-      <div class="<%=g_piece_selector%>"  data-hook="outside_cart_form">
+      <div data-hook="outside_cart_form">
         <%= form_for @order, :url => update_cart_path, :html => {:id => 'update-cart'} do |order_form| %>
           <div data-hook="inside_cart_form">
             <% #place holder for action /cart %>
@@ -654,16 +573,16 @@ cart:
             </div>
           </div>
         <% end %>
-      </div>    
+      </div>
     <% end %>
   created_at: 2011-09-20 19:40:07
   updated_at: 2011-09-20 19:40:07
   css: |
-    .<%=g_piece_selector%> .cart_buttons{ clear:both; }
-    .<%=g_piece_selector%> button{
+    .<%=@template.section_selector%> .cart_buttons{ clear:both; }
+    .<%=@template.section_selector%> button{
       <%= @template.css :button %>
     }
-    .<%=g_piece_selector%> .line_item_quantity{ width:60px; }
+    .<%=@template.section_selector%> .line_item_quantity{ width:60px; }
   js: ""
 account:
   id: 21
@@ -671,7 +590,7 @@ account:
   slug: account
   is_selectable: "0"
   is_container: "0"
-  html: |   
+  html: |
     <%= yield %>
   created_at: 2011-09-20 19:40:07
   updated_at: 2011-09-20 19:40:07
@@ -684,12 +603,7 @@ taxonomy_name:
   is_selectable: "1"
   is_container: "0"
   resources: m
-  html: |    
-    <% if @template.menu.present? %>   
-    <span ><%= @template.menu.taxonomy.name %> </span>
-    <% end %>
-  created_at: 2011-09-20 19:40:07
-  updated_at: 2011-09-20 19:40:07
+  html: <%= @template.page_attribute(:root_name) %>
   css: ""
   js: ""
 cart_items:
@@ -698,25 +612,25 @@ cart_items:
   slug: cart-items
   is_selectable: "1"
   is_container: "0"
-  html: |    
-    <%= render :partial => 'form', :locals => { :order_form => order_form } %>
+  html: |
+    <%= render :partial => 'spree/orders/form', :locals => { :order_form => order_form } %>
   created_at: 2011-09-20 19:40:07
   updated_at: 2011-09-20 19:40:07
   css: ""
   js: ""
-order_total_price:  
+order_total_price:
   id: 24
   title: order total price
   slug: order-total-price
   is_selectable: "1"
   is_container: "0"
-  html: |    
-    <%= Spree.t(:subtotal) %>: <span class="g-order-total"><%= @order.display_total.to_html %></span>
+  html: |
+    <%= Spree.t(:total) %>: <span class="g-order-total"><%= @order.display_total.to_html %></span>
   created_at: 2011-09-20 19:40:07
   updated_at: 2011-09-20 19:40:07
   css: |
    .g-order-total{
-     
+
    }
   js: ""
 checkout:
@@ -725,35 +639,15 @@ checkout:
   slug: checkout
   is_selectable: "0"
   is_container: "0"
-  html: |   
-    <div id="checkout" class="<%=g_piece_selector%>">  
-      <%= render :partial => 'spree/shared/error_messages', :locals => { :target => @order } %>
-        <div class="columns <%= if @order.state != 'confirm' then 'alpha twelve' else 'alpha omega sixteen' end %>" data-hook="checkout_form_wrapper">
-          <%= form_for @order, :url => update_checkout_path(@order.state), :html => { :id => "checkout_form", :class=>'form' } do |form| %>
-            <% unless @order.email? %>
-              <p class="field" style='clear: both'>
-                <%= form.label :email %><br />
-                <%= form.text_field :email %>
-              </p>
-            <% end %>
-            <%= yield %>~~content~~
-            <div class="form-buttons" data-hook="buttons">
-              <%= button_tag :class => 'continue button primary', :type => 'submit' do %>
-                <%= Spree.t(:save_and_continue) %>
-              <% end %>
-              <script>Spree.disableSaveOnClick();</script>
-            </div>            
-          <% end %>
-        </div>
-    </div>    
-    <% if I18n.locale != :en %>
-      <script src='/assets/jquery.validate/localization/messages_<%= I18n.locale %>.js'></script>
-    <% end %>
+  html: |
+     <%= yield %>~~content~~
   created_at: 2011-09-20 19:40:07
   updated_at: 2011-09-20 19:40:07
-  css: 
-    .<%=g_piece_selector%> .form-buttons{ clear:both; }
-
+  css: |
+    .<%=@template.section_selector%> .form-buttons{ clear:both; }
+    .<%=@template.section_selector%> ul{ margin: 0; padding: 0;}
+    .<%=@template.section_selector%> li{ list-style-type:none; }
+    .<%=@template.section_selector%> .stock-shipping-method-title {margin:0;}
   js: ""
 thanks:
   id: 26
@@ -761,7 +655,7 @@ thanks:
   slug: thanks
   is_selectable: "0"
   is_container: "0"
-  html: |   
+  html: |
     <%= yield %>~~content~~
   created_at: 2011-09-20 19:40:07
   updated_at: 2011-09-20 19:40:07
@@ -774,13 +668,7 @@ taxon_name:
   is_selectable: "1"
   is_container: "0"
   html: |
-    <% (defined?(page) ? page : @current_page).tap{|page| %>
-      <% if @template.current_piece.view_as_clickable? %>
-        <%= link_to page.name, page.path, page.extra_html_attributes %>    
-      <% else %>
-        <%= page.name %>
-      <% end %>
-    <% }%>
+    <%= @template.page_attribute( :name ) %>
   created_at: 2011-09-20 19:40:07
   updated_at: 2011-09-20 19:40:07
   css: |
@@ -791,11 +679,11 @@ container_title:
   slug: container-title
   is_selectable: "0"
   is_container: "1"
-  html: ~~content~~    
+  html: ~~content~~
   css: |
     .header3 { margin: 0; padding: 0; font-size: 100%;line-height:1em; }
-    .<%=@template.current_piece.section_selector%> .header3{       
-      <%= @template.css :s_header3 %> 
+    .<%=@template.section_selector%> .header3{
+      <%= @template.css :s_header3 %>
     }
   js: ""
 order_number:
@@ -804,7 +692,7 @@ order_number:
   slug: order-number
   is_selectable: "1"
   is_container: "0"
-  html: |    
+  html: |
     <span> <%= Spree.t(:order) + " #" + @order.number %></span>
   css: ""
   js: ""
@@ -822,7 +710,7 @@ order_address:
           <%= render :partial => 'spree/shared/address', :locals => { :address => @order.ship_address } %>
         </div>
       <% end %>
-    <% end %>    
+    <% end %>
   css: " "
   js: " "
 order_payment:
@@ -831,7 +719,7 @@ order_payment:
   slug: order-payment
   is_selectable: "1"
   is_container: "0"
-  html: |    
+  html: |
     <h3 class="header3"><%= Spree.t(:payment_information) %> <%= link_to "(#{Spree.t(:edit)})", checkout_state_path(:payment) unless @order.completed? %></h3>
     <div class="payment-info">
       <% @order.payments.valid.each do |payment| %>
@@ -846,8 +734,8 @@ order_items:
   slug: order-items
   is_selectable: "1"
   is_container: "0"
-  html: |    
-    <%= render :partial => 'order_items' %>
+  html: |
+    <%= render partial: 'order_items', locals: {order: @order} %>
   css: ""
   js: ""
 payment_form:
@@ -856,34 +744,7 @@ payment_form:
   slug: payment-form
   is_selectable: "1"
   is_container: "0"
-  html: |    
-    <div id="checkout_form_payment" >
-      <h3 class="header3"><%= Spree.t(:payment_information) %></h3>
-      <% @order.available_payment_methods.each do |method| %>
-      <p>
-        <label>
-          <%= radio_button_tag "order[payments_attributes][][payment_method_id]", method.id, method == @order.available_payment_methods.first %>
-          <%= Spree.t(method.name, :scope => :payment_methods, :default => method.name) %>
-        </label>
-      </p>
-      <% end %>  
-      <ul id="payment-methods" >
-        <% @order.available_payment_methods.each do |method| %>
-          <li id="payment_method_<%= method.id %>" class="<%= 'last' if method == @order.available_payment_methods.last %>" data-hook>
-            <fieldset>
-              <%= render :partial => "spree/checkout/payment/#{method.method_type}", :locals => { :payment_method => method } %>
-            </fieldset>
-          </li>
-        <% end %>
-      </ul>
-      <div style="clear:both;"></div>
-      <% if Spree::Promotion.with_code.count > 0 %>
-        <p class='field' data-hook='coupon_code'>
-          <%= form.label :coupon_code %><br />
-          <%= form.text_field :coupon_code %>
-        </p>
-      <% end %>
-    </div>
+  html: ""
   css: |-
     #checkout_form_payment ul{ margin: 0; padding: 0;}
     #checkout_form_payment li{ list-style-type:none; }
@@ -895,16 +756,7 @@ ship_form:
   slug: ship-form
   is_selectable: "1"
   is_container: "0"
-  html: |    
-    <div id="checkout_form_address" data-hook="billing_fieldset_wrapper">
-      <%= form.fields_for :bill_address do |bill_form| %>
-        <h3 class="header3"><%= Spree.t(:shipping_address) %></h3>
-        <%= render :partial => 'spree/address/form', :locals => { :form => bill_form, :address_type => 'billing', :address => @order.bill_address } %>
-      <% end %>
-      <%= form.fields_for :ship_address do |ship_form| %>
-          <%= hidden_field_tag 'order[use_billing]', '1' %>
-      <% end %>
-    </div>
+  html: ""
   css: |
     #baddress1 input{ width:480px; }
   js: ""
@@ -914,10 +766,10 @@ order_summary:
   slug: order-summary
   is_selectable: "1"
   is_container: "0"
-  html: |    
+  html: |
     <% if @order.state != 'confirm' %>
         <%= render :partial => 'summary', :locals => { :order => @order } %>
-    <% end %>  
+    <% end %>
   css: ""
   js: ""
 login_form:
@@ -926,7 +778,7 @@ login_form:
   slug: login-form
   is_selectable: "1"
   is_container: "0"
-  html: |    
+  html: |
     <%= render :partial => 'spree/user_sessions/new' %>
   css: ""
   js: ""
@@ -936,7 +788,7 @@ checkout_as_guest_form:
   slug: checkout-as-guest-form
   is_selectable: "1"
   is_container: "0"
-  html: "" 
+  html: ""
   css: ""
   js: ""
 sign_up_form:
@@ -945,7 +797,7 @@ sign_up_form:
   slug: sign-up-form
   is_selectable: "1"
   is_container: "0"
-  html: |    
+  html: |
     <%= render :partial => 'spree/user_registrations/new' %>
   css: ""
   js: ""
@@ -955,7 +807,7 @@ profile:
   slug: profile
   is_selectable: "1"
   is_container: "0"
-  html: |    
+  html: |
     <dl id="user-info">
       <dt><%= Spree.t(:email) %></dt>
       <dd><%= @user.email %> (<%= link_to Spree.t(:edit), spree.edit_account_path, :remote=>true %>)</dd>
@@ -968,36 +820,8 @@ order_list:
   slug: order-list
   is_selectable: "1"
   is_container: "0"
-  html: |    
-    <h3 class="header3"><%= Spree.t(:my_orders) %></h3>
-    <% if @orders.present? %>
-      <table class="order-summary">
-        <thead>
-        <tr>
-          <th class="order-number"><%= Spree.t(:order_number) %></th>
-          <th class="order-date"><%= Spree.t(:order_date) %></th>
-          <th class="order-status"><%= Spree.t(:status) %></th>
-          <th class="order-payment-state"><%= Spree.t(:payment_state) %></th>
-          <th class="order-shipment-state"><%= Spree.t(:shipment_state) %></th>
-          <th class="order-total"><%= Spree.t(:total) %></th>
-        </tr>
-        </thead>
-        <tbody>
-        <% @orders.each do |order| %>
-          <tr class="<%= cycle('even', 'odd') %>">
-            <td class="order-number"><%= link_to order.number, order_url(order), :remote=>true %></td>
-            <td class="order-date"><%= l order.completed_at.to_date %></td>
-            <td class="order-status"><%= Spree.t(order.state).titleize %></td>
-            <td class="order-payment-state"><%= Spree.t("payment_states.#{order.payment_state}") if order.payment_state %></td>
-            <td class="order-shipment-state"><%= Spree.t("shipment_states.#{order.shipment_state}") if order.shipment_state %></td>
-            <td class="order-total"><%= order.display_total %></td>
-          </tr>
-        <% end %>
-        </tbody>
-      </table>
-    <% else %>
-      <p><%= Spree.t(:you_have_no_orders_yet) %></p>
-    <% end %>
+  html: |
+    <%= render partial: 'themes/orders/list' %>
   css: ""
   js: ""
 dialog:
@@ -1007,15 +831,15 @@ dialog:
   is_selectable: "1"
   is_container: "0"
   usage: "dialog"
-  html: |    
-    <div id="dialog" class="<%=g_piece_selector%> content_layout" >
-          <div class="<%=g_piece_selector%>_inner clear-block">
+  html: |
+    <div id="dialog" class="content_layout" >
+          <div class="clear-block">
           ~~content~~
           </div>
-    </div> 
+    </div>
   css: |
-    div.<%=g_piece_selector%>
-    { 
+    #dialog
+    {
       display:none;
       ~~PageParams.get:outer~~
     }
@@ -1027,12 +851,12 @@ container_link:
   slug: container-link
   is_selectable: "0"
   is_container: "1"
-  html: ~~content~~    
+  html: ~~content~~
   css: |
-    .<%=@template.current_piece.section_selector%> a{ display: inline-block; <%=@template.css(:s_a) %> }
-    .<%=@template.current_piece.section_selector%> a:hover{ <%=@template.css(:s_a_h) %> }  
-    .<%=@template.current_piece.section_selector%> a.selected{ <%=@template.css(:s_a_sel) %> }
-    .<%=@template.current_piece.section_selector%> a.unavailable{ <%=@template.css(:s_a_una) %> }
+    .<%=@template.section_selector%> a{ display: inline-block; <%=@template.css(:s_a) %> }
+    .<%=@template.section_selector%> a:hover{ <%=@template.css(:s_a_h) %> }
+    .<%=@template.section_selector%> a.selected{ <%=@template.css(:s_a_sel) %> }
+    .<%=@template.section_selector%> a.unavailable{ <%=@template.css(:s_a_una) %> }
   js: ""
 container_table:
   id: 43
@@ -1040,12 +864,12 @@ container_table:
   slug: container-table
   is_selectable: "0"
   is_container: "1"
-  html: ~~content~~    
+  html: ~~content~~
   css: |
-    .<%=@template.current_piece.section_selector%> table{ <%= @template.css :s_table %>  }
-    .<%=@template.current_piece.section_selector%> th, .<%=@template.current_piece.section_selector%> td{ <%= @template.css :s_cell %> }
-    .<%=@template.current_piece.section_selector%> th{ <%= @template.css :s_th %>  }
-    .<%=@template.current_piece.section_selector%> td{ <%= @template.css :s_td %>  }
+    .<%=@template.section_selector%> table{ <%= @template.css :s_table %>  }
+    .<%=@template.section_selector%> th, .<%=@template.section_selector%> td{ <%= @template.css :s_cell %> }
+    .<%=@template.section_selector%> th{ <%= @template.css :s_th %>  }
+    .<%=@template.section_selector%> td{ <%= @template.css :s_td %>  }
   js: ""
 container_form:
   id: 44
@@ -1053,13 +877,14 @@ container_form:
   slug: container-form
   is_selectable: "0"
   is_container: "1"
-  html: ~~content~~    
+  html: ~~content~~
   css: |
-    .<%=@template.current_piece.section_selector%> label.error{ <%=@template.css(:s_error) %> }
-    .<%=@template.current_piece.section_selector%> label{ <%=@template.css(:s_label) %> }
-    .<%=@template.current_piece.section_selector%> input{ <%=@template.css(:s_input) %> }
-    .<%=@template.current_piece.section_selector%> button{ <%=@template.css(:s_button) %> } 
-    .<%=@template.current_piece.section_selector%> button:hover{ <%=@template.css(:s_button_h) %> } 
+    .<%=@template.section_selector%> label.error{ <%=@template.css(:s_error) %> }
+    .<%=@template.section_selector%> label{ <%=@template.css(:s_label) %> }
+    .<%=@template.section_selector%> form input[type='text'], .<%=@template.section_selector%> form input[type='password'], .<%=@template.section_selector%> form input[type='email'], .<%=@template.section_selector%>  form textarea
+    { <%=@template.css(:s_input) %> }
+    .<%=@template.section_selector%> button{ <%=@template.css(:s_button) %> }
+    .<%=@template.section_selector%> button:hover{ <%=@template.css(:s_button_h) %> }
 
   js: ""
 dialog_title:
@@ -1069,15 +894,13 @@ dialog_title:
   is_selectable: "0"
   is_container: "0"
   html: |
-    <div class="<%=g_piece_selector%>">
-      <div class="title"> <%= Spree.t(:dialog_title) %> <a class="cancel">X</a> </div>
-    </div>    
-  css: | 
-    .<%=g_piece_selector%> .title{ <%=@template.css(:title) %> }
-    .<%=g_piece_selector%> a.cancel{      
+      <div class="dialog_title"> <%= Spree.t(:dialog_title) %> <a class="cancel dialog_close">X</a> </div>
+  css: |
+    .<%=@template.section_selector%>  .dialog_title{ <%=@template.css(:dialog_title) %> }
+    .<%=@template.section_selector%>  .dialog_title a.dialog_close{
       border:0;  padding:0;  margin:0; background: transparent none; text-decoration: none;/*reset it, prevent root's default */
-      float:right; cursor:pointer; 
-      <%=@template.css(:cancel) %> 
+      float:right; cursor:pointer;
+      <%=@template.css(:dialog_close) %>
      }
   js: ""
 # set padding, margin, without affecting dialog title
@@ -1089,24 +912,14 @@ dialog_content:
   is_container: "1"
   usage: "dial-cont"
   html: |
-    <!-- container  -->
-    <div class="<%=g_piece_selector%> content_layout" >
-          <div class="<%=g_piece_selector%>_inner clear-block">
-          ~~content~~
-          </div>          
-    </div> 
-  css: | 
-    .<%=g_piece_selector%>
-    { 
-      position:relative;
-      <%=@template.css(:block)%>
-    }
+    <div class="dialog_content" >   ~~content~~   </div>
+  css: |
     /* background, margin, border, padding */
-    .<%=g_piece_selector%> .<%=g_piece_selector%>_inner
+    .<%=@template.section_selector%>  .dialog_content
     {
-      <%=@template.css(:inner)%>
+      <%=@template.css(:dialog_content)%>
     }
-  js: ""      
+  js: ""
 logo:
   id: 47
   title: logo
@@ -1114,15 +927,15 @@ logo:
   is_selectable: "0"
   is_container: "0"
   resources: i
-  html: | 
-    <% if @template.image.present? %>    
-         <%= link_to image_tag( @template.image.url ),  spree.root_path %>  
+  html: |
+    <% if @template.image.present? %>
+         <%= link_to image_tag( @template.image.url ),  spree.root_path %>
     <% else %>
-         <%= logo %>         
+         <%= logo %>
     <% end %>
   created_at: 2011-09-20 19:40:07
   updated_at: 2011-09-20 19:40:07
-  css: ""
+  css: .<%= @template.section_selector %> img { width:100%; }
   js: ""
 minicart:
   id: 48
@@ -1131,18 +944,7 @@ minicart:
   is_selectable: "0"
   is_container: "0"
   html: |
-    <%
-      text = Spree.t('cart')
-      css_class = nil
-      if current_order.nil? or current_order.item_count.zero?
-        text = "#{text}: (#{Spree.t('empty')})"
-        css_class = 'empty'
-      else
-        text = "#{text}: (#{current_order.item_count})  <span class='amount'>#{current_order.display_total.to_html}</span>".html_safe
-        css_class = 'full'
-      end
-    %>
-    <%=  link_to text, spree.cart_path, :class => "cart-info #{css_class}" %>
+    <%=  link_to_cart %>
   css: ""
   js: ""
 logged_and_unlogged_menu:
@@ -1155,18 +957,18 @@ logged_and_unlogged_menu:
   html: |
     <% menu = (spree_current_user ? @template.menu : @template.menu2) %>
     <% if menu.present? %>
-    <ul class="<%=g_piece_selector%>" >
+    <ul >
       <% menu.children.each{|page| %>
          ~~content~~
       <% } %>
     </ul>
     <% end %>
   css: |-
-    ul.<%=g_piece_selector%> { margin: 0; padding: 0;}
-    .<%=g_piece_selector%> li{ 
+    .<%=@template.section_selector%> ul { margin: 0; padding: 0;}
+    .<%=@template.section_selector%> li{
       list-style-type:none;
       display:inline;float: left;}
-    .<%=g_piece_selector%> a{ 
+    .<%=@template.section_selector%> a{
      display:inline-block;
      float:left;
      margin:0; /* non-editable */}
@@ -1176,7 +978,7 @@ password_recover_form:
   slug: password-recover-form
   is_selectable: "1"
   is_container: "0"
-  html: |    
+  html: |
     <%= render :partial => 'spree/user_passwords/new' %>
   css: ""
   js: ""
@@ -1186,29 +988,13 @@ product_option_values:
   slug: product-option-values
   is_selectable: "1"
   is_container: "0"
-  html: |    
-    <% if product.variants_and_option_values(current_currency).any? %>
-      <div id="product-variants" class="<%=g_piece_selector%>">
-        <ul>
-          <% product.variants_and_option_values(current_currency).each_with_index do |variant, index| %>
-            <li>
-              <%= radio_button_tag "products[#{product.id}]", variant.id, index == 0, 'data-price' => display_price(variant).to_s %>
-              <label for="<%= ['products', product.id, variant.id].join('_') %>">
-                <span class="variant-description">
-                  <%= variant_options variant %>
-                </span>
-                <% if variant_price variant %>
-                  <span class="price diff"><%= variant_price variant %></span>
-                <% end %>
-              </label>
-            </li>
-          <% end%>
-        </ul>
-      </div>
-    <% end%>
+  html: |
+    <% if defined? product %>
+        <%= render :partial => 'themes/variants_and_option_values', :locals=>{:product=>product}  %>
+    <% end %>
   css: |-
-    .<%=g_piece_selector%> ul{ margin: 0; padding: 0;}
-    .<%=g_piece_selector%> li{ list-style-type:none; }
+    .<%=@template.section_selector%> ul{ margin: 0; padding: 0;}
+    .<%=@template.section_selector%> li{ list-style-type:none; }
   js: ""
 taxon_description:
   id: 52
@@ -1216,20 +1002,20 @@ taxon_description:
   slug: taxon-description
   is_selectable: "1"
   is_container: "0"
-  html: |    
-    <%=raw (defined?(page) ? page : @current_page).description %>
+  html: |
+    <%== @template.page_attribute(:description) %>
   css: ""
-  js: ""  
+  js: ""
 site_form:
   id: 53
   title: site form
   slug: site-form
   is_selectable: "1"
   is_container: "0"
-  html: |    
-    <%= render :partial => 'spree/sites/form_for_spree_theme' %>
+  html: |
+    <%= render :partial => 'themes/sites/quick_lunch' %>
   css: |
-    .<%=@template.current_piece.section_selector%> p{ 
+    .<%=@template.section_selector%> .field{
       float:left;
     }
   js: ""
@@ -1240,65 +1026,40 @@ slider:
   resources: m
   is_selectable: "1"
   is_container: "0"
-  html: |    
-    <div id="<%=g_piece_selector%>" style="<%=@template.css(:slides)%>">
+  html: |-
+    <div class="effect_slider" >
+    <%# outer div is required, jssor duplicate it and set style. %>
     <% if @template.menu.present? %>
       <!-- Loading Screen -->
       <div u="loading" style="position: absolute; top: 0px; left: 0px;width: 100%;height:100%;">
         <div style="filter: alpha(opacity=70); opacity:0.7; position: absolute; display: block; background-color: #000000; top: 0px; left: 0px;width: 100%;height:100%;"></div>
         <div style="position: absolute; display: block; background: url(/shops/shared/images/jssor/loading.gif) no-repeat center center; top: 0px; left: 0px;width: 100%;height:100%;"> </div>
       </div>
-      <% # jssor require with,height in element style. %>
-      <div u="slides" style="position: absolute;overflow:hidden;<%=@template.css(:slides)%>">
-      <% @template.menu.children.each{|page| %>
-      <div><%= image_tag page.icon.url(:original), :u=>'image', :alt=>page.name %></div>
-      <% } %>
+      <%# jssor require with,height in element style. %>
+      <div u="slides" style="position: absolute;overflow:hidden;" >
+        <% @template.menu.children.each{|page| %>
+          <div>
+            <%= link_to_if @template.current_piece.clickable?, image_tag( page.icon.url(:original), :u=>'image', :alt=>page.name), page.path %>
+          </div>
+        <% } %>
       </div>
-      <!-- bullet navigator container -->
         <!-- Bullet Navigator Skin Begin -->
         <div u="navigator" class= "jssorb03" style="position: absolute;">
             <!-- bullet navigator item prototype -->
             <div u="prototype" style="position: absolute; width: 19px; height: 19px;"></div>
         </div>
-      <!-- Bullet Navigator Skin End -->
     <% end %>
     </div>
-    <script>
-    jQuery(document).ready(function ($) {
-      //$('#<%=g_piece_selector%>').css(
-      //  { height: $('.<%=@template.current_piece.section_selector%>_inner').css( 'height' ),
-      //    width: $('.<%=@template.current_piece.section_selector%>_inner').css( 'width' )}
-      //);
-      var options = { $FillMode: 2,  $AutoPlay: true ,
-        $BulletNavigatorOptions: { $Class: $JssorBulletNavigator$, $ChanceToShow: 2,  $AutoCenter:1  }
-        };
-      var jssor_slider1 = new $JssorSlider$('<%=g_piece_selector%>', options);
-      //responsive code begin
-      //you can remove responsive code if you don't want the slider scales while window resizes
-      function ScaleSlider() {
-          var parentWidth = jssor_slider1.$Elmt.parentNode.clientWidth;
-          if (parentWidth)
-              jssor_slider1.$SetScaleWidth(parentWidth);
-          else
-              window.setTimeout(ScaleSlider, 30);
-      }
-      //Scale slider immediately
-      ScaleSlider();
-      //if (!navigator.userAgent.match(/(iPhone|iPod|iPad|BlackBerry|IEMobile)/)) {
-      //    $(window).bind('resize', ScaleSlider);
-      //}
-      //responsive code end
-    });
-    </script>
   css: |-
-    #<%=g_piece_selector%> { position:relative; }
-    #<%=g_piece_selector%> [u='slides']{ 
-      cursor: move; left: 0px; top: 0px;      
+    .<%=@template.section_selector%> > .inner { min-height:1px;min-width:1px; /* hight, width are required*/}
+    .effect_slider { position:relative; }
+    .<%=@template.section_selector%> [u='slides']{
+      cursor: move; left: 0px; top: 0px;
     }
-    #<%=g_piece_selector%> [u='navigator']{
+    .<%=@template.section_selector%> [u='navigator']{
       position: absolute;
       bottom:0;
-    } 
+    }
     .jssorb03 div, .jssorb03 div:hover, .jssorb03 .av
     {
         background: url('/shops/shared/images/jssor/n21.png') no-repeat;
@@ -1317,12 +1078,12 @@ breadcrumbs:
   slug: breadcrumbs
   is_selectable: "1"
   is_container: "0"
-  html: |    
+  html: |
     <%= breadcrumbs(@current_page) %>
   css: |
-    .<%=@template.current_piece.section_selector%> ul{ margin: 0; padding: 0;}
-    .<%=@template.current_piece.section_selector%> li{
-      list-style-type:none; 
+    .<%=@template.section_selector%> ul{ margin: 0; padding: 0;}
+    .<%=@template.section_selector%> li{
+      list-style-type:none;
       display: inline-block;
     }
   js: ""
@@ -1332,18 +1093,16 @@ taxon_icon:
   slug: taxon-icon
   is_selectable: "1"
   is_container: "0"
-  html: |    
-    <% if defined? page %>
-      <% if page.icon.present? %>
-        <%= link_to image_tag(page.icon.url(:original), :u=>'image', :alt=>page.name), page.path %>
-      <% end %>
-    <% end %>
+  html: |
+    <%= @template.page_attribute(:icon) %>
   created_at: 2011-09-20 19:40:07
   updated_at: 2011-09-20 19:40:07
   css: |
-    .<%=@template.current_piece.section_selector%> {
-      margin: 0; padding: 0;
+    .<%=@template.section_selector%> {
+      /*margin: 0;  it is required to align center*/
+      padding: 0;
     }
+    .<%= @template.section_selector %> img { width:100%; }
   js: ""
 post_title:
   id: 57
@@ -1351,14 +1110,8 @@ post_title:
   slug: post-title
   is_selectable: "0"
   is_container: "0"
-  html: |    
-    <% if defined? post %>     
-     <% if @template.current_piece.view_as_clickable? %>
-       <a href="<%= post.path %>"> <%=post.title %> </a>
-     <% else %>
-       <%=post.title %>
-     <% end %>
-    <% end %>
+  html: |
+     <%= @template.post_attribute(:title)  %>
   created_at: 2011-09-20 19:40:07
   updated_at: 2011-09-20 19:40:07
   css: ""
@@ -1369,10 +1122,8 @@ post_author:
   slug: post-author
   is_selectable: "0"
   is_container: "0"
-  html: |    
-    <% if defined? post %>     
-      <%=post.author %>
-    <% end %>
+  html: |
+    <%= @template.post_attribute(:author)  %>
   created_at: 2011-09-20 19:40:07
   updated_at: 2011-09-20 19:40:07
   css: ""
@@ -1383,10 +1134,8 @@ post_time:
   slug: post-time
   is_selectable: "0"
   is_container: "0"
-  html: |    
-    <% if defined? post %>     
-      <%= pretty_time post.posted_at %>
-    <% end %>
+  html: |
+    <%= @template.post_attribute(:posted_at)  %>
   created_at: 2011-09-20 19:40:07
   updated_at: 2011-09-20 19:40:07
   css: ""
@@ -1397,10 +1146,8 @@ post_body:
   slug: post-body
   is_selectable: "0"
   is_container: "0"
-  html: |    
-    <% if defined? post %>     
-      <%=raw post.body %>
-    <% end %>
+  html: |
+    <%== @template.post_attribute(:body) %>
   created_at: 2011-09-20 19:40:07
   updated_at: 2011-09-20 19:40:07
   css: ""
@@ -1411,15 +1158,11 @@ post_cover:
   slug: post-cover
   is_selectable: "1"
   is_container: "0"
-  html: |    
-    <% if defined? post %>
-      <% if post.cover.present? %>
-        <%= link_to image_tag(post.cover.url(:original), :u=>'image', :alt=>post.title), post.path %>
-      <% end %>
-    <% end %>
+  html: |
+    <%= @template.post_attribute(:cover) %>
   created_at: 2011-09-20 19:40:07
   updated_at: 2011-09-20 19:40:07
-  css: ''
+  css: .<%= @template.section_selector %> img { width:100%; }
   js: ""
 grouped_option_values_selector:
   id: 62
@@ -1427,40 +1170,38 @@ grouped_option_values_selector:
   slug: grouped-option-values-selector
   is_selectable: "1"
   is_container: "0"
-  html: |    
+  html: |
     <% if defined? product %>
-      <% if product.has_variants? %>
-       <%= render :partial => 'themes/grouped_option_values_selector', :locals=>{:product=>product,:g_piece_selector=>g_piece_selector} %>
-      <% end%>
+       <%= render :partial => 'themes/grouped_option_values_selector', :locals=>{:product=>product} %>
     <% end%>
   created_at: 2011-09-20 19:40:07
   updated_at: 2011-09-20 19:40:07
   css: |
     #product-details .price.unselected {
-      color: #bbb;  
+      color: #bbb;
     }
-    .<%=g_piece_selector%> .option_type {
-       <%=@template.css(:option_type)%> 
+    .<%=@template.section_selector%> .option_type {
+       <%=@template.css(:option_type)%>
     }
-    .<%=g_piece_selector%> .option_value {
-       <%=@template.css(:option_value)%> 
+    .<%=@template.section_selector%> .option_value {
+       <%=@template.css(:option_value)%>
     }
-    .<%=g_piece_selector%> ul.option_values {
-      list-style-type: none;    
+    .<%=@template.section_selector%> ul.option_values {
+      list-style-type: none;
       margin: 0; padding: 0;
     }
-    .<%=g_piece_selector%> .option_values li {
+    .<%=@template.section_selector%> .option_values li {
       display: block;
       position: relative;
       float: left;
     }
-    .<%=g_piece_selector%> .option_values li a {
+    .<%=@template.section_selector%> .option_values li a {
       display: block;
       cursor: pointer;
       text-decoration: none;
     }
     .option-value.selected,
-    .option-value.in-stock:hover {      
+    .option-value.in-stock:hover {
     }
     .option-value.out-of-stock {
       display: block;
@@ -1469,8 +1210,8 @@ grouped_option_values_selector:
       cursor: default;
     }
     .option-value.locked,
-    .option-value.locked:hover {      
-      cursor: default;
+    .option-value.locked:hover {
+      cursor: not-allowed;
     }
     .option-value.locked img {
       filter:alpha(opacity=50);
@@ -1478,6 +1219,7 @@ grouped_option_values_selector:
       -khtml-opacity: 0.5;
       opacity: 0.5;
     }
+
   js: ""
 option_values_in_slide_style:
   id: 63
@@ -1485,24 +1227,24 @@ option_values_in_slide_style:
   slug: option-values-in-slide-style
   is_selectable: "1"
   is_container: "0"
-  html: |    
+  html: |
     <% if defined? product %>
-      <div class="<%=g_piece_selector%>">
-        <%= render :partial => 'themes/product_options_in_slide_style', :locals=>{:product=>product,:g_piece_selector=>g_piece_selector} %>
-      </div>  
+      <div class="">
+        <%= render :partial => 'themes/product_options_in_slide_style', :locals=>{:product=>product} %>
+      </div>
     <% end%>
   created_at: 2011-09-20 19:40:07
   updated_at: 2011-09-20 19:40:07
   css: |
-    .<%=g_piece_selector%> .variant-option{
+    .<%=@template.section_selector%> .variant-option{
       display:none;
     }
-    .<%=g_piece_selector%> ul.option_values {
+    .<%=@template.section_selector%> ul.option_values {
       list-style-type: none;
       margin:0;
-      padding:0;  
+      padding:0;
     }
-    .<%=g_piece_selector%> .option_values li {
+    .<%=@template.section_selector%> .option_values li {
       display: block;
       position: relative;
       float: left;
@@ -1513,9 +1255,9 @@ option_values_in_slide_style:
       border-color: #1072B9;
       color: #ffffff;
     }
-    .<%=g_piece_selector%> .option_type{ <%=@template.css(:option_type)%> }
-    .<%=g_piece_selector%> .large_image{ <%=@template.css(:large_image)%>  }
-    .<%=g_piece_selector%> .thumb_image{ <%=@template.css(:thumb_image)%>  }
+    .<%=@template.section_selector%> .option_type{ <%=@template.css(:option_type)%> }
+    .<%=@template.section_selector%> .large_image{ <%=@template.css(:large_image)%>  }
+    .<%=@template.section_selector%> .thumb_image{ <%=@template.css(:thumb_image)%>  }
   js: ""
 product_customization_options:
   id: 64
@@ -1523,7 +1265,7 @@ product_customization_options:
   slug: product-customization-options
   is_selectable: "1"
   is_container: "0"
-  html: |    
+  html: |
     <% if defined? product %>
       <%= render :partial => 'themes/product_customizations', :locals=>{:product=>product} %>
     <% end %>
@@ -1537,11 +1279,11 @@ container_header0:
   slug: container-header0
   is_selectable: "0"
   is_container: "1"
-  html: ~~content~~    
+  html: ~~content~~
   css: |
-    .<%=@template.current_piece.section_selector%> .header0 {
+    .<%=@template.section_selector%> .header0 {
       margin: 0; padding: 0; font-size: 100%;line-height:1em;
-      <%= @template.css :s_header0 %> 
+      <%= @template.css :s_header0 %>
     }
   js: ""
 container_dl:
@@ -1550,11 +1292,11 @@ container_dl:
   slug: container-dl
   is_selectable: "0"
   is_container: "1"
-  html: ~~content~~    
+  html: ~~content~~
   css: |
-    .<%=@template.current_piece.section_selector%> dl,dd{ margin:0;padding:0; }
-    .<%=@template.current_piece.section_selector%> dt{ <%= @template.css :s_dt %>  }
-    .<%=@template.current_piece.section_selector%> dd{ <%= @template.css :s_dd %>  }
+    .<%=@template.section_selector%> dl,dd{ margin:0;padding:0; }
+    .<%=@template.section_selector%> dt{ float:left; <%= @template.css :s_dt %>  }
+    .<%=@template.section_selector%> dd{ float:left; <%= @template.css :s_dd %>  }
   js: ""
 preview_theme_button:
   id: 67
@@ -1563,12 +1305,12 @@ preview_theme_button:
   is_selectable: "0"
   is_container: "0"
   html: |
-    <% if defined? product %>      
-      <%=link_to Spree.t(:preview_theme), preview_template_theme_url( product.template_theme, :host=>product.template_theme.site.subdomain ), {:target=>'_blank'} %>  
+    <% if defined? product %>
+      <%=link_to Spree.t(:preview_theme), preview_template_theme_url( product.template_theme, :host=>product.template_theme.site.subdomain ), {:target=>'_blank'} %>
     <% end %>
   created_at: 2011-09-20 19:40:07
   updated_at: 2011-09-20 19:40:07
-  css: "" 
+  css: ""
   js: ""
 install_theme_with_site_button:
   id: 68
@@ -1577,12 +1319,12 @@ install_theme_with_site_button:
   is_selectable: "0"
   is_container: "0"
   html: |
-    <% if defined? product %>      
+    <% if defined? product %>
       <%= link_to Spree.t(:install_theme_with_site), new_site_path(:template_theme_id=> product.theme_id), {:remote=>true}  %>
     <% end %>
   created_at: 2011-09-20 19:40:07
   updated_at: 2011-09-20 19:40:07
-  css: "" 
+  css: ""
   js: ""
 container_fixed:
   id: 69
@@ -1591,21 +1333,429 @@ container_fixed:
   is_selectable: "0"
   is_container: "1"
   html: |
-    ~~content~~    
-    <input type="hidden" class="fixed_container" value=".<%=@template.current_piece.section_selector%>">
+    ~~content~~
+    <input type="hidden" class="fixed_container" value=".<%=@template.section_selector%>">
   css: |
-    .<%=@template.current_piece.section_selector%> { position: fixed; right:0; top:250px; <%=@template.css(:position) %>}
+    .<%=@template.section_selector%> {z-index:1; position:fixed;  <%=@template.css(:fixed_position) %>}
   js: ''
-container_hover_effect:
+hover_effect_slide_container:
   id: 70
-  title: container hover effect
-  slug: container-hover-effect
+  title: hover effect slide container
+  slug: hover-effect-slide-container
   is_selectable: "0"
   is_container: "1"
   html: |
-    ~~content~~    
-    <input type="hidden" class="hover_effect_container" value=".<%=@template.current_piece.section_selector%>">
+    ~~content~~
   css: |
-    /* since ie 6-8 do not support :last_child, have first child hidden initially */
-    .<%=@template.current_piece.section_selector%>_inner>:first-child { display:none; <%=@template.css(:position) %>}
+      /* slide_effect: width,height is required, children are absolute  */
+      /* override original position,display */
+      .<%= @template.section_selector %> .child_1{  position:absolute; display:block;height:100%; }
+      .<%= @template.section_selector %> .child_2{  position:absolute; display:block;height:0;  }
   js: ''
+
+taxon_tooltips:
+  id: 71
+  title: taxon tooltips
+  slug: taxon-tooltips
+  is_selectable: "1"
+  is_container: "0"
+  html: |
+    <%= @template.page_attribute( :tooltips ) %>
+  created_at: 2011-09-20 19:40:07
+  updated_at: 2011-09-20 19:40:07
+  css: |
+  js: ""
+hover_effect_show_container:
+  id: 72
+  title: hover effect show container
+  slug: hover-effect-show-container
+  is_selectable: "0"
+  is_container: "1"
+  html: |
+    ~~content~~
+  css: |
+      .<%= @template.section_selector %> .child_1{   }
+      .<%= @template.section_selector %> .child_2{  position:absolute; display:none;bottom:0;  }
+  js: ''
+hover_effect_expansion_container:
+  id: 73
+  title: hover effect expansion container
+  slug: hover-effect-expansion-container
+  is_selectable: "0"
+  is_container: "1"
+  html: |
+    ~~content~~
+  css: |
+    .<%= @template.section_selector %> .child_1{   }
+    .<%= @template.section_selector %> .child_2{  display:none;  }
+    .<%= @template.section_selector %>.hovered, .<%= @template.section_selector %>.data_current_ancestor {
+      <%= @template.css :block_hovered %> }
+    .<%= @template.section_selector %>.data_current_ancestor .child_2,
+    .<%= @template.section_selector %>.data_current .child_2 { display:block;}
+  js: ''
+
+hover_effect_overlay_container:
+  id: 74
+  title: hover effect overlay container
+  slug: hover-effect-overlay-container
+  is_selectable: "0"
+  is_container: "1"
+  html: |
+    ~~content~~
+  css: |
+      /* overlay_effect: width,height is required, children are absolute  */
+      /* override original position,display */
+      /* child_1.z-index < child_2.z-index, child_2 is on top of child_1 initially, slideUp on hovering */
+      .<%= @template.section_selector %> .child_1{   }
+      .<%= @template.section_selector %> .child_2{  position:absolute; }
+  js: ''
+hover_effect_popup_container:
+  id: 75
+  title: hover effect popup container
+  slug: hover-effect-popup-container
+  is_selectable: "0"
+  is_container: "1"
+  html: |
+    ~~content~~
+  css: |
+      /* popup_effect: width,height is required, children are absolute  */
+      /* override original position,display */
+      /* child_1.z-index < child_2.z-index, child_2 is on top of child_1 initially, slideUp on hovering */
+      .<%= @template.section_selector %> .child_1{   }
+      .<%= @template.section_selector %> .child_2{ position:absolute; display:none;  }
+  js: ''
+
+baidu_map:
+  id: 76
+  title: baidu map
+  slug: baidu-map
+  is_selectable: "0"
+  is_container: "0"
+  html: |
+    <%= render 'map' %>
+  css: '/* width,height are required for map */'
+  js: ''
+
+container_pagination:
+  id: 77
+  title: container pagination
+  slug: container-pagination
+  is_selectable: "0"
+  is_container: "1"
+  html: ~~content~~
+  css: |
+    <% if @template.current_piece.per_page >0 %>
+    /* #copy from spree_backend/assets/stylesheets/admin/components/pagination */
+    .<%=@template.section_selector%> .pagination { float:left; clear:both; } /* add clear */
+    .<%=@template.section_selector%> .pagination .page{ display: inline-block; text-align: center;
+      <%=@template.css(:pagination_page)%>
+    }
+    .<%=@template.section_selector%> .pagination .current{
+      <%=@template.css(:pagination_current)%>
+    }
+    <% end %>
+  js: ""
+post_summary:
+  id: 78
+  title: post summary
+  slug: post-summary
+  is_selectable: "0"
+  is_container: "0"
+  html: |
+    <%== @template.post_attribute(:summary) %>
+  css: ''
+  js: ''
+
+site_title:
+  id: 79
+  title: site title
+  slug: site-title
+  is_selectable: "0"
+  is_container: "0"
+  html: |
+    <%= @template.site_attribute(:name) %>
+  css: ''
+  js: ''
+taxon_summary:
+  id: 80
+  title: taxon summary
+  slug: taxon-summary
+  is_selectable: "0"
+  is_container: "0"
+  html: |
+    <%== @template.page_attribute(:summary) %>
+  css: ''
+  js: ''
+taxon_more:
+  id: 81
+  title: taxon more
+  slug: taxon-more
+  is_selectable: "0"
+  is_container: "0"
+  html: |
+    <%= @template.page_attribute(:more) %>
+  css: ''
+  js: ''
+slider_scrolling:
+  id: 82
+  title: slider scrolling
+  slug: slider-scrolling
+  resources: ''
+  is_selectable: "1"
+  is_container: "0"
+  html: |-
+    <div class="effect_slider" >
+      <!-- Loading Screen -->
+      <div u="loading" style="position: absolute; top: 0px; left: 0px;width: 100%;height:100%;">
+        <div style="filter: alpha(opacity=70); opacity:0.7; position: absolute; display: block; background-color: #000000; top: 0px; left: 0px;width: 100%;height:100%;"></div>
+        <div style="position: absolute; display: block; background: url(/shops/shared/images/jssor/loading.gif) no-repeat center center; top: 0px; left: 0px;width: 100%;height:100%;"> </div>
+      </div>
+      <%# jssor require with,height in element style. %>
+      <div u="slides" data-display-pieces='n' style="position: absolute;overflow:hidden;" >
+        ~~content~~
+      </div>
+    </div>
+  css: |-
+    .<%=@template.section_selector%> > .inner { min-height:1px;min-width:1px; /* hight, width are required*/}
+    .effect_slider { position:relative; }
+    .<%=@template.section_selector%> [u='slides']{
+      cursor: move; left: 0px; top: 0px;
+    }
+
+hover_effect_popup_menu_container:
+  id: 83
+  title: hover effect popup menu container
+  slug: hover-effect-popup-menu-container
+  is_selectable: "0"
+  is_container: "1"
+  html: |
+    ~~content~~
+  css: |
+      /* popup_effect: width,height is required, children are absolute  */
+      /* override original position,display */
+      /* child_1.z-index < child_2.z-index, child_2 is on top of child_1 initially, slideUp on hovering */
+      .<%= @template.section_selector %> .child_1{   }
+      .<%= @template.section_selector %> .child_2{ position:absolute; display:none;  }
+  js: ''
+
+page_attribute:
+  id: 84
+  title: page attribute
+  slug: page-attribute
+  is_selectable: "0"
+  is_container: "0"
+  html: |
+    <%= @template.page_attribute() %>
+  css: ''
+  js: ''
+next_post_title:
+  id: 85
+  title: next post title
+  slug: next-post-title
+  is_selectable: "0"
+  is_container: "0"
+  html: |
+    <%= render "themes/posts/next_post_title" %>
+  css: ''
+  js: ''
+previous_post_title:
+  id: 86
+  title: previous post title
+  slug: previous-post-title
+  is_selectable: "0"
+  is_container: "0"
+  html: |
+    <%= render "themes/posts/previous_post_title" %>
+  css: ''
+  js: ''
+slider_core:
+  id: 87
+  title: slider core
+  slug: slider-core
+  is_selectable: "1"
+  is_container: "1"
+  html: |-
+    <div class="effect_slider" >
+      <!-- Loading Screen -->
+      <div u="loading" style="position: absolute; top: 0px; left: 0px;width: 100%;height:100%;">
+        <div style="filter: alpha(opacity=70); opacity:0.7; position: absolute; display: block; background-color: #000000; top: 0px; left: 0px;width: 100%;height:100%;"></div>
+        <div style="position: absolute; display: block; background: url(/shops/shared/images/jssor/loading.gif) no-repeat center center; top: 0px; left: 0px;width: 100%;height:100%;"> </div>
+      </div>
+        ~~content~~
+        <!-- Bullet Navigator Skin Begin -->
+        <div u="navigator" class= "jssorb03" style="position: absolute;">
+            <!-- bullet navigator item prototype -->
+            <div u="prototype" style="position: absolute; width: 19px; height: 19px;"></div>
+        </div>
+    </div>
+  css: |-
+    .<%=@template.section_selector%> > .inner { min-height:1px;min-width:1px; /* hight, width are required*/}
+    .effect_slider { position:relative; }
+    .<%=@template.section_selector%> [u='slides']{
+      cursor: move; left: 0px; top: 0px;
+    }
+    .<%=@template.section_selector%> [u='navigator']{
+      position: absolute;
+      bottom:0;
+    }
+    .jssorb03 div, .jssorb03 div:hover, .jssorb03 .av
+    {
+        background: url('/shops/shared/images/jssor/n21.png') no-repeat;
+        overflow:hidden;
+        cursor: pointer;
+    }
+    .jssorb03 div { background-position: -5px -5px; }
+    .jssorb03 div:hover, .jssorb03 .av:hover { background-position: -35px -5px; }
+    .jssorb03 .av { background-position: -65px -5px; }
+    .jssorb03 .dn, .jssorb03 .dn:hover { background-position: -95px -5px; }
+
+slider_data_taxons:
+  id: 88
+  title: slider data taxons
+  slug: slider-data-taxons
+  is_selectable: "0"
+  is_container: "0"
+  html: |-
+      <%# jssor require with,height in element style. %>
+      <div u="slides" style="position: absolute;overflow:hidden;" >
+      <% if @template.menu.present? %>
+        <% @template.menu.children.each{|page| %>
+          <div><%= image_tag page.icon.url(:original), :u=>'image', :alt=>page.name %></div>
+        <% } %>
+      <% end %>
+      </div>
+  css: ''
+  js: ''
+slider_data_product_images:
+  id: 89
+  title: slider data product images
+  slug: slider-data-product-images
+  is_selectable: "0"
+  is_container: "0"
+  html: |-
+      <div u="slides" style="position: absolute;overflow:hidden;" data-auto-play="false">
+         <% (@template.running_data_item.try(:whole_images)).each{|image| %>
+          <div><%= @template.product_attribute( :image, image: image ) %></div>
+         <% } %>
+      </div>
+  css: |-
+    .<%=@template.section_selector%> img{ width: 100%; }
+  js: ''
+click_effect_sider:
+  id: 90
+  title: click effect sider
+  slug: click-effect-sider
+  is_selectable: "0"
+  is_container: "1"
+  html: ~~content~~
+  css: |-
+      /* slide_effect:   */
+      .<%= @template.section_selector %> .child_1{   }
+      .<%= @template.section_selector %> .child_2{ display: none; }
+      .sidr {
+        /* Default Settings */
+        display: none;
+        position: absolute;
+        position: fixed;
+        top: 0;
+        height: 100%;
+        min-width: 10%;
+        z-index: 3;
+        overflow-x: none;
+        overflow-y: auto;
+        /* Theme Settings */
+        box-shadow: inset 0 0 5px 5px #ebebeb;
+        <%= @template.css :sidr %>
+      }
+      .sidr-close{
+        float:right;
+      }
+      .sidr-close .fa{
+        font-size: 2em;
+      }
+      .sidr-overlay{
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        z-index: 2;
+        background-color:gray;
+        opacity: 0.3;
+      }
+  js: ''
+
+video:
+  id: 91
+  title: video
+  slug: video
+  is_selectable: "0"
+  is_container: "0"
+  html: |-
+    <!-- http://open.youku.com/tools/ -->
+    <div id="youkuplayer" class="video-player" style="width:480px;height:400px"></div>
+    <script type="text/javascript" src="http://player.youku.com/jsapi">
+      player = new YKU.Player('youkuplayer',{
+        styleid: '0',
+        client_id: 'YOUR YOUKUOPENAPI CLIENT_ID',
+        vid: ''
+      });
+    </script>
+  css: |-
+    .<%=@template.section_selector%> video-player{ <%= @template.css :video %> }
+  js: ''
+container_hmenu_with_vertical_submenu:
+  id: 92
+  title: container hmenu with vertical submenu
+  slug: container-hmenu-with-vertical-submenu
+  is_selectable: "0"
+  is_container: "1"
+  html: ~~content~~
+  css: |
+    .<%=@template.section_selector%> > .inner {
+      overflow: visible;/* submenu required*/
+    }
+    /* mainly copy from superfish.css */
+    /* 'section_selector ul li' override 'section_selector li'*/
+    .<%=@template.section_selector%>  ul li {
+      position: relative; display:inline-block;
+    }
+    .<%=@template.section_selector%>  ul.depth2 li{
+      display: block;
+    }
+    .<%=@template.section_selector%>  ul.depth2 a{
+      display: block;
+    }
+    .<%=@template.section_selector%> ul ul {
+      position: absolute;
+      display: none;
+      top: 100%;
+      left: 0;
+      z-index: 99;
+      opacity:0.8 ;
+    }
+    /*.<%=@template.section_selector%> ul ul ul{
+      top: 0;
+      left: 100%;
+    }*/
+  js: ""
+post_title_with_ellipsis:
+  id: 93
+  title: post title with ellipsis
+  slug: post-title-with-ellipsis
+  is_selectable: "0"
+  is_container: "0"
+  for_terminal: "0"
+  html: |
+    <%= @template.post_attribute( :title )  %>
+  css: |
+    .<%=@template.section_selector%> .inner a{
+      display:inline; /*it has to be inline for overflow:ellipsis*/
+    }
+    .<%=@template.section_selector%> .inner {
+      overflow:hidden;
+      text-overflow:ellipsis;
+      white-space:nowrap;
+    }
+  js: ""

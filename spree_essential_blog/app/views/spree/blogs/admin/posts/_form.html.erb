@@ -1,30 +1,41 @@
 <%= form.field_container :title do %>
-  <%= form.label :title, t("activerecord.attributes.post.title") %><br />
+  <%= form.label :title %><br />
   <%= form.text_field :title, :class => 'title fullwidth' %>
   <%= error_message_on :post, :title %>
 <% end %>
 
-<%= form.field_container :posted_at do %>
-  <%= form.label :posted_at, t("activerecord.attributes.post.posted_at") %><br />
-  <%= form.text_field :posted_at, :class => 'datetime fullwidth' %>
-  
-  <%= error_message_on :post, :posted_at %>
-<% end %>
+<div class="clearfix" >
+    <div class="six columns alpha">
+    <%= form.field_container :author do %>
+      <%= form.label :author %><br />
+      <%= form.text_field :author, :class => 'datetime fullwidth' %>
+      <%= error_message_on :post, :author %>
+    <% end %>
+    </div>
+
+    <div class="six columns omega">
+    <%= form.field_container :posted_at do %>
+      <%= form.label :posted_at %><br />
+      <%= form.text_field :posted_at, :class => 'datetime fullwidth' %>
+      <%= error_message_on :post, :posted_at %>
+    <% end %>
+    </div>
+</div>
 
 <%= form.field_container :cover do %>
   <%= form.label :cover, Spree.t(:icon) %><br />
   <%= form.file_field :cover %>
   <%= error_message_on :post, :cover %>
 <% end %>
-    
+
 <%= form.field_container :body do %>
-  <%= form.label :body, t("activerecord.attributes.post.body") %><br />
+  <%= form.label :body %><br />
   <%= form.text_area :body, :class => 'fullwidth'  %>
   <%= error_message_on :post, :body %>
 <% end %>
 
 <%= form.field_container :tag_list do %>
-  <%= form.label :tag_list, t("activerecord.attributes.post.tags") %><br />
+  <%= form.label :tags %><br />
   <%= form.text_field :tag_list, :class => 'text fullwidth' %><br />
   <%= error_message_on :post, :tag_list %>
 <% end %>
@@ -34,8 +45,20 @@
   <%= form.hidden_field :taxon_ids, :value => @post.taxon_ids.join(','), :class => 'text fullwidth'  %>
 <% end %>
 
+<div data-hook="admin_post_form_meta_keywords">
+  <%= form.field_container :meta_keywords do %>
+    <%= form.label :meta_keywords, Spree.t(:meta_keywords) %>
+    <%= form.text_field :meta_keywords, :class => 'fullwidth' %>
+  <% end %>
+</div>
+
+<div data-hook="admin_post_form_meta_description">
+  <%= form.field_container :meta_description do %>
+    <%= form.label :meta_description, Spree.t(:meta_description) %>
+    <%= form.text_field :meta_description, :class => 'fullwidth' %>
+  <% end %>
+</div>
 
 <%= form.field_container :live do %>
-  <%= form.check_box :live  %> <%= form.label :live, t("activerecord.attributes.post.live") %><br />
+  <%= form.check_box :live  %> <%= form.label :live %><br />
 <% end %>
-

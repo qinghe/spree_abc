@@ -26,7 +26,7 @@
           //<![CDATA[
             var variant_options = new VariantOptions({
               view_style: 'slide',
-              container_selector: <%== ('.'+g_piece_selector).to_json -%>,
+              container_selector: <%== ('.'+@template.section_selector).to_json -%>,
               options: <%== product.variant_options_hash.to_json -%>,
               track_inventory_levels: false,
               allow_backorders: true,

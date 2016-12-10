@@ -13,10 +13,14 @@ db/sample9
 config/deploy
 config/deploy/*
 Gemfile.lock
-Gemfile.lock
+public/shops/staging
 public/shops/development
+public/shops/aliyun_development
 public/shops/test
 config/deploy/production.rb
 db/full_sql
 rdoc
 .settings
+.project
+db/*.sqlite3
+*.bak

@@ -2,11 +2,11 @@ Spree::Address.class_eval do
   #attr_accessible :city_name, :city_id # follow state
    
   before_validation :set_city, :only=>[:city]
-    def self.default
+    def self.build_default
       country = Spree::Country.find(Spree::Config[:default_country_id]) rescue Spree::Country.first
       # add default state into default address
       state = country.states.first      
-      new({:country => country,:state=>state}, :without_protection => true)
+      new({:country => country,:state=>state})
     end
     
     
@@ -14,7 +14,7 @@ Spree::Address.class_eval do
     private
       # Address.city should be present
       def set_city()
-        selected_city = Spree::City.first(:conditions=>["id=?",city_id])
+        selected_city = Spree::City.where(id: city_id).first
         self.city = selected_city.present? ? selected_city.name : city_name 
       end
     

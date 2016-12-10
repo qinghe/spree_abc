@@ -1,4 +1,13 @@
-app server 
+1. selinux
+http://www.electrictoolbox.com/switch-off-selinux-centos-5/
+setenforce 0, or mod_passenger.so: cannot open shared object file: Permission denied
+
+2. iptables
+ iptables -A INPUT -p tcp --dport 80 -j ACCEPT
+ service iptables save
+
+
+app server
 --------------------------------------------------------
 echo export TMOUT=1000000 >> /root/.bash_profile
 
@@ -21,19 +30,30 @@ chown apache.apache  public -R
 
 https://help.github.com/articles/deploying-with-capistrano
 
+
+
+
+php install
+------------------------------------------------------------
+yum install gd
+
+
+
+
+
 db server
 -----------------------------------------------------------
 1. configure mysql to support utf-8
   [mysqld]
-  character_set_server= utf8    
+  character_set_server= utf8
 http://www.dotkam.com/2008/09/14/configure-rails-and-mysql-to-support-utf-8/
 
 
 2. yum install libxml2-devel libxslt-devel
-  nokogiri required 
+  nokogiri required
   https://github.com/sparklemotion/nokogiri
 
-  
+
 3. install pg
 https://community.jboss.org/wiki/InstallPostgreSQLonFedora?_sscc=t
 
@@ -41,6 +61,11 @@ https://community.jboss.org/wiki/InstallPostgreSQLonFedora?_sscc=t
 #http://www.imagemagick.org/script/install-source.php
 wget http://www.imagemagick.org/download/ImageMagick.tar.gz
 tar xvzf ImageMagick.tar.gz
+identify  #try it
+ldconfig  /usr/local/lib # refresh as need.
+
+5. install google nodejs #execjs required
+ln -s /usr/local/bin/node /usr/bin/node
 
 spree~>2.4 only
 --------------------------------------------------------------
@@ -49,9 +74,43 @@ bundle show spree
 comment out spree/front_end/config/routes.rb
 #  root :to => 'home#index'
 
-system recovery
+setup aliyun oss
+---------------------------------------------------------------
+Paperclip_aliyun_oss/aliyun-oss-sync require it,
+env |grep SHELL
+vi ~/.bashrc
+export OSS_ACCESS_ID="xxx"
+export OSS_ACCESS_SECRET="xxx"
+#
+gem install aliyun-oss-sync
+#edit source lib/aosss/sync.rb
+:server            => 'oss-cn-beijing.aliyuncs.com'
+#sycn assets with aliyun
+aliyun-oss-sync push aliass:assets public/assets
+
+system recovery&backup
 --------------------------------------------------------------
 mysql -uroot spree_abc_staging < spree_abc20141204.sql
 tar -zxvf spree_abc20141204.tar.gz
 mv /webroot/spree_abc /webroot/spree_abc.bak
 mv webroot/spree_abc /webroot/
+
+tar -czvf spree_abc20150330.tar.gz spree_abc
+mysqldump -uroot spree_abc_staging > spree_abc20150330.sql
+
+feature upgrade
+---------------------------------------------------------------
+1. rake db:migrate RAILS_ENV=staging
+2. rake spree_theme:reload_section_piece
+3. rake spree_theme:load_seed[xxx.rb]
+4. rake assets:precomile
+5. rake spree_theme:release_theme[1]  #1,2,12,16,28
+6. aliyun-oss-sync push aliass:assets public/assets
+
+useful command
+---------------------------------------------------------------
+ CREATE USER ylyy@'localhost' IDENTIFIED BY 'huojinfeng';
+ GRANT ALL PRIVILEGES ON ylyy.* TO ylyy;
+
+ http://blog.chinaunix.net/uid-24250828-id-3239100.html
+  time dd if=/dev/zero of=test.dbf bs=8k count=300000

@@ -1,0 +1,70 @@
+post_files:
+  id: 100
+  title: post files
+  slug: post-files
+  is_selectable: "0"
+  is_container: "0"
+  for_terminal: "0"
+  html: |
+    <div  data-hook="post_images" >
+    <% if post.files.any? %>
+      <ul class="" data-hook>
+        <% post.files.each do |i| %>
+          <li class='tmb-all tmb-<%= i.viewable.id %>'>
+            <%= @template.post_attribute( :file, file: i ) %>
+          </li>
+        <% end %>
+      </ul>
+    <% end %>
+    </div>
+  css: |
+    .<%=@template.section_selector%> ul{
+      list-style: none;
+      margin: 0; padding: 0;}
+  js: ""
+container_background:
+  id: 101
+  title: container background
+  slug: container-background
+  is_selectable: "0"
+  is_container: "1"
+  html: ~~content~~
+  css: |
+    @media screen and (min-width: 1441px) {
+      /*1440*731 1920x975 */
+      .<%=@template.section_selector%> > .inner{ background-size: cover; <%=@template.css(:inner1)%>  }
+    }
+  js: ""
+one_click_trial:
+  id: 102
+  title: one click trial
+  slug: one-click-trial
+  is_selectable: "0"
+  is_container: "1"
+  usage: unused
+  html: |
+    <%= render "themes/sites/one_click_trial" %>
+  css: |
+    #launch_site_container {
+      display:none;
+    }
+    .<%=@template.section_selector%> .modal_close_img{
+      position:absolute;
+      font-size: 22px;
+    }
+  js: ""
+container_dialog:
+  id: 103
+  title: container dialog
+  slug: container-dialog
+  is_selectable: "0"
+  is_container: "1"
+  usage: "dialog"
+  html: ~~content~~
+  css: |
+    .<%=@template.section_selector%>
+    { display:none;   }
+    .simplemodal-overlay{ background-color:black;
+      opacity: 50;
+      <%=@template.css(:dialog_overlay)%>
+    }

@@ -2,7 +2,7 @@
 .sg_cover /* for interface.js*/
 {
   position:absolute !important;
-  z-index:999999 !important;
+  z-index:99 !important;
   background:white !important;
   margin:0px !important;
   padding:0px !important;
@@ -24,7 +24,7 @@
 }
 .sg_border{
   position:absolute !important;
-  z-index:999999 !important;
+  z-index:99 !important;
   background:white !important;
   background-color:orange !important;
   margin:0px !important;

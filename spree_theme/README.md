@@ -1,101 +1,56 @@
-SpreeTheme
-==========
+#SpreeTheme
 
-New frontend of spree, user could easy modify theme or add new theme. It is not working now!
-It is just for spree_abc, not common use, cause it override some cart/checkout views.
+New frontend of spree, user could easy modify theme or add new theme.
+__It is just for spree_abc, not common use.__
 
-how it work
------------
-  roles: designer, user, customer
-  sites: design site, shopping site
-  a design/shopping site must have a released theme, or redirect to under_contruction.  
-    released theme contains layout, js, css. each release has own folder.
-  a designer could login and design new theme.
+####terms and conditions
+Each site want their own theme, site could have more than one themes.
+Theme should be configurable, site could assigned their own data to it.
+Each site could select preferred theme from all available list.
+Designer could design theme and release it.
+
+Shops
+* design shop: product is theme, designer produce theme on line.
+* other shop: use released theme as frentend, sell product on line.
+
+Roles
+* user:  on line shop user, have full permission to manage shop.
+* customer: shopping on line.
+* designer: login design site, design template on line.
+
+Themes
+* theme: a theme of site, contains html, js, css.
 
 
-  designer
-  0. new theme
-  1. design theme
-  2. release completed theme.  generate themeN/versionN.html.erb
-  3. theme is viewable by public.  shops/themes/themeN/    
-   designs.dalianshops.com?theme_id=N
-   
-  backend
+####How it work
+designer produce theme
+  0. in design shop, create new theme.
+  1. design theme vie editor.
+  2. release completed theme, generate theme files themeX/html, css, js
+  3. theme is public now. user could import, config and publish.
+
+user apply theme to site
   1. user browse available themes, snapshot or live demo.
-  2. import preferred theme
-  *3. preview it. Do not support it now, find a clean way support tld/admin/add_to_cart first. 
-  4. apply it to frontend
+  2. import preferred theme,
+  3. configure it with site data.
+  4. apply it as frontend
 
-requirement
-  admin.sometld/... is for user preview,   ex. admin.somtld/some_taxon  
-  www.sometld/... is for customer,         ex. www.sometld/some_taxon
-
-how roles get layout?
----------------------
-  designer: get current editing template
-  customer: get layout from current site 
-
-path
-----
-  1. designer design product list page       
-  www.tld/tid       
-  2. designer design product detail page     
-  www.tld/tid/pid   
-  2. designer release design     
-  www.tld/admin/template_theme     
-  3. customer view product list              
-  www.tld/tid                -> /var/www/shops/n/    
-  4. customer view product detail            
-  www.tld/tid/pid   
-  5. admin manage site                       
-  www.tld/admin/...   
-  6. user login
-  www.tld/admin/
-  7. customer view live template demo        
-  templates.dalianshops.com  -> /var/www/shops/1
-  8. customer browse published template list 
-  www.tld/admin/template_themes/
-  9. shop folders
-    template folder
-       t(current template id)-> /var/www/shops/1/t(original template id)
-    theme image folder:
-       tx/images
-    generated layout
-       tx/tx.html.erb
-    theme css, js
-       tx/cssx.css
-       tx/jsx.js       
-    page_layout image folder: images belongs to shop, like logo
-       lx
-
-configure
----------
-  website theme_id, index_page should greater than 0.
-  website index_page could equal to 0.
-
-extra feature for theme
------------------------
-  option value has image, please look at https://github.com/citrus/spree_variant_options  for detail
-
-Installation
-============
-
+####Installation(tbd...)
 rake spree_theme:install:migrations
 rake db:migrate
 rails r "SpreeeTheme::Engine.load_seed"
 in config/spree.rb
-  SpreeTheme.website_class = 'Spree::FakeWebsite'
-  SpreeTheme.taxon_class = 'Spree::Taxon'
-
+SpreeTheme.website_class = 'Spree::FakeWebsite'
+SpreeTheme.taxon_class = 'Spree::Taxon'
 
 Load sample
------------
+
 rake spree_theme:load_samples
 rake spree_theme:import_theme
 
-Testing
--------
+####Testing(tbd...)
 rake test_app
+
 change db from sqlite to mysql,  fix id setting, rails sqlite adapter ignore id setting  
 rake db:seed RAILS_ENV=test
 rake spree_theme:import_theme  RAILS_ENV=test  SEED_PATH=1 THEME_ID=2

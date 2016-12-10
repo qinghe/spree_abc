@@ -451,7 +451,7 @@ $.layout = {
 			else
 				CSS[p] = style[p];
 		};
-		return CSS
+		return CSS;
 	}
 
 	/**
@@ -617,7 +617,7 @@ $.layout = {
 				+	'<ul style="font-size: 13px; font-weight: none; list-style: none; margin: 0; padding: 0 0 2px;"></ul>'
 				+ '</div>'
 				).appendTo("body");
-			$e.css('left', $(window).width() - $e.outerWidth() - 5)
+			$e.css('left', $(window).width() - $e.outerWidth() - 5);
 			if ($.ui.draggable) $e.draggable({ handle: ':first-child' });
 			return $e;
 		};
@@ -1733,7 +1733,7 @@ $.fn.layout = function (opts) {
 		// check for destroy()ed layouts and update the child pointers & arrays
 		if ($.isPlainObject( pC )) {
 			$.each( pC, function (key, child) {
-				if (child.destroyed) delete pC[key]
+				if (child.destroyed) delete pC[key];
 			});
 			// if no more children, remove the children hash
 			if ($.isEmptyObject( pC ))
@@ -1900,7 +1900,7 @@ $.fn.layout = function (opts) {
 
 			if (o.inset && !$.isPlainObject(o.inset)) {
 				// can specify a single number for equal outset all-around
-				n = parseInt(o.inset, 10) || 0
+				n = parseInt(o.inset, 10) || 0;
 				o.inset = {
 					top:	n
 				,	bottom:	n
@@ -1923,7 +1923,7 @@ $.fn.layout = function (opts) {
 				}
 				else if (!$.isPlainObject(o.outset)) {
 					// can specify a single number for equal outset all-around
-					n = parseInt(o.outset, 10) || 0
+					n = parseInt(o.outset, 10) || 0;
 					o.outset = {
 						top:	n
 					,	bottom:	n
@@ -2042,7 +2042,7 @@ $.fn.layout = function (opts) {
 			if ($.inArray(key, rootKeys) < 0 && $.inArray(key, data) < 0) {
 				if (!opts.panes[key])
 					opts.panes[key] = $.isPlainObject(val) ? $.extend(true, {}, val) : val;
-				delete opts[key]
+				delete opts[key];
 			}
 		}
 
@@ -2160,7 +2160,7 @@ $.fn.layout = function (opts) {
 	 * @param {string}	pane		The pane to process
 	 */
 ,	getPane = function (pane) {
-		var sel = options[pane].paneSelector
+		var sel = options[pane].paneSelector;
 		if (sel.substr(0,1)==="#") // ID selector
 			// NOTE: elements selected 'by ID' DO NOT have to be 'children'
 			return $N.find(sel).eq(0);
@@ -2686,7 +2686,7 @@ $.fn.layout = function (opts) {
 					// SET RESIZER LIMITS - used in drag()
 					setSizeLimits(pane); // update pane/resizer state
 					r = s.resizerPosition;
-					lastPos = ui.position[ side ]
+					lastPos = ui.position[ side ];
 
 					$R.addClass( resizerClass +" "+ resizerPaneClass ); // add drag classes
 					helperClassesSet = false; // reset logic var - see drag()
@@ -2730,7 +2730,7 @@ $.fn.layout = function (opts) {
 					// won't trigger unless resizer has actually moved!
 					if (live && Math.abs(ui.position[side] - lastPos) >= o.liveResizingTolerance) {
 						lastPos = ui.position[side];
-						resizePanes(e, ui, pane)
+						resizePanes(e, ui, pane);
 					}
 				}
 
@@ -2852,7 +2852,7 @@ $.fn.layout = function (opts) {
 			if (s.isVisible && ( o.maskObjects || (!a.objectsOnly && o.maskContents) )) {
 				getMasks(p).each(function(){
 					sizeMask.call(this);
-					this.style.zIndex = s.isSliding ? z.pane_sliding+1 : z.pane_normal+1
+					this.style.zIndex = s.isSliding ? z.pane_sliding+1 : z.pane_normal+1;
 					this.style.display = "block";
 				});
 			}
@@ -3596,7 +3596,7 @@ $.fn.layout = function (opts) {
 			.addClass( rClass+_open +" "+ rClass+_pane+_open )
 		;
 		if (s.isSliding)
-			$R.addClass( rClass+_sliding +" "+ rClass+_pane+_sliding )
+			$R.addClass( rClass+_sliding +" "+ rClass+_pane+_sliding );
 		else // in case 'was sliding'
 			$R.removeClass( rClass+_sliding +" "+ rClass+_pane+_sliding )
 
@@ -3781,7 +3781,7 @@ $.fn.layout = function (opts) {
 
 		// must remove double-click-toggle when using dblclick-slide
 		if (o.resizerDblClickToggle && evtName.match(/click/)) {
-			$R[enable ? "unbind" : "bind"]('dblclick.'+ sID, toggle)
+			$R[enable ? "unbind" : "bind"]('dblclick.'+ sID, toggle);
 		}
 
 		$R
@@ -4446,7 +4446,7 @@ $.fn.layout = function (opts) {
 				,	numFooters:		$Fs.length
 				,	hiddenFooters:	$Fs.length - $Fs_vis.length
 				,	spaceBelow:		0 // correct if no content footer ($E)
-				}
+				};
 					m.spaceAbove	= m.top; // just for state - not used in calc
 					m.bottom		= m.top + m.height;
 				if ($F.length)
@@ -4466,7 +4466,7 @@ $.fn.layout = function (opts) {
 	 * @param {(string|Object)=}		evt_or_panes	The pane(s) being resized
 	 */
 ,	sizeHandles = function (evt_or_panes) {
-		var panes = evtPane.call(this, evt_or_panes)
+		var panes = evtPane.call(this, evt_or_panes);
 		panes = panes ? panes.split(",") : _c.borderPanes;
 
 		$.each(panes, function (i, pane) {
@@ -4778,7 +4778,7 @@ $.fn.layout = function (opts) {
 			,	C:			$C ? $C[0] : false
 			,	state:		$.extend(true, {}, state[n])
 			,	options:	$.extend(true, {}, options[n])
-			}
+			};
 		};
 
 		function move (oPane, pane) {
@@ -5126,7 +5126,7 @@ $.fn.layout = function (opts) {
 	else // true OR false -- if layout-elements did NOT init (hidden or do not exist), can auto-init later
 		return Instance; // return the Instance object
 
-}
+};
 
 
 })( jQuery );
@@ -5397,7 +5397,7 @@ $.layout.state = {
 				s	= o.size;
 				c	= o.initClosed;
 				h	= o.initHidden;
-				ar	= o.autoResize
+				ar	= o.autoResize;
 				state	= inst.state[pane];
 				open	= state.isVisible;
 

@@ -9,7 +9,7 @@
   <ul>
     <% for child in children %>
     <li data-lid=<%= child.id %> data-tid=<%= theme.id %> data-action="<%= params[:action]%>">
-      <%= link_to_function(child.title, "",
+      <%= link_to(child.title, "#",
         {"class"=>(child.id==selected_id ? 'selected':'') })
       %>
       <% if current == 'ConfigResource'%>

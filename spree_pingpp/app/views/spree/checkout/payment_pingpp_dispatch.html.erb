@@ -1,0 +1,19 @@
+<%
+pingpp_object_name =  ( Spree::Gateway::PingppProvider::PingppPcChannelEnum.values.include?( @charge['channel'] ) ? 'pingppPc' : 'pingpp' )
+%>
+
+<div style="position:fixed; width:100%; height:100%; background-color:white; top:0; left:0;text-align:center;">
+  <h3> Payment page loading </h3>
+</div>
+<%= javascript_tag defer: 'defer' do -%>
+<%= pingpp_object_name%>.createPayment( <%== @charge.to_json %>, function(result, err){
+  if( result == "success" ){
+
+  }else if(result == "fail" ){
+    alert(err)
+  }else if( result == "cancel" ){
+    alert(err)
+  }
+
+} )
+<% end %>

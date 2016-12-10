@@ -12,5 +12,5 @@ option_types = [
 ]
 
 option_types.each do |option_type_attrs|
-  Spree::OptionType.create!(option_type_attrs, :without_protection => true)
+  Spree::OptionType.create!(option_type_attrs)
 end

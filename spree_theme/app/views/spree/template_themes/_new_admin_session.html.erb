@@ -1,16 +1,22 @@
-<% #show error message in dialog %>
+<% # actions: new_admin_section/create_admin_session 
+   #show error message in dialog, 
+ %>
 <%= flash_messages if request.xhr? %>
 
-<%= form_for @user, :as => :spree_user, :url => create_admin_session_path, :method=>:post, :remote=>request.xhr? do |f| %>
+<%= form_for Spree::User.new, :as => :spree_user, :url => create_admin_session_path, :method=>:post, :remote=>request.xhr? do |f| %>
   <div id="password-credentials">
-    <p>
-      <%= f.label :email, Spree.t(:email) %><br />
-      <%= f.email_field :email, :class => 'title', :tabindex => 1 %>
-    </p>
-    <p>
-      <%= f.label :password, Spree.t(:password) %><br />
-      <%= f.password_field :password, :class => 'title', :tabindex => 2 %>
-    </p>
-  </div>
-  <p><%= f.submit Spree.t(:login), :class => 'button primary', :tabindex => 3 %></p>
+    <table class="no-borders">
+        <tr>
+            <td><%= f.label :email, Spree.t(:email) %></td>
+            <td><%= f.email_field :email, :class => 'fullwidth', :tabindex => 1 %></td>
+        </tr>
+        <tr>
+            <td> <%= f.label :password, Spree.t(:password) %></td>
+            <td><%= f.password_field :password, :class => 'fullwidth', :tabindex => 2 %></td>
+        </tr>
+        <tr>
+            <td></td> <td><%= f.submit Spree.t(:login), :class => 'button primary', :tabindex => 3 %></td>
+        </tr>
+    </table>
+    
 <% end %>

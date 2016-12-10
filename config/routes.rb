@@ -9,6 +9,16 @@ SpreeAbc::Application.routes.draw do
   # We ask that you don't use the :as option here, as Spree relies on it being the default of "spree"
   mount Spree::Core::Engine, :at => '/'
 
+  Spree::Core::Engine.add_routes do
+    namespace :admin do
+      resources :template_themes do
+        member do
+          post :import
+        end
+      end
+    end
+  end
+  #mount Sprangular::Engine => '/'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -65,4 +75,6 @@ SpreeAbc::Application.routes.draw do
   # This is a legacy wild controller route that's not recommended for RESTful applications.
   # Note: This route will make all actions in every controller accessible via GET requests.
   # match ':controller(/:action(/:id))(.:format)'
+  # Any other routes are handled here (as ActionDispatch prevents RoutingError from hitting ApplicationController::rescue_action).
+  match "*path", :to => "errors#catch_404", :via => :all
 end

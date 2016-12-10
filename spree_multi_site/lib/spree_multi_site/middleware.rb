@@ -7,39 +7,40 @@ module SpreeMultiSite
 
     def call(env)
       request = Rack::Request.new(env)
-      unless request.path.include?('.') # ignore .css, .js, .img
-        site = get_site_from_request(request)
-        Spree::Site.current = ( site || Spree::Site.first)
+      resource_extension = request.path[/\.[\w]+/]
+      # ignore .css, .js, .img, except .json
+      if resource_extension.nil? || resource_extension=='.json' 
+        Spree::Store.current = get_store_from_request(request)
       end
       status, headers, body = @app.call(env)      
       [status, headers, body]
     end
     
-    def get_site_from_request( request )
-      site = nil      
-      # test.david.com => www.david.com/?n=test.david.com
+    def get_store_from_request( request )
+      # test.david.com => localhost:8080/?n=test.david.com
       # our domain is www.dalianshops.com 
-      if request.params['n'].try(:split,'.') # support short_name.dalianshops.com
-        short_name = request.params['n'].split('.').first
-        site = Spree::Site.find_by_short_name(short_name)
-      end
-
-      if site.blank?  
-        # support domain, ex. www.david.com
-        # TODO should use public_suffix_service handle example.com.cn
-        site = Spree::Site.find_by_domain(request.host) 
-      end
       
-      if(( Rails.env !~ /prduction/ ) && ( site.blank? ) )  
+      store = Spree::Store.by_domain( request.host )
+      
+      # support domain, ex. www.david.com
+      # apache rewrite test.david.com => localhost:8080/?n=test.david.com, request.host is 'test.david.com'
+      # TODO should use public_suffix_service handle example.com.cn
+            
+      if(( Rails.env !~ /prduction/ ) && ( store.blank? ) )  
         # for development or test, enable get site from cookie
-        #Rails.logger.debug "request.cookie_jar=#{request.cookie_jar.inspect},#{request.cookie_jar[:abc_development_domain]},#{request.cookie_jar['abc_development_domain']}"
-        #string and symbol both OK.  cookie.domain should be exactly same as host, www.domain.com != domain.com
-        cookie_domain = request.cookies['_dalianshops_domain'] 
-        if cookie_domain.present?
-          site = Spree::Site.find_by_domain( cookie_domain )
-        end        
+        # string and symbol both OK.  cookie.domain should be exactly same as host, www.domain.com != domain.com
+        # disable domain, some site have no domain, short_name always exists.
+        # we can not easily modify cookies except firefox, we'll add default_site for debug page on other browser.
+        # we could set default site for missing site as well.       
+        short_name = request.cookies['_dalianshops_short_name'] 
+        if short_name.present?
+          store = Spree::Store.unscoped.find_by_code( short_name )
+        end
+        #support request.host for development
+        store ||= Spree::Store.default 
+        
       end
-      site
+      store
     end
 
   end

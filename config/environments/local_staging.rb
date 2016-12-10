@@ -15,7 +15,8 @@ SpreeAbc::Application.configure do
   config.assets.compress = true
 
   # Don't fallback to assets pipeline if a precompiled asset is missed
-  config.assets.compile = false
+  # fix https://github.com/galetahub/ckeditor/issues/307
+  config.assets.compile = true
 
   # Generate digests for assets URLs
   config.assets.digest = true
@@ -40,10 +41,10 @@ SpreeAbc::Application.configure do
   # config.cache_store = :mem_cache_store
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server
-  # config.action_controller.asset_host = "http://assets.example.com"
 
   # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
-  config.assets.precompile += %w( tinymce-jquery.js )
+  # config.assets.precompile += %w( tinymce-jquery.js )
+  config.assets.precompile += %w( html5shiv.js )
 
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
@@ -57,6 +58,19 @@ SpreeAbc::Application.configure do
 
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
-  
+
   config.eager_load  = false
+
+  config.middleware.delete 'Rack::Cache'   # 整页缓存，用不上
+  config.middleware.delete 'Rack::Lock'    # 多线程加锁，多进程模式下无意义
+  #config.middleware.delete 'Rack::Runtime' # 记录X-Runtime（方便客户端查看执行时间）
+  config.middleware.delete 'ActionDispatch::RequestId' # 记录X-Request-Id（方便查看请求在群集中的哪台执行）
+  config.middleware.delete 'ActionDispatch::RemoteIp'  # IP SpoofAttack
+  config.middleware.delete 'ActionDispatch::Callbacks' # 在请求前后设置callback
+  config.middleware.delete 'ActionDispatch::Head'      # 如果是HEAD请求，按照GET请求执行，但是不返回body
+  config.middleware.delete 'Rack::ConditionalGet'      # HTTP客户端缓存才会使用
+  config.middleware.delete 'Rack::ETag'    # HTTP客户端缓存才会使用
+
+  config.spree_multi_site.system_top_domain = 'david.com'
+
 end

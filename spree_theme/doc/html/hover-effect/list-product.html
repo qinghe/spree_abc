@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title> list product </title>
+
+		<link rel='stylesheet' type='text/css' href='css/normalize.css' />
+		<style type='text/css'>
+		    body{ background-color:silver;}
+		    #boxes { position: relative; 
+			  width: 950px;
+			  margin:auto;
+			  background-color:gray;
+			}
+            .box{  float:left;	position:relative; width:240px;height:240px;
+			  margin-right: 10px;
+			}
+            .box.box-n{
+			  margin-right: 0px;
+			}
+
+			.box1 { background-color: #53b388; 
+			  
+			}
+			.box2 { background-color: #5a69a9; 
+			  
+			}
+			.box3 { background-color: #c26468; }
+            .box4 { background-color: #32a408; 
+			  
+			}
+			.box-title{  position:absolute; bottom:0px; left:0px; right:0px; background-color:yellow; display:none; overflow:hidden;}
+            .box-title a { display:block; }
+			.clear-block { clear:both; }
+		</style>
+	</head>
+	
+	<body>
+    <div id="boxes"> 
+        <div class="box box1">
+            <div style="">
+     			box1 
+			</div>
+		    <div class="box-title"> <a  href="#"> title </a> </div>
+        </div>
+        <div class="box box2">
+		  <div style=" ">
+             box2
+          </div>
+		    <div class="box-title"> <a  href="#"> title </a> </div>
+        </div>
+		<div class="box box3 box-n" style="">
+			<div style=" "> box3 </div>
+		    <div class="box-title"> <a  href="#"> title </a> </div>
+		</div>
+		<div class="box box4" style="">
+			<div style=" ">  box4 </div>
+		    <div class="box-title"> <a  href="#"> title </a> </div>
+		</div>
+        
+        <div class="box box1">
+            <div style="">
+     			box1 
+			</div>
+		    <div class="box-title"> <a  href="#"> title </a> </div>
+        </div>
+        <div class="box box2 box-n">
+		  <div style=" ">
+             box2
+          </div>
+		    <div class="box-title"> <a  href="#"> title </a> </div>
+        </div>
+		<div class="box box3" style="">
+			<div style=" "> box3 </div>
+		    <div class="box-title"> <a  href="#"> title </a> </div>
+		</div>
+		<div class="box box4" style="">
+			<div style=" ">  box4 </div>
+		    <div class="box-title"> <a  href="#"> title </a> </div>
+		</div>
+        <div class="clear-block"> </div>
+        
+    </div>
+
+		<script src='js/jquery-1.8.1.min.js' type='text/javascript'></script>
+		<script type='text/javascript'>
+$(document).ready(function(){
+            //nav sliding   
+            
+  			var height = ''+ 20+'px';
+            //nav sliding            
+            $('.box').hover(function(){			   
+                $('.box-title',this).stop().slideDown();;
+            },function(){
+                $('.box-title',this).stop().slideUp();
+                 
+                });	
+                    
+
+});
+		
+		</script>
+		
+	</body>
+</html>

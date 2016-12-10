@@ -1,0 +1,33 @@
+#account
+  h1 My Account
+
+  .well
+    div ng-hide="editing"
+      dl
+        dt Email
+        dd
+          | {{user.email}}
+
+        dt Password
+        dd •••••••
+
+        dt One-click Checkout
+        dd
+          span(ng-if='user.one_click_enabled') Enabled
+          span(ng-if='!user.one_click_enabled') Disabled
+
+      .clearfix
+        .pull-right
+          a.btn.btn-primary.btn-lg(ng-click="edit()")
+            span.glyphicon.glyphicon-edit
+            | &nbsp;
+            | Edit
+
+    div ng-show="editing"
+      div ng-include="'account/edit.html'"
+
+  div ng-include="'credit_cards/index.html'" ng-controller="CreditCardListCtrl"
+
+  div ng-include="'addresses/index.html'" ng-controller="AddressListCtrl"
+
+  div ng-include="'orders/index.html'" ng-controller="OrdersListCtrl"

@@ -12,7 +12,7 @@ Spree::Address.create!({
   :zipcode => 16804,
   :country => united_states,
   :phone => Faker::PhoneNumber.phone_number
-}, :without_protection => true)
+})
 
 #Shipping address
 Spree::Address.create!({
@@ -25,4 +25,4 @@ Spree::Address.create!({
   :zipcode => 16804,
   :country => united_states,
   :phone => Faker::PhoneNumber.phone_number
-}, :without_protection => true)
+})

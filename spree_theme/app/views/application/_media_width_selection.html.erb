@@ -1,0 +1,3 @@
+<div class="fr" style="padding: 0 40px;">
+  <%= select_tag( :terminal_id, options_from_collection_for_select( @theme.terminals,:id, :name) ) if @theme.terminals.present? %>
+</div>

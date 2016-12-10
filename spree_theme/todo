@@ -1,34 +1,31 @@
 #flaws
-after theme release, if we modify page_layout tree, this would cause theme generating error. 
+after theme release, if we modify page_layout tree, this would cause theme generating error.
 
 
 #todos
-0. go through whole process, create new template -> edit it-> release it-> other shop apply it
-
-*1. export template
-*2. editor dock.
-*2.1 promote section, demote section   
-*2.2 highlight counter part of preview page when hovering on section
-2.3 _update_param_value.js.erb, update <a> hover,selected param_value, client should be updated by ajax. 
+2.3 _update_param_value.js.erb, update <a> hover,selected param_value, client should be updated by ajax.
 3.  ajax update section, no need refresh when add section into template.
 
 4.  add section cart and try add to cart.
- 
 
-           
+5. �༭��z-index С��highlight cover, �����޷�ѡ��section
 
+6. container ȱʡ width:100%, �ֻ�ģ����Ҫ
+7. product  ȱʡ width:100%, text-align:center;
+8. product images in slide
+9. minicart for mobile
+10. ��������
+11. mobile root,  padding, border, margin, background
 
 #bugs
-get_css 12,13,'block', it is not right in generated css. 
+get_css 12,13,'block', it is not right in generated css.
 set font-size:0, unset it does not work.
 set input font-color:red, unset it does not work.
 category 'brand' do not work.
 
-https://github.com/spree/spree_fancy
-
+user logged in, click copy template until timeout, user is redirected to login form, after login again, redirect to get:template_theme/copy, this would cause error, there is only post:template_theme/copy
 
 # new features
-link add margin
-link add hover param,  same as link
-container add hover param 
 disable taxon/post link
+
+click effect

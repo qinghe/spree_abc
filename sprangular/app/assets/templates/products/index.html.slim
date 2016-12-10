@@ -1,0 +1,6 @@
+h1(ng-bind="pageTitle")
+div(ng-bind-html="taxon.description")
+
+div(ng-include="'products/list.html'"
+  infinite-scroll='loadNextPage()'
+  infinite-scroll-disabled='loadingComplete || fetching')

@@ -10,7 +10,7 @@ function SelectorGadget() {
   this.sg_div = null;
   this.unbound = false;
   //this.prediction_helper = new DomPredictionHelper();
-  this.restricted_elements = jQuery.map(['html', 'body', 'head', 'base'], function(selector) { return jQuery(selector).get(0) });
+  this.restricted_elements = jQuery.map(['html', 'body', 'head', 'base'], function(selector) { return jQuery(selector).get(0); });
   // david added at 04/28/2012 10:00  
   this.cover = null; // cover on the selected element
   this.covers = [];
@@ -21,7 +21,7 @@ SelectorGadget.prototype = new Object();
 
 SelectorGadget.prototype.makeBorders = function(orig_elem, makeRed) {
   //this.removeBorders();
-  this.cover = this.get_available_cover()
+  this.cover = this.get_available_cover();
   if (this.cover==null)
   {
     this.setupBorders();//set cover
@@ -36,8 +36,8 @@ SelectorGadget.prototype.makeBorders = function(orig_elem, makeRed) {
 
   var top = p.top;
   var left = p.left;
-  var width = elem.outerWidth()
-  var height = elem.outerHeight()
+  var width = elem.outerWidth();
+  var height = elem.outerHeight();
 
   // david added at 04/28/2012 10:00  
   this.cover.css('width', this.px(width)).css('height', this.px(height)).css('top', this.px(top )).css('left', this.px(left));
@@ -72,13 +72,13 @@ SelectorGadget.prototype.removeBorders = function() {
       this.covers[i].hide(); 
     }   
   }
-}
+};
 
 SelectorGadget.prototype.setupBorders = function() {
   if (!this.cover) {
     var width = this.border_width + 'px';
     // david added at 04/28/2012 10:00  
-    this.cover = jQuery('<div>').addClass('sg_cover').hide()
+    this.cover = jQuery('<div>').addClass('sg_cover').hide();
     this.addBorderToDom();
   }
 };
@@ -137,10 +137,10 @@ SelectorGadget.prototype.sgMouseover = function(e) {
 
 SelectorGadget.prototype.firstSelectedOrSuggestedParent = function(elem) {
   var orig = elem;
-  if (jQuery(elem).hasClass('sg_suggested') || jQuery(elem).hasClass('sg_selected')) return elem
+  if (jQuery(elem).hasClass('sg_suggested') || jQuery(elem).hasClass('sg_selected')) return elem;
   while (elem.parentNode && (elem = elem.parentNode)) {
     if (jQuery.inArray(elem, this.restricted_elements) == -1)
-      if (jQuery(elem).hasClass('sg_suggested') || jQuery(elem).hasClass('sg_selected')) return elem
+      if (jQuery(elem).hasClass('sg_suggested') || jQuery(elem).hasClass('sg_selected')) return elem;
   }
   return null;
 };
@@ -190,7 +190,7 @@ SelectorGadget.prototype.sgMousedown = function(e) {
     gadget.selected.push(elem);
   }
 
-  gadget.clearSuggested()
+  gadget.clearSuggested();
   var prediction = gadget.prediction_helper.predictCss(gadget.selected, gadget.rejected.concat(gadget.restricted_elements));
   gadget.suggestPredicted(prediction);
   gadget.setPath(prediction);
@@ -322,8 +322,8 @@ SelectorGadget.prototype.clearSelected = function(e) {
 
 SelectorGadget.prototype.clearEverything = function(e) {
   var self = (e && e.data && e.data.self) || this;
-  self.clearSelected()
-  self.resetOutputs()
+  self.clearSelected();
+  self.resetOutputs();
 };
 
 SelectorGadget.prototype.resetOutputs = function() {

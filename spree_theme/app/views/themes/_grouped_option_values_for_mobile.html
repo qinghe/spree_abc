@@ -1,0 +1,12 @@
+<% if product.has_variants? %>
+  <div class="step1">
+        <div class="option_values_summary"> Spree.t(:select)
+          <%= render partial: 'themes/option_type_list'
+        </div>
+  </div>
+  <div class="step2">    
+        <div class="option_values_detail">
+           <%= render partial: 'themes/grouped_option_values_selector'
+        </div>
+  </div>
+<% end%>

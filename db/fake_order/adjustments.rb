@@ -10,7 +10,7 @@ first_order.adjustments.create!({
   :label => "Tax",
   :state => "open",
   :mandatory => true
-}, :without_protection => true)
+})
 
 last_order.adjustments.create!({
   :amount => 0,
@@ -19,7 +19,7 @@ last_order.adjustments.create!({
   :label => "Tax",
   :state => "open",
   :mandatory => true
-}, :without_protection => true)
+})
 
 first_order.adjustments.create!({
   :amount => 0,
@@ -28,7 +28,7 @@ first_order.adjustments.create!({
   :label => "Shipping",
   :state => "finalized",
   :mandatory => true
-}, :without_protection => true)
+})
 
 last_order.adjustments.create!({
   :amount => 0,
@@ -37,4 +37,4 @@ last_order.adjustments.create!({
   :label => "Shipping",
   :state => "finalized",
   :mandatory => true
-}, :without_protection => true)
+})

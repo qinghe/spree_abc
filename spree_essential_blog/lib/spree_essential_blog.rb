@@ -5,6 +5,7 @@ require "spree_essential_blog/version"
 require "spree_essential_blog/engine"
 require "spree_essential_blog/search"
 require "spree_essential_blog/permitted_attributes_for_blog"
+require "spree_essential_blog/paper_clip_interpolate_site"
 
 module SpreeEssentialBlog
   mattr_accessor :site_class, :taxon_class
