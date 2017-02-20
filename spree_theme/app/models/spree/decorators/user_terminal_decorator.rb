@@ -27,6 +27,6 @@ Spree::Order.class_eval do
 
   def available_payment_methods
     #@available_payment_methods ||= (PaymentMethod.available(:front_end) + PaymentMethod.available(:both)).uniq
-    @available_payment_methods ||= (Spree::PaymentMethod.available(:front_end) + Spree::PaymentMethod.available(:both)).uniq.select{|payment_method| payment_method.user_terminal == self.user_terminal }
+    @available_payment_methods ||= (Spree::PaymentMethod.available_on_front_end).select{|payment_method| payment_method.user_terminal == self.user_terminal }
   end
 end
