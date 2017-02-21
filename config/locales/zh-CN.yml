@@ -13,11 +13,11 @@ zh-CN:
         state: "省份"
         zipcode: "邮政编码"
       spree/calculator/tiered_flat_rate:
-        preferred_base_amount:
-        preferred_tiers:
+        preferred_base_amount: Base Amount
+        preferred_tiers: Tiers
       spree/calculator/tiered_percent:
-        preferred_base_percent:
-        preferred_tiers:
+        preferred_base_percent: Base Percent
+        preferred_tiers: Tiers
       spree/country:
         iso: ISO
         iso3: ISO3
@@ -28,7 +28,7 @@ zh-CN:
         base:
         cc_type: "信用卡类型"
         month: "月份"
-        name:
+        name: Name
         number: "卡号"
         verification_value: "验证码"
         year: "年份"
@@ -73,6 +73,7 @@ zh-CN:
         zipcode: 收货地址邮政编码
       spree/payment:
         amount: "金额"
+        number: Number
       spree/payment_method:
         name: "名称"
       spree/product:
@@ -116,8 +117,8 @@ zh-CN:
         name: "名称"
       spree/state_change:
         state_changes: "状态变更"
-        state_from:
-        state_to:
+        state_from: State from
+        state_to: State to
         timestamp: "时间"
         type: "类型"
         updated:
@@ -203,7 +204,7 @@ zh-CN:
         spree/store:
           attributes:
             base:
-              cannot_destroy_default_store:
+              cannot_destroy_default_store:  Cannot destroy the default Store.
     models:
       spree/address:
         one: "地址"
@@ -230,6 +231,8 @@ zh-CN:
         one: "选项类型"
         other: "选项类型"
       spree/option_value:
+        one: Option Value
+        other: Option Values
       spree/order:
         one: "订单"
         other: "订单"
@@ -255,12 +258,20 @@ zh-CN:
         one: "原型"
         other: "原型"
       spree/refund_reason:
+        one: Refund Reason
+        other: Refund Reasons
       spree/reimbursement:
+        one: Reimbursement
+        other: Reimbursements
       spree/reimbursement_type:
+        one: Reimbursement Type
+        other: Reimbursement Types
       spree/return_authorization:
         one: 退款
         other: 退款
       spree/return_authorization_reason:
+        one: Return Authorization Reason
+        other: Return Authorization Reasons
       spree/role:
         one: "角色"
         other: "角色"
@@ -277,6 +288,11 @@ zh-CN:
         one: "省份"
         other: "省份"
       spree/state_change:
+        one: State Change
+        other: State Changes
+      spree/stock_movement:
+        one: Stock Movement
+        other: Stock Movements
       spree/stock_location:
         one: 仓库地址
         other: 仓库地址记录
@@ -284,6 +300,12 @@ zh-CN:
       spree/stock_transfer:
         one: 库存转储
         other: 库存转储记录
+      spree/store_credit:
+        one: Store Credit
+        other: Store Credits
+      spree/store_credit_category:
+        one: Store Credit Category
+        other: Store Credit Categories
       spree/tax_category:
         one: "缴税分类"
         other: "缴税分类"
@@ -310,10 +332,10 @@ zh-CN:
         other: "区域"
   spree:
     abbreviation: "缩写"
-    accept:
-    acceptance_errors:
-    acceptance_status:
-    accepted:
+    accept: Accept
+    acceptance_errors: Acceptance status
+    acceptance_status: Acceptance errors
+    accepted: Accepted
     account: "帐户"
     account_updated: "帐户更新完成!"
     action: "操作"
@@ -380,6 +402,12 @@ zh-CN:
         taxonomies: "分类层级"
         taxons: "分类"
         users: "用户"
+      order:
+        events:
+          approve: approve
+          cancel: cancel
+          resume: resume
+          resend: Resend
       user:
         account: "账户"
         addresses: "地址"
@@ -389,6 +417,9 @@ zh-CN:
         order_num: "订单数量"
         orders: "订单"
         user_information:  "用户信息"
+        store_credits: Store Credits
+        no_store_credit: User has no Store Credit available.
+        available_store_credit: User has %{amount} in Store Credit available.
     admin_login: 网站管理系统登录
     administration: "管理"
     advertise: "推广"
@@ -568,11 +599,12 @@ zh-CN:
     coupon_code_not_found: "您所输入的优惠券号码不存在。请重新输入。"
     coupon_code_unknown_error:
     create: "创建"
-    create_new_order: "新建订单"
     create_a_new_account: 创建一个新帐号
-    created_at: 创建日期
+    create_new_order: "新建订单"
     create_product_group_from_products: Create a new product group from these products
+    create_reimbursement: Create reimbursement
     create_user_account: 创建用户帐号
+    created_at: 创建日期
     created_successfully: 创建成功
     credit: 欠款??
     credit_card: 信用卡

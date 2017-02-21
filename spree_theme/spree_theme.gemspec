@@ -16,7 +16,8 @@ Gem::Specification.new do |s|
   s.require_path = 'lib'
   s.requirements << 'none'
 
-  s.add_dependency 'spree_core', '3.1.0.rc3'
+  s.add_dependency 'spree_core'
+  
   s.add_dependency 'friendly_id'
   s.add_dependency 'useragent'
   s.add_dependency 'acts_as_commentable'
