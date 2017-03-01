@@ -116,6 +116,11 @@ end
 
 Spree::Tracker.class_eval do
   include Spree::MultiSiteSystem
+
+  def self.current
+    tracker = where(active: true).first
+    tracker.analytics_id.present? ? tracker : nil if tracker     
+  end
 end
 
 Spree.user_class.class_eval do
