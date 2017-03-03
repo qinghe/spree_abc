@@ -18,6 +18,8 @@ module SpreePingpp
     initializer "spree.assets.precompile", :group => :all do |app|
       app.config.assets.precompile += %w[
         spree/frontend/spree_pingpp.js
+        billing_integrations/pingpp/alipay_pc_direct.jpg
+        billing_integrations/pingpp/alipay_wap.jpg
       ]
     end
 
