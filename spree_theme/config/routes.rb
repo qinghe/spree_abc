@@ -66,14 +66,14 @@ Spree::Core::Engine.add_routes do
   #api extension
   namespace :api, :defaults => { :format => 'json' } do
     namespace :v1 do
-    resources :products, only: [] do
-      get :related, on: :member
-      resources :relations do
-        collection do
-          post :update_positions
+      resources :products, only: [] do
+        get :related, on: :member
+        resources :relations do
+          collection do
+            post :update_positions
+          end
         end
       end
-    end
 
       resources :template_themes do
         member do

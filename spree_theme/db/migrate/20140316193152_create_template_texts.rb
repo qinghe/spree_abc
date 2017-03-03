@@ -5,7 +5,7 @@ class CreateTemplateTexts < ActiveRecord::Migration
       t.string :name
       t.text :body
       t.string :slug
-      t.timestamps
+      t.timestamps null: false
     end
     add_index(:spree_template_texts, :slug)
   end

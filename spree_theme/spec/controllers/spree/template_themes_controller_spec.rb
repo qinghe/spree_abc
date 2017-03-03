@@ -30,9 +30,10 @@ describe Spree::TemplateThemesController, :type => :controller do
       create(:store, default: true, designable: true)
       allow( controller ).to receive(:get_layout_if_use).and_return( false )
     }
+    let(:template_theme) { create(:template_theme) }
 
     it "preview "  do
-      spree_get :preview
+      spree_get :preview, id: template_theme
       expect(response).to be_success
     end
   end

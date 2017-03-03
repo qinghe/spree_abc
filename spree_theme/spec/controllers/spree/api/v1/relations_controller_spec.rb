@@ -1,4 +1,4 @@
-RSpec.describe Spree::Api::RelationsController, type: :controller do
+RSpec.describe Spree::Api::V1::RelationsController, type: :controller do
   stub_authorization!
   render_views
 

@@ -34,7 +34,6 @@ module Spree
 
     def duplicate_template_theme
       new_template_theme = original_template_theme.dup
-      new_template_theme.site_id = SpreeTheme.site_class.current.id
       new_template_theme.store_id = Spree::Store.current.id
       new_template_theme.release_id = 0 # new copied theme should have no release
       new_template_theme.page_layout_root_id = 0
@@ -57,7 +56,6 @@ module Spree
       end
       h.each_pair{|item, cloned|
         cloned.copy_from_id = item.id
-        #cloned.site_id = SpreeTheme.site_class.current.id
         cloned.template_theme = new_template_theme
       }
       cloned_branch = h[page_layout_root]

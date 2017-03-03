@@ -60,6 +60,16 @@ Spree::Product.class_eval do
     Spree::Relation.where(related_to_type: self.class.to_s).where(related_to_id: id).destroy_all
   end
 
+  private
+
+  def find_relation_type(relation_name)
+    self.class.relation_types.detect { |rt| format_name(rt.name) == format_name(relation_name) }
+  rescue ActiveRecord::StatementInvalid
+    # This exception is throw if the relation_types table does not exist.
+    # And this method is getting invoked during the execution of a migration
+    # from another extension when both are used in a project.
+    nil
+  end
 
   # Returns all the Products that are related to this record for the given RelationType.
   #
@@ -81,17 +91,6 @@ Spree::Product.class_eval do
     end
 
     result
-  end
-
-  private
-
-  def find_relation_type(relation_name)
-    self.class.relation_types.detect { |rt| format_name(rt.name) == format_name(relation_name) }
-  rescue ActiveRecord::StatementInvalid
-    # This exception is throw if the relation_types table does not exist.
-    # And this method is getting invoked during the execution of a migration
-    # from another extension when both are used in a project.
-    nil
   end
 
   # Simple accessor for the class-level relation_filter.

@@ -1,3 +1,4 @@
+require 'spec_helper'
 RSpec.describe Spree::Admin::ProductsController, type: :controller do
   stub_authorization!
 

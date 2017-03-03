@@ -1,4 +1,14 @@
+#require 'active_support/concern'
+
 module SpreeTheme
+  # these are for file_theme, copy from gem themes_on_rails
+  #autoload :ActionController,    'spree_theme/file_theme/action_controller'
+  #autoload :ControllerAdditions, 'spree_theme/file_theme/controller_additions'
+
+  def self.all
+    Dir.glob("app/themes/*").select { |fn| !fn.start_with?('.') && File.directory?(fn) }.map { |fn| fn.split('/').last }
+  end
+
   TEMPLATE_THEME_TABS = [:native_themes, :theme_texts, :foreign_themes]
 
   mattr_accessor :site_class, :taxon_class, :post_class
@@ -36,6 +46,9 @@ end
 require 'spree_core'
 require 'spree_theme/engine'
 require 'spree_theme/paper_clip_interpolate_site'
+require 'spree_theme/database_theme/installer'
+require 'spree_theme/file_theme/installer'
+require 'spree_theme/file_theme/action_controller'
 require 'spree_theme/system'
 require 'spree_theme/site_helper'
 require 'spree_theme/seed_helper'

@@ -49,12 +49,12 @@ class SpreeThemeTables < ActiveRecord::Migration
       t.column "position",               :integer, :limit => 3,     :null => true,  :default => 0
       t.column "slug",             :string,   :limit => 200,   :null => false, :default => ""
       t.column "is_enabled",              :boolean,                   :null => false, :default => true
-      t.timestamps
+      t.timestamps null: false
     end
 
     create_table :spree_editors, :force=>true do |t|
       t.column "slug",             :string,   :limit => 200,   :null => false, :default => ""
-      t.timestamps
+      t.timestamps null: false
     end
 
     # section_piece composite of section
@@ -97,7 +97,7 @@ class SpreeThemeTables < ActiveRecord::Migration
       # it is only for root record, this layout tree is full html page.
       # there are two kinds of layout tree  full_html_page and part_html_page
       t.column "is_full_html",             :boolean,                :null => false, :default => false
-      t.timestamps
+      t.timestamps null: false
 
     end
     create_table :spree_section_piece_params, :force=>true do |t|
@@ -128,14 +128,14 @@ class SpreeThemeTables < ActiveRecord::Migration
       t.string  :default_value   #,   :null => false, :default => ""
       t.boolean :is_enabled,     :default=>true
       t.string :disabled_ha_ids, :limit=>255, :null => false, :default => ""
-      t.timestamps
+      t.timestamps null: false
     end
 
     # store the text used in the section. like pclass='txt'
     create_table :spree_section_texts do |t|
       t.string :lang
       t.string :body
-      t.timestamps
+      t.timestamps null: false
     end
 
     create_table :spree_template_themes, :force=>true do |t|
@@ -148,13 +148,13 @@ class SpreeThemeTables < ActiveRecord::Migration
       #  {:page_layout_id={:spree/template_file=[], :spree/taxon=[]}}
       t.column :assigned_resource_ids,   :string,  :limit => 255,     :null => false, :default => ""
       #t.column :released_at,             :datetime,:null => false,    :default => "1970-01-01 00:00:00"
-      t.timestamps
+      t.timestamps null: false
     end
 
     create_table :spree_template_releases do |t|
       t.string :name,:limit => 24,     :null => false
       t.integer :theme_id,     :null => false, :default => 0
-      t.timestamps
+      t.timestamps null: false
     end
 
     create_table :spree_param_values, :force=>true do |t|
@@ -172,7 +172,7 @@ class SpreeThemeTables < ActiveRecord::Migration
       #t.column :preview_pvalue,          :string,                   :null => false, :default => ""
       # only used when pclass=themeimg, if not empty this is the name of the image to use during preview, when publishing set this to empty after renaming the file on disk.
       #t.column :preview_unset,           :string,                   :null => false, :default => false # if true ignore the pvalue and do not generate an output for this param
-      t.timestamps
+      t.timestamps null: false
     end
     create_table :spree_template_files do |t|
       t.integer :theme_id

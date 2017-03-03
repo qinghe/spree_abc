@@ -7,8 +7,9 @@ module Spree
     has_many :stores
 
     class << self
+
       def current
-      #  if Thread.current[:spree_site].nil?
+        if Thread.current[:spree_site].nil?
       #    website = self.find_or_initialize_by_domain_and_name('design.example.com','Design Site' )
       #    #or Rails.env.development?
       #    if website.new_record?
@@ -16,8 +17,9 @@ module Spree
       #      website.theme_id = 1
       #      website.save!
       #    end
-      #    Thread.current[:spree_site] = website
-      #  end
+          #for test
+          Thread.current[:spree_site] = new
+        end
         Thread.current[:spree_site]
       end
 

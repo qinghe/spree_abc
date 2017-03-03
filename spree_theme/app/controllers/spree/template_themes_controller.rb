@@ -3,7 +3,15 @@ module Spree
     helper 'spree/products'
     delegate :taxon_class,:site_class, :to=>:"SpreeTheme"
 
+    # support database_theme and file_theme
     def page
+      if file_theme_instance.present?
+        @searcher = build_searcher(params.merge(include_images: true))
+        @products = @searcher.retrieve_products
+        @products = @products.includes(:possible_promotions) if @products.respond_to?(:includes)
+        @taxonomies = Spree::Taxonomy.includes(root: :children)
+        render file_theme_instance.index_page
+      end
     end
 
     def under_construction

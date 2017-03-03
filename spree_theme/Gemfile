@@ -1,5 +1,5 @@
-source 'https://ruby.taobao.org'
-#source "https://rails-assets.org"
+#source 'http://gems.ruby-china.org'
+source 'https://rubygems.org/'
 
 eval(File.read(File.dirname(__FILE__) + '/../common_spree_dependencies.rb'))
 
@@ -8,12 +8,14 @@ group :test,:development do
   #gem 'ruby-graphviz' #print checkout flow
   #gem 'simplecov' #rspec using it.
   #using backend required
+  gem 'sass-rails', '~> 5.0.0'
   gem "mysql2"
 end
 
-#group :test do
-#  gem 'ffaker'
-#end
+group :test do
+  gem 'ffaker'
+  gem 'shoulda-matchers', '~> 3.1'
+end
 
 gem "acts_as_list"
 gem "acts_as_tree"
@@ -27,5 +29,10 @@ gem "friendly_id"
 
 gem 'turbolinks'
 gem 'jquery-turbolinks'
+
+#gem 'bootstrap-sass'
+#gem 'font-awesome-rails'
+# support multiple theme by file
+#gem 'themes_on_rails',  github: "spree/spree_editor", branch: "master"
 
 gemspec

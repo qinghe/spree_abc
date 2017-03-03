@@ -1,6 +1,7 @@
 #ActiveRecord::RecordInvalid: Validation failed: Slug has already been taken
-Spree::Site.all.each{|site|
-  Spree::Site.current = site
+# it would cause error while spree_theme:reload, there is no FakeWebsite table.
+SpreeTheme.site_class.all.each{|site|
+  SpreeTheme.site_class.current = site
   site.products.each{|product|
     unless product.valid?
       puts "#{product.id} #{product.errors.messages}"

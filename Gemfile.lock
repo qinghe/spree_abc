@@ -131,6 +131,7 @@ PATH
   specs:
     spree_theme (3.1.0)
       acts_as_commentable
+      font-awesome-rails
       friendly_id
       spree_core
       useragent

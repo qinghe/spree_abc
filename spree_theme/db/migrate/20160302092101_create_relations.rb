@@ -4,7 +4,7 @@ class CreateRelations < ActiveRecord::Migration
       t.references :relation_type
       t.references :relatable, polymorphic: true
       t.references :related_to, polymorphic: true
-      t.timestamps
+      t.timestamps null: false
     end
   end
 

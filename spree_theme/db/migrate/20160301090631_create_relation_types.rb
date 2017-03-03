@@ -4,7 +4,7 @@ class CreateRelationTypes < ActiveRecord::Migration
       t.string :name
       t.text :description
       t.string :applies_to
-      t.timestamps
+      t.timestamps null: false
     end
   end
 

@@ -43,7 +43,6 @@ module Spree
     #extend FriendlyId
     TerminalEnum = Struct.new( :desktop, :mobile, :pad, :tv )[0,1,2,3]
 
-    #belongs_to :website, :class_name => SpreeTheme.site_class.to_s, :foreign_key => "site_id"
     belongs_to :store, :foreign_key => "store_id"
 
     # for now template_theme and page_layout are one to one
@@ -64,7 +63,6 @@ module Spree
     #use string as key instead of integer page_layout.id, exported theme in json, after restore, key is always string
     serialize :assigned_resource_ids, Hash
 
-    #scope :within_site, ->(site){ where(:site_id=> site.id) }
     scope :released, ->{ where("release_id>0") }
     scope :published, -> { released.where(:is_public=>true) }
     scope :for_desktop, ->{ where( for_terminal: TerminalEnum.desktop) }
@@ -88,6 +86,7 @@ module Spree
       def create_plain_template(  section_root, title, attrs={})
         #create a theme first.
         template = TemplateTheme.create( {:title=>title, :section_root_id=>section_root.id}.merge(attrs) ) do |obj|
+          obj.store =  Spree::Store.current
         end
       end
 
@@ -258,7 +257,6 @@ module Spree
             obj.assign_attributes( attrs )
             obj.root_id = selected_page_layout.root_id if selected_page_layout.present?
             obj.template_theme_id = self.id
-            obj.site_id = SpreeTheme.site_class.current.id
             obj.is_full_html = section.section_piece.is_root?
           end
           if selected_page_layout.present?
@@ -465,9 +463,9 @@ module Spree
         self.store_id= Spree::Store.current.id
       end
       #fix Attribute was supposed to be a Hash, but was a String
-      if new_record? && assigned_resource_ids.blank?
-        self.assigned_resource_ids={}
-      end
+      #if new_record? && assigned_resource_ids.blank?
+      #  self.assigned_resource_ids={}
+      #end
     end
 
     # it is for create plain theme, create would trigger it.

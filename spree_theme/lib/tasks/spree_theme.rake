@@ -1,5 +1,25 @@
 require 'fileutils'
 namespace :spree_theme do
+  desc "reset db, load seed, load sample, load theme sample"
+  task :reload  => :environment do
+    Rake::Task["db:remigrate"].invoke
+    Rake::Task["db:seed"].invoke
+    load File.join(SpreeTheme::Engine.root,'db/seeds.rb')
+
+    # spree_sample:load cause strange error
+    # NoMethodError: undefined method `slug' for #<Spree::Product:0x0000000933d138>
+    # Rake::Task["spree_sample:load"].invoke
+    # load File.join(SpreeTheme::Engine.root,'db/themes/seed.rb')
+  end
+  
+  desc "load sample, load theme sample"
+  task :load_sample  => :environment do
+    # spree_sample:load cause strange error
+    # NoMethodError: undefined method `slug' for #<Spree::Product:0x0000000933d138>
+     Rake::Task["spree_sample:load"].invoke
+     load File.join(SpreeTheme::Engine.root,'db/themes/seed.rb')
+  end
+
   desc "load themes"
   task :load_themes  => :environment do
     Rake::Task["spree_sample:load"].invoke

@@ -10,6 +10,6 @@ Spree::TemplateTheme.class_eval do
   acts_as_commentable
 end
 
-SpreeTheme.site_class.class_eval do
+Spree::Store.class_eval do
   acts_as_commentable
 end

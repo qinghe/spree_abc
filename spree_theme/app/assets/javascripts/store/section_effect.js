@@ -1,4 +1,4 @@
-//= require image-zoom
+//= require image_zoom
 //= require jquery.menuhover
 //= require jquery.ias.dev
 //= require jquery.sidr

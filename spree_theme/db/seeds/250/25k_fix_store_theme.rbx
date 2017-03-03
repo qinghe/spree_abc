@@ -1,3 +1,4 @@
+# it would cause error while spree_theme:reload, NoMethodError: undefined method `site'
 Spree::Store.all.each{|store|
   if store.theme_id == 0
     if store.site.theme_id>0

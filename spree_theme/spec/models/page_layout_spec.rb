@@ -9,7 +9,6 @@ describe Spree::PageLayout do
   #       node22 - pv(2)
   before(:each){
     @node_has_children =  page_layout_tree.children.last
-  #  SpreeTheme.site_class.current = create(:fake_site)
   #  @page_layout_tree = create(:page_layout_tree)
   }
 

@@ -5,7 +5,7 @@ describe Spree::TemplateTheme do
   let (:section_root) { create :section_root }
 
   before(:each) do
-    SpreeTheme.site_class.current = create(:fake_site)
+    create(:store, active: true)
     @taxon = create(:taxon)
   end
 

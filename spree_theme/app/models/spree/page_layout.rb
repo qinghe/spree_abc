@@ -49,7 +49,6 @@ module Spree
       #def create_layout(section, title, attrs={})
       #  layout = create!(:section_id=>section.id) do |obj|
       #    obj.title = title
-      #    obj.site_id = SpreeTheme.site_class.current.id
       #    obj.attributes = attrs unless attrs.empty?
       #    obj.section_instance = 1
       #    obj.is_full_html = section.section_piece.is_root?
@@ -65,7 +64,6 @@ module Spree
       #  original_children =  ordered_nodes.select{|node| node.parent_id == original_parent.id }
       #  for node in original_children
       #    new_node = node.dup
-      #    new_node.site_id = new_parent.site_id
       #    new_node.parent_id = new_parent.id
       #    new_node.root_id = new_parent.root_id
       #    new_node.save!
@@ -88,7 +86,6 @@ module Spree
       #  original_root = ordered_nodes.first
       #  new_layout = original_root.dup
       #  new_layout.root_id = 0 # reset the lft,rgt.
-      #  new_layout.site_id = SpreeTheme.site_class.current.id
       #  new_layout.save!
       #  new_layout.update_attribute("root_id", new_layout.id)
       #  copy_decendants_to_new_parent(new_layout, original_root,  ordered_nodes)
