@@ -27,6 +27,9 @@ production:
   jsapi_ticket: <%= ENV['WECHAT_JSAPI_TICKET'] %>
   oauth2_cookie_duration: <%= ENV['WECHAT_OAUTH2_COOKIE_DURATION'] %> # seconds
 
+aliyun_staging:
+  <<: *default
+
 development:
   <<: *default
   trusted_domain_fullname: ""
