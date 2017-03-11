@@ -66,6 +66,7 @@ namespace :spree_abc do
       #商店目录没有创建
       unless File.exists?( src )
         FileUtils.mkdir( src )
+        puts "Create #{src}"
       end
 
       if File.exists?( des )
