@@ -63,6 +63,11 @@ namespace :spree_abc do
       #oldname, newname
       src = store.document_path
       des = File.join(Rails.root,'public', store.url )
+      #商店目录没有创建
+      unless File.exists?( src )
+        FileUtils.mkdir( src )
+      end
+
       if File.exists?( des )
         puts "Exists #{des}"
       else
