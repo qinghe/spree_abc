@@ -1,6 +1,6 @@
 ﻿bugs
-20150603a: unset font-size,  ajax return font-size:0px.
-20150603b: add section for flash[:error],flash[:notice]...   ex. after login, show login successfully.
-20150603c: ajax request should show spinner first.
-20150801a: copy template cause strange problem, can not get param_values by page_layout.
-  we have to restart server to fix it.
+==================================================================================
+Started GET "/assets/default_taxon.png" for 127.0.0.1 at 2017-03-05 12:08:37 +0800
+Processing by ErrorsController#catch_404 as PNG
+  Parameters: {"path"=>"assets/default_taxon"}
+Completed 404 Not Found in 93ms (ActiveRecord: 0.5ms)

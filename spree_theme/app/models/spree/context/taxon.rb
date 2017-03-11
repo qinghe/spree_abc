@@ -72,21 +72,30 @@ module Spree
       #     /user  context is account
       # return :either(detail or list), cart, checkout, register, login
       def current_context
-        @context_context = nil
+        @current_context = nil
         if request_fullpath.present? #for current page, request_fullpath is present
-          @context_context = get_context_by_full_path( request_fullpath )
+          @current_context = get_context_by_full_path( request_fullpath )
         end
 
-        if @context_context.nil?
+        if @current_context.nil?
           target_page_context = ( self.page_context>0 ? self.page_context : inherited_page_context )
-          @context_context = self.class.get_context_by_page_context( target_page_context )
+          @current_context = self.class.get_context_by_page_context( target_page_context )
         end
-        @context_context
+        @current_context
       end
 
       def context_either?
         current_context ==ContextEnum.either
       end
+
+      def context_list?
+        current_context ==ContextEnum.list
+      end
+
+      def context_blog?
+        current_context ==ContextEnum.blog
+      end
+
 
       #is it a home page?
       def home?

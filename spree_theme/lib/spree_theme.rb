@@ -44,6 +44,7 @@ module SpreeTheme
 end
 
 require 'spree_core'
+require 'spree_theme/sitemap_helper'
 require 'spree_theme/engine'
 require 'spree_theme/paper_clip_interpolate_site'
 require 'spree_theme/database_theme/installer'

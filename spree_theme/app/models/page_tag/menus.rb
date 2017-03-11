@@ -1,7 +1,7 @@
 module PageTag
   class Menus < Base
     class WrappedMenu < WrappedModel
-      self.accessable_attributes=[:id, :name, :icon, :summary, :path, :friendly_id, :tooltips, :is_clickable?, :home?,:depth, :leaf?,:root?,:persisted?, :extra_html_attributes, :description, :replaced_by ]
+      self.accessable_attributes=[:id, :name, :icon, :summary, :build_path, :friendly_id, :tooltips, :is_clickable?, :home?,:depth, :leaf?,:root?,:persisted?, :extra_html_attributes, :description, :replaced_by ]
       delegate *self.accessable_attributes, :to => :model
       delegate :taxonomy, :root, :persisted?, :right_sibling, :left_sibling, :to => :model
 
@@ -61,15 +61,18 @@ module PageTag
       #  objs
       #end
 
-      def partial_path
-        # menu.id would be nil if it is class DefaultTaxon
-        if( model.persisted? && !model.home? )
-          path
-        else
-          # in case default home page show all products,
-          # to prevent '//10-cup', it is required
-          "/#{self.model.id.to_i}"
-        end
+      #def partial_path
+      #  # menu.id would be nil if it is class DefaultTaxon
+      #  if( model.persisted? && !model.home? )
+      #    path
+      #  else
+      #    # in case default home page show all products,
+      #    # to prevent '//10-cup', it is required
+      #    "/#{self.model.id.to_i}"
+      #  end
+      #end
+      def path
+        build_path
       end
 
       def resource_taxon_id
@@ -78,7 +81,8 @@ module PageTag
 
     end
     attr_accessor :menus_cache #store all menus of template, key is page_layout_id, value is menu tree
-    attr_accessor :template_tag, :page_generator
+    attr_accessor :template_tag
+    #:page_generator
     #model.path require page_generator
     delegate :page_generator, :to=>:template_tag
 

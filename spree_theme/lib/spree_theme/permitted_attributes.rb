@@ -19,5 +19,7 @@ module Spree
     @@comment_type_attributes = [:name, :applies_to]
     @@comment_attributes = [:commentable_id, :commentable_type, :user_id, :comment_type_id, :comment, :cellphone, :email]
 
+    @@store_attributes += [ logo_attributes:[:attachment], favicon_attributes:[:attachment] ]
+
   end
 end

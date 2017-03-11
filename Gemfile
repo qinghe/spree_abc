@@ -68,6 +68,10 @@ gem 'spree_china_checkout',   path: './spree_china_checkout'
 gem 'spree_essential_blog',   path: './spree_essential_blog'
 gem 'spree_pingpp',   path: './spree_pingpp'
 
+
+gem 'wechat'
+gem 'spree_omniauth',   path: './spree_omniauth'
+
 # copy from https://github.com/RuanShan/spree_flexi_variants/tree/2-1-stable
 # gem 'spree_flexi_variants',   path: './spree_flexi_variants'
 
@@ -93,6 +97,7 @@ gem 'exception_notification'
 # Dalli, kgio is for Dalli
 #gem 'kgio'
 #gem 'dalli'
+gem 'sitemap_generator'
 
 
 group :test, :development do

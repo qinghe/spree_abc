@@ -29,6 +29,7 @@ gem "friendly_id"
 
 gem 'turbolinks'
 gem 'jquery-turbolinks'
+gem 'sitemap_generator'
 
 #gem 'bootstrap-sass'
 #gem 'font-awesome-rails'

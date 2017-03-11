@@ -1,5 +1,6 @@
 SpreeTheme.taxon_class.class_eval do
     include Spree::Context::Taxon
+    include TemplateResourcePath
 
     before_destroy :remove_from_theme
     before_validation :set_default_values

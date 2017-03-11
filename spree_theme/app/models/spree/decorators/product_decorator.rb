@@ -1,4 +1,5 @@
 Spree::Product.class_eval do
+
   # Finds all products that have the ids matching the given collection of ids.
   add_search_scope :without_ids do |*ids|
     where.not(id: ids)

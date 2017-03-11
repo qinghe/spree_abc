@@ -18,6 +18,12 @@ module SpreeTheme
       Dir.glob(File.join(File.dirname(__FILE__), "../../app/**/*_decorator*.rb")) do |c|
         Rails.configuration.cache_classes ? require(c) : load(c)
       end
+
+      #https://github.com/spree-contrib/spree_sitemap
+      SitemapGenerator::Interpreter.send :include, SpreeTheme::SitemapHelper
+      if defined? SitemapGenerator::LinkSet
+        SitemapGenerator::LinkSet.send :include, SpreeTheme::SitemapHelper
+      end
     end
 
     # sets the manifests / assets to be precompiled, even when initialize_on_precompile is false

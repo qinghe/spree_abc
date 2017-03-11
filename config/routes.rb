@@ -1,5 +1,3 @@
-
-
 SpreeAbc::Application.routes.draw do
 
   Spree::Core::Engine.add_routes do

@@ -22,6 +22,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'useragent'
   s.add_dependency 'acts_as_commentable'
   s.add_dependency 'font-awesome-rails'
+  s.add_dependency 'sitemap_generator'
 
   s.add_development_dependency 'capybara', '~> 2.6'
   s.add_development_dependency 'coffee-rails'
