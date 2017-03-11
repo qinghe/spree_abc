@@ -29,3 +29,7 @@ rake spree_theme:import_theme RAILS_ENV=local_staging SEED_PATH=1
 
 8. get attachment styles
  Spree::Image.attachment_definitions[:attachment][:styles]
+
+9. 生成sitemap, robots
+bundle exec rake spree_abc:create_robots[45] RAILS_ENV=aliyun_staging
+bundle exec rake spree_abc:create_sitemap[45] RAILS_ENV=aliyun_staging

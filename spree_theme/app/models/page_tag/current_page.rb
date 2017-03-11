@@ -43,8 +43,12 @@ module PageTag
 
     #title is current page title,  resource.title-page.title-website.title
     def title
-      if home? || page.root?
+      if page.meta_title.present?
+        page.meta_title
+      elsif home? #|| page.root?
         # do not show page name for root, for case, show all products on home page.
+        # should show  page name for root,
+        # for case, user click taxon root( products ) -> click a product, now current page is 'products'
         # home page point to product category root. show website.name as title.
         website.name
       elsif detail_page?
