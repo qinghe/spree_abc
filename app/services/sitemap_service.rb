@@ -101,6 +101,8 @@
       }
       taxons.uniq!
       taxons.select{|taxon|
+        #忽略外链
+        next if taxon.html_attributes.try( :href ).present?
         taxon.home? || taxon.context_list? || taxon.context_blog?
       }
 
