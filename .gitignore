@@ -17,6 +17,7 @@ public/shops/staging
 public/shops/development
 public/shops/aliyun_development
 public/shops/test
+#public/*.dalianshops.com
 config/deploy/production.rb
 db/full_sql
 rdoc
