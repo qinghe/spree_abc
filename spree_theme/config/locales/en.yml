@@ -99,6 +99,7 @@ en:
       city: city
       street: street
     logo: LOGO
+    detail: Detail
     favicon: FAVICON
     new_relation_type: New Relation Type
     related_product_discount: Related Product Discount

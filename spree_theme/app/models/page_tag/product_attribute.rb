@@ -19,6 +19,8 @@ module PageTag
            '>'
         when :icon_angle_left
            '<'
+        when :detail # it is same as clickable name
+          Spree.t('detail')
         else
             wrapped_product.send attribute_name
         end
