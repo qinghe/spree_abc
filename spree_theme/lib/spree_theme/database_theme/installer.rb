@@ -117,12 +117,13 @@ module SpreeTheme
               # #just set home page in taxon is ok as well
               #  @menu = SpreeTheme.taxon_class.home
             end
-            #menu should be same instance pass to PageTag::PageGenerator, it require  request_fullpath
-            @menu.request_fullpath = request_fullpath
             # support feature replaced_by
             if @menu.replacer.present?
               @menu = @menu.replacer
             end
+
+            #menu should be same instance pass to PageTag::PageGenerator, it require  request_fullpath
+            @menu.request_fullpath = request_fullpath
 
             # @theme is required since we support create admin session by ajax.
             case request_fullpath
