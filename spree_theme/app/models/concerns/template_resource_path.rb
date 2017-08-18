@@ -23,6 +23,7 @@
 
     #product
     def build_product_path(taxon)
+Rails.logger.debug "build_product_path taxon = #{taxon.id} "      
       taxon.partial_path + "/#{self.id}-#{self.friendly_id}"
     end
 
