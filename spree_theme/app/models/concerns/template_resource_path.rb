@@ -1,5 +1,5 @@
   module TemplateResourcePath
-
+    #模板中数据生成自己的路径
     def build_path( taxon=nil )
 
         case self
@@ -23,7 +23,7 @@
 
     #product
     def build_product_path(taxon)
-Rails.logger.debug "build_product_path taxon = #{taxon.id}, partial_path=#{taxon.partial_path}, build_taxon_path=#{taxon.build_taxon_path}, current_context=#{taxon.current_context} "      
+      #Rails.logger.debug "build_product_path taxon = #{taxon.id}, partial_path=#{taxon.partial_path}, build_taxon_path=#{taxon.build_taxon_path}, current_context=#{taxon.current_context} "
       taxon.partial_path + "/#{self.id}-#{self.friendly_id}"
     end
 

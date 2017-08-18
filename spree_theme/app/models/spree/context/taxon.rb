@@ -99,7 +99,9 @@ module Spree
 
       #is it a home page?
       def home?
-        page_context == 1
+        # page_context == 1
+        # taxon may be assigned to site.home_page, in this case, it would act as  home whatever it was.
+        current_context == ContextEnum.home
       end
 
       #support feature
