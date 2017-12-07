@@ -133,3 +133,32 @@ bundle exec rake spree_theme:reload_section_piece RAILS_ENV=aliyun_staging
 
 3. copy theme to new design site
 bundle exec rake spree_theme:copy_theme[44,369] RAILS_ENV=aliyun_staging
+
+
+nginx
+---------------------------------------------------------------
+https://www.phusionpassenger.com/library/install/nginx/install/oss/tarball/#note_about_nginx
+
+sudo kill $(cat /opt/nginx/logs/nginx.pid)
+sudo /opt/nginx/sbin/nginx
+
+puma
+---------------------------------------------------------------
+puma -e production -b unix:///tmp/blog.sock -d
+bundle exec puma -e production -b unix:///tmp/wechatmore.sock -d
+
+centos
+---------------------------------------------------------------
+http://www.jianshu.com/p/28fccca3448d
+
+https://www.godaddy.com/garage/tech/config/how-to-install-postgresql-on-centos-7/
+
+Connecting to GitHub with SSH
+---------------------------------------------------------------
+https://help.github.com/articles/connecting-to-github-with-ssh/
+
+
+postgresql
+http://www.ruanyifeng.com/blog/2013/12/getting_started_with_postgresql.html
+
+http://www.jianshu.com/p/b3d77910da0d

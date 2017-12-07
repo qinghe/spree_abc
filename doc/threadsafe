@@ -1,0 +1,5 @@
+1. config.threadsafe! Rails 中的多进程和多线程
+http://yanghao.org/blog/archives/406
+
+2.数据库 并发，多线程引起的问题？
+https://ruby-china.org/topics/33864
