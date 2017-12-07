@@ -143,6 +143,7 @@ module Spree
       #end
     end
 
+    # 生成模板文件
     # params
     #   options:  page_only- do not create template_release record, rake task import_theme required it
     def release( release_attributes= {},option={})

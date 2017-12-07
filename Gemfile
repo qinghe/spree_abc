@@ -1,13 +1,12 @@
-source 'https://ruby.taobao.org/'
+source 'https://gems.ruby-china.org'
 #source 'https://rubygems.org'
-#source "https://rails-assets.org"
 
 # Bundle edge Rails instead:
-ruby '2.2.4'
+# ruby '2.2.4'
 
 gem 'rails', '~>4.2.6'
 
-gem 'mysql2','0.3.19'
+gem 'mysql2'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
