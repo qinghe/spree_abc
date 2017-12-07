@@ -102,6 +102,7 @@ zh-CN:
       street: 详细地址
     comment_successfully_created: 谢谢您的反馈，我们已收到。
     comment_to_store: 亲爱的用户：欢迎您抢先体验“%{store_name}”，有任何意见和建议，或在使用过程中遇到问题，请告诉我们，我们会每天关注反馈信息，不断优化产品，为您提供更好的服务！
+    detail: 详细
     logo: LOGO
     favicon: FAVICON
     new_template_file: 新建图片素材

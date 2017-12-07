@@ -480,7 +480,7 @@ product_properties:
           <% product.product_properties.each do |product_property| %>
             <% css_class = cycle('even', 'odd', :name => "properties") %>
             <tr class="<%= css_class %>">
-              <th class="cell"><%= product_property.property.presentation %></th>
+              <th class="cell" valign="top"><%= product_property.property.presentation %></th>
               <td class="cell"><%= product_property.value %></td>
             </tr>
           <% end %>
