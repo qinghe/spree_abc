@@ -14,7 +14,7 @@ module SpreeTheme
   mattr_accessor :site_class, :taxon_class, :post_class
 
   def self.site_class
-    #default has to be Spree::FakeWebsite, then we could test without spree_multi_site
+
     @@site_class ||= "Spree::FakeWebsite"
     if @@site_class.is_a?(Class)
       raise "Spree.site_class MUST be a String object, not a Class object."
