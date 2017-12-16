@@ -129,7 +129,7 @@ group :development do
 end
 
 
-gem 'aliyun-oss-sync',   github: 'qhwa/aliyun-oss-sync', branch: 'master'
+#gem 'aliyun-oss-sync',   github: 'qhwa/aliyun-oss-sync', branch: 'master'
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
