@@ -18,7 +18,6 @@ module SpreeMultiSite
       path = ":site/:simple_class/:id_:filename"
       #make sure each
       attachment_key = :attachment  # spree_image/ spree_template_file
-      attachment_key = :icon if self.name == AttachmentClassEnum.spree_taxon
       attachment_key = :cover if self.name == AttachmentClassEnum.spree_post
       attachment_key = :data if self.name == AttachmentClassEnum.ckeditor_picture  #Ckeditor::Picture,
       attachment_key = :data if self.name == AttachmentClassEnum.ckeditor_file     #Ckeditor::AttachmentFile
