@@ -88,6 +88,12 @@ gem install aliyun-oss-sync
 #sycn assets with aliyun
 aliyun-oss-sync push aliass:assets public/assets
 
+aliyun-oss-sync 最新版本为0.1.0， 需要安装这个最新的
+目前rubygems.org上是0.0.1，需要下载源码再安装。
+https://github.com/qhwa/aliyun-oss-sync
+-----------------------------------------------------
+
+
 system recovery&backup
 --------------------------------------------------------------
 mysql -uroot spree_abc_staging < spree_abc20141204.sql
