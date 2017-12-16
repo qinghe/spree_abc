@@ -1068,7 +1068,7 @@ slider:
       <div data-u="slides" class="slides" style="position: absolute;overflow:hidden;" >
         <% @template.menu.children.each{|page| %>
           <div>
-            <%= link_to_if @template.current_piece.clickable?, image_tag( page.icon.url(:original), :u=>'image', :alt=>page.name), page.path %>
+            <%= link_to_if @template.current_piece.clickable?, image_tag( page.icon.try(:url,:original), :u=>'image', :alt=>page.name), page.path %>
           </div>
         <% } %>
       </div>
@@ -1632,7 +1632,7 @@ slider_data_taxons:
       <div data-u="slides" class="slides" style="position: absolute;overflow:hidden;" >
       <% if @template.menu.present? %>
         <% @template.menu.children.each{|page| %>
-          <div><%= image_tag page.icon.url(:original), :u=>'image', :alt=>page.name %></div>
+          <div><%= image_tag page.icon.try(:url,:original), :u=>'image', :alt=>page.name %></div>
         <% } %>
       <% end %>
       </div>

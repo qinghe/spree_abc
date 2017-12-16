@@ -18,6 +18,7 @@ Gem::Specification.new do |s|
   spree_version = '>= 3.1.0', '< 4.0'
 
   s.add_dependency 'friendly_id'
+  s.add_dependency 'erubis'
   s.add_dependency 'useragent'
   s.add_dependency 'acts_as_commentable'
   s.add_dependency 'font-awesome-rails', '~> 4.7.0'

@@ -30,6 +30,7 @@ gem 'acts-as-taggable-on'
 gem 'useragent'
 gem "friendly_id"
 
+gem 'erubis'
 gem 'turbolinks'
 gem 'jquery-turbolinks'
 gem 'sitemap_generator'
