@@ -84,13 +84,17 @@ export OSS_ACCESS_SECRET="xxx"
 #
 gem install aliyun-oss-sync
 #edit source lib/aosss/sync.rb, method init_connection
-:server            => 'oss-cn-beijing.aliyuncs.com'
-#sycn assets with aliyun
-aliyun-oss-sync push aliass:assets public/assets
+#:server            => 'oss-cn-beijing.aliyuncs.com'
+#sycn assets with aliyun，老版本命令，已不好用
+#aliyun-oss-sync push aliass:assets public/assets
 
 aliyun-oss-sync 最新版本为0.1.0， 需要安装这个最新的
 目前rubygems.org上是0.0.1，需要下载源码再安装。
 https://github.com/qhwa/aliyun-oss-sync
+
+新版本的命令
+aliyun-oss-sync -e http://oss-cn-beijing.aliyuncs.com  push aliass:assets ./public/assets
+
 -----------------------------------------------------
 
 
