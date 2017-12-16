@@ -8,7 +8,7 @@ module Spree
           #################################################################################
           # 添加spree_theme支持
           #################################################################################
-          puts "use spree_theme common.rb"
+          #puts "use spree_theme common.rb"
           include SpreeTheme::DatabaseTheme::Installer
           include SpreeTheme::FileTheme::Installer
           # template holds data for page render, we have to initialize it even for api
