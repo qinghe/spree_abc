@@ -7,7 +7,7 @@ module PageTag
       attribute_value = case attribute_name
         when :icon
           if wrapped_page.icon.present?
-            tag('img', :src=>wrapped_page.icon.url(:original), :u=>'image', :alt=>wrapped_page.name, :class=>"img-responsive" )
+            tag('img', :src=>wrapped_page.icon.attachment.url(:original), :u=>'image', :alt=>wrapped_page.name, :class=>"img-responsive" )
           else
             ''
           end
