@@ -18,6 +18,7 @@ root_for_mobile:
       <%== meta_data_tags %>
       <%= favicon_link_tag 'favicon.ico' %>
       <%# it is in main app/assets/ include spree_theme, spree_china_checkout, store/product, store/cart, store/checkout ... %>
+      <%= render 'spree/shared/paths' %>
       <%= javascript_include_tag 'spree/frontend/all.mobile', "data-turbolinks-track" => true %>
       <%= stylesheet_link_tag 'store/spree_theme.mobile', "data-turbolinks-track" => true %>
       <% if @current_page.is_preview %>
