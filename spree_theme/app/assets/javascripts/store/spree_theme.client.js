@@ -1,3 +1,4 @@
+//= require jquery.validate.min
 //= require jquery.validate/localization/messages_zh-CN
 //= require jquery.lightbox.custom
 //= require store/section_effect
