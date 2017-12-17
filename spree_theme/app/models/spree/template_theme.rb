@@ -62,8 +62,8 @@ module Spree
     # template_release may be in current or design site
     belongs_to :current_template_release, :class_name=>"TemplateRelease", :foreign_key=>"release_id"
     has_one :mobile, foreign_key: "master_id", class_name: self.name
-    belongs_to :desktop, foreign_key: "master_id", class_name: self.name
-    belongs_to :duplicated_from, foreign_key: "copy_from_id", class_name: self.name
+    belongs_to :desktop, foreign_key: "master_id", class_name: self.name, required: false
+    belongs_to :duplicated_from, foreign_key: "copy_from_id", class_name: self.name, required: false
 
     #use string as key instead of integer page_layout.id, exported theme in json, after restore, key is always string
     serialize :assigned_resource_ids, Hash

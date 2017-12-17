@@ -11,7 +11,7 @@ namespace :spree_theme do
     # Rake::Task["spree_sample:load"].invoke
     # load File.join(SpreeTheme::Engine.root,'db/themes/seed.rb')
   end
-  
+
   desc "load sample, load theme sample"
   task :load_sample  => :environment do
     # spree_sample:load cause strange error
@@ -124,6 +124,17 @@ namespace :spree_theme do
     Spree::Store.current = theme.store
     theme.release({},{:page_only=>true})
     puts "released theme #{theme.title} - at #{theme.layout_path}"
+  end
+
+  desc "release theme without new template_release, rake spree_theme:release_theme[1]"
+  task :release_all_themes  =>[ :environment ] do |t, args|
+    themes = Spree::TemplateTheme.where( copy_from_id: 0 )
+    # current site is required for build css( image url )
+    themes.each{|theme|
+      Spree::Store.current = theme.store
+      theme.release({},{:page_only=>true})
+      puts "released theme #{theme.title} - at #{theme.layout_path}"
+    }
   end
 
   desc "get css of theme one, rake spree_theme:get_css[1,2,'block']"

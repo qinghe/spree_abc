@@ -3,7 +3,7 @@ Spree::Site.class_eval do
 end
 
 Spree::TemplateTheme.class_eval do
-  belongs_to :site
+  # belongs_to :site
   # no need default, want to get foreign template.
 
   def importer
