@@ -26,3 +26,4 @@ rdoc
 db/*.sqlite3
 *.bak
 .byebug_history
+aliyun_sdk.log
