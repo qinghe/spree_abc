@@ -15,6 +15,15 @@ GIT
     spree_mail_settings (3.0.0)
 
 GIT
+  remote: https://github.com/luluhongxu/aliyun-oss-ruby-sdk.git
+  revision: 6e898034e5e2c8d4ff19f864a114d3e95267b4b9
+  branch: master
+  specs:
+    aliyun-sdk (0.6.0)
+      nokogiri (~> 1.6)
+      rest-client (~> 2.0.2)
+
+GIT
   remote: https://github.com/spree/spree_editor.git
   revision: 9b2aa109b983b0f9dcc5804f88982b8e760b00b7
   branch: master
@@ -529,6 +538,7 @@ DEPENDENCIES
   acts-as-taggable-on
   acts_as_commentable
   alipay
+  aliyun-sdk!
   autoprefixer-rails
   bootstrap-sass (~> 3.3.6)
   byebug
