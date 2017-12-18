@@ -6,7 +6,7 @@
 # method of this form should be 'get', every time user click a section, get_param_values belong to the section.
 %>
 <%= form_tag(get_param_values_template_theme_path(@theme), { :remote=>true, :method=>'post', 'data-type'=>'script', :id=>"layout_editor_form",:name=>"layout_editor_form"}) do %>
-    
+
     <ul class="tabs block_header clear-block">
     <% for tab in @editors%>
       <li data-id="<%=tab.id%>">
@@ -17,10 +17,10 @@
  <% # the next div container is for js to get all editors, in other word, its children
  %>
  <div>
-<% @editors.each_index{ |idx|%>
-  <div style="<%= 'display:none' if @editors[idx]!=@editor %>">
+<% @editors.each_with_index{ | editor, i|%>
+  <div style="<%= 'display:none' if editor!=@editor %>">
   <%# render :partial=>"editor", :locals => {:editor=>@editors[idx], :param_values=>@param_values_for_editors[idx]}%>
-  <%=raw partial_editor( @editors[idx], @param_values_for_editors[idx]) %>
+  <%=raw partial_editor( editor, @param_values_for_editors[i]) %>
   </div>
 <%}%>
  </div>

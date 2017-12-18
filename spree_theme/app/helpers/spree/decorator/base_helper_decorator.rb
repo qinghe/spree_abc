@@ -254,7 +254,7 @@ module Spree
         manual_value_tag = ""
         manual_unit_tag = ""
         if possible_values.size>1
-          passible_value_tag << select(pv_ele_id,"psvalue#{i}", possible_values.each_index.collect{|j|  [possible_values_descriptions[j],possible_values[j]] },{:selected =>psvalue }, {:class=>"pv-psv", :onchange=>onchange})
+          passible_value_tag << select(pv_ele_id,"psvalue#{i}", possible_values.each_with_index.collect{|possible_value, j|  [possible_values_descriptions[j],possible_value] },{:selected =>psvalue }, {:class=>"pv-psv", :onchange=>onchange})
         else
           passible_value_tag << hidden_field_tag("#{pv_ele_id}[psvalue#{i}]", psvalue )
         end
