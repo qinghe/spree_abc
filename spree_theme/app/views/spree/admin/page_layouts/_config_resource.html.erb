@@ -42,7 +42,7 @@
   <script>
   $(document).ready(function () {
     <% if section_piece_resources.blank? && data_source_based_resource.blank? %>
-    set_resource_taxon_select('assigned_resource_ids_', false, Spree.routes.taxons_search);
+    set_resource_taxon_select('assigned_resource_ids_', false, Spree.routes.taxons_api);
     <% end %>
   });
   </script>

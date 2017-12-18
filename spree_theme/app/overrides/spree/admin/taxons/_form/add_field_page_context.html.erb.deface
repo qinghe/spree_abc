@@ -19,7 +19,7 @@
 <% unless Rails.env.test? %>
   <script>
   $(document).ready(function () {
-    set_resource_taxon_select('taxon_replaced_by', false, Spree.routes.taxons_search);
+    set_resource_taxon_select('taxon_replaced_by', false, Spree.routes.taxons_api);
   });
 
   </script>
