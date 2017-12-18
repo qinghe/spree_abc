@@ -45,6 +45,21 @@ Spree::Product.class_eval do
   #has_many :global_classifications, dependent: :delete_all
   #has_many :global_taxons, through: :global_classifications, source: :taxon
 
+  friendly_id :slug_candidates, use: [:history, :scoped], :scope => :site
+
+  clear_validators!
+  with_options length: { maximum: 255 }, allow_blank: true do
+    validates :meta_keywords
+    validates :meta_title
+  end
+  with_options presence: true do
+    validates :name, :shipping_category
+    validates :price, if: proc { Spree::Config[:require_master_price] }
+  end
+
+  validates :slug, presence: true, uniqueness: { allow_blank: true, :scope => :site_id }
+  validate :discontinue_on_must_be_later_than_available_on, if: -> { available_on && discontinue_on }
+
 
   # Try building a slug based on the following fields in increasing order of specificity.
   def slug_candidates
@@ -81,15 +96,29 @@ end
 
 Spree::Taxonomy.class_eval do
   include Spree::MultiSiteSystem
+
+  clear_validators!
+  validates :name, presence: true, uniqueness: { case_sensitive: false, allow_blank: true,  scope: :site_id }
+
 end
 
 
 Spree::Taxon.class_eval do
   include Spree::MultiSiteSystem
+  #重载以前的定义，添加site范围
+  friendly_id :permalink, slug_column: :permalink, use: [:history, :scoped], :scope => :site
 
   has_many :global_classifications, dependent: :delete_all
   has_many :global_products, through: :global_classifications, source: :product
 
+  clear_validators!
+  validates :name, presence: true, uniqueness: { scope: [:parent_id, :taxonomy_id], allow_blank: true }
+  validates :permalink, uniqueness: { case_sensitive: false,  scope: :site_id }
+  with_options length: { maximum: 255 }, allow_blank: true do
+    validates :meta_keywords
+    validates :meta_description
+    validates :meta_title
+  end
 end
 
 Spree::TaxCategory.class_eval do
