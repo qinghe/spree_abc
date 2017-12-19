@@ -63,6 +63,7 @@ module Spree
 
     def self.bind
       Spree::MultiSiteSystem.multi_site_context = Spree::MultiSiteSystem::MultiSiteContextEnum.scoped
+      #Rails.logger.debug "set_multi_site_scope = #{Spree::MultiSiteSystem.multi_site_context}"
     end
 
     def self.unbind
