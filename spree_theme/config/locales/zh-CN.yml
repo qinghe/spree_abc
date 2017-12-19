@@ -164,6 +164,7 @@ zh-CN:
       either: 任意页
       new_site: 注册开店
     section_data_source:
+      none: 无
       gpvs: 产品集合
       this_product: 当前选择产品
       taxon: 分类

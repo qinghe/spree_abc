@@ -489,7 +489,7 @@ module Spree
             end
           }
           #TODO correct descendants's data_source
-          self.update_data_source( DataSourceEmpty )
+          self.update_data_source( DataSourceNone )
         end
       end
 
@@ -519,13 +519,13 @@ module Spree
       # * data source has two parts, data and filter, separated by '|'
       # * current data_source could be nil
       def current_data_source
-        self.data_source.present? ? self.data_source.to_sym : DataSourceEmpty
+        self.data_source.present? ? self.data_source.to_sym : DataSourceNone
       end
 
       def inherited_data_source
-        return DataSourceEmpty if self.root?
+        return DataSourceNone if self.root?
         ancestor_data_source = self.ancestors.collect{|page_layout| page_layout.data_source }.last
-        ancestor_data_source.present? ? ancestor_data_source.to_sym : DataSourceEmpty
+        ancestor_data_source.present? ? ancestor_data_source.to_sym : DataSourceNone
       end
 
       # verify new_data_source
@@ -536,10 +536,10 @@ module Spree
         if new_data_source.blank? || self.is_valid_data_source?
           self.update_attribute(:data_source,new_data_source )
           #verify descendants, fix them.
-          verify_required_descendants = self.descendants.where('data_source!=?', DataSourceEmpty)
+          verify_required_descendants = self.descendants.where('data_source!=?', DataSourceNone)
           for node in verify_required_descendants
             unless node.is_valid_data_source?
-              node.update_data_source(DataSourceEmpty)
+              node.update_data_source(DataSourceNone)
             end
           end
         else
@@ -551,8 +551,8 @@ module Spree
       # * is self.data_source valid to ancestors
       def is_valid_data_source?
         is_valid = false
-        if self.current_data_source != DataSourceEmpty
-          if self.inherited_data_source == DataSourceEmpty # top level data source
+        if self.current_data_source != DataSourceNone
+          if self.inherited_data_source == DataSourceNone # top level data source
             section_contexts = self.current_contexts
             if  section_contexts.length == 1
               available_data_sources =  ContextDataSourceMap[section_contexts.first]
@@ -581,7 +581,7 @@ module Spree
           the_context = self.current_contexts.first
           if  the_context != ContextEnum.either
             the_data_source = self.inherited_data_source
-            if the_data_source == DataSourceEmpty # top level data source
+            if the_data_source == DataSourceNone # top level data source
               data_sources =  ContextDataSourceMap[the_context]
             else
               data_sources = DataSourceChainMap[the_data_source]

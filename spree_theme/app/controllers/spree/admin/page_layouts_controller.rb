@@ -73,10 +73,10 @@ module Spree
         #update datasource
         def update_data_source
           section_data_source = params[:section_data_source]
-          if section_data_source.present?
-            @page_layout.update_data_source(section_data_source.to_sym )
+          if section_data_source.blank? || section_data_source == 'none'
+            @page_layout.update_data_source( PageLayout::DataSourceNone )
           else
-            @page_layout.update_data_source( PageLayout::DataSourceEmpty )
+            @page_layout.update_data_source(section_data_source.to_sym )
           end
         end
 

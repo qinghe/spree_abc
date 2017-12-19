@@ -20,9 +20,9 @@ module Spree
         post: []
         #keys should inclde all data_sources, test required.
       }
-      DataSourceEnum  = Struct.new(:gpvs, :this_product, :taxonomy, :taxon, :related_taxa, :blog, :post,:related_posts, :related_products, :gpvs_theme )\
-        [:gpvs, :this_product, :taxonomy, :taxon, :related_taxa, :blog, :post,:related_posts, :related_products, :gpvs_theme]
-      DataSourceEmpty = :""
+      DataSourceEnum  = Struct.new(:none,:gpvs, :this_product, :taxonomy, :taxon, :related_taxa, :blog, :post,:related_posts, :related_products, :gpvs_theme )\
+        [:'', :gpvs, :this_product, :taxonomy, :taxon, :related_taxa, :blog, :post,:related_posts, :related_products, :gpvs_theme]
+      DataSourceNone = :""
 
       DataSourceFilterEnum  = Struct.new( :next, :previous )\
         ['next', 'previous']
