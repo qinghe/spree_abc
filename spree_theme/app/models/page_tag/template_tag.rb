@@ -545,12 +545,10 @@ module PageTag
       case self.current_piece.current_data_source
       when Spree::PageLayout::DataSourceEnum.gpvs, Spree::PageLayout::DataSourceEnum.related_products
         if order_by == 'created_at_desc'
+          # the newest products of site/taxon order by created_at
           params.merge!( search:{ sorts: 'created_at desc' } )
-          # the newest products of site, ignore taxon
-          #products in taxon is always positioned
-        else
-          params.merge!( taxon: wrapped_taxon.resource_taxon_id )
         end
+        params.merge!( taxon: wrapped_taxon.resource_taxon_id )
       when Spree::PageLayout::DataSourceEnum.blog
         params.merge!( taxon: wrapped_taxon.resource_taxon_id )
       when Spree::PageLayout::DataSourceEnum.gpvs_theme
