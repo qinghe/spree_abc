@@ -71,7 +71,7 @@ en:
         state: Shipping address state
         zipcode: Shipping address zipcode
       spree/payment:
-        amount: "金额"
+        amount: Amount
         number: Number
       spree/payment_method:
         name: Name
@@ -96,8 +96,10 @@ en:
         path: Path
         starts_at: Starts At
         usage_limit: Usage Limit
+        promotion_category: Promotion Category
       spree/promotion_category:
         name: Name
+        code: Code
       spree/property:
         name: Name
         presentation: Presentation
@@ -315,6 +317,8 @@ en:
               invalid_date_range: must be later than start date
         spree/product:
           attributes:
+            discontinue_on:
+              invalid_date_range: must be later than available date
             base:
               cannot_destroy_if_attached_to_line_items: Cannot delete products once they are attached to line items.
         spree/refund:
@@ -474,6 +478,8 @@ en:
         taxonomies: Taxonomies
         taxons: Taxons
         users: Users
+        return_authorizations: Return Authorizations
+        customer_returns: Customer Returns
       order:
         events:
           approve: approve
@@ -511,6 +517,7 @@ en:
     analytics_desc_list_2: Requires only a free Spree account to activate
     analytics_desc_list_3: Absolutely no code to install
     analytics_desc_list_4: It's completely free!
+    analytics_engine: Analytics Engine
     analytics_trackers: Analytics Trackers
     and: and
     approve: approve
@@ -533,7 +540,7 @@ en:
     back_to_resource_list: 'Back To %{resource} List'
     back_to_payment: Back To Payment
     back_to_rma_reason_list: Back To RMA Reason List
-    back_to_store: Go Back To Store
+    back_to_store: Back to Store
     back_to_users_list: Back To Users List
     backorderable: Backorderable
     backorderable_default: Backorderable default
@@ -557,6 +564,7 @@ en:
     cannot_create_customer_returns: Cannot create customer returns as this order has no shipped units.
     cannot_create_returns: Cannot create returns as this order has no shipped units.
     cannot_perform_operation: Cannot perform requested operation
+    cannot_return_more_than_bought_quantity: Cannot return more than bought quantity.
     cannot_set_shipping_method_without_address: Cannot set shipping method until customer details are provided.
     capture: Capture
     capture_events: Capture events
@@ -610,8 +618,11 @@ en:
       FRA: France
       ITA: Italy
       US: United States of America
+    country_rule:
+      label: Choose must be shipped to this country
     coupon: Coupon
     coupon_code: Coupon code
+    coupon_code_apply: Apply
     coupon_code_already_applied: The coupon code has already been applied to this order
     coupon_code_applied: The coupon code was successfully applied to your order.
     coupon_code_better_exists: The previously applied coupon code results in a better deal
@@ -710,11 +721,13 @@ en:
     error: error
     errors:
       messages:
+        blank: can't be blank
         could_not_create_taxon: Could not create taxon
         no_shipping_methods_available: No shipping methods available for selected location, please change your address and try again.
     errors_prohibited_this_record_from_being_saved:
       one: 1 error prohibited this record from being saved
       other: ! '%{count} errors prohibited this record from being saved'
+    error_user_destroy_with_orders: User associated with orders cannot be destroyed
     event: Event
     events:
       spree:
@@ -736,6 +749,7 @@ en:
     excl: excl.
     expiration: Expiration
     extension: Extension
+    extensions_directory: Extensions Directory
     existing_shipments: Existing shipments
     failed_payment_attempts: Failed Payment Attempts
     filename: Filename
@@ -766,6 +780,7 @@ en:
     has_no_shipped_units: has no shipped units
     height: Height
     home: Home
+    help_center: Help Center
     i18n:
       available_locales: Available Locales
       fields: Fields
@@ -824,8 +839,7 @@ en:
     items_to_be_reimbursed: Items to be reimbursed
     items_reimbursed: Items reimbursed
     jirafe: Jirafe
-    landing_page_rule:
-      path: Path
+    join_slack: Join Slack
     last_name: Last Name
     last_name_begins_with: Last Name Begins With
     learn_more: Learn More
@@ -864,6 +878,7 @@ en:
     meta_keywords: Meta Keywords
     meta_title: Meta Title
     metadata: Metadata
+    mutable: Mutable
     minimal_amount: Minimal Amount
     missing_return_authorization: ! 'Missing Return Authorization for %{item_name}.'
     month: Month
@@ -892,6 +907,7 @@ en:
     new_prototype: New Prototype
     new_refund: New Refund
     new_refund_reason: New Refund Reason
+    new_reimbursement_type: New Reimbursement Type
     new_rma_reason: New RMA Reason
     new_return_authorization: New Return Authorization
     new_role: New Role
@@ -1020,6 +1036,7 @@ en:
     payment_processor_choose_banner_text: If you need help choosing a payment processor, please visit
     payment_processor_choose_link: our payments page
     payment_state: Payment State
+    payment_identifier: Payment Identifier
     payment_states:
       balance_due: balance due
       checkout: checkout
@@ -1094,15 +1111,15 @@ en:
     promotion_label: 'Promotion (%{name})'
     promotion_rule: Promotion Rule
     promotion_rule_types:
+      country:
+        description: Order is shipped to proper (or default) country
+        name: Country
       first_order:
         description: Must be the customer's first order
         name: First order
       item_total:
         description: Order total meets these criteria
         name: Item total
-      landing_page:
-        description: Customer must have visited the specified page
-        name: Landing Page
       one_use_per_user:
         description: Only One Use Per User
         name: One Use Per User
@@ -1130,6 +1147,7 @@ en:
     prototypes: Prototypes
     provider: Provider
     provider_settings_warning: If you are changing the provider type, you must save first before you can edit the provider settings
+    purchased_quantity: Purchased Quantity
     qty: Qty
     quantity: Quantity
     quantity_returned: Quantity Returned
@@ -1144,7 +1162,6 @@ en:
     reference: Reference
     reference_contains: Reference Contains
     refund: Refund
-    refund_amount_must_be_greater_than_zero: Refund amount must be greater than zero
     refund_reasons: Refund Reasons
     refunded_amount: Refunded Amount
     refunds: Refunds
@@ -1199,6 +1216,7 @@ en:
         refund_summary: Refund Summary
         subject: Reimbursement Notification
         total_refunded: ! 'Total refunded: %{total}'
+        thanks: Thank you for your business.
     return_number: Return Number
     return_quantity: Return Quantity
     returned: Returned
@@ -1218,6 +1236,7 @@ en:
     sales_totals: Sales Totals
     save_and_continue: Save and Continue
     save_my_address: Save my address
+    saving: Saving
     say_no: 'No'
     say_yes: 'Yes'
     scope: Scope
@@ -1348,7 +1367,10 @@ en:
     stock_movements: Stock Movements
     stock_movements_for_stock_location: Stock Movements for %{stock_location_name}
     stock_successfully_transferred: Stock was successfully transferred between locations.
-    stock_transfer: Stock Transfer
+    stock_transfer_name: Stock Transfer
+    stock_transfer:
+      errors:
+        must_have_variant: You must add atleast one variant.
     stock_transfers: Stock Transfers
     stop: Stop
     store: Store
@@ -1359,6 +1381,7 @@ en:
       captured: "Used"
       allocated: "Added"
       apply: Apply Store Credit
+      remove: Remove Store Credit
       applicable_amount: "%{amount} in store credit will be applied to this order."
       available_amount: "You have %{amount} in Store Credit available!"
       remaining_amount: "You have %{amount} remaining in your account's Store Credit."
@@ -1411,6 +1434,8 @@ en:
       match_any: at least one
     taxonomies: Taxonomies
     taxonomy: Taxonomy
+    taxonomy_brands_name: Brands
+    taxonomy_categories_name: Categories
     taxonomy_edit: Edit taxonomy
     taxonomy_tree_error: The requested change has not been accepted and the tree has been returned to its previous state, please try again.
     taxonomy_tree_instruction: ! '* Right click a child in the tree to access the menu for adding, deleting or sorting a child.'
