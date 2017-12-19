@@ -395,17 +395,17 @@ zh-CN:
           error: ! '测试邮件错误: %{e}'
       tab:
         configuration: "配置"
-        option_types: "选项类型"
+        option_types: "产品选项"
         orders: "订单"
         overview: "概览"
         products: "产品"
         promotions: "促销"
         promotion_categories: "促销分类"
-        properties: "属性"
-        prototypes: "原型"
+        properties: "产品属性"
+        prototypes: "产品原型"
         reports: "报告"
-        taxonomies: "分类层级"
-        taxons: "分类"
+        taxonomies: "分类树"
+        taxons: "产品与分类"
         users: "用户"
       order:
         events:
@@ -674,13 +674,13 @@ zh-CN:
     delete: "删除"
     deleted_variants_present:
     delivery: "配送"
-    depth: "长"
+    depth: "长度"
     description: "描述"
     destination: "目的地"
     destroy: "删除"
     details: "详情"
     discount_amount: "折扣金额"
-    discontinue_on: Discontinue On
+    discontinue_on: '下架日期'
     discontinued: Discontinued
     dismiss_banner: "不，谢谢！我对此不感兴趣，请不要再显示此信息。"
     display: "显示"
@@ -1027,7 +1027,7 @@ zh-CN:
     open_all_adjustments: "启用所有价格调整"
     operation: 操作
     option_type: "选项类型"
-    option_type_placeholder: "选项类型默认值"
+    option_type_placeholder: "添加选项类型"
     option_types: "选项类型"
     option_value: "选项值"
     option_values: "选项值"
@@ -1633,8 +1633,8 @@ zh-CN:
     successfully_signed_up_for_analytics: Successfully signed up for Spree Analytics
     successfully_updated: "%{resource} 已被成功更新!"
     summary: "概览"
-    tags: Tags
-    tags_placeholder: Add Tags
+    tags: '标签'
+    tags_placeholder: '添加标签'
     tax: "税"
     tax_included: "Tax (incl.)"
     tax_categories: "缴税分类"
@@ -1644,7 +1644,7 @@ zh-CN:
     tax_included:
     tax_rate_amount_explanation: Tax rates are a decimal amount to aid in calculations, (i.e. if the tax rate is 5% then enter 0.05)
     tax_rates: "税率"
-    taxon: "分类"
+    taxon: "产品分类"
     taxon_edit: "编辑分类"
     taxon_placeholder: "添加分类"
     taxon_rule:
@@ -1652,9 +1652,9 @@ zh-CN:
       label: Order must contain x amount of these taxons
       match_all: all
       match_any: at least one
-    taxonomies: "分类层级"
-    taxonomy: "分类层级"
-    taxonomy_edit: "编辑分类层级"
+    taxonomies: "分类树"
+    taxonomy: "分类树"
+    taxonomy_edit: "编辑分类树"
     taxonomy_tree_error: "请求的变更没有被接受，分类树会恢复到之前的状态，请重新尝试."
     taxonomy_tree_instruction: "* 右键单击一个树的子结点以访问添加、删除或者排序字节点的菜单."
     taxons: "分类"
