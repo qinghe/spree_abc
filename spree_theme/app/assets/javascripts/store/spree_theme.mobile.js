@@ -2,7 +2,7 @@
 //= require jquery.turbolinks
 //= require jquery_ujs
 //= require jquery.form
-//= require jquery.finger
+//= require jquery.finger.16.min
 //= require jquery.simplemodal.mobile
 //= require jssor.slider.20.min
 //= require spree/frontend
