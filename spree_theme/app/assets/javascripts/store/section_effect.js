@@ -361,10 +361,11 @@ $(document).ready(function() {
     $.sidr( 'close', sidr_name);
 
   });
-  $("#page").on( 'click',".sidr_overlay",function(e){
+  $("#page").on( 'click touchstart',".sidr_overlay",function(e){
     //<div id="sidr0"> </div>
     //<div id="sidr0-overlay"> </div>
-    //sidr0-overlay
+    //sidr0-overlay    
+    e.preventDefault();
     e.stopPropagation();
     var sidr_name = $(this).attr('id').split('-').shift();
     $.sidr( 'close',sidr_name);
