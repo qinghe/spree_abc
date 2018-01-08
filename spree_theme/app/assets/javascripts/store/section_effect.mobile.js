@@ -4,7 +4,6 @@ $(function() {
   var section_css_class_regex = /\bs\_([0-9]+)\_([0-9]+)\b/;
 
   $("#page").on( 'tap', '.sidr_overlay', function(e) {
-    alert('yes,triggered');
     e.stopPropagation();
     e.preventDefault(); /* should not trigger link under overlay*/
     //sidr0-overlay
