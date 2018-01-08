@@ -3,12 +3,12 @@ $(function() {
   //"content_layout s_551_2 c_549 effect_infinitescroll u_container"
   var section_css_class_regex = /\bs\_([0-9]+)\_([0-9]+)\b/;
 
-  //$("#page").on( 'tap', '.sidr_overlay', function(e) {
-  //  //sidr0-overlay
-  //  var sidr_name = $(this).attr('id').split('-').shift();
-  //  $.sidr( 'close', sidr_name );
-  //  e.preventDefault();
-  //});
+  $("#page").on( 'tap', '.sidr_overlay', function(e) {
+    e.stopPropagation();
+    //sidr0-overlay
+    var sidr_name = $(this).attr('id').split('-').shift();
+    $.sidr( 'close', sidr_name );
+  });
   // prevent scrolling happen
   //$('#page').on('drag', '.sidr_overlay', function(e) {
   //  // prevent default horizontal scrolling
