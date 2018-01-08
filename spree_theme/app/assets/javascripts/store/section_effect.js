@@ -353,16 +353,19 @@ $(document).ready(function() {
           }
       });
   });
-  $(".sidr").on( 'click touchstart',".sidr_close",function(){
+  $(".sidr").on( 'click touchstart',".sidr_close",function(e){
     //<div id="sidr0"> <div class='sidr_close_container'> <a class="sidr_close"></a> </div>
     //</div>
+    e.stopPropagation();
     var sidr_name = $(this).parents('.sidr').attr('id')
     $.sidr( 'close', sidr_name);
+
   });
-  $("#page").on( 'click touchstart',".sidr_overlay",function(){
+  $("#page").on( 'click touchstart',".sidr_overlay",function(e){
     //<div id="sidr0"> </div>
     //<div id="sidr0-overlay"> </div>
     //sidr0-overlay
+    e.stopPropagation();
     var sidr_name = $(this).attr('id').split('-').shift();
     $.sidr( 'close',sidr_name);
   });
