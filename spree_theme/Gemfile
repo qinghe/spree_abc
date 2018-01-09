@@ -31,8 +31,7 @@ gem 'useragent'
 gem "friendly_id"
 
 gem 'erubis'
-gem 'turbolinks'
-gem 'jquery-turbolinks'
+gem 'turbolinks', '~> 5.0.0'
 gem 'sitemap_generator'
 
 gem 'bootstrap-sass'

@@ -1,6 +1,5 @@
 //= require underscore-min
 //= require jquery
-//= require jquery.turbolinks
 //= require jquery_ujs
 //= require jquery.form
 //= require jquery.simplemodal

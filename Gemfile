@@ -27,8 +27,7 @@ gem 'uglifier', '>= 1.3.0'
 # Deploy with Capistrano
 # gem 'capistrano'
 
-gem 'turbolinks', '~> 2.5.3'
-gem 'jquery-turbolinks'
+gem 'turbolinks', '~> 5.0.0'
 
 eval(File.read(File.dirname(__FILE__) + '/common_spree_dependencies.rb'))
 #support rich_editor

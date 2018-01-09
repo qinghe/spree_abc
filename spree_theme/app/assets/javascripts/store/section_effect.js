@@ -339,7 +339,6 @@ $(document).ready(function() {
         });
       }
   });
-
   $(".click_effect_sider").each(function(i, element){
     var child2 = $(".child_2", element);
     //var class_names = $(".child_2", element).attr('class').replace(/(^\s+)|(\s+$)/g,"").replace(/\s+/g,'.');
@@ -352,19 +351,21 @@ $(document).ready(function() {
           return ( child2.is("*") ? child2[0].outerHTML : "no content");
           }
       });
+
   });
+
   $(".sidr").on( 'click touchstart',".sidr_close",function(e){
     //<div id="sidr0"> <div class='sidr_close_container'> <a class="sidr_close"></a> </div>
     //</div>
     e.stopPropagation();
-    var sidr_name = $(this).parents('.sidr').attr('id')
+    var sidr_name = $(this).parents('.sidr').attr('id');
     $.sidr( 'close', sidr_name);
 
   });
   $("#page").on( 'click touchstart',".sidr_overlay",function(e){
     //<div id="sidr0"> </div>
     //<div id="sidr0-overlay"> </div>
-    //sidr0-overlay    
+    //sidr0-overlay
     e.preventDefault();
     e.stopPropagation();
     var sidr_name = $(this).attr('id').split('-').shift();
