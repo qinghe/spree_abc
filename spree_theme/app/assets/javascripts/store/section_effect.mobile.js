@@ -1,5 +1,5 @@
 
-$(function() {
+$(document).on('turbolinks:load',function() {
   //"content_layout s_551_2 c_549 effect_infinitescroll u_container"
   var section_css_class_regex = /\bs\_([0-9]+)\_([0-9]+)\b/;
 

@@ -44,6 +44,7 @@ gem 'spree_editor',  github: "spree/spree_editor", branch: "master"
 
 # Use SCSS for stylesheets,  spree_theme/spree_devise_auth required
 #gem 'spree_multi_site',   path: './spree_multi_site'
+gem 'kaminari'
 gem "acts_as_commentable"
 gem 'acts-as-taggable-on'
 gem 'useragent'

@@ -548,6 +548,7 @@ DEPENDENCIES
   exception_notification
   factory_girl_rails (~> 4.5.0)
   font-awesome-rails
+  kaminari
   launchy
   listen (>= 3.0.5, < 3.2)
   mysql2

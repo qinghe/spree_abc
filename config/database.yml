@@ -13,7 +13,7 @@ development:
   encoding: utf8
   reconnect: false
   database: spree_abc_development
-  pool: 5
+  pool: 8
   username: root
   password:
   socket: /var/lib/mysql/mysql.sock
@@ -67,7 +67,7 @@ aliyun_staging:
   encoding: utf8
   reconnect: false
   database: spree_abc_staging
-  pool: 5
+  pool: 10
   username: root
   password:
   socket: /tmp/mysql.sock
@@ -77,7 +77,7 @@ production:
   encoding: utf8
   reconnect: false
   database: spree_abc_production
-  pool: 5
+  pool: 15
   username: root
   password:
   socket: /var/lib/mysql/mysql.sock
