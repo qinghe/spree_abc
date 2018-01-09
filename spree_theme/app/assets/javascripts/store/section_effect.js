@@ -42,7 +42,7 @@ function SetHome(){
 
 
 
-$(document).ready(function() {
+$(document).on('turbolinks:load',function() {
   //return to top
   $('.return_top').click(function(){
     //var $element =$(this);

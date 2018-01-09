@@ -1,6 +1,6 @@
 // handle effect for ckeditor content
 
-$(document).ready(function() {
+$(document).on('turbolinks:load',function() {
   //<div class=ck_effect_page>
   //  <div class="ck_effect_page_nav"> <a> 1</a> <a>2</a> </div>
   //  <div class="ck_effect_page_content">

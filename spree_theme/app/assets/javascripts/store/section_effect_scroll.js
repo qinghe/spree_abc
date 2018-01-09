@@ -1,6 +1,6 @@
 // it is using jssor.20 for effect slider
 
-$(document).ready(function() {
+$(document).on('turbolinks:load',function() {
   function ScaleSlider(event) {
     // console.debug( jssor_slider )
     //Object { data=slider, originalEvent=Event load,  type="load",  timeStamp=0,  more...}

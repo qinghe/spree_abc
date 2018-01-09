@@ -4,7 +4,7 @@
 //= require store/section_effect
 //= require store/section_editor
 
-$(document).ready(function() {
+$(document).on('turbolinks:load',function() {
   // disable progress-bar, coolpadwebkit do not support
   //if( !g_client_info.is_mobile ){
   //  Turbolinks.enableProgressBar();
@@ -373,11 +373,12 @@ function VariantOptions(params) {
         // select current clicked option value
         // correct next all selected option value
     }
-    if( Object.getOwnPropertyNames(options).length>0){
-      if( view_style == 'slide' ){
-        $(document).ready(init_for_slide_style);
-      }else{
-        $(document).ready(init);
-      }
-    }
+    // FIXME  turbolinks use event turbolinks:load
+    //if( Object.getOwnPropertyNames(options).length>0){
+    //  if( view_style == 'slide' ){
+    //    $(document).ready(init_for_slide_style);
+    //  }else{
+    //    $(document).ready(init);
+    //  }
+    //}
 };

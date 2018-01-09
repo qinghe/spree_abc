@@ -1,7 +1,7 @@
 //= require jquery.ajax
 //= require interface.js
 
-$(document).ready(function() {
+$(document).on('turbolinks:load',function() {
 
   if (typeof(g_client_info) != 'undefined' && g_client_info.is_preview==true)
   {
@@ -72,7 +72,7 @@ $(document).ready(function() {
 
           $('#selected_page_layout_id').val(self.data('lid'));
           $('#layout_editor_form').trigger('submit');
-        
+
     });
 
     $(document).on('mouseover',"#editors .tabs li", function(){
