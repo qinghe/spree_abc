@@ -553,7 +553,8 @@ module PageTag
             # the newest products of site/taxon order by created_at
             search[:sorts] = 'created_at desc'
           end
-          if wrapped_taxon.resource_taxon_id>0
+          #wrapped_taxon.resource_taxon_id could be nil, ex. DefaultTaxon
+          if wrapped_taxon.resource_taxon_id.to_i>0
             search[:in_taxon_without_order] = Spree::Taxon.find( wrapped_taxon.resource_taxon_id )
           end
           params.merge!( search: search)
