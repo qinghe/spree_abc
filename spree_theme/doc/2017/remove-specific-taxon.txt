@@ -1,0 +1,1242 @@
+ select * from spree_template_themes  where assigned_resource_ids like '%specific%';
++-----+---------+---------------------+------------+--------------------------------------------+------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------+---------------------+-----------+--------------+-----------+------------------+-----------------+----------+--------+--------------+--------------+------------------+----------+
+| id  | site_id | page_layout_root_id | release_id | title                                      | slug | assigned_resource_ids                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            | created_at          | updated_at          | is_public | for_terminal | master_id | last_released_at | last_changed_at | store_id | locale | home_page_id | copy_from_id | user_terminal_id | renderer |
++-----+---------+---------------------+------------+--------------------------------------------+------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------+---------------------+-----------+--------------+-----------+------------------+-----------------+----------+--------+--------------+--------------+------------------+----------+
+|   2 |       1 |                  64 |        148 | Dalianshops                                |      | ---
+'69':
+  spree/taxon:
+  - 23
+'78':
+  spree/template_text:
+  - 1
+'79':
+  spree/template_text:
+  - 0
+'80':
+  spree/template_text:
+  - 0
+'82':
+  spree/template_text:
+  - 4
+'71':
+  spree/template_file:
+  - 49
+'550':
+  spree/taxon:
+  - 134
+  spree/specific_taxon:
+  - 25
+'557':
+  spree/taxon:
+  - 139
+'561':
+  spree/specific_taxon:
+  - 28
+'562':
+  spree/template_text:
+  - 16
+'651':
+  spree/specific_taxon:
+  - 208
+'654':
+  spree/taxon:
+  - 0
+'662':
+  spree/specific_taxon:
+  - 27
+'663':
+  spree/template_text:
+  - 17
+'652':
+  spree/taxon:
+  - 208
+'665':
+  spree/taxon:
+  - 214
+'695':
+  spree/taxon:
+  - 313
+                                                                                                                                                                                                                                                                                                                                                                                                                                   | 2014-03-09 01:13:21 | 2017-12-17 11:17:06 |         0 |            0 |         0 | NULL             | NULL            |        1 | NULL   |         NULL |            0 |                1 |        1 |
+|  42 |     336 |                1226 |        146 | 北电新能源                                 |      | ---
+'911':
+  spree/taxon:
+  - 474
+'875':
+  spree/taxon:
+  - 0
+'961':
+  spree/taxon:
+  - 477
+'1121':
+  spree/taxon:
+  - 602
+'1123':
+  spree/taxon:
+  - 603
+'1228':
+  spree/template_file:
+  - 112
+'1230':
+  spree/taxon:
+  - 0
+'1234':
+  spree/taxon:
+  - 477
+'1241':
+  spree/taxon:
+  - 707
+'1245':
+  spree/taxon:
+  - 729
+'1247':
+  spree/taxon:
+  - 726
+'1254':
+  spree/taxon:
+  - 491
+'1260':
+  spree/taxon:
+  - 715
+'1267':
+  spree/taxon:
+  - 0
+'1274':
+  spree/taxon:
+  - 715
+'1291':
+  spree/template_file:
+  - 93
+'1292':
+  spree/taxon:
+  - 725
+'1312':
+  spree/taxon:
+  - 0
+'1317':
+  spree/template_text:
+  - 23
+'1322':
+  spree/taxon:
+  - 722
+'1318':
+  spree/taxon:
+  - 723
+'1330':
+  spree/taxon:
+  - 724
+'1332':
+  spree/taxon:
+  - 728
+'1493':
+  spree/template_file:
+  - 114
+'1494':
+  spree/template_file:
+  - 131
+'1501':
+  spree/template_text:
+  - 31
+'1502':
+  spree/specific_taxon:
+  - 0
+'1508':
+  spree/taxon:
+  - 734
+'1621':
+  spree/taxon:
+  - 940
+'2622':
+  spree/template_text:
+  - 100
+                                          | 2015-07-27 12:32:27 | 2017-12-17 11:17:06 |         1 |            0 |         0 | NULL             | NULL            |      336 | NULL   |         NULL |            0 |                1 |        1 |
+|  45 |       1 |                1555 |        234 | GetStore                                   |      | ---
+'79':
+  spree/template_text:
+  - 0
+'80':
+  spree/template_text:
+  - 0
+'654':
+  spree/taxon:
+  - 0
+'1558':
+  spree/template_file:
+  - 292
+'1559':
+  spree/taxon:
+  - 214
+'1562':
+  spree/taxon:
+  - 932
+'1565':
+  spree/template_text:
+  - 1
+'1570':
+  spree/taxon:
+  - 1009
+  spree/specific_taxon:
+  - 0
+'1577':
+  spree/taxon:
+  - 139
+'1583':
+  spree/specific_taxon:
+  - 938
+'1584':
+  spree/template_text:
+  - 16
+'1585':
+  spree/specific_taxon:
+  - 208
+'1586':
+  spree/taxon:
+  - 208
+'1595':
+  spree/specific_taxon:
+  - 27
+'1596':
+  spree/template_text:
+  - 17
+'1600':
+  spree/template_text:
+  - 41
+'1603':
+  spree/taxon:
+  - 313
+'1615':
+  spree/taxon:
+  - 748
+'1637':
+  spree/template_text:
+  - 36
+'1638':
+  spree/taxon:
+  - 997
+'1639':
+  spree/taxon:
+  - 997
+'1644':
+  spree/template_text:
+  - 37
+'1646':
+  spree/template_text:
+  - 38
+'1648':
+  spree/template_text:
+  - 39
+'1650':
+  spree/template_text:
+  - 40
+'1653':
+  spree/taxon:
+  - 999
+'1669':
+  spree/specific_taxon:
+  - 1009
+'1670':
+  spree/taxon:
+  - 0
+'1674':
+  spree/taxon:
+  - 1016
+'1677':
+  spree/template_text:
+  - 42
+'1679':
+  spree/template_text:
+  - 43
+'1678':
+  spree/specific_taxon:
+  - 937
+'1680':
+  spree/taxon:
+  - 997
+'1682':
+  spree/template_text:
+  - 44
+'1683':
+  spree/template_text:
+  - 45
+ | 2015-09-20 10:05:17 | 2017-12-17 11:15:25 |         0 |            0 |         0 | NULL             | NULL            |        1 | NULL   |         NULL |            0 |                1 |        1 |
+|  53 |     342 |                1226 |        146 | Imported 北电新能源                        |      | ---
+'911':
+  spree/taxon:
+  - 944
+'875':
+  spree/taxon:
+  - 0
+'961':
+  spree/taxon:
+  - 947
+'1121':
+  spree/taxon:
+  - 0
+'1123':
+  spree/taxon:
+  - 0
+'1228':
+  spree/template_file:
+  - 146
+'1230':
+  spree/taxon:
+  - 0
+'1234':
+  spree/taxon:
+  - 947
+'1241':
+  spree/taxon:
+  - 950
+'1245':
+  spree/taxon:
+  - 959
+'1247':
+  spree/taxon:
+  - 970
+'1254':
+  spree/taxon:
+  - 971
+'1260':
+  spree/taxon:
+  - 963
+'1267':
+  spree/taxon:
+  - 0
+'1274':
+  spree/taxon:
+  - 963
+'1291':
+  spree/template_file:
+  - 0
+'1292':
+  spree/taxon:
+  - 969
+'1312':
+  spree/taxon:
+  - 0
+'1317':
+  spree/template_text:
+  - 33
+'1322':
+  spree/taxon:
+  - 983
+'1318':
+  spree/taxon:
+  - 984
+'1330':
+  spree/taxon:
+  - 985
+'1332':
+  spree/taxon:
+  - 973
+'1493':
+  spree/template_file:
+  - 147
+'1494':
+  spree/template_file:
+  - 148
+'1501':
+  spree/template_text:
+  - 34
+'1502':
+  spree/specific_taxon:
+  - 0
+'1508':
+  spree/taxon:
+  - 974
+'1621':
+  spree/taxon:
+  - 978
+'2620':
+  spree/template_text:
+  - 91
+'2622':
+  spree/template_text:
+  - 101
+         | 2015-10-17 08:53:27 | 2017-12-17 11:17:06 |         1 |            0 |         0 | NULL             | NULL            |      342 | NULL   |         NULL |           42 |                1 |        1 |
+|  73 |     352 |                1226 |        146 | Imported 北电新能源                        |      | ---
+'911':
+  spree/taxon:
+  - 1335
+'875':
+  spree/taxon:
+  - 0
+'961':
+  spree/taxon:
+  - 1338
+'1121':
+  spree/taxon:
+  - 0
+'1123':
+  spree/taxon:
+  - 0
+'1228':
+  spree/template_file:
+  - 0
+'1230':
+  spree/taxon:
+  - 0
+'1234':
+  spree/taxon:
+  - 1338
+'1241':
+  spree/taxon:
+  - 1341
+'1245':
+  spree/taxon:
+  - 1350
+'1247':
+  spree/taxon:
+  - 0
+'1254':
+  spree/taxon:
+  - 0
+'1260':
+  spree/taxon:
+  - 1354
+'1267':
+  spree/taxon:
+  - 0
+'1274':
+  spree/taxon:
+  - 1354
+'1291':
+  spree/template_file:
+  - 0
+'1292':
+  spree/taxon:
+  - 1360
+'1312':
+  spree/taxon:
+  - 0
+'1317':
+  spree/template_text:
+  - 60
+'1322':
+  spree/taxon:
+  - 0
+'1318':
+  spree/taxon:
+  - 0
+'1330':
+  spree/taxon:
+  - 0
+'1332':
+  spree/taxon:
+  - 0
+'1493':
+  spree/template_file:
+  - 0
+'1494':
+  spree/template_file:
+  - 0
+'1501':
+  spree/template_text:
+  - 61
+'1502':
+  spree/specific_taxon:
+  - 0
+'1508':
+  spree/taxon:
+  - 1365
+'1621':
+  spree/taxon:
+  - 1369
+                                                                                              | 2016-03-18 06:54:07 | 2017-12-17 11:17:07 |         1 |            0 |         0 | NULL             | NULL            |      352 | NULL   |         NULL |           42 |                1 |        1 |
+|  77 |     336 |                1916 |        177 | 大连中和能源                               |      | ---
+'911':
+  spree/taxon:
+  - 474
+'875':
+  spree/taxon:
+  - 0
+'961':
+  spree/taxon:
+  - 477
+'1121':
+  spree/taxon:
+  - 602
+'1123':
+  spree/taxon:
+  - 603
+'1230':
+  spree/taxon:
+  - 0
+'1267':
+  spree/taxon:
+  - 0
+'1312':
+  spree/taxon:
+  - 0
+'1502':
+  spree/specific_taxon:
+  - 0
+'1918':
+  spree/template_file:
+  - 206
+'1924':
+  spree/taxon:
+  - 0
+'1931':
+  spree/taxon:
+  - 707
+'1934':
+  spree/taxon:
+  - 729
+'1937':
+  spree/taxon:
+  - 727
+'1941':
+  spree/template_file:
+  - 114
+'1945':
+  spree/taxon:
+  - 722
+'1953':
+  spree/taxon:
+  - 724
+'1956':
+  spree/template_file:
+  - 131
+'1957':
+  spree/taxon:
+  - 728
+'1959':
+  spree/template_text:
+  - 66
+'1961':
+  spree/taxon:
+  - 726
+'1967':
+  spree/taxon:
+  - 723
+'1974':
+  spree/taxon:
+  - 715
+'1982':
+  spree/taxon:
+  - 715
+'2002':
+  spree/template_file:
+  - 93
+'2003':
+  spree/taxon:
+  - 725
+'2028':
+  spree/taxon:
+  - 734
+'2048':
+  spree/taxon:
+  - 940
+'2064':
+  spree/template_text:
+  - 23
+'2071':
+  spree/template_text:
+  - 65
+'2074':
+  spree/taxon:
+  - 1457
+'2079':
+  spree/template_file:
+  - 211
+ | 2016-04-02 03:30:55 | 2017-12-17 11:17:07 |         1 |            0 |         0 | NULL             | NULL            |      336 | NULL   |         NULL |            0 |                1 |        1 |
+|  83 |     353 |                1916 |        177 | Imported 大连中和能源                      |      | ---
+'911':
+  spree/taxon:
+  - 1460
+'875':
+  spree/taxon:
+  - 0
+'961':
+  spree/taxon:
+  - 1463
+'1121':
+  spree/taxon:
+  - 0
+'1123':
+  spree/taxon:
+  - 0
+'1230':
+  spree/taxon:
+  - 0
+'1267':
+  spree/taxon:
+  - 0
+'1312':
+  spree/taxon:
+  - 0
+'1502':
+  spree/specific_taxon:
+  - 0
+'1918':
+  spree/template_file:
+  - 212
+'1924':
+  spree/taxon:
+  - 0
+'1931':
+  spree/taxon:
+  - 1466
+'1934':
+  spree/taxon:
+  - 1475
+'1937':
+  spree/taxon:
+  - 1487
+'1941':
+  spree/template_file:
+  - 0
+'1945':
+  spree/taxon:
+  - 1502
+'1953':
+  spree/taxon:
+  - 0
+'1956':
+  spree/template_file:
+  - 0
+'1957':
+  spree/taxon:
+  - 0
+'1959':
+  spree/template_text:
+  - 69
+'1961':
+  spree/taxon:
+  - 1486
+'1967':
+  spree/taxon:
+  - 0
+'1974':
+  spree/taxon:
+  - 1479
+'1982':
+  spree/taxon:
+  - 1479
+'2002':
+  spree/template_file:
+  - 0
+'2003':
+  spree/taxon:
+  - 1485
+'2028':
+  spree/taxon:
+  - 1490
+'2048':
+  spree/taxon:
+  - 1494
+'2064':
+  spree/template_text:
+  - 70
+'2071':
+  spree/template_text:
+  - 71
+'2074':
+  spree/taxon:
+  - 1498
+'2079':
+  spree/template_file:
+  - 213
+'1962':
+  spree/taxon:
+  - 0
+'1964':
+  spree/taxon:
+  - 0
+'1952':
+  spree/taxon:
+  - 1489
+ | 2016-04-11 04:04:00 | 2017-12-17 11:17:07 |         1 |            0 |         0 | NULL             | NULL            |      353 | NULL   |         NULL |           77 |                1 |        1 |
+| 105 |     366 |                1916 |        177 | Imported 大连中和能源                      |      | ---
+'911':
+  spree/taxon:
+  - 1792
+'875':
+  spree/taxon:
+  - 0
+'961':
+  spree/taxon:
+  - 1795
+'1121':
+  spree/taxon:
+  - 0
+'1123':
+  spree/taxon:
+  - 0
+'1230':
+  spree/taxon:
+  - 0
+'1267':
+  spree/taxon:
+  - 0
+'1312':
+  spree/taxon:
+  - 0
+'1502':
+  spree/specific_taxon:
+  - 0
+'1918':
+  spree/template_file:
+  - 0
+'1924':
+  spree/taxon:
+  - 0
+'1931':
+  spree/taxon:
+  - 1798
+'1934':
+  spree/taxon:
+  - 1807
+'1937':
+  spree/taxon:
+  - 0
+'1941':
+  spree/template_file:
+  - 0
+'1945':
+  spree/taxon:
+  - 0
+'1953':
+  spree/taxon:
+  - 0
+'1956':
+  spree/template_file:
+  - 0
+'1957':
+  spree/taxon:
+  - 0
+'1959':
+  spree/template_text:
+  - 109
+'1961':
+  spree/taxon:
+  - 0
+'1967':
+  spree/taxon:
+  - 0
+'1974':
+  spree/taxon:
+  - 1811
+'1982':
+  spree/taxon:
+  - 1811
+'2002':
+  spree/template_file:
+  - 0
+'2003':
+  spree/taxon:
+  - 1817
+'2028':
+  spree/taxon:
+  - 1822
+'2048':
+  spree/taxon:
+  - 1826
+'2064':
+  spree/template_text:
+  - 105
+'2071':
+  spree/template_text:
+  - 110
+'2074':
+  spree/taxon:
+  - 1830
+'2079':
+  spree/template_file:
+  - 0
+ | 2016-08-14 15:32:29 | 2017-12-17 11:17:08 |         1 |            0 |         0 | NULL             | NULL            |      366 | NULL   |         NULL |           77 |                1 |        1 |
+| 110 |     366 |                1226 |        146 | Imported 北电新能源                        |      | ---
+'911':
+  spree/taxon:
+  - 1792
+'875':
+  spree/taxon:
+  - 0
+'961':
+  spree/taxon:
+  - 1795
+'1121':
+  spree/taxon:
+  - 0
+'1123':
+  spree/taxon:
+  - 0
+'1228':
+  spree/template_file:
+  - 0
+'1230':
+  spree/taxon:
+  - 0
+'1234':
+  spree/taxon:
+  - 1795
+'1241':
+  spree/taxon:
+  - 1798
+'1245':
+  spree/taxon:
+  - 1807
+'1247':
+  spree/taxon:
+  - 0
+'1254':
+  spree/taxon:
+  - 0
+'1260':
+  spree/taxon:
+  - 1811
+'1267':
+  spree/taxon:
+  - 0
+'1274':
+  spree/taxon:
+  - 1811
+'1291':
+  spree/template_file:
+  - 0
+'1292':
+  spree/taxon:
+  - 1817
+'1312':
+  spree/taxon:
+  - 0
+'1317':
+  spree/template_text:
+  - 105
+'1322':
+  spree/taxon:
+  - 0
+'1318':
+  spree/taxon:
+  - 0
+'1330':
+  spree/taxon:
+  - 0
+'1332':
+  spree/taxon:
+  - 0
+'1493':
+  spree/template_file:
+  - 0
+'1494':
+  spree/template_file:
+  - 0
+'1501':
+  spree/template_text:
+  - 113
+'1502':
+  spree/specific_taxon:
+  - 0
+'1508':
+  spree/taxon:
+  - 1822
+'1621':
+  spree/taxon:
+  - 1826
+'2622':
+  spree/template_text:
+  - 114
+                                                     | 2016-08-14 15:32:44 | 2017-12-17 11:17:08 |         1 |            0 |         0 | NULL             | NULL            |      366 | NULL   |         NULL |           42 |                1 |        1 |
+| 129 |     374 |                1226 |        146 | Imported 北电新能源                        |      | ---
+'911':
+  spree/taxon:
+  - 2154
+'875':
+  spree/taxon:
+  - 0
+'961':
+  spree/taxon:
+  - 2157
+'1121':
+  spree/taxon:
+  - 0
+'1123':
+  spree/taxon:
+  - 0
+'1228':
+  spree/template_file:
+  - 0
+'1230':
+  spree/taxon:
+  - 0
+'1234':
+  spree/taxon:
+  - 2157
+'1241':
+  spree/taxon:
+  - 2160
+'1245':
+  spree/taxon:
+  - 2169
+'1247':
+  spree/taxon:
+  - 2180
+'1254':
+  spree/taxon:
+  - 2181
+'1260':
+  spree/taxon:
+  - 2173
+'1267':
+  spree/taxon:
+  - 0
+'1274':
+  spree/taxon:
+  - 2173
+'1291':
+  spree/template_file:
+  - 0
+'1292':
+  spree/taxon:
+  - 2179
+'1312':
+  spree/taxon:
+  - 0
+'1317':
+  spree/template_text:
+  - 129
+'1322':
+  spree/taxon:
+  - 2203
+'1318':
+  spree/taxon:
+  - 2204
+'1330':
+  spree/taxon:
+  - 2205
+'1332':
+  spree/taxon:
+  - 2183
+'1493':
+  spree/template_file:
+  - 0
+'1494':
+  spree/template_file:
+  - 0
+'1501':
+  spree/template_text:
+  - 130
+'1502':
+  spree/specific_taxon:
+  - 0
+'1508':
+  spree/taxon:
+  - 2184
+'1621':
+  spree/taxon:
+  - 2188
+'2622':
+  spree/template_text:
+  - 131
+'1255':
+  spree/taxon:
+  - 0
+'1492':
+  spree/taxon:
+  - 0
+'1320':
+  spree/taxon:
+  - 0
+'1319':
+  spree/taxon:
+  - 0
+ | 2017-01-19 02:39:47 | 2017-12-17 11:17:08 |         1 |            0 |         0 | NULL             | NULL            |      374 | NULL   |         NULL |           42 |                1 |        1 |
+| 139 |     376 |                1916 |        177 | 大连新动能自动化装备有限公司               |      | ---
+'911':
+  spree/taxon:
+  - 2311
+'875':
+  spree/taxon:
+  - 0
+'961':
+  spree/taxon:
+  - 2314
+'1121':
+  spree/taxon:
+  - 0
+'1123':
+  spree/taxon:
+  - 0
+'1230':
+  spree/taxon:
+  - 0
+'1267':
+  spree/taxon:
+  - 0
+'1312':
+  spree/taxon:
+  - 0
+'1502':
+  spree/specific_taxon:
+  - 0
+'1918':
+  spree/template_file:
+  - 303
+'1924':
+  spree/taxon:
+  - 0
+'1931':
+  spree/taxon:
+  - 2317
+'1934':
+  spree/taxon:
+  - 2326
+'1937':
+  spree/taxon:
+  - 2338
+'1941':
+  spree/template_file:
+  - 0
+'1945':
+  spree/taxon:
+  - 2322
+'1953':
+  spree/taxon:
+  - 0
+'1956':
+  spree/template_file:
+  - 0
+'1957':
+  spree/taxon:
+  - 0
+'1959':
+  spree/template_text:
+  - 147
+'1961':
+  spree/taxon:
+  - 2319
+'1967':
+  spree/taxon:
+  - 0
+'1974':
+  spree/taxon:
+  - 2330
+'1982':
+  spree/taxon:
+  - 2330
+'2002':
+  spree/template_file:
+  - 0
+'2003':
+  spree/taxon:
+  - 2336
+'2028':
+  spree/taxon:
+  - 2341
+'2048':
+  spree/taxon:
+  - 2345
+'2064':
+  spree/template_text:
+  - 148
+'2071':
+  spree/template_text:
+  - 149
+'2074':
+  spree/taxon:
+  - 2349
+'2079':
+  spree/template_file:
+  - 302
+'1952':
+  spree/taxon:
+  - 2325
+ | 2017-04-14 01:50:10 | 2017-12-17 11:17:08 |         1 |            0 |         0 | NULL             | NULL            |      376 | NULL   |         NULL |           77 |                1 |        1 |
+| 140 |     378 |                1916 |        177 | Imported 大连中和能源                      |      | ---
+'911':
+  spree/taxon:
+  - 2353
+'875':
+  spree/taxon:
+  - 0
+'961':
+  spree/taxon:
+  - 2356
+'1121':
+  spree/taxon:
+  - 0
+'1123':
+  spree/taxon:
+  - 0
+'1230':
+  spree/taxon:
+  - 0
+'1267':
+  spree/taxon:
+  - 0
+'1312':
+  spree/taxon:
+  - 0
+'1502':
+  spree/specific_taxon:
+  - 0
+'1918':
+  spree/template_file:
+  - 0
+'1924':
+  spree/taxon:
+  - 0
+'1931':
+  spree/taxon:
+  - 2359
+'1934':
+  spree/taxon:
+  - 2368
+'1937':
+  spree/taxon:
+  - 0
+'1941':
+  spree/template_file:
+  - 0
+'1945':
+  spree/taxon:
+  - 0
+'1953':
+  spree/taxon:
+  - 0
+'1956':
+  spree/template_file:
+  - 0
+'1957':
+  spree/taxon:
+  - 0
+'1959':
+  spree/template_text:
+  - 150
+'1961':
+  spree/taxon:
+  - 0
+'1967':
+  spree/taxon:
+  - 0
+'1974':
+  spree/taxon:
+  - 2372
+'1982':
+  spree/taxon:
+  - 2372
+'2002':
+  spree/template_file:
+  - 0
+'2003':
+  spree/taxon:
+  - 2378
+'2028':
+  spree/taxon:
+  - 2383
+'2048':
+  spree/taxon:
+  - 2387
+'2064':
+  spree/template_text:
+  - 151
+'2071':
+  spree/template_text:
+  - 152
+'2074':
+  spree/taxon:
+  - 2391
+'2079':
+  spree/template_file:
+  - 0
+ | 2017-07-03 09:18:12 | 2017-12-17 11:17:08 |         1 |            0 |         0 | NULL             | NULL            |      378 | NULL   |         NULL |           77 |                1 |        1 |
+| 141 |     378 |                1916 |        177 | Imported 大连中和能源                      |      | ---
+'911':
+  spree/taxon:
+  - 2394
+'875':
+  spree/taxon:
+  - 0
+'961':
+  spree/taxon:
+  - 2356
+'1121':
+  spree/taxon:
+  - 0
+'1123':
+  spree/taxon:
+  - 0
+'1230':
+  spree/taxon:
+  - 0
+'1267':
+  spree/taxon:
+  - 0
+'1312':
+  spree/taxon:
+  - 0
+'1502':
+  spree/specific_taxon:
+  - 0
+'1918':
+  spree/template_file:
+  - 0
+'1924':
+  spree/taxon:
+  - 0
+'1931':
+  spree/taxon:
+  - 2397
+'1934':
+  spree/taxon:
+  - 2368
+'1937':
+  spree/taxon:
+  - 0
+'1941':
+  spree/template_file:
+  - 0
+'1945':
+  spree/taxon:
+  - 0
+'1953':
+  spree/taxon:
+  - 0
+'1956':
+  spree/template_file:
+  - 0
+'1957':
+  spree/taxon:
+  - 0
+'1959':
+  spree/template_text:
+  - 153
+'1961':
+  spree/taxon:
+  - 0
+'1967':
+  spree/taxon:
+  - 0
+'1974':
+  spree/taxon:
+  - 2372
+'1982':
+  spree/taxon:
+  - 2372
+'2002':
+  spree/template_file:
+  - 0
+'2003':
+  spree/taxon:
+  - 2378
+'2028':
+  spree/taxon:
+  - 2383
+'2048':
+  spree/taxon:
+  - 2387
+'2064':
+  spree/template_text:
+  - 154
+'2071':
+  spree/template_text:
+  - 155
+'2074':
+  spree/taxon:
+  - 2391
+'2079':
+  spree/template_file:
+  - 0
+ | 2017-07-03 09:18:16 | 2017-12-17 11:17:08 |         1 |            0 |         0 | NULL             | NULL            |      378 | NULL   |         NULL |           77 |                1 |        1 |
++-----+---------+---------------------+------------+--------------------------------------------+------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------+---------------------+-----------+--------------+-----------+------------------+-----------------+----------+--------+--------------+--------------+------------------+----------+
+13 rows in set (0.11 sec)
