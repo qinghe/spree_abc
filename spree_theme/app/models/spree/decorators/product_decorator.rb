@@ -5,9 +5,14 @@ Spree::Product.class_eval do
     where.not(id: ids)
   end
 
+  #当需要按照其它字段排序时，如 created_at, updated_at, 需要调用这个方法
+  add_search_scope :in_taxon_without_order do |taxon|
+    includes(:classifications).
+      where('spree_products_taxons.taxon_id' => taxon.self_and_descendants.pluck(:id))
+  end
   # add_simple_scopes [:ascend_by_created_at, :descend_by_created_at]
   # get newer products of site
-  whitelisted_ransackable_attributes << 'created_at'
+  #whitelisted_ransackable_attributes << 'created_at'
 
 
   scope :for_template, ->{ where.not( theme_id: 0 ) }

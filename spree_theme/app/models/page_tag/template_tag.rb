@@ -544,12 +544,22 @@ module PageTag
 
       case self.current_piece.current_data_source
       when Spree::PageLayout::DataSourceEnum.gpvs, Spree::PageLayout::DataSourceEnum.related_products
+        # Product.in_taxon 加入排序 order('spree_products_taxons.position ASC')，order_by 将不起作用
+        # 因此需要调用 search_scope :in_taxon_without_order
         # 不再支持 order_by 'created_at_desc'，这样排序无法支持taxon, 并且taxon内的产品排序是按照position,并且默认数据库排序既是created_at desc
-        #if order_by == 'created_at_desc'
-        #  # the newest products of site/taxon order by created_at
-        #  params.merge!( search:{ sorts: 'created_at desc' } )
-        #end
-        params.merge!( taxon: wrapped_taxon.resource_taxon_id )
+        if order_by.present?
+          search = { }
+          if order_by == 'created_at_desc'
+            # the newest products of site/taxon order by created_at
+            search[:sorts] = 'created_at desc'
+          end
+          if wrapped_taxon.resource_taxon_id>0
+            search[:in_taxon_without_order] = Spree::Taxon.find( wrapped_taxon.resource_taxon_id )
+          end
+          params.merge!( search: search)
+        else
+          params.merge!( taxon: wrapped_taxon.resource_taxon_id )
+        end
       when Spree::PageLayout::DataSourceEnum.blog
         params.merge!( taxon: wrapped_taxon.resource_taxon_id )
       when Spree::PageLayout::DataSourceEnum.gpvs_theme
@@ -559,7 +569,7 @@ module PageTag
       #Rails.logger.debug " build_searcher_params =#{params.inspect} pagination_params=#{pagination_params.inspect} current_piece.id=#{current_piece.id}"
 
       params[:search] = options[:search] if options.key?( :search )
-      params
+      ActionController::Parameters.new params
     end
 
 
