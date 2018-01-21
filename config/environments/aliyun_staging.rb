@@ -62,7 +62,7 @@ SpreeAbc::Application.configure do
     :email => {
       :email_prefix => "[GetStoreException] ",
       :sender_address => %{"notice" <notice@getstore.cn>},
-      :exception_recipients => %w{admin@getstore.cn}
+      :exception_recipients => %w{debug@getstore.cn}
     }
   # Enable threaded mode
   # config.threadsafe!
