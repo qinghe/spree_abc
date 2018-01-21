@@ -28,9 +28,9 @@ production:
   oauth2_cookie_duration: <%= ENV['WECHAT_OAUTH2_COOKIE_DURATION'] %> # seconds
 
 aliyun_staging:
-  appid: <%= ENV['GETSTORE_WECHAT_APPID'] %>
-  secret: <%= ENV['GETSTORE_WECHAT_SECRET'] %>
-  token:  <%= ENV['GETSTORE_WECHAT_TOKEN'] %>
+  appid: <%= ENV['WECHAT_APPID'] %>
+  secret: <%= ENV['WECHAT_SECRET'] %>
+  token:  <%= ENV['WECHAT_TOKEN'] %>
 
 development:
   <<: *default
