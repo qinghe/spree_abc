@@ -10,4 +10,5 @@
 //= require jquery.jeditable.js
 // require bootstrap-sprockets
 //= require store/section_effect.mobile
+//= require weixin_support
 //= require turbolinks
