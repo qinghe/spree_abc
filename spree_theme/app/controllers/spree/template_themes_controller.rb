@@ -2,7 +2,6 @@ module Spree
   class TemplateThemesController < Spree::StoreController
     helper 'spree/products'
     delegate :taxon_class,:site_class, :to=>:"SpreeTheme"
-    wechat_api
 
     # support database_theme and file_theme
     def page
