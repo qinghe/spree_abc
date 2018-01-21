@@ -32,7 +32,7 @@ module Spree
       url = if current_page.product_tag.present?
         current_page.product_tag.simple_image( :medium )
       else
-        image_url( 'wxshare_missing.png')
+        image_url( 'missing/wxshare.png')
       end
 
 
