@@ -155,7 +155,7 @@ sudo /opt/nginx/sbin/nginx
 puma
 ---------------------------------------------------------------
 puma -e production -b unix:///tmp/blog.sock -d
-bundle exec puma -e production -b unix:///tmp/wechatmore.sock -d
+bundle exec puma -e aliyun_staging
 
 centos
 ---------------------------------------------------------------

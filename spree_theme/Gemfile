@@ -36,5 +36,6 @@ gem 'sitemap_generator'
 
 gem 'bootstrap-sass'
 gem 'font-awesome-rails'
+gem 'wechat' #微信分享功能
 
 gemspec

@@ -1,5 +1,5 @@
-<% if @current_page.product_tag.present? %>
-<div class ='weixin_quan' style='margin:0 auto;width:0px;height:0px;overflow:hidden;'>
-  <%= @current_page.product_tag.simple_image( :medium ) %>
-</div>
-<% end %>
+<%= javascript_tag defer: 'defer' do -%>
+  getstore = {};
+  getstore.wx_cfg_params = <%== wechat_config_params.to_json %>
+  getstore.share_data = <%== wechat_share_data(@current_page).to_json %>
+<% end -%>

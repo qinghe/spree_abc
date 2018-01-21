@@ -5,7 +5,7 @@ default: &default
 # Or if using public account, only need above two line
   appid: "wxe1e41bc95e1ffc98"
   secret: "5ed88d0faa88ba705a31e650791c5d85"
-  token:    "my_token"
+  token:  "my_token"
   #access_token: "tmp/wechat_access_token"
   #encrypt_mode: false # if true must fill encoding_aes_key
   #encoding_aes_key:  "my_encoding_aes_key"
@@ -28,7 +28,9 @@ production:
   oauth2_cookie_duration: <%= ENV['WECHAT_OAUTH2_COOKIE_DURATION'] %> # seconds
 
 aliyun_staging:
-  <<: *default
+  appid: <%= ENV['GETSTORE_WECHAT_APPID'] %>
+  secret: <%= ENV['GETSTORE_WECHAT_SECRET'] %>
+  token:  <%= ENV['GETSTORE_WECHAT_TOKEN'] %>
 
 development:
   <<: *default
