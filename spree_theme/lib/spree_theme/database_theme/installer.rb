@@ -57,7 +57,7 @@ module SpreeTheme
 
             @client_info = current_terminal
             @client_info.is_preview = @is_designer
-            @client_info.is_wechat = wechat?
+            @client_info.is_weixin = weixin?
             # use file theme
             if store.file_theme_name.present?
               handle_file_theme( store.file_theme_name ) and return
@@ -222,7 +222,7 @@ module SpreeTheme
             agent_str =~ Regexp.new(MOBILE_USER_AGENTS)
           end
 
-          def wechat?
+          def weixin?
             user_agent = UserAgent.parse request.user_agent
             user_agent.browser =~ /wechat/i
           end

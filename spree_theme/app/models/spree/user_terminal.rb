@@ -2,7 +2,7 @@ module Spree
 
   # compatible query media for a template_theme
   class UserTerminal < ActiveRecord::Base
-    attr_accessor :is_preview, :is_mobile, :is_wechat
+    attr_accessor :is_preview, :is_mobile, :is_weixin
     attr_accessor :os, :platform #UserAgent.attribute
 
     scope :cellphone, ->{ where( name: 'Cellphone' ) }

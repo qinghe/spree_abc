@@ -1,7 +1,7 @@
 //= require jweixin-1.1.0
 //= require store/weixin_support
 
-if( g_client_info.is_wechat && getstore.wx_cfg_params ){
+if( g_client_info.is_weixin && getstore.wx_cfg_params ){
   wx.config({
     debug: getstore.wx_cfg_params.debug,
     appId: getstore.wx_cfg_params.app_id,
