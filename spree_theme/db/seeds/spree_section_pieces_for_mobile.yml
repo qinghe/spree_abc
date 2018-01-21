@@ -27,6 +27,10 @@ root_for_mobile:
       <% end %>
       <%= csrf_meta_tags %>
       <%= render "spree/shared/sync_analytics" %>
+      <%= javascript_tag  do -%>
+        g_client_info = <%== @client_info.to_json %>
+      <% end -%>
+      <%= javascript_include_tag 'spree/frontend/all.mobile', "data-turbolinks-track" => true %>
       </head>
       <body class="clear-block <%= @current_page.agent_selector(request.user_agent) %>">
         <%= render "spree/shared/weixin_share" %>
@@ -38,14 +42,11 @@ root_for_mobile:
         ~~content~~
       </div><!-- /#page-inner -->
       </div><!-- /#page -->
-      <%= javascript_tag  do -%>
-        g_client_info = <%== @client_info.to_json %>
-      <% end -%>
+
       <% if @current_page.is_preview %>
          <%= render 'layout_editor_panel' %>
       <% end %>
       <%= render "spree/shared/analytics" %>
-      <%= javascript_include_tag 'spree/frontend/all.mobile', "data-turbolinks-track" => true %>
       </body>
     </html>
   css: |-
