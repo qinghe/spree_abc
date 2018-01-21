@@ -2,6 +2,7 @@ module Spree
   module BaseHelper
 
     def wechat_config_params(config_options = {})
+      config_options[:debug] = true
       account = config_options[:account]
       # copy from module Wechat::Helpers
       # not default account
