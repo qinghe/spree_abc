@@ -31,6 +31,10 @@ module PageTag
         ProductAttribute.new( nil, self ).simple_image( style )
       end
 
+      def simple_image_url( style )
+        ProductAttribute.new( nil, self ).simple_image_url( style )
+      end
+
       def accurate_taxon_tag
         current_taxon_model = wrapped_taxon.model
         accurate_taxon_model = nil

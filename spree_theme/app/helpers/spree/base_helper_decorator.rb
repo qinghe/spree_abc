@@ -33,13 +33,8 @@ module Spree
     end
 
     def wechat_share_data( current_page )
-      url = if current_page.product_tag.present?
-        current_page.product_tag.simple_image( :medium )
-      else
-        image_url( 'missing/wxshare.png')
-      end
-
-
+      url = current_page.product_tag.simple_image_url( :medium )
+Rails.logger.debug " url =#{ url }"
       share_data = {
         title: current_page.title.to_json,
         desc: 'this is description',
@@ -53,7 +48,7 @@ module Spree
     # override original, always return style  for feature :aliyun_oss
     # Returns style of image or nil
     def image_style_from_method_name(method_name)
-      if method_name.to_s.match(/_image$/) && style = method_name.to_s.sub(/_image$/, '')
+      if method_name.to_s.match(/_image\z/) && style = method_name.to_s.sub(/_image\z/, '')
         #possible_styles = Spree::Image.attachment_definitions[:attachment][:styles]
         #style if style.in? possible_styles.with_indifferent_access
         style

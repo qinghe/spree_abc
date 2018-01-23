@@ -41,6 +41,17 @@ module PageTag
       product_image_by_spree( wrapped_product.model, style )
     end
 
+    def simple_image_url( style )
+      image = image = get_product_image
+
+      if image.present?
+        image.attachment.url(style)
+      else
+        #image_tag "noimage/#{style}.png", options
+        image_url "noimage/#{style}.png"
+      end
+    end
+
     private
     def create_product_image_tag( image, product, options, style)
       #Rails.logger.debug " image = #{image} product = #{product}, options= #{options}, style=#{style}"
@@ -51,22 +62,16 @@ module PageTag
     end
     # copy from BaseHelper#define_image_method
     def product_image_by_spree(product, style, options = {})
-        if product.images.empty?
-          if !product.is_a?(Spree::Variant) && !product.variant_images.empty?
-            create_product_image_tag(product.variant_images.first, product, options, style)
-          else
-            if product.is_a?(Spree::Variant) && !product.product.variant_images.empty?
-              create_product_image_tag(product.product.variant_images.first, product, options, style)
-            else
-              #seems assets digest do not support template .ruby
-              #image_tag "noimage/#{style}.png", options
-              options.merge!  'data' => { 'big-image'=> "noimage/large.png" } #zoomable required
-              image_tag "noimage/#{style}.png", options
-            end
-          end
-        else
-          create_product_image_tag(product.images.first, product, options, style)
-        end
+
+      image = get_product_image
+      if image.present?
+        create_product_image_tag(image, product, options, style)
+      else
+        #seems assets digest do not support template .ruby
+        #image_tag "noimage/#{style}.png", options
+        options.merge!  'data' => { 'big-image'=> "noimage/large.png" } #zoomable required
+        image_tag "noimage/#{style}.png", options
+      end
     end
 
     # * params
@@ -94,6 +99,23 @@ module PageTag
           product_image_by_spree( product, main_image_style, options)
         end
       #}
+    end
+
+    def get_product_image
+      product = wrapped_product.model
+      image = nil
+      if product.images.empty?
+        if !product.is_a?(Spree::Variant) && !product.variant_images.empty?
+          image = product.variant_images.first
+        else
+          if product.is_a?(Spree::Variant) && !product.product.variant_images.empty?
+            image = product.product.variant_images.first
+          end
+        end
+      else
+        image = product.images.first
+      end
+      image
     end
 
   end
