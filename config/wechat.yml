@@ -7,7 +7,7 @@ default: &default
   secret: "5ed88d0faa88ba705a31e650791c5d85"
   token:  "mytoken"
   #access_token: "tmp/wechat_access_token"
-  #encrypt_mode: false # if true must fill encoding_aes_key
+  encrypt_mode: false # if true must fill encoding_aes_key
   #encoding_aes_key:  "my_encoding_aes_key"
   #jsapi_ticket: "tmp/wechat_jsapi_ticket"
   trusted_domain_fullname: "http://getstore.cn"
