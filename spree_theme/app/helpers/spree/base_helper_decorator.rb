@@ -16,6 +16,7 @@ module Spree
                  else
                    controller.request.original_url
                  end
+      page_url = controller.request.original_url
       js_hash = api.jsapi_ticket.signature(page_url)
 
       config_params = {
