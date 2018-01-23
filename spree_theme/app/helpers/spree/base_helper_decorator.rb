@@ -2,9 +2,9 @@ module Spree
   module BaseHelper
 
     def wechat_config_params(config_options = {})
-      if controller.request.original_url =~ /design.getstore.cn/
-        config_options[:debug] = true
-      end
+      #if controller.request.original_url =~ /design.getstore.cn/
+      #  config_options[:debug] = true
+      #end
       account = config_options[:account]
       # copy from module Wechat::Helpers
       # not default account
