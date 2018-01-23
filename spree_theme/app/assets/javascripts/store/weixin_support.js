@@ -16,7 +16,7 @@ if( g_client_info.is_weixin && getstore.wx_cfg_params ){
       title:  getstore.share_data.desc,
       desc:getstore.share_data.title,
       link:   getstore.share_data.link,
-      imgUrl: getstore.share_data.imgUrl,
+      imgUrl: getstore.share_data.img_url,
       success: function () {
               },
       cancel: function () {
@@ -26,7 +26,7 @@ if( g_client_info.is_weixin && getstore.wx_cfg_params ){
       title: getstore.share_data.title,
       desc: getstore.share_data.desc,
       link:  getstore.share_data.link,
-      imgUrl: getstore.share_data.imgUrl,
+      imgUrl: getstore.share_data.img_url,
       type: '',
       dataUrl: '',
       success: function () {
