@@ -11,17 +11,19 @@ Spree::Core::Engine.add_routes do
        get  :upload_file_dialog
        post :upload_file_dialog
      end
-
      collection do
        #get :preview # add function preview_template_themes_path
      end
-
      resources :page_layouts, only: [:edit,:update] do
-
      end
-
   end
 
+  namespace :api, :defaults => { :format => 'json' } do
+    namespace :v1 do
+      resource :wechat, only: [:show, :create]
+    end
+  end
+  
   ##############################################################################
   # mulit site
   # one click get form to trial

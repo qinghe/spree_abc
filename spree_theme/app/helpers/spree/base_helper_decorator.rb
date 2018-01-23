@@ -2,7 +2,9 @@ module Spree
   module BaseHelper
 
     def wechat_config_params(config_options = {})
-      config_options[:debug] = true
+      if controller.request.original_url =~ /design.getstore.cn/
+        config_options[:debug] = true
+      end
       account = config_options[:account]
       # copy from module Wechat::Helpers
       # not default account
@@ -16,6 +18,7 @@ module Spree
                  else
                    controller.request.original_url
                  end
+      page_url = controller.request.original_url
       js_hash = api.jsapi_ticket.signature(page_url)
 
       config_params = {
