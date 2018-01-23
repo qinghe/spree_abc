@@ -33,8 +33,12 @@ module Spree
     end
 
     def wechat_share_data( current_page )
-      url = current_page.product_tag.simple_image_url( :medium )
-Rails.logger.debug " url =#{ url }"
+      url = if current_page.product_tag.present?
+        current_page.product_tag.simple_image_url( :medium )
+      else
+        image_url( 'missing/wxshare.png')
+      end
+
       share_data = {
         title: current_page.title.to_json,
         desc: 'this is description',
