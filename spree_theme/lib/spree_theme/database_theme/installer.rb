@@ -224,7 +224,8 @@ module SpreeTheme
 
           def weixin?
             user_agent = UserAgent.parse request.user_agent
-            user_agent.browser =~ /wechat/i
+            #Rails.logger.debug "user_agent=#{user_agent}, user_agent.browser=#{user_agent.browser},request.user_agent#{request.user_agent}"
+            !!(user_agent.browser =~ /wechat/i)
           end
 
           def current_terminal

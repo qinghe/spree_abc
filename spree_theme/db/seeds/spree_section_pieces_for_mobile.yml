@@ -30,10 +30,10 @@ root_for_mobile:
       <%= javascript_tag  do -%>
         g_client_info = <%== @client_info.to_json %>
       <% end -%>
+      <%= render "spree/shared/weixin_share" %>
       <%= javascript_include_tag 'spree/frontend/all.mobile', "data-turbolinks-track" => true %>
       </head>
       <body class="clear-block <%= @current_page.agent_selector(request.user_agent) %>">
-        <%= render "spree/shared/weixin_share" %>
 
       <% if @current_page.site_design? && !@current_page.is_preview %>
         <%= render "spree/shared/theme_selection_for_nondesigner" %>
