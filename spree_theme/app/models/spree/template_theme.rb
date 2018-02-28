@@ -61,7 +61,7 @@ module Spree
     has_many :template_files, foreign_key: "theme_id", class_name: "Spree::TemplateFile", inverse_of: :template_theme, dependent: :delete_all
     has_many :template_releases, :foreign_key=>"theme_id", :dependent => :delete_all
     # template_release may be in current or design site
-    belongs_to :current_template_release, :class_name=>"TemplateRelease", :foreign_key=>"release_id"
+    belongs_to :current_template_release, :class_name=>"TemplateRelease", :foreign_key=>"release_id", required: false
     has_one :mobile, foreign_key: "master_id", class_name: self.name
     belongs_to :desktop, foreign_key: "master_id", class_name: self.name, required: false
     belongs_to :duplicated_from, foreign_key: "copy_from_id", class_name: self.name, required: false
@@ -393,7 +393,7 @@ module Spree
     def valid_context?(selected_page_layout, taxon)
       # 当前设计是，只有具有上下文的page_layout，需要stylish,同时页面可以共享头部和尾部
       # 如 文章列表/产品列表页有多种显示方式。 有的是文件下载，有的是新闻
-      # 
+      #
       #stylish only apply page_layout with context other than either.
       if !selected_page_layout.context_either? #selected_page_layout.stylish >0 #
         # Rails.logger.debug "--------selected_page_layout=#{ selected_page_layout.title} --------"
