@@ -18,7 +18,8 @@ Spree.config do |config|
 end
 Spree.user_class = "Spree::User"
 
-Spree::Api::Config.requires_authentication = false
+# disable it for security, enable cors on nginx
+# Spree::Api::Config.requires_authentication = false
 
 Rails.application.config.spree_multi_site.site_scope_required_classes_with_image_from_other_gems.concat(
   [['Spree::TaxonIcon',:attachment], ['Spree::Post',:cover],['Spree::PostFile',:attachment],['Spree::TemplateFile',:attachment],
