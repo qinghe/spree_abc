@@ -175,7 +175,8 @@ module Spree
 
       def has_native_layout?
         #original_template_theme == self
-        !self.class.exists?(["page_layout_root_id=? and id<?", self.page_layout_root_id, self.id])
+        PageLayout.exists?( template_theme_id: self.id )
+        #!self.class.exists?(["page_layout_root_id=? and id<?", self.page_layout_root_id, self.id])
       end
 
       # is theme applied to webiste
@@ -185,8 +186,8 @@ module Spree
 
       # template theme contained native page layout and param values
       def original_template_theme
-
-        duplicated_from || self
+        #duplicated_from 有自己的page_layouts
+        has_native_layout? ? self : duplicated_from
         #self.class.where(:page_layout_root_id=>self.page_layout_root_id).first
       end
 
