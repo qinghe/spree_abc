@@ -134,7 +134,7 @@ module Spree
       param_value_keys = params.keys.select{|k| k=~/pv[\d]+/}
 
         param_value_params = params["pv#{editing_param_value_id}"]
-        source_param_value = ParamValue.includes(:section_param, :section).find(editing_param_value_id)
+        source_param_value = ParamValue.includes(:section_param).find(editing_param_value_id)
         updated_html_attribute_values = do_update_param_value(source_param_value, param_value_params, param_value_event, editing_html_attribute_id)
 
       #  param_value = ParamValue.find(editing_param_value_id)

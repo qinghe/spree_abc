@@ -4,7 +4,6 @@ module Spree
     belongs_to :section_param
     belongs_to :page_layout, :foreign_key=>"page_layout_id"
     belongs_to :page_layout_root, :foreign_key=>"page_layout_root_id", class_name: 'Spree::PageLayout'
-    #belongs_to :section
     belongs_to :template_theme, :foreign_key=>"theme_id"
 
     serialize :pvalue, Hash
