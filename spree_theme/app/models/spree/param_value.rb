@@ -3,14 +3,14 @@ module Spree
     EventEnum={:psv_changed=>'psv_changed',:pv_changed=>'pv_changed',:psu_changed=>'psu_changed',:unset_changed=>'unset_changed'}
     belongs_to :section_param
     belongs_to :page_layout, :foreign_key=>"page_layout_id"
-    belongs_to :page_layout_root, :foreign_key=>"page_layout_root_id"
-    belongs_to :section
+    belongs_to :page_layout_root, :foreign_key=>"page_layout_root_id", class_name: 'Spree::PageLayout'
+    #belongs_to :section
     belongs_to :template_theme, :foreign_key=>"theme_id"
 
     serialize :pvalue, Hash
-    serialize :pvalue1, Hash
-    serialize :pvalue2, Hash
-    serialize :pvalue3, Hash
+    #serialize :pvalue1, Hash
+    #serialize :pvalue2, Hash
+    #serialize :pvalue3, Hash
 
     before_update :collect_events # skip create
     after_update :trigger_events
