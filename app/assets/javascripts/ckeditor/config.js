@@ -128,5 +128,5 @@ CKEDITOR.editorConfig = function( config ) {
     ];
     config.toolbar = 'Full';   
     //http://sdk.ckeditor.com/samples/acf.html
-    config.extraAllowedContent = 'a[class,style,href,target,title,data-*];p[id](*){*}';
+    config.extraAllowedContent = 'a[class,style,href,target,title,data-*](*){*};p[id](*){*}';
 };
