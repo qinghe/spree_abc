@@ -39,12 +39,12 @@ selected_id= (options[:selected_id]||layout_root.id )
     <% end %>
     <% if options[:editable] %>
       <div class="fr">
-      <%= link_to "+","#", {data: {id:page_layout.id, op:'list_section'}, onclick: 'submit_layout_tree_form(this);'  } %>
-      <%= link_to "-","#", {data: {id:page_layout.id, op:'del_self'}, onclick: "if(confirm('Really delete #{page_layout.title} ?')) submit_layout_tree_form(this);" } %>
-      <%= link_to "u","#", {data: {id:page_layout.id, op:'move_left'}, onclick: 'submit_layout_tree_form(this);' } %>
-      <%= link_to "d","#", {data: {id:page_layout.id, op:'move_right'}, onclick: 'submit_layout_tree_form(this);' } %>
-      <%= link_to "<","#", {data: {id:page_layout.id, op:'promote'}, onclick: 'submit_layout_tree_form(this);' } %>
-      <%= link_to ">","#", {data: {id:page_layout.id, op:'demote'}, onclick: 'submit_layout_tree_form(this);' } %>
+      <%= link_to "+","#", {data: {id:page_layout.id, op:'list_section', turbolinks: false }, onclick: 'submit_layout_tree_form(this);'  } %>
+      <%= link_to "-","#", {data: {id:page_layout.id, op:'del_self', turbolinks: false }, onclick: "if(confirm('Really delete #{page_layout.title} ?')) submit_layout_tree_form(this);" } %>
+      <%= link_to "u","#", {data: {id:page_layout.id, op:'move_left', turbolinks: false }, onclick: 'submit_layout_tree_form(this);' } %>
+      <%= link_to "d","#", {data: {id:page_layout.id, op:'move_right', turbolinks: false }, onclick: 'submit_layout_tree_form(this);' } %>
+      <%= link_to "<","#", {data: {id:page_layout.id, op:'promote', turbolinks: false }, onclick: 'submit_layout_tree_form(this);' } %>
+      <%= link_to ">","#", {data: {id:page_layout.id, op:'demote', turbolinks: false }, onclick: 'submit_layout_tree_form(this);' } %>
       <%= link_to "e",edit_template_theme_page_layout_path( theme, page_layout), remote: true %>
       </div>
     <% end %>
