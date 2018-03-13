@@ -21,9 +21,13 @@ Spree::Core::Engine.add_routes do
   namespace :api, :defaults => { :format => 'json' } do
     namespace :v1 do
       resource :wechat, only: [:show, :create]
+      
+      post 'auth/sign_in', :to => 'auth#sign_in'
+      #post 'auth/facebook', :to => 'auth#facebook'
+      #post 'auth/sign_up', :to => 'auth#sign_up'
     end
   end
-  
+
   ##############################################################################
   # mulit site
   # one click get form to trial
