@@ -34,8 +34,8 @@ namespace :spree_theme do
   end
 
 
-  desc "add page_layouts.image_style_param, fix content_param"
-  task :fix_image_style_param  => :environment do
+  desc "add page_layouts.image_param, fix content_param"
+  task :fix_image_param  => :environment do
     section_id = 17
     page_layouts = Spree::PageLayout.where section_id: section_id
 
@@ -51,9 +51,9 @@ namespace :spree_theme do
         #   256 + 512 = 768
         position = (pl.get_content_param&768)>>8
 
-        puts "page_layout#{pl.id}-#{pl.title}=" +[size,position].inspect + pl.get_parsed_image_style.inspect
+        puts "page_layout#{pl.id}-#{pl.title}=" +[size,position].inspect + pl.get_parsed_image_param.inspect
 
-        pl.update_attribute :image_style_param, [size,position].join(',')
+        pl.update_attribute :image_param, [size,position].join(',')
 
       end
     }

@@ -190,17 +190,17 @@ module Spree
           ## default is medium
           ##   000x , 001x,  010x,    011x,    100x
           #[:medium, :large, :product, :small, :original ].fetch( idx, :medium )
-          get_parsed_image_style.image_size
+          get_parsed_image_param.image_size
         when :thumbnail_style
           ## bit 5,6,7
           #idx = (get_content_param&112)>>4
           #[:mini, :large, :medium, :small, :original].fetch( idx, :mini )
-          get_parsed_image_style.thumbnail_size
+          get_parsed_image_param.thumbnail_size
         when :main_image_position                         # section product image
           ## bit 9,   10,  product-image
           ##   256 + 512 = 768
           #(get_content_param&768)>>8
-          get_parsed_image_style.image_position
+          get_parsed_image_param.image_position
         when :zoomable
           # bit 8
           get_content_param&128 > 0
@@ -255,14 +255,14 @@ module Spree
 
       #
       #返回  ParsedImageStyle
-      def get_parsed_image_style
+      def get_parsed_image_param
         parsed_image_style_class = Struct.new(:image_size, :image_position, :thumbnail_size, :thumbnail_position)
         parsed_image_style = parsed_image_style_class.new('medium', 0, 'mini', 0)
-        # image_style_param 格式
+        # image_param 格式
         #  medium      large,0/mini,0     600w_600h_1x,0/mini,0
         #
-        if image_style_param.present?
-          master_style, thumbnail_style = image_style_param.split('/')
+        if image_param.present?
+          master_style, thumbnail_style = image_param.split('/')
           if master_style.present?
             image_size, image_position = master_style.split(',')
             parsed_image_style.image_size, parsed_image_style.image_position  = image_size, image_position.to_i
