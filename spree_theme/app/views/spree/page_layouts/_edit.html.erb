@@ -12,6 +12,11 @@
         <%= f.number_field :content_param %> columns=n/clickable=1/image_size
     </div>
     <div>
+        <%= f.label :image_style_param %>
+        <%= f.text_field :image_style_param %> mini/small/product/medium/large/custom
+    </div>
+
+    <div>
         <%= f.label :css_class %>
         <%= f.text_field :css_class %>bootstrap .col-xs-n, .container, .container-fluid
     </div>

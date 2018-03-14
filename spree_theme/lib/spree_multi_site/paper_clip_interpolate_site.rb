@@ -30,30 +30,35 @@ module SpreeMultiSite
     # http://userdomain/object.jpg@100w_100h_90Q.jpg
     Paperclip.interpolates :aliyun_style do |attachment, style_name|
       extension = '.jpg'
+      style_name = style_name.to_s
       style_symbol = style_name.to_sym
       if attachment.instance.class.name == AttachmentClassEnum.spree_image
-        case style_symbol
-          when :mini
+        case style_name
+          when /mini/
             '@48w_48h_1x' + extension
-          when :small
+          when /small/
             '@100w_100h_1x' + extension
-          when :product
+          when /product/
             '@240w_240h_1x' + extension
-          when :medium
+          when /medium/
             '@350w_350h_1x' + extension
-          when :large
+          when /large/
             '@600w_600h_1x' + extension
+          when /custom/
+            '@' + style_name + extension
         end
       elsif attachment.instance.class.name == AttachmentClassEnum.spree_post
-        case style_symbol
-          when :mini # post cover
+        case style_name
+          when /mini/ # post cover
             '@60w_60h_1x' + extension
-          when :small
+          when /small/
             '@180w_120h_1x' + extension
-          when :medium
+          when /medium/
             '@280w_190h_1x' + extension
-          when :large
+          when /large/
             '@670w_370h_1x' + extension
+          when /custom/
+            '@' + style_name + extension          
         end
       elsif attachment.instance.class.name == AttachmentClassEnum.ckeditor_picture
         case style_symbol
