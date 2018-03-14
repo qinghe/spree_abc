@@ -185,22 +185,25 @@ module Spree
           [:datetime, :date, :time ].fetch( idx, :datetime )
 
         when :main_image_style                            # section slider, product_image_with_thumbnail
-          # bit 2,3,4
-          idx = (get_content_param&14)>>1
-          # default is medium
-          #   000x , 001x,  010x,    011x,    100x
-          [:medium, :large, :product, :small, :original ].fetch( idx, :medium )
+          ## bit 2,3,4
+          #idx = (get_content_param&14)>>1
+          ## default is medium
+          ##   000x , 001x,  010x,    011x,    100x
+          #[:medium, :large, :product, :small, :original ].fetch( idx, :medium )
+          get_parsed_image_style.image_size
         when :thumbnail_style
-          # bit 5,6,7
-          idx = (get_content_param&112)>>4
-          [:mini, :large, :medium, :small, :original].fetch( idx, :mini )
+          ## bit 5,6,7
+          #idx = (get_content_param&112)>>4
+          #[:mini, :large, :medium, :small, :original].fetch( idx, :mini )
+          get_parsed_image_style.thumbnail_size
+        when :main_image_position                         # section product image
+          ## bit 9,   10,  product-image
+          ##   256 + 512 = 768
+          #(get_content_param&768)>>8
+          get_parsed_image_style.image_position
         when :zoomable
           # bit 8
           get_content_param&128 > 0
-        when :main_image_position                         # section product image
-          # bit 9,   10,  product-image
-          #   256 + 512 = 768
-          (get_content_param&768)>>8
         when :form_enabled                                # container
           # wrap section with form, ex. product quantity, product options, add_to_cart
           # by default there is no form any more, add_to_cart button require form,
@@ -253,8 +256,8 @@ module Spree
       #
       #返回  ParsedImageStyle
       def get_parsed_image_style
-        ParsedImageStyle = Struct.new(:image_size, :image_position, :thumbnail_size, :thumbnail_position)
-        parsed_image_style = ParsedImageStyle.new('medium', 0, 'mini', 0)
+        parsed_image_style_class = Struct.new(:image_size, :image_position, :thumbnail_size, :thumbnail_position)
+        parsed_image_style = parsed_image_style_class.new('medium', 0, 'mini', 0)
         # image_style_param 格式
         #  medium      large,0/mini,0     600w_600h_1x,0/mini,0
         #
