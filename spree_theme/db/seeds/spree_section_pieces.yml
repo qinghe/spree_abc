@@ -172,6 +172,10 @@ root:
     .clear-block {
       display: block;
     }
+    /* effect */
+    .hover_scaleble{    }
+    .hover_scaleble img { transition:all .5s linear;}
+    .hover_scaleble:hover img { transform:scale(1.2,1.2); }
 
     /* common setting for subsections, they are in container-link, container-form, container-table now.
      * a
