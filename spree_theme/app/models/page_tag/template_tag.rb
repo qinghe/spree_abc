@@ -16,7 +16,7 @@ module PageTag
       MaxTaxonDepth = 9999
 
       self.accessable_attributes=[:id,:title,:current_data_source, :wrapped_data_source_param, :data_filter, :data_source_order_by, :current_contexts, :context_either?,\
-         :get_content_param_by_key, :get_data_source_param_by_key, :is_container?, :is_image?, :is_zoomable_image?, :effects, :section_pieces, \
+         :get_content_param_by_key, :get_data_source_param_by_key, :is_container?, :is_image?, :is_zoomable_image?, :effects, :effect_param, :section_pieces, \
          :content_css_class, :section_piece_resources]
       attr_accessor :section_id, :page_layout, :parent
 
@@ -473,6 +473,7 @@ module PageTag
       css_classes << " lightboxable" if current_piece.lightboxable?
       css_classes << " infinitescroll" if current_piece.infinitescroll?
 
+      css_classes << " #{current_piece.effect_param}" if current_piece.effect_param.present?
       css_classes
 
     end
