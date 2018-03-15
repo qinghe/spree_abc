@@ -44,8 +44,8 @@ module SpreeMultiSite
             '@350w_350h_1x' + extension
           when /large/
             '@600w_600h_1x' + extension
-          when /custom/
-            '@' + style_name + extension
+          when /@/ #'@330w_330h_1x'
+            style_name + extension
         end
       elsif attachment.instance.class.name == AttachmentClassEnum.spree_post
         case style_name
@@ -57,8 +57,8 @@ module SpreeMultiSite
             '@280w_190h_1x' + extension
           when /large/
             '@670w_370h_1x' + extension
-          when /custom/
-            '@' + style_name + extension          
+          when /@/ #'@330w_330h_1x'
+            '@' + style_name + extension
         end
       elsif attachment.instance.class.name == AttachmentClassEnum.ckeditor_picture
         case style_symbol
