@@ -268,3 +268,32 @@ product_attribute:
     <%= @template.product_attribute() %>
   css: ''
   js: ''
+hover_effect_fadein_container:
+  id: 118
+  title: hover effect fadein container
+  slug: hover-effect-fadein-container
+  is_selectable: "0"
+  is_container: "1"
+  html: |
+    ~~content~~
+  css: |
+      /*http://www.gtn9.com/user_show.aspx?action=yc&id=C80E6E334F84E131&page=1*/
+      .<%=@template.section_selector%> > .inner{ position: relative; }
+      .<%= @template.section_selector %> >.inner div:nth-child(1){   }
+      .<%= @template.section_selector %> >.inner div:nth-child(2){  position:absolute; top:0;left:0;  }
+      .<%= @template.section_selector %> >.inner:hover div:nth-child(2) {
+        color:#fff;
+        transform: scale3d(1,1,1);
+      	background-color: rgba(0,0,0,0.8);
+      }
+      .<%= @template.section_selector %> >.inner div:nth-child(2) {
+      	opacity: 0;
+        transition: opacity 0.35s, transform 0.35s;
+        transform: scale(1.5);
+       }
+      .<%= @template.section_selector %> >.inner:hover div:nth-child(2) {
+        opacity: 1;
+        transform: scale3d(1,1,1);
+       }
+
+  js: ''
