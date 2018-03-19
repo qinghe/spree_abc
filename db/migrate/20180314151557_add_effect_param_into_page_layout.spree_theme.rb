@@ -7,6 +7,7 @@ class AddEffectParamIntoPageLayout < ActiveRecord::Migration[5.1]
     # 以便js找到相应元素，实现特效
     # 示例：:hover_slide, :hover_show, :hover_expansion, :hover_overlay, :hover_popup, :popup_menu, :popup_menu_l, :sider,     :multi_level_menu
     add_column :spree_page_layouts, :effect_param, :string, limit: 32
+    add_column :spree_sections, :effect_param, :string, limit: 32
 
   end
 

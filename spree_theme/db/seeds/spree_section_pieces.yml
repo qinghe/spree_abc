@@ -172,10 +172,10 @@ root:
     .clear-block {
       display: block;
     }
-    /* effect */
-    .hover_scaleble{    }
-    .hover_scaleble img { transition:all .5s linear;}
-    .hover_scaleble:hover img { transform:scale(1.2,1.2); }
+    /* css3 effect */
+    .hover_bigger{    }
+    .hover_bigger img { transition:all .5s linear;}
+    .hover_bigger:hover img { transform:scale(1.2,1.2); }
 
     /* common setting for subsections, they are in container-link, container-form, container-table now.
      * a
@@ -1441,8 +1441,9 @@ hover_effect_overlay_container:
       /* overlay_effect: width,height is required, children are absolute  */
       /* override original position,display */
       /* child_1.z-index < child_2.z-index, child_2 is on top of child_1 initially, slideUp on hovering */
-      .<%= @template.section_selector %> .child_1{   }
-      .<%= @template.section_selector %> .child_2{  position:absolute; }
+      .<%=@template.section_selector%> > .inner{ position: relative; /*fix: it has margin/border, child2 position would incorrect.*/}
+      .<%= @template.section_selector %> .inner div:nth-child(1){   }
+      .<%= @template.section_selector %> .inner div:nth-child(2){  position:absolute; }
   js: ''
 hover_effect_popup_container:
   id: 75

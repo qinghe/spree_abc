@@ -148,8 +148,8 @@ module Spree
       end
 
       def has_extra_selector?
-        #child1,child2...              data1,data2...                                          zoomable                  columns>0, data_first,data_last  infinitescroll
-        self.effects.present? || parent.effects.present? || parent.data_source.present? || self.get_content_param > 0 || parent.get_content_param > 0 || self.data_source_param.present?
+        #  hover_bigger                   child1,child2...              data1,data2...                                          zoomable                  columns>0, data_first,data_last  infinitescroll
+        self.effect_param.present? || self.effects.present? || parent.effects.present? || parent.data_source.present? || self.get_content_param > 0 || parent.get_content_param > 0 || self.data_source_param.present?
       end
 
 
