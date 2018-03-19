@@ -1062,7 +1062,7 @@ slider:
   is_selectable: "1"
   is_container: "0"
   html: |-
-    <div class="effect_slider" >
+    <div class="effect_jssor_slider" >
     <%# outer div is required, jssor duplicate it and set style. %>
     <% if @template.menu.present? %>
       <!-- Loading Screen -->
@@ -1071,7 +1071,7 @@ slider:
         <div style="position: absolute; display: block; background: url(/shops/shared/images/jssor/loading.gif) no-repeat center center; top: 0px; left: 0px;width: 100%;height:100%;"> </div>
       </div>
       <%# jssor require with,height in element style. %>
-      <div data-u="slides" class="slides" style="position: absolute;overflow:hidden;" >
+      <div data-u="slides" class="slides" style="position: relative;overflow:hidden;" >
         <% @template.menu.children.each{|page| next if page.icon.blank? %>
           <div>
             <%= link_to_if @template.current_piece.clickable?, image_tag( page.icon.attachment.url(:original), :u=>'image', :alt=>page.name), page.path %>
@@ -1087,7 +1087,7 @@ slider:
     </div>
   css: |-
     .<%=@template.section_selector%> > .inner { min-height:1px;min-width:1px; /* hight, width are required*/}
-    .effect_slider { position:relative; }
+    .effect_jssor_slider { position:relative; }
     .<%=@template.section_selector%> [data-u='slides']{
       <%=@template.css(:slides)%>
       cursor: move; left: 0px; top: 0px;
@@ -1539,7 +1539,7 @@ slider_scrolling:
   is_selectable: "1"
   is_container: "0"
   html: |-
-    <div class="effect_slider" >
+    <div class="effect_jssor_slider" >
       <!-- Loading Screen -->
       <div data-u="loading" style="position: absolute; top: 0px; left: 0px;width: 100%;height:100%;">
         <div style="filter: alpha(opacity=70); opacity:0.7; position: absolute; display: block; background-color: #000000; top: 0px; left: 0px;width: 100%;height:100%;"></div>
@@ -1552,7 +1552,7 @@ slider_scrolling:
     </div>
   css: |-
     .<%=@template.section_selector%> > .inner { min-height:1px;min-width:1px; /* hight, width are required*/}
-    .effect_slider { position:relative; }
+    .effect_jssor_slider { position:relative; }
     .<%=@template.section_selector%> [data-u='slides']{
       <%=@template.css(:slides)%>
       cursor: move; left: 0px; top: 0px;
@@ -1611,7 +1611,7 @@ slider_core:
   is_selectable: "1"
   is_container: "1"
   html: |-
-    <div class="effect_slider" >
+    <div class="effect_jssor_slider" >
       <!-- Loading Screen -->
       <div data-u="loading" style="position: absolute; top: 0px; left: 0px;width: 100%;height:100%;">
         <div style="filter: alpha(opacity=70); opacity:0.7; position: absolute; display: block; background-color: #000000; top: 0px; left: 0px;width: 100%;height:100%;"></div>
@@ -1621,7 +1621,7 @@ slider_core:
     </div>
   css: |-
     .<%=@template.section_selector%> > .inner { min-height:1px;min-width:1px; /* hight, width are required*/}
-    .effect_slider { position:relative; }
+    .effect_jssor_slider { position:relative; }
     .<%=@template.section_selector%> .slides {
       <%=@template.css(:slides)%>
       cursor: move; left: 0px; top: 0px;
