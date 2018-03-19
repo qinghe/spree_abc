@@ -22,7 +22,7 @@ $(document).on('turbolinks:load',function() {
   //         <div> slide2 </div>
   //      </div> </div>
   //   </div> </div>
-  $(".effect_jssor_slider").each(function(index, element) {
+  $(".effect_slider").each(function(index, element) {
     var $self = $(element);
     var $parent = $self.parent();
     //slides
