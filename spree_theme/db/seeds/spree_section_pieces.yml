@@ -1619,6 +1619,11 @@ slider_core:
         <div style="position: absolute; display: block; background: url(/shops/shared/images/jssor/loading.gif) no-repeat center center; top: 0px; left: 0px;width: 100%;height:100%;"> </div>
       </div>
       ~~content~~
+      <!-- Bullet Navigator Skin Begin -->
+      <div data-u="navigator" class= "jssorb107" style="position: absolute;">
+          <!-- bullet navigator item prototype -->
+          <div u="prototype" style="position: absolute; width: 19px; height: 19px;"></div>
+      </div>
     </div>
   css: |-
     .<%=@template.section_selector%> > .inner { min-height:1px;min-width:1px; /* hight, width are required*/}
@@ -1627,7 +1632,16 @@ slider_core:
       <%=@template.css(:slides)%>
       cursor: move; left: 0px; top: 0px;
     }
-
+    .jssorb107 div, .jssorb107 div:hover, .jssorb107 .av
+    {
+        position:absolute;
+        overflow:hidden;
+        cursor: pointer;
+    }
+    .jssorb107 div { background-position: -5px -5px; }
+    .jssorb107 div:hover, .jssorb107 .av:hover { background-position: -35px -5px; }
+    .jssorb107 .av { background-position: -65px -5px; }
+    .jssorb107 .dn, .jssorb107 .dn:hover { background-position: -95px -5px; }
 slider_data_taxons:
   id: 88
   title: slider data taxons
@@ -1636,7 +1650,7 @@ slider_data_taxons:
   is_container: "0"
   html: |-
       <%# jssor require with,height in element style. %>
-      <div data-u="slides" class="slides" style="position: absolute;overflow:hidden;" >
+      <div data-u="slides" class="slides" style="position: relative;overflow:hidden;" >
       <% if @template.menu.present? %>
         <% @template.menu.children.each{|page| next if page.icon.blank? %>
           <div><%= image_tag page.icon.attachment.url(:original), :u=>'image', :alt=>page.name %></div>
