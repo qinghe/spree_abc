@@ -6,7 +6,7 @@ module Spree
     preference :ids,            :string,  default: 'product_description page_body taxon_description template_text_body post_body'
 
     def self.editors
-      %w(TinyMCE CKEditor)
+      %w(CKEditor)
     end
   end
 end
