@@ -297,3 +297,44 @@ hover_effect_fadein_container:
        }
 
   js: ''
+swipper_core:
+  id: 119
+  title: swipper core
+  slug: swipper-core
+  is_selectable: "1"
+  is_container: "1"
+  html: |-
+    <div class="swiper-container">
+      ~~content~~
+        <!-- 如果需要分页器 -->
+        <div class="swiper-pagination"></div>
+
+        <!-- 如果需要导航按钮 -->
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+
+        <!-- 如果需要滚动条 -->
+        <div class="swiper-scrollbar"></div>
+    </div>
+
+  css: |-
+    .<%=@template.section_selector%> > .inner { min-height:1px;min-width:1px; /* hight, width are required*/}
+    .<%=@template.section_selector%> .swiper-container {
+      <%=@template.css(:slides)%>
+      cursor: move;
+    }
+
+swipper_data_taxons:
+  id: 120
+  title: swipper data taxons
+  slug: swipper-data-taxons
+  is_selectable: "0"
+  is_container: "0"
+  html: |-
+      <div class="swiper-wrapper">
+        <% @template.menu.children.each{|page| next if page.icon.blank? %>
+          <div class="swiper-slide"><%= image_tag page.icon.attachment.url(:original), :alt=>page.name %></div>
+        <% } %>
+      </div>
+  css: ''
+  js: ''

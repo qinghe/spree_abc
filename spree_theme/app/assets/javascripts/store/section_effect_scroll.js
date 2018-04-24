@@ -1,6 +1,23 @@
 // it is using jssor.20 for effect slider
 
 $(document).on('turbolinks:load',function() {
+  $(".swiper-container").each(function(index, element) {
+
+    var mySwiper = new Swiper (element, {
+      direction: 'vertical',
+      loop: true,
+
+      // 如果需要分页器
+      pagination: '.swiper-pagination',
+
+      // 如果需要前进后退按钮
+      nextButton: '.swiper-button-next',
+      prevButton: '.swiper-button-prev',
+
+      // 如果需要滚动条
+      scrollbar: '.swiper-scrollbar',
+    })
+  })
   function ScaleSlider(event) {
     // console.debug( jssor_slider )
     //Object { data=slider, originalEvent=Event load,  type="load",  timeStamp=0,  more...}

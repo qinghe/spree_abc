@@ -4,6 +4,7 @@
 //= require jquery.form
 //= require jquery.simplemodal
 //= require jssor.slider.20.min
+//= require swiper.jquery.min
 //= require spree/frontend
 //= require store/spree_theme.client
 //= require store/spree_theme.routes
