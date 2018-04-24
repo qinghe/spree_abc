@@ -18,4 +18,4 @@ Ckeditor.setup do |config|
   # config.authorize_with :cancan
   config.assets_languages = ['zh-cn', 'en']
 end
-#Rails.application.config.assets.precompile += %w( ckeditor/* )
+Rails.application.config.assets.precompile += %w(ckeditor/*)
