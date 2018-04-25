@@ -11,11 +11,11 @@ $(document).on('turbolinks:load',function() {
       pagination: '.swiper-pagination',
 
       // 如果需要前进后退按钮
-      nextButton: '.swiper-button-next',
-      prevButton: '.swiper-button-prev',
+      //nextButton: '.swiper-button-next',
+      //prevButton: '.swiper-button-prev',
 
       // 如果需要滚动条
-      scrollbar: '.swiper-scrollbar',
+      //scrollbar: '.swiper-scrollbar',
     })
   })
   function ScaleSlider(event) {
