@@ -6,6 +6,6 @@ class FixIndexesOnFriendlyIdSlugs < ActiveRecord::Migration[5.0]
     remove_index :friendly_id_slugs, [:slug, :sluggable_type]
     remove_index :friendly_id_slugs, [:slug, :sluggable_type, :scope]
     add_index :friendly_id_slugs, [:slug, :sluggable_type], length: { name: 100, slug: 40, sluggable_type: 20 }
-    add_index :friendly_id_slugs, [:slug, :sluggable_type, :scope], length: { name: 100, slug: 40, sluggable_type: 15, scope: 15 }, unique: true
+    add_index :friendly_id_slugs, [:slug, :sluggable_type, :scope], length: { name: 100, slug: 30, sluggable_type: 15, scope: 15 }, unique: true
   end
 end

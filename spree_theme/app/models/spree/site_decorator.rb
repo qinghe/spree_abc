@@ -57,7 +57,7 @@ Spree::Product.class_eval do
     validates :price, if: proc { Spree::Config[:require_master_price] }
   end
 
-  validates :slug, presence: true, uniqueness: { allow_blank: true, :scope => :site_id }
+  validates :slug, presence: true, uniqueness: { allow_blank: true, :scope => :site_id }, length: { maximum: 30 }
   validate :discontinue_on_must_be_later_than_available_on, if: -> { available_on && discontinue_on }
 
 
@@ -71,7 +71,7 @@ Spree::Product.class_eval do
   end
 
   def name_to_url
-    name.to_url
+    name.to_url[0,30]
   end
 end
 

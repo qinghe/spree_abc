@@ -15,9 +15,12 @@ module SpreeTheme
           before_validation(:on => :create) { save_permalink }
         end
       end
-      
+
       def save_permalink
-        self.slug = self.title.parameterize
+        #in mysql 5.5, grouped index column length is 60byte, it is tested on aliyun server.
+        #in friendly_id_slugs table slug(30)+sluggable_type(15)+scope(15)
+        #keep slug <30
+        self.slug = self.title.parameterize[0,30]
       end
     end
 end
