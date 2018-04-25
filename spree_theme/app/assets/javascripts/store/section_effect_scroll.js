@@ -4,7 +4,7 @@ $(document).on('turbolinks:load',function() {
   $(".swiper-container").each(function(index, element) {
 
     var mySwiper = new Swiper (element, {
-      direction: 'vertical',
+      direction: 'horizontal',
       loop: true,
 
       // 如果需要分页器
