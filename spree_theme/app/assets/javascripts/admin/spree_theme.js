@@ -2,6 +2,7 @@
 //= require jquery.ajax
 //= require jquery.jeditable
 //= require admin/resource_autocomplete
+//= require admin/spree_essential_blog
 //= require admin/template_themes
 //= require store/spree_theme.routes
 
