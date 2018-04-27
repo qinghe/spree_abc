@@ -11,7 +11,7 @@ selected_id= (options[:selected_id]||layout_root.id )
   <% Spree::PageLayout.each_with_level( layout_root.self_and_descendants) { |page_layout, level|%>
     <% assigned_taxons = theme.assigned_resources(SpreeTheme.taxon_class, page_layout)
     %>
-  <div class="clear-block">
+  <div  class="page_layout clear-block">
     <div class="fl">
     <%=raw("&nbsp;&nbsp;"*level)%>
     <% # do not call form.submit.

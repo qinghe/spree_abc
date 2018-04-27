@@ -34,7 +34,14 @@
 {
   height:200px;
   overflow: auto;
+  .page_layout {
+      background-color: transparent;
+  }
+  .page_layout:hover {
+      background-color: #ebebeb;
+  }
 }
+
 .param_value_editor
 {
   height:200px;
