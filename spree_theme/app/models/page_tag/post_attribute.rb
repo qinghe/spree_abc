@@ -18,7 +18,7 @@ module PageTag
             wrapped_post.send attribute_name, self.current_piece.truncate_at
           when :detail
             #get more text from page.html_attributes[:title] || Spree.t('more')
-            this.options.delete(:detail_text) || Spree.t(:detail)
+            self.options.delete(:detail_text) || Spree.t(:detail)
           else
             wrapped_post.send attribute_name
           end
