@@ -395,7 +395,9 @@ module PageTag
 
     # * params
     #   * options - file, get specified file of post
-    def post_attribute(  attribute_name, options = { }  )
+    def post_attribute(  attribute_name=nil, options = { }  )
+      attribute_name ||=  self.current_piece.attribute_name.to_sym
+      
       wrapped_model = ( options.delete(:data) || self.running_data_item_by_class( Posts::WrappedPost ))
       options.merge! detail_text: Spree.t(:post_detail)
       PostAttribute.new( current_piece, wrapped_model, options ).get( attribute_name )  if wrapped_model
