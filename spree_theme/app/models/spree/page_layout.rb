@@ -767,10 +767,10 @@ module Spree
                   <% @template.running_data_source = nil %>
               <% end %>
               EOS6
-          when DataSourceEnum.related_taxa
+          when DataSourceEnum.related_taxon
               #assigned node, could be root
               subpieces = <<-EOS7
-                  <% @template.running_data_source= @template.related_taxa%>
+                  <% @template.running_data_source= @template.related_taxon%>
                   <% @template.running_data_source.each{|page| @template.running_data_item = page %> #{subpieces} <%}%>
                   <% @template.running_data_source = nil %>
               EOS7

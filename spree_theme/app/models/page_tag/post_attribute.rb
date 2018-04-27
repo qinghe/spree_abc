@@ -16,6 +16,9 @@ module PageTag
             post_file.attachment_file_name if post_file
           when :summary
             wrapped_post.send attribute_name, self.current_piece.truncate_at
+          when :detail
+            #get more text from page.html_attributes[:title] || Spree.t('more')
+            this.options.delete(:detail_text) || Spree.t(:detail)
           else
             wrapped_post.send attribute_name
           end

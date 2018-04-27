@@ -14,6 +14,7 @@ module PageTag
         when :summary
           wrapped_page.send attribute_name, self.current_piece.truncate_at
         when :more # it is same as clickable wrapped_page name
+          #get more text from page.html_attributes[:title] || Spree.t('more')
           Spree.t('more')
         when :root_name
           wrapped_page.name

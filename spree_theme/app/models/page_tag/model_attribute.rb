@@ -7,6 +7,8 @@ module PageTag
     delegate :tag, :image_tag, :content_tag, :to=> :helpers
 
 
+    # Params
+    #  options - file
     def initialize( current_piece, wrapped_model,  options = {})
       self.wrapped_model = wrapped_model
       self.current_piece = current_piece

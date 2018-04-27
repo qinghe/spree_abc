@@ -53,3 +53,8 @@
 
 12. Module prepend
   https://www.justinweiss.com/articles/rails-5-module-number-prepend-and-the-end-of-alias-method-chain/
+
+
+13. add date format
+
+  spree_abc/config/locales/zh-CN.rails.yml 

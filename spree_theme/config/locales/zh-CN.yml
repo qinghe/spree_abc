@@ -146,6 +146,7 @@ zh-CN:
       section_context: 模块适用页面
       specific_taxon: 模块适用个别页面
       config_resource: 模块可用素材
+    post_detail: 详细信息
     related_case_in_taxon: 相关案例
     section_context:
       home: 首页
@@ -175,7 +176,7 @@ zh-CN:
       previous_post: 当前选择文章-前一篇
       next_post: 当前选择文章-下一篇
       related_products: 相关产品
-      related_taxa: 相关分类
+      related_taxon: 相关分类
     store_comment: 请留下您对“%{store_name}”的意见和建议！
     template_file:
       index: 图片素材
@@ -227,10 +228,3 @@ zh-CN:
     new_comment_type: New Comment Type
     editing_comment_type: Editing Comment Type
     back_to_comment_types_list: Back to Comment Types List
-# date/time format
-  time:
-    formats:
-      simple_date: ! '%m-%d-%Y'
-  date:
-    formats:
-      simple_date: ! '%m-%d-%Y'
