@@ -9,6 +9,5 @@
 //= require spree/backend
 //= require spree/backend/spree_editor
 //= require admin/spree_theme
-//= require admin/spree_essential_blog
 //= require_tree .
 // require admin/spree_flexi_variants
