@@ -79,7 +79,10 @@ ul.tabs{list-style:none; margin:0;padding:0;}
 
 #editors div.pv{
     padding:2px;
-
+    background-color: transparent;
+    &:hover{
+      background-color: #ebebeb;
+    }
 }
 #editors span.pv-name
 {
