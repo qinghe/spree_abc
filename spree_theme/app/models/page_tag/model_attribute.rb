@@ -24,8 +24,8 @@ module PageTag
       [I18n.l(time.to_date, format: :long), time.strftime("%l:%M %p")].join(" ")
     end
 
-    def pretty_date(time)
-      I18n.l(time.to_date, format: :long)
+    def pretty_date(time, format= :long)
+      I18n.l(time.to_date, format: format)
     end
 
   end

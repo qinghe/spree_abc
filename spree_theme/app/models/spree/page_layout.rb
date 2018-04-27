@@ -182,7 +182,7 @@ module Spree
           # bit 2,3,4
           idx = (get_content_param&14)>>1
           #   000x , 001x,  010x,    011x,    100x
-          [:datetime, :date, :time ].fetch( idx, :datetime )
+          [:datetime, :date, :time, :simple_date ].fetch( idx, :datetime )
 
         when :main_image_style                            # section slider, product_image_with_thumbnail
           ## bit 2,3,4

@@ -75,6 +75,9 @@ zh-CN:
         <<: *template_theme_labels
   template_theme: Theme
   template_themes: Themes
+  time:
+    formats:
+      simple_date: ! '%m-%d-%Y'
   spree:
     actions:
       import: 购买

@@ -37,6 +37,8 @@ module PageTag
           case self.current_piece.datetime_style
             when :date
               pretty_date attribute_value
+            when :simple_date
+              pretty_date attribute_value, format: :simple_date
             else
               pretty_datetime attribute_value
           end
