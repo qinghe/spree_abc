@@ -9,7 +9,7 @@ zh-CN:
     - 五
     - 六
     abbr_month_names:
-    - 
+    -
     - 1月
     - 2月
     - 3月
@@ -34,8 +34,9 @@ zh-CN:
       default: ! '%Y-%m-%d'
       long: ! '%Y年%b%d日'
       short: ! '%b%d日'
+      simple_date: ! '%m-%d-%Y'
     month_names:
-    - 
+    -
     - 一月
     - 二月
     - 三月
