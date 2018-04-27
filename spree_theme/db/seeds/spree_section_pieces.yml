@@ -1484,10 +1484,10 @@ container_pagination:
     /* #copy from spree_backend/assets/stylesheets/admin/components/pagination */
     .<%=@template.section_selector%> .pagination { float:left; clear:both; } /* add clear */
     .<%=@template.section_selector%> .pagination .page{ display: inline-block; text-align: center;
-      <%=@template.css(:pagination_page)%>
+      <%=@template.css(:".pagination-.page")%>
     }
     .<%=@template.section_selector%> .pagination .current{
-      <%=@template.css(:pagination_current)%>
+      <%=@template.css(:".pagination-.current")%>
     }
     <% end %>
   js: ""
