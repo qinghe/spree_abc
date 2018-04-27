@@ -8,7 +8,7 @@ module Spree
 
       # context may be array, if inherited_data_source is empty, [:taxon, :gpvs, :blog, :gpvs_theme] are available datasource for current.
       # gpvs is available to every context.
-      ContextDataSourceMap = Hash.new( [:taxon, :gpvs, :blog, :gpvs_theme] ).merge!( { ContextEnum.detail=>[:this_product,:related_products], ContextEnum.post=>[:post] } )
+      ContextDataSourceMap = Hash.new( [:taxonomy, :taxon, :gpvs, :blog, :gpvs_theme] ).merge!( { ContextEnum.detail=>[:this_product,:related_products], ContextEnum.post=>[:post] } )
       DataSourceChainMap = {
         taxon: [:gpvs,:blog],
         #:gpvs=>[:gpv_product,:gpv_group, :gpv_either],
