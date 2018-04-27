@@ -359,3 +359,13 @@ swipper_data_taxons_as_background:
       background-position: center; background-size: cover;
     }
   js: ''
+post_attribute:
+  id: 122
+  title: post attribute
+  slug: post-attribute
+  is_selectable: "0"
+  is_container: "0"
+  html: |
+    <%= @template.post_attribute() %>
+  css: ''
+  js: ''
