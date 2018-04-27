@@ -75,9 +75,6 @@ zh-CN:
         <<: *template_theme_labels
   template_theme: Theme
   template_themes: Themes
-  time:
-    formats:
-      simple_date: ! '%m-%d-%Y'
   spree:
     actions:
       import: 购买
@@ -230,3 +227,10 @@ zh-CN:
     new_comment_type: New Comment Type
     editing_comment_type: Editing Comment Type
     back_to_comment_types_list: Back to Comment Types List
+# date/time format
+  time:
+    formats:
+      simple_date: ! '%m-%d-%Y'
+  date:
+    formats:
+      simple_date: ! '%m-%d-%Y'
