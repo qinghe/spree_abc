@@ -5,7 +5,7 @@ module PageTag
   class Posts < ModelCollection
 
     class WrappedPost < WrappedModel
-      self.accessable_attributes=[:id, :title, :body, :posted_at, :cover, :summary, :author, :files, :build_path]
+      self.accessable_attributes=[:id, :title, :name, :body, :posted_at, :cover, :summary, :author, :files, :build_path]
       delegate *self.accessable_attributes, :to => :model
       delegate :wrapped_taxon, to: :collection_tag
 
