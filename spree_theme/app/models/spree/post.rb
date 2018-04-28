@@ -47,6 +47,7 @@ module Spree
     scope :live, -> {  where(:live => true ) }
 
    	#make_permalink
+    alias_attribute :name, :title #default post_attribute name
 
     # add search related
     cattr_accessor :searcher_class do
