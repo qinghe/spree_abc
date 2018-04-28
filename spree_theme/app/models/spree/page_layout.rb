@@ -831,10 +831,10 @@ module Spree
       # notice: current piece is data iterator parent at present.  ex. product_list(current_piece)->one_product
       #if @template.current_piece.per_page>0 && @template.current_piece.pagination_enable?
       if params[:pagination_enable] && params[:per_page] >0
-        if params[:pagination_style] == PaginationStyle.pn_links
-          "<%= paginate( @template.running_data_source, theme: 'pn', params: #{pagination_params.to_s} )  if @template.running_data_source.try( :has_pages? ) %> "
+        if params[:pagination_style].present?
+          "<%= paginate( @template.running_data_source, theme: '#{params[:pagination_style]}', params: #{pagination_params.to_s} )  if @template.running_data_source.try( :has_pages? ) %> "
         else
-          "<%= paginate( @template.running_data_source, params: #{pagination_params.to_s} )  if @template.running_data_source.try( :has_pages? ) %> "
+          "<%= paginate( @template.running_data_source, theme: 'twitter-bootstrap-3', params: #{pagination_params.to_s} )  if @template.running_data_source.try( :has_pages? ) %> "
         end
       end
     end

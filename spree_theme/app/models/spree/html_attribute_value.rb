@@ -326,9 +326,8 @@ module Spree
             # product quantity,atc section_piece content just input,add a <span> wrap it.
             # product images content thumb and main images so here should be section_id,
             " #{target}"
-          when '.pagination-.page','.pagination-.current','.pagination-.current:hover','.pagination-.current:hover'
-            #
-            target.sub('-',' ')
+          when /pagination/
+            " #{target.sub('-',' ')}"
           else  #noclick, selected
             " .#{target}"
           end

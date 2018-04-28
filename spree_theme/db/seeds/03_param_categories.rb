@@ -60,6 +60,12 @@ objs=[
   {"id"=>195, "position"=>195, "is_enabled"=>true, "editor_id"=>0, "slug"=>"even" },
   {"id"=>196, "position"=>196, "is_enabled"=>true, "editor_id"=>0, "slug"=>"odd" },
 
+  #pagination
+  {"id"=>230, "position"=>230, "is_enabled"=>true, "editor_id"=>0, "slug"=>"pagination" },
+  {"id"=>231, "position"=>231, "is_enabled"=>true, "editor_id"=>0, "slug"=>"pagination page" },
+  {"id"=>232, "position"=>232, "is_enabled"=>true, "editor_id"=>0, "slug"=>"pagination page hover" },
+  {"id"=>233, "position"=>233, "is_enabled"=>true, "editor_id"=>0, "slug"=>"pagination page active" },
+
   # query media background
   {"id"=>1051, "position"=>1051, "is_enabled"=>true, "editor_id"=>0, "slug"=>"background1" },
   {"id"=>1052, "position"=>1052, "is_enabled"=>true, "editor_id"=>0, "slug"=>"background2" },
@@ -69,6 +75,8 @@ objs=[
   {"id"=>501, "position"=>21, "is_enabled"=>true, "editor_id"=>0, "slug"=>"dialog_close" },
   {"id"=>502, "position"=>22, "is_enabled"=>true, "editor_id"=>0, "slug"=>"dialog_overlay" },
   {"id"=>531, "position"=>531, "is_enabled"=>true, "editor_id"=>0, "slug"=>"fa" },
+
+
   ]
 
 Spree::ParamCategory.delete_all
@@ -76,5 +84,5 @@ for ha in objs
   obj = Spree::ParamCategory.new
   obj.assign_attributes( ha )
   obj.editor_id=0
-  obj.save
+  obj.save!
 end

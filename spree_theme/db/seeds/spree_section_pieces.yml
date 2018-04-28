@@ -1480,16 +1480,19 @@ container_pagination:
   is_container: "1"
   html: ~~content~~
   css: |
-    <% if @template.current_piece.per_page >0 %>
-    /* #copy from spree_backend/assets/stylesheets/admin/components/pagination */
-    .<%=@template.section_selector%> .pagination { float:left; clear:both; } /* add clear */
-    .<%=@template.section_selector%> .pagination .page{ display: inline-block; text-align: center;
-      <%=@template.css(:".pagination-.page")%>
+    /* #container pagination */
+    .<%=@template.section_selector%> .pagination { float:left; clear:both;   clear: both;
+     padding: 0;  margin: 0; text-align: center; } /* add clear */
+    .<%=@template.section_selector%> .pagination li{ display: inline-block; text-align: center;
+      <%=@template.css(:".pagination-li")%>
     }
-    .<%=@template.section_selector%> .pagination .current{
-      <%=@template.css(:".pagination-.current")%>
+    .<%=@template.section_selector%> .pagination a{
+      <%=@template.css(:".pagination-a")%>    
     }
-    <% end %>
+    .<%=@template.section_selector%> .pagination .active{
+      <%=@template.css(:".pagination-.active")%>
+    }
+
   js: ""
 post_summary:
   id: 78
