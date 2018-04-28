@@ -631,6 +631,7 @@ module Spree
           else
             # section :page_attribute, :product_attribute, :post_attribute
             params[:attribute_name] = splited_params[0]
+            params[:attribute_alternative] = splited_params[1]
           end
         end
         params

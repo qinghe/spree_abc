@@ -153,6 +153,10 @@ module PageTag
       def enabled_depth
         get_data_source_param_by_key(:depth) || MaxTaxonDepth
       end
+
+      def attribute_alternative
+        get_data_source_param_by_key( :attribute_alternative )
+      end
     end
 
     attr_accessor :param_values_tag, :menus_tag, :images_tag, :text_tag, :blog_posts_tag
@@ -397,9 +401,9 @@ module PageTag
     #   * options - file, get specified file of post
     def post_attribute(  attribute_name=nil, options = { }  )
       attribute_name ||=  self.current_piece.attribute_name.to_sym
-      
+
       wrapped_model = ( options.delete(:data) || self.running_data_item_by_class( Posts::WrappedPost ))
-      options.merge! detail_text: Spree.t(:post_detail)
+      options.merge! attribute_alternative: current_piece.attribute_alternative
       PostAttribute.new( current_piece, wrapped_model, options ).get( attribute_name )  if wrapped_model
     end
 
