@@ -359,6 +359,8 @@ module PageTag
     def page_attribute(  attribute_name = nil, options = { } )
       attribute_name ||=  self.current_piece.attribute_name.to_sym
       page = options.delete(:data)
+      options.merge! attribute_alternative: current_piece.attribute_alternative
+
       unless page
         if attribute_name.to_s =~/root\_/
           # in this case, taxonomy have no running_data_item at this time.

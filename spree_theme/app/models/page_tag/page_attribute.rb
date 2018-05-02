@@ -24,6 +24,8 @@ module PageTag
            '>'
         when :icon_angle_left
            '<'
+        when :alternative # get text from current_piece.alternative_text
+          self.options.delete(:attribute_alternative) || Spree.t(:alternative)
         else
           wrapped_page.send attribute_name
       end

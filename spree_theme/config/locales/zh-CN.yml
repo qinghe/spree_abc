@@ -87,6 +87,7 @@ zh-CN:
         theme_texts: 模板素材
         native_themes: 模板
         foreign_themes: 模板商店
+    alternative: alternative
     attachment: 文件名
     back_to_themes_list: 回到模板列表
     back_to_template_text_list: 回到素材列表
