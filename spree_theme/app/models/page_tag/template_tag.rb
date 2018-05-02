@@ -154,8 +154,8 @@ module PageTag
         get_data_source_param_by_key(:depth) || MaxTaxonDepth
       end
 
-      def attribute_alternative
-        get_data_source_param_by_key( :attribute_alternative )
+      def attribute_placeholder
+        get_data_source_param_by_key( :attribute_placeholder )
       end
     end
 
@@ -359,7 +359,7 @@ module PageTag
     def page_attribute(  attribute_name = nil, options = { } )
       attribute_name ||=  self.current_piece.attribute_name.to_sym
       page = options.delete(:data)
-      options.merge! attribute_alternative: current_piece.attribute_alternative
+      options.merge! attribute_placeholder: current_piece.attribute_placeholder
 
       unless page
         if attribute_name.to_s =~/root\_/
@@ -375,7 +375,7 @@ module PageTag
       end
       # page may be nil
       if page
-        PageAttribute.new( current_piece, page ).get( attribute_name )
+        PageAttribute.new( current_piece, page, options ).get( attribute_name )
       else
         options.delete(:placeholder)
       end
@@ -405,7 +405,7 @@ module PageTag
       attribute_name ||=  self.current_piece.attribute_name.to_sym
 
       wrapped_model = ( options.delete(:data) || self.running_data_item_by_class( Posts::WrappedPost ))
-      options.merge! attribute_alternative: current_piece.attribute_alternative
+      options.merge! attribute_placeholder: current_piece.attribute_placeholder
       PostAttribute.new( current_piece, wrapped_model, options ).get( attribute_name )  if wrapped_model
     end
 
