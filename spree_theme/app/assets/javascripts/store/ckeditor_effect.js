@@ -47,41 +47,27 @@ $(document).on('turbolinks:load',function() {
       // background-color:transparent;color:#e20012;background-image:url('http://aliimg.getstore.cn/358/ckeditor_picture/598_arraw.jpg');
       if( hover_style)
       {
-        var attrs = _.chain(hover_style.split(";")).map( function( attr){ return attr.split(':')}).filter( function(attr){ return attr.length==2;}).value();
-        //['color','red'] => { color: 'red' }
-        attrs = _.object(attrs);
-        $this.css( attrs);
-      }
-    },function(event){
-      var $this =  $(this);
-      var normal_style = $this.data("style")
-      if( normal_style )
-      {
-        var attrs = _.chain(normal_style.split(";")).map( function( attr){ return attr.split(':')}).filter( function(attr){ return attr.length==2;}).value();
-        attrs = _.object(attrs);
-        $this.css( attrs);
-      }else{
-        $this.css({'background-color': '', 'color':''});
-      }
-    })
-    // style in json, handle background-image:url('http://aliimg.getstore.cn/358/ckeditor_picture/598_arraw.jpg');
-    $(".ck_effect_jhover a").hover(function(event){
-      var $this =  $(this);
-      var hover_style = $this.data("hover-style")
-      // background-color:transparent;color:#e20012;background-image:url(http://aliimg.getstore.cn/358/ckeditor_picture/598_arraw.jpg);
-      // "{ 'background-color':'transparent', 'color':'#e20012','background-image':'url(http://aliimg.getstore.cn/358/ckeditor_picture/598_arraw.jpg)' }" => { color: 'red' }
-      if( hover_style)
-      {
-        var attrs = JSON.parse( hover_style );
-        $this.css( attrs);
+        //var attrs = _.chain(hover_style.split(";")).map( function( attr){ return attr.split(':')}).filter( function(attr){ return attr.length==2;}).value();
+        ////['color','red'] => { color: 'red' }
+        //attrs = _.object(attrs);
+        //$this.css( attrs);
+        // it is difficult to parse background-image:url('http://aliimg.getstore.cn/358/ckeditor_picture/598_arraw.jpg'), so just set style
+        $this.attr( 'style', hover_style )
       }
     },function(event){
       var $this =  $(this);
       var style = $this.data("style")
       if( style )
       {
-        var attrs = JSON.parse( style );
-        $this.css( attrs);
+        //var attrs = _.chain(normal_style.split(";")).map( function( attr){ return attr.split(':')}).filter( function(attr){ return attr.length==2;}).value();
+        //attrs = _.object(attrs);
+        //$this.css( attrs);
+        $this.attr( 'style', style )
+
+      }else{
+        $this.css({'background-color': '', 'color':''});
       }
     })
+    // style in json, handle background-image:url('http://aliimg.getstore.cn/358/ckeditor_picture/598_arraw.jpg');
+
 })
