@@ -44,7 +44,7 @@ $(document).on('turbolinks:load',function() {
     $(".ck_effect_hover a").hover(function(event){
       var $this =  $(this);
       var hover_style = $this.data("hover-style")
-      // background-color:white;color:black
+      // background-color:transparent;color:#e20012;background-image:url('http://aliimg.getstore.cn/358/ckeditor_picture/598_arraw.jpg');
       if( hover_style)
       {
         var attrs = _.chain(hover_style.split(";")).map( function( attr){ return attr.split(':')}).filter( function(attr){ return attr.length==2;}).value();
@@ -64,5 +64,24 @@ $(document).on('turbolinks:load',function() {
         $this.css({'background-color': '', 'color':''});
       }
     })
-
+    // style in json, handle background-image:url('http://aliimg.getstore.cn/358/ckeditor_picture/598_arraw.jpg');
+    $(".ck_effect_jhover a").hover(function(event){
+      var $this =  $(this);
+      var hover_style = $this.data("hover-style")
+      // background-color:transparent;color:#e20012;background-image:url(http://aliimg.getstore.cn/358/ckeditor_picture/598_arraw.jpg);
+      // "{ 'background-color':'transparent', 'color':'#e20012','background-image':'url(http://aliimg.getstore.cn/358/ckeditor_picture/598_arraw.jpg)' }" => { color: 'red' }
+      if( hover_style)
+      {
+        var attrs = JSON.parse( hover_style );
+        $this.css( attrs);
+      }
+    },function(event){
+      var $this =  $(this);
+      var style = $this.data("style")
+      if( style )
+      {
+        var attrs = JSON.parse( style );
+        $this.css( attrs);
+      }
+    })
 })
