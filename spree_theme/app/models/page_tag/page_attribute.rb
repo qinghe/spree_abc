@@ -32,6 +32,7 @@ module PageTag
       if self.current_piece.clickable? || attribute_name==:more
         html_options = wrapped_page.extra_html_attributes
         html_options[:href] ||= wrapped_page.path
+        html_options[:class] ||= 'selected' if wrapped_page.current?
         if attribute_name == :summary
           attribute_value << content_tag(:a, "[#{Spree.t(:detail)}]", html_options)
         else
