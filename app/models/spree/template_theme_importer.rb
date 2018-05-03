@@ -40,6 +40,7 @@ module Spree
         new_theme.assigned_resource_ids = {}
         new_theme.site_id =  Spree::Store.current.site_id
         new_theme.store_id = Spree::Store.current.id
+        new_theme.copy_from_id = original_template_theme.id
         new_theme.save!
         new_theme
 
