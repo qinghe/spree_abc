@@ -26,7 +26,7 @@ module SpreeMultiSite
       # apache rewrite test.david.com => localhost:8080/?n=test.david.com, request.host is 'test.david.com'
       # TODO should use public_suffix_service handle example.com.cn
 
-      if(( Rails.env =~ /development|test/ ) && ( store.blank? ) )
+      if store.blank? 
         # for development or test, enable get site from cookie
         # string and symbol both OK.  cookie.domain should be exactly same as host, www.domain.com != domain.com
         # disable domain, some site have no domain, short_name always exists.
