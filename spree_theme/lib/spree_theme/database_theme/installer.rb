@@ -53,7 +53,7 @@ module SpreeTheme
             # allow edit mobile template on chrome
             #@is_designer = false if mobile?
             #login, forget_password page only available fore unlogged user. we need this flag to show editor even user have not log in.
-            @is_designer = ( cookies[:_dalianshops_designer]=='1')  if cookies[:_dalianshops_designer].present?
+            @is_designer = ( cookies[:_getstore_designer]=='1')  if cookies[:_getstore_designer].present?
 
             @client_info = current_terminal
             @client_info.is_preview = @is_designer
@@ -64,24 +64,24 @@ module SpreeTheme
             end
             #current_user.is_designer means he could design template_theme.
             #current_site.designable means current user could preview published template_theme
-            # designer or shop owner could select theme to view in editor,
-            if  store.designable? || params[:action]=='preview'
+            # designer and shop owner could select theme to view both,
+            #FIXME coolies expires when the user's browser is closed. but user do not know it.
               #get template from query string
               if params[:action]=='preview' && params[:id].present?
                 @theme = store.template_themes.find( params[:id] )
-                session[:theme_id] = params[:id]
+                cookies[:_getstore_theme_id] = params[:id]
               end
               # there are more than one designable store,  design1, design2 ....
               # since cookies domain is same top level domain, ex. .dalianshops.com
-              # session[:theme_id] maybe not belong to current store, we should test that.
-              if session[:theme_id].present?
-                if Spree::TemplateTheme.native.exists? session[:theme_id]  #theme could be deleted.
-                  @theme = Spree::TemplateTheme.find( session[:theme_id] )
+              # cookies[:theme_id] maybe not belong to current store, we should test that.
+              if cookies[:_getstore_theme_id].present?
+                if Spree::TemplateTheme.native.exists? cookies[:_getstore_theme_id]  #theme could be deleted.
+                  @theme = Spree::TemplateTheme.find( cookies[:_getstore_theme_id] )
                 else
-                  session[:theme_id] = nil
+                  cookies[:_getstore_theme_id] = nil
                 end
               end
-            end
+
             # public view pages
             if @theme.blank? && Spree::Store.current.template_theme.present?
               @theme = Spree::Store.current.template_theme
