@@ -64,8 +64,8 @@ module SpreeTheme
             end
             #current_user.is_designer means he could design template_theme.
             #current_site.designable means current user could preview published template_theme
-            # user could select theme to view in editor.
-            if  store.designable?
+            # designer or shop owner could select theme to view in editor,
+            if  store.designable? || params[:action]=='preview'
               #get template from query string
               if params[:action]=='preview' && params[:id].present?
                 @theme = store.template_themes.find( params[:id] )
