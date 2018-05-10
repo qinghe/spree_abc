@@ -37,11 +37,11 @@ module Spree
       url: '/shops/:rails_env/:site/posts/:id/:basename_:style.:extension',
       path: ':rails_root/public/shops/:rails_env/:site/posts/:id/:basename_:style.:extension',
       default_url: '/assets/default_post.png'
-
+ 
     validates_attachment :cover,
       content_type: { content_type: ["image/jpg", "image/jpeg", "image/png", "image/gif"] }
 
-    scope :ordered, -> { order("posted_at DESC") }
+    scope :ordered, -> { order( posted_at: :desc, created_at: :desc) }
     scope :future, -> { where("posted_at > ?", Time.now).order("posted_at ASC") }
     scope :past, -> { where("posted_at <= ?", Time.now).ordered }
     scope :live, -> {  where(:live => true ) }
