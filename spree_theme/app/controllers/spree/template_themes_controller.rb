@@ -245,8 +245,11 @@ module Spree
       request.host.end_with?  Site.system_top_domain
     end
 
+    #对于 realdesign 允许 iframe, 360广告推广需要 X-Frame-Options
     def allow_iframe_requests
-      response.headers.delete('X-Frame-Options')
+      if request.host.include? "realdesign"
+        response.headers.delete('X-Frame-Options')
+      end
     end
 
   end
