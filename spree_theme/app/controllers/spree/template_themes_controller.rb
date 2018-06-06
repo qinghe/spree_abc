@@ -1,5 +1,7 @@
 module Spree
   class TemplateThemesController < Spree::StoreController
+    before_action :allow_iframe_requests
+
     helper 'spree/products'
     delegate :taxon_class,:site_class, :to=>:"SpreeTheme"
 
@@ -241,6 +243,10 @@ module Spree
     def is_from_system_domain?
       #consider localhost?
       request.host.end_with?  Site.system_top_domain
+    end
+
+    def allow_iframe_requests
+      response.headers.delete('X-Frame-Options')
     end
 
   end
