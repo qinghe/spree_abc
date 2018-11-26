@@ -1,6 +1,0 @@
-<% if tracker = Spree::Tracker.current %>
-  <% case tracker.name %>
-  <% when /51la/ %>
-    <%= render :partial=>'spree/shared/analytics_51la', :locals=>{:tracker=>tracker} %>  
-  <% end %>
-<% end %>

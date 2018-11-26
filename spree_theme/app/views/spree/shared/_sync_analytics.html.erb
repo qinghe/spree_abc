@@ -1,7 +1,7 @@
 <% if tracker = Spree::Tracker.current %>
-  <% case tracker.name %>
+  <% case tracker.engine %>
   <% when /google/ %>
-    <%= render :partial=>'spree/shared/sync_analytics_google', :locals=>{:tracker=>tracker} %>  
+    <%= render :partial=>'spree/shared/sync_analytics_google', :locals=>{:tracker=>tracker} %>
   <% when /baidu/ %>
     <%= render :partial=>'spree/shared/sync_analytics_baidu', :locals=>{:tracker=>tracker} %>
   <% end %>
