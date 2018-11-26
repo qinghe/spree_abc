@@ -69,7 +69,7 @@ aliyun_staging:
   database: spree_abc_staging
   pool: 10
   username: root
-  password:
+  password: root
   socket: /tmp/mysql.sock
 
 production:
