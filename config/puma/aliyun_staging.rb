@@ -112,7 +112,7 @@ bind 'unix:///home/deploy/www/spree_abc_current/tmp/sockets/puma.socket'
 #
 # The default is "0".
 #
-workers 2
+workers 1
 
 # Code to run immediately before the master starts workers.
 #
