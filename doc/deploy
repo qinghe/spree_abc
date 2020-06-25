@@ -1,4 +1,13 @@
-app server 
+1. selinux
+http://www.electrictoolbox.com/switch-off-selinux-centos-5/
+setenforce 0, or mod_passenger.so: cannot open shared object file: Permission denied
+
+2. iptables
+ iptables -A INPUT -p tcp --dport 80 -j ACCEPT
+ service iptables save
+
+
+app server
 --------------------------------------------------------
 echo export TMOUT=1000000 >> /root/.bash_profile
 
@@ -21,19 +30,30 @@ chown apache.apache  public -R
 
 https://help.github.com/articles/deploying-with-capistrano
 
+
+
+
+php install
+------------------------------------------------------------
+yum install gd
+
+
+
+
+
 db server
 -----------------------------------------------------------
 1. configure mysql to support utf-8
   [mysqld]
-  character_set_server= utf8    
+  character_set_server= utf8
 http://www.dotkam.com/2008/09/14/configure-rails-and-mysql-to-support-utf-8/
 
 
 2. yum install libxml2-devel libxslt-devel
-  nokogiri required 
+  nokogiri required
   https://github.com/sparklemotion/nokogiri
 
-  
+
 3. install pg
 https://community.jboss.org/wiki/InstallPostgreSQLonFedora?_sscc=t
 
@@ -41,6 +61,11 @@ https://community.jboss.org/wiki/InstallPostgreSQLonFedora?_sscc=t
 #http://www.imagemagick.org/script/install-source.php
 wget http://www.imagemagick.org/download/ImageMagick.tar.gz
 tar xvzf ImageMagick.tar.gz
+identify  #try it
+ldconfig  /usr/local/lib # refresh as need.
+
+5. install google nodejs #execjs required
+ln -s /usr/local/bin/node /usr/bin/node
 
 spree~>2.4 only
 --------------------------------------------------------------
@@ -49,9 +74,108 @@ bundle show spree
 comment out spree/front_end/config/routes.rb
 #  root :to => 'home#index'
 
-system recovery
+setup aliyun oss
+---------------------------------------------------------------
+Paperclip_aliyun_oss/aliyun-oss-sync require it,
+env |grep SHELL
+vi ~/.bashrc
+export OSS_ACCESS_ID="xxx"
+export OSS_ACCESS_SECRET="xxx"
+#
+gem install aliyun-oss-sync
+#edit source lib/aosss/sync.rb, method init_connection
+#:server            => 'oss-cn-beijing.aliyuncs.com'
+#sycn assets with aliyun，老版本命令，已不好用
+#aliyun-oss-sync push aliass:assets public/assets
+
+aliyun-oss-sync 最新版本为0.1.0， 需要安装这个最新的
+目前rubygems.org上是0.0.1，需要下载源码再安装。
+https://github.com/qhwa/aliyun-oss-sync
+
+新版本的命令
+aliyun-oss-sync -e http://oss-cn-beijing.aliyuncs.com  push aliass:assets ./public/assets
+
+-----------------------------------------------------
+
+
+system recovery&backup
 --------------------------------------------------------------
 mysql -uroot spree_abc_staging < spree_abc20141204.sql
 tar -zxvf spree_abc20141204.tar.gz
 mv /webroot/spree_abc /webroot/spree_abc.bak
 mv webroot/spree_abc /webroot/
+
+tar -czvf spree_abc20150330.tar.gz spree_abc
+mysqldump -uroot spree_abc_staging > spree_abc20150330.sql
+
+feature upgrade
+---------------------------------------------------------------
+1. rake db:migrate RAILS_ENV=staging
+2. rake spree_theme:reload_section_piece
+3. rake spree_theme:load_seed[xxx.rb]
+4. rake assets:precomile
+5. rake spree_theme:release_theme[1]  #1,2,12,16,28
+6. aliyun-oss-sync push aliass:assets public/assets
+
+useful command
+---------------------------------------------------------------
+ CREATE USER ylyy@'localhost' IDENTIFIED BY 'huojinfeng';
+ GRANT ALL PRIVILEGES ON ylyy.* TO ylyy;
+
+ http://blog.chinaunix.net/uid-24250828-id-3239100.html
+  time dd if=/dev/zero of=test.dbf bs=8k count=300000
+
+ bundle update --source spree_alipay
+ bundle config local.spree_alipay ../spree_alipay
+ bundle config  --delete local.spree_alipay
+---------------------------------------------------------------
+1 php.ini short_open_tag On
+
+
+---------------------------------------------------------------
+1. update js
+bundle exec rake assets:precompile RAILS_ENV=aliyun_staging
+aliyun-oss-sync push aliass:assets public/assets
+touch tmp/restart.txt
+
+2. update section piece
+bundle exec rake spree_theme:reload_section_piece RAILS_ENV=aliyun_staging
+
+3. copy theme to new design site
+bundle exec rake spree_theme:copy_theme[44,369] RAILS_ENV=aliyun_staging
+
+
+nginx
+---------------------------------------------------------------
+https://www.phusionpassenger.com/library/install/nginx/install/oss/tarball/#note_about_nginx
+
+sudo kill $(cat /opt/nginx/logs/nginx.pid)
+sudo /opt/nginx/sbin/nginx
+
+puma
+---------------------------------------------------------------
+puma -e production -b unix:///tmp/blog.sock -d
+bundle exec puma -e aliyun_staging
+
+centos
+---------------------------------------------------------------
+http://www.jianshu.com/p/28fccca3448d
+
+https://www.godaddy.com/garage/tech/config/how-to-install-postgresql-on-centos-7/
+
+Connecting to GitHub with SSH
+---------------------------------------------------------------
+https://help.github.com/articles/connecting-to-github-with-ssh/
+
+
+postgresql
+http://www.ruanyifeng.com/blog/2013/12/getting_started_with_postgresql.html
+
+http://www.jianshu.com/p/b3d77910da0d
+
+
+https://ruby-china.org/topics/31970
+ Nginx 配置， https 和 http 都可以访问
+---------------------------------------------------------------
+申请 Let's Encrypt ssh证书
+https://ruby-china.org/topics/31983

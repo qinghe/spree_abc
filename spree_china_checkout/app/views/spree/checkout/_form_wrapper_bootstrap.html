@@ -1,0 +1,24 @@
+<% # do not support confirm anymore
+   # do not open new window for mobile terminal.
+  form_html_options = { :id => "checkout_form_#{state}", :class=>"single_page_edit_order" }
+%>
+
+
+<div class="panel-heading header2"> <%= Spree.t("order_state.#{state}") %>
+  <%= link_to Spree.t(:edit), checkout_state_path(state), class: 'previous' %>
+</div>
+<div class="panel-body form-wrapper clear-block" data-hook="checkout_form_wrapper">
+  <div class="">
+      <%= render :partial => 'spree/shared/error_messages', :locals => { :target => order } %>
+      <% # override default form class :edit_order with :single_page_edit_order, disableSaveOnClick cause button disabled even form validation failure %>
+      <%= form_for order, :url => update_checkout_path(state), :remote => (state != 'payment'), :html => form_html_options do |form| %>
+        <%= render "#{state}_bootstrap", :form => form %>
+      <% end %>
+  </div>
+
+</div>
+<div id="checkout-summary-<%= state%>" class="panel-body summary-wrapper">
+  <% if order.passed_checkout_step? state %>
+  <%= render :partial => "#{state}_summary", :locals => { :order => order } %>
+  <% end %>
+</div>

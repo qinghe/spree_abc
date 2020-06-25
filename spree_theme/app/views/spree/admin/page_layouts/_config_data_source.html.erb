@@ -1,0 +1,25 @@
+
+  <% if @page_layout.present? %>
+      <% page_layout = @page_layout%>
+      <%= form_for :page_layout, url: update_data_source_admin_template_theme_page_layout_path(@template_theme,page_layout),remote: true do |f|%>
+        <fieldset id="page_layout_container" class="">
+          <legend align="center"><%= page_layout.title %></legend>
+            <div class="form-group">
+              <%= label_tag :section_data_source, Spree.t('page_layout.data_source') %><br>
+              <% current_data_source = page_layout.current_data_source
+                 options = options_for_select((Spree::PageLayout::DataSourceEnum.members).collect{|section_data_source| [Spree.t("section_data_source.#{ section_data_source }"), section_data_source] }, current_data_source )
+              %>
+              <%= select_tag "section_data_source", options , 'class'=> 'select2' %>
+            </div>
+            <div class="form-actions" data-hook="buttons">
+              <%= button Spree.t('actions.update'), 'refresh' %>
+              <span class="or"><%= Spree.t(:or) %></span>
+              <%= button_link_to Spree.t('actions.cancel'), '', :icon => 'remove', :onclick=>"$('#page_layout_container').hide();return false;" %>
+            </div>
+        </fieldset>
+      <%end%>
+  <% else %>
+      <div class="alert alert-info no-objects-found">
+        <%= Spree.t(:no_resource_found, resource: I18n.t(:other, scope: 'activerecord.models.spree/page_layout')) %>,
+      </div>
+  <% end %>

@@ -1,7 +1,7 @@
 Deface::Override.new(:virtual_path     => "spree/admin/option_types/edit",
                      :name             => "admin_option_value_table_headers",
                      :replace_contents => "thead[data-hook=option_header]",
-                     :partial          => "spree/admin/option_values/table_header",
+                     :partial          => "spree/admin/option_types/table_header",
                      :disabled         => false)
 
 Deface::Override.new(:virtual_path   => "spree/admin/option_types/edit",
@@ -13,7 +13,7 @@ Deface::Override.new(:virtual_path   => "spree/admin/option_types/edit",
 #Deface::Override.new(:virtual_path   => "spree/admin/option_types/edit",
 #                     :name           => "admin_sortable_option_values",
 #                     :set_attributes => "table.index",
-#                     :attributes     => { 
+#                     :attributes     => {
 #                       "class"              => "index sortable",
 #                       "data-sortable-link" => "/admin/option_values/update_positions"
 #                     },

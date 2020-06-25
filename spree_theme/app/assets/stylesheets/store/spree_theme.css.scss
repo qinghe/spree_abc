@@ -1,0 +1,155 @@
+@import "spree_theme_base";
+@import "interface";
+
+#editor_panel
+{ position: fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  height:248px;
+  border-bottom: solid 1px #EBEBEB;
+  background-color: #F8F8F8;
+  z-index: 100;
+  display: none;
+}
+#editor_panel a.close{
+  position: absolute;
+  top:0;
+  right:0;
+  display: inline-block;
+  padding:5px;
+}
+#editor_panel_icon{
+  position: fixed;
+  bottom:0;
+  right:0;
+  height:30px;
+  width:30px;
+  border: solid 1px #EBEBEB;
+  background-color: #F8F8F8;
+  z-index: 99;
+  font-size: 0.7em;
+}
+#page_layout_tree_inner
+{
+  height:200px;
+  overflow: auto;
+  .page_layout {
+      background-color: transparent;
+  }
+  .page_layout:hover {
+      background-color: #ebebeb;
+  }
+}
+
+.param_value_editor
+{
+  height:200px;
+  overflow: auto;
+}
+.editor-header
+{
+  background-color: #B6B6B6;
+}
+
+
+.block
+{
+    border: solid 1px gray;
+    padding: 2px;
+    margin: 2px;
+}
+.block_header{  height:32px; }
+
+.menu li{
+  padding:5px;
+  float:left;
+}
+ul.tabs{list-style:none; margin:0;padding:0;}
+.tabs li{
+  padding: 5px;
+    float:left;
+}
+
+#editors span.option_item
+{
+  display:inline-block;
+  width:170px;
+}
+
+#editors div.pv{
+    padding:2px;
+    background-color: transparent;
+    &:hover{
+      background-color: #ebebeb;
+    }
+}
+#editors span.pv-name
+{
+  display:inline-block;
+  width:150px;
+}
+
+#editors input.pv-psv, select.pv-psv
+{
+  display:inline-block;
+  width:120px;
+}
+#editors input.pv-pv
+{
+  display:inline-block;
+  width:120px;
+}
+#editors [type="checkbox"]{
+  vertical-align: bottom;
+}
+
+#section_select_dialog ul
+{
+  list-style:none; margin: 0; padding: 0;
+}
+#section_select_dialog ul.titles li
+{
+  white-space:nowrap;
+}
+
+#section_select_dialog li.selected
+{
+  background-color: silver;
+}
+#section_select_dialog .details .selected
+{
+  display:block;
+}
+#section_select_dialog .details div
+{
+  display:none;
+}
+
+#editors label, #menu_and_template label
+{
+  margin:0;
+  padding:0;
+  display:inline;
+}
+#publish ul
+{
+  margin:0;
+  padding:0;
+}
+
+#editor_panel a.selected
+{
+  background-color: #22A7F2;
+  color: white;
+  font-weight: bold;
+}
+
+#dialog_for_editor{
+  background-color:white;
+  padding: 25px 35px;
+  display:none;
+}
+
+.simplemodal-overlay{ background-color:black; }
+form.editable input { color: black; }

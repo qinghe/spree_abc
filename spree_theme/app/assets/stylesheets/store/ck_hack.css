@@ -1,0 +1,6 @@
+/* eliminate margin of tag p
+ <div class="ck_nomargin"> <p> xyz </p> </div>
+*/
+.ck_nomargin p {
+  margin: 0;
+}

@@ -1,7 +1,0 @@
-<% if tracker = Spree::Tracker.current %>
-  <% if tracker.analytics_id.size== 32 %>
-    <%= render :partial=>'spree/shared/baidu_sync_analytics'%>
-  <% else %>
-    <%= render :partial=>'spree/shared/google_sync_analytics'%>  
-  <% end %>
-<% end %>

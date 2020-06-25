@@ -1,60 +1,62 @@
-<%= render :partial => 'sub_menu' %>
 <% content_for :page_title do %>
-  <%= Spree.t(:theme_native) %> 
+  <%= Spree.t(:theme_native) %>
 <% end %>
 
-<% if SpreeTheme.site_class.current.design?  %>
-  <% content_for :page_actions do %>  
-    <li><%= button_link_to Spree.t("template_theme.new"), new_object_url, :icon => 'icon-plus',:remote=>:true, :id=>'admin_new_template_theme' %></li>
+<% designable= Spree::Store.current.designable? %>
+
+<% if designable  %>
+  <% content_for :page_actions do %>
+    <%= button_link_to Spree.t("template_theme.new"), new_object_url, :class => "btn-success", :icon => 'add', :id=>'admin_new_template_theme' %>
   <% end %>
 <% end %>
 
 <div id="new_template_theme_wrapper" data-hook></div>
 
-
 <% if @themes.any? %>
-<% has_column_is_public = Spree::Site.current.design? %>
-<table id="listing_template_themes">
+<table id="listing_template_themes" class="table">
   <colgroup>
        <col style="width: 55%;">
        <col style="width: 10%;">
-       <% if has_column_is_public %>
+       <% if designable %>
        <col style="width: 10%;">
        <% end %>
        <col style="width: 25%;">
-  </colgroup>  
-  <thead>  <tr>
-    <th><%= Spree::TemplateTheme.human_attribute_name(:title) %></th>
-    <th>  <%= Spree.t(:theme_applied) %> </th>
-    <% if has_column_is_public %>    
-    <th><%= Spree::TemplateTheme.human_attribute_name(:is_public) %> </th>
-    <% end %>    
-  </tr> </thead>
+  </colgroup>
+  <thead>
+    <tr>
+      <th><%= Spree::TemplateTheme.human_attribute_name(:title) %></th>
+      <th>  <%= Spree.t(:theme_applied) %> </th>
+      <% if designable %>
+      <th><%= Spree::TemplateTheme.human_attribute_name(:is_public) %> </th>
+      <% end %>
+      <th data-hook="admin_template_themes_index_header_actions" class="actions"></th>
+    </tr>
+  </thead>
 
 
 <% @themes.each do |theme| %>
   <tr class="<%= cycle('odd', 'even') %>">
     <td> <span class="editable" data-id="<%=theme.id%>"><%= theme.title %></span></td>
-    <td align="center">      
+    <td align="center">
         <%= form_for [:admin,theme],:url=>apply_admin_template_theme_path(theme), :remote=>true do |f|%>
-        <%= radio_button_tag "is_applied", theme.id, theme.applied?  %>       
-        <% end %> 
+        <%= radio_button_tag "is_applied", theme.id, theme.applied?  %>
+        <% end %>
     </td>
-    <% if has_column_is_public %>
+    <% if designable %>
       <td align="center">
         <%= form_for [:admin,theme], :remote=>true do |f|%>
         <%= f.check_box "is_public"  %>
-        <% end %> 
+        <% end %>
       </td>
     <% end %>
     <td class="actions">
-    <%= link_to_with_icon 'icon-cogs', Spree.t(:theme_config), config_resource_admin_template_theme_path(theme), {:method=>:get,:no_text => true} %>
-    <% if theme.has_native_layout? %>    
-      <%= link_to_with_icon 'icon-eye', Spree.t(:preview_theme), preview_template_theme_path(theme), {:target=>'_blank',:no_text => true} %>
-      <% if SpreeTheme.site_class.current.design? %>    
-      <%= link_to_with_icon 'icon-copy', Spree.t(:theme_copy), copy_admin_template_theme_path(theme), {:method=>:post,:no_text => true} %>
+    <%= link_to_edit Spree.t(:theme_config), url: config_resource_admin_template_theme_path(theme), :no_text => true %>
+    <%= link_to_with_icon 'eye-open', Spree.t(:preview_theme), preview_template_theme_path(theme), {class: "btn btn-primary btn-sm",:target=>'_blank',:no_text => true} %>
+    <% if theme.has_native_layout? %>
+      <% if false %>
+      <%= link_to_clone Spree.t(:theme_copy), url: copy_admin_template_theme_path(theme) %>
       <% end %>
-      <%= link_to_with_icon 'icon-print', Spree.t(:theme_release), release_admin_template_theme_path(theme), {:method=>:post,:no_text => true} %>
+      <%= link_to_with_icon 'print', Spree.t(:theme_release), release_admin_template_theme_path(theme), {class: "btn btn-primary btn-sm", :method=>:post,:no_text => true} %>
     <% end %>
     <%= link_to_delete theme, :no_text => true if can?(:delete, theme)  %>
     </td>
@@ -62,11 +64,10 @@
 <% end %>
 </table>
 <% else %>
-  <div class="alpha twelve columns no-objects-found">
+  <div class="alert alert-info no-objects-found">
     <%= Spree.t(:no_resource_found, resource: I18n.t(:other, scope: 'activerecord.models.spree/template_theme')) %>,
     <%= link_to Spree.t(:select_from_foreign_themes), spree.foreign_admin_template_themes_path %>!
   </div>
 <% end %>
 
 <br />
-

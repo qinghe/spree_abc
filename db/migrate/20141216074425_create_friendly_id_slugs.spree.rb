@@ -10,7 +10,7 @@ class CreateFriendlyIdSlugs < ActiveRecord::Migration
     end
     add_index :friendly_id_slugs, :sluggable_id
     add_index :friendly_id_slugs, [:slug, :sluggable_type]
-    add_index :friendly_id_slugs, [:slug, :sluggable_type, :scope], :unique => true
+    add_index :friendly_id_slugs, [:slug, :sluggable_type, :scope], :unique => true, , length: { slug: 80, sluggable_type: 20, scope:20 }
     add_index :friendly_id_slugs, :sluggable_type
   end
 end

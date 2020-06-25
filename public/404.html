@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>The page you were looking for doesn't exist (404)</title>
+  <title>对不起，您访问的页面不存在！ (404)</title>
   <style type="text/css">
     body { background-color: #fff; color: #666; text-align: center; font-family: arial, sans-serif; }
     div.dialog {
@@ -12,6 +12,7 @@
       border-right-color: #999;
       border-bottom-color: #999;
     }
+    div.dialog p { text-align: left; }
     h1 { font-size: 100%; color: #f00; line-height: 1.5em; }
   </style>
 </head>
@@ -19,8 +20,12 @@
 <body>
   <!-- This file lives in public/404.html -->
   <div class="dialog">
-    <h1>The page you were looking for doesn't exist.</h1>
-    <p>You may have mistyped the address or the page may have moved.</p>
+    <h1>抱歉！页面无法访问……</h1>
+    <p> 可能因为： </p>
+    <p>网址有错误 > 请检查地址是否完整或存在多余字符 <br/>
+       网址已失效 > 可能页面已删除
+    </p>
+    <p> 返回 <a href="/" >网站首页</a> </p>
   </div>
 </body>
 </html>

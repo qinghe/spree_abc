@@ -1,0 +1,6 @@
+﻿bugs
+==================================================================================
+Started GET "/assets/default_taxon.png" for 127.0.0.1 at 2017-03-05 12:08:37 +0800
+Processing by ErrorsController#catch_404 as PNG
+  Parameters: {"path"=>"assets/default_taxon"}
+Completed 404 Not Found in 93ms (ActiveRecord: 0.5ms)

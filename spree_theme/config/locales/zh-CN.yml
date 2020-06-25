@@ -1,28 +1,49 @@
 zh-CN:
-########################################### start for template ###########################################    
+########################################### start for template ###########################################
   views:
     pagination:
       first: "&laquo; 首页"
-      last: "末页 &raquo;"      
+      last: "末页 &raquo;"
       next: 下一页 &raquo;
       previous: ! '&laquo; 上一页'
       truncate: ! '&hellip;'
-########################################### end for template ###########################################    
+  theme:
+    product_image:
+      lightboxable: 点击放大图片
+
+########################################### end for template ###########################################
   activerecord:
     attributes:
+      spree/comment:
+        email: 电子邮箱
+        cellphone: 手机
+        comment: 评论
       spree/page_layout:
-        section_context: section context
-        data_source: data source 
+        title: 名称
+        content_param: 内容参数
+        css_class: 模块CSS
+        css_class_for_js: JS使用CSS
+        content_css_class: 内容使用CSS
+        section_context: 适用页面
+        data_source: 数据源
+        data_source_param: 数据源参数
+        stylish: 样式
       spree/product:
         theme_id: 销售模板
+      spree/store_logo:
+        attachment: 文件名
+      spree/store_favicon:
+        attachment: FAVICON
       spree/taxon:
-        page_context: 页面显示内容分类
-        replaced_by: 页面显示内容置换
-      spree/template_file: 
+        page_context: 页面内容类型
+        replaced_by: 页面内容替换
+      spree/template_file:
         attachment_file_name: 文件名字
         attachment_content_type: 类型
         attachment_file_size: 文件大小
+        theme_id: 所属模板
         template_theme: 所属模板
+        alt: Alt文本
         created_at: 上传时间
       spree/template_text:
         name: 用途
@@ -33,15 +54,18 @@ zh-CN:
         slug: Slug
         section_root_id: 基础模块
         is_public: 是否公开
-      
+      spree/store_logo:
+        attachment: logo
     models:
       spree/page_layout:
         one: 模块
         other: 模块
       spree/template_file:
         one: 模板图片
+        other: 模板图片
       spree/template_text:
         one: 模板素材
+        other: 模板素材
       spree/template_theme:
         one: 模板
         other: 模板
@@ -54,6 +78,8 @@ zh-CN:
   spree:
     actions:
       import: 购买
+      config_desktop_theme: 配置电脑模板
+      config_mobile_theme: 配置手机模板
     admin:
       tab:
         taxonomies: 分类
@@ -61,18 +87,30 @@ zh-CN:
         theme_texts: 模板素材
         native_themes: 模板
         foreign_themes: 模板商店
+    alternative: alternative
+    attachment: 文件名
     back_to_themes_list: 回到模板列表
     back_to_template_text_list: 回到素材列表
     back_to_template_file_list: 回到素材列表
     china_address:
+      state_prompt: "省份/自治区"
+      city_prompt: "城市/地区/自治州"
+      district_prompt: "区/县"
       firstname: 收货人姓名
       phone: 电话
       state: 邮编
       city: 所在地区
       street: 详细地址
+    comment_successfully_created: 谢谢您的反馈，我们已收到。
+    comment_to_store: 亲爱的用户：欢迎您抢先体验“%{store_name}”，有任何意见和建议，或在使用过程中遇到问题，请告诉我们，我们会每天关注反馈信息，不断优化产品，为您提供更好的服务！
+    detail: 详细
+    logo: LOGO
+    favicon: FAVICON
+    new_template_file: 新建图片素材
+    new_template_text: 新建文本素材
     select_taxon: 选择菜单
-    select_template_image: 选择图片    
-    select_template_text: 选择文本 
+    select_template_image: 选择图片
+    select_template_text: 选择文本
     select_from_foreign_themes: 到模板商店选择模板
     default_page:
       home: 首页
@@ -86,20 +124,31 @@ zh-CN:
       unknown: 未知
       checkout: 付款
       thanks: 恭喜！支付成功
-      taxonomy: 缺省菜单 
+      taxonomy: 缺省菜单
       blog: 文章列表
       post: 文章内容
+      search: 搜索
+    detail: 详细
     dialog_title: 对话框
     global_taxons: 全局分类
+    one_click_trial: 免费创建店铺
+    post:
+      next: 下一篇
+      previous: 上一篇
+      no_previous: 没有了
+      no_next: 没有了
     notice_messages:
       theme_imported: 模板已经购买成功
-      theme_not_imported: 模板无法导入        
+      theme_released: 模板已经发布成功
+      theme_not_imported: 模板无法导入
     page_layout:
-      data_source: 数据源 
+      data_source: 数据源
       please_select_to_config: 请选择需要配置的模块
       section_context: 模块适用页面
       specific_taxon: 模块适用个别页面
       config_resource: 模块可用素材
+    post_detail: 详细信息
+    related_case_in_taxon: 相关案例
     section_context:
       home: 首页
       list: 产品列表
@@ -117,25 +166,31 @@ zh-CN:
       either: 任意页
       new_site: 注册开店
     section_data_source:
+      none: 无
       gpvs: 产品集合
       this_product: 当前选择产品
-      taxon: 菜单  
+      taxon: 分类
+      taxonomy: 分类树
       blog: 文章集合
       post: 当前选择文章
       gpvs_theme: 模板集合
+      previous_post: 当前选择文章-前一篇
+      next_post: 当前选择文章-下一篇
+      related_products: 相关产品
+      related_taxon: 相关分类
+    store_comment: 请留下您对“%{store_name}”的意见和建议！
     template_file:
       index: 图片素材
-      new: 新建图片素材
     template_resource: 网站素材
     template_text:
       index: 文本素材
       static_pages_desc: Manage static page with WYSIWYG editor.
-      new: 新建文本素材
       editing_page: Editing page
       confirm_delete: Are you sure ?
       link: Link
       meta_title: Meta Title
-      page_navigation_title: "Pages"          
+      page_navigation_title: "Pages"
+    template_texts: '文本素材'
     template_themes: 模板
     template_theme:
       assign_resource: 模板素材
@@ -157,7 +212,20 @@ zh-CN:
     install_theme_with_site: 安装
     is_taxon_clickable: 分类是否可点击
     theme_release: 发布
-    welcome_to_admin_login: Dalianshops管理系统登录
+    user_terminal: 用戶终端
+    unsupported_browser_add_favorite: '您的浏览器不支持,请按 Ctrl+D 手动收藏!'
+    unsupported_browser_set_home: '抱歉，您所使用的浏览器无法完成此操作。您需要手动将【"+url+"】设置为首页。'
+    welcome_to_admin_login: 管理系统登录
     welcome_to_under_construction: 网站建设中，请登录管理系统
-      
-                         
+#for comment
+    said: said
+    for: for
+    comments: Comments
+    comment: Comment
+    add_comment_type: Add Comment Type
+    comment_types: Comment Types
+    manage_comment_types: Manage comment types
+    applies_to: Applies To
+    new_comment_type: New Comment Type
+    editing_comment_type: Editing Comment Type
+    back_to_comment_types_list: Back to Comment Types List

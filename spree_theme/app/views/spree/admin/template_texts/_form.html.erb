@@ -1,19 +1,12 @@
-<div class="row">
-  <div class="alpha twelve columns">
-    <div data-hook="page_translate" >
-    <%= f.field_container :name do %>
+
+    <%= f.field_container :name, class: ['form-group']  do %>
       <%= f.label :name %> <span class="required">*</span><br />
-      <%= f.text_field :name, :class => 'fullwidth title' %>
+      <%= f.text_field :name, :class => 'form-control title ' %>
       <%= f.error_message_on :name %>
     <% end %>
 
-     <%= f.field_container :body do %>
+     <%= f.field_container :body, class: ['form-group']  do %>
       <%= f.label :body %><span class="required">*</span><br />
-      <%#= f.text_area :body,:class => 'fullwidth title' %>
       <%= f.text_area :body %>
       <%= f.error_message_on :body %>
     <% end %>
-    </div>
-  </div>
-</div>
-

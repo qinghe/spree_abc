@@ -1,0 +1,371 @@
+post_files:
+  id: 100
+  title: post files
+  slug: post-files
+  is_selectable: "0"
+  is_container: "0"
+  for_terminal: "0"
+  html: |
+    <div  data-hook="post_images" >
+    <% if post.files.any? %>
+      <ul class="" data-hook>
+        <% post.files.each do |i| %>
+          <li class='tmb-all tmb-<%= i.viewable.id %>'>
+            <%= @template.post_attribute( :file, file: i ) %>
+          </li>
+        <% end %>
+      </ul>
+    <% end %>
+    </div>
+  css: |
+    .<%=@template.section_selector%> ul{
+      list-style: none;
+      margin: 0; padding: 0;}
+  js: ""
+container_background:
+  id: 101
+  title: container background
+  slug: container-background
+  is_selectable: "0"
+  is_container: "1"
+  html: ~~content~~
+  css: |
+    @media screen and (min-width: 1441px) {
+      /*1440*731 1920x975 */
+      .<%=@template.section_selector%> > .inner{ background-size: cover; <%=@template.css(:inner1)%>  }
+    }
+  js: ""
+one_click_trial:
+  id: 102
+  title: one click trial
+  slug: one-click-trial
+  is_selectable: "0"
+  is_container: "1"
+  usage: unused
+  html: |
+    <%= render "themes/sites/one_click_trial" %>
+  css: |
+    #launch_site_container {
+      display:none;
+    }
+    .<%=@template.section_selector%> .modal_close_img{
+      position:absolute;
+      font-size: 22px;
+    }
+  js: ""
+container_dialog:
+  id: 103
+  title: container dialog
+  slug: container-dialog
+  is_selectable: "0"
+  is_container: "1"
+  usage: "dialog"
+  html: ~~content~~
+  css: |
+    .<%=@template.section_selector%> { display:none; }
+    .simplemodal-overlay{
+      <%=@template.css(:dialog_overlay)%>
+    }
+slider_data_taxons_transition_fade:
+  id: 104
+  title: slider data taxons transition fade
+  slug: slider-data-taxons-transition-fade
+  is_selectable: "0"
+  is_container: "0"
+  html: |-
+      <%# jssor require with,height in element style. %>
+      <div data-u="slides" class="slides" style="position: absolute;overflow:hidden;" data-transition='fade'>
+      <% if @template.menu.present? %>
+        <% @template.menu.children.each{|page| next if page.icon.blank? %>
+          <div><%= image_tag page.icon.attachment.url(:original), :u=>'image', :alt=>page.name %></div>
+        <% } %>
+      <% end %>
+      </div>
+  css: ''
+  js: ''
+product_search:
+  id: 105
+  title: product search
+  slug: product-search
+  is_selectable: "0"
+  is_container: "1"
+  html: |
+    <%= render "themes/product_search" %>
+  css: |
+    .search_form {
+    }
+  js: ""
+container_absolute:
+  id: 106
+  title: container absolute
+  slug: container-absolute
+  is_selectable: "0"
+  is_container: "1"
+  html: |
+    ~~content~~
+  css: |
+    .<%=@template.section_selector%> {z-index:1; position:absolute;  <%=@template.css(:absolute_position) %>}
+  js: ''
+flash_message:
+  id: 107
+  title: flash message
+  slug: flash-message
+  is_selectable: 0
+  is_container: 0
+  html: <%= flash_messages %>
+  css: |
+    .<%=@template.section_selector%> .alert { padding: 5px; border: 1px solid transparent; border-radius: 4px;}
+    .<%=@template.section_selector%> .alert-success,.<%=@template.section_selector%> .alert-notice {
+       color: #3c763d;  background-color: #dff0d8;  border-color: #d6e9c6;
+    }
+    .<%=@template.section_selector%> .alert-info {  color: #31708f; background-color: #d9edf7; border-color: #bce8f1; }
+    .<%=@template.section_selector%> .alert-warning { color: #8a6d3b; background-color: #fcf8e3; border-color: #faebcc; }
+    .<%=@template.section_selector%> ..alert-danger { color: #a94442; background-color: #f2dede; border-color: #ebccd1;}
+
+  js: ''
+relation_type_name:
+  id: 108
+  title: relation type name
+  slug: relation-type-name
+  is_selectable: "0"
+  is_container: "0"
+  html: |
+    <%= @template.relation_attribute(:name) %>
+  css: ""
+  js: ""
+related_taxon_name:
+  id: 109
+  title: related taxon name
+  slug: related-taxon-name
+  is_selectable: "0"
+  is_container: "0"
+  html: ""
+  css: ""
+  js: ""
+
+slider_bullet_navigator:
+  id: 110
+  title: slider bullet navigator
+  slug: slider-bullet-navigator
+  is_selectable: "1"
+  is_container: "1"
+  html: |-
+      <!-- Bullet Navigator Skin Begin -->
+      <div u="navigator" class= "jssorb03" style="position: absolute;">
+          <!-- bullet navigator item prototype -->
+          <div u="prototype" style="position: absolute; width: 19px; height: 19px;"></div>
+      </div>
+  css: |-
+    .<%=@template.section_selector%> [u='navigator']{
+      position: absolute;
+      bottom:0;
+    }
+    .jssorb03 div, .jssorb03 div:hover, .jssorb03 .av
+    {
+        background: url('/shops/shared/images/jssor/n21.png') no-repeat;
+        overflow:hidden;
+        cursor: pointer;
+    }
+    .jssorb03 div { background-position: -5px -5px; }
+    .jssorb03 div:hover, .jssorb03 .av:hover { background-position: -35px -5px; }
+    .jssorb03 .av { background-position: -65px -5px; }
+    .jssorb03 .dn, .jssorb03 .dn:hover { background-position: -95px -5px; }
+
+slider_arrow_navigator:
+  id: 111
+  title: slider arrow navigator
+  slug: slider-arrow-navigator
+  is_selectable: "1"
+  is_container: "1"
+  html: |-
+    <span data-u="arrowleft" class="jssora22l arrowleft" style="top: 123px; left: 8px;" data-autocenter="2"></span>
+    <span data-u="arrowright" class="jssora22r arrowright" style="top: 123px; right: 8px;" data-autocenter="2"></span>
+  css: |-
+    /* jssor slider arrow navigator skin 22 css */
+    /*
+    .jssora22l                  (normal)
+    .jssora22r                  (normal)
+    .jssora22l:hover            (normal mouseover)
+    .jssora22r:hover            (normal mouseover)
+    .jssora22l.jssora22ldn      (mousedown)
+    .jssora22r.jssora22rdn      (mousedown)
+    */
+    .jssora22l, .jssora22r {
+        display: block;
+        position: absolute;
+        /* size of arrow element */
+        width: 40px;
+        height: 58px;
+        cursor: pointer;
+        background: url('/shops/shared/images/jssor/a22.png') center center no-repeat;
+        overflow: hidden;
+    }
+    .jssora22l { background-position: -10px -31px; }
+    .jssora22r { background-position: -70px -31px; }
+    .jssora22l:hover { background-position: -130px -31px; }
+    .jssora22r:hover { background-position: -190px -31px; }
+    .jssora22l.jssora22ldn { background-position: -250px -31px; }
+    .jssora22r.jssora22rdn { background-position: -310px -31px; }
+product_next_attribute:
+  id: 112
+  title: product next attribute
+  slug: product-next-attribute
+  is_selectable: "0"
+  is_container: "0"
+  html: |
+    <%= @template.product_attribute( :icon_angle_right, {data: @template.next_product, placeholder: '>'} ) %>
+  css: ""
+  js: ""
+product_previous_attribute:
+  id: 113
+  title: product previous attribute
+  slug: product-previous-attribute
+  is_selectable: "0"
+  is_container: "0"
+  html: |
+    <%= @template.product_attribute( :icon_angle_left, {data: @template.previous_product, placeholder: '<'} ) %>
+  css: ""
+  js: ""
+taxon_next_attribute:
+  id: 114
+  title: taxon next attribute
+  slug: taxon-next-attribute
+  is_selectable: "0"
+  is_container: "0"
+  html: |
+    <%= @template.page_attribute( :icon_angle_right, {data: @template.next_taxon, placeholder: '>'} ) %>
+  css: ""
+  js: ""
+taxon_previous_attribute:
+  id: 115
+  title: taxon previous attribute
+  slug: taxon-previous-attribute
+  is_selectable: "0"
+  is_container: "0"
+  html: |
+    <%= @template.page_attribute( :icon_angle_left, {data: @template.previous_taxon, placeholder: '<'} ) %>
+  css: ""
+  js: ""
+full_screen:
+  id: 116
+  title: full screen
+  slug: full-screen
+  is_selectable: "0"
+  is_container: "1"
+  html: |
+    ~~content~~
+  css: |
+    .<%=@template.section_selector%> { z-index:1; position:fixed;  top:0;left:0;right:0;bottom:0;}
+    .<%=@template.section_selector%> >.inner { width:100%; height:100%; }
+
+product_attribute:
+  id: 117
+  title: product attribute
+  slug: product-attribute
+  is_selectable: "0"
+  is_container: "0"
+  html: |
+    <%= @template.product_attribute() %>
+  css: ''
+  js: ''
+hover_effect_fadein_container:
+  id: 118
+  title: hover effect fadein container
+  slug: hover-effect-fadein-container
+  is_selectable: "0"
+  is_container: "1"
+  html: |
+    ~~content~~
+  css: |
+      /*http://www.gtn9.com/user_show.aspx?action=yc&id=C80E6E334F84E131&page=1*/
+      .<%=@template.section_selector%> > .inner{ position: relative; }
+      .<%= @template.section_selector %> >.inner div:nth-child(1){   }
+      .<%= @template.section_selector %> >.inner div:nth-child(2){  position:absolute; top:0;left:0;  }
+      .<%= @template.section_selector %> >.inner:hover div:nth-child(2) {
+        color:#fff;
+        transform: scale3d(1,1,1);
+      	background-color: rgba(0,0,0,0.8);
+      }
+      .<%= @template.section_selector %> >.inner div:nth-child(2) {
+      	opacity: 0;
+        transition: opacity 0.35s, transform 0.35s;
+        transform: scale(1.5);
+       }
+      .<%= @template.section_selector %> >.inner:hover div:nth-child(2) {
+        opacity: 1;
+        transform: scale3d(1,1,1);
+       }
+
+  js: ''
+swipper_core:
+  id: 119
+  title: swipper core
+  slug: swipper-core
+  is_selectable: "1"
+  is_container: "1"
+  html: |-
+    <div class="swiper-container">
+      ~~content~~
+        <!-- 如果需要分页器 -->
+        <div class="swiper-pagination"></div>
+
+    </div>
+
+  css: |-
+    .<%=@template.section_selector%> > .inner { min-height:1px;min-width:1px; /* hight, width are required*/}
+    .<%=@template.section_selector%> .swiper-container {
+      <%=@template.css(:slides)%>
+      cursor: move;
+    }
+    .<%=@template.section_selector%> .swiper-pagination-bullet {
+        border-radius: 0;
+        width: 5%;
+        height: 4px;
+    }
+    .<%=@template.section_selector%> .swiper-pagination-bullet-active {
+      background: #e20012;
+    }
+swipper_data_taxons:
+  id: 120
+  title: swipper data taxons
+  slug: swipper-data-taxons
+  is_selectable: "0"
+  is_container: "0"
+  html: |-
+      <div class="swiper-wrapper">
+        <% @template.menu.children.each{|page| next if page.icon.blank? %>
+          <div class="swiper-slide"><%= image_tag page.icon.attachment.url(:original), :alt=>page.name %></div>
+        <% } if @template.menu.present?%>
+      </div>
+  css: |-
+    .<%=@template.section_selector%> .swiper-slide img {
+      width: 100%;
+    }
+  js: ''
+swipper_data_taxons_as_background:
+  id: 121
+  title: swipper data taxons as background
+  slug: swipper-data-taxons-as-background
+  is_selectable: "0"
+  is_container: "0"
+  html: |-
+      <div class="swiper-wrapper">
+        <% @template.menu.children.each{|page| next if page.icon.blank? %>
+          <div class="swiper-slide" style="background-image:url('<%=page.icon.attachment.url(:original)%>')"></div>
+        <% } if @template.menu.present?%>
+      </div>
+  css: |-
+    .<%=@template.section_selector%> .swiper-slide {
+      background-position: center; background-size: cover;
+    }
+  js: ''
+post_attribute:
+  id: 122
+  title: post attribute
+  slug: post-attribute
+  is_selectable: "0"
+  is_container: "0"
+  html: |
+    <%= @template.post_attribute() %>
+  css: ''
+  js: ''

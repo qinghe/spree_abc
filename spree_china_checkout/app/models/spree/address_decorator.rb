@@ -1,23 +1,28 @@
 Spree::Address.class_eval do
   #attr_accessible :city_name, :city_id # follow state
-   
+  belongs_to :china_city, foreign_key: 'city_id', class_name: 'City'
+  belongs_to :district
+  #disable validation to walk arount order address editing at backend
+  #validates :district, presence: true
+
   before_validation :set_city, :only=>[:city]
-    def self.default
+
+    def self.build_default
       country = Spree::Country.find(Spree::Config[:default_country_id]) rescue Spree::Country.first
       # add default state into default address
-      state = country.states.first      
-      new({:country => country,:state=>state}, :without_protection => true)
+      state = country.states.first
+      new({:country => country,:state=>state})
     end
-    
-    
-    
+
+
+
     private
       # Address.city should be present
       def set_city()
-        selected_city = Spree::City.first(:conditions=>["id=?",city_id])
-        self.city = selected_city.present? ? selected_city.name : city_name 
+        selected_city = Spree::City.where(id: city_id).first
+        self.city = selected_city.present? ? selected_city.name : city_name
       end
-    
+
       #copy from Address#state_validate
       def city_validate
         # Skip city validation without country (also required)
@@ -54,6 +59,4 @@ Spree::Address.class_eval do
         # ensure at least one city field is populated
         errors.add :city, :blank if city.blank? && city_name.blank?
       end
-end    
-
-
+end

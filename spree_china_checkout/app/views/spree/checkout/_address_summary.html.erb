@@ -1,0 +1,29 @@
+<% address = order.ship_address %>
+<div class="address vcard">
+  <span class="fn"><%= address.firstname %></span>
+  <% unless address.company.blank? %>
+    <span class="org">
+      <%= address.company %>
+    </span>
+  <% end %>
+  <span class="adr">
+    <span class="local">
+      <span class="region"><%= address.state.name %></span> <span class="locality"><%= address.city %></span>   <span class="locality"><%= address.district.name %></span>    
+      <span class="street-address-line"> <%= address.address1 %> </span>
+      <span class="postal-code"><%= address.zipcode %></span>
+    </span>
+
+  </span>
+  <% unless address.phone.blank? %>
+    <span class="tel">
+      <span class="type"><%= Spree.t(:phone) %></span>
+      <%= address.phone %>
+    </span>
+  <% end %>
+  <% unless address.alternative_phone.blank? %>
+    <span class="alternative-phone tel">
+      <span class="type"><%= Spree.t(:alternative_phone) %></span>
+      <%= address.alternative_phone %>
+    </span>
+  <% end %>
+</div>

@@ -1,3 +1,8 @@
+<%= javascript_tag " var please_select_state_prompt = '#{j Spree.t('china_address.state_prompt')}';
+  var please_select_city_prompt = '#{j Spree.t('china_address.city_prompt')}';
+  var please_select_district_prompt = '#{j Spree.t('china_address.district_prompt')}';" %>
+
+
 <% address_id = address_type.chars.first %>
 <div class="inner" data-hook=<%="#{address_type}_inner" %>>
   <%= form.hidden_field :lastname, :class => '', :value=>'unused' %>
@@ -16,53 +21,37 @@
     </span>
   <% if Spree::Config[:address_requires_state] %>
     <span class="field" id=<%="#{address_id}state" %>>
-      <% have_states = !address.country.states.empty? %>
-      <% state_elements = [
-         form.collection_select(:state_id, address.country.states,
+      <% states = address.try(:country).try(:states) %>
+      <%= form.collection_select(:state_id, states,
                             :id, :name,
-                            {:include_blank => true},
-                            {:class => have_states ? 'required' : 'hidden',
-                            :disabled => !have_states}) +
-         form.text_field(:state_name,
-                            :class => !have_states ? 'required' : 'hidden',
-                            :disabled => have_states)
-         ].join.gsub('"', "'").gsub("\n", "")
+                            {:include_blank => Spree.t('china_address.state_prompt')},
+                            {:class => 'form-control required'})
       %>
-      <%= javascript_tag do %>
-        $('#<%="#{address_id}state" %>').append("<%== state_elements %>");
-      <% end %>
     </span>
-      <noscript>
-        <%= form.text_field :state_name, :class => 'required' %>
-      </noscript>
 
     <span class="field" id=<%="#{address_id}city" %>>
-      <% have_cities = !address.state.cities.empty? %>
-
-      <% city_elements = [
-         form.collection_select(:city_id, address.state.cities,
+      <% cities = address.try(:state).try(:cities) || [] %>
+      <%= form.collection_select(:city_id, cities,
                             :id, :name,
-                            {:include_blank => true},
-                            {:class => have_cities ? 'required' : 'hidden',
-                            :disabled => !have_cities}) +
-         form.text_field(:city_name,
-                            :class => !have_cities ? 'required' : 'hidden',
-                            :disabled => have_cities)
-         ].join.gsub('"', "'").gsub("\n", "")
+                            {:include_blank => Spree.t('china_address.city_prompt')},
+                            {:class => 'form-control required'})
       %>
-      <%= javascript_tag do %>
-        $('#<%="#{address_id}city" %>').append("<%== city_elements %>");
-      <% end %>
     </span>
-      <noscript>
-        <%= form.text_field :city_name, :class => 'required' %>
-      </noscript>
+
+    <span class="field" id=<%="#{address_id}district" %>>
+      <% districts = address.try(:china_city).try(:districts ) || [] %>
+      <%= form.collection_select(:district_id, districts,
+                            :id, :name,
+                            {:include_blank => Spree.t('china_address.district_prompt')},
+                            {:class => 'form-control required'})
+      %>
+    </span>
   <% end %>
   </p>
 
   <p class="field" id=<%="#{address_id}address1" %>>
     <%= form.label :address1, Spree.t('china_address.street') %><span class="required">*</span><br />
-    <%= form.text_field :address1, :class => 'required' %>
+    <%= form.text_field :address1, class: 'required', size: '66', maxlength: '66' %>
   </p>
 
   <p class="field" id=<%="#{address_id}zipcode" %>>

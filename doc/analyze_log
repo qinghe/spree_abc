@@ -1,0 +1,28 @@
+shell command
+========================================================================================
+1. has error?
+cat log/aliyun_staging.log --number |grep Error
+2. view specific line
+more +line_no  aliyun_staging.log
+3. view specific line by vi
+vi aliyun_staging.log
+command: set num
+command:  nG   ex. 125G
+
+request-log-analyzer
+=========================================================================================
+1. prepare tool
+gem install rails
+gem install sqlite3
+gem install request-log-analyzer
+
+2. copy server log to localhost.
+
+ scp deploy@getstore.cn:/home/deploy/www/spree_abc_current/log/aliyun_staging.log .
+
+3. dump analysis result into sqlite
+
+request-log-analyzer /home/deploy/www/spree_abc_current/log/aliyun_staging.log  --format rails3 --before 2015-12-17 --after 2015-12-16  --database spree_abc_log_2015_12_16
+
+select all Errors
+SELECT * FROM started_lines left join processing_lines on  processing_lines.request_id=started_lines.request_id  where controller='ErrorsController'

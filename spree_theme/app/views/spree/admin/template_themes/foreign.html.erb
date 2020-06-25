@@ -1,32 +1,31 @@
-<%= render :partial => 'sub_menu' %>
 <% content_for :page_title do %>
-  <%= Spree.t(:theme_foreign) %> 
+  <%= Spree.t(:theme_foreign) %>
 <% end %>
-<table>
+
+<table class="table">
   <colgroup>
        <col style="width: 65%;">
        <col style="width: 10%;">
        <col style="width: 12%;">
-       <col style="width: 10%;">
-  </colgroup>  
+       <col style="width: 13%;">
+  </colgroup>
 
   <tr>
     <th><%= Spree::TemplateTheme.human_attribute_name(:title) %></th>
     <th><%= Spree.t(:theme_is_free) %></th>
     <th><%= Spree.t(:theme_is_imported) %></th>
+    <th> </th>
   </tr>
 
-<% @themes.each do |theme| %>
-  <tr>
-    <td><%= theme.title %></td>
-    <td align="center"><%= Spree.t(:say_yes) %></td>
-    <td align="center"><%= theme.imported? ? Spree.t(:say_yes) : Spree.t(:not) %></td>
-    <td class="actions"><%= link_to_with_icon 'icon-eye', Spree.t(:preview_theme), preview_template_theme_url(theme, :host=>SpreeTheme.site_class.designsite.domain),{:target=>'_blank',:no_text => true} %>
-    <%=link_to_with_icon 'icon-tag', Spree.t(:theme_import), import_admin_template_theme_path(theme),{:disabled=>theme.imported?, :no_text => true, :method=>:post} %>
-    </td>
-  </tr>
-<% end %>
+  <% @themes.each do |theme| %>
+    <tr>
+      <td><%= theme.title %></td>
+      <td align="center"><%= Spree.t(:say_yes) %></td>
+      <td align="center"><%= theme.imported? ? Spree.t(:say_yes) : Spree.t(:not) %></td>
+      <td class="actions">
+        <%= link_to_with_icon 'eye', Spree.t(:preview_theme), preview_template_theme_url(theme, :host=>theme.store.subdomain),{:target=>'_blank',:no_text => true} %>
+        <%= link_to_with_icon 'tag', Spree.t(:theme_import), import_admin_template_theme_path(theme),{:disabled=>theme.imported?, :no_text => true, :method=>:post} %>
+      </td>
+    </tr>
+  <% end %>
 </table>
-
-<br />
-

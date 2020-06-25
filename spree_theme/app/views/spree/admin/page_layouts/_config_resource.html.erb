@@ -1,0 +1,49 @@
+
+<fieldset id="page_layout_container" class="">
+  <% if @page_layout.present? %>
+      <% page_layout = @page_layout
+         section_piece_resources = page_layout.section_piece_resources
+         data_source_based_resource = page_layout.data_source_based_resources
+      %>
+      <%= form_for :page_layout, url: update_resource_admin_template_theme_page_layout_path(@template_theme,page_layout),remote: true do |f|%>
+          <div class="form-group">
+            <%= label_tag :config_resource, Spree.t('page_layout.config_resource') %><br>
+            <% if section_piece_resources.present? %>
+              <% section_piece_resources.each_with_index{| wrapped_resource,idx |
+                    assigned_resource_id = @template_theme.assigned_resource_id(wrapped_resource.resource_class, page_layout, idx)
+              %>
+                  <%= select_tag "assigned_resource_ids[]",options_from_collection_for_select(wrapped_resource.resource_class.resourceful(@template_theme ), :id, :name, assigned_resource_id ), include_blank: true, class: 'select2', multiple: "multiple" %>
+              <% } %>
+            <% elsif data_source_based_resource.present?
+              assigned_resource_id = @template_theme.assigned_resource_id(data_source_based_resource.resource_class, page_layout)
+            %>
+              <%= select_tag "assigned_resource_ids[]",options_from_collection_for_select( data_source_based_resource.resource_class.resourceful(@template_theme ), :id, :name, assigned_resource_id ), include_blank: true, class: 'select2', multiple: "multiple" %>
+
+            <% else %>
+                 <% assigned_resource_id = @template_theme.assigned_resource_id(SpreeTheme.taxon_class, page_layout) %>
+                 <%= hidden_field_tag "assigned_resource_ids[]",'', :value=>( assigned_resource_id>0 ? assigned_resource_id : '' ) %>
+            <% end %>
+          </div>
+
+        <div class="form-actions" data-hook="buttons">
+          <%= button Spree.t('actions.update'), 'refresh' %>
+          <span class="or"><%= Spree.t(:or) %></span>
+          <%= button_link_to Spree.t('actions.cancel'), '', :icon => 'remove', :onclick=>"$('#page_layout_container').hide();return false;" %>
+        </div>
+      <%end%>
+  <% else %>
+      <div class="alert alert-info no-objects-found">
+        <%= Spree.t(:no_resource_found, resource: I18n.t(:other, scope: 'activerecord.models.spree/page_layout')) %>,
+      </div>
+  <% end %>
+</fieldset>
+
+<% unless Rails.env.test? %>
+  <script>
+  $(document).ready(function () {
+    <% if section_piece_resources.blank? && data_source_based_resource.blank? %>
+    set_resource_taxon_select('assigned_resource_ids_', false, Spree.routes.taxons_api);
+    <% end %>
+  });
+  </script>
+<% end %>

@@ -1,16 +1,14 @@
-<%= render :partial => 'sub_menu' %>
+<%= render :partial=>'spree/admin/template_themes/js_head' %>
+
 <% content_for :page_actions do %>
-  <li><%= button_link_to Spree.t(:back_to_themes_list), native_admin_template_themes_url, :icon => 'icon-arrow-left' %></li>
-  <% if can?(:config, Spree::TemplateTheme) %>
-    <li id="new_template_theme_link">
-    </li>
-  <% end %>
+  <%= render :partial => 'page_actions_for_config' %>
 <% end %>
+
 <div id="page_layout_wrapper">
-      <%= render :partial=>'spree/admin/page_layout/config_resource', :locals=>{ :page_layout=> @template_theme.page_layout } %>
+      <%= render :partial=>'spree/admin/page_layouts/config_resource', :locals=>{ :page_layout=> @template_theme.original_page_layout_root } %>
 </div>
 
-<%= render :partial=>'theme_tabs',:locals=>{:current=>"ConfigResource"}%>
+<%= render :partial=>'spree/admin/shared/template_theme_tabs',:locals=>{:current=>"ConfigResource"}%>
 <div class="">
-<%= render :partial=>'layout_tree_for_config', :locals=>{:theme=>@template_theme, :current=>"ConfigResource" }%>
+  <%= render :partial=>'layout_tree_for_config', :locals=>{:theme=>@template_theme, :current=>"ConfigResource" }%>
 </div>

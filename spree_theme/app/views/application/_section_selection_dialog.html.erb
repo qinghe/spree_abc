@@ -1,26 +1,24 @@
-<div id="section_select_dialog" class="clear-block" title="Section dialog" style="display: none; position: relative;">
-    
-  <div style="position: absolute">  
-        
-      <ul class="titles" style="position:absolute; width:50%;left:0; top:0; bottom:30px;">
-          <% sections.each_index{|i| s = sections[i]%>
+<div id="section_select_dialog" class="clear-block" title="Section dialog" style="display: none; position: relative; height:100%;">
+
+
+      <ul class="titles" style="position:absolute; width:50%;left:10px; top:10px; bottom:50px;overflow-y:auto; ">
+          <% sections.each_with_index{|s,i| %>
           <li <%= 'class=selected' if i==0%> <%="data-section-id=#{s.id}"%> ><%=s.slug%></li>
           <% }%>
-      </ul>  
-      <div class="details" style="position:absolute; width:50%;right:0; top:0; bottom:30px;">
-          <% sections.each_index{|i| s = sections[i]%>
+      </ul>
+      <div class="details" style="position:absolute; width:40%;right:10px; top:10px; bottom:50px;">
+          <% sections.each_with_index{|s,i| %>
           <div <%= 'class=selected' if i==0%>>
             <%= s.slug%>
           </div>
           <% }%>
-      </div>   
-      
-      <div style="position: absolute;bottom: 0;">
-          <%=link_to "cancel", "#", { class:'dialog_close_button' }%>
-          <%=link_to "ok", "#", { class:'dialog_ok_button' }%>
       </div>
-       
-  </div>
+
+      <div style="position: absolute;bottom: 0;">
+          <%=link_to "cancel", "#", { class:'dialog_close_button', data:{ turbolinks: false } }%>
+          <%=link_to "ok", "#", { class:'dialog_ok_button', data:{op:'add_child', turbolinks: false } }%>
+      </div>
+
   <input type="hidden" name="selected_section_id" value="<%=sections.first.id%>" />
-  
+
 </div>

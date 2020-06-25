@@ -3,7 +3,7 @@
 
 require 'test_helper'
 
-class Spree::Blogs::Admin::DisqusIntegrationTest < SpreeEssentials::IntegrationCase
+class Spree::Admin::DisqusIntegrationTest < SpreeEssentials::IntegrationCase
 
   should "have a link to disqus config" do
     visit spree.admin_configurations_path

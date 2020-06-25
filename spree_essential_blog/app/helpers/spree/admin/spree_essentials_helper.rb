@@ -10,6 +10,16 @@ module Spree::Admin::SpreeEssentialsHelper
     end
   end
   
+  def mini_cover( post )
+    options = {:alt=> 'post mini image'}
+    if post.cover.present?
+      image_tag post.cover.url(:mini), options      
+    else
+      image_tag "noimage/mini.png", options
+    end
+
+  end
+  
 private
   
   def extension_routes

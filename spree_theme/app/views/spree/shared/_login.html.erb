@@ -1,12 +1,12 @@
-<%= form_for Spree::User.new, :as => :spree_user, :url => spree.create_new_session_path do |f| %>
+<%= form_for Spree::User.new, :as => :spree_user, :url => spree.create_new_session_path, :html=>{ :class=> 'fullwidth' } do |f| %>
   <div id="password-credentials">
     <p>
       <%= f.label :email, Spree.t(:email) %><br/>
-      <%= f.email_field :email, :class => 'title', :tabindex => 1 %>
+      <%= f.email_field :email, :class => 'form-control', :tabindex => 1, autofocus: true %>
     </p>
     <p>
       <%= f.label :password, Spree.t(:password) %><br/>
-      <%= f.password_field :password, :class => 'title', :tabindex => 2 %>
+      <%= f.password_field :password, :class => 'form-control', :tabindex => 2 %>
     </p>
   </div>
   <p class="box-check">

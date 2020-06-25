@@ -1,0 +1,5 @@
+网站名称： Example Shop
+网站域名： www.example.com
+管理路径： 网站域名+/admin
+管理员帐号： some@example.com
+管理员密码： xxxxxx

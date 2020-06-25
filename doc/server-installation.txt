@@ -1,0 +1,38 @@
+# add user
+useradd -m -s /bin/bash deploy
+passwd deploy
+
+# add sudo
+usermod -a -G wheel deploy
+visudo
+
+# install rvm, http://rvm.io/
+yum install openssl
+
+gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
+curl -sSL https://get.rvm.io | bash -s stable
+
+rvm install 2.x
+
+# install bundler, http://ruby.taobao.org/
+gem install bundler
+
+# install nodejs, rails execjs required
+wget http://nodejs.org/dist/node-latest.tar.gz
+tar -xcvf node*
+
+# verify node is accessiable
+which node
+ln -s /usr/local/bin/node /usr/bin/node
+
+# install passenger
+gem install passenger
+passenger-install-apache2-module  / passenger-install-nginx-module
+
+# add /home/deploy  execute permission, httpd required
+chmod +x /home/deploy
+
+
+
+
+

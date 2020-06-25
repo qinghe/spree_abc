@@ -1,0 +1,5 @@
+$("#page_layout_wrapper").html('<%= escape_javascript(render :partial => "spree/admin/page_layouts/config_data_source", :formats => [:html], :handlers => [:erb]) %>');
+<% unless Rails.env.test? %>
+  $('.select2').select2( );
+  $('.select2-container').css({width: '40em'});
+<% end %>

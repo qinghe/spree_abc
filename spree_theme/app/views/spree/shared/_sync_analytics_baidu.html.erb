@@ -1,0 +1,13 @@
+<% if tracker = Spree::Tracker.current %>
+
+  <%= javascript_tag do %>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.setAttribute("data-turbolinks-track","reload");
+      hm.src = "//hm.baidu.com/hm.js?<%= tracker.analytics_id %>";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  <% end %>
+<% end %>

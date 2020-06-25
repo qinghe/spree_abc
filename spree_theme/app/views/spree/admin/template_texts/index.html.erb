@@ -1,11 +1,10 @@
-<%= render :partial => 'sub_menu' %>
-<% content_for :page_actions do %>  
-  <li><%= button_link_to Spree.t("template_text.new"), new_object_url, :icon => 'icon-plus' %></li>
+<% content_for :page_actions do %>
+  <%= button_link_to Spree.t("new_template_text"), new_object_url, :class => "btn-success", :icon => 'add' %>
 <% end %>
+<%= render :partial=>'spree/admin/shared/template_text_tabs',:locals=>{:current=>"TemplateText"}%>
 
-<%= render :partial=>'tabs',:locals=>{:current=>"TemplateText"}%>
-
-<table class="index">
+<% if @template_texts.any? %>
+<table class="table">
   <colgroup>
     <col style="width: 70%" />
     <col style="width: 20%" />
@@ -16,7 +15,7 @@
       <th class="actions"></th>
     </tr>
   </thead>
-  
+
   <tbody>
     <% @template_texts.each do |page| %>
       <tr class="<%= cycle('odd', 'even') %>" id="<%= dom_id page %>">
@@ -31,3 +30,10 @@
     <% end %>
   </tbody>
 </table>
+
+<% else %>
+  <div class="alert alert-info no-objects-found">
+    <%= Spree.t(:no_resource_found, resource: I18n.t(:other, scope: 'activerecord.models.spree/template_text')) %>,
+    <%= link_to Spree.t(:add_one), spree.new_admin_template_text_path %>!
+  </div>
+<% end %>

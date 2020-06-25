@@ -1,0 +1,40 @@
+#https://github.com/ruby-china/ruby-china/wiki/Ubuntu-12.04-%E4%B8%8A%E4%BD%BF%E7%94%A8-Nginx-Passenger-%E9%83%A8%E7%BD%B2-Ruby-on-Rails
+
+1 出于安全考虑，不要使用 root 帐号运行 web 应用。这里新建一个专门用于部署的用户，例如 deploy 或者其它你喜欢的名字。运行以下命令创建用户
+useradd -m -s /bin/bash deploy
+
+2 将用户加入 sudo 群组，以便使用 sudo 命令
+groupadd sudo
+
+3.
+usermod -a -G sudo deploy
+
+4. visudo
+
+5. 为 deploy 用户设置密码：
+  passwd deploy
+
+6.
+  curl -sSL https://get.rvm.io | bash -s stable
+
+7.
+  rvm use --install --default 2.1.2
+  rvm use 2.1.2@spree_abc --create --default
+
+8. generates ssh key for github
+https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/
+
+9. install mysql
+  yum -y install mysql-server mysql mysql-devel
+
+10. secure mysql
+/usr/bin/mysql_secure_installation
+
+11. make mysql/httpd as service
+sudo chkconfig httpd on
+sudo chkconfig mysqld on
+
+
+12. modify folder 'deploy' permission for apache
+http://wiki.apache.org/httpd/13PermissionDenied
+chmod 711 deploy

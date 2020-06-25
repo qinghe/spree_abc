@@ -1,0 +1,88 @@
+<% address_id = address_type.chars.first %>
+<div class="inner" data-hook=<%="#{address_type}_inner" %>>
+  <%= form.hidden_field :lastname, :class => '', :value=>'unused' %>
+  <% if Spree::Config[:company] %>
+    <p class="field form-group" id=<%="#{address_id}company" %>>
+      <%= form.label :company, Spree.t(:company) %><br />
+      <%= form.text_field :company, :class =>'form-control' %>
+    </p>
+  <% end %>
+
+
+  <p class="field form-group" id=<%="#{address_id}country" %>>
+    <%= form.label :country_id, Spree.t('china_address.city') %><span class="required">*</span><br />
+    <span id=<%="#{address_id}country-selection" %>>
+      <%= form.collection_select :country_id, available_countries, :id, :name, {}, {:class => 'form-control required'} %>
+    </span>
+  <% if Spree::Config[:address_requires_state] %>
+    <span class="field" id=<%="#{address_id}state" %>>
+      <% have_states = !address.country.states.empty? %>
+      <% state_elements = [
+         form.collection_select(:state_id, address.country.states,
+                            :id, :name,
+                            {:include_blank => true},
+                            {:class => have_states ? 'form-control required' : 'hidden',
+                            :disabled => !have_states}) +
+         form.text_field(:state_name,
+                            :class => !have_states ? 'form-control required' : 'hidden',
+                            :disabled => have_states)
+         ].join.gsub('"', "'").gsub("\n", "")
+      %>
+      <%= javascript_tag do %>
+        $('#<%="#{address_id}state" %>').append("<%== state_elements %>");
+      <% end %>
+    </span>
+      <noscript>
+        <%= form.text_field :state_name, :class => 'required' %>
+      </noscript>
+
+    <span class="field" id=<%="#{address_id}city" %>>
+      <% have_cities = !address.state.cities.empty? %>
+
+      <% city_elements = [
+         form.collection_select(:city_id, address.state.cities,
+                            :id, :name,
+                            {:include_blank => true},
+                            {:class => have_cities ? 'form-control required' : 'hidden',
+                            :disabled => !have_cities}) +
+         form.text_field(:city_name,
+                            :class => !have_cities ? 'form-control required' : 'hidden',
+                            :disabled => have_cities)
+         ].join.gsub('"', "'").gsub("\n", "")
+      %>
+      <%= javascript_tag do %>
+        $('#<%="#{address_id}city" %>').append("<%== city_elements %>");
+      <% end %>
+    </span>
+      <noscript>
+        <%= form.text_field :city_name, :class => 'required' %>
+      </noscript>
+  <% end %>
+  </p>
+
+  <p class="field form-group" id=<%="#{address_id}address1" %>>
+    <%= form.label :address1, Spree.t('china_address.street') %><span class="required">*</span><br />
+    <%= form.text_field :address1, class: 'form-control required' %>
+  </p>
+
+  <p class="field form-group" id=<%="#{address_id}zipcode" %>>
+    <%= form.label :zipcode, Spree.t(:zip) %><span class="required">*</span><br />
+    <%= form.text_field :zipcode, :class => 'form-control required' %>
+  </p>
+
+  <p class="field form-group" id=<%="#{address_id}firstname" %>>
+    <%= form.label :firstname, Spree.t('china_address.firstname') %><span class="required">*</span><br />
+    <%= form.text_field :firstname, :class => 'form-control required' %>
+  </p>
+
+  <p class="field form-group" id=<%="#{address_id}phone" %>>
+    <%= form.label :phone, Spree.t(:phone) %><span class="required">*</span><br />
+    <%= form.phone_field :phone, :class => 'form-control required' %>
+  </p>
+  <% if Spree::Config[:alternative_shipping_phone] %>
+    <p class="field form-group" id=<%="#{address_id}altphone" %>>
+      <%= form.label :alternative_phone, Spree.t(:alternative_phone) %><br />
+      <%= form.phone_field :alternative_phone %>
+    </p>
+  <% end %>
+</div>

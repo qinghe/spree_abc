@@ -1,0 +1,65 @@
+<% #edit page_layout in editor,
+   # title, columns, data_resource,
+%>
+<%= render :partial => 'spree/shared/error_messages', :locals => { :target => @page_layout } %>
+<%=form_for  @page_layout, url: template_theme_page_layout_path(@template_theme, @page_layout), remote: true do |f| %>
+    <div>
+        <%= f.label :title %>
+        <%= f.text_field :title %>
+    </div>
+    <div>
+        <%= f.label :content_param %>
+        <%= f.number_field :content_param %> columns=n/clickable=1/image_size
+    </div>
+    <div>
+        <%= f.label :image_param %>
+        <%= f.text_field :image_param %> mini/small/product/medium/large/240w_240h_1x
+    </div>
+    <div>
+        <%= f.label :effect_param %>
+        <%= f.text_field :effect_param %> hover_scaleble
+    </div>
+
+    <div>
+        <%= f.label :css_class %>
+        <%= f.text_field :css_class %>bootstrap .col-xs-n, .container, .container-fluid
+    </div>
+
+    <div>
+        <%= f.label :content_css_class %>
+        <%= f.text_field :content_css_class %> glyphicon
+    </div>
+
+    <div class="field">
+      <%= f.label :data_source %>
+      <% current_data_source = @page_layout.current_data_source
+         options = options_for_select((Spree::PageLayout::DataSourceEnum.members).collect{|section_data_source| [Spree.t("section_data_source.#{ section_data_source }"), section_data_source] }, current_data_source )
+      %>
+      <%= f.select "data_source", options , include_blank: true, class: 'select2' %>
+    </div>
+    <div>
+        <%= f.label :data_filter %>
+        <%= f.text_field :data_filter %> next,previous
+    </div>
+    <div>
+        <%= f.label :data_source_order_by %>
+        <%= f.text_field :data_source_order_by %> created_at_desc
+    </div>
+    <div>
+        <%= f.label :data_source_param %>
+        <%= f.text_field :data_source_param %> per_page,enable,style/attribute_name
+    </div>
+    <div>
+        <%= f.label :stylish %>
+        <%= f.text_field :stylish %> default is 0
+    </div>
+    <div>
+        <%= f.label :section_context %>
+        <%= f.text_field :section_context %>
+    </div>
+
+    <div>
+      <%= f.submit Spree.t('update') %> <%= f.button Spree.t('cancel'), type: :button, class: 'cancel'%>
+    </div>
+
+<% end %>

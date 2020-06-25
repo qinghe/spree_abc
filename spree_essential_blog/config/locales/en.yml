@@ -8,7 +8,6 @@ en:
       blog:
         model_name: Blog
         name: Name
-        permalink: Permalink
       post:
         model_name: Post
         title: Title
@@ -16,10 +15,10 @@ en:
         body: Body
         live: Published
         tags: Tags
+        author: Author
       post_category:
         model_name: Category
         name: Name
-        permalink: Permalink
     models:
       spree/post:
         one: post

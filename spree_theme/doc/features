@@ -3,13 +3,13 @@
 how to add a section piece param?
   #sectionA   -container
   #              -container
-  #                -text                  
+  #                -text
   #page_layoutA  -root
-  #                 -sectionA                   
-  #add a section piece param into continer 
+  #                 -sectionA
+  #add a section piece param into continer
   #
-  
-  add record of section_piece_param 
+
+  add record of section_piece_param
   # after create
   add section_param where section.section_piece_id = ? for each section tree.
   # after create
@@ -19,52 +19,106 @@ how to remove a section piece param?
   del record of section_piece_param
   del section_param where section.section_piece_id = ? for each section tree.
   del param_value where page_layout.section_id = ? for each layout tree.
-  
+
 features
 =====================================================================================================
 
-  
-     
+
+
 template_theme
 --------------
   1. designer could copy template for new design
      copy html(layout) and css(param_value)
-     
-  
+
+
 logo
------- 
-  1. a site has one logo, user could upload own logo 
+------
+  1. a site has one logo, user could upload own logo
      logo section always get logo from app configuration.
-  2. a template could have own logo,  design shop require it. 
+  2. a template could have own logo,  design shop require it.
 
 index page
 -----------
-  1. 在设计商店, 每一个模板，期望有自己的主页，显示相应的产品。 
-  2. 在一般商店，如果当前页是系统缺省页面，默认所有产品分配给当前页.   
+  1. 在设计商店, 每一个模板，期望有自己的主页，显示相应的产品。
+  2. 在一般商店，如果当前页是系统缺省页面，默认所有产品分配给当前页.
      期望用户做最少的事情，实现他想要的效果。
 
 模板发布后，可以继续修改而不影响已发布内容（当它成为一个问题时再处理）
---------------------------------------------------------------------------------  
-  1. 保证生成页面过程中，不再访问page_layouts，sections, section_pieces, param_values 
-    page_layouts，sections, section_pieces => html.erb 
+--------------------------------------------------------------------------------
+  1. 保证生成页面过程中，不再访问page_layouts，sections, section_pieces, param_values
+    page_layouts，sections, section_pieces => html.erb
     param_values => css
-    
+
     @template.css(:image_style)
     @template.css(:slides)
-  2. assigned_resource_id 是否可以更改？ 
-  
+  2. assigned_resource_id 是否可以更改？
+
   add table released_page_layout?
-  
-使模板导入简单，用户预览模板，看到喜欢的， 点‘导入’，完成。 import_with_resource 
---------------------------------------------------------------------------------  
+
+使模板导入简单，用户预览模板，看到喜欢的， 点‘导入’，完成。 import_with_resource
+--------------------------------------------------------------------------------
     模板中使用了taxon， 它表示菜单和分类，如：主菜单，产品分类，图片轮播(slider)。
     为了方便用户使用模板，简化导入过程，导入模板时无需配置taxon, 直接拷贝模板所用分类。
-    
-  
-#themes-+      
+
+支持sitemap.xml，robots.txt
+--------------------------------------------------------------------------------
+搜索引擎优化
+
+#themes-+
         +- foreign :  themes from design shop
-        +- native -+ has native layout, can edit, release 
-                   + no native layout, can not edit,  
+        +- native -+ has native layout, can edit, release
+                   + no native layout, can not edit,
                       theme.release_id: release id of original theme, means imported that release
-                     
-  
+
+a design/shopping site must have a released theme, or redirect to under_contruction.
+
+  requirement
+    admin.sometld/... is for user preview,   ex. admin.somtld/some_taxon
+    www.sometld/... is for customer,         ex. www.sometld/some_taxon
+
+  how roles get layout?
+  ---------------------
+    designer: get current editing template
+    customer: get layout from current site
+
+  path
+  ----
+    1. designer design product list page
+    www.tld/tid
+    2. designer design product detail page
+    www.tld/tid/pid
+    2. designer release design
+    www.tld/admin/template_theme
+    3. customer view product list
+    www.tld/tid                -> /var/www/shops/n/
+    4. customer view product detail
+    www.tld/tid/pid
+    5. admin manage site
+    www.tld/admin/...
+    6. user login
+    www.tld/admin/
+    7. customer view live template demo
+    design.tld  -> /var/www/shops/2
+    8. customer browse published template list
+    www.tld/admin/template_themes/
+    9. shop folders
+      template folder
+         t(current template id)-> /var/www/shops/1/t(original template id)
+      theme image folder:
+         tx/images
+      generated layout
+         tx/tx.html.erb
+      theme css, js
+         tx/cssx.css
+         tx/jsx.js
+      page_layout image folder: images belongs to shop, like logo
+         lx
+
+  configure
+  ---------
+    website theme_id, index_page should greater than 0.
+    website index_page could equal to 0.
+
+  extra feature for theme
+  -----------------------
+    option value has image, please look at https://github.com/citrus/spree_variant_options  for detail

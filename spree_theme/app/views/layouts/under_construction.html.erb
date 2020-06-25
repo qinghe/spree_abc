@@ -6,24 +6,18 @@
 <!--[if gt IE 9]><!--><html lang="<%= I18n.locale %>"><!--<![endif]-->
   <head data-hook="inside_head">
     <%= render :partial => 'spree/shared/head' %>
-    <%= stylesheet_link_tag :admin_login %>
+    <%= stylesheet_link_tag 'spree/backend/all' %>
+    <%= javascript_include_tag 'store/spree_theme.login' %>
   </head>
-  <body class="<%= body_class %>" id="<%= @body_id || 'default' %>" data-hook="body">
-
-    <div class="container admin-container">
-    <h2 class="admin-container-title"><%= Spree.t(:welcome_to_under_construction)%></h2>
-      <div id="wrapper" class="row" data-hook>
-
-        <div id="content" class="columns <%= !content_for?(:sidebar) ? "sixteen" : "twelve" %>" data-hook>
-          <%= flash_messages %>
+  <body>
+    <div class="container">
+      <div class="row">
+        <%= render partial: 'spree/admin/shared/header' %>
+        <%= flash_alert(flash) %>
+        <div class="col-md-4 col-md-offset-4">
           <%= yield %>
         </div>
-
       </div>
     </div>
-    <%= render :partial => 'spree/shared/google_analytics' %>
-    <script>
-      Spree.api_key = <%= raw(try_spree_current_user.try(:spree_api_key).to_s.inspect) %>;
-    </script>
   </body>
 </html>

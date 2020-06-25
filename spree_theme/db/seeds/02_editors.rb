@@ -7,6 +7,6 @@ editors = [
 Spree::Editor.delete_all              
 for ha in editors
   obj = Spree::Editor.new
-  obj.assign_attributes( ha,  :without_protection => true)
+  obj.assign_attributes( ha )
   obj.save
 end

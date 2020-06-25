@@ -1,0 +1,8 @@
+## how to decide a taxon is clickable?
+
+if section.clickable?
+  #  section taxon.icon
+  if taxon.clickable?
+    <a> taxon.attribute </a>
+  end
+end

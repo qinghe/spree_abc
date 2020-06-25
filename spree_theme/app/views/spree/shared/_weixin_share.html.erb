@@ -1,0 +1,5 @@
+<%= javascript_tag defer: 'defer',  data: { 'turbolinks-track'=>"reload" } do -%>
+  getstore = {};
+  getstore.wx_cfg_params = <%== wechat_config_params(api:['onMenuShareTimeline','onMenuShareAppMessage']).to_json %>
+  getstore.share_data = <%== wechat_share_data(@current_page).to_json %>
+<% end -%>

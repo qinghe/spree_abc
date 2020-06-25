@@ -1,19 +1,39 @@
 <%
 # list layout tree in editor page.
 # local params: theme, selected_id, current
-page_layout = theme.page_layout
-selected_id ||= page_layout.id 
+page_layout = theme.original_page_layout_root
+selected_id ||= page_layout.id
 %>
+
+<div id="ajax_error" class="errorExplanation" style="display:none;"></div>
+
 <%=form_tag(update_layout_tree_template_theme_path(theme), :id=>"layout_tree_form",:name=>"layout_tree_form", :remote=>true) do %>
 
-  <div id='page_layout_tree_inner' class="block">
-  <ul >
-    <li data-lid=<%= page_layout.id %> data-tid=<%= theme.id %> data-action="<%= params[:action]%>" >
-    <%= link_to_function( page_layout.title, "",
-      {"class"=>(page_layout.id==selected_id ? "selected":"")})
-      %>
-      <%= render :partial=>'page_layout', :locals=>{:theme=>theme, :page_layout=>page_layout, :selected_id=>selected_id, :current=>current  } %>
-    </li>
-  </ul>
-  </div>
+  <fieldset class="no-border-top">
+    <div class="form-group">
+      <%= label_tag nil, Spree.t(:tree) %><br />
+      <script>
+        Spree.routes.template_theme_page_layouts_path = "<%= spree.api_v1_template_theme_page_layouts_path(@template_theme) %>";
+        Spree.routes.admin_template_theme_page_layouts_path = "<%= spree.admin_template_theme_page_layouts_path(@template_theme) %>";
+        Spree.routes.jstree_theme_path = "<%= stylesheet_path("jquery.jstree/themes/spree2/style.css") %>";
+      </script>
+
+      <div id="template_theme_tree" class="tree">
+        <ul >
+          <li data-lid=<%= page_layout.id %> data-tid=<%= theme.id %> data-action="<%= params[:action]%>" >
+          <%= link_to( page_layout.title, "#",
+            {"class"=>(page_layout.id==selected_id ? "selected":"")})
+            %>
+            <%= render :partial=>'page_layout', :locals=>{:theme=>theme, :page_layout=>page_layout, :selected_id=>selected_id, :current=>current  } %>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="alert alert-info">
+      <%= Spree.t(:template_theme_tree_instruction) %>
+    </div>
+
+  </fieldset>
+
 <%end%>

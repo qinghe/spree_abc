@@ -4,7 +4,7 @@
 #  :name => "North America",
 #  :zone => north_america, 
 #  :amount => 0.05,
-#  :tax_category => clothing},
-#  :without_protection => true)
+#  :tax_category => clothing}
+#  )
 #tax_rate.calculator = Spree::Calculator::DefaultTax.create!
 #tax_rate.save!

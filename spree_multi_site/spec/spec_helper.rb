@@ -15,6 +15,7 @@ ENV['RAILS_ENV'] = 'test'
 require File.expand_path('../dummy/config/environment.rb',  __FILE__)
 
 require 'rspec/rails'
+require 'database_cleaner'
 require 'ffaker'
 
 # Requires supporting ruby files with custom matchers and macros, etc,
@@ -27,6 +28,9 @@ require 'spree/testing_support/capybara_ext'
 require 'spree/testing_support/controller_requests'
 require 'spree/testing_support/factories'
 require 'spree/testing_support/url_helpers'
+
+# Requires factories defined in lib/spree_multi_site/factories.rb
+require 'spree_multi_site/testing_support/factories'
 
 RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
@@ -42,6 +46,12 @@ RSpec.configure do |config|
   # current_path.should eql(spree.products_path)
   config.include Spree::TestingSupport::UrlHelpers
 
+  # == Requests support
+  #
+  # Adds convenient methods to request Spree's controllers
+  # spree_get :index
+  config.include Spree::TestingSupport::ControllerRequests, type: :controller
+
   # == Mock Framework
   #
   # If you prefer to use mocha, flexmock or RR, uncomment the appropriate line:
@@ -55,6 +65,7 @@ RSpec.configure do |config|
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
+
   # Capybara javascript drivers require transactional fixtures set to false, and we use DatabaseCleaner
   # to cleanup after each test instead.  Without transactional fixtures set to false the records created
   # to setup a test will be unavailable to the browser, which runs under a separate server instance.
@@ -63,7 +74,7 @@ RSpec.configure do |config|
   # Ensure Suite is set to use transactions for speed.
   config.before :suite do
     DatabaseCleaner.strategy = :transaction
-    DatabaseCleaner.clean_with :truncation
+    #DatabaseCleaner.clean_with :truncation
   end
 
   # Before each spec check if it is a Javascript test and switch between using database transactions or not where necessary.

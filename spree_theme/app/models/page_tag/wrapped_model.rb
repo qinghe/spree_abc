@@ -4,15 +4,18 @@ module PageTag
     class_attribute :accessable_attributes
     self.accessable_attributes = [:id]
     attr_accessor :collection_tag, :model
+
+    delegate :page_generator, to: :collection_tag
+
     def initialize(collection_tag, model)
       self.model = model
       self.collection_tag = collection_tag
     end
-    
-    def path
-      self.collection_tag.page_generator.build_path( self )
-    end
-    
+
+    #def path
+    #  self.collection_tag.page_generator.build_path( self )
+    #end
+
 #    def [](attribute_name)
 #      if accessable_attributes.include? attribute_name.to_sym
 #        #support method name

@@ -1,0 +1,296 @@
+# mobile section pieces
+root_for_mobile:
+  id: 200
+  title: root for mobile
+  slug: root-for-mobile
+  is_selectable: "1"
+  is_container: "1"
+  is_root: true
+  for_terminal: "1"
+  html: |
+    <!DOCTYPE html>
+    <html lang="zh-CN">
+      <head>
+      <title><%= @current_page.title%></title>
+      <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+      <%== meta_data_tags %>
+      <%= favicon_link_tag 'favicon.ico' %>
+      <%# it is in main app/assets/ include spree_theme, spree_china_checkout, store/product, store/cart, store/checkout ... %>
+      <%= render 'spree/shared/paths' %>
+      <%= stylesheet_link_tag 'store/spree_theme.mobile', "data-turbolinks-track" => true %>
+      <% if @current_page.is_preview %>
+        <%= stylesheet_link_tag 'store/spree_theme'  %>
+      <% else%>
+        <link rel="stylesheet" href="<%=@website.public_path('css')%>" type="text/css" data-turbolinks-track />
+      <% end %>
+      <%= csrf_meta_tags %>
+      <%= render "spree/shared/sync_analytics" %>
+      <%= javascript_tag  do -%>
+        g_client_info = <%== @client_info.to_json %>
+      <% end -%>
+      <%= render "spree/shared/weixin_share" %>
+      <%= javascript_include_tag 'spree/frontend/all.mobile', "data-turbolinks-track" => true %>
+      </head>
+      <body class="clear-block <%= @current_page.agent_selector(request.user_agent) %>">
+
+      <% if @current_page.site_design? && !@current_page.is_preview %>
+        <%= render "spree/shared/theme_selection_for_nondesigner" %>
+      <% end %>
+      <div id="page" class='container <%=@template.section_selector%>'><div id="page-inner" class="row inner clear-block">
+        ~~content~~
+      </div><!-- /#page-inner -->
+      </div><!-- /#page -->
+
+      <% if @current_page.is_preview %>
+         <%= render 'layout_editor_panel' %>
+      <% end %>
+      <%= render "spree/shared/analytics" %>
+      </body>
+    </html>
+  css: |-
+      #page /* sidr displace feature required */
+      { position:relative;      }
+      #page-inner
+      { position:relative;
+        <%= @template.css :inner %>
+      }
+      .infinitescroll .pagination{ display:none;}
+      #infscr-loading{ background-color:white; clear:both; text-align:center; border-radius:4px;}
+      .clear-block:after {
+        content: ".";
+        display: block;
+        height: 0;
+        clear: both;
+        visibility: hidden;
+        font-size: 0;
+      }
+      .clear-block {
+        display: block;
+      }
+
+  js: ""
+bootstrap_container:
+  id: 201
+  title: bootstrap container
+  slug: bootstrap-container
+  is_selectable: "1"
+  is_container: "1"
+  for_terminal: "1"
+  html: |
+    <div class="container ~~selector~~">
+      <div class="row inner"> ~~content~~ </div>
+    </div>
+  css: |
+    /* width,height, skinnables */
+    .<%=@template.section_selector%>
+    {
+      <%=@template.css(:block)%>
+    }
+    /* background, margin, border, padding */
+    .<%=@template.section_selector%> > .inner
+    { overflow: hidden;/* keep border visible*/
+      min-height:1px;min-width:1px;  /* it is required as placeholder */
+      <%=@template.css(:inner)%>
+    }
+    <% if @template.current_piece.column_count >0 %>
+    /* css for last column in row, feature center content */
+    .<%=@template.current_piece.child_selector%>.data_last { margin-right:0; padding-right:0; border-right:0; }
+    <% end %>
+
+  js: ""
+bootstrap_column:
+  id: 202
+  title: bootstrap column
+  slug: bootstrap-column
+  is_selectable: "1"
+  is_container: "1"
+  for_terminal: "1"
+  html: |
+    <div class="~~selector~~"> ~~content~~ </div>
+  css: |
+    .<%=@template.section_selector%>
+      { padding:0;  margin:0 auto;
+        <%=@template.css(:block)%>
+      }
+  js: ""
+bootstrap_glyphicon:
+  id: 203
+  title: bootstrap glyphicon
+  slug: bootstrap-glyphicon
+  is_selectable: "1"
+  is_container: "0"
+  for_terminal: "1"
+  html: |
+    <span class="glyphicon content_css_class_placeholder" aria-hidden="true"></span>
+  css: ''
+  js: ""
+font_awesome:
+  id: 204
+  title: font awesome
+  slug: font-awesome
+  is_selectable: "1"
+  is_container: "0"
+  for_terminal: "1"
+  html: |
+    <%=@template.font_awesome %>
+  css: |
+    .<%=@template.section_selector%>  fa{
+      <%= @template.css(:fa) %>
+    }
+  js: ""
+#http://www.tuicool.com/articles/3QnyAf , width is required, one line only.
+product_name_with_ellipsis:
+  id: 205
+  title: Product name with ellipsis
+  slug: product-name-with-ellipsis
+  is_selectable: "0"
+  is_container: "0"
+  for_terminal: "1"
+  html: |
+    <%= @template.product_attribute( :name )  %>
+  css: |
+    .<%=@template.section_selector%>  a{
+      <%= @template.css :a %>
+    }
+    .<%=@template.section_selector%>  a:hover{
+      <%= @template.css :a_h %>
+    }
+    .<%=@template.section_selector%> > .inner {
+      text-overflow:ellipsis;
+    }
+    .<%=@template.section_selector%>  span {
+      white-space:nowrap;
+    }
+  js: ""
+minicart_badge:
+  id: 206
+  title: minicart badge
+  slug: minicart-badge
+  is_selectable: "0"
+  is_container: "0"
+  for_terminal: "1"
+  html: |
+    <%=  link_to_cart_badge %>
+  css: ""
+  js: ""
+option_values_for_mobile:
+  id: 207
+  title: option values for mobile
+  slug: option-values-for-mobile
+  is_selectable: "1"
+  is_container: "0"
+  for_terminal: "1"
+  html: |
+    <% if defined? product %>
+        <%= render :partial => 'themes/product_options_for_mobile', :locals=>{:product=>product} %>
+    <% end%>
+  css: |
+    .<%=@template.section_selector%> .variant-option{
+      display:none;
+    }
+    .<%=@template.section_selector%> ul.option_values {
+      list-style-type: none;
+      margin:0;
+      padding:0;
+    }
+    .<%=@template.section_selector%> .option_values li {
+      display: block;
+      position: relative;
+      float: left;
+    }
+    .option-value.selected,
+    .option-value.in-stock:hover {
+      background-color: #1491EB;
+      border-color: #1072B9;
+      color: #ffffff;
+    }
+    .<%=@template.section_selector%> .option_type{ <%=@template.css(:option_type)%> }
+    .<%=@template.section_selector%> .large_image{ <%=@template.css(:large_image)%>  }
+    .<%=@template.section_selector%> .thumb_image{ <%=@template.css(:thumb_image)%>  }
+  js: ""
+bootstrap_carousel:
+  id: 208
+  title: bootstrap carousel
+  slug: bootstrap-carousel
+  is_selectable: "1"
+  is_container: "0"
+  for_terminal: "1"
+  html: |-
+    <%# http://v3.bootcss.com/javascript/#carousel %>
+      <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+          <% (@template.running_data_item.try(:whole_images)).each_with_index{|image,i| %>
+            <%= tag :li, class: ( i==0 ? 'active' : '' ), data: { target: "#carousel-example-generic", slide_to: i } %>
+          <% } %>
+        </ol>
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner" role="listbox">
+             <% (@template.running_data_item.try(:whole_images)).each_with_index{|image,i| %>
+               <%=content_tag :div, class: ( i==0 ? 'item active' : 'item' ) do -%>
+                 <%= @template.product_attribute( :image, image: image ) %>
+               <% end %>
+             <% } %>
+        </div>
+        <!-- Controls -->
+        <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+          <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+          <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+      </div>
+  css: ''
+cart_items_for_mobile:
+  id: 209
+  title: cart items for mobile
+  slug: cart-items-for-mobile
+  is_selectable: "1"
+  is_container: "0"
+  for_terminal: "1"
+  html: |
+    <%= render :partial => 'spree/orders/form_bootstrap', :locals => { :order_form => order_form } %>
+  created_at: 2011-09-20 19:40:07
+  updated_at: 2011-09-20 19:40:07
+  css: |-
+    .<%=@template.section_selector%> .cart-item-image img {width:60px;}
+  js: ""
+bootstrap_sign_up_form:
+  id: 210
+  title: bootstrap sign up form
+  slug: bootstrap-sign-up-form
+  is_selectable: "1"
+  is_container: "0"
+  for_terminal: "1"
+  html: |
+    <%= render :partial => 'spree/user_registrations/new_bootstrap' %>
+  css: ""
+  js: ""
+
+bootstrap_dialog_titlebar:
+  id: 212
+  title: bootstrap dialog titlebar
+  slug: bootstrap-dialog-titlebar
+  is_selectable: "0"
+  is_container: "0"
+  html: |
+    <div class="clear-block dialog_titlebar">
+      <div class="dialog_title"> <%= Spree.t(:dialog_title) %>  </div>
+      <div class="dialog_close_wrapper"> <a class="cancel dialog_close">
+          <i class="fa fa-2x fa-chevron-left" aria-hidden="true"></i>
+        </a> </div>
+    </div>
+  css: |
+    .<%=@template.section_selector%>  .dialog_titlebar{ <%=@template.css(:dialog_titlebar) %> }
+    .<%=@template.section_selector%>  .dialog_title{ float:left; font-size:0;}
+    .<%=@template.section_selector%>  .dialog_close_wrapper{ float:left; }
+    .<%=@template.section_selector%>  .dialog_close_wrapper a.dialog_close{
+      border:0;  padding:0;  margin:0; background: transparent none; text-decoration: none;/*reset it, prevent root's default */
+      cursor:pointer;
+      <%=@template.css(:dialog_close) %>
+     }
+  js: ""

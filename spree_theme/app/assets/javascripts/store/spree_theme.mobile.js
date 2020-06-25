@@ -1,0 +1,14 @@
+//= require jquery
+//= require jquery_ujs
+//= require jquery.form
+//= require jquery.finger.16.min
+//= require jquery.simplemodal.mobile
+//= require jssor.slider.20.min
+//= require spree/frontend
+//= require store/spree_theme.client
+//= require store/spree_theme.routes
+//= require jquery.jeditable.js
+// require bootstrap-sprockets
+//= require store/section_effect.mobile
+//= require store/weixin_support
+//= require turbolinks

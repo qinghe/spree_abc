@@ -1,0 +1,41 @@
+
+  <% if @page_layout.present? %>
+      <% page_layout = @page_layout%>
+      <%= form_for :page_layout, url: update_context_admin_template_theme_page_layout_path(@template_theme,page_layout),remote: true do |f|%>
+        <fieldset id="page_layout_container" class="">
+          <legend align="center"><%= page_layout.title %></legend>
+            <div class="form-group">
+              <%= label_tag :section_context, Spree.t('page_layout.section_context') %><br>
+              <% current_contexts = page_layout.current_contexts if page_layout.section_context.present?  %>
+              <%= select_tag "section_contexts[]", options_for_select((Spree::PageLayout::ContextEnum.members-[:either]).collect{|section_context| [Spree.t("section_context.#{ section_context }"), section_context] }, current_contexts ), include_blank: true,class: 'select2', multiple: "multiple" %>
+            </div>
+            <div class="form-group">
+              <% assigned_resources = @template_theme.assigned_resources(Spree::SpecificTaxon, page_layout).compact   %>
+
+              <%= label_tag :specific_taxon, Spree.t('page_layout.specific_taxon') %><br>
+              <%= hidden_field_tag :specific_taxon_ids, assigned_resources.collect(&:id).join(',') %>
+            </div>
+
+            <div class="form-actions" data-hook="buttons">
+              <%= button Spree.t('actions.update'), 'refresh' %>
+              <span class="or"><%= Spree.t(:or) %></span>
+              <%= button_link_to Spree.t('actions.cancel'), '', :icon => 'remove', :onclick=>"$('#page_layout_container').hide();return false;" %>
+            </div>
+        </fieldset>
+      <%end%>
+  <% else %>
+      <div class="alert alert-info no-objects-found">
+        <%= Spree.t(:no_resource_found, resource: I18n.t(:other, scope: 'activerecord.models.spree/page_layout')) %>,
+      </div>
+  <% end %>
+
+<% unless Rails.env.test? %>
+  <script>
+  // copy from spree/backend/assets/javascripts/admin/taxon_autocomlete.js.erb
+// assign resource to theme
+  $(document).ready(function () {
+    set_resource_taxon_select( 'specific_taxon_ids', true, Spree.routes.taxons_api);
+  });
+
+  </script>
+<% end %>

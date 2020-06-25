@@ -1,7 +1,9 @@
-# last updated seed for each env 
+# last updated seed for each env
 staging:
-  version: 23f
+  version: 25e
+aliyun_staging:
+  version: 267
 local_staging:
-  version: 220
+  version: 23z
 development:
   version: 230
